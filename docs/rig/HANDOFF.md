@@ -44,6 +44,20 @@ scripted local endpoint and the prompt/tools were exercised by other LLM agents.
 - `dk::Area::init` (0x00149ca0, 20 B) — promoted by `driver.py` driving the mock endpoint.
 - parked `func_002421e8` / `Tz::McSys::isGameClearKH2` (0x002421e8) after 9 attempts, best 23%.
 
+## Two findings worth acting on
+- **`promote.py` could report a vacuous MATCHED!** `out/generated/{objects.mk,
+  layout_status.tsv,symbols.ld}` are regenerated only when `layout.tsv`/`functions.tsv`
+  change, so adding a definition to an *existing* TU left the row marked `asm`; the build
+  then `.incbin`s the original bytes and prints MATCHED! without ever compiling the new
+  code. `promote.py` now forces `python3 tools/build_elf.py objects` before `make verify`
+  **and** asserts the row is `cxx` with the expected source afterwards. The Makefile's
+  dependency list for those generated files should probably grow a `src/` stamp too.
+- **Commit a09f680 (the 725 E3 symbol names) silently cost 2 matched functions.**
+  Regenerating `layout_status.tsv` from a clean checkout gives 4,680 cxx rows at upstream
+  `8b5bc47` and **4,678** at `a09f680`: two symbols stopped resolving to a source file once
+  they were renamed. `docs/BASELINE.md` still quotes the 4,680 figure. Worth finding which
+  two and fixing the names. (Current tree: 4,680 = 4,678 + the two matched this session.)
+
 ## Next steps (priority)
 1. **Rerun the smoke test on the Spark once it is back**:
    `python3 tools/rig/driver.py --endpoint http://spark-e3f4.local:8000/v1 --model qwen3.8-27b

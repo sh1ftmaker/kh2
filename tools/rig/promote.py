@@ -306,6 +306,14 @@ def promote(spec: str, src: Path, dest: str, *, dry_run: bool = False) -> dict:
         if ins:
             header_edits.append(f'{d["header"]}: {ins}')
 
+    # out/generated/{objects.mk,layout_status.tsv,symbols.ld} are regenerated only
+    # when layout.tsv/functions.tsv change, so adding a definition to an existing TU
+    # would otherwise leave the row marked `asm` and the build would still .incbin
+    # the original bytes -- a vacuous MATCHED!. Force the regeneration.
+    subprocess.run(
+        ["python3", str(rc.ROOT / "tools" / "build_elf.py"), "objects"],
+        cwd=str(rc.ROOT), capture_output=True, text=True, timeout=600,
+    )
     cp = subprocess.run(
         [MAKE, "verify"], cwd=str(rc.ROOT), capture_output=True, text=True, timeout=1800,
     )
@@ -313,6 +321,19 @@ def promote(spec: str, src: Path, dest: str, *, dry_run: bool = False) -> dict:
     log = rc.ensure_out() / "last_verify.log"
     log.write_text(out)
     matched = cp.returncode == 0 and "MATCHED!" in out
+
+    # A MATCHED! that did not actually build this row from source proves nothing.
+    built_from = ""
+    if matched:
+        rc._status_cache = None
+        mode, srcfile = rc.layout_status().get(target.addr, ("asm", ""))
+        built_from = srcfile
+        if mode != "cxx" or not srcfile:
+            matched = False
+            out += (f"\nrig: 0x{target.addr:08x} is still marked '{mode}' in "
+                    "out/generated/layout_status.tsv -- the build did not use the new "
+                    "definition, so MATCHED! says nothing about it. The registry symbol "
+                    "probably does not resolve to the destination TU.\n")
 
     if not matched:
         undone = rb.restore()
@@ -339,6 +360,7 @@ def promote(spec: str, src: Path, dest: str, *, dry_run: bool = False) -> dict:
         "registry_entry_added": added,
         "header_declarations_added": header_edits,
         "verify": "MATCHED!",
+        "built_from": built_from,
         "elapsed_ms": int((time.time() - t0) * 1000),
     }
 
