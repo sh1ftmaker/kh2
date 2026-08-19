@@ -1,0 +1,104 @@
+# ee-gcc 3.2 codegen idioms (R5900, -O2)
+
+Observed while matching functions with `tools/rig`. Every entry here was
+confirmed by a byte-exact `compile_diff` or by a diff that changed exactly as
+predicted. Add to it whenever an attempt teaches you something — the point is to
+turn "try things until it matches" into "recognise the idiom".
+
+Compiler and flags: `ee-g++ 3.2` (SCE EE 040921),
+`-O2 -g0 -x c++ -fno-exceptions -fno-rtti -fpermissive -ffunction-sections -I src`.
+
+## Register-to-register moves
+
+`daddu rd, rs, zero` — that is how 3.2 spells `move` on the R5900. Seeing
+`daddu t7, a1, zero` in the original where you produced nothing means the
+original kept the value in a *separate* variable rather than reusing the
+parameter register.
+
+## Ternary vs if-assignment: not the same code
+
+This is the single highest-yield idiom found so far.
+
+```cpp
+// (a) if-assignment
+s32 v = max;  if (max < 0) v = m_MenuItemMax;  m_SelectMax = v;
+// -> bltzl a1, L ; lhu a1, 4(a0) ; jr ra ; sh a1, 0x16(a0)
+//    gcc reuses the argument register and picks a branch-likely.
+
+// (b) ternary
+m_SelectMax = (s16)((max < 0) ? (s32)m_MenuItemMax : max);
+// -> bgez a1, L ; daddu t7, a1, zero ; lhu t7, 4(a0) ; jr ra ; sh t7, 0x16(a0)
+//    gcc materialises a temporary and inverts the branch. THIS is the shipped code.
+```
+
+`Tz::Select::SetSelectMax` matched with (b) and not with (a), (a)-with-`u32`,
+(a)-with-`s32`, or a mask-based variant. **When the original copies a parameter
+into a `t`-register before a branch, try the ternary.**
+
+## Load width tells you the member type
+
+| Instruction | Member type |
+|---|---|
+| `lbu` | `u8` |
+| `lb` | `s8` |
+| `lhu` | `u16` |
+| `lh` | `s16` |
+| `lw` | `u32` / `s32` / pointer |
+| `ld` | 64-bit, or a struct copy |
+
+Getting this wrong shows up immediately: a `s16` member where the original has
+`lhu` produces `sll`+`sra` sign-extension noise around your load.
+
+## Sign vs zero extension
+
+- signed narrowing/widening: `sll rX, rY, 16` + `sra rX, rX, 16` (16-bit),
+  `sll`/`sra` by 24 for 8-bit
+- unsigned: `andi rX, rY, 0xffff` / `andi rX, rY, 0xff`
+- `sltu rX, zero, rY` is `(rY != 0)` — a bool conversion of a non-0/1 value
+- a bare `andi rX, rX, 0xff` after an `andi rX, rX, 1` is a *QImode truncation of
+  an already-narrow value*: the source had a `bool`/`u8` intermediate that gcc
+  could not fold away. Plain `(u8)(word & 1)` **does** get folded (gcc narrows the
+  load to `lbu` instead), so if you see `lw` + `andi 1` + `andi 0xff` the value
+  reached the truncation through something gcc could not see through.
+
+## Callee-saved registers mean "live across a call"
+
+If the original uses `s0`–`s7` (and pays for `sd`/`ld` in the prologue and
+epilogue) the value is live across a `jal`. If it uses `t0`–`t9`/`v1`, it is not.
+When your version uses `t`-registers and the original uses `s`, you have folded a
+variable that the original kept alive — usually because gcc proved your version's
+value was rematerialisable (e.g. it could recompute a constant `0`), while the
+original's could not be.
+
+## Branch-likely forms
+
+`bnezl` / `beql` / `bltzl` appear routinely at -O2; the delay-slot instruction is
+executed **only when the branch is taken**. gcc picks the likely form based on
+the shape of the `if`, so a `bnez` where the original has `bnezl` is a control-flow
+shape difference, not a register problem.
+
+## Tail calls
+
+A plain `j <addr>` at the end of a row, after the epilogue, is a sibling call:
+
+```cpp
+void Area::init() { func_0013dd28(); }
+// -> addiu sp,-16 ; sd ra,0(sp) ; ld ra,0(sp) ; j 0x13dd28 ; addiu sp,16
+```
+
+gcc still builds the frame and saves/restores `ra` around it. `dk::Area::init`
+matched with exactly this, first try.
+
+## Globals
+
+`-G0` means no `$gp` small-data addressing at all: every global is a `lui` plus a
+displaced load/store or `addiu`. A `lui rX, 0x36` + `lw rY, -0x1348(rX)` pair is
+the address `0x360000 - 0x1348 = 0x35ecb8`. Use the registry name for it
+(`D_0035ecb8`) rather than a raw pointer cast when the context gives you one.
+
+## Function-local constants
+
+`li rX, 1` is `addiu rX, zero, 1`; `move rX, zero` is `daddu rX, zero, zero`.
+gcc 3.2 rematerialises small constants aggressively rather than keeping them in
+registers, so a constant showing up twice in the original is normal and does not
+mean the source assigned it twice.
