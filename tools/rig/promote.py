@@ -105,7 +105,7 @@ def _block_end(text: str, open_brace: int) -> Optional[int]:
 
 
 def normalize_candidate(body: str, dest: Optional[Path] = None,
-                        dest_text: str = "") -> tuple[str, List[dict]]:
+                        dest_text: str = "") -> tuple[str, List[dict], List[dict]]:
     """Turn a self-contained candidate into repo house style.
 
     A candidate must compile on its own, so it declares its own methods-only
@@ -116,6 +116,7 @@ def normalize_candidate(body: str, dest: Optional[Path] = None,
     """
     edits: List[dict] = []
     includes: List[str] = []
+    kept: List[dict] = []
     out = body
     while True:
         m = CLASS_BLOCK_RE.search(out)
@@ -139,12 +140,32 @@ def normalize_candidate(body: str, dest: Optional[Path] = None,
         if end is None:
             break
         block = out[m.start():end]
+        local_types = set(re.findall(
+            r"^[ \t]*(?:struct|class|union|enum)\s+([A-Za-z_][A-Za-z0-9_]*)", body, re.M))
+        local_types.discard(cls)
+        pending: List[dict] = []
+        movable = True
         for dm in re.finditer(r"^[ \t]*([^;{}]*?\b([A-Za-z_~][A-Za-z0-9_]*)\s*\([^;{}]*\)[^;{}]*);",
                               block, re.M):
             decl = " ".join(dm.group(1).split())
             decl = re.sub(r"^(?:public|private|protected)\s*:\s*", "", decl)
-            edits.append({"cls": cls, "fn": dm.group(2), "decl": decl + ";",
-                          "header": info["header"], "include": info["include"]})
+            # A declaration naming a type that only exists in the candidate cannot
+            # move into the repo header -- the header would not parse.
+            if any(re.search(rf"\b{re.escape(lt)}\b", decl) for lt in local_types):
+                movable = False
+                break
+            pending.append({"cls": cls, "fn": dm.group(2), "decl": decl + ";",
+                            "header": info["header"], "include": info["include"]})
+        if not movable:
+            # leave this class declaration in place; the candidate stays self-contained
+            e = _block_end(out, m.end() - 1)
+            if e is None:
+                break
+            kept.append({"cls": cls, "header": info["header"], "include": info["include"]})
+            out = out[:m.start()] + out[m.start():e].replace("class ", "class\x00", 1).replace(
+                "struct ", "struct\x00", 1) + out[e:]
+            continue
+        edits.extend(pending)
         includes.append(info["include"])
         out = out[:m.start()] + out[end:]
     out = out.replace("class\x00", "class ").replace("struct\x00", "struct ")
@@ -161,7 +182,7 @@ def normalize_candidate(body: str, dest: Optional[Path] = None,
         line = f'#include "{spelled}"'
         if line not in out:
             out = line + "\n" + out
-    return out, edits
+    return out, edits, kept
 
 
 def error_lines(out: str, limit: int = 25) -> List[str]:
@@ -274,7 +295,22 @@ def promote(spec: str, src: Path, dest: str, *, dry_run: bool = False) -> dict:
 
     created = not dest_path.exists()
     dest_text = "" if created else dest_path.read_text()
-    body, pending_decls = normalize_candidate(src.read_text(), dest_path, dest_text)
+    body, pending_decls, kept_classes = normalize_candidate(
+        src.read_text(), dest_path, dest_text)
+    for k in kept_classes:
+        base = Path(k["include"]).name
+        if re.search(rf'#include\s+"[^"]*{re.escape(base)}"', dest_text):
+            return {
+                "ok": False, "promoted": False, "addr": f"0x{target.addr:08x}",
+                "reason": (
+                    f'the candidate declares class {k["cls"]} with a member whose type '
+                    f'only exists in the candidate, so that declaration cannot move into '
+                    f'{k["header"]}; but {dest} already includes that header, which would '
+                    f'be a redefinition. Either restrict the local class to members the '
+                    f'header can express, or pick a destination TU that does not include '
+                    f'{k["include"]}.'
+                ),
+            }
     dest_path.parent.mkdir(parents=True, exist_ok=True)
     if created:
         dest_path.write_text(body if body.endswith("\n") else body + "\n")
