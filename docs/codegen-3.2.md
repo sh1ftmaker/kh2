@@ -117,6 +117,24 @@ globals differs, do not change the code — **permute the statement order**. Wit
 for `func_00136968` was found in under 10 s. (A `permute` helper is worth adding
 to the rig.)
 
+## Is there a `this`? Read what happens to `$a0`
+
+The E3 name says `Tz::JmNewInfo::SetCharaFlg(int)`, so the obvious candidate
+takes `(void* self, int flg)`. The shipped code is
+
+```
+jal   GetSram
+daddu s0, a0, zero        ; delay slot: a0 saved -- and then SHIFTED and MASKED
+srl   t7, s0, 5 ; andi s0, s0, 0x1f
+```
+
+`a0` is treated as a scalar, so it *is* `flg`: the method is **static** (no
+`this`), and `GetSram()` is called with no arguments. With a `self` parameter the
+candidate moves `a1` instead (`daddu s0, a1, zero`) and is one instruction off at
+99.75 % forever. Rule: `a0` dereferenced (`lw rX, off(a0)`) or forwarded to a
+member callee → `this`; `a0` used as data → no `this`, the first listed argument
+is in `a0`. (`func_002aa048`, exact once the parameter was removed.)
+
 ## Tail calls
 
 A plain `j <addr>` at the end of a row, after the epilogue, is a sibling call:

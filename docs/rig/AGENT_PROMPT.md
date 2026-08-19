@@ -120,6 +120,7 @@ The classes and what they mean:
 | Their `lui`+`sw -0x44e4(t7)`, your `lui`+`ori`+`sw 0(t7)` | You used a raw address constant; declare the global as a `D_XXXXXXXX` symbol. |
 | `lui rX, 0x3c` vs your `lui rX, 0x3d` | You mis-decoded the address: `lo` is signed, `lui 0x3c` + `-0x74e0` = `0x3b8b20`. |
 | Their `addiu rY, rX, LO` then `sh/sw off(rY)`, yours all `lui`+displacement | A global **struct**: one `D_XXXXXXXX` symbol with a local `D_XXXXXXXX_t` layout (`unkNN` members), not several scalar globals. |
+| `daddu s0, a0, zero` vs your `daddu s0, a1, zero` (or any one-register shift of *every* argument) | Your parameter list is off by one: you added `void* self` to a **static** method (a0 used as data → no `this`), or dropped a leading argument. |
 | Same stores/loads, different order, nothing else wrong | gcc 3.2 schedules independent global accesses. Permute the source statement order (try the original's order first, then others) — do not rewrite the logic. |
 
 One hypothesis per attempt. If two consecutive attempts do not move `fuzzy_pct`,

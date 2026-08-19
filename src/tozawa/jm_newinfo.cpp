@@ -47,3 +47,16 @@ u32 JmNewInfo::GetSram() {
 }
 
 }  // namespace Tz
+
+// ---- 0x002aa048 func_002aa048 ----
+extern "C" u32 GetSram_2a9d68() asm("_ZN2Tz9JmNewInfo7GetSramEv");
+void func_002aa048(int flg) asm("func_002aa048");
+void func_002aa048(int flg) {
+    u32* sram = (u32*)GetSram_2a9d68();
+    u32 idx = (u32)flg >> 5;
+    u32 bit = 1u << ((u32)flg & 0x1f);
+    u32 v = sram[idx];
+    if ((v & bit) == 0u) {
+        sram[idx] = v | bit;
+    }
+}
