@@ -39,10 +39,31 @@ scripted local endpoint and the prompt/tools were exercised by other LLM agents.
 - Registry symbol policy implemented in `rigcommon.symbol_for()`: functions.tsv wins; then
   the E3 mangled name but only at confidence `seed`/`high`; otherwise `func_XXXXXXXX`.
 
+## Smoke test (2026-08-19)
+The Spark (`spark-e3f4.local:8000`) was **down the whole session** — connection refused;
+port 8080 on the same host is an unrelated static file server. The driver was therefore
+validated against `mock_endpoint.py` (it promoted `dk::Area::init` end to end, including
+the `make verify` gate), and the *prompt plus tools* were exercised by three independent
+LLM agents given `AGENT_PROMPT.md` verbatim and only `get_context` + `compile_diff`
+(6 targets: 3 x 80-200 B, 3 x 200-500 B, real names, no VU0, Tz/YS/dk).
+
+| addr | function | size | attempts | best fuzzy | exact |
+|---|---|---|---|---|---|
+| 0x00242500 | `Tz::Munny::Add(unsigned int)` | 92 | 1 | 100.0 | yes, promoted |
+| 0x001d87b8 | `YS::MISSION::GetCount(int)` | 100 | 9 (+1) | 100.0 | yes, promote blocked (see parked.tsv) |
+| 0x00188958 | `YS::PARTRAM::set_item_max(int)` | 204 | 7 | 91.76 | no |
+| 0x00197b98 | `YS::EVENT::GetRestTime()` | 80 | 6 | 89.90 | no |
+| 0x00161aa8 | `dk::Camera::draw2Camera()` | 376 | 1 | 86.93 | no |
+| 0x0028c4f8 | `Tz::MenuItem::update()` | 224 | 0 | - | not reached |
+
 ## Landed this session
-- `match: Tz::Select::SetSelectMax` (0x0028af90, 20 B) — by hand through the rig, 4 attempts.
+- `Tz::Select::SetSelectMax` (0x0028af90, 20 B) — by hand through the rig, 4 attempts.
 - `dk::Area::init` (0x00149ca0, 20 B) — promoted by `driver.py` driving the mock endpoint.
-- parked `func_002421e8` / `Tz::McSys::isGameClearKH2` (0x002421e8) after 9 attempts, best 23%.
+- `Tz::Munny::Add` (0x00242500, 92 B) — from the smoke test, exact on the first attempt.
+- 5 functions parked with honest reasons in `docs/rig/parked.tsv`.
+
+`layout_status.tsv` now has **4,681** cxx rows (4,678 before this session; see the
+BASELINE note below).
 
 ## Two findings worth acting on
 - **`promote.py` could report a vacuous MATCHED!** `out/generated/{objects.mk,
@@ -59,6 +80,11 @@ scripted local endpoint and the prompt/tools were exercised by other LLM agents.
   two and fixing the names. (Current tree: 4,680 = 4,678 + the two matched this session.)
 
 ## Next steps (priority)
+0. `promote.py` cannot yet place `YS::MISSION::GetCount`: moving its member declarations
+   into `src/yasui/libys/mission.hpp` leaves that header unparseable at line 65, so the
+   promote is refused and rolled back. The candidate itself is byte-exact
+   (`out/rig/smoke/001d87b8/attempt_009.cpp`). Either harden `ensure_member_decl`'s
+   class-body end detection for that header or place the three declarations by hand.
 1. **Rerun the smoke test on the Spark once it is back**:
    `python3 tools/rig/driver.py --endpoint http://spark-e3f4.local:8000/v1 --model qwen3.8-27b
     --pick --min-size 80 --max-size 200 --count 3 --parallel 3 --max-attempts 20`
