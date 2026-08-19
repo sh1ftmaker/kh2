@@ -171,7 +171,7 @@ def strip_fences(text: str) -> str:
 
 class FunctionRun:
     def __init__(self, ep: Endpoint, addr: str, log_dir: Path, max_attempts: int,
-                 system_prompt: str, dry_promote: bool = False):
+                 system_prompt: str, dry_promote: bool = False, brief: bool = False):
         self.ep = ep
         self.addr = addr
         self.dir = log_dir
@@ -179,6 +179,7 @@ class FunctionRun:
         self.max_attempts = max_attempts
         self.system_prompt = system_prompt
         self.dry_promote = dry_promote
+        self.brief = brief
         self.transcript = self.dir / "transcript.jsonl"
         self.attempts = 0
         self.best = 0.0
@@ -198,7 +199,7 @@ class FunctionRun:
 
     def t_get_context(self, _args: dict) -> dict:
         if not self.ctx:
-            self.ctx = get_context(self.addr)
+            self.ctx = get_context(self.addr, brief=self.brief)
         c = dict(self.ctx)
         c.pop("files", None)
         return c

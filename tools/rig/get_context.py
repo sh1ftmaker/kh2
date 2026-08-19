@@ -319,7 +319,8 @@ def build_skeleton(target, dem: str, includes: List[str], proto: dict) -> str:
 
 
 def get_context(spec: str, *, ghidra: bool = True, m2c: bool = True,
-                similar: bool = True, preview: int = DISASM_PREVIEW) -> dict:
+                similar: bool = True, preview: int = DISASM_PREVIEW,
+                brief: bool = False) -> dict:
     t = rc.resolve(spec)
     outdir = CONTEXT_DIR / f"{t.addr:08x}"
     outdir.mkdir(parents=True, exist_ok=True)
@@ -453,6 +454,17 @@ def get_context(spec: str, *, ghidra: bool = True, m2c: bool = True,
     sk_path.write_text(skel)
     out["files"]["skeleton"] = str(sk_path)
     out["skeleton"] = skel
+
+    if brief:
+        # keep the paths, drop the bodies -- the whole disassembly and both
+        # decompiler drafts are the bulk of the payload
+        for k in ("ghidra", "m2c"):
+            if out.get(k):
+                out[k] = None
+                out[f"{k}_file"] = out["files"].get(k)
+        sim = out.get("similar_matched")
+        if sim and sim.get("snippet") and len(sim["snippet"]) > 800:
+            sim["snippet"] = sim["snippet"][:800] + "\n/* ... truncated ... */"
     return out
 
 
@@ -463,9 +475,12 @@ def main() -> int:
     ap.add_argument("--no-m2c", dest="m2c", action="store_false")
     ap.add_argument("--no-similar", dest="similar", action="store_false")
     ap.add_argument("--preview", type=int, default=DISASM_PREVIEW)
+    ap.add_argument("--brief", action="store_true",
+                    help="drop the Ghidra and m2c bodies (keep the file paths)")
     args = ap.parse_args()
     rc.json_out(get_context(args.target, ghidra=args.ghidra, m2c=args.m2c,
-                            similar=args.similar, preview=args.preview))
+                            similar=args.similar, preview=args.preview,
+                            brief=args.brief))
     return 0
 
 
