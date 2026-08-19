@@ -156,6 +156,9 @@ Any of these makes the result worthless — never do them:
 - `compile_diff(target, src)` — compile + mini-link at the real address + byte
   compare + instruction diff. Costs about 80 ms; use it freely.
 - `promote(target, src, dest)` — only when `exact` is true.
+- `permute(first_line, last_line)` — when only the *order* of loads/stores differs,
+  try every ordering of those statements of your last attempt (≤ 7 statements);
+  it returns the byte-exact file if one exists. Then `compile_diff` that text.
 - `park(target, reason, fuzzy, hypothesis)` — give up honestly.
 
 Reply concisely between tool calls: state the hypothesis you are testing, then test

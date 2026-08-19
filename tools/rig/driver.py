@@ -97,6 +97,27 @@ TOOLS = [
     {
         "type": "function",
         "function": {
+            "name": "permute",
+            "description": "When the diff shows the right instructions in the wrong order "
+                           "(stores/loads to different globals or members), try every "
+                           "ordering of the statements on lines first..last (1-based, at most "
+                           "7 statements) of your last attempt. Returns exact=true with the "
+                           "winning file when an ordering matches; then compile_diff that file's "
+                           "contents and promote. Costs ~80 ms per ordering.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "attempt": {"type": "integer", "description": "attempt number to permute (default: last)"},
+                    "first_line": {"type": "integer"},
+                    "last_line": {"type": "integer"},
+                },
+                "required": ["first_line", "last_line"],
+            },
+        },
+    },
+    {
+        "type": "function",
+        "function": {
             "name": "park",
             "description": "Give up on this function, honestly, and record why.",
             "parameters": {
@@ -256,6 +277,24 @@ class FunctionRun:
             self.result = "matched"
         return res
 
+    def t_permute(self, args: dict) -> dict:
+        from permute import permute as _permute
+        n = int(args.get("attempt") or self.attempts)
+        path = self.dir / f"attempt_{n:03d}.cpp"
+        if not path.exists():
+            return {"ok": False, "error": f"no attempt_{n:03d}.cpp yet -- compile_diff a candidate first"}
+        try:
+            res = _permute(self.addr, path, int(args["first_line"]), int(args["last_line"]))
+        except (KeyError, ValueError) as e:
+            return {"ok": False, "error": f"bad arguments: {e}"}
+        self.log("permute", {"attempt": n, "first": args.get("first_line"), "last": args.get("last_line"),
+                             "exact": res.get("exact"), "tried": res.get("tried"), "best": res.get("best_fuzzy")})
+        if res.get("ok") and res.get("file"):
+            res["source"] = Path(res["file"]).read_text()
+            res["note"] = (res.get("note") or "") + " The winning file's full text is in `source`: " \
+                          "call compile_diff with it unchanged as your next attempt."
+        return res
+
     def t_park(self, args: dict) -> dict:
         self.park_reason = args.get("reason", "model parked without a reason")
         res = parklib.park(self.addr, self.park_reason, self.best,
@@ -285,6 +324,7 @@ class FunctionRun:
             "get_context": self.t_get_context,
             "compile_diff": self.t_compile_diff,
             "promote": self.t_promote,
+            "permute": self.t_permute,
             "park": self.t_park,
         }
 
