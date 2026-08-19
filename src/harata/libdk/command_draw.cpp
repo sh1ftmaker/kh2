@@ -53,3 +53,26 @@ u32 COMMAND_DRAW::isSpecialCommand() {
 }
 
 }  // namespace dk
+
+// ---- 0x0031b070 func_0031b070 ----
+#include "../../common/types.h"
+
+// ---- callees, declared by the rig: copy these lines verbatim, never retype a symbol ----
+extern "C" u32 _ZN2YI8SEQUENCED1Ev_239870(void* self) asm("_ZN2YI8SEQUENCED1Ev");  // YI::SEQUENCE::~SEQUENCE() -- arity VERIFIED
+
+// globals
+extern "C" u32 D_00348590 asm("D_00348590");
+extern "C" u32 D_00347e60 asm("D_00347e60");
+extern "C" u32 D_00347f98 asm("D_00347f98");
+
+// func_0031b070 is a registry stub; the asm label below binds the name.
+// if the call sites show an object in $a0, keep `void* self` as the first argument.
+void func_0031b070_impl(void* self) asm("func_0031b070");
+void func_0031b070_impl(void* self) {
+    u32* p = (u32*)self;
+    p[0] = (u32)&D_00348590;
+    p[260/4] = (u32)&D_00347e60;
+    _ZN2YI8SEQUENCED1Ev_239870((u32)self + 284);
+    p[260/4] = (u32)&D_00347f98;
+    p[0] = (u32)&D_00347f98;
+}

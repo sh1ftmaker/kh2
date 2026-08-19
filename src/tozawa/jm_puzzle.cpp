@@ -48,3 +48,23 @@ u32 JmPuzzle::CalcMaxPiece(s32 a0) {
 }
 
 }  // namespace Tz
+
+// ---- 0x002b1aa0 func_002b1aa0 ----
+#include "../common/types.h"
+
+extern "C" u32 GetImageInfo_2b23e0(int a) asm("_ZN2Tz8JmPuzzle12GetImageInfoEi");
+
+extern "C" u32 D_00374ca4 asm("D_00374ca4");
+extern "C" u32 D_00374ca8 asm("D_00374ca8");
+
+u32 func_002b1aa0_impl(void* self, u32 a) asm("func_002b1aa0");
+
+u32 func_002b1aa0_impl(void* self, u32 a) {
+    u32* p = (u32*)GetImageInfo_2b23e0(-1);
+    u32 f = *p;
+    if (f & 0x4000000)
+        return 20690;
+    if (f & 0x10000000)
+        return D_00374ca4;
+    return D_00374ca8;
+}

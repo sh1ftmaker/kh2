@@ -3,14 +3,17 @@ addr	size	symbol	best_fuzzy	reason	hypothesis	attempts	parked_at
 00105370	80	_ZN4AREA15CreateAllocatorEjj	68.55	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-19T17:26:16Z
 00136968	80	func_00136968	75.6	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-19T17:25:58Z
 0013c820	84	func_0013c820	0.0	3 consecutive candidates failed to compile or link	model cannot produce a compiling candidate	3	2026-08-19T17:39:16Z
+0014cc40	116	func_0014cc40	3.41	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-19T18:07:40Z
+0015aa98	92	func_0015aa98	69.39	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-19T18:09:10Z
 00161aa8	376	_ZN2dk6Camera11draw2CameraEv	86.93	smoke test: 1 attempt, best 86.93% (376 B, agent ran out of budget)	see out/rig/smoke/00161aa8/attempt_001.cpp	1	2026-08-19T04:55:30Z
-001703a8	84	_Z16wtarget_001703a8jjjj	63.17	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	10	2026-08-19T17:46:36Z
-001819c0	88	func_001819c0	36.45	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-19T17:49:48Z
+0016ac80	92	func_0016ac80	53.17	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-19T18:10:40Z
+001703a8	84	_Z16wtarget_001703a8jjjj	63.17	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	10	2026-08-19T18:04:47Z
+001819c0	88	func_001819c0	36.45	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-19T18:05:38Z
 00188958	204	_ZN2YS7PARTRAM12set_item_maxEi	91.76	smoke test: 7 attempts, best 91.76%	see out/rig/smoke/00188958/attempt_003.cpp	7	2026-08-19T04:55:29Z
 00197b98	80	_ZN2YS5EVENT11GetRestTimeEv	89.9	smoke test: 6 attempts, best 89.90%	see out/rig/smoke/00197b98/attempt_004.cpp	6	2026-08-19T04:55:30Z
-001bdcd0	80	func_001bdcd0	59.05	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	8	2026-08-19T17:37:36Z
+001bdcd0	80	func_001bdcd0	59.05	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	8	2026-08-19T18:06:53Z
 001d2248	80	func_001d2248	50.35	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-19T17:38:14Z
-001d87b8	100	_ZN2YS7MISSION8GetCountEi	100.0	byte-exact candidate exists (out/rig/smoke/001d87b8/attempt_009.cpp, compile_diff exact=true) but promote cannot place it: inserting the member declarations into src/yasui/libys/mission.hpp makes that header unparseable at line 65	needs manual placement: add GetCount/IsExec/GetCurrent to class MISSION by hand, or promote into a TU that does not include mission.hpp	9	2026-08-19T04:55:29Z
+001d87b8	100	_ZN2YS7MISSION8GetCountEi	100.0	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	9	2026-08-19T18:11:28Z
 001dc878	80	_ZN3ryj6EFFECT4freeEv	100.0	Byte-exact match confirmed (fuzzy_pct 100.0, exact: true) in multiple attempts, but promote fails every time with "previous definition of `class ryj::EFFECT`" at src/ryj/effect.hpp:17. This is a repo-level header issue (likely missing include guards or a duplicate class definition) that prevents the promoted file from compiling in the full build. The candidate code is correct and byte-identical to the original.	The header src/ryj/effect.hpp likely lacks #pragma once or include guards, causing a double-definition when the candidate's #include "ryj/effect.hpp" is combined with the existing include in effect.cpp. Alternatively, promote's header modification (adding PartMng member) triggers a redefinition. The fix would be to add include guards to effect.hpp or resolve the duplicate class definition, but that requires editing a file outside the candidate.	7	2026-08-19T17:29:25Z
 001dc920	84	_ZN3ryj6EFFECT4killEv	48.52	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-19T17:42:08Z
 001ddd30	84	func_001ddd30	0.0	3 consecutive candidates failed to compile or link	model cannot produce a compiling candidate	3	2026-08-19T17:40:18Z
@@ -20,11 +23,16 @@ addr	size	symbol	best_fuzzy	reason	hypothesis	attempts	parked_at
 0024c828	108	func_0024c828	97.41	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	9	2026-08-19T17:54:54Z
 0024eb50	108	func_0024eb50	7.23	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-19T17:49:53Z
 002865d0	84	func_002865d0	71.62	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-19T17:42:26Z
+0028ce38	92	_ZN2Tz10MenuCursor9DeleteAllEz	100.0	compile_diff is byte-exact (100.0%, size_ok, empty diff) for the candidate: a free function with asm label _ZN2Tz10MenuCursor9DeleteAllEz that loops i from 0 while i < D_0035f404 calling func_0028cdb8(i), then stores 0 to D_0035f410. However promote fails every time: functions.tsv already contains a duplicate entry for 0x0028ce38 (line 7090 vs line 4589, both _ZN2Tz10MenuCursor9DeleteAllEz), and tools/common.py refuses to load the registry, so the full build cannot run. This is a registry data problem outside the candidate file; I cannot edit functions.tsv myself.	The duplicate registry row for 0x0028ce38 (one likely the E3 _ZN2Tz10MenuCursor9DeleteAllEv row and one the Ez placeholder) must be deduplicated by hand before promote can verify. The matched source is: void Tz_MenuCursor_DeleteAll() asm("_ZN2Tz10MenuCursor9DeleteAllEz") { s32 i = 0; while (i < D_0035f404) { func_0028cdb8(i); i = i + 1; } D_0035f410 = 0; }	4	2026-08-19T18:10:50Z
 00294480	80	func_00294480	97.0	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	8	2026-08-19T17:38:45Z
 002aa048	80	func_002aa048	99.75	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-19T17:38:04Z
 002aa450	84	func_002aa450	0.0	3 consecutive candidates failed to compile or link	model cannot produce a compiling candidate	3	2026-08-19T17:41:38Z
 002aab90	84	func_002aab90	74.38	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-19T17:43:38Z
-002aae30	84	func_002aae30	71.57	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-19T17:44:04Z
-002ab258	84	func_002ab258	74.14	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-19T17:44:12Z
+002aae30	84	func_002aae30	77.52	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	9	2026-08-19T18:04:59Z
+002ab258	84	func_002ab258	74.14	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-19T18:04:54Z
 0031afa8	84	func_0031afa8	68.05	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	10	2026-08-19T18:00:46Z
 0031b000	112	func_0031b000	75.46	3 consecutive candidates failed to compile or link	model cannot produce a compiling candidate	6	2026-08-19T17:59:05Z
+0031b0c0	108	func_0031b0c0	55.74	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-19T18:08:55Z
+0031c668	144	func_0031c668	83.11	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	8	2026-08-19T18:02:27Z
+0031c7a8	144	func_0031c7a8	98.36	model stopped calling tools	conversation stalled	15	2026-08-19T18:30:33Z
+0031da48	168	func_0031da48	64.26	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-19T18:02:45Z

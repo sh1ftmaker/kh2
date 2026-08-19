@@ -275,6 +275,10 @@ def add_registry_entry(path: Path, addr: int, symbol: str) -> bool:
     line = f"{symbol}\t{addr:08x}\n"
     if line in text:
         return False
+    # the registry may already carry this address under another spelling of the
+    # same symbol (e.g. `Tz::MenuCursor::DeleteAll(...)`); one row per address
+    if addr in rc.registry_symbols():
+        return False
     if not text.endswith("\n"):
         text += "\n"
     path.write_text(text + line)

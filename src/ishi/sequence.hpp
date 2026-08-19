@@ -8,6 +8,7 @@ class SEQUENCE {
 public:
     u32 GetDrawMode();
     u32 GetPlayMode();
+    void GetActiveXY(int*, int*);
 };
 
 }  // namespace YI

@@ -60,3 +60,37 @@ void func_002aa048(int flg) {
         sram[idx] = v | bit;
     }
 }
+
+// ---- 0x002aab90 func_002aab90 ----
+#include "../common/types.h"
+
+extern "C" u32 GetSram_2a9d68() asm("_ZN2Tz9JmNewInfo7GetSramEv");
+
+void func_002aab90_impl(int flg) asm("func_002aab90");
+void func_002aab90_impl(int flg) {
+    u32* sram = (u32*)(GetSram_2a9d68() + 132);
+    u32 idx = (u32)flg >> 5;
+    u32 bit = 1u << ((u32)flg & 0x1f);
+    u32 v = sram[idx];
+    if ((v & bit) == 0u) {
+        sram[idx] = v | bit;
+    }
+}
+
+// ---- 0x002aa450 func_002aa450 ----
+
+// ---- callees, declared by the rig: copy these lines verbatim, never retype a symbol ----
+extern "C" u32 GetSram_2a9d68() asm("_ZN2Tz9JmNewInfo7GetSramEv");  // Tz::JmNewInfo::GetSram() -- arity VERIFIED
+
+// func_002aa450 is a registry stub. The DECLARATION below carries the asm label
+// that binds the name; the DEFINITION after it must NOT repeat asm(...) (parse error).
+void func_002aa450_impl(int flg) asm("func_002aa450");  // declaration
+void func_002aa450_impl(int flg) {  // definition: no asm() here
+    u32* sram = (u32*)((u32)GetSram_2a9d68() + 316);
+    u32 idx = (u32)flg >> 5;
+    u32 bit = 1u << ((u32)flg & 0x1f);
+    u32 v = sram[idx];
+    if ((v & bit) == 0u) {
+        sram[idx] = v | bit;
+    }
+}
