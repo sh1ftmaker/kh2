@@ -151,6 +151,8 @@ def main() -> int:
     ap.add_argument("--limit", type=int, default=40)
     ap.add_argument("--out", default=str(QUEUE))
     ap.add_argument("--json", action="store_true")
+    ap.add_argument("--twins", type=int, default=150,
+                    help="compute similarity-to-matched for the top-N pre-scored rows (0 = off)")
     args = ap.parse_args()
     if args.tier == 1:
         args.min_size, args.max_size = 80, 200
@@ -164,7 +166,19 @@ def main() -> int:
                            named_only=False, namespace=args.namespace,
                            exclude_parked=not args.include_parked, exclude_vu0=True,
                            limit=1 << 30, sort="size", scan=False)
-    scored = score_rows(rows, load_twins(), recent_classes(), parked)[: args.limit]
+    twins = load_twins()
+    if args.twins:
+        # opcode-sequence similarity to the nearest matched function, computed for
+        # the top-N rows by the other signals (each check costs ~10-50 ms)
+        from get_context import most_similar_matched
+        pre = score_rows(rows, {}, recent_classes(), parked)[: args.twins]
+        for r in pre:
+            a = int(r["addr"], 16)
+            sm = most_similar_matched(a, r["size"], "")
+            if sm and sm.get("similarity", 0) >= 0.75:
+                twins[a] = max(twins.get(a, 0.0), float(sm["similarity"]))
+                r["twin_of"] = sm.get("symbol") or sm.get("addr")
+    scored = score_rows(rows, twins, recent_classes(), parked)[: args.limit]
     outp = Path(args.out)
     outp.parent.mkdir(parents=True, exist_ok=True)
     with outp.open("w", newline="") as f:

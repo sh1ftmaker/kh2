@@ -357,10 +357,11 @@ def build_skeleton(target, dem: str, includes: List[str], proto: dict,
         # extern "C" definition with different arguments collides with them at
         # build time; a differently named C++ function with asm("func_XXXXXXXX")
         # does not.
-        lines.append(f'// {target.symbol} is a registry stub; the asm label below binds the name.')
-        lines.append(f'// if the call sites show an object in $a0, keep `void* self` as the first argument.')
-        lines.append(f'void {target.symbol}_impl(/* TODO args -- arity UNKNOWN */) asm("{target.symbol}");')
-        lines.append(f'void {target.symbol}_impl(/* TODO args -- arity UNKNOWN */) {{')
+        lines.append(f'// {target.symbol} is a registry stub. The DECLARATION below carries the asm label')
+        lines.append(f'// that binds the name; the DEFINITION after it must NOT repeat asm(...) (parse error).')
+        lines.append(f'// Decide the arguments from the disassembly: a0 used as data -> no `void* self`.')
+        lines.append(f'void {target.symbol}_impl(/* TODO args -- arity UNKNOWN */) asm("{target.symbol}");  // declaration')
+        lines.append(f'void {target.symbol}_impl(/* TODO args -- arity UNKNOWN */) {{  // definition: no asm() here')
         lines.append("    /* TODO */")
         lines.append("}")
         return "\n".join(lines) + "\n"
