@@ -271,8 +271,23 @@ def most_similar_matched(target_addr: int, size: int, decl_file: str) -> Optiona
     dem = rc.demangle(sym) if sym else ""
     name = dem.split("(")[0].split("::")[-1] if dem else sym
     snippet = extract_definition(rc.ROOT / src, name) if name else None
+    notes = []
+    if snippet and src.startswith("src/anon/"):
+        # auto-generated anon code leans on helpers from <tu>_decls.hpp; a
+        # standalone candidate has to spell them out
+        n_addr = len(re.findall(r"\baddr_D_[0-9a-fA-F]{8}\(\)", snippet))
+        snippet = re.sub(r"\baddr_D_([0-9a-fA-F]{8})\(\)", r"(u32)&D_\1", snippet)
+        if n_addr:
+            notes.append(f"{n_addr} addr_D_XXXXXXXX() helper(s) rewritten to (u32)&D_XXXXXXXX; "
+                         "declare each as extern \"C\" u32 D_XXXXXXXX asm(\"D_XXXXXXXX\");")
+        if re.search(r"\bFn_[0-9a-fA-F]{8}\b", snippet):
+            notes.append("Fn_XXXXXXXX are function-pointer typedefs from the anon decls header: "
+                         "define your own typedef in the candidate")
+        notes.append("this twin lives in src/anon (auto-generated style): copy its logic, not its "
+                     "raw-address idioms -- use the registry names the context gives you")
     return {
         "addr": f"0x{row.addr:08x}",
+        "notes": notes or None,
         "symbol": sym or None,
         "demangled": dem or None,
         "source_file": src,
