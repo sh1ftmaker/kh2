@@ -514,7 +514,9 @@ def main() -> int:
                 if not parts or parts[0] == "addr" or not parts[0].startswith("0x"):
                     continue
                 a = int(parts[0], 16)
-                if a in held or a in parked:
+                # the scheduler already applied the park rules (a parked row is
+                # listed only when a twin matched since) -- the queue is authoritative
+                if a in held:
                     continue
                 if not args.bench and status.get(a, ("asm", ""))[0] != "asm":
                     continue
