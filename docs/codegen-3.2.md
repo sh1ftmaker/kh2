@@ -96,6 +96,25 @@ displaced load/store or `addiu`. A `lui rX, 0x36` + `lw rY, -0x1348(rX)` pair is
 the address `0x360000 - 0x1348 = 0x35ecb8`. Use the registry name for it
 (`D_0035ecb8`) rather than a raw pointer cast when the context gives you one.
 
+**A raw constant cast can never match a symbol reference.** `*(u32*)0x32bb1c = v;`
+compiles to `lui t7, 0x33; ori t7, t7, 0xbb1c; sw v0, 0(t7)` (three instructions,
+the constant is materialised). The shipped code is `lui t7, 0x33; sw v0, -0x44e4(t7)`
+(two instructions, a `%hi/%lo` relocation against a symbol). So when the original
+has `lui` + a load/store with a *displacement*, declare the global
+(`extern "C" u32 D_0032bb1c asm("D_0032bb1c");` or the registry name) and use it;
+`compile_diff` PROVIDEs any `D_XXXXXXXX` / `func_XXXXXXXX` token at its address.
+Decode the address as `(hi << 16) + sign_extended(lo)`: `lui 0x33` + `-0x44e4` is
+`0x32bb1c`, **not** `0x33bb1c`. (Seen on `AREA::CreateAllocator`, 0x00105370.)
+
+## Tail calls
+
+gcc 3.2 turns `return f(a, b);` at the end of a function into `j f` with the
+epilogue (`ld ra`, `addiu sp`) hoisted before it and the arguments set up in the
+delay slot. If the original ends in `j 0x...` rather than `jal` + `jr ra`, the
+source *returns the callee's result* (or the callee is `void` and so is the
+function). Writing `f(a, b); return x;` produces `jal` + `jr ra` instead and never
+matches. (Same function.)
+
 ## Function-local constants
 
 `li rX, 1` is `addiu rX, zero, 1`; `move rX, zero` is `daddu rX, zero, zero`.

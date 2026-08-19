@@ -49,6 +49,21 @@ Facts that follow from that, and that you must hold in your head:
   and truncating an int to `bool`/`u8` in a register shows up as `andi rX, rX, 0xff`
   or `sltu rX, zero, rY`.
 
+## Callees and globals: copy, never retype
+
+The skeleton in `get_context` already declares every callee as
+`extern "C" u32 name_XXXXXX(args) asm("<exact symbol>");`. **Copy those lines
+verbatim.** One wrong character in a mangled name is a silent link failure that
+costs you an attempt (`VU1Draw` is not `V1Draw`). You may change a declared
+callee's *return type* and, for a non-static member function, prepend the object
+pointer (`void* self`) — nothing else.
+
+For a global reached as `lui rX, HI` + load/store with displacement `LO`, the
+address is `(HI << 16) + signext(LO)` (`lui 0x33` + `-0x44e4` = `0x32bb1c`). Declare
+it as a symbol — `extern "C" u32 D_0032bb1c asm("D_0032bb1c");` or the registry
+name — and use it. A raw `*(u32*)0x32bb1c` cast compiles to `lui`+`ori`+access and
+can never match a relocated symbol reference.
+
 ## Class members: offsets only, never guesses
 
 `get_context` gives you `class_layouts`, taken from the E3-2014 debug build's DWARF.
@@ -91,6 +106,8 @@ The classes and what they mean:
 | Your `bltzl`/`sltu` vs their `bgez`+move | Control-flow shape. `x = a; if (cond) x = b;` and `x = cond ? b : a;` compile *differently* in gcc 3.2 — try both. |
 | Your version is shorter than the row | You are missing a whole branch, or the row contains a second function's tail. Check `size` vs `compiled_size`. |
 | Trailing `nop`s on your side | Your function is shorter than the row; the padding is only cosmetic, look higher up. |
+| Their `j <callee>` at the end, your `jal` + `jr ra` | Tail call: the source is `return callee(...);` (or both are `void`). |
+| Their `lui`+`sw -0x44e4(t7)`, your `lui`+`ori`+`sw 0(t7)` | You used a raw address constant; declare the global as a `D_XXXXXXXX` symbol. |
 
 One hypothesis per attempt. If two consecutive attempts do not move `fuzzy_pct`,
 stop guessing and re-read the disassembly instruction by instruction.

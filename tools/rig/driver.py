@@ -116,13 +116,15 @@ TOOLS = [
 
 
 class Endpoint:
-    def __init__(self, base: str, model: str, timeout: float = 900.0,
-                 temperature: float = 0.2, max_tokens: int = 4096):
+    def __init__(self, base: str, model: str, timeout: float = 1800.0,
+                 temperature: float = 0.2, max_tokens: int = 12288,
+                 think: bool = True):
         self.url = base.rstrip("/") + "/chat/completions"
         self.model = model
         self.timeout = timeout
         self.temperature = temperature
         self.max_tokens = max_tokens
+        self.think = think
 
     def chat(self, messages: List[dict], tools: List[dict]) -> dict:
         payload = {
@@ -133,6 +135,9 @@ class Endpoint:
             "temperature": self.temperature,
             "max_tokens": self.max_tokens,
         }
+        if not self.think:
+            # vLLM / Qwen3 chat template switch; ignored by servers that do not know it
+            payload["chat_template_kwargs"] = {"enable_thinking": False}
         req = urllib.request.Request(
             self.url,
             data=json.dumps(payload).encode(),
@@ -190,6 +195,7 @@ class FunctionRun:
         self.result = "unfinished"
         self.ctx: dict = {}
         self.park_reason = ""
+        self.length_cutoffs = 0
 
     def log(self, kind: str, data) -> None:
         with self.transcript.open("a") as f:
@@ -310,13 +316,34 @@ class FunctionRun:
                 self.log("error", resp)
                 break
             msg = choices[0].get("message") or {}
+            finish = choices[0].get("finish_reason")
+            reasoning = msg.get("reasoning_content") or msg.get("reasoning") or ""
             messages.append({k: v for k, v in msg.items()
                              if k in ("role", "content", "tool_calls")})
             self.log("assistant", {"content": (msg.get("content") or "")[:4000],
+                                   "reasoning_chars": len(reasoning),
+                                   "reasoning_tail": reasoning[-600:],
+                                   "finish_reason": finish,
+                                   "completion_tokens": usage.get("completion_tokens"),
                                    "tool_calls": [tc.get("function", {}).get("name")
                                                   for tc in (msg.get("tool_calls") or [])]})
 
             calls = msg.get("tool_calls") or []
+            if finish == "length" and not calls:
+                # the model spent the whole budget thinking; ask for the action directly
+                self.length_cutoffs += 1
+                messages.append({
+                    "role": "user",
+                    "content": "Your reply was cut off by the token limit before you "
+                               "called a tool. Do not re-derive everything: state the one "
+                               "hypothesis in two sentences and call compile_diff with the "
+                               "full candidate file now (or promote/park).",
+                })
+                if self.length_cutoffs >= 3:
+                    self.t_park({"reason": "3 replies cut off by max_tokens without a tool call",
+                                 "hypothesis": "model reasoning exceeds the token budget"})
+                    break
+                continue
             if not calls:
                 # no tool call: nudge once, then treat as a dead conversation
                 messages.append({
@@ -407,7 +434,9 @@ def main() -> int:
     ap.add_argument("--parallel", type=int, default=1)
     ap.add_argument("--log-dir")
     ap.add_argument("--temperature", type=float, default=0.2)
-    ap.add_argument("--max-tokens", type=int, default=4096)
+    ap.add_argument("--no-think", action="store_true",
+                    help="send chat_template_kwargs.enable_thinking=false (Qwen3 on vLLM)")
+    ap.add_argument("--max-tokens", type=int, default=12288)
     args = ap.parse_args()
 
     targets = list(args.addr)
@@ -425,7 +454,7 @@ def main() -> int:
     run_dir.mkdir(parents=True, exist_ok=True)
     system_prompt = PROMPT_PATH.read_text()
     ep = Endpoint(args.endpoint, args.model, temperature=args.temperature,
-                  max_tokens=args.max_tokens)
+                  max_tokens=args.max_tokens, think=not args.no_think)
 
     t0 = time.time()
     if args.parallel > 1:

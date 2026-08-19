@@ -271,12 +271,74 @@ def include_candidates(decl_file: str) -> List[str]:
     return hits
 
 
-def build_skeleton(target, dem: str, includes: List[str], proto: dict) -> str:
+_BUILTIN_WORDS = {"char", "short", "int", "long", "unsigned", "signed", "float", "double",
+                  "void", "bool", "const", "volatile", "u8", "u16", "u32", "u64", "s8", "s16",
+                  "s32", "s64", "f32", "f64"}
+
+
+def _c_arg(a: str) -> str:
+    """Rewrite a demangled C++ argument type so a standalone candidate compiles:
+    pointers/references to unknown classes become void*; unknown value types stay
+    (the model must then declare them) but are flagged."""
+    t = a.strip()
+    words = [w for w in t.replace("*", " ").replace("&", " ").split() if w]
+    if all(w in _BUILTIN_WORDS for w in words):
+        return t
+    if "*" in t or "&" in t:
+        return f"void* /* {t} */"
+    return f"{t} /* unknown type: declare it or use u32 */"
+
+
+def callee_decls(callees: List[dict]) -> List[str]:
+    """extern "C" declarations bound to the exact registry symbol via an asm label.
+
+    The model must never retype a mangled name (one wrong character is a silent
+    link failure); it copies these lines instead.  Return types are free (not
+    mangled); for member functions the object pointer is a leading argument.
+    """
+    if not callees:
+        return []
+    out = ["// ---- callees, declared by the rig: copy these lines verbatim, never retype a symbol ----",
+           "// return types are not mangled -- change them freely (u32 / s32 / void / void*).",
+           "// a NON-static member function takes the object pointer as its FIRST argument:",
+           "//   add `void* self` in front of the listed args when the call site puts an object in $a0."]
+    seen = set()
+    for c in callees:
+        sym = c.get("symbol")
+        link = c.get("link_symbol") or sym
+        if not link or link in seen:
+            continue
+        seen.add(link)
+        dem = c.get("demangled") or sym or link
+        short = dem.split("(")[0].split("::")[-1] if "::" in dem else dem.split("(")[0]
+        if not short or not short.replace("_", "a").isalnum():
+            short = sym
+        if sym and sym.startswith("_Z") and "(" in dem:
+            args_text = dem[dem.index("(") + 1: dem.rindex(")")]
+            args = [a for a in split_args(args_text) if a and a != "void"]
+            arglist = ", ".join(_c_arg(a) for a in args)
+            note = f"{dem} -- arity {c.get('arity_status')}"
+        else:
+            arglist = "/* args: arity UNKNOWN -- read the call site */"
+            note = f"{dem} -- arity UNKNOWN" if dem != sym else "arity UNKNOWN"
+        # avoid clashing with the target's own short name: suffix by address
+        if link != sym:
+            note += f" [links as {link}: E3 name not in the registry yet]"
+        out.append(f'extern "C" u32 {short}_{c.get("addr","")[-6:]}({arglist}) asm("{link}");  // {note}')
+    return out
+
+
+def build_skeleton(target, dem: str, includes: List[str], proto: dict,
+                   callees: List[dict] = None) -> str:
     """A candidate file that compiles as-is and defines exactly target.symbol."""
     lines = ['#include "common/types.h"']
     for inc in includes[:3]:
         lines.append(f'#include "{inc}"')
     lines.append("")
+    cd = callee_decls(callees or [])
+    if cd:
+        lines.extend(cd)
+        lines.append("")
     lines.append(f"// layout row 0x{target.addr:08x}, {target.size} bytes")
     lines.append(f"// the definition MUST produce the symbol: {target.symbol}"
                  f"  (source: {target.symbol_origin})")
@@ -362,6 +424,7 @@ def get_context(spec: str, *, ghidra: bool = True, m2c: bool = True,
     for a in scan["calls"]:
         csym = rc.registry_symbols().get(a, "")
         crow = rc.e3_map().get(a, {})
+        link_sym = csym or f"func_{a:08x}"   # what actually links (registry or PROVIDEd stub)
         if not csym:
             csym = crow.get("mangled", "")
         p = prototype_for(csym)
@@ -369,6 +432,8 @@ def get_context(spec: str, *, ghidra: bool = True, m2c: bool = True,
             {
                 "addr": f"0x{a:08x}",
                 "symbol": csym or None,
+                "link_symbol": link_sym,
+                "symbol_origin": "registry" if link_sym == csym else "stub (E3 name not registered yet)",
                 "demangled": crow.get("demangled") or (rc.demangle(csym) if csym else None),
                 "prototype": p["text"],
                 "arity": p["arity"],
@@ -449,7 +514,7 @@ def get_context(spec: str, *, ghidra: bool = True, m2c: bool = True,
         'candidate files are compiled with -I src, so use repo-relative includes '
         'like #include "tz/ui_accessors.hpp" (NOT the ../relative form used inside src/)'
     )
-    skel = build_skeleton(t, dem, incs, out["prototype"])
+    skel = build_skeleton(t, dem, incs, out["prototype"], out.get("callees"))
     sk_path = outdir / "skeleton.cpp"
     sk_path.write_text(skel)
     out["files"]["skeleton"] = str(sk_path)

@@ -1,4 +1,5 @@
 addr	size	symbol	best_fuzzy	reason	hypothesis	attempts	parked_at
+00136968	80	func_00136968	51.36	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-19T17:14:24Z
 00161aa8	376	_ZN2dk6Camera11draw2CameraEv	86.93	smoke test: 1 attempt, best 86.93% (376 B, agent ran out of budget)	see out/rig/smoke/00161aa8/attempt_001.cpp	1	2026-08-19T04:55:30Z
 00188958	204	_ZN2YS7PARTRAM12set_item_maxEi	91.76	smoke test: 7 attempts, best 91.76%	see out/rig/smoke/00188958/attempt_003.cpp	7	2026-08-19T04:55:29Z
 00197b98	80	_ZN2YS5EVENT11GetRestTimeEv	89.9	smoke test: 6 attempts, best 89.90%	see out/rig/smoke/00197b98/attempt_004.cpp	6	2026-08-19T04:55:30Z
