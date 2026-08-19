@@ -17,6 +17,15 @@ SLPM := $(ROOT)/SLPM_666.75
 
 MAKE_JOBS ?= $(shell nproc 2>/dev/null || getconf _NPROCESSORS_ONLN 2>/dev/null || echo 1)
 KH2_PS2_IMAGE ?= kh2-local/ps2-compiler:3.2-ee-040921-objdiff
+# Native (docker-less) build: KH2_NATIVE=1 PS2_TOOLCHAIN=/path/to/extracted/gcc make
+# PS2_TOOLCHAIN must contain bin/ee-g++ etc. (with a working interpreter) and
+# a shim/ dir with as/ld symlinks to ee-as/ee-ld. See docs/native-toolchain.md.
+KH2_NATIVE ?= 0
+PS2_TOOLCHAIN ?= /opt/ps2/gcc
+export KH2_NATIVE PS2_TOOLCHAIN
+ifeq ($(KH2_NATIVE),1)
+export PATH := $(PS2_TOOLCHAIN)/shim:$(KH2_OBJDIFF_DIR):$(PATH)
+endif
 
 PS2_PREP := $(ROOT)/docker/ps2/prepare.sh
 
@@ -85,8 +94,12 @@ $(TMP_LD): $(ROOT)/kh2.ld $(GEN)/cxx_sections.ld
 
 $(TARGET): $(SLPM) $(BOUNDARIES) $(GEN)/objects.mk $(GEN)/layout_status.tsv $(GEN)/symbols.ld $(ROOT)/functions.tsv $(ROOT)/kh2.ld \
            $(TOOLS)/build_elf.py $(TOOLS)/common.py $(BUILD_INPUTS_STAMP)
+ifeq ($(KH2_NATIVE),1)
+	@$(MAKE) --no-print-directory -j"$(MAKE_JOBS)" inner-all
+else
 	@$(PS2_PREP)
 	@$(DOCKER_RUN_PS2) bash -lc '/usr/bin/make -j"$(MAKE_JOBS)" inner-all'
+endif
 	@echo "Built $@"
 
 $(OBJDIFF_CONFIG_PATH): $(TARGET) $(BOUNDARIES) $(GEN)/objects.mk $(GEN)/layout_status.tsv $(GEN)/symbols.ld $(ROOT)/functions.tsv $(TOOLS)/objdiff.py $(TOOLS)/common.py
@@ -98,26 +111,26 @@ inner-all: $(GEN)/objects.mk $(ORDERED_OBJS)
 	@if ! python3 $(TOOLS)/build_elf.py fast-link --linked-elf $(FAST_LINK_ELF) --out-elf $(TARGET) --full-linked-elf $(TMP_LINK_ELF); then \
 		sed -e '/\/\* @CXX_SECTIONS@ \*\//r $(GEN)/cxx_sections.ld' \
 		    -e '/\/\* @CXX_SECTIONS@ \*\//d' $(ROOT)/kh2.ld > $(TMP_LD); \
-		/opt/ps2/gcc/bin/ee-ld --no-check-sections -T $(TMP_LD) -T $(LINK_RSP) -o $(TMP_LINK_ELF) -L/opt/ps2/gcc/lib/gcc-lib/ee/3.2-ee-040921 -lgcc; \
+		$(PS2_TOOLCHAIN)/bin/ee-ld --no-check-sections -T $(TMP_LD) -T $(LINK_RSP) -o $(TMP_LINK_ELF) -L$(PS2_TOOLCHAIN)/lib/gcc-lib/ee/3.2-ee-040921 -lgcc; \
 		python3 $(TOOLS)/build_elf.py normalize --linked-elf $(TMP_LINK_ELF) --out-elf $(TARGET); \
 	fi
 
 out/build/%.o: %.cpp
 	@mkdir -p $(dir $@)
-	@/opt/ps2/gcc/bin/ee-g++ $(CXXFLAGS) -c -o $@ $<
+	@$(PS2_TOOLCHAIN)/bin/ee-g++ $(CXXFLAGS) -c -o $@ $<
 
 out/build/%.o: %.s
 	@mkdir -p $(dir $@)
-	@/opt/ps2/gcc/bin/ee-as $(ASFLAGS) -o $@ $<
+	@$(PS2_TOOLCHAIN)/bin/ee-as $(ASFLAGS) -o $@ $<
 
 out/build/%.o: %.S
 	@mkdir -p $(dir $@)
-	@/opt/ps2/gcc/bin/ee-as $(ASFLAGS) -o $@ $<
+	@$(PS2_TOOLCHAIN)/bin/ee-as $(ASFLAGS) -o $@ $<
 
 out/generated/asm/%.o: out/generated/asm/%.s
 	@mkdir -p $(dir $@)
-	@/opt/ps2/gcc/bin/ee-as $(ASFLAGS) -o $@ $<
-	@/opt/ps2/gcc/bin/ee-objcopy -R .text -R .data -R .bss $@
+	@$(PS2_TOOLCHAIN)/bin/ee-as $(ASFLAGS) -o $@ $<
+	@$(PS2_TOOLCHAIN)/bin/ee-objcopy -R .text -R .data -R .bss $@
 
 .PRECIOUS: out/build/%.o out/generated/asm/%.o $(OBJDIFF_CONFIG_PATH)
 

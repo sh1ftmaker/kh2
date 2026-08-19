@@ -23,6 +23,49 @@ PS2_DOCKER_PREPARE = ROOT / "docker" / "ps2" / "prepare.sh"
 PS2_DOCKER_IMAGE = os.environ.get(
     "KH2_PS2_IMAGE", "kh2-local/ps2-compiler:3.2-ee-040921-objdiff"
 )
+# Native (docker-less) mode: KH2_NATIVE=1 runs the toolchain directly from
+# PS2_TOOLCHAIN (a patched extraction of docker/ps2/ee-gcc3.2-040921-full.tar.gz).
+# Command strings written for the container (/opt/ps2/gcc/...) are rewritten.
+DOCKER_TOOLCHAIN = "/opt/ps2/gcc"
+PS2_TOOLCHAIN = os.environ.get("PS2_TOOLCHAIN", DOCKER_TOOLCHAIN)
+KH2_NATIVE = os.environ.get("KH2_NATIVE", "") == "1"
+# Prefix to use when *writing* commands/scripts that will run in the toolchain env.
+TOOLCHAIN = PS2_TOOLCHAIN if KH2_NATIVE else DOCKER_TOOLCHAIN
+
+
+def native_env() -> dict[str, str]:
+    env = dict(os.environ)
+    tc = Path(PS2_TOOLCHAIN)
+    extra = [str(tc / "shim")]
+    if os.environ.get("KH2_OBJDIFF_DIR"):
+        extra.append(os.environ["KH2_OBJDIFF_DIR"])
+    env["PATH"] = os.pathsep.join(extra + [env.get("PATH", "")])
+    env["PS2_TOOLCHAIN"] = PS2_TOOLCHAIN
+    env["KH2_NATIVE"] = "1"
+    return env
+
+
+def rewrite_native(cmd: str) -> str:
+    # Container paths -> host paths: toolchain prefix and the /work bind mount.
+    cmd = cmd.replace(DOCKER_TOOLCHAIN, PS2_TOOLCHAIN)
+    return re.sub(r"(?<![\w/])/work(?=/|\b)", str(ROOT), cmd)
+
+
+def ps2_shell(cmd: str, *, capture: bool = False, cwd: "Path | None" = None) -> subprocess.CompletedProcess[str]:
+    """Run a shell command inside the PS2 toolchain environment (docker or native)."""
+    if KH2_NATIVE:
+        return subprocess.run(
+            ["bash", "-c", rewrite_native(cmd)], check=True, cwd=str(cwd or ROOT),
+            env=native_env(), capture_output=capture, text=True,
+        )
+    subprocess.run([str(PS2_DOCKER_PREPARE)], check=True)
+    full = [
+        "docker", "run", "--rm", "--platform", "linux/amd64",
+        "-u", f"{os.getuid()}:{os.getgid()}",
+        "-v", f"{ROOT}:/work", "-v", "/tmp:/tmp", "-w", "/work",
+        PS2_DOCKER_IMAGE, "bash", "-lc", cmd,
+    ]
+    return subprocess.run(full, check=True, capture_output=capture, text=True)
 
 # ELF layout constants
 MAIN_VADDR = 0x00100000
@@ -95,6 +138,9 @@ def parse_hex_addr(text: str) -> int:
 
 
 def run_ee_objdump(args: Sequence[str], *, cwd: Path = ROOT) -> subprocess.CompletedProcess[str]:
+    if KH2_NATIVE:
+        cmd = [f"{PS2_TOOLCHAIN}/bin/ee-objdump", *args]
+        return subprocess.run(cmd, check=True, capture_output=True, text=True, cwd=str(cwd), env=native_env())
     if not PS2_DOCKER_PREPARE.exists():
         raise FileNotFoundError(f"missing PS2 prepare script: {PS2_DOCKER_PREPARE}")
     subprocess.run([str(PS2_DOCKER_PREPARE)], check=True)
@@ -113,7 +159,7 @@ def run_ee_objdump(args: Sequence[str], *, cwd: Path = ROOT) -> subprocess.Compl
         "-w",
         "/work",
         PS2_DOCKER_IMAGE,
-        "/opt/ps2/gcc/bin/ee-objdump",
+        f"{DOCKER_TOOLCHAIN}/bin/ee-objdump",
         *args,
     ]
     return subprocess.run(cmd, check=True, capture_output=True, text=True, cwd=str(cwd))

@@ -11,6 +11,9 @@ from pathlib import Path
 
 from common import (
     GENERATED_DIR,
+    KH2_NATIVE,
+    PS2_TOOLCHAIN,
+    native_env,
     REGISTRY_TSV,
     ROOT,
     SLPM_PATH,
@@ -768,17 +771,17 @@ def try_fast_link(linked_elf: Path, out_elf: Path, full_linked_elf: Path = FULL_
     script_path.write_text("".join(script_lines))
 
     cmd = [
-        "/opt/ps2/gcc/bin/ee-ld",
+        f"{PS2_TOOLCHAIN}/bin/ee-ld",
         "--no-check-sections",
         "-T",
         str(script_path.relative_to(ROOT)),
         "-o",
         str(linked_elf.relative_to(ROOT)),
         *changed_objs,
-        "-L/opt/ps2/gcc/lib/gcc-lib/ee/3.2-ee-040921",
+        f"-L{PS2_TOOLCHAIN}/lib/gcc-lib/ee/3.2-ee-040921",
         "-lgcc",
     ]
-    proc = subprocess.run(cmd, cwd=ROOT)
+    proc = subprocess.run(cmd, cwd=ROOT, env=native_env() if KH2_NATIVE else None)
     if proc.returncode != 0:
         return 1
     return normalize_final_elf(linked_elf, out_elf)

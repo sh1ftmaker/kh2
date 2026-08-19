@@ -27,6 +27,8 @@ from common import (
     MAIN_VADDR,
     PS2_DOCKER_IMAGE,
     PS2_DOCKER_PREPARE,
+    TOOLCHAIN,
+    ps2_shell,
     REGISTRY_TSV,
     ROOT,
     SLPM_PATH,
@@ -90,34 +92,11 @@ class TextSymbol:
 
 
 def run_in_ps2(cmd: str) -> None:
-    subprocess.run([str(PS2_DOCKER_PREPARE)], check=True)
-    full = [
-        "docker", "run", "--rm",
-        "--platform", "linux/amd64",
-        "-u", f"{os.getuid()}:{os.getgid()}",
-        "-v", f"{ROOT}:/work",
-        "-v", "/tmp:/tmp",
-        "-w", "/work",
-        os.environ.get("KH2_PS2_IMAGE", DEFAULT_IMAGE),
-        "bash", "-lc", cmd,
-    ]
-    subprocess.run(full, check=True)
+    ps2_shell(cmd)
 
 
 def run_in_ps2_capture(cmd: str) -> str:
-    subprocess.run([str(PS2_DOCKER_PREPARE)], check=True)
-    full = [
-        "docker", "run", "--rm",
-        "--platform", "linux/amd64",
-        "-u", f"{os.getuid()}:{os.getgid()}",
-        "-v", f"{ROOT}:/work",
-        "-v", "/tmp:/tmp",
-        "-w", "/work",
-        os.environ.get("KH2_PS2_IMAGE", DEFAULT_IMAGE),
-        "bash", "-lc", cmd,
-    ]
-    return subprocess.run(full, check=True, capture_output=True, text=True).stdout
-
+    return ps2_shell(cmd, capture=True).stdout
 
 
 def load_layout_status_rows() -> List[LayoutRow]:
@@ -765,8 +744,8 @@ def build_units(
             base_asm_rel = base_asm.relative_to(ROOT).as_posix()
             if base_changed or base_asm_changed or not base_obj.exists():
                 assemble_cmds.extend([
-                    f"/opt/ps2/gcc/bin/ee-as -G0 {shlex.quote(base_asm_rel)} -o {shlex.quote(base_obj_rel)}",
-                    f"/opt/ps2/gcc/bin/ee-objcopy -R .mdebug -R .pdr {shlex.quote(base_obj_rel)}",
+                    f"{TOOLCHAIN}/bin/ee-as -G0 {shlex.quote(base_asm_rel)} -o {shlex.quote(base_obj_rel)}",
+                    f"{TOOLCHAIN}/bin/ee-objcopy -R .mdebug -R .pdr {shlex.quote(base_obj_rel)}",
                 ])
 
             target_changed = _write_bytes_if_changed(target_bin, target_blob_bytes)
@@ -777,8 +756,8 @@ def build_units(
             target_asm_rel = target_asm.relative_to(ROOT).as_posix()
             if target_changed or target_asm_changed or not target_obj.exists():
                 assemble_cmds.extend([
-                    f"/opt/ps2/gcc/bin/ee-as -G0 {shlex.quote(target_asm_rel)} -o {shlex.quote(target_obj_rel)}",
-                    f"/opt/ps2/gcc/bin/ee-objcopy -R .mdebug -R .pdr {shlex.quote(target_obj_rel)}",
+                    f"{TOOLCHAIN}/bin/ee-as -G0 {shlex.quote(target_asm_rel)} -o {shlex.quote(target_obj_rel)}",
+                    f"{TOOLCHAIN}/bin/ee-objcopy -R .mdebug -R .pdr {shlex.quote(target_obj_rel)}",
                 ])
         unit_complete = (
             spec.complete
