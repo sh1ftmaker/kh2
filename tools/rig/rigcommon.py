@@ -535,3 +535,46 @@ def scan_row(addr: int, size: int) -> dict:
         elif op in (0x12, 0x36, 0x3E):
             vu0 = True
     return {"calls": calls, "n_calls": len(calls), "uses_vu0": vu0}
+
+
+# ---------------------------------------------------------------- repo headers
+
+CLASS_DECL_RE_TMPL = r"^[ \t]*(?:class|struct)\s+{cls}\s*(?::[^{{;]*)?\{{"
+
+
+def find_class_header(qualified: str) -> Optional[dict]:
+    """Locate the repo header that already declares `NS::Class`, if any.
+
+    A candidate that redeclares a class the repo already has will not build once
+    it is promoted into a TU that includes that header, so the model needs to
+    know up front.
+    """
+    if not qualified:
+        return None
+    parts = qualified.split("::")
+    cls = parts[-1]
+    ns = parts[:-1]
+    rx = re.compile(CLASS_DECL_RE_TMPL.format(cls=re.escape(cls)), re.M)
+    src = ROOT / "src"
+    for p in sorted(list(src.rglob("*.hpp")) + list(src.rglob("*.h"))):
+        text = p.read_text(errors="ignore")
+        m = rx.search(text)
+        if not m:
+            continue
+        if ns and not all(f"namespace {n}" in text for n in ns):
+            continue
+        members = re.findall(r"\b([A-Za-z_~][A-Za-z0-9_]*)\s*\(", text[m.end() :])
+        layouts = re.findall(r"^\s*struct\s+([A-Za-z_][A-Za-z0-9_]*Layout)\s*\{", text, re.M)
+        return {
+            "header": p.relative_to(ROOT).as_posix(),
+            "include": p.relative_to(src).as_posix(),
+            "declared_members": sorted(set(members)),
+            "layout_structs": sorted(set(layouts)),
+        }
+    return None
+
+
+def tu_for_header(header_rel: str) -> Optional[str]:
+    p = ROOT / header_rel
+    cpp = p.with_suffix(".cpp")
+    return cpp.relative_to(ROOT).as_posix() if cpp.exists() else None

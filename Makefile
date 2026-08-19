@@ -29,7 +29,7 @@ endif
 
 PS2_PREP := $(ROOT)/docker/ps2/prepare.sh
 
-CXXFLAGS := -O2 -g0 -x c++ -fno-exceptions -fno-rtti -fpermissive -ffunction-sections
+CXXFLAGS := -O2 -g0 -x c++ -fno-exceptions -fno-rtti -fpermissive -ffunction-sections -I $(ROOT)/src
 ASFLAGS := -G0
 VERIFY_AUTODIFF_COUNT ?= 3
 VERIFY_SMALL_DIFF_MAX ?= 32

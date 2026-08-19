@@ -417,6 +417,31 @@ def get_context(spec: str, *, ghidra: bool = True, m2c: bool = True,
         if s:
             out["similar_matched"] = s
 
+    # does the repo already declare this class?
+    cls_qual = ""
+    if dem and "::" in dem.split("(")[0]:
+        cls_qual = "::".join(dem.split("(")[0].split("::")[:-1])
+    existing = rc.find_class_header(cls_qual) if cls_qual else None
+    if existing:
+        method = dem.split("(")[0].split("::")[-1]
+        existing["declares_this_method"] = method in existing["declared_members"]
+        existing["tu"] = rc.tu_for_header(existing["header"])
+        out["existing_class_header"] = existing
+        out["class_decl_policy"] = (
+            f'{cls_qual} is already declared in {existing["header"]} -- include it '
+            f'(#include "{existing["include"]}") and do NOT redeclare the class. '
+            "Read members through a reinterpret_cast to a local *Layout struct with "
+            "explicit byte offsets. promote.py adds the missing member declaration to "
+            "that header for you."
+        )
+    else:
+        out["existing_class_header"] = None
+        out["class_decl_policy"] = (
+            "no repo header declares this class yet: declare a methods-only class in "
+            "the candidate (house style, see src/anon/*.cpp) plus a local *Layout "
+            "struct carrying the byte offsets."
+        )
+
     incs = include_candidates(decl_file)
     out["suggested_includes"] = incs
     out["include_style"] = (
