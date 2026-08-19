@@ -26,5 +26,5 @@ addr	size	symbol	best_fuzzy	reason	hypothesis	attempts	parked_at
 002aab90	84	func_002aab90	74.38	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-19T17:43:38Z
 002aae30	84	func_002aae30	71.57	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-19T17:44:04Z
 002ab258	84	func_002ab258	74.14	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-19T17:44:12Z
-0031afa8	84	func_0031afa8	68.05	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	10	2026-08-19T17:51:51Z
-0031b000	112	func_0031b000	75.46	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-19T17:50:48Z
+0031afa8	84	func_0031afa8	68.05	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	10	2026-08-19T18:00:46Z
+0031b000	112	func_0031b000	75.46	3 consecutive candidates failed to compile or link	model cannot produce a compiling candidate	6	2026-08-19T17:59:05Z
