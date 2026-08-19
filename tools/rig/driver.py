@@ -488,6 +488,8 @@ def main() -> int:
                     help="held-out bench: targets may already be matched; exact is recorded, "
                          "nothing is promoted")
     ap.add_argument("--prompt", help="system prompt file (default docs/rig/AGENT_PROMPT.md)")
+    ap.add_argument("--no-catalogue", action="store_true",
+                    help="do not append docs/codegen-3.2.md to the system prompt")
     ap.add_argument("--no-think", action="store_true",
                     help="send chat_template_kwargs.enable_thinking=false (Qwen3 on vLLM)")
     ap.add_argument("--max-tokens", type=int, default=12288)
@@ -544,6 +546,11 @@ def main() -> int:
     )
     run_dir.mkdir(parents=True, exist_ok=True)
     system_prompt = (Path(args.prompt) if args.prompt else PROMPT_PATH).read_text()
+    catalogue = rc.ROOT / "docs" / "codegen-3.2.md"
+    if catalogue.exists() and not args.no_catalogue:
+        system_prompt += ("\n\n---\n# Idiom catalogue (docs/codegen-3.2.md) -- confirmed ee-gcc 3.2 "
+                          "codegen facts; check your diff against these before guessing\n\n"
+                          + catalogue.read_text())
     ep = Endpoint(args.endpoint, args.model, temperature=args.temperature,
                   max_tokens=args.max_tokens, think=not args.no_think)
 
