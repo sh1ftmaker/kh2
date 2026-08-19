@@ -197,8 +197,10 @@ def strip_fences(text: str) -> str:
 
 class FunctionRun:
     def __init__(self, ep: Endpoint, addr: str, log_dir: Path, max_attempts: int,
-                 system_prompt: str, dry_promote: bool = False, brief: bool = False):
+                 system_prompt: str, dry_promote: bool = False, brief: bool = False,
+                 bench: bool = False):
         self.ep = ep
+        self.bench = bench
         self.addr = addr
         self.dir = log_dir
         self.dir.mkdir(parents=True, exist_ok=True)
@@ -417,7 +419,10 @@ class FunctionRun:
                 if self.result != "unfinished":
                     break
 
+        import hashlib
         summary = {
+            "prompt_sha": hashlib.sha256(self.system_prompt.encode()).hexdigest()[:12],
+            "bench": self.bench,
             "addr": self.addr,
             "symbol": target.symbol,
             "size": target.size,
@@ -441,14 +446,14 @@ _promote_lock = threading.Lock()
 
 
 def run_one(ep: Endpoint, addr: str, run_dir: Path, max_attempts: int,
-            system_prompt: str) -> dict:
+            system_prompt: str, bench: bool = False) -> dict:
     got = locklib.acquire(rc.resolve(addr).addr, owner="driver")
     if not got.get("acquired"):
         return {"addr": addr, "result": "locked", "attempts": 0, "best_fuzzy": 0.0,
                 "exact": False, "tokens": {"prompt": 0, "completion": 0}, "wall_s": 0.0}
     try:
         fr = FunctionRun(ep, addr, run_dir / addr.replace("0x", ""), max_attempts,
-                         system_prompt)
+                         system_prompt, bench=bench)
         # promote touches shared repo files and runs make: serialise it
         orig = fr.t_promote
 
@@ -479,6 +484,10 @@ def main() -> int:
     ap.add_argument("--parallel", type=int, default=1)
     ap.add_argument("--log-dir")
     ap.add_argument("--temperature", type=float, default=0.2)
+    ap.add_argument("--bench", action="store_true",
+                    help="held-out bench: targets may already be matched; exact is recorded, "
+                         "nothing is promoted")
+    ap.add_argument("--prompt", help="system prompt file (default docs/rig/AGENT_PROMPT.md)")
     ap.add_argument("--no-think", action="store_true",
                     help="send chat_template_kwargs.enable_thinking=false (Qwen3 on vLLM)")
     ap.add_argument("--max-tokens", type=int, default=12288)
@@ -502,7 +511,9 @@ def main() -> int:
                 if not parts or parts[0] == "addr" or not parts[0].startswith("0x"):
                     continue
                 a = int(parts[0], 16)
-                if a in held or a in parked or status.get(a, ("asm", ""))[0] != "asm":
+                if a in held or a in parked:
+                    continue
+                if not args.bench and status.get(a, ("asm", ""))[0] != "asm":
                     continue
                 targets.append(parts[0])
                 if len(targets) >= args.count:
@@ -532,7 +543,7 @@ def main() -> int:
         rc.RIG_OUT / "runs" / time.strftime("%Y%m%d-%H%M%S")
     )
     run_dir.mkdir(parents=True, exist_ok=True)
-    system_prompt = PROMPT_PATH.read_text()
+    system_prompt = (Path(args.prompt) if args.prompt else PROMPT_PATH).read_text()
     ep = Endpoint(args.endpoint, args.model, temperature=args.temperature,
                   max_tokens=args.max_tokens, think=not args.no_think)
 
@@ -540,10 +551,10 @@ def main() -> int:
     if args.parallel > 1:
         with ThreadPoolExecutor(max_workers=args.parallel) as pool:
             results = list(pool.map(
-                lambda a: run_one(ep, a, run_dir, args.max_attempts, system_prompt),
+                lambda a: run_one(ep, a, run_dir, args.max_attempts, system_prompt, args.bench),
                 targets))
     else:
-        results = [run_one(ep, a, run_dir, args.max_attempts, system_prompt)
+        results = [run_one(ep, a, run_dir, args.max_attempts, system_prompt, args.bench)
                    for a in targets]
 
     out = {
