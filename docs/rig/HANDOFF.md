@@ -1,99 +1,63 @@
-# Rig handoff (Phase 2: agent-safe matching rig) — 2026-08-19
+# tools/rig handoff — state as of 2026-08-19 (fleet rounds 0–3)
 
-Status: **built and working**. Tools, driver, prompt and docs are committed on branch `rig`
-in this worktree (`/data/agent-tom/kh2/rig-wt`). Two functions were landed through the rig.
-The one thing not yet done against the intended model is the Spark smoke test: the vLLM
-server on `spark-e3f4.local:8000` went down mid-session (`connection refused`; port 8080 is
-an unrelated static file server). The driver was instead validated end-to-end against a
-scripted local endpoint and the prompt/tools were exercised by other LLM agents.
+Entry point for the next session. Read `README.md` for the tools, `AGENT_PROMPT.md`
+(+ `codegen-3.2.md`, appended to the system prompt) for the worker, `REFLECTOR_PROMPT.md`
+for the reflector, `CAMPAIGN.md` for per-round numbers, `BENCH.md` for the held-out gate.
 
-## Deliverable state
-| Item | State |
-|---|---|
-| `tools/rig/rigcommon.py` | done — layout/registry/E3/DWARF/types loaders, `resolve()`, opcode scan, `find_class_header()` |
-| `tools/rig/compile_diff.py` | done, ~80 ms/attempt, sanity-checked both ways |
-| `tools/rig/list_candidates.py` | done, all filters, no subprocesses |
-| `tools/rig/get_context.py` | done — disasm, Ghidra, m2c, callees+DWARF arity, strings, class layouts, nearest matched source, skeleton |
-| `tools/rig/promote.py` | done — normalizes to house style, edits the class header, `make verify`, full byte-for-byte rollback |
-| `tools/rig/park.py`, `lock.py` | done |
-| `tools/rig/driver.py` | done — OpenAI tool-calling loop, `--parallel`, locks, JSONL transcripts, `summary.json` |
-| `tools/rig/mock_endpoint.py` | done — scripted endpoint used to test the driver without a model |
-| `docs/rig/AGENT_PROMPT.md` | done |
-| `docs/rig/README.md`, `docs/codegen-3.2.md` | done |
-| Smoke test on the Spark | **blocked**: endpoint down all session |
+## Setup
+```sh
+cd /data/agent-tom/kh2/rig-wt && source /data/agent-tom/kh2/env.sh   # branch rig
+curl -s http://spark-e3f4.local:8000/v1/models                        # vLLM qwen3.8-27b
+```
+Always `/usr/bin/make`. Never put the PS2 `bin/` on PATH.
 
-## Confirmed facts (in addition to the 2026-08-18 recon notes, which all still hold)
-- Full `make verify` from cold: **9.7 s**; incremental after one TU: ~2 s. Always call
-  `/usr/bin/make` — `tools/env.sh` puts the PS2 `bin/` on PATH, whose ancient `make`
-  mis-expands `$(abspath ...)` and fails with `missing /layout.tsv`.
-- The Makefile now carries `-I $(ROOT)/src` (added this session) so candidate files living
-  outside `src/` compile with exactly the flags the real build uses. Full build still MATCHED!.
-- `objdiff-cli` 3.8 one-shot JSON shape: `{left,right}.symbols[] -> {name, match_percent,
-  instructions[]}`, each instruction `{diff_kind?, instruction:{formatted, parts}}`.
-  `diff_kind` absent means that row agrees. `left` is the first `-1` object.
-- `ghidra-cli decompile --project kh2 --program SLPM_666.75 FUN_xxxxxxxx` answers in
-  **0.2 s** (it is a client to a running service, not a headless launch). Cached anyway.
-- ee-gcc 3.2 keys `#pragma once` on the *spelled* include path: including the same header
-  as `"select.hpp"` and `"tozawa/select.hpp"` in one TU is a redefinition error. `promote.py`
-  reuses whatever spelling the destination TU already uses.
-- Registry symbol policy implemented in `rigcommon.symbol_for()`: functions.tsv wins; then
-  the E3 mangled name but only at confidence `seed`/`high`; otherwise `func_XXXXXXXX`.
+## One round (what we ran today)
+```sh
+python3 tools/rig/scheduler.py --tier 1 --limit 60                    # queue.tsv, twin-led
+python3 tools/rig/driver.py --no-think --queue out/rig/queue.tsv \
+        --count 20 --parallel 5 --max-attempts 20 --log-dir out/rig/runs/roundN
+python3 tools/rig/round_report.py out/rig/runs/roundN --label "round N ..."   # -> CAMPAIGN.md
+python3 tools/rig/reflect.py out/rig/runs/roundN --llm --no-think     # worklist + proposals
+```
+Then: close ≥ 90 % near-misses by hand or accept reflector proposals → new entries in
+`codegen-3.2.md` (confirmed only when a byte-exact pair shows it) → rerun. Before any
+`AGENT_PROMPT.md` change: `python3 tools/rig/bench.py run --no-think [--prompt new.md]`
+and compare `BENCH.md`. **The bench baseline has not been run yet** — run it first.
 
-## Smoke test (2026-08-19)
-The Spark (`spark-e3f4.local:8000`) was **down the whole session** — connection refused;
-port 8080 on the same host is an unrelated static file server. The driver was therefore
-validated against `mock_endpoint.py` (it promoted `dk::Area::init` end to end, including
-the `make verify` gate), and the *prompt plus tools* were exercised by three independent
-LLM agents given `AGENT_PROMPT.md` verbatim and only `get_context` + `compile_diff`
-(6 targets: 3 x 80-200 B, 3 x 200-500 B, real names, no VU0, Tz/YS/dk).
+## Model facts (qwen3.8-27b on the DGX Spark)
+- `--no-think` is the right mode: ~30 s/turn, ~20 tok/s per stream, 5–6 streams fine.
+  Thinking mode spent 10–12 k tokens per turn on a 40 KB context and produced nothing
+  better (one turn hit the 12,288 cap without a tool call).
+- Per function: ~50 k prompt tokens over ~8 turns; 15 functions on 5 workers ≈ 8 min.
+- It gets to 97–99.75 % often and then parks after 4 flat attempts; the residue is
+  almost always one idiom (see `codegen-3.2.md` entries dated today). The reflector
+  (Qwen, no-think, 315 s per round) diagnoses those residues correctly.
 
-| addr | function | size | attempts | best fuzzy | exact |
-|---|---|---|---|---|---|
-| 0x00242500 | `Tz::Munny::Add(unsigned int)` | 92 | 1 | 100.0 | yes, promoted |
-| 0x001d87b8 | `YS::MISSION::GetCount(int)` | 100 | 9 (+1) | 100.0 | yes, promote blocked (see parked.tsv) |
-| 0x00188958 | `YS::PARTRAM::set_item_max(int)` | 204 | 7 | 91.76 | no |
-| 0x00197b98 | `YS::EVENT::GetRestTime()` | 80 | 6 | 89.90 | no |
-| 0x00161aa8 | `dk::Camera::draw2Camera()` | 376 | 1 | 86.93 | no |
-| 0x0028c4f8 | `Tz::MenuItem::update()` | 224 | 0 | - | not reached |
+## Failure modes seen and the fix that closed each
+| symptom | cause | fix (landed) |
+|---|---|---|
+| empty turns, `finished_reason=length` | Qwen thinking ate `max_tokens` 4096 | max_tokens 12288, re-ask on cut-off, `--no-think` |
+| link errors on callees | model retyped mangled names / used unregistered E3 names | rig-generated `extern "C" … asm("<link symbol>")` callee lines in the skeleton |
+| `already been declared` / header redefinition | two same-stem headers; upstream headers with duplicate decls | includes verified by compiling the skeleton; self-contained fallback; header hygiene (23 fixed, 14 structurally garbled `OBJ::VTABLE<T>` remain) |
+| parse error before `{` ×3 → park | asm label on the *definition* line | compile hint + skeleton comment; 0 such parks in round 2+ |
+| promote MATCHED! but row still `asm` | build regex rejected `extern "C"` stub definitions | `tools/common.py` def_re accepts it; promote asserts `cxx` |
+| promote redefinition of class | candidate include spelled differently from the TU (`#pragma once` by spelling) | promote respells/drops candidate includes |
+| `linker did not place func_…` | model defined the E3 mangled name when the registry symbol is a stub | prompt rule: `symbol_to_define` wins; asm-label stub form |
+| twins not helping (1.00 twin parked at 68 %) | `similar_matched.snippet` was null for asm-label definitions | extract_definition finds `_impl`/asm("name") forms; full text + hint for ≥ 0.85 |
+| 4 wasted attempts on callee arity | `_Z16u_call4_…jjjj` reported arity VERIFIED | placeholder names report arity as a guess |
+| off-by-one parameter list at 99.75 % | `void* self` added to a *static* method | idiom "a0 used as data ⇒ no this" + diff-table row |
 
-## Landed this session
-- `Tz::Select::SetSelectMax` (0x0028af90, 20 B) — by hand through the rig, 4 attempts.
-- `dk::Area::init` (0x00149ca0, 20 B) — promoted by `driver.py` driving the mock endpoint.
-- `Tz::Munny::Add` (0x00242500, 92 B) — from the smoke test, exact on the first attempt.
-- 5 functions parked with honest reasons in `docs/rig/parked.tsv`.
-
-`layout_status.tsv` now has **4,681** cxx rows (4,678 before this session; see the
-BASELINE note below).
-
-## Two findings worth acting on
-- **`promote.py` could report a vacuous MATCHED!** `out/generated/{objects.mk,
-  layout_status.tsv,symbols.ld}` are regenerated only when `layout.tsv`/`functions.tsv`
-  change, so adding a definition to an *existing* TU left the row marked `asm`; the build
-  then `.incbin`s the original bytes and prints MATCHED! without ever compiling the new
-  code. `promote.py` now forces `python3 tools/build_elf.py objects` before `make verify`
-  **and** asserts the row is `cxx` with the expected source afterwards. The Makefile's
-  dependency list for those generated files should probably grow a `src/` stamp too.
-- **Commit a09f680 (the 725 E3 symbol names) silently cost 2 matched functions.**
-  Regenerating `layout_status.tsv` from a clean checkout gives 4,680 cxx rows at upstream
-  `8b5bc47` and **4,678** at `a09f680`: two symbols stopped resolving to a source file once
-  they were renamed. `docs/BASELINE.md` still quotes the 4,680 figure. Worth finding which
-  two and fixing the names. (Current tree: 4,680 = 4,678 + the two matched this session.)
-
-## Next steps (priority)
-0. `promote.py` cannot yet place `YS::MISSION::GetCount`: moving its member declarations
-   into `src/yasui/libys/mission.hpp` leaves that header unparseable at line 65, so the
-   promote is refused and rolled back. The candidate itself is byte-exact
-   (`out/rig/smoke/001d87b8/attempt_009.cpp`). Either harden `ensure_member_decl`'s
-   class-body end detection for that header or place the three declarations by hand.
-1. **Rerun the smoke test on the Spark once it is back**:
-   `python3 tools/rig/driver.py --endpoint http://spark-e3f4.local:8000/v1 --model qwen3.8-27b
-    --pick --min-size 80 --max-size 200 --count 3 --parallel 3 --max-attempts 20`
-   then the same with `--min-size 200 --max-size 500`. Compare against the by-hand results
-   in `out/rig/smoke/` (attempt files kept).
-2. Feed whatever the run teaches into `docs/codegen-3.2.md` and the diff-reading table in
-   `AGENT_PROMPT.md` — that table is the highest-leverage part of the prompt.
-3. `get_context` currently returns a lot of JSON. If the model's context is tight, add
-   `--brief` (drop `ghidra`/`m2c` bodies, keep the file paths).
-4. `compile_diff` already returns `diff_classes` (mechanical classification + hints).
-   Next step there: use the classification to *suggest a concrete edit* (e.g. "change
-   member at 0x04 from s16 to u16") rather than naming the class.
+## Open items (in priority order)
+1. Run the bench baseline; then accept/reject the round-1 reflector proposals
+   (`out/rig/rounds/round1/proposals.md`) through it.
+2. `reflect.py`: auto-append accepted idioms as *unconfirmed* entries; example store
+   (`out/rig/examples/`) + retrieval by diff signature in `get_context`.
+3. `campaign.py`: schedule → drive → report → reflect as one resumable command; nightly
+   header audit of members `promote` added vs DWARF offsets.
+4. Registry renames: many matched rows are still `func_XXXXXXXX` with a low-confidence E3
+   name (e.g. `func_002aa048` = `Tz::JmNewInfo::SetCharaFlg`, now confirmed static by the
+   match). Decide the rename policy (byte-exact match under the E3 prototype as evidence?).
+5. Merge `rig` (+ `header-hygiene`, already merged here) with `layout-regen` into one main
+   line; re-run the E3 mapper on the regenerated layout; fix the 2-function regression
+   from a09f680 and update `docs/BASELINE.md`.
+6. Tier 2 (200–500 B): `scheduler.py --tier 2` skeletons all compile; not yet attempted.
