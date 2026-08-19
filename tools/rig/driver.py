@@ -273,6 +273,11 @@ class FunctionRun:
         if self.last_exact_src is None:
             return {"ok": False, "error": "no byte-exact candidate yet; "
                                           "compile_diff must return exact first"}
+        if self.bench:
+            self.result = "matched"
+            self.log("bench_exact", {"attempt": self.attempts})
+            return {"ok": True, "promoted": False, "bench": True,
+                    "note": "bench mode: byte-exact result recorded; nothing is written to the repo. You are done."}
         dest = args.get("dest") or suggest_dest(self.ctx)
         res = promote(self.addr, self.last_exact_src, dest, dry_run=self.dry_promote)
         self.log("promote", res)

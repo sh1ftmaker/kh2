@@ -106,7 +106,7 @@ def report(run_dir: Path, label: str = "", wall: float = 0.0) -> int:
         b = by_bin.setdefault(r["bin"], [0, 0])
         b[1] += 1
         total += 1
-        if d.get("exact") or d.get("result") == "matched":
+        if d.get("exact") or d.get("result") == "matched" or float(d.get("best_fuzzy") or 0) >= 100.0:
             b[0] += 1
             ok += 1
             attempts_exact.append(d.get("attempts", 0))
