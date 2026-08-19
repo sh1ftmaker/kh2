@@ -73,8 +73,13 @@ Every member there has a **byte offset**. Use those offsets and nothing else.
 
 ## Reading a diff
 
-The diff is two columns, `yours (compiled)` on the left and `orig (SLPM)` on the
-right, with `!` marking rows that do not agree. Classify before you edit:
+`compile_diff` hands you two things. `diff_classes` counts, mechanically, what
+kinds of difference are present and gives a hint for each — read it first, it is
+usually right about *what* is wrong. `diff` is the raw comparison: two columns,
+`yours (compiled)` on the left and `orig (SLPM)` on the right, with `!` marking
+rows that do not agree — read it to work out *why*.
+
+The classes and what they mean:
 
 | What you see | What it usually means |
 |---|---|
