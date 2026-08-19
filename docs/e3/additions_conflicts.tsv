@@ -1,0 +1,46 @@
+# e3_mangled	addr	existing_name
+_ZN4MENU12GetAllocatorEv	00103570	Tz::LoadDataGetSystem()
+_ZdlPv	00106420	Tz::LoadDataFree(...)
+_ZN2dk5Obj2D15DoubleSuicideOnEv	001396b0	Tz::Select::BeginLeave(...)
+_ZN2dk10GAUGE_DRAW4initEv	0013d820	_Z17ttarget0_0013d820v
+_ZN2dk6LockOn4initEv	0013e688	_Z16u_call0_0013e688v
+_ZN2dk12LEVELUP_INFO4initEv	00152f40	_Z16u_tail0_00152f40v
+_ZN2dk12LEVELUP_INFO3offEv	00153158	_Z16u_call0_00153158v
+_ZN2YS8OBJENTRY3GetEj	0016e920	Tz::JmInfo::GetCharaData(unsigned int)
+_ZN2YS2VM7call_pcEiP8BD_VALUEi	0016cba0	_Z16u_tail4_0016cba0jjjj
+_ZN2YS8OBJENTRY14ReadRequestSubEjiii	0016eb48	_Z16u_tail4_0016eb48jjjj
+_ZN2YS3ACT4stopEv	00187b90	_Z17ctarget0_00187b90v
+_ZNK2YS5SHEET10is_mpdriveEv	001a1de0	_Z16u_call4_001a1de0jjjj
+_ZN2YS12COMMAND_ELEM3GetEi	001b8e88	_Z16u_call4_001b8e88jjjj
+_ZN2YS3OBJ6attachEPS0_ii	001c0d38	_Z16u_tail4_001c0d38jjjj
+_ZN2YS13MISSION_GAUGE7destroyEv	001d1ed0	_Z16u_call4_001d1ed0jjjj
+_ZN2YS11LIMIT_TABLE6SearchEi	001d44d8	Tz::JmInfo::GetLimitEntry(...)
+_ZNK2YS11LIMIT_TABLE9get_scoreEv	001d4550	Tz::JmInfo::IsLimitEnabled(...)
+_ZN2YS7MISSION14init_mission2dEPKNS_9MISSION2D5TABLEEPS1_	001d8190	_Z16u_tail4_001d8190jjjj
+_ZN2sa10MUSICAL_2D4readEv	0022b838	_Z16u_tail0_0022b838v
+_ZN2YI12IMAGE_FREEZE4InitEPvP9ALLOCATOR	00236a58	Tz::MenuBasic::SetGraRes(...)
+_ZN2YI6LAYOUT4InitEPvPNS_12IMAGE_FREEZEEP9ALLOCATOR	0023c100	Tz::MenuBasic::SetMesRes(...)
+_ZN2Tz6CmItem13LeaveCategoryEv	00262588	Tz::CmItem::LeaveStock()
+_ZN2Tz6CmItem14LeavePartyListEv	00262ff8	Tz::CmItem::LeaveHelp()
+_ZN2Tz8Selector4ExitEv	0026db60	Tz::Selector::SelExitImpl(...)
+_ZN2Tz8Selector5SetupEv	0026dda0	Tz::PauseTaskBegin()
+_ZN2Tz8Selector4DrawEv	0026e940	Tz::PauseTaskUpdate()
+_ZN2Tz8MenuBase8GetSModeEv	00287cd0	Tz::Selector::GetState()
+_ZN2Tz6Select7FadeOutEv	0028aa40	Tz::Select::Start(...)
+_ZN2Tz6Select12GetSelectPosEv	0028b040	Tz::JmReport::GetData(unsigned int)
+_ZN2Tz8MenuUtil10CreateMessEPN2dk13SpriteMessageEiiiPNS_6LayoutEiiiii	0028d980	Tz::MenuCursor::Create(...)
+_ZN2Tz8MenuUtil10CreateSprtEPN2dk6SpriteEiiiPNS_6LayoutEiiii	0028d8c0	Tz::Pause::CreateFadeObject(...)
+_ZN2Tz8MenuUtil10SprtSetNumEPN2dk6SpriteEi	0028da70	Tz::Select::SetSequence(...)
+_ZN2Tz8MenuUtil13SetSprtParentEPN2dk6SpriteES3_	0028dcc0	Tz::MenuCursor::AttachSprite(...)
+_ZN2Tz7SelHist5LeaveEi	0028f7e8	Tz::JmStory::LeaveAllPost(...)
+_ZNK2Tz8MenuFile14getFileAddressEv	00290940	Tz::JmInfo::IsLoaded(unsigned int)
+_ZN2Tz8MenuFile4freeEv	00290a60	Tz::JmInfo::Unload(...)
+_ZN2Tz8LoadData5FlushEv	002925c0	Tz::LoadDataFlush()
+_ZN2Tz8LoadData10isFlushingEv	00292630	Tz::LoadDataIsFlushing()
+_ZN2Tz6JMData11LoadRequestEiPKcb	00293bd0	Tz::JmAlbum::RequestLoad(unsigned int, void*, unsigned int)
+_ZN2Tz8JmReport13PadSel2SelNumEi	00296da8	Tz::JmReport::GetIndex(unsigned int)
+_ZN2Tz8JmBattle9LeaveListEv	002a67a8	Tz::JmBattle::LeaveAllInner()
+_ZN5SOUND8createSeEi	002bc1e8	Tz::MenuSound::GetBgSeHandle()
+_ZN5SOUND9destroySeEji	002bc358	Tz::MenuSound::StopBgSeHandle(...)
+_ZN2Ti12MG_EHSidecar8PlayPathEib	002e2d88	_Z16u_tail4_002e2d88jjjj
+_ZN5MOVIE7isMovieEv	002ef7b8	Tz::MenuSound::isPauseActive()
