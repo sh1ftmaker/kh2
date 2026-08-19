@@ -8,6 +8,7 @@ class CollisionParam;
 class FMatrix;
 class FVector;
 class MODEL;
+class ushort;
 
 namespace YS {
 

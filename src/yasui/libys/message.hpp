@@ -4,6 +4,8 @@
 
 class FONT;
 class STYLE;
+class uint;
+class ushort;
 
 namespace YS {
 

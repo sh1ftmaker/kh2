@@ -3,6 +3,7 @@
 #include "../common/types.h"
 
 class IMAGE;
+class ushort;
 
 namespace YI {
 

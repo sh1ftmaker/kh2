@@ -2,6 +2,8 @@
 
 #include "../../common/types.h"
 
+class ushort;
+
 namespace YS {
 
     class SUMMON_TABLE {

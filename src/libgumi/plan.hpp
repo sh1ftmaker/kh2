@@ -9,6 +9,7 @@ class FMatrix;
 class GUMISHIP;
 class MODEL_GUMI;
 class MemoryAllocator;
+class ushort;
 
 namespace gm {
 

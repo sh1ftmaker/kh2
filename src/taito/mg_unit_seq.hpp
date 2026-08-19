@@ -2,6 +2,8 @@
 
 #include "../common/types.h"
 
+class uint;
+
 namespace Ti {
 
     class MGUnitSeq {
