@@ -49,6 +49,16 @@ Facts that follow from that, and that you must hold in your head:
   and truncating an int to `bool`/`u8` in a register shows up as `andi rX, rX, 0xff`
   or `sltu rX, zero, rY`.
 
+## The symbol to define is the one in `symbol_to_define`, nothing else
+
+`get_context.symbol_to_define` is authoritative. When it is a placeholder
+(`func_XXXXXXXX`, `_Z13func_XXXXXXXXPv`, `wtarget_…`) you define **that** name even
+if a repo header already declares the E3 name for this address — use the
+skeleton's asm-label form (`void func_XXXXXXXX_impl(void* self) asm("func_XXXXXXXX");`)
+and do *not* define the method through the header. Defining the E3 mangled name
+instead fails the mini-link ("linker did not place …") and costs an attempt. The
+registry is renamed later, by people, once the mapping is confirmed.
+
 ## Callees and globals: copy, never retype
 
 The skeleton in `get_context` already declares every callee as
