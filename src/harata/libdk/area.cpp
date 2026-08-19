@@ -21,3 +21,16 @@ void InitThread(TASK* a0);
 void MapJumpTask(TASK* a0);
 void start(void);
 void StartTask(TASK* a0);
+
+// ---- 0x00149ca0 _ZN2dk4Area4initEv ----
+#include "common/types.h"
+
+namespace dk {
+
+
+
+extern "C" void func_0013dd28();
+
+void Area::init() { func_0013dd28(); }
+
+}  // namespace dk

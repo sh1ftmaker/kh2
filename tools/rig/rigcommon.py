@@ -518,6 +518,7 @@ def scan_row(addr: int, size: int) -> dict:
     """Decode the row's words straight from SLPM (no objdump) for cheap triage.
 
     jal      opcode 0b000011 (0x03)
+    j        opcode 0b000010 (0x02)  -- tail calls out of the row count too
     COP2     opcode 0b010010 (0x12)  -- all VU0 macro-mode ops + cfc2/ctc2/qmfc2/qmtc2
     LQC2     opcode 0b110110 (0x36)
     SQC2     opcode 0b111110 (0x3e)
@@ -528,8 +529,10 @@ def scan_row(addr: int, size: int) -> dict:
     for i in range(0, len(data) - 3, 4):
         w = int.from_bytes(data[i : i + 4], "little")
         op = w >> 26
-        if op == 0x03:  # jal
+        if op == 0x03 or op == 0x02:  # jal / j (tail call)
             t = ((addr + i) & 0xF0000000) | ((w & 0x03FFFFFF) << 2)
+            if op == 0x02 and addr <= t < addr + size:
+                continue  # local branch, not a tail call
             if t not in calls:
                 calls.append(t)
         elif op in (0x12, 0x36, 0x3E):
