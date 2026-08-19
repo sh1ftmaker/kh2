@@ -305,10 +305,12 @@ class FunctionRun:
 
     def t_park(self, args: dict) -> dict:
         self.park_reason = args.get("reason", "model parked without a reason")
-        res = parklib.park(self.addr, self.park_reason, self.best,
-                           args.get("hypothesis", ""), self.attempts)
         self.result = "parked"
-        return res
+        if self.bench:
+            # bench targets are already matched: record the miss, never touch parked.tsv
+            return {"ok": True, "parked": False, "bench": True}
+        return parklib.park(self.addr, self.park_reason, self.best,
+                            args.get("hypothesis", ""), self.attempts)
 
     # -- loop -----------------------------------------------------------------
 
