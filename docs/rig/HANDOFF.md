@@ -68,5 +68,6 @@ scripted local endpoint and the prompt/tools were exercised by other LLM agents.
    `AGENT_PROMPT.md` — that table is the highest-leverage part of the prompt.
 3. `get_context` currently returns a lot of JSON. If the model's context is tight, add
    `--brief` (drop `ghidra`/`m2c` bodies, keep the file paths).
-4. Consider a `compile_diff --explain` that classifies the diff (regalloc vs ordering vs
-   width) mechanically instead of leaving it to the model.
+4. `compile_diff` already returns `diff_classes` (mechanical classification + hints).
+   Next step there: use the classification to *suggest a concrete edit* (e.g. "change
+   member at 0x04 from s16 to u16") rather than naming the class.
