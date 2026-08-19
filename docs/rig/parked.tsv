@@ -5,6 +5,7 @@ addr	size	symbol	best_fuzzy	reason	hypothesis	attempts	parked_at
 0013c820	84	func_0013c820	0.0	3 consecutive candidates failed to compile or link	model cannot produce a compiling candidate	3	2026-08-19T17:39:16Z
 00161aa8	376	_ZN2dk6Camera11draw2CameraEv	86.93	smoke test: 1 attempt, best 86.93% (376 B, agent ran out of budget)	see out/rig/smoke/00161aa8/attempt_001.cpp	1	2026-08-19T04:55:30Z
 001703a8	84	_Z16wtarget_001703a8jjjj	63.17	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	10	2026-08-19T17:46:36Z
+001819c0	88	func_001819c0	36.45	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-19T17:49:48Z
 00188958	204	_ZN2YS7PARTRAM12set_item_maxEi	91.76	smoke test: 7 attempts, best 91.76%	see out/rig/smoke/00188958/attempt_003.cpp	7	2026-08-19T04:55:29Z
 00197b98	80	_ZN2YS5EVENT11GetRestTimeEv	89.9	smoke test: 6 attempts, best 89.90%	see out/rig/smoke/00197b98/attempt_004.cpp	6	2026-08-19T04:55:30Z
 001bdcd0	80	func_001bdcd0	59.05	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	8	2026-08-19T17:37:36Z
@@ -14,6 +15,10 @@ addr	size	symbol	best_fuzzy	reason	hypothesis	attempts	parked_at
 001dc920	84	_ZN3ryj6EFFECT4killEv	48.52	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-19T17:42:08Z
 001ddd30	84	func_001ddd30	0.0	3 consecutive candidates failed to compile or link	model cannot produce a compiling candidate	3	2026-08-19T17:40:18Z
 002421e8	80	func_002421e8	23.25	9 attempts, best 23% -- cannot reproduce 'lw; andi 1; andi 0xff' plus the s0 (callee-saved) result variable; gcc keeps folding the second test into a branchless sltu/andi	the 0x35ecb8 flag is read through an inlined accessor returning bool/u8 that gcc 3.2 cannot narrow to lbu; the result variable is live across the call for a reason my source shape does not reproduce	9	2026-08-19T02:41:02Z
+00247bb0	108	func_00247bb0	75.67	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	7	2026-08-19T17:53:27Z
+00249358	108	func_00249358	72.96	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-19T17:53:38Z
+0024c828	108	func_0024c828	97.41	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	9	2026-08-19T17:54:54Z
+0024eb50	108	func_0024eb50	7.23	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-19T17:49:53Z
 002865d0	84	func_002865d0	71.62	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-19T17:42:26Z
 00294480	80	func_00294480	97.0	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	8	2026-08-19T17:38:45Z
 002aa048	80	func_002aa048	99.75	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-19T17:38:04Z
@@ -21,3 +26,5 @@ addr	size	symbol	best_fuzzy	reason	hypothesis	attempts	parked_at
 002aab90	84	func_002aab90	74.38	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-19T17:43:38Z
 002aae30	84	func_002aae30	71.57	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-19T17:44:04Z
 002ab258	84	func_002ab258	74.14	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-19T17:44:12Z
+0031afa8	84	func_0031afa8	68.05	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	10	2026-08-19T17:51:51Z
+0031b000	112	func_0031b000	75.46	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-19T17:50:48Z

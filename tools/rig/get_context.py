@@ -74,6 +74,19 @@ def prototype_for(symbol: str) -> dict:
     if symbol.startswith("_Z"):
         args_text = dem[dem.index("(") + 1 : dem.rindex(")")] if "(" in dem else ""
         args = [a for a in split_args(args_text) if a and a != "void"]
+        placeholder = bool(re.match(r"^(?:func|wtarget|ctarget|u_call\d*|u_tail\d*)_[0-9a-fA-F]{8}\b", dem))
+        if placeholder and not d:
+            # _Z16u_call4_00139d78jjjj etc.: the argument list was invented by the
+            # placeholder generator, it is NOT evidence of the real arity
+            return {
+                "text": dem,
+                "arity": len(args),
+                "args": args,
+                "arity_status": "PLACEHOLDER (argument list is a guess -- read the call site: "
+                                "what is in a0..a3 right before the jal?)",
+                "source": "placeholder-mangling",
+                "decl_file": None,
+            }
         return {
             "text": dem,
             "arity": len(args),
@@ -331,11 +344,14 @@ def callee_decls(callees: List[dict]) -> List[str]:
         short = dem.split("(")[0].split("::")[-1] if "::" in dem else dem.split("(")[0]
         if not short or not short.replace("_", "a").isalnum():
             short = sym
-        if sym and sym.startswith("_Z") and "(" in dem:
+        if sym and sym.startswith("_Z") and "(" in dem and not str(c.get("arity_status", "")).startswith("PLACEHOLDER"):
             args_text = dem[dem.index("(") + 1: dem.rindex(")")]
             args = [a for a in split_args(args_text) if a and a != "void"]
             arglist = ", ".join(_c_arg(a) for a in args)
             note = f"{dem} -- arity {c.get('arity_status')}"
+        elif sym and sym.startswith("_Z") and "(" in dem:
+            arglist = "/* args: PLACEHOLDER name, the mangled list is a guess -- read a0..a3 at the call site */"
+            note = f"{dem} -- arity UNKNOWN (placeholder)"
         else:
             arglist = "/* args: arity UNKNOWN -- read the call site */"
             note = f"{dem} -- arity UNKNOWN" if dem != sym else "arity UNKNOWN"

@@ -82,3 +82,25 @@ void Select::SetSelectMax(int max) {
 }
 
 }  // namespace Tz
+
+// ---- 0x0024c828 func_0024c828 ----
+
+extern "C" u32 isExist_139d78(u32 elem) asm("_Z16u_call4_00139d78jjjj");
+
+extern "C" u32 D_0035edbc asm("D_0035edbc");
+
+void func_0024c828_impl() asm("func_0024c828");
+void func_0024c828_impl() {
+    int i = 2;
+    u32 off = 0;
+    while (1) {
+        if (isExist_139d78(D_0035edbc + off) != 0) {
+            u32 p = off + D_0035edbc;
+            u32 vt = *(u32*)p;
+            ((void (*)(u32))(*(u32*)(vt + 20)))(p);
+        }
+        i--;
+        if (i < 0) break;
+        off += 408;
+    }
+}
