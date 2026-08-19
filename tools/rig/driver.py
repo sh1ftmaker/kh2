@@ -222,7 +222,10 @@ class FunctionRun:
         res["hypothesis"] = args.get("hypothesis", "")
         self.log("attempt", {"n": self.attempts, "file": path.name,
                              "hypothesis": res["hypothesis"],
-                             "exact": res.get("exact"), "fuzzy": res.get("fuzzy_pct")})
+                             "exact": res.get("exact"), "fuzzy": res.get("fuzzy_pct"),
+                             "compile_errors": (res.get("compile_errors") or [])[:6],
+                             "link_errors": (res.get("link_errors") or [])[:4],
+                             "diff_classes": (res.get("diff_classes") or {}).get("counts")})
         if res.get("compile_errors") or res.get("link_errors"):
             self.compile_fails += 1
         else:
@@ -441,10 +444,23 @@ def main() -> int:
 
     targets = list(args.addr)
     if args.pick or not targets:
+        # skip rows another live driver holds (locks of dead pids are ignored)
+        held = set()
+        for lk in locklib.list_locks().get("locks", []):
+            try:
+                if locklib._alive(int(lk.get("pid") or 0)):
+                    held.add(int(str(lk.get("addr")), 16))
+            except (TypeError, ValueError):
+                pass
         for c in list_candidates(min_size=args.min_size, max_size=args.max_size,
                                  named_only=True, namespace=args.namespace,
-                                 exclude_vu0=True, limit=args.count, sort="confidence"):
+                                 exclude_vu0=True, limit=args.count + len(held),
+                                 sort="confidence"):
+            if int(c["addr"], 16) in held:
+                continue
             targets.append(c["addr"])
+            if len(targets) >= args.count:
+                break
     if not targets:
         rc.die("no targets")
 

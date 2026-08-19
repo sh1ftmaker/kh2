@@ -258,6 +258,37 @@ def byte_fuzzy(a: bytes, b: bytes) -> float:
     return round(100.0 * same / total, 2)
 
 
+# ---------------------------------------------------------------- banned-move lint
+
+# statement-level / file-scope inline asm: `asm(` or `__asm__ volatile (` whose
+# preceding non-blank char is not a declarator end (`)` or identifier char).
+# `void f() asm("sym");` and `extern "C" u32 D_x asm("D_x");` are asm *labels*
+# and are allowed -- they are how candidates bind to registry symbols.
+_ASM_RE = re.compile(r'(?<![A-Za-z0-9_)])\s*(?:__asm__|asm)\s*(?:__volatile__|volatile)?\s*\(')
+_BANNED = [
+    (re.compile(r'__attribute__\s*\(\(\s*naked'), "__attribute__((naked))"),
+    (re.compile(r'\bregister\b[^;]*\basm\s*\('), "register variable pinned with asm()"),
+    (re.compile(r'\.incbin\b'), ".incbin"),
+]
+
+
+def banned_constructs(src_text: str) -> List[str]:
+    found = []
+    for m in _ASM_RE.finditer(src_text):
+        # skip when the asm( directly follows a declarator on the same line
+        line_start = src_text.rfind("\n", 0, m.start()) + 1
+        before = src_text[line_start:m.start()].rstrip()
+        decl = re.search(r'([A-Za-z_]\w*)\s*(?:\([^()]*\))?$', before)
+        if decl and decl.group(1) not in ("if", "while", "for", "switch", "return", "else", "do"):
+            continue   # asm label on a declarator
+        found.append("inline asm statement (only asm *labels* on declarations are allowed)")
+        break
+    for rx, what in _BANNED:
+        if rx.search(src_text):
+            found.append(what)
+    return found
+
+
 def compile_diff(
     spec: str,
     src: Path,
@@ -291,6 +322,13 @@ def compile_diff(
         "diff": [],
         "diff_truncated": False,
     }
+
+    banned = banned_constructs(src.read_text(errors="ignore"))
+    if banned:
+        result["compile_errors"] = [f"banned construct: {b} -- the candidate is rejected "
+                                    "unscored; remove it (see 'Banned moves')" for b in banned]
+        result["elapsed_ms"] = int((time.time() - t0) * 1000)
+        return result
 
     workdir = keep or Path(tempfile.mkdtemp(prefix="rig-cd-"))
     workdir.mkdir(parents=True, exist_ok=True)

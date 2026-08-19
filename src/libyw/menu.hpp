@@ -38,14 +38,12 @@ public:
     void ExecTaskFinalizer(TASK* a0);
     void CreateMenuCamera(void);
     void Init(TASK* a0);
-    void Ensure(void);
     void CreateMenuLayout(void);
     void CreateEditLayout(void);
     u32 GetMenuCamera(void);
     u32 GetBodySelctCamera(void);
     MENU(MENU* a0, char* a1, s32 a2, s32 a3, ELEM* a4, FuncDef74* a5);
     MENU(MENU* a0, char* a1, s32 a2, s32 a3, ELEM* a4, FuncDef75* a5);
-    ~MENU();
     void select(s32 a0);
 };
 

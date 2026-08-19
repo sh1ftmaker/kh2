@@ -514,7 +514,30 @@ def get_context(spec: str, *, ghidra: bool = True, m2c: bool = True,
         'candidate files are compiled with -I src, so use repo-relative includes '
         'like #include "tz/ui_accessors.hpp" (NOT the ../relative form used inside src/)'
     )
-    skel = build_skeleton(t, dem, incs, out["prototype"], out.get("callees"))
+    # keep only includes that actually compile together with the skeleton:
+    # several repo headers share a stem (libyw/menu.hpp vs worldmap/menu.hpp) and
+    # including two of them is a redefinition error.  Try each alone, keep the
+    # first that compiles; fall back to no include.
+    def _compiles(text: str) -> bool:
+        tmp = outdir / "skeleton_try.cpp"
+        tmp.write_text(text)
+        cp = subprocess.run([rc.EE_GXX, *rc.CXXFLAGS, "-fsyntax-only", str(tmp)],
+                            cwd=rc.ROOT, capture_output=True, text=True)
+        return cp.returncode == 0
+    chosen: List[str] = []
+    proto = out["prototype"]
+    for inc in incs:
+        if _compiles(build_skeleton(t, dem, [inc], proto, out.get("callees"))):
+            chosen = [inc]
+            break
+    out["suggested_includes"] = chosen
+    out["rejected_includes"] = [i for i in incs if i not in chosen]
+    skel = build_skeleton(t, dem, chosen, proto, out.get("callees"))
+    if not _compiles(skel):
+        # the skeleton body is a TODO, so only declarations can break it
+        out["skeleton_compiles"] = False
+    else:
+        out["skeleton_compiles"] = True
     sk_path = outdir / "skeleton.cpp"
     sk_path.write_text(skel)
     out["files"]["skeleton"] = str(sk_path)

@@ -118,6 +118,34 @@ def normalize_candidate(body: str, dest: Optional[Path] = None,
     includes: List[str] = []
     kept: List[dict] = []
     out = body
+    # Candidate includes are spelled relative to `src/` (-I src).  Inside the
+    # destination TU they must be spelled the way the TU spells them, and
+    # dropped when the TU already includes the same file under another spelling
+    # (ee-gcc 3.2 keys `#pragma once` on the spelled path, so two spellings of
+    # one header is a redefinition error).
+    def _resolve(spelled: str, base_dir: Path) -> Optional[Path]:
+        for cand in (base_dir / spelled, rc.ROOT / "src" / spelled):
+            try:
+                if cand.exists():
+                    return cand.resolve()
+            except OSError:
+                pass
+        return None
+    dest_dir = dest.parent if dest is not None else rc.ROOT / "src"
+    dest_includes = set()
+    for dm in re.finditer(r'^[ \t]*#include\s+"([^"]+)"', dest_text, re.M):
+        r = _resolve(dm.group(1), dest_dir)
+        if r:
+            dest_includes.add(r)
+    def _fix_include(m):
+        spelled = m.group(1)
+        r = _resolve(spelled, rc.ROOT / "src")
+        if r is None:
+            return m.group(0)
+        if r in dest_includes:
+            return ""  # already included by the TU
+        return f'#include "{os.path.relpath(r, dest_dir)}"'
+    out = re.sub(r'^[ \t]*#include\s+"([^"]+)"[ \t]*\n?', lambda m: _fix_include(m) + ("\n" if _fix_include(m) else ""), out, flags=re.M)
     while True:
         m = CLASS_BLOCK_RE.search(out)
         if not m:

@@ -57,6 +57,32 @@ the same thing for one function:
 Two sanity checks that must always hold: an already-matched source scores
 `exact: true`, and a one-token perturbation of it does not.
 
+## Callee declarations and the banned-move lint
+
+The skeleton from `get_context` carries one line per callee,
+`extern "C" u32 name_XXXXXX(args) asm("<link symbol>");`, where the asm label is
+the registry symbol when the address is registered and the neutral
+`func_XXXXXXXX` stub otherwise (E3 names that are not in the registry do not
+link; `compile_diff` PROVIDEs the stubs). Unknown class pointers are rewritten
+to `void*`. The model copies these lines instead of retyping mangled names — a
+one-character typo there was the most common failure in the first Qwen runs.
+Suggested includes are verified by compiling the skeleton (`-fsyntax-only`) so
+two same-stem headers never end up in one candidate.
+
+`compile_diff` rejects, unscored, any candidate containing an inline `asm`
+*statement*, `__attribute__((naked))`, a `register ... asm("$sN")` pin or
+`.incbin`. `asm("symbol")` labels on declarations are allowed — they are the
+binding mechanism above.
+
+## Model endpoints: Qwen3 and reasoning
+
+`driver.py` sends `max_tokens` 12288 by default (Qwen3 thinking can spend 4k+
+tokens per turn on a large context), logs `finish_reason` and the reasoning
+length per turn, re-asks once when a reply is cut off before a tool call, and
+offers `--no-think` (vLLM `chat_template_kwargs.enable_thinking=false`).
+On the DGX Spark a single stream decodes at roughly 20 tok/s, so a thinking
+turn can take minutes; `--no-think` turns take ~30 s.
+
 ## Candidate files
 
 Candidates live outside `src/` and must compile standing alone, so they declare
