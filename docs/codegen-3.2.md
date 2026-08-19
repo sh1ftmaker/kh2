@@ -179,3 +179,25 @@ matches. (Same function.)
 gcc 3.2 rematerialises small constants aggressively rather than keeping them in
 registers, so a constant showing up twice in the original is normal and does not
 mean the source assigned it twice.
+
+## Naming a D_ global from lui/addiu pairs: subtract the signed-%lo carry
+
+`lui t7, 0x36` + `addiu t7, t7, -0x59a0` loads **0x35a660**, so the symbol is
+`D_0035a660` — NOT `D_0036...`. When %lo ≥ 0x8000 the assembler bumps %hi by 1
+to compensate for sign extension; reading the lui literal as the address's top
+half names a symbol 0x10000 too high, and the only diff you'll see is one lui
+off by exactly 1 (compile_diff now emits a hint for this). Derive the address
+as `(hi << 16) + sign_extend16(lo)`.
+
+## OPEN residue: destructor-family s1/s2 swap (park, don't grind)
+
+Family: `dk::GET_MUNNY`/`GAUGE_FRIEND` D0/D1 (0x0031c7a8, 0x0031c838,
+0x0031c6f8) — manual array-dtor loop (top-test `do { if (begin==end) break;
+end -= 0x158; virtcall(end); } while (1)`) followed by a tail with ~5 `this`
+uses. gcc allocates `this`→s1 / `begin`→s2; the original wants `this`→s2 /
+`begin`→s1. Every decl-order / loop-shape / compare-order / self-copy variant
+compiles to the same swap (best 98.79 %, files in wip/regalloc-family/).
+The light-tail twin `func_0031d9b8` (auto80_199_queue.cpp:14203) matches with
+the identical loop, so the trigger is the tail's register pressure. If your
+diff is a pure s1↔s2 rename on this shape: park with reason "s1/s2 dtor-family
+swap" — do not spend attempts on it.

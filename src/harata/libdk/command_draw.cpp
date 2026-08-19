@@ -76,3 +76,34 @@ void func_0031b070_impl(void* self) {
     p[260/4] = (u32)&D_00347f98;
     p[0] = (u32)&D_00347f98;
 }
+
+// ---- 0x0031b0c0 func_0031b0c0 ----
+
+extern "C" u32 _ZN2YI8SEQUENCED1Ev_239870(void* self) asm("_ZN2YI8SEQUENCED1Ev");  // YI::SEQUENCE::~SEQUENCE() -- arity VERIFIED
+
+extern "C" u32 D_00348590 asm("D_00348590");
+extern "C" u32 D_00347e60 asm("D_00347e60");
+extern "C" u32 D_00347f98 asm("D_00347f98");
+extern "C" u32 D_00347f80 asm("D_00347f80");
+
+typedef void (*Fn_0031b0c0)(u32, u32);
+
+void func_0031b0c0_impl(u32 self) asm("func_0031b0c0");
+void func_0031b0c0_impl(u32 self) {
+    u32 c0 = (u32)&D_00348590;
+    u32 c416 = (u32)&D_00347e60;
+    *(u32*)self = c0;
+    *(u32*)(self + 260) = c416;
+
+    u32 s16 = self;
+    _ZN2YI8SEQUENCED1Ev_239870((void*)(s16 + 284));
+
+    u32 s17 = (u32)&D_00347f98;
+    *(u32*)(s16 + 260) = s17;
+    *(u32*)s16 = s17;
+
+    u32 t = D_00347f80;
+    u32 obj = *(u32*)(t + 20);
+    Fn_0031b0c0 fn = (Fn_0031b0c0)*(u32*)(*(u32*)obj + 4);
+    fn(obj, s16);
+}

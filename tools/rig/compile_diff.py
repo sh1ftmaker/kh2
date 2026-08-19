@@ -427,6 +427,17 @@ def compile_diff(
         # ---- instruction diff
         diff_lines, fell_back, match_pct, pairs = objdiff_units(workdir, "diff_fn", got, want)
         result["diff_classes"] = classify(pairs) if pairs else {"counts": {}, "dominant": None, "hint": ""}
+        # lui off-by-one at a symbol load = the D_XXXXXXXX address was derived
+        # from the asm without the signed-%lo carry (0x10000 too high/low)
+        for pair in pairs or []:
+            m = re.match(r"lui (\w+), 0x([0-9a-f]+)$", (pair.get("left") or "").strip())
+            o = re.match(r"lui (\w+), 0x([0-9a-f]+)$", (pair.get("right") or "").strip())
+            if m and o and m.group(1) == o.group(1) and abs(int(m.group(2), 16) - int(o.group(2), 16)) == 1:
+                result.setdefault("hints", []).append(
+                    "a lui differs by exactly 1: your D_XXXXXXXX symbol address is 0x10000 off. "
+                    "%lo is SIGNED -- derive the address as (hi << 16) + sign_extend16(lo), "
+                    "e.g. lui 0x36 + addiu -0x5... is 0x35..., not 0x36....")
+                break
         if match_pct is not None and not result["exact"]:
             result["fuzzy_pct"] = round(match_pct, 2)
         if len(diff_lines) > diff_cap:
