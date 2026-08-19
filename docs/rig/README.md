@@ -33,6 +33,10 @@ should, if you run `make` by hand.
 | `park.py` / `lock.py` | Honest give-up record (`docs/rig/parked.tsv`) and per-address advisory locks so several agents can share one worktree. A lock records the owning pid and is taken over once that pid is gone, so it protects concurrent long-lived drivers, not successive one-shot CLI calls. |
 | `driver.py` | The loop: one independent conversation per function, numbered immutable candidate files, JSONL transcript, `summary.json`. |
 | `mock_endpoint.py` | A scripted OpenAI-compatible server for testing `driver.py` without a model. |
+| `scheduler.py` | Scores every undecompiled row (twin similarity to matched, class with a recent promotion, name confidence, verified callee arity, DWARF layout, leaf) and writes `out/rig/queue.tsv` with per-row reasons; `driver.py --queue` consumes it. Parked rows come back without penalty once a twin matches. |
+| `permute.py` | Statement-order search for the "right instructions, wrong order" case (gcc 3.2 reschedules independent stores). Also a driver tool (`permute`). |
+| `bench.py` | Held-out re-match bench: 28 already-matched functions (`docs/rig/bench_set.tsv`) run with `driver.py --bench`; appends the rate to `docs/rig/BENCH.md`. Gate for prompt/catalogue changes. |
+| `round_report.py` | Summarises a run directory (matched, parks by reason, near-misses ≥ 90 % = the reflector worklist, tokens, wall) and logs a row in `docs/rig/CAMPAIGN.md`. |
 
 ## How the scorer works
 
@@ -102,6 +106,20 @@ only if the mapping confidence is `seed` or `high`; for weaker evidence it uses
 the neutral `func_XXXXXXXX` stub rather than committing a possibly-wrong name.
 `get_context` reports both (`symbol_to_define` and `e3_symbol`) plus
 `symbol_origin`.
+
+## Running a round (the fleet)
+
+```sh
+python3 tools/rig/scheduler.py --tier 1 --limit 60            # -> out/rig/queue.tsv
+python3 tools/rig/driver.py --no-think --queue out/rig/queue.tsv \
+        --count 15 --parallel 5 --max-attempts 20 --log-dir out/rig/runs/roundN
+python3 tools/rig/round_report.py out/rig/runs/roundN --label "round N"
+```
+
+Then read the near-miss list: every residue ≥ 90 % is either a missing idiom
+(add it to `docs/codegen-3.2.md`, which rides along in the system prompt) or a
+tooling gap. Before changing `AGENT_PROMPT.md`, run `bench.py run` with the old
+and the new prompt (`--prompt`) and compare `docs/rig/BENCH.md`.
 
 ## Running the driver
 
