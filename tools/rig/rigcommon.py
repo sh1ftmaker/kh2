@@ -188,7 +188,8 @@ class Target:
     end: int
     size: int
     layout_name: str
-    symbol: str  # registry mangled symbol or "" if unnamed
+    symbol: str  # the mangled symbol a definition must produce
+    symbol_origin: str  # registry | e3-seed | e3-high | stub
     mode: str  # asm | cxx
     source: str  # TU that currently defines it (cxx only)
 
@@ -216,15 +217,35 @@ def resolve(spec: str) -> Target:
     if row is None:
         die(f"address 0x{addr:08x} is not a layout row start")
     mode, source = layout_status().get(addr, ("asm", ""))
+    sym, origin = symbol_for(addr)
     return Target(
         addr=row.addr,
         end=row.end,
         size=row.size,
         layout_name=row.name,
-        symbol=registry_symbols().get(addr, ""),
+        symbol=sym,
+        symbol_origin=origin,
         mode=mode,
         source=source,
     )
+
+
+def symbol_for(addr: int) -> Tuple[str, str]:
+    """The symbol a new definition for `addr` must produce, and where it came from.
+
+    functions.tsv is authoritative. When the address is not registered yet we
+    fall back to the E3-2014 mangled name, but only when the mapping confidence
+    is `seed` or `high` -- for weaker evidence we use the neutral func_XXXXXXXX
+    stub rather than committing a possibly wrong name to the registry.
+    """
+    reg = registry_symbols().get(addr)
+    if reg:
+        return reg, "registry"
+    row = e3_map().get(addr, {})
+    mangled = row.get("mangled", "")
+    if mangled and row.get("confidence") in ("seed", "high"):
+        return mangled, "e3-" + str(row.get("confidence"))
+    return f"func_{addr:08x}", "stub"
 
 
 # ---------------------------------------------------------------- SLPM bytes / disasm
@@ -489,3 +510,28 @@ def namespace_of(sym_or_demangled: str) -> str:
 def ensure_out() -> Path:
     RIG_OUT.mkdir(parents=True, exist_ok=True)
     return RIG_OUT
+
+
+# ---------------------------------------------------------------- fast opcode scan
+
+def scan_row(addr: int, size: int) -> dict:
+    """Decode the row's words straight from SLPM (no objdump) for cheap triage.
+
+    jal      opcode 0b000011 (0x03)
+    COP2     opcode 0b010010 (0x12)  -- all VU0 macro-mode ops + cfc2/ctc2/qmfc2/qmtc2
+    LQC2     opcode 0b110110 (0x36)
+    SQC2     opcode 0b111110 (0x3e)
+    """
+    data = orig_bytes(addr, size)
+    calls: List[int] = []
+    vu0 = False
+    for i in range(0, len(data) - 3, 4):
+        w = int.from_bytes(data[i : i + 4], "little")
+        op = w >> 26
+        if op == 0x03:  # jal
+            t = ((addr + i) & 0xF0000000) | ((w & 0x03FFFFFF) << 2)
+            if t not in calls:
+                calls.append(t)
+        elif op in (0x12, 0x36, 0x3E):
+            vu0 = True
+    return {"calls": calls, "n_calls": len(calls), "uses_vu0": vu0}

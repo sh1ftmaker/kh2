@@ -204,14 +204,13 @@ def compile_diff(
     if not src.exists():
         rc.die(f"missing candidate source: {src}")
     sym = target.symbol
-    if not sym:
-        sym = f"func_{target.addr:08x}"
 
     result = {
         "ok": True,
         "addr": f"0x{target.addr:08x}",
-        "symbol": target.symbol or None,
-        "demangled": rc.demangle(target.symbol) if target.symbol else None,
+        "symbol": target.symbol,
+        "symbol_origin": target.symbol_origin,
+        "demangled": rc.demangle(target.symbol),
         "size": target.size,
         "exact": False,
         "size_ok": False,
