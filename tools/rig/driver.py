@@ -151,11 +151,12 @@ class Endpoint:
         payload = {
             "model": self.model,
             "messages": messages,
-            "tools": tools,
-            "tool_choice": "auto",
             "temperature": self.temperature,
             "max_tokens": self.max_tokens,
         }
+        if tools:
+            payload["tools"] = tools
+            payload["tool_choice"] = "auto"
         if not self.think:
             # vLLM / Qwen3 chat template switch; ignored by servers that do not know it
             payload["chat_template_kwargs"] = {"enable_thinking": False}

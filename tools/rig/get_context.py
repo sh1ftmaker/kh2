@@ -194,11 +194,26 @@ def extract_definition(source: Path, func_name: str) -> Optional[str]:
     if not source.exists():
         return None
     text = source.read_text(errors="ignore")
-    pat = re.compile(rf"(^|\n)([^\n;{{}}]*?\b{re.escape(func_name)}\s*\([^;{{}}]*\)[^;{{}}]*?)\{{")
-    m = pat.search(text)
+    # the definition may be spelled `name(`, `Class::name(`, `name_impl(` (asm-label
+    # form for stubs) or any identifier bound to the symbol with asm("name")
+    names = [re.escape(func_name), re.escape(func_name) + r"_impl"]
+    am = re.search(r'([A-Za-z_]\w*)\s*\([^;{}]*\)\s*asm\s*\(\s*"' + re.escape(func_name) + r'"\s*\)\s*;', text)
+    if am:
+        names.append(re.escape(am.group(1)))
+    m = None
+    for nm in names:
+        pat = re.compile(rf"(^|\n)([^\n;{{}}]*?\b{nm}\s*\([^;{{}}]*\)[^;{{}}]*?)\{{")
+        m = pat.search(text)
+        if m:
+            break
     if not m:
         return None
     start = m.start(2)
+    # include the preceding rig-style preamble (asm-label declarations, locals)
+    # when the definition belongs to a "// ---- 0x... ----" block
+    blk = text.rfind("// ---- 0x", 0, start)
+    if blk != -1 and text.count("\n", blk, start) <= 25:
+        start = blk
     i = text.index("{", m.end(2) - 1)
     depth = 0
     for j in range(i, len(text)):
@@ -619,8 +634,14 @@ def get_context(spec: str, *, ghidra: bool = True, m2c: bool = True,
                 out[k] = None
                 out[f"{k}_file"] = out["files"].get(k)
         sim = out.get("similar_matched")
-        if sim and sim.get("snippet") and len(sim["snippet"]) > 800:
-            sim["snippet"] = sim["snippet"][:800] + "\n/* ... truncated ... */"
+        # a real twin (>= 0.85) is worth its full text: the right move is to copy it
+        limit = 3000 if (sim and (sim.get("similarity") or 0) >= 0.85) else 800
+        if sim and sim.get("snippet") and len(sim["snippet"]) > limit:
+            sim["snippet"] = sim["snippet"][:limit] + "\n/* ... truncated ... */"
+        if sim and (sim.get("similarity") or 0) >= 0.85:
+            sim["hint"] = ("this matched function is a near-twin of the target (opcode similarity "
+                           f"{sim.get('similarity')}): start from its source, change only the class, "
+                           "offsets, constants and callees the disassembly shows to differ")
     return out
 
 

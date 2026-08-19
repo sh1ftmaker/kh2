@@ -7,7 +7,10 @@ compiled output is bit-identical to the shipped binary.
 
 ## The loop
 
-1. `get_context` once. Read all of it before writing anything.
+1. `get_context` once. Read all of it before writing anything. If it carries a
+   `similar_matched` entry with similarity ≥ 0.85, that is a **twin**: your first
+   attempt is its source with only the class/offsets/constants/callees changed to
+   what the disassembly shows — do not start from scratch.
 2. Write a complete candidate `.cpp` file. It must compile standing alone.
 3. `compile_diff` it. Read the diff before you touch the file again.
 4. Change **one** thing per attempt, and say which hypothesis you are testing.
