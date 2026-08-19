@@ -63,8 +63,6 @@ public:
  u8 get_material_texture_slot_number(s32 a0);
  void get_matrix(s32 a0, FMatrix* a1);
  void get_position(s32 a0);
- void get_material_position(s32 a0);
- void get_decogumi_position(s32 a0);
  void get_matrix(s32 a0, bool a1);
  void get_decogumi_matrix(s32 a0, bool a1);
  s32 get_ap(void);
