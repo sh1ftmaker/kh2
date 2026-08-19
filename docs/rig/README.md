@@ -30,7 +30,7 @@ should, if you run `make` by hand.
 | `get_context.py <addr>` | Disassembly, Ghidra decompilation (cached), m2c draft, callee prototypes with `arity_status`, string refs, E3 DWARF class layouts, the nearest already-matched source, and a compilable candidate skeleton. Big blobs go to `out/rig/context/<addr>/`. |
 | `compile_diff.py <addr> --src f.cpp` | The scorer. Compile → mini-link at the real address → normalize → byte compare → instruction diff. ~80 ms. |
 | `promote.py <addr> --src f.cpp --dest src/…/tu.cpp` | Lands a byte-exact candidate: normalizes it to repo house style, updates `functions.tsv`, adds the missing member declaration to the class header, runs `make verify`, and rolls **everything** back byte-for-byte if the build does not print `MATCHED!`. |
-| `park.py` / `lock.py` | Honest give-up record (`docs/rig/parked.tsv`) and per-address advisory locks so several agents can share one worktree. |
+| `park.py` / `lock.py` | Honest give-up record (`docs/rig/parked.tsv`) and per-address advisory locks so several agents can share one worktree. A lock records the owning pid and is taken over once that pid is gone, so it protects concurrent long-lived drivers, not successive one-shot CLI calls. |
 | `driver.py` | The loop: one independent conversation per function, numbered immutable candidate files, JSONL transcript, `summary.json`. |
 | `mock_endpoint.py` | A scripted OpenAI-compatible server for testing `driver.py` without a model. |
 

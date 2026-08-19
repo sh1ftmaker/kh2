@@ -78,7 +78,7 @@ def pick_symbol(obj: Path, target: Target) -> Optional[object]:
     return None
 
 
-def objdiff_units(work: Path, sym: str, target_bytes: bytes, base_bytes: bytes) -> Tuple[List[str], bool, Optional[float]]:
+def objdiff_units(work: Path, sym: str, target_bytes: bytes, base_bytes: bytes) -> Tuple[List[str], bool, Optional[float], List[dict]]:
     """Wrap raw bytes in .incbin objects (like tools/objdiff.py) and run objdiff-cli."""
     objs = {}
     for kind, blob in (("target", target_bytes), ("base", base_bytes)):
@@ -98,7 +98,7 @@ def objdiff_units(work: Path, sym: str, target_bytes: bytes, base_bytes: bytes) 
         o_path = work / f"{kind}.o"
         cp = _run([rc.EE_AS, "-G0", "-o", o_path.name, s_path.name], cwd=work)
         if cp.returncode != 0:
-            return [f"ee-as failed: {cp.stderr.strip()[:200]}"], False, None
+            return [f"ee-as failed: {cp.stderr.strip()[:200]}"], False, None, []
         _run([rc.EE_OBJCOPY, "-R", ".mdebug", "-R", ".pdr", o_path.name], cwd=work)
         objs[kind] = o_path
 
@@ -109,11 +109,11 @@ def objdiff_units(work: Path, sym: str, target_bytes: bytes, base_bytes: bytes) 
         cwd=work,
     )
     if cp.returncode != 0 or not cp.stdout.strip():
-        return objdump_fallback(work, objs["target"], objs["base"]), True, None
+        return objdump_fallback(work, objs["target"], objs["base"]), True, None, []
     try:
         data = json.loads(cp.stdout)
     except json.JSONDecodeError:
-        return objdump_fallback(work, objs["target"], objs["base"]), True, None
+        return objdump_fallback(work, objs["target"], objs["base"]), True, None, []
     return render_objdiff_json(data, sym)
 
 
@@ -129,7 +129,7 @@ def _row_text(row: dict) -> str:
     return str(ins.get("formatted") or "").strip()
 
 
-def render_objdiff_json(data: dict, sym: str) -> Tuple[List[str], bool, Optional[float]]:
+def render_objdiff_json(data: dict, sym: str) -> Tuple[List[str], bool, Optional[float], List[dict]]:
     """objdiff-cli 3.x one-shot JSON -> aligned 'yours | orig' instruction rows.
 
     left = our compiled bytes, right = the original SLPM bytes.
@@ -146,6 +146,7 @@ def render_objdiff_json(data: dict, sym: str) -> Tuple[List[str], bool, Optional
     lrows = lsym.get("instructions") or []
     rrows = rsym.get("instructions") or []
     lines: List[str] = ["  yours (compiled)                             | orig (SLPM)"]
+    pairs: List[dict] = []
     for i in range(max(len(lrows), len(rrows))):
         lrow = lrows[i] if i < len(lrows) else {}
         rrow = rrows[i] if i < len(rrows) else {}
@@ -154,9 +155,77 @@ def render_objdiff_json(data: dict, sym: str) -> Tuple[List[str], bool, Optional
         kinds = {k for k in (lrow.get("diff_kind"), rrow.get("diff_kind")) if k}
         marker = " " if not kinds - {"DIFF_NONE"} else "!"
         lines.append(f"{marker} {lt:<44} | {rt}")
+        if marker == "!":
+            pairs.append({"left": lt, "right": rt})
     if len(lines) == 1:
-        return [], False, match_pct
-    return lines, False, match_pct
+        return [], False, match_pct, []
+    return lines, False, match_pct, pairs
+
+
+
+LOAD_STORE = {"lb", "lbu", "lh", "lhu", "lw", "lwu", "ld", "sb", "sh", "sw", "sd",
+              "lwl", "lwr", "swl", "swr"}
+BRANCH = {"beq", "bne", "beqz", "bnez", "bgez", "bltz", "blez", "bgtz",
+          "beql", "bnel", "beqzl", "bnezl", "bgezl", "bltzl", "blezl", "bgtzl"}
+REG_RE = re.compile(r"\b(?:zero|at|v[01]|a[0-3]|t[0-9]|s[0-7]|k[01]|gp|sp|fp|ra|f\d+)\b")
+
+
+def _mnemonic(text: str) -> str:
+    return text.split()[0] if text.split() else ""
+
+
+def classify(rows: List[dict]) -> dict:
+    """Mechanically name what kind of difference this is, so the model does not
+    have to guess from the raw rows."""
+    counts = {
+        "register_allocation": 0,
+        "member_width": 0,
+        "control_flow_shape": 0,
+        "missing_on_yours": 0,
+        "extra_on_yours": 0,
+        "operand_value": 0,
+        "other": 0,
+    }
+    for r in rows:
+        lt, rt = r["left"], r["right"]
+        if lt and not rt:
+            counts["extra_on_yours"] += 1
+            continue
+        if rt and not lt:
+            counts["missing_on_yours"] += 1
+            continue
+        if lt == rt:
+            continue
+        lm, rm = _mnemonic(lt), _mnemonic(rt)
+        if lm == rm:
+            if REG_RE.sub("", lt) == REG_RE.sub("", rt):
+                counts["register_allocation"] += 1
+            else:
+                counts["operand_value"] += 1
+        elif lm in LOAD_STORE and rm in LOAD_STORE:
+            counts["member_width"] += 1
+        elif lm in BRANCH and rm in BRANCH:
+            counts["control_flow_shape"] += 1
+        else:
+            counts["other"] += 1
+
+    hints = {
+        "member_width": "a *Layout member has the wrong width or signedness "
+                        "(lbu=u8 lb=s8 lhu=u16 lh=s16 lw=u32/s32/ptr)",
+        "control_flow_shape": "the if/ternary shape differs; 'x = c ? a : b' and "
+                              "'x = b; if (c) x = a;' compile differently in gcc 3.2",
+        "register_allocation": "same instructions, different registers: a variable's "
+                               "lifetime differs (s0-s7 = live across a call)",
+        "missing_on_yours": "you folded something away -- a cast, a truncation or a branch",
+        "extra_on_yours": "you added a conversion or temporary the original does not have",
+        "operand_value": "right instruction, wrong constant/offset -- check the byte offsets",
+    }
+    ranked = sorted(((v, k) for k, v in counts.items() if v), reverse=True)
+    return {
+        "counts": {k: v for v, k in ranked},
+        "dominant": ranked[0][1] if ranked else None,
+        "hints": [f"{k}: {hints[k]}" for _, k in ranked if k in hints],
+    }
 
 
 def objdump_fallback(work: Path, target_o: Path, base_o: Path) -> List[str]:
@@ -310,7 +379,8 @@ def compile_diff(
         result["fuzzy_pct"] = 100.0 if result["exact"] else byte_fuzzy(got, want)
 
         # ---- instruction diff
-        diff_lines, fell_back, match_pct = objdiff_units(workdir, "diff_fn", got, want)
+        diff_lines, fell_back, match_pct, pairs = objdiff_units(workdir, "diff_fn", got, want)
+        result["diff_classes"] = classify(pairs) if pairs else {"counts": {}, "dominant": None, "hint": ""}
         if match_pct is not None and not result["exact"]:
             result["fuzzy_pct"] = round(match_pct, 2)
         if len(diff_lines) > diff_cap:
