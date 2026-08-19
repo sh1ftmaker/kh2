@@ -44,6 +44,17 @@ E3_DWARF = E3 / "symbols" / "functions_dwarf.tsv"
 E3_TYPES = E3 / "symbols" / "types.txt"
 
 PS2_TOOLCHAIN = Path(os.environ.get("PS2_TOOLCHAIN", "/data/agent-tom/kh2/toolchain/gcc"))
+
+# ee-g++ finds `as`/`ld` via PATH, so the shim must be there no matter what
+# shell launched us (env.sh replicated; only shim/, never gcc/bin, goes first).
+os.environ.setdefault("KH2_NATIVE", "1")
+os.environ.setdefault("PS2_TOOLCHAIN", str(PS2_TOOLCHAIN))
+os.environ.setdefault("KH2_OBJDIFF_DIR", "/data/agent-tom/kh2/toolchain/objdiff")
+_shim = str(PS2_TOOLCHAIN / "shim")
+if _shim not in os.environ.get("PATH", "").split(":"):
+    os.environ["PATH"] = ":".join(
+        [_shim, os.environ["KH2_OBJDIFF_DIR"], os.environ.get("PATH", "")])
+
 EE_BIN = PS2_TOOLCHAIN / "bin"
 EE_GXX = EE_BIN / "ee-g++"
 EE_LD = EE_BIN / "ee-ld"
