@@ -135,7 +135,10 @@ def score_rows(rows: List[dict], twins: Dict[int, float], classes: set,
         if cns and any(rc.type_block(cn) for cn in cns):
             s += W["layout"]; why.append("DWARF layout")
         if addr in parked:
-            s += W["parked"]; why.append("parked")
+            if tw >= 0.85:
+                why.append("parked, but a twin matched since -> retry")
+            else:
+                s += W["parked"]; why.append("parked")
         out.append({**r, "score": round(s, 2), "n_calls": ncall, "reasons": "; ".join(why)})
     out.sort(key=lambda x: (-x["score"], x["size"], x["addr"]))
     return out
@@ -162,23 +165,28 @@ def main() -> int:
         args.min_size, args.max_size = 500, 1000
 
     parked = parked_addrs()
+    # parked rows are always scored (the twin rule can bring them back); without
+    # --include-parked the ones that stay penalised are dropped from the output
     rows = list_candidates(min_size=args.min_size, max_size=args.max_size,
                            named_only=False, namespace=args.namespace,
-                           exclude_parked=not args.include_parked, exclude_vu0=True,
+                           exclude_parked=False, exclude_vu0=True,
                            limit=1 << 30, sort="size", scan=False)
     twins = load_twins()
     if args.twins:
         # opcode-sequence similarity to the nearest matched function, computed for
         # the top-N rows by the other signals (each check costs ~10-50 ms)
         from get_context import most_similar_matched
-        pre = score_rows(rows, {}, recent_classes(), parked)[: args.twins]
+        pre = score_rows(rows, {}, recent_classes(), set())[: args.twins]   # no park penalty here
         for r in pre:
             a = int(r["addr"], 16)
             sm = most_similar_matched(a, r["size"], "")
             if sm and sm.get("similarity", 0) >= 0.75:
                 twins[a] = max(twins.get(a, 0.0), float(sm["similarity"]))
                 r["twin_of"] = sm.get("symbol") or sm.get("addr")
-    scored = score_rows(rows, twins, recent_classes(), parked)[: args.limit]
+    scored = score_rows(rows, twins, recent_classes(), parked)
+    if not args.include_parked:
+        scored = [r for r in scored if not r["reasons"].endswith("parked")]
+    scored = scored[: args.limit]
     outp = Path(args.out)
     outp.parent.mkdir(parents=True, exist_ok=True)
     with outp.open("w", newline="") as f:
