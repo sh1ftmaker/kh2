@@ -35,6 +35,7 @@ public:
     void SetSelectorLoop(bool);
     s32 SetEnableShortCut(u32 v);
     void SetSelectDisable(u32 v);
+    void SetSelectMax(int max);
 };
 
 }  // namespace Tz

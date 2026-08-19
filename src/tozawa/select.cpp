@@ -52,3 +52,33 @@ s32 Select::SetEnableShortCut(u32 v) {
 }
 void Select::SetSelectDisable(u32 v) { reinterpret_cast<SelectLayout*>(this)->selectDisable = v; }
 }  // namespace Tz
+
+// ---- 0x0028af90 _ZN2Tz6Select12SetSelectMaxEi ----
+#include "common/types.h"
+
+namespace Tz {
+
+// Byte offsets from the E3-2014 DWARF dump (class Tz::Select size=56).
+struct SelectMaxLayout {
+    s16 m_Current;       // 0x00
+    s16 m_CurrentOld;    // 0x02
+    u16 m_MenuItemMax;   // 0x04
+    s16 m_CurUp;         // 0x06
+    s16 m_CurDown;       // 0x08
+    s16 m_CurLeft;       // 0x0a
+    s16 m_CurRight;      // 0x0c
+    s16 m_FadeOut;       // 0x0e
+    s16 m_ItemMax;       // 0x10
+    s16 m_SelectTop;     // 0x12
+    s16 m_SelectTopOld;  // 0x14
+    s16 m_SelectMax;     // 0x16
+};
+
+
+
+void Select::SetSelectMax(int max) {
+    SelectMaxLayout* p = reinterpret_cast<SelectMaxLayout*>(this);
+    p->m_SelectMax = (s16)((max < 0) ? (s32)p->m_MenuItemMax : max);
+}
+
+}  // namespace Tz
