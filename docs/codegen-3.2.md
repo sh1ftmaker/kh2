@@ -77,6 +77,46 @@ executed **only when the branch is taken**. gcc picks the likely form based on
 the shape of the `if`, so a `bnez` where the original has `bnezl` is a control-flow
 shape difference, not a register problem.
 
+**Decode `%hi` correctly.** The `lo` part is a *signed* 16-bit displacement, so
+`lui 0x3c` + `-0x74e0` is `0x3c0000 - 0x74e0 = 0x3b8b20`, not `0x3c8b20`; gcc
+emits `lui 0x3d` for an address whose low half is ≥ 0x8000. A wrong `hi` shows up
+as `lui rX, 0x3d` vs `lui rX, 0x3c` in the diff — recompute the address.
+(`func_00136968`, 0x00136968.)
+
+## Global structs: `lui` + `addiu` + offset access
+
+```
+lui   t3, 0x3c
+addiu t4, t3, -0x74e0     ; t4 = &D_003b8b20  (the struct's address, materialised)
+sh    t5, 0x2(t4)         ; member at +2
+...
+sh    t5, -0x74e0(t3)     ; member at +0, addressed directly
+```
+
+When the original takes a global's address with `addiu` and then accesses it
+with a non-zero offset, the global is a **struct (or array)** and the accesses are
+members of it — two separate `u16` globals never produce the `addiu`. Declare
+one symbol with a local layout type and access members through it:
+
+```cpp
+struct D_003b8b20_t { u16 unk0; u16 unk2; };   // widths from the sh instructions
+extern "C" D_003b8b20_t D_003b8b20 asm("D_003b8b20");
+D_003b8b20.unk2 = -1;  D_003b8b20.unk0 = -1;
+```
+
+Name inferred types by address (`D_XXXXXXXX_t`, members `unkNN`) so nobody
+mistakes them for a DWARF-verified layout. (`func_00136968`: 75.6 % → exact.)
+
+## gcc 3.2 reschedules independent global stores
+
+Five stores to distinct globals in source order `A B C D E` came out as
+`C B D E A` — the instruction scheduler reorders stores it can prove independent.
+If every instruction is present but the *order* of stores/loads to different
+globals differs, do not change the code — **permute the statement order**. With
+≤ 6 statements that is ≤ 720 `compile_diff` calls at 80 ms each; the exact order
+for `func_00136968` was found in under 10 s. (A `permute` helper is worth adding
+to the rig.)
+
 ## Tail calls
 
 A plain `j <addr>` at the end of a row, after the epilogue, is a sibling call:

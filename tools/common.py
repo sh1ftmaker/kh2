@@ -355,7 +355,7 @@ def _build_addr_source_fallback_map(
     # Fallback for auto-generated files where registry symbol resolution from source
     # names is ambiguous or unavailable. Supports both C/C++ definitions and asm labels.
     def_re = re.compile(
-        r"^\s*(?:[A-Za-z_][A-Za-z0-9_:<>,~*&\s]*\s+)?"
+        r"^\s*(?:extern\s+\"C\"\s+)?(?:[A-Za-z_][A-Za-z0-9_:<>,~*&\s]*\s+)?"
         r"func_([0-9a-fA-F]{8})\s*\([^;{}]*\)\s*"
         r"(?:const\s*)?(?:__attribute__\s*\(\([^{}]*\)\)\s*)?\{",
         re.M,

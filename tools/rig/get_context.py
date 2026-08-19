@@ -286,7 +286,10 @@ def _c_arg(a: str) -> str:
         return t
     if "*" in t or "&" in t:
         return f"void* /* {t} */"
-    return f"{t} /* unknown type: declare it or use u32 */"
+    # a value-typed enum/class argument: an enum is an int on the EE ABI, and a
+    # small struct by value is rare; u32 keeps the declaration compilable and
+    # the call codegen identical for enums.
+    return f"u32 /* {t} -- enum/class by value; u32 if it is an enum */"
 
 
 def callee_decls(callees: List[dict]) -> List[str]:
@@ -329,7 +332,7 @@ def callee_decls(callees: List[dict]) -> List[str]:
 
 
 def build_skeleton(target, dem: str, includes: List[str], proto: dict,
-                   callees: List[dict] = None) -> str:
+                   callees: List[dict] = None, self_contained: bool = False) -> str:
     """A candidate file that compiles as-is and defines exactly target.symbol."""
     lines = ['#include "common/types.h"']
     for inc in includes[:3]:
@@ -346,10 +349,32 @@ def build_skeleton(target, dem: str, includes: List[str], proto: dict,
         lines.append(f"// original name (E3 debug build): {dem}")
     lines.append("")
 
-    if target.symbol_origin == "stub" or "::" not in (dem or ""):
+    if (target.symbol_origin == "stub" or not str(target.symbol).startswith("_Z")
+            or "::" not in (dem or "")):
         # unregistered / weak evidence: define the neutral C symbol, never invent
-        # a mangled C++ name.
-        lines.append(f'extern "C" u32 {target.symbol}(/* TODO args -- arity UNKNOWN */) {{')
+        # a mangled C++ name.  Bind it with an asm label: other TUs in src/anon
+        # carry ad-hoc `func_XXXXXXXX(u32, u32, ...)` prototypes, and a plain
+        # extern "C" definition with different arguments collides with them at
+        # build time; a differently named C++ function with asm("func_XXXXXXXX")
+        # does not.
+        lines.append(f'// {target.symbol} is a registry stub; the asm label below binds the name.')
+        lines.append(f'// if the call sites show an object in $a0, keep `void* self` as the first argument.')
+        lines.append(f'void {target.symbol}_impl(/* TODO args -- arity UNKNOWN */) asm("{target.symbol}");')
+        lines.append(f'void {target.symbol}_impl(/* TODO args -- arity UNKNOWN */) {{')
+        lines.append("    /* TODO */")
+        lines.append("}")
+        return "\n".join(lines) + "\n"
+
+    # a C++-mangled placeholder (e.g. _Z13func_0017c578Pv = func_0017c578(void*)):
+    # define the free function with exactly those argument types; the E3 name
+    # is only a comment until the registry is renamed.
+    reg_dem = rc.demangle(target.symbol) if str(target.symbol).startswith("_Z") else ""
+    if reg_dem and re.match(r"^(func|wtarget|ctarget|u_call|u_tail)_[0-9a-fA-F]{8}\(", reg_dem):
+        rp = prototype_for(target.symbol)
+        rargs = rp.get("args") or []
+        rname = reg_dem.split("(")[0]
+        lines.append(f"// the registry symbol is the C++-mangled placeholder {reg_dem}; define it as-is")
+        lines.append(f"u32 {rname}({', '.join(f'{a} a{i}' for i, a in enumerate(rargs))}) {{")
         lines.append("    /* TODO */")
         lines.append("}")
         return "\n".join(lines) + "\n"
@@ -359,17 +384,49 @@ def build_skeleton(target, dem: str, includes: List[str], proto: dict,
     ns = "::".join(parts[:-2]) if len(parts) > 2 else ""
     cls = parts[-2]
     fn = parts[-1]
+    is_ctor_dtor = fn == cls or fn.startswith("~")
+    ret = "" if is_ctor_dtor else "int "
     args = proto.get("args") or []
     arglist = ", ".join(f"{a} a{i}" for i, a in enumerate(args))
+    decl_arglist = ", ".join(args)
+    # forward-declare class types used by pointer/reference in the signature so
+    # the skeleton compiles without the (possibly missing) headers
+    fwd = []
+    for a in args:
+        words = [w for w in a.replace("*", " ").replace("&", " ").split() if w]
+        for w in words:
+            if w in _BUILTIN_WORDS or not re.match(r"^[A-Za-z_][\w:]*$", w):
+                continue
+            if ("*" in a or "&" in a) and w not in fwd:
+                fwd.append(w)
+    for w in fwd:
+        parts = w.split("::")
+        if len(parts) == 1:
+            lines.append(f"class {w};")
+        else:
+            inner = f"class {parts[-1]};"
+            for nsn in reversed(parts[:-1]):
+                inner = f"namespace {nsn} {{ {inner} }}"
+            lines.append(inner)
+    if fwd:
+        lines.append("")
     if ns:
         lines.append(f"namespace {ns} {{")
+    if self_contained:
+        # no repo header: declare a methods-only class with exactly this member.
+        # promote drops it and adds the declaration to the real header.
+        lines.append(f"class {cls} {{")
+        lines.append("public:")
+        lines.append(f"    {ret}{fn}({decl_arglist});" + ("" if is_ctor_dtor else "   // return type is free (not mangled)"))
+        lines.append("};")
+        lines.append("")
     lines.append(f"struct {cls}Layout {{")
     lines.append("    // every member needs an explicit byte offset from class_layouts;")
     lines.append("    // pad unknown gaps with u8 padNN[...]; // 0xNN  and say so")
     lines.append("};")
     lines.append("")
     lines.append(f"/* {dem} */")
-    lines.append(f"int {cls}::{fn}({arglist}) {{")
+    lines.append(f"{ret}{cls}::{fn}({arglist}) {{")
     lines.append("    /* TODO */")
     lines.append("}")
     if ns:
@@ -533,9 +590,19 @@ def get_context(spec: str, *, ghidra: bool = True, m2c: bool = True,
     out["suggested_includes"] = chosen
     out["rejected_includes"] = [i for i in incs if i not in chosen]
     skel = build_skeleton(t, dem, chosen, proto, out.get("callees"))
+    out["skeleton_form"] = "repo-header"
     if not _compiles(skel):
-        # the skeleton body is a TODO, so only declarations can break it
-        out["skeleton_compiles"] = False
+        # usually: the header exists but does not declare this member yet, or no
+        # header compiles.  Fall back to the self-contained methods-only class.
+        alt = build_skeleton(t, dem, [], proto, out.get("callees"), self_contained=True)
+        if _compiles(alt):
+            skel = alt
+            out["skeleton_form"] = "self-contained (header lacks this member or none compiles)"
+            out["suggested_includes"] = []
+            out["rejected_includes"] = incs
+            out["skeleton_compiles"] = True
+        else:
+            out["skeleton_compiles"] = False
     else:
         out["skeleton_compiles"] = True
     sk_path = outdir / "skeleton.cpp"

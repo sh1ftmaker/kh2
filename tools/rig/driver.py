@@ -429,6 +429,8 @@ def main() -> int:
     ap.add_argument("--addr", action="append", default=[],
                     help="explicit target (repeatable)")
     ap.add_argument("--pick", action="store_true", help="pick targets with list_candidates")
+    ap.add_argument("--queue", help="take targets top-down from a scheduler.py queue.tsv "
+                                    "(skips locked / parked / already-matched rows)")
     ap.add_argument("--min-size", type=int, default=80)
     ap.add_argument("--max-size", type=int, default=500)
     ap.add_argument("--namespace")
@@ -443,7 +445,29 @@ def main() -> int:
     args = ap.parse_args()
 
     targets = list(args.addr)
-    if args.pick or not targets:
+    if args.queue:
+        held = set()
+        for lk in locklib.list_locks().get("locks", []):
+            try:
+                if locklib._alive(int(lk.get("pid") or 0)):
+                    held.add(int(str(lk.get("addr")), 16))
+            except (TypeError, ValueError):
+                pass
+        status = rc.layout_status()
+        from list_candidates import parked_addrs
+        parked = parked_addrs()
+        with open(args.queue) as qf:
+            for line in qf:
+                parts = line.rstrip("\n").split("\t")
+                if not parts or parts[0] == "addr" or not parts[0].startswith("0x"):
+                    continue
+                a = int(parts[0], 16)
+                if a in held or a in parked or status.get(a, ("asm", ""))[0] != "asm":
+                    continue
+                targets.append(parts[0])
+                if len(targets) >= args.count:
+                    break
+    if args.pick or (not targets and not args.queue):
         # skip rows another live driver holds (locks of dead pids are ignored)
         held = set()
         for lk in locklib.list_locks().get("locks", []):

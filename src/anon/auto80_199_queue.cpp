@@ -15897,3 +15897,28 @@ u32 func_002677f0(u32 a0, u32 a1) {
     func_0028fb68(1, v);
     return func_002678a8();
 }
+
+// ---- 0x00103500 func_00103500 ----
+
+// ---- callees, declared by the rig: copy these lines verbatim, never retype a symbol ----
+extern "C" u32 isRunning_103b38(void* self) asm("_ZN4MENU9isRunningEv");  // MENU::isRunning() -- arity VERIFIED
+
+// globals
+extern "C" u32 D_0032ba20 asm("D_0032ba20");
+extern "C" u32 D_003a6a50 asm("D_003a6a50");
+
+// layout row 0x00103500, 80 bytes
+// the definition MUST produce the symbol: func_00103500  (source: stub)
+// original name (E3 debug build): MENU::setType(int)
+
+void func_00103500_impl(void* self) asm("func_00103500");
+
+void func_00103500_impl(void* self) {
+    if (isRunning_103b38(self)) {
+        if (D_0032ba20 != (u32)self)
+            D_0032ba20 = (u32)self;
+    } else {
+        D_003a6a50 = (u32)self;
+        D_0032ba20 = 0xffffffff;
+    }
+}

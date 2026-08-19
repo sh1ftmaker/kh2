@@ -475,12 +475,35 @@ def type_names() -> Iterable[str]:
 # ---------------------------------------------------------------- demangling
 
 
+_cxxfilt_cache: Dict[str, str] = {}
+
+
+def cxxfilt(sym: str) -> str:
+    """Full Itanium demangling (with argument types) via the system c++filt."""
+    if sym in _cxxfilt_cache:
+        return _cxxfilt_cache[sym]
+    try:
+        out = subprocess.run(["c++filt", sym], capture_output=True, text=True, timeout=5).stdout.strip()
+    except (OSError, subprocess.SubprocessError):
+        out = ""
+    _cxxfilt_cache[sym] = out if out and out != sym else ""
+    return _cxxfilt_cache[sym]
+
+
 def demangle(sym: str) -> str:
+    """Demangled name WITH argument types when they are recoverable.
+
+    Order: E3 map (has the original spelling) > c++filt (any Itanium name, incl.
+    _Z13func_XXXXXXXX placeholders) > DWARF qualified name > repo heuristic.
+    """
     if not sym or not sym.startswith("_Z"):
         return sym
     row = e3_map_by_mangled().get(sym)
     if row:
         return row.get("demangled", sym)
+    full = cxxfilt(sym)
+    if full:
+        return full
     d = dwarf_by_linkage().get(sym)
     if d:
         return d.get("qualified", sym)
