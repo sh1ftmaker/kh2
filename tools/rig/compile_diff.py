@@ -337,7 +337,15 @@ def compile_diff(
         cp = _run([rc.EE_GXX, *rc.CXXFLAGS, "-c", "-o", str(obj), str(src)], cwd=ROOT)
         msgs = clean_compiler_output(cp.stderr, src)
         if cp.returncode != 0:
-            result["compile_errors"] = msgs[:40] or ["ee-g++ failed with no output"]
+            hints = []
+            src_text0 = src.read_text(errors="ignore")
+            if re.search(r'\)\s*asm\s*\(\s*"[^"]*"\s*\)\s*\{', src_text0):
+                hints.append("hint: an asm label may only appear on a DECLARATION "
+                             "(`void f(...) asm(\"sym\");`), not on the definition -- "
+                             "declare on one line, define on the next without asm(...)")
+            if re.search(r'^\s*asm\s*\(', src_text0, re.M):
+                hints.append("hint: file-scope asm() is banned; use asm labels on declarations")
+            result["compile_errors"] = hints + (msgs[:40] or ["ee-g++ failed with no output"])
             result["elapsed_ms"] = int((time.time() - t0) * 1000)
             return result
         # warnings are informational only

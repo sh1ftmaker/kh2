@@ -55,7 +55,9 @@ Facts that follow from that, and that you must hold in your head:
 (`func_XXXXXXXX`, `_Z13func_XXXXXXXXPv`, `wtarget_…`) you define **that** name even
 if a repo header already declares the E3 name for this address — use the
 skeleton's asm-label form (`void func_XXXXXXXX_impl(void* self) asm("func_XXXXXXXX");`)
-and do *not* define the method through the header. Defining the E3 mangled name
+and do *not* define the method through the header. The asm label goes on the
+**declaration** line only — `void f(...) asm("sym");` then `void f(...) { ... }` —
+never on the definition (`void f(...) asm("sym") {` is a parse error). Defining the E3 mangled name
 instead fails the mini-link ("linker did not place …") and costs an attempt. The
 registry is renamed later, by people, once the mapping is confirmed.
 
@@ -121,6 +123,7 @@ The classes and what they mean:
 | `lui rX, 0x3c` vs your `lui rX, 0x3d` | You mis-decoded the address: `lo` is signed, `lui 0x3c` + `-0x74e0` = `0x3b8b20`. |
 | Their `addiu rY, rX, LO` then `sh/sw off(rY)`, yours all `lui`+displacement | A global **struct**: one `D_XXXXXXXX` symbol with a local `D_XXXXXXXX_t` layout (`unkNN` members), not several scalar globals. |
 | `daddu s0, a0, zero` vs your `daddu s0, a1, zero` (or any one-register shift of *every* argument) | Your parameter list is off by one: you added `void* self` to a **static** method (a0 used as data → no `this`), or dropped a leading argument. |
+| Their `slt rX, zero, rY` / `sltu rX, zero, rY` / `sltiu rX, rY, 1`, your `daddu rX, rY, zero` | A comparison result, not a copy: `rY > 0` (signed) / `rY != 0` / `rY == 0`. The source returns or stores a `bool`-ish test of the value. |
 | Same stores/loads, different order, nothing else wrong | gcc 3.2 schedules independent global accesses. Permute the source statement order (try the original's order first, then others) — do not rewrite the logic. |
 
 One hypothesis per attempt. If two consecutive attempts do not move `fuzzy_pct`,

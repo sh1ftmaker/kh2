@@ -110,3 +110,33 @@ void JmInfo::Exit() {
 u32 JmInfo::isInit() { return (D_0035f570 != 0); }
 
 }  // namespace Tz
+
+// ---- 0x00294480 func_00294480 ----
+#include "../common/types.h"
+
+extern "C" u32 CheckFlag_181500(int) asm("_ZN2YS8PROGRESS9CheckFlagEi");
+extern "C" u32 GetNumBackyard_1a3570(int) asm("_ZN2Tz6JmInfo13HasAnsemEntryEj");
+
+struct JmDiagramDataInfoLayout {
+    u16 DrawProgress; // 0x0
+    u16 HideProgress; // 0x2
+    char World;       // 0x4
+    char Cnt;         // 0x5
+    char Type;        // 0x6
+    char Filler;      // 0x7
+    u32 Addr;         // 0x8
+};
+
+u32 func_00294480_impl(void* info) asm("func_00294480");
+u32 func_00294480_impl(void* info) {
+    JmDiagramDataInfoLayout const* d = reinterpret_cast<JmDiagramDataInfoLayout const*>(info);
+    s32 r = 0;
+    if (d->Type != 2) {
+        if (CheckFlag_181500(d->DrawProgress) != 0) {
+            r = 1;
+        }
+    } else {
+        r = (s32)GetNumBackyard_1a3570(d->DrawProgress) > 0;
+    }
+    return r;
+}
