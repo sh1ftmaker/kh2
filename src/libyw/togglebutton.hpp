@@ -15,9 +15,6 @@ public:
     void focus_func(EVENT a0, s32 a1, s32 a2);
     void draw_func(RECT* a0, COLOR* a1);
     TOGGLE_BUTTON(TOGGLE_BUTTON* a0, char* a1, s32 a2, s32 a3, s32 a4, s32 a5, bool a6, FuncDef77* a7, void* a8);
-    void focus_func(EVENT a0, s32 a1, s32 a2);
-    void draw_func(RECT* a0, COLOR* a1);
-    ~TOGGLE_BUTTON();
     ~TOGGLE_BUTTON();
 };
 

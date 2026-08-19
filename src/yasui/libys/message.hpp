@@ -2,9 +2,10 @@
 
 #include "../../common/types.h"
 
-class ...;
 class FONT;
 class STYLE;
+class uint;
+class ushort;
 
 namespace YS {
 

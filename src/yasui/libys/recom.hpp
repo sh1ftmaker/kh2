@@ -2,6 +2,8 @@
 
 #include "../../common/types.h"
 
+class COMMAND_SLOT;
+
 namespace YS {
 
     class RECOM {

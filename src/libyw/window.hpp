@@ -27,7 +27,6 @@ public:
     void close();
     void Init();
     s32 Click(s32 a0, s32 a1);
-    ~WINDOW();
     void page_end();
     void update();
     s32 set_select(s32 a0, s32 a1, s32 a2, s32 a3);

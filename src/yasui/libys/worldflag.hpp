@@ -3,6 +3,7 @@
 #include "../../common/types.h"
 
 class CODE;
+class uchar;
 
 namespace YS {
 

@@ -3,6 +3,7 @@
 #include "../common/types.h"
 
 class ALLOCATOR;
+class uchar;
 
 namespace Tz {
 

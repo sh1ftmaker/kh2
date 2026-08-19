@@ -79,7 +79,6 @@ public:
     s32 get_select(void);
     void set_select_callback(FuncDef37* a0);
     void exec(WINDOW* a0, PAD* a1);
-    void draw(void);
     void update(f32 a0, f32 a1, u32 a2, s32 a3, s32 a4);
     void start(s32 a0, s32 a1);
     void move(FVector* a0);

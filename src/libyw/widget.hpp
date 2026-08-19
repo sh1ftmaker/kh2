@@ -23,16 +23,12 @@ public:
     void draw(void);
     WIDGET();
     void draw_func(RECT* a0, COLOR* a1);
-    WIDGET();
-    void draw_func(RECT* a0, COLOR* a1);
     WIDGET(WIDGET* a0, OBJ* a1);
     void ExecAct(EVENT a0, s32 a1, void* a2);
     WIDGET(WIDGET* a0, STDOBJ* a1);
     void Play(void* a0);
     void Voice(void* a0);
     void idle_func(void);
-    ~WIDGET();
-    ~WIDGET();
 };
 
 class Widget {

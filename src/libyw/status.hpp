@@ -32,7 +32,6 @@ public:
     u64 IsDisableCampMenu();
     void clear();
     STATUS(STATUS* a0, s32 a1, s32 a2, s32 a3, u32 a4);
-    ~STATUS();
     void vprintf(char* a0, char* a1);
     void idle_func();
     void draw_func(RECT* a0, COLOR* a1);

@@ -6,6 +6,7 @@
 class CODE;
 class COMMAND_ELEM;
 class MISSION;
+class MISSION2D;
 class PARTYATTACK;
 class TABLE;
 
