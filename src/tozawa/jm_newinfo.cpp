@@ -94,3 +94,39 @@ void func_002aa450_impl(int flg) {  // definition: no asm() here
         sram[idx] = v | bit;
     }
 }
+
+// ---- 0x002aae30 func_002aae30 ----
+
+// ---- callees, declared by the rig: copy these lines verbatim, never retype a symbol ----
+extern "C" u32 GetSram_2a9d68() asm("_ZN2Tz9JmNewInfo7GetSramEv");  // Tz::JmNewInfo::GetSram() -- arity VERIFIED
+
+// func_002aae30 is a registry stub. The DECLARATION below carries the asm label
+// that binds the name; the DEFINITION after it must NOT repeat asm(...) (parse error).
+void func_002aae30_impl(int flg) asm("func_002aae30");  // declaration
+void func_002aae30_impl(int flg) {  // definition: no asm() here
+    u32* sram = (u32*)((u32)GetSram_2a9d68() + 148);
+    u32 idx = (u32)flg >> 5;
+    u32 bit = 1u << ((u32)flg & 0x1f);
+    u32 v = sram[idx];
+    if ((v & bit) == 0u) {
+        sram[idx] = v | bit;
+    }
+}
+
+// ---- 0x002ab258 func_002ab258 ----
+
+// ---- callees, declared by the rig: copy these lines verbatim, never retype a symbol ----
+extern "C" u32 GetSram_2a9d68() asm("_ZN2Tz9JmNewInfo7GetSramEv");  // Tz::JmNewInfo::GetSram() -- arity VERIFIED
+
+// func_002ab258 is a registry stub. The DECLARATION below carries the asm label
+// that binds the name; the DEFINITION after it must NOT repeat asm(...) (parse error).
+void func_002ab258_impl(int flg) asm("func_002ab258");  // declaration
+void func_002ab258_impl(int flg) {  // definition: no asm() here
+    u32* sram = (u32*)((u32)GetSram_2a9d68() + 136);
+    u32 idx = (u32)flg >> 5;
+    u32 bit = 1u << ((u32)flg & 0x1f);
+    u32 v = sram[idx];
+    if ((v & bit) == 0u) {
+        sram[idx] = v | bit;
+    }
+}
