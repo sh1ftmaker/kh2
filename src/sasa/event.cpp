@@ -96,3 +96,26 @@ void EVENT::leaveAllEffect() {
     }
 }
 }  // namespace sa
+
+// ---- 0x0022bb60 func_0022bb60 ----
+
+// ---- callees, declared by the rig: copy these lines verbatim, never retype a symbol ----
+extern "C" u32 isMovie_2ef7b8() asm("_ZN2Tz9MenuSound13isPauseActiveEv");  // MOVIE::isMovie() -- arity VERIFIED
+extern "C" u32 get3DFade_14abd8() asm("_ZN2dk9get3DFadeEv");  // dk::get3DFade() -- arity VERIFIED
+extern "C" u32 fadeOut_14aa58(unsigned int, bool, bool) asm("_ZN2dk4Fade7fadeOutEjb");  // dk::Fade::fadeOut(unsigned int, bool) -- arity VERIFIED
+extern "C" u32 functionCall_2ef7a0(int, void*) asm("_ZN5MOVIE12functionCallEiPv");  // MOVIE::functionCall(int, void*) -- arity VERIFIED
+
+// layout row 0x0022bb60, 100 bytes
+// the definition MUST produce the symbol: func_0022bb60  (source: registry)
+// original name (E3 debug build): sa::EVENT::movie_end(TASK*)
+
+void func_0022bb60_impl(void* self) asm("func_0022bb60");  // declaration
+void func_0022bb60_impl(void* self) {  // definition: no asm() here
+    if (self == 0)
+        return;
+    if (!isMovie_2ef7b8())
+        return;
+    u32 fade = get3DFade_14abd8();
+    fadeOut_14aa58(fade, 0, 0);
+    functionCall_2ef7a0(2, self);
+}

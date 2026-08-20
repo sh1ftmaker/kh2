@@ -150,3 +150,84 @@ void func_0028b078_impl(void* self, int a, int b) {  // definition: no asm() her
     SetEnableButton_28af18(self, 127);
     SetSelectDisable_28b1b0(self, 0);
 }
+
+// ---- 0x00244db8 func_00244db8 ----
+
+extern "C" u32 isExist_139d78(u32 elem) asm("_Z16u_call4_00139d78jjjj");
+
+extern "C" u32 D_0035ed04 asm("D_0035ed04");
+
+void func_00244db8_impl() asm("func_00244db8");
+void func_00244db8_impl() {
+    int i = 1;
+    u32 off = 0;
+    while (1) {
+        if (isExist_139d78(D_0035ed04 + off) != 0) {
+            u32 p = off + D_0035ed04;
+            u32 vt = *(u32*)p;
+            ((void (*)(u32))(*(u32*)(vt + 20)))(p);
+        }
+        i--;
+        if (i < 0) break;
+        off += 408;
+    }
+}
+
+// ---- 0x002a94f8 func_002a94f8 ----
+
+// ---- callees, declared by the rig: copy these lines verbatim, never retype a symbol ----
+extern "C" u32 isExist_139d78(u32 elem) asm("_Z16u_call4_00139d78jjjj");
+extern "C" u32 func_00276a18_276a18() asm("func_00276a18");
+extern "C" u32 func_00276b10_276b10() asm("func_00276b10");
+
+extern "C" u32 D_0035f60c asm("D_0035f60c");
+
+void func_002a94f8_impl() asm("func_002a94f8");
+void func_002a94f8_impl() {
+    int i = 9;
+    u32 off = 0;
+    while (1) {
+        if (isExist_139d78(D_0035f60c + off) != 0) {
+            u32 p = off + D_0035f60c;
+            u32 vt = *(u32*)p;
+            ((void (*)(u32))(*(u32*)(vt + 20)))(p);
+        }
+        i--;
+        if (i < 0) break;
+        off += 436;
+    }
+    func_00276a18_276a18();
+    func_00276b10_276b10();
+}
+
+// ---- 0x0024b078 func_0024b078 ----
+
+// ---- callees, declared by the rig: copy these lines verbatim, never retype a symbol ----
+// return types are not mangled -- change them freely (u32 / s32 / void / void*).
+// a NON-static member function takes the object pointer as its FIRST argument:
+//   add `void* self` in front of the listed args when the call site puts an object in $a0.
+extern "C" u32 isExist_139d78(u32 elem) asm("_Z16u_call4_00139d78jjjj");  // Tz::Select::isExist() -- arity UNKNOWN (placeholder)
+
+extern "C" u32 D_0035ed8c asm("D_0035ed8c");
+
+// layout row 0x0024b078, 108 bytes
+// the definition MUST produce the symbol: func_0024b078  (source: stub)
+
+// func_0024b078 is a registry stub. The DECLARATION below carries the asm label
+// that binds the name; the DEFINITION after it must NOT repeat asm(...) (parse error).
+// Decide the arguments from the disassembly: a0 used as data -> no `void* self`.
+void func_0024b078_impl() asm("func_0024b078");  // declaration
+void func_0024b078_impl() {  // definition: no asm() here
+    int i = 1;
+    u32 off = 0;
+    while (1) {
+        if (isExist_139d78(D_0035ed8c + off) != 0) {
+            u32 p = off + D_0035ed8c;
+            u32 vt = *(u32*)p;
+            ((void (*)(u32))(*(u32*)(vt + 20)))(p);
+        }
+        i--;
+        if (i < 0) break;
+        off += 408;
+    }
+}

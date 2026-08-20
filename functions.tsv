@@ -4334,6 +4334,7 @@ _ZN2Tz6Jiminy13SetHideCursorEb	00276690
 _ZN2Tz6Jiminy18SetHideLightCursorEb	002766b0
 _ZN2Tz6Jiminy9GetSeqTblEv	002766d0
 func_00276a18	00276a18
+func_00276b10	00276b10
 _ZN2Tz6Jiminy10isFullOpenEv	00276c18
 _ZN2Tz6Jiminy18GetFontColorSeqNumEi	00276c38
 Tz::JmReport::DrawMessage(unsigned int, unsigned int)	00276c50
@@ -7126,3 +7127,8 @@ func_002a4ad8	002a4ad8
 func_0031c7a8	0031c7a8
 func_0031c668	0031c668
 func_002df7d8	002df7d8
+func_002df470	002df470
+func_002d1028	002d1028
+func_00244db8	00244db8
+func_002a94f8	002a94f8
+func_0024b078	0024b078
