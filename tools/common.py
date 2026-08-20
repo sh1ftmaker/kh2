@@ -506,6 +506,28 @@ def _resolve_source_for_symbol(
         candidates = [p for p in src_files if def_re.search(texts[p])]
     if not candidates:
         return None, f"no source defines '{func_name}'"
+    # A method name alone does not identify a method. `Ti::MGHachimitsuPod::
+    # set_run_effect(int)` and `Ti::MGHachimitsuPo::set_run_effect(int)` differ
+    # only by class, as do `YS::ACT::callback` and `YS::VM::callback`; matching
+    # on the bare name hands the undecompiled sibling's address to whichever TU
+    # happens to define the other one, and the build then fails demanding a
+    # symbol nobody has written. Prefer a definition under this symbol's own
+    # class, and refuse when every candidate defines the name under a different
+    # explicit class.
+    owner = qual.split("::")[-2] if len(qual.split("::")) >= 2 else ""
+    if owner:
+        own_cls = [p for p in candidates
+                   if re.search(rf"\b{re.escape(owner)}\s*::\s*{re.escape(func_name)}\s*\(", texts[p])]
+        if own_cls:
+            candidates = own_cls
+        else:
+            foreign = [p for p in candidates
+                       if re.search(rf"\b([A-Za-z_]\w*)\s*::\s*{re.escape(func_name)}\s*\(", texts[p])]
+            if foreign and len(foreign) == len(candidates):
+                shown = ", ".join(p.relative_to(ROOT).as_posix() for p in candidates[:3])
+                return None, (f"'{func_name}' is only defined under other classes "
+                              f"(not {owner}) in {shown}")
+
     exact_sig = [
         p for p in candidates if _definition_matches_symbol(texts[p], func_name, symbol)
     ]
