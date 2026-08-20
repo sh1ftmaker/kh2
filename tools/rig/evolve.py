@@ -48,6 +48,39 @@ Rules:
 """
 
 
+def _norm(line: str) -> str:
+    """Normalised form of a prompt line for duplicate detection."""
+    return re.sub(r"[\s`*|]+", " ", line).strip().lower()
+
+
+def dedup_appendix(appendix: str, current: str) -> tuple[str, int]:
+    """Drop appendix lines that already exist in the current prompt, and lines
+    that repeat inside the appendix itself.
+
+    The distiller sees its own earlier appendices as part of the prompt and
+    happily re-emits them (round 6's candidate restated the whole accepted
+    appendix twice and one diff row three times). That bloat is not neutral:
+    the bench run degenerated — six workers answered with a couple of stray
+    tokens and never called a tool. Deduping keeps the prompt from growing
+    into itself.
+    """
+    have = {_norm(l) for l in current.splitlines() if _norm(l)}
+    out, dropped = [], 0
+    for line in appendix.splitlines():
+        n = _norm(line)
+        if not n or len(n) < 12:          # blank lines, table rules, short headers
+            out.append(line)
+            continue
+        if n in have:
+            dropped += 1
+            continue
+        have.add(n)
+        out.append(line)
+    # a table whose every data row was dropped leaves a bare header behind
+    kept = [l for l in out if _norm(l) and len(_norm(l)) >= 12]
+    return ("\n".join(out).strip() if kept else ""), dropped
+
+
 def state() -> dict:
     if STATE.exists():
         return json.loads(STATE.read_text())
@@ -117,6 +150,17 @@ def vector(run_dir: Path) -> dict:
     return out
 
 
+def degenerate(run_dir: Path) -> int:
+    """Workers that produced no attempt at all because the model stopped emitting
+    tool calls — a prompt-health signal distinct from 'tried and missed'."""
+    n = 0
+    for sp in run_dir.glob("*/summary.json"):
+        d = json.loads(sp.read_text())
+        if not d.get("attempts") and "stopped calling tools" in (d.get("park_reason") or ""):
+            n += 1
+    return n
+
+
 VECTOR_PATH = rc.ROOT / "docs" / "rig" / "bench_vector.json"
 BOOTSTRAP_RUN = rc.RIG_OUT / "runs" / "bench-20260819-113128"  # the 8/28 baseline
 
@@ -152,6 +196,15 @@ def main() -> int:
     appendix = distill(proposals, args.endpoint, args.model, think=not args.no_think)
     if not appendix or appendix.strip() == "NOTHING-NEW":
         print("evolve: reflector found nothing new worth adding; marking proposals consumed")
+        st["consumed"] += [str(p) for p in proposals]
+        save_state(st)
+        return 0
+
+    appendix, dropped = dedup_appendix(appendix, PROMPT_PATH.read_text())
+    if dropped:
+        print(f"evolve: dropped {dropped} appendix lines already present in the prompt")
+    if not appendix:
+        print("evolve: appendix was entirely restatement; marking proposals consumed")
         st["consumed"] += [str(p) for p in proposals]
         save_state(st)
         return 0
@@ -212,7 +265,9 @@ def main() -> int:
         accepted = total > 0 and not regressed and (new_passes or rate >= base)
     else:
         accepted = total > 0 and rate >= base
+    degen = degenerate(run_dir)
     label = (f"evolve candidate {ts} pareto +{len(new_passes)}/-{len(regressed)}"
+             + (f" ({degen} degenerate: model stopped calling tools)" if degen else "")
              + (" ACCEPTED" if accepted else " rejected"))
     bench_report(run_dir, label=label, wall=time.time() - t0)
 
