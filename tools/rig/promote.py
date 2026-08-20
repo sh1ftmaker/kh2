@@ -286,6 +286,21 @@ def add_registry_entry(path: Path, addr: int, symbol: str) -> bool:
 
 
 def promote(spec: str, src: Path, dest: str, *, dry_run: bool = False) -> dict:
+    # cross-PROCESS serialisation: promote edits shared repo files and runs make;
+    # the driver's threading.Lock only covers its own threads, and a second
+    # promoter (hand session, Fable agent) may run concurrently with a campaign
+    import fcntl
+    rc.RIG_OUT.mkdir(parents=True, exist_ok=True)
+    _plock = open(rc.RIG_OUT / "promote.flock", "w")
+    fcntl.flock(_plock, fcntl.LOCK_EX)
+    try:
+        return _promote_locked(spec, src, dest, dry_run=dry_run)
+    finally:
+        fcntl.flock(_plock, fcntl.LOCK_UN)
+        _plock.close()
+
+
+def _promote_locked(spec: str, src: Path, dest: str, *, dry_run: bool = False) -> dict:
     t0 = time.time()
     target = rc.resolve(spec)
     src = Path(src)
