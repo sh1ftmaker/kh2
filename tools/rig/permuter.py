@@ -195,8 +195,128 @@ def m_split_expr(s: Source, rng: random.Random) -> bool:
     return True
 
 
-MOVES = [m_hoist_decl, m_reorder_decls, m_add_temp, m_inline_temp,
-         m_sink_use, m_widen_local, m_split_expr]
+# --- moves ported from decomp-permuter's randomiser, with its own weights ---
+# Upstream weights perm_temp_for_expr at 100, five times anything else: binding
+# a subexpression to a temporary is the move that most reliably changes which
+# quantity gets a callee-saved register. The first version of this file only
+# did it for call arguments, which is why 1,775 compiles found 18 distinct
+# scores -- the reachable set was exhausted almost immediately.
+
+EXPR_RE = re.compile(r"(?<![\w.])(\*?[A-Za-z_]\w*(?:\s*(?:->|\.)\s*\w+)+|"
+                     r"[A-Za-z_]\w*\s*\[[^\]]+\])")
+
+
+def m_temp_for_expr(s: Source, rng: random.Random) -> bool:
+    """Bind any member access or subscript to a fresh local (upstream weight 100)."""
+    cands = []
+    for i in s.stmt_indices():
+        line = s.lines[i]
+        if line.strip().startswith(("for", "while", "}", "{")):
+            continue
+        for m in EXPR_RE.finditer(line):
+            e = m.group(1).strip()
+            if 3 < len(e) < 48 and "=" not in e:
+                cands.append((i, e))
+    if not cands:
+        return False
+    i, expr = rng.choice(cands)
+    name = f"t{rng.randrange(10000)}"
+    ind = re.match(r"\s*", s.lines[i]).group(0)
+    ty = rng.choice(["u32", "s32", "u32", "void*"])
+    s.lines[i] = s.lines[i].replace(expr, name, 1)
+    s.lines.insert(i, f"{ind}{ty} {name} = ({ty})({expr});")
+    s.end += 1
+    return True
+
+
+def m_refer_to_var(s: Source, rng: random.Random) -> bool:
+    """Reuse an existing local in place of one of its known values."""
+    names = []
+    for i in range(s.body, s.end):
+        m = INLINE_DECL_RE.match(s.lines[i]) or DECL_RE.match(s.lines[i])
+        if m and "name" in m.groupdict():
+            names.append((i, m.group("name")))
+    if len(names) < 2:
+        return False
+    (i, a), (j, b) = rng.sample(names, 2)
+    if not re.search(rf"\b{re.escape(b)}\b", s.lines[i]):
+        return False
+    s.lines[i] = re.sub(rf"\b{re.escape(b)}\b", a, s.lines[i], count=1)
+    return True
+
+
+def m_add_mask(s: Source, rng: random.Random) -> bool:
+    """A no-op mask or cast: changes nothing, can change the RTL."""
+    idx = [i for i in s.stmt_indices() if ASSIGN_RE.match(s.lines[i])]
+    if not idx:
+        return False
+    i = rng.choice(idx)
+    m = ASSIGN_RE.match(s.lines[i])
+    wrap = rng.choice(["(u32)({})", "({}) & 0xffffffff", "({}) | 0", "({}) ^ 0",
+                       "(s32)({})", "({}) + 0"])
+    s.lines[i] = f"{m.group('indent')}{m.group('lhs')} = {wrap.format(m.group('rhs'))};"
+    return True
+
+
+def m_ins_block(s: Source, rng: random.Random) -> bool:
+    """Wrap a run of statements in a bare block -- shortens a live range."""
+    idx = [i for i in s.stmt_indices()
+           if not s.lines[i].strip().startswith(("if", "for", "while", "else", "}", "{"))
+           and s.lines[i].strip().endswith(";")]
+    if len(idx) < 2:
+        return False
+    a = rng.choice(idx[:-1])
+    b = min(a + rng.randint(1, 3), s.end - 1)
+    ind = re.match(r"\s*", s.lines[a]).group(0)
+    s.lines.insert(b + 1, ind + "}")
+    s.lines.insert(a, ind + "{")
+    s.end += 2
+    return True
+
+
+def m_self_assign(s: Source, rng: random.Random) -> bool:
+    """`x = x;` -- an extra reference, which is a term in the priority formula."""
+    names = set()
+    for i in range(s.body, s.end):
+        for m in re.finditer(r"\b([A-Za-z_]\w*)\s*=[^=]", s.lines[i]):
+            names.add(m.group(1))
+    if not names:
+        return False
+    idx = s.stmt_indices()
+    if not idx:
+        return False
+    i = rng.choice(idx)
+    name = rng.choice(sorted(names))
+    ind = re.match(r"\s*", s.lines[i]).group(0)
+    s.lines.insert(i, f"{ind}{name} = {name};")
+    s.end += 1
+    return True
+
+
+def m_condition(s: Source, rng: random.Random) -> bool:
+    """Respell a condition: `if (x)` <-> `if (x != 0)`, and flip comparisons."""
+    idx = [i for i in range(s.body, s.end) if s.lines[i].strip().startswith(("if", "while"))]
+    if not idx:
+        return False
+    i = rng.choice(idx)
+    line = s.lines[i]
+    for a, b in ((" != 0", ""), (" == 0", "!"), (" < ", " <= "), (" <= ", " < "),
+                 (" > ", " >= "), (" >= ", " > ")):
+        if a in line and rng.random() < 0.5:
+            s.lines[i] = line.replace(a, b, 1)
+            return True
+    m = re.match(r"^(\s*(?:if|while)\s*\()([^()]+)(\).*)$", line)
+    if m and "!=" not in m.group(2) and "==" not in m.group(2):
+        s.lines[i] = f"{m.group(1)}({m.group(2)}) != 0{m.group(3)}"
+        return True
+    return False
+
+
+# weighted like upstream's default_weights.toml: temp-for-expr dominates
+MOVES = ([m_temp_for_expr] * 10 + [m_add_mask] * 3 + [m_add_temp] * 2 +
+         [m_inline_temp] * 2 + [m_reorder_decls] * 2 + [m_ins_block] * 2 +
+         [m_condition] * 2 + [m_hoist_decl] * 2 + [m_split_expr] * 2 +
+         [m_refer_to_var] + [m_self_assign] + [m_sink_use] + [m_widen_local])
 
 
 def search(addr: str, src: Path, iters: int, seed: int, quiet: bool = False) -> dict:
@@ -214,13 +334,37 @@ def search(addr: str, src: Path, iters: int, seed: int, quiet: bool = False) -> 
     out_path = src.with_suffix(".permuted.cpp")
     t0 = time.time()
     tried = compiled = 0
+    scores = set()
+    no_change = 0
+    seen: set = set()
+
+    # A random *walk*, not repeated single mutations of one fixed source. The
+    # first version always mutated the best text with 1-3 moves, so it kept
+    # re-deriving the same handful of shapes: 1,616 of 3,000 steps produced no
+    # change at all and 1,384 compiles found only 7 distinct scores. Compound
+    # shapes are where the interesting register assignments live, so the state
+    # has to drift: keep a current text, accept sideways moves, and restart
+    # occasionally to escape a dead end.
+    cur_text, cur_fuzzy = base_text, best_fuzzy
+    stall = 0
     for n in range(iters):
-        s = Source(best_text if rng.random() < 0.7 else base_text)   # exploit / restart
-        for _ in range(rng.randint(1, 3)):                            # 1-3 moves a step
-            rng.choice(MOVES)(s, rng)
+        if stall > 250:                       # dead end: restart from the best
+            cur_text, cur_fuzzy, stall = best_text, best_fuzzy, 0
+        elif rng.random() < 0.04:             # occasional restart from scratch
+            cur_text, cur_fuzzy = base_text, start_fuzzy
+        s = Source(cur_text)
+        applied = 0
+        for _ in range(rng.randint(1, 4)):
+            applied += 1 if rng.choice(MOVES)(s, rng) else 0
         cand = s.text()
-        if cand == best_text:
+        if not applied or cand == cur_text:
+            no_change += 1
             continue
+        h = hash(cand)
+        if h in seen:                          # already compiled this shape
+            no_change += 1
+            continue
+        seen.add(h)
         tried += 1
         tmp.write_text(cand)
         try:
@@ -228,6 +372,7 @@ def search(addr: str, src: Path, iters: int, seed: int, quiet: bool = False) -> 
         except Exception:
             continue
         if res.get("compile_errors"):
+            stall += 1
             continue
         compiled += 1
         if res.get("exact"):
@@ -235,18 +380,27 @@ def search(addr: str, src: Path, iters: int, seed: int, quiet: bool = False) -> 
             tmp.unlink(missing_ok=True)
             return {"ok": True, "exact": True, "iters": n + 1, "tried": tried,
                     "compiled": compiled, "file": str(out_path),
-                    "from_fuzzy": start_fuzzy,
+                    "from_fuzzy": start_fuzzy, "distinct_scores": len(scores),
                     "elapsed_s": round(time.time() - t0, 1)}
         f = float(res.get("fuzzy_pct") or 0.0)
+        scores.add(round(f, 2))
         if f > best_fuzzy:
             best_fuzzy, best_text = f, cand
             if not quiet:
                 print(f"  {addr} {f:6.2f} % after {n + 1} iters", flush=True)
+        # accept equal-or-better, and sometimes slightly worse, so the walk can
+        # cross a valley instead of sitting on the first plateau it finds
+        if f >= cur_fuzzy or rng.random() < 0.10:
+            cur_text, cur_fuzzy = cand, f
+            stall = 0
+        else:
+            stall += 1
     tmp.unlink(missing_ok=True)
     if best_text != base_text:
         out_path.write_text(best_text)
     return {"ok": True, "exact": False, "iters": iters, "tried": tried,
             "compiled": compiled, "from_fuzzy": start_fuzzy, "best_fuzzy": best_fuzzy,
+            "distinct_scores": len(scores), "no_change": no_change,
             "file": str(out_path) if best_text != base_text else None,
             "elapsed_s": round(time.time() - t0, 1)}
 
@@ -266,9 +420,29 @@ def parked_targets(min_fuzzy: float) -> List[tuple]:
         # the sweep; those are done, not near-misses
         if status.get(int(s["addr"], 16), ("asm", ""))[0] == "cxx":
             continue
-        atts = sorted(sp.parent.glob("attempt_*.cpp"))
-        if atts:
-            out.append((float(s["best_fuzzy"]), s["addr"], s.get("size", 0), atts[-1]))
+        # the last attempt is not the best one: workers often end on a worse
+        # shape than their peak, and starting the search there throws away the
+        # progress that made the function worth permuting (0x0031da48 started
+        # 5 points below its own parked score)
+        best_att, best_score = None, -1.0
+        for att in sorted(sp.parent.glob("attempt_*.cpp")):
+            sc = att.parent / f"score_{att.stem.split('_')[1]}.json"
+            fz = -1.0
+            if sc.exists():
+                try:
+                    fz = float(json.loads(sc.read_text()).get("fuzzy") or -1.0)
+                except (OSError, ValueError):
+                    fz = -1.0
+            if fz < 0:
+                try:
+                    fz = float(compile_diff(s["addr"], att).get("fuzzy_pct") or 0.0)
+                except Exception:
+                    continue
+            if fz > best_score:
+                best_att, best_score = att, fz
+        if best_att is not None:
+            out.append((max(float(s["best_fuzzy"]), best_score), s["addr"],
+                        s.get("size", 0), best_att))
     out.sort(reverse=True)
     seen, uniq = set(), []
     for row in out:
@@ -300,8 +474,9 @@ def main() -> int:
                 wins.append({"addr": addr, "size": size, "file": r["file"]})
                 print(f"  EXACT after {r['iters']} iters ({r['elapsed_s']} s) -> {r['file']}", flush=True)
             else:
-                print(f"  {r.get('best_fuzzy', 0):.2f} % best "
-                      f"({r['compiled']} compiled, {r['elapsed_s']} s)", flush=True)
+                print(f"  {r.get('best_fuzzy', 0):.2f} % best from {r.get('from_fuzzy', 0):.2f} "
+                      f"({r['compiled']} compiled, {r.get('distinct_scores', 0)} distinct scores, "
+                      f"{r.get('no_change', 0)} no-op moves, {r['elapsed_s']} s)", flush=True)
         print(json.dumps({"wins": wins, "bytes": sum(w["size"] for w in wins)}, indent=1))
         return 0
 
