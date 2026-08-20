@@ -99,16 +99,36 @@ def distill(proposals: list[Path], endpoint: str, model: str, think: bool) -> st
 
 
 def score(run_dir: Path) -> tuple[int, int]:
-    ok = total = 0
+    v = vector(run_dir)
+    return sum(v.values()), len(v)
+
+
+def vector(run_dir: Path) -> dict:
+    """Per-function pass/fail for a bench run. Missing summary = fail (fail-safe)."""
+    out = {}
     for r in load_set():
         sp = run_dir / r["addr"].replace("0x", "") / "summary.json"
-        if not sp.exists():
-            continue
-        total += 1
-        d = json.loads(sp.read_text())
-        if d.get("exact") or d.get("result") == "matched" or float(d.get("best_fuzzy") or 0) >= 100.0:
-            ok += 1
-    return ok, total
+        ok = False
+        if sp.exists():
+            d = json.loads(sp.read_text())
+            ok = bool(d.get("exact") or d.get("result") == "matched"
+                      or float(d.get("best_fuzzy") or 0) >= 100.0)
+        out[r["addr"]] = ok
+    return out
+
+
+VECTOR_PATH = rc.ROOT / "docs" / "rig" / "bench_vector.json"
+BOOTSTRAP_RUN = rc.RIG_OUT / "runs" / "bench-20260819-113128"  # the 8/28 baseline
+
+
+def baseline_vector() -> dict:
+    if VECTOR_PATH.exists():
+        return json.loads(VECTOR_PATH.read_text())
+    if BOOTSTRAP_RUN.exists():
+        v = vector(BOOTSTRAP_RUN)
+        VECTOR_PATH.write_text(json.dumps(v, indent=1))
+        return v
+    return {}
 
 
 def main() -> int:
@@ -160,19 +180,52 @@ def main() -> int:
         cmd += ["--addr", r["addr"]]
     t0 = time.time()
     subprocess.run(cmd, cwd=rc.ROOT)
-    ok, total = score(run_dir)
+    cand = vector(run_dir)
+    basev = baseline_vector()
+    regressed = [a for a, p in basev.items() if p and not cand.get(a)]
+    if regressed:
+        # one retry absorbs sampling variance before we call it a regression
+        # (GEPA-style per-example gating; 28 examples is small, flakes are real)
+        retry_dir = Path(str(run_dir) + "-retry")
+        rcmd = [sys.executable, str(Path(__file__).parent / "driver.py"), "--bench",
+                "--endpoint", args.endpoint, "--model", args.model,
+                "--parallel", str(min(args.parallel, len(regressed))),
+                "--max-attempts", str(args.max_attempts),
+                "--log-dir", str(retry_dir), "--prompt", str(candidate)]
+        if args.no_think:
+            rcmd.append("--no-think")
+        for a in regressed:
+            rcmd += ["--addr", a]
+        print(f"evolve: retrying {len(regressed)} regressed fns once: {' '.join(regressed)}")
+        subprocess.run(rcmd, cwd=rc.ROOT)
+        rv = vector(retry_dir)
+        for a in regressed:
+            if rv.get(a):
+                cand[a] = True
+        regressed = [a for a in regressed if not cand.get(a)]
+    ok, total = sum(cand.values()), len(cand)
     rate = 100.0 * ok / total if total else 0.0
-    accepted = total > 0 and rate >= base
-    label = f"evolve candidate {ts}" + (" ACCEPTED" if accepted else " rejected")
+    new_passes = [a for a, p in cand.items() if p and not basev.get(a)]
+    # accept iff nothing that passed before now fails, and the candidate is not
+    # strictly useless; the aggregate floor still guards a first run w/o a vector
+    if basev:
+        accepted = total > 0 and not regressed and (new_passes or rate >= base)
+    else:
+        accepted = total > 0 and rate >= base
+    label = (f"evolve candidate {ts} pareto +{len(new_passes)}/-{len(regressed)}"
+             + (" ACCEPTED" if accepted else " rejected"))
     bench_report(run_dir, label=label, wall=time.time() - t0)
 
     st["consumed"] += [str(p) for p in proposals]
     save_state(st)
     if accepted:
         shutil.copy(candidate, PROMPT_PATH)
-        print(f"evolve: ACCEPTED {rate:.0f} % >= baseline {base:.0f} % — AGENT_PROMPT.md updated")
+        VECTOR_PATH.write_text(json.dumps(cand, indent=1))
+        print(f"evolve: ACCEPTED {rate:.0f} % (+{len(new_passes)}/-0 vs vector, "
+              f"baseline {base:.0f} %) — AGENT_PROMPT.md and bench_vector.json updated")
     else:
-        print(f"evolve: rejected {rate:.0f} % < baseline {base:.0f} % — prompt unchanged")
+        print(f"evolve: rejected ({len(regressed)} regressed: {' '.join(regressed[:6])}; "
+              f"rate {rate:.0f} % vs baseline {base:.0f} %) — prompt unchanged")
     return 0
 
 
