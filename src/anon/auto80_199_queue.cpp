@@ -15922,3 +15922,24 @@ void func_00103500_impl(void* self) {
         D_0032ba20 = 0xffffffff;
     }
 }
+
+// ---- 0x002df7d8 func_002df7d8 ----
+
+extern "C" u32 func_002def70_2def70(void) asm("func_002def70");
+extern "C" u32 config_2dc7c8(u32 p) asm("_ZN2Ti6MGJump6configEv");
+extern "C" u32 func_002deac0_2deac0(void* a0, f32 x, f32 y) asm("func_002deac0");
+extern "C" void func_002deba0_2deba0(void* a0, u32 a1, f32 x, f32 y) asm("func_002deba0");
+
+extern "C" u32 D_00361f60 asm("D_00361f60");
+
+void func_002df7d8_impl(void* a0, u32 a1) asm("func_002df7d8");
+void func_002df7d8_impl(void* a0, u32 a1) {
+    func_002def70_2def70();
+    u32 p = D_00361f60;
+    u32 s = config_2dc7c8(p);
+    u32 t = config_2dc7c8(p);
+    func_002deac0_2deac0(a0, *(f32*)(s + 244), *(f32*)(t + 248));
+    u32 s2 = config_2dc7c8(p);
+    u32 t2 = config_2dc7c8(p);
+    func_002deba0_2deba0(a0, a1, *(f32*)(s2 + 252), *(f32*)(t2 + 256));
+}

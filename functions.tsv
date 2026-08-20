@@ -5358,6 +5358,7 @@ func_002de810	002de810
 _ZN2YS3OBJ6VTABLEIN2Ti10MGJumpPoohEE8pre_execEPS0_	002de888
 func_002dea80	002dea80
 func_002deaa0	002deaa0
+func_002deba0	002deba0
 func_002def70	002def70
 func_002df140	002df140
 _Z13func_002df198Pv	002df198
@@ -7124,3 +7125,4 @@ func_001ad1d0	001ad1d0
 func_002a4ad8	002a4ad8
 func_0031c7a8	0031c7a8
 func_0031c668	0031c668
+func_002df7d8	002df7d8
