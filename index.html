@@ -1,0 +1,51 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>KH2FM Decompilation Status</title>
+<style>
+:root { --bg:#0f1115; --card:#181b22; --text:#d7dae0; --dim:#8b93a1; --acc:#7aa2f7; --good:#9ece6a; }
+@media (prefers-color-scheme: light) { :root { --bg:#f5f6f8; --card:#ffffff; --text:#1a1d23; --dim:#5b6472; --acc:#2b5fd9; --good:#3f8f29; } }
+* { box-sizing:border-box; margin:0 }
+body { background:var(--bg); color:var(--text); font:15px/1.55 ui-sans-serif,system-ui,sans-serif; padding:2rem 1rem; }
+main { max-width:900px; margin:0 auto; display:grid; gap:1.2rem }
+h1 { font-size:1.5rem } h2 { font-size:1.05rem; margin-bottom:.6rem; color:var(--acc) }
+.card { background:var(--card); border-radius:10px; padding:1.1rem 1.3rem; overflow-x:auto }
+.head { display:flex; justify-content:space-between; flex-wrap:wrap; gap:.5rem; align-items:baseline }
+.dim { color:var(--dim); font-size:.85rem }
+.big { font-size:2.1rem; font-weight:700; font-variant-numeric:tabular-nums }
+table { border-collapse:collapse; width:100%; font-variant-numeric:tabular-nums }
+td,th { text-align:left; padding:.35rem .7rem .35rem 0; border-bottom:1px solid color-mix(in srgb,var(--dim) 25%,transparent); font-size:.9rem }
+th { color:var(--dim); font-weight:600; font-size:.78rem; text-transform:uppercase; letter-spacing:.04em }
+.bar { position:relative; background:color-mix(in srgb,var(--dim) 20%,transparent); border-radius:4px; height:1.1rem; min-width:140px }
+.fill { background:var(--good); height:100%; border-radius:4px }
+.bar span { position:absolute; inset:0; font-size:.75rem; display:flex; align-items:center; padding-left:.4rem }
+code { font-size:.85em }
+</style></head><body><main>
+<div class="head"><h1>KH2FM Decompilation</h1>
+<span class="dim">sh1ftmaker/kh2 · 9e85def · generated 2026-08-20 14:29 UTC</span></div>
+
+<div class="card"><h2>Progress</h2>
+<div style="display:flex;gap:3rem;flex-wrap:wrap">
+<div><div class="big">12.59 %</div><div class="dim">by bytes (honest headline) — 249,916 / 1,985,545</div></div>
+<div><div class="big">41.9 %</div><div class="dim">by functions — 4,730 / 11,286</div></div>
+</div>
+<table style="margin-top:1rem"><thead><tr><th>size bin</th><th>functions</th><th>bytes</th><th>bytes done</th></tr></thead>
+<tbody><tr><td>&lt;80 B</td><td>3,630/5,193</td><td>123,640/208,025</td><td><div class="bar"><div class="fill" style="width:59.44%"></div><span>59.44 %</span></div></td></tr><tr><td>80–199 B</td><td>1,089/3,498</td><td>123,256/435,616</td><td><div class="bar"><div class="fill" style="width:28.29%"></div><span>28.29 %</span></div></td></tr><tr><td>200–999 B</td><td>11/2,393</td><td>3,020/941,932</td><td><div class="bar"><div class="fill" style="width:0.32%"></div><span>0.32 %</span></div></td></tr><tr><td>≥1 KB</td><td>0/202</td><td>0/399,972</td><td><div class="bar"><div class="fill" style="width:0.00%"></div><span>0.00 %</span></div></td></tr></tbody></table></div>
+
+<div class="card"><h2>Model arena — 12 shared targets, byte-exact scoring</h2>
+<table><thead><tr><th>model</th><th>exact</th><th>median best-match</th><th>total attempts</th></tr></thead>
+<tbody><tr><td><b>anthropic-haiku-4-5</b></td><td>5/12</td><td>99.5 %</td><td>70</td></tr><tr><td><b>anthropic-opus-5</b></td><td>8/12</td><td>100.0 %</td><td>46</td></tr><tr><td><b>anthropic-sonnet-5</b></td><td>7/12</td><td>100.0 %</td><td>51</td></tr><tr><td><b>codex-auto-review</b></td><td>5/12</td><td>86.8 %</td><td>66</td></tr><tr><td><b>codex-gpt-5.4</b></td><td>5/12</td><td>95.6 %</td><td>64</td></tr><tr><td><b>codex-gpt-5.4-mini</b></td><td>6/12</td><td>100.0 %</td><td>50</td></tr><tr><td><b>codex-gpt-5.5</b></td><td>6/12</td><td>100.0 %</td><td>61</td></tr><tr><td><b>codex-gpt-5.6-luna</b></td><td>5/12</td><td>90.9 %</td><td>80</td></tr><tr><td><b>codex-gpt-5.6-sol</b></td><td>7/12</td><td>100.0 %</td><td>60</td></tr><tr><td><b>codex-gpt-5.6-sol-high</b></td><td>8/12</td><td>100.0 %</td><td>49</td></tr><tr><td><b>codex-gpt-5.6-sol-max</b></td><td>8/12</td><td>100.0 %</td><td>48</td></tr><tr><td><b>codex-gpt-5.6-sol-medium</b></td><td>7/12</td><td>100.0 %</td><td>53</td></tr><tr><td><b>codex-gpt-5.6-sol-ultra</b></td><td>8/12</td><td>100.0 %</td><td>46</td></tr><tr><td><b>codex-gpt-5.6-sol-xhigh</b></td><td>8/12</td><td>100.0 %</td><td>46</td></tr><tr><td><b>codex-gpt-5.6-terra</b></td><td>6/12</td><td>100.0 %</td><td>63</td></tr><tr><td><b>gemini-2.5-flash</b></td><td>0/12</td><td>0.0 %</td><td>0</td></tr><tr><td><b>gemini-2.5-flash-lite</b></td><td>0/12</td><td>0.0 %</td><td>0</td></tr><tr><td><b>gemini-2.5-pro</b></td><td>0/12</td><td>0.0 %</td><td>0</td></tr><tr><td><b>gemini-3-flash-base</b></td><td>0/12</td><td>0.0 %</td><td>0</td></tr><tr><td><b>gemini-3-flash-preview</b></td><td>0/12</td><td>0.0 %</td><td>0</td></tr><tr><td><b>gemini-3-pro-preview</b></td><td>0/12</td><td>0.0 %</td><td>0</td></tr><tr><td><b>gemini-3.1-flash-lite</b></td><td>3/12</td><td>33.6 %</td><td>46</td></tr><tr><td><b>gemini-3.1-pro-preview</b></td><td>0/12</td><td>0.0 %</td><td>0</td></tr><tr><td><b>gemini-3.1-pro-preview-customtools</b></td><td>6/12</td><td>100.0 %</td><td>36</td></tr><tr><td><b>gemini-3.5-flash</b></td><td>0/12</td><td>0.0 %</td><td>2</td></tr><tr><td><b>gemini-3.5-flash-base</b></td><td>0/12</td><td>0.0 %</td><td>0</td></tr><tr><td><b>gemini-3.5-flash-lite</b></td><td>0/12</td><td>0.0 %</td><td>0</td></tr></tbody></table>
+<p class="dim" style="margin-top:.5rem">Same functions, same playbook, same 8-attempt budget, scored by the mini-link
+byte-exact verifier. Qwen3.8-27B runs the 24/7 campaign below; anchors carry its scores in
+<code>out/rig/arena/targets.tsv</code>.</p></div>
+
+<div class="card"><h2>Held-out bench — prompt evolution history (gate: never regress)</h2>
+<table><thead><tr><th>when</th><th>prompt</th><th>change</th><th>re-match rate</th><th>by bin</th></tr></thead>
+<tbody><tr><td>2026-08-19 11:57</td><td><code>6ef092c17a22</code></td><td>baseline 2026-08-19 after rounds 0-3 (exact = any attempt byte-exact)</td><td><b>8/28 = 29 %</b></td><td>&lt;80 3/8 · 80-199 3/14 · 200-499 2/6</td></tr><tr><td>2026-08-19 15:20</td><td><code>4d598c73c06e</code></td><td>evolve candidate 20260819-151039 rejected — VOID: broken PATH, assembler failed on every attempt (not a prompt result)</td><td><b>0/28 = 0 %</b></td><td>&lt;80 0/8 · 80-199 0/14 · 200-499 0/6</td></tr><tr><td>2026-08-19 15:39</td><td><code>4bac5df636b5</code></td><td>evolve candidate 20260819-152535 rejected</td><td><b>7/28 = 25 %</b></td><td>&lt;80 4/8 · 80-199 3/14 · 200-499 0/6</td></tr><tr><td>2026-08-19 18:34</td><td><code>716948a2818d</code></td><td>evolve candidate 20260819-181733 ACCEPTED</td><td><b>13/28 = 46 %</b></td><td>&lt;80 7/8 · 80-199 4/14 · 200-499 2/6</td></tr><tr><td>2026-08-19 20:27</td><td><code>b8fc7071a237</code></td><td>evolve candidate 20260819-200351 pareto +0/-8 rejected — cause: self-restating appendix (26 of 34 lines already in the prompt, one row 3×); 5 workers degenerated (a few stray tokens, no tool call). Dedup guard added to evolve.py.</td><td><b>5/28 = 18 %</b></td><td>&lt;80 2/8 · 80-199 1/14 · 200-499 2/6</td></tr><tr><td>2026-08-19 22:08</td><td><code>3aba78a062d0</code></td><td>evolve candidate 20260819-214553 pareto +1/-1 rejected</td><td><b>12/28 = 43 %</b></td><td>&lt;80 7/8 · 80-199 4/14 · 200-499 1/6</td></tr><tr><td>2026-08-20 01:13</td><td><code>5e5711538f1d</code></td><td>v2 playbook draft (unified, 8.9 KB vs 24.6 KB) — pareto gate</td><td><b>4/28 = 14 %</b></td><td>&lt;80 1/8 · 80-199 1/14 · 200-499 2/6</td></tr><tr><td>2026-08-20 01:38</td><td><code>c5c1242e9091</code></td><td>v2 playbook draft + catalogue appended (isolates compression from catalogue loss)</td><td><b>10/28 = 36 %</b></td><td>&lt;80 4/8 · 80-199 4/14 · 200-499 2/6</td></tr><tr><td>2026-08-20 03:34</td><td><code>a43a983d201c</code></td><td>evolve candidate 20260820-030655 pareto +0/-6 (1 degenerate: model stopped calling tools) rejected</td><td><b>7/28 = 25 %</b></td><td>&lt;80 3/8 · 80-199 2/14 · 200-499 2/6</td></tr><tr><td>2026-08-20 05:09</td><td><code>c9384231fe8d</code></td><td>evolve candidate 20260820-044630 pareto +1/-0 ACCEPTED</td><td><b>10/28 = 36 %</b></td><td>&lt;80 3/8 · 80-199 4/14 · 200-499 3/6</td></tr><tr><td>2026-08-20 07:17</td><td><code>5d97207bbd2c</code></td><td>evolve candidate 20260820-064930 pareto +1/-3 rejected</td><td><b>11/28 = 39 %</b></td><td>&lt;80 5/8 · 80-199 4/14 · 200-499 2/6</td></tr></tbody></table></div>
+
+<div class="card"><h2>Qwen campaign rounds (24 workers on the DGX Spark)</h2>
+<table><thead><tr><th>round</th><th>matched</th><th>parked</th></tr></thead>
+<tbody><tr><td>c0819b-r1</td><td>2</td><td>30</td></tr><tr><td>c0819b-r2</td><td>0</td><td>32</td></tr><tr><td>c0819b-r3</td><td>2</td><td>46</td></tr><tr><td>c0819b-r4</td><td>1</td><td>47</td></tr><tr><td>c0819b-r5</td><td>1</td><td>47</td></tr><tr><td>c0819b-r6</td><td>2</td><td>46</td></tr><tr><td>c0819b-r7</td><td>1</td><td>47</td></tr><tr><td>c0819b-r8</td><td>1</td><td>47</td></tr><tr><td>c0820a-r1</td><td>1</td><td>47</td></tr><tr><td>c0820a-r2</td><td>1</td><td>47</td></tr><tr><td>c0820a-r3</td><td>1</td><td>47</td></tr><tr><td>c0820a-r4</td><td>3</td><td>45</td></tr><tr><td>c0820a-r5</td><td>1</td><td>47</td></tr><tr><td>c0820a-r6</td><td>1</td><td>47</td></tr><tr><td>c0820a-r7</td><td>0</td><td>11</td></tr></tbody></table></div>
+
+<p class="dim">An independent continuation of the KH2FM matching decompilation. Byte-exact only:
+a function counts when its compiled bytes equal the original SLPM_666.75 ELF.</p>
+</main></body></html>
