@@ -337,6 +337,51 @@ def register_stub_callees(make_output: str, rb: "Rollback") -> List[str]:
     return sorted(want)
 
 
+PROTO_RE = re.compile(
+    r"prototype for [`'](?P<got>[^`']+?)\s+(?P<qual>[\w:~]+)\((?P<args>[^)]*)\)'[^\n]*\n"
+    r"[^\n]*?(?P<hdr>[\w./\-]+\.hpp):(?P<line>\d+): candidate is: (?P<want>[^`'\n]+?)\s+"
+    r"(?P=qual)\((?P<cargs>[^)]*)\)")
+
+
+def fix_return_type_mismatch(make_output: str, rb: "Rollback") -> List[str]:
+    """Correct a repo header whose declared return type contradicts a byte-exact
+    definition.
+
+    Return types are not mangled, so the header and the definition must merely
+    agree -- but which one is right is decided by the compiled bytes, and the
+    candidate has already been proven byte-exact. Where they differ only in
+    return type, the header is the one that is wrong: act.hpp declared
+    YS::ACT::callback as bool (gcc then normalises the value to 0/1, 95.65 %)
+    and jm_synthe.hpp declared isEnableMaterial as u64 (a widening sequence,
+    97.78 %). Argument lists must match exactly -- a real signature difference
+    is a decompilation error and must still fail.
+    """
+    fixed = []
+    # gcc 3.2 hard-wraps long diagnostics, so try the raw text and a unwrapped copy
+    unwrapped = " ".join(make_output.split("\n"))
+    hits = list(PROTO_RE.finditer(make_output)) or list(PROTO_RE.finditer(unwrapped))
+    for m in hits:
+        if " ".join(m.group("args").split()) != " ".join(m.group("cargs").split()):
+            continue
+        hdr = rc.ROOT / m.group("hdr")
+        if not hdr.exists():
+            continue
+        lines = hdr.read_text().splitlines()
+        i = int(m.group("line")) - 1
+        if not (0 <= i < len(lines)):
+            continue
+        want, got = m.group("want").strip(), m.group("got").strip()
+        fn = m.group("qual").split("::")[-1]
+        new = re.sub(rf"\b{re.escape(want)}\s+(?={re.escape(fn)}\s*\()", got + " ", lines[i])
+        if new == lines[i]:
+            continue
+        rb.track(hdr)
+        lines[i] = new
+        hdr.write_text("\n".join(lines) + "\n")
+        fixed.append(f"{m.group('hdr')}:{m.group('line')} {want} -> {got} for {m.group('qual')}")
+    return fixed
+
+
 def registry_check(addr: int, symbol: str) -> Optional[str]:
     """None when the registry can hold this (addr, symbol); else the conflict."""
     regs = rc.registry_symbols()
@@ -485,7 +530,7 @@ def _promote_locked(spec: str, src: Path, dest: str, *, dry_run: bool = False) -
     matched = cp.returncode == 0 and "MATCHED!" in out
 
     if not matched:
-        added = register_stub_callees(out, rb)
+        added = register_stub_callees(out, rb) + fix_return_type_mismatch(out, rb)
         if added:
             # The mini-link scorer PROVIDEs every callee, so a candidate can be
             # byte-exact and still fail the full link when a callee it calls has
@@ -499,7 +544,7 @@ def _promote_locked(spec: str, src: Path, dest: str, *, dry_run: bool = False) -
                 [MAKE, "verify"], cwd=str(rc.ROOT), capture_output=True, text=True, timeout=1800,
             )
             out = (cp.stdout or "") + (cp.stderr or "")
-            out += "\nrig: auto-registered stub callees: " + " ".join(added) + "\n"
+            out += "\nrig: auto-fixed before retry: " + " | ".join(added) + "\n"
             log.write_text(out)
             matched = cp.returncode == 0 and "MATCHED!" in out
 

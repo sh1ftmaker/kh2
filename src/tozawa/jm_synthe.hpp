@@ -6,7 +6,9 @@ namespace Tz {
 
 class JmSynthe {
 public:
-    u64 isEnableMaterial(void);
+    // u8, not u64: the original returns the byte it loaded, unwidened.
+    // Declaring u64 makes gcc emit a widening sequence (97.78 %).
+    u8 isEnableMaterial(void);
     bool isEnableRecipe(void);
     void CreateList(void);
     void Init(void);
