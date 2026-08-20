@@ -14,3 +14,4 @@ Set: `docs/rig/bench_set.tsv`. A change is accepted only if the rate does not dr
 | 2026-08-20 01:38 | c5c1242e9091 | v2 playbook draft + catalogue appended (isolates compression from catalogue loss) | **10/28 = 36 %** | <80 4/8 · 80-199 4/14 · 200-499 2/6 | median attempts 3 | 1498 s |
 | 2026-08-20 03:34 | a43a983d201c | evolve candidate 20260820-030655 pareto +0/-6 (1 degenerate: model stopped calling tools) rejected | **7/28 = 25 %** | <80 3/8 · 80-199 2/14 · 200-499 2/6 | median attempts 1 | 1632 s |
 | 2026-08-20 05:09 | c9384231fe8d | evolve candidate 20260820-044630 pareto +1/-0 ACCEPTED | **10/28 = 36 %** | <80 3/8 · 80-199 4/14 · 200-499 3/6 | median attempts 2 | 1366 s |
+| 2026-08-20 07:17 | 5d97207bbd2c | evolve candidate 20260820-064930 pareto +1/-3 rejected | **11/28 = 39 %** | <80 5/8 · 80-199 4/14 · 200-499 2/6 | median attempts 2 | 1684 s |
