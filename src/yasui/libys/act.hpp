@@ -14,7 +14,9 @@ namespace YS {
 
     class ACT {
     public:
-     bool callback(s32 a0, BD_VALUE* a1, s32 a2);
+     // returns the callee's value unchanged: declaring this `bool` makes gcc
+     // normalise it to 0/1 and the function stops matching (95.65 %).
+     s32 callback(s32 a0, BD_VALUE* a1, s32 a2);
      void stop(void);
      u64 start(ELEM* a0);
      void clear(void);

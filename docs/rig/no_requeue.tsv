@@ -5,3 +5,4 @@ addr	reason
 0031c838	s1/s2 dtor-family regalloc swap -- do not requeue
 001d87b8	return-value pseudo lands in scratch+move, orig loads/zeros v0 directly; 9 source shapes all 95.19 -- do not requeue
 0017c030	out stays in a0 in the original (copy uses a0, call arg fills the delay slot); every shape we compile copies out to s0 and emits a bare nop, +1 instruction. 6 source shapes and 12 arena contenders across 3 providers all land on exactly 92.14 -- do not requeue
+00188340	SOLVED but not promotable: Opus's attempt_001 is byte-exact (out/rig/arena/anthropic-opus-5/00188340). Every destination TU fails normalize-cxx-layout with "0x0016cce8 symbol not found in object: _ZN2YS2VM8callbackEiP8BD_VALUEiPS0_" -- appending a definition of YS::ACT::callback makes the objects generator hand that unrelated VM address to the same TU. A promote/layout bug, not a decompilation one; do not requeue for the model

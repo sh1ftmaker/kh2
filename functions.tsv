@@ -4612,6 +4612,7 @@ func_0028db48	0028db48
 func_0028dba0	0028dba0
 Tz::MenuCursor::AttachSprite(...)	0028dcc0
 _ZN2Tz8MenuUtil16SetSprtParentSeqEPN2dk6SpriteEPN2YI8SEQUENCEE	0028dd28
+func_0028dd90	0028dd90
 _ZN2Tz8MenuUtil11GetFontTypeEi	0028ddd8
 func_0028e000	0028e000
 func_0028e040	0028e040
@@ -7116,3 +7117,4 @@ func_0022d1d8	0022d1d8
 func_0028b078	0028b078
 func_001d4c98	001d4c98
 func_001c2338	001c2338
+func_001ad1d0	001ad1d0

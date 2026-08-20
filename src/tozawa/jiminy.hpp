@@ -36,6 +36,7 @@ public:
     static void* GetSeqTbl();
     static void* GetScrBarSeqTbl();
     static s32 GetFontColorSeqNum(s32);
+    static void SetParentSeqNum(int, int);
 };
 
 }  // namespace Tz

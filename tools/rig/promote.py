@@ -203,8 +203,13 @@ def normalize_candidate(body: str, dest: Optional[Path] = None,
         if end is None:
             break
         block = out[m.start():end]
+        # Only types the candidate *defines* are candidate-only. A bare forward
+        # declaration (`class BD_VALUE;`) names a repo type the candidate simply
+        # did not need the layout of, and treating it as local wrongly pinned
+        # YS::ACT::callback: its one member declaration mentions BD_VALUE, so the
+        # declaration looked unmovable and no destination TU could take it.
         local_types = set(re.findall(
-            r"^[ \t]*(?:struct|class|union|enum)\s+([A-Za-z_][A-Za-z0-9_]*)", body, re.M))
+            r"^[ \t]*(?:struct|class|union|enum)\s+([A-Za-z_][A-Za-z0-9_]*)[^;{]*\{", body, re.M))
         local_types.discard(cls)
         pending: List[dict] = []
         movable = True
