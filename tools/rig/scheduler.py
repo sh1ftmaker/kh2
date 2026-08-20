@@ -226,13 +226,22 @@ def main() -> int:
         args.limit // 4 if args.max_size > 200 else 0)
     if quota:
         # tier-1 twins outscore everything, so 200+B rows never surface on score
-        # alone — reserve slots for the best of them (that's where the bytes are)
+        # alone — reserve slots for the best of them (that's where the bytes are).
+        # Interleave (3 small : 1 big) so any top-N prefix keeps the ratio: the
+        # driver reads the queue top-down and may take fewer rows than the limit.
         big = [r for r in scored if r["size"] >= 200][:quota]
-        big_set = {r["addr"] for r in big}
-        small = [r for r in scored if r["addr"] not in big_set][: args.limit - len(big)]
-        scored = small + big
+        big_set = {id(r) for r in big}
+        small = [r for r in scored if id(r) not in big_set][: args.limit - len(big)]
         for r in big:
             r["reasons"] += "; tier2 quota"
+        woven, si, bi = [], 0, 0
+        while si < len(small) or bi < len(big):
+            for _ in range(3):
+                if si < len(small):
+                    woven.append(small[si]); si += 1
+            if bi < len(big):
+                woven.append(big[bi]); bi += 1
+        scored = woven
     else:
         scored = scored[: args.limit]
     outp = Path(args.out)
