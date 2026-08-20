@@ -60,3 +60,39 @@ void EVENT::setActorParam(YS::OBJ* obj) {
 }
 
 }  // namespace sa
+
+// ---- 0x0022e288 _ZN2sa5EVENT14leaveAllEffectEv ----
+#include "../common/types.h"
+
+extern "C" u32 ThisIsValid_1de568(void* /* ryj::PAX* */) asm("_ZN3ryj3PAX11ThisIsValidEPS0_");
+extern "C" u32 ensure_1dde40(void* self) asm("_ZN3ryj3PAX6ensureEv");
+
+extern "C" u32 D_0035dcf4 asm("D_0035dcf4");
+
+namespace sa {
+
+
+void EVENT::leaveAllEffect() {
+    u32* base = (u32*)&D_0035dcf4;
+    if (*base == 0)
+        return;
+    s32 neg = -1;
+    s32 offset = 0;
+    for (s32 cnt = 95; cnt >= 0; cnt--) {
+        u32* e = (u32*)(offset + (u32)D_0035dcf4);
+        if (e[1] == (u32)neg) {
+            offset += 52;
+            continue;
+        }
+        if (ThisIsValid_1de568((void*)(e + 4))) {
+            u32* e2 = (u32*)((u32)D_0035dcf4 + offset);
+            ensure_1dde40((void*)(e2 + 4));
+        }
+        u32* e3 = (u32*)(offset + (u32)D_0035dcf4);
+        e3[3] = 0;
+        u32* e4 = (u32*)(offset + (u32)D_0035dcf4);
+        e4[1] = (u32)neg;
+        offset += 52;
+    }
+}
+}  // namespace sa

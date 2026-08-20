@@ -16,6 +16,7 @@ public:
     static void wide_on();
     static void readWaitInit();
     void setActorParam(YS::OBJ*);
+    void leaveAllEffect();
 };
 
 }  // namespace sa
