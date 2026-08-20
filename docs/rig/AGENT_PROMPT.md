@@ -198,3 +198,15 @@ it. Do not narrate the disassembly back at length.
 | Their `addiu ptr, ptr, N` in a loop, your `sll` + `addu` | Pointer increment vs index multiply: the source increments a pointer by `N` each iteration, not multiplies an index by `N`. Use a pointer that is incremented, not an index. |
 | Your `movn` vs their `movz` (or vice versa) | The comparison is inverted: `movz` = increment when equal, `movn` = increment when different. Flip `==` to `!=` or vice versa. |
 | Their `sltiu`, your `bltz` + `slti` | Signed vs unsigned comparison. `sltiu` = unsigned (`u32`), `bltz` + `slti` = signed (`s32`). Use the correct type. |
+
+---
+# Evolved adjustments (2026-08-20, bench-gated)
+
+|---|---|
+| Their `lui`+`and`, your `andi` | Mask is **reused**: declare the mask as a local variable so gcc materialises it into a register. |
+| Their `bnel`, your `beql` (or vice versa) | Inverted comparison: flip `==` to `!=` or vice versa. |
+| Their `bgez`, your `bltz` (or vice versa) | The branch condition is inverted: `bgez` = `if (x >= 0)`, `bltz` = `if (x < 0)`. The source tests the *opposite* condition. Flip `<` to `>=` or vice versa. |
+| Their `sltu`+`beqzl`, your `bnez` | The bit-test result is a *bool expression* (`(word & bit) != 0`), not a raw AND. gcc emits `sltu` to convert the AND result to 0/1, then `beqzl` on that. Writing `if (word & bit)` produces `bnez` on the AND result directly. |
+| Their `lq`/`sq`, your `ld`/`sd` (for a 16-byte copy) | The source uses a 16-byte struct type (`FVector`, `u32[4]`, `float[4]`), not `u64`. A `u64` local produces two 64-bit ops; a 16-byte struct produces one 128-bit op. |
+| Their `fv0f`/`c.lt.s`, your `fv0`/`c.lt.d` | The source uses `float` (32-bit), not `double`. Change the `*Layout` member to `f32` and the comparison to `0.0f`. |
+| Their `movz rd, rs, rt`, your `addiu`+`bnel` | The source is `if (cond) x++;` (bare increment in an if, no else). gcc 3.2 emits `movz` for this. Writing `x = x + 1` or `x += 1` inside the if produces `addiu`+`bnel`. |
