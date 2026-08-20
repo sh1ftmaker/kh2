@@ -16,3 +16,4 @@ Set: `docs/rig/bench_set.tsv`. A change is accepted only if the rate does not dr
 | 2026-08-20 05:09 | c9384231fe8d | evolve candidate 20260820-044630 pareto +1/-0 ACCEPTED — NOTE: this row is the primary run (10/28); the Pareto gate accepted on the retry-merged vector (14/28 = 50 %), which is what bench_vector.json holds. Later rows print both. | **10/28 = 36 %** | <80 3/8 · 80-199 4/14 · 200-499 3/6 | median attempts 2 | 1366 s |
 | 2026-08-20 07:17 | 5d97207bbd2c | evolve candidate 20260820-064930 pareto +1/-3 rejected | **11/28 = 39 %** | <80 5/8 · 80-199 4/14 · 200-499 2/6 | median attempts 2 | 1684 s |
 | 2026-08-20 09:32 | 8b1c22c49686 | evolve candidate 20260820-085730 pareto +0/-4 rejected | **9/28 = 32 %** | <80 3/8 · 80-199 4/14 · 200-499 2/6 | median attempts 1 | 2129 s |
+| 2026-08-20 11:44 | da46b68af8aa | evolve candidate 20260820-111205 pareto +2/-4 rejected | **12/28 = 43 %** | <80 4/8 · 80-199 6/14 · 200-499 2/6 | median attempts 2 | 1945 s |
