@@ -20,7 +20,9 @@ import argparse
 import json
 import sys
 import time
+import urllib.error
 from pathlib import Path
+from typing import Optional
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import rigcommon as rc  # noqa: E402
@@ -74,22 +76,57 @@ def worklist(run_dir: Path, max_diff_rows: int = 40) -> str:
     return "\n".join(out) + "\n"
 
 
+# The 130_000-char figure this replaced only bounded the worklist -- it ignored
+# AGENT_PROMPT.md and codegen-3.2.md, which are resent on every call and have
+# both grown substantially as the catalogue absorbed today's promotions
+# (28,124 chars combined as of 2026-08-20, versus ~15,000 when 130k was chosen).
+# That silently ate the safety margin and round 2 of c0820b lost its reflection
+# entirely to an HTTP 400. CHARS_PER_TOKEN is deliberately pessimistic: MIPS
+# disassembly and hex offsets tokenize far denser than English prose.
+CONTEXT_TOKENS = 65536
+REPLY_TOKENS = 6000
+CHARS_PER_TOKEN = 2.5
+
+
 def llm_proposals(text: str, endpoint: str, model: str, think: bool,
-                  char_budget: int = 130_000) -> str:
+                  char_budget: Optional[int] = None) -> str:
     from driver import Endpoint
-    ep = Endpoint(endpoint, model, temperature=0.3, max_tokens=6000, think=think)
-    if len(text) > char_budget:
-        # worklist is near-misses-first, so the tail is the least valuable part;
-        # the server's max-model-len (65k tokens) must hold prompt+catalogue+worklist
-        text = text[:char_budget] + "\n\n[worklist truncated to fit the model context]\n"
+    ep = Endpoint(endpoint, model, temperature=0.3, max_tokens=REPLY_TOKENS, think=think)
     system = REFLECTOR_PROMPT.read_text()
     cat = (rc.ROOT / "docs" / "codegen-3.2.md").read_text()
     prompt_doc = (rc.ROOT / "docs" / "rig" / "AGENT_PROMPT.md").read_text()
-    user = ("Current agent prompt (do not repeat it back; propose diffs against it):\n\n" + prompt_doc +
-            "\n\n---\nCurrent idiom catalogue:\n\n" + cat + "\n\n---\nWorklist from the last round:\n\n" + text)
-    resp = ep.chat([{"role": "system", "content": system}, {"role": "user", "content": user}], tools=[])
-    msg = (resp.get("choices") or [{}])[0].get("message") or {}
-    return msg.get("content") or ""
+    overhead = len(system) + len(prompt_doc) + len(cat) + 600  # +separators/labels
+
+    def budget() -> int:
+        if char_budget is not None:
+            return char_budget
+        avail_tokens = CONTEXT_TOKENS - REPLY_TOKENS - int(overhead / CHARS_PER_TOKEN)
+        return max(4000, int(avail_tokens * CHARS_PER_TOKEN))
+
+    def build(cb: int) -> str:
+        body = text
+        if len(body) > cb:
+            # worklist is near-misses-first, so the tail is the least valuable part
+            body = body[:cb] + "\n\n[worklist truncated to fit the model context]\n"
+        return ("Current agent prompt (do not repeat it back; propose diffs against it):\n\n" +
+                prompt_doc + "\n\n---\nCurrent idiom catalogue:\n\n" + cat +
+                "\n\n---\nWorklist from the last round:\n\n" + body)
+
+    cb = budget()
+    for attempt in range(3):
+        user = build(cb)
+        try:
+            resp = ep.chat([{"role": "system", "content": system}, {"role": "user", "content": user}], tools=[])
+        except urllib.error.HTTPError as e:
+            if e.code == 400 and attempt < 2:
+                # the estimate was still too generous for this text -- halve and retry
+                # rather than losing the round's reflection outright
+                cb = cb // 2
+                continue
+            raise
+        msg = (resp.get("choices") or [{}])[0].get("message") or {}
+        return msg.get("content") or ""
+    return ""
 
 
 def main() -> int:
