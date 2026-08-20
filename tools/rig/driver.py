@@ -136,6 +136,14 @@ TOOLS = [
 # ---------------------------------------------------------------- endpoint
 
 
+# The Spark serves 65536 tokens of context. A 12-attempt conversation with the
+# full compile_diff output on every turn can and does exceed that -- round 10
+# of campaign c0820a lost 4 of 48 targets to a raw HTTP 400 this way (one worker's
+# prompt reached 306,675 tokens). COMPACT_AT leaves headroom for the reply.
+CONTEXT_TOKENS = 65536
+COMPACT_AT = int(CONTEXT_TOKENS * 0.7)
+
+
 class Endpoint:
     def __init__(self, base: str, model: str, timeout: float = 1800.0,
                  temperature: float = 0.2, max_tokens: int = 12288,
@@ -216,10 +224,61 @@ class FunctionRun:
         self.compile_fails = 0
         self.last_exact_src: Optional[Path] = None
         self.tokens = {"prompt": 0, "completion": 0}
+        self.last_prompt_tokens = 0
+        self.compactions = 0
         self.result = "unfinished"
         self.ctx: dict = {}
         self.park_reason = ""
         self.length_cutoffs = 0
+
+    def compact(self, messages: List[dict], user: str) -> List[dict]:
+        """Replace the conversation history with a distilled digest plus the most
+        recent exchange, before the accumulated transcript blows the context.
+
+        Every full compile_diff result (diff rows, hints) stays on every turn for
+        the life of the conversation today, so a hard function with a long attempt
+        history grows without bound; the failure mode is not a graceful truncation,
+        it is an HTTP 400 that discards the whole target. compact() keeps what
+        actually helps the model (current best, what has already been tried, the
+        dominant failure class) and drops the verbatim history that produced it.
+        """
+        tried = []
+        for i, m in enumerate(messages):
+            if m.get("role") != "assistant":
+                continue
+            calls = m.get("tool_calls") or []
+            for tc in calls:
+                if (tc.get("function") or {}).get("name") == "compile_diff":
+                    j = i + 1
+                    if j < len(messages) and messages[j].get("role") == "tool":
+                        try:
+                            r = json.loads(messages[j]["content"])
+                        except (ValueError, TypeError):
+                            continue
+                        dom = (r.get("diff_classes") or {}).get("dominant")
+                        if not dom and (r.get("compile_errors") or r.get("link_errors")):
+                            dom = "compile/link error"
+                        tried.append(f"  attempt {r.get('attempt')}: "
+                                     f"{r.get('fuzzy_pct', 0):.2f} % ({dom or 'n/a'})")
+        digest = (
+            f"[Conversation compacted: {self.attempts} attempts so far, best "
+            f"{self.best:.2f} %, approaching the context budget.]\n"
+            "Attempts tried, do not repeat their exact shape:\n" + "\n".join(tried[-15:]) +
+            "\n\nContinue from here: call compile_diff with your next candidate, "
+            "or park if you are out of ideas."
+        )
+        # The tail must be a self-consistent slice: a `tool` message is only valid
+        # immediately after the `assistant` turn that called it. Walk back to the
+        # start of the last assistant turn rather than taking a fixed-size slice,
+        # which can (and in testing did) cut a tool result off from its call and
+        # produce a conversation the API rejects outright.
+        start = len(messages)
+        for i in range(len(messages) - 1, 0, -1):
+            if messages[i].get("role") == "assistant":
+                start = i
+                break
+        keep_tail = messages[start:] if start < len(messages) else []
+        return [messages[0], {"role": "user", "content": user + "\n\n" + digest}] + keep_tail
 
     def log(self, kind: str, data) -> None:
         with self.transcript.open("a") as f:
@@ -354,14 +413,40 @@ class FunctionRun:
             if self.result != "unfinished":
                 break
 
+            if self.last_prompt_tokens >= COMPACT_AT:
+                before = len(messages)
+                messages = self.compact(messages, user)
+                self.compactions += 1
+                self.last_prompt_tokens = 0
+                self.log("compact", {"messages_before": before, "messages_after": len(messages),
+                                     "attempts_so_far": self.attempts, "best": self.best})
             try:
                 resp = self.ep.chat(messages, TOOLS)
+            except urllib.error.HTTPError as e:
+                if e.code == 400 and len(messages) > 3:
+                    # a context overflow the token-count trigger above did not catch in
+                    # time (the server's tokenizer counts differently from usage.prompt_tokens)
+                    # -- compact unconditionally and retry once rather than losing the target
+                    messages = self.compact(messages, user)
+                    self.compactions += 1
+                    self.log("compact", {"reason": "HTTP 400", "messages_after": len(messages)})
+                    try:
+                        resp = self.ep.chat(messages, TOOLS)
+                    except (urllib.error.URLError, TimeoutError, OSError) as e2:
+                        self.result = "endpoint_error"
+                        self.log("error", str(e2))
+                        break
+                else:
+                    self.result = "endpoint_error"
+                    self.log("error", str(e))
+                    break
             except (urllib.error.URLError, TimeoutError, OSError) as e:
                 self.result = "endpoint_error"
                 self.log("error", str(e))
                 break
             usage = resp.get("usage") or {}
-            self.tokens["prompt"] += int(usage.get("prompt_tokens") or 0)
+            self.last_prompt_tokens = int(usage.get("prompt_tokens") or 0)
+            self.tokens["prompt"] += self.last_prompt_tokens
             self.tokens["completion"] += int(usage.get("completion_tokens") or 0)
             choices = resp.get("choices") or []
             if not choices:
@@ -439,6 +524,7 @@ class FunctionRun:
             "best_fuzzy": self.best,
             "exact": self.result == "matched",
             "park_reason": self.park_reason,
+            "compactions": self.compactions,
             "tokens": self.tokens,
             "wall_s": round(time.time() - t0, 1),
             "model": self.ep.model,
