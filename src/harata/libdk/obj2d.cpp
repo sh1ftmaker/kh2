@@ -138,3 +138,49 @@ u32 Obj2D::isHide() {
     return (v != 0);
 }
 }  // namespace dk
+
+// ---- 0x0031d0f8 func_0031d0f8 ----
+#include "../../common/types.h"
+
+extern "C" u32 _ZN2dk4FACED1Ev_31cec0(void* self) asm("func_0031cec0");  // dk::FACE::~FACE() -- arity VERIFIED [links as func_0031cec0: E3 name not in the registry yet]
+
+extern "C" u32 D_0034a848 asm("D_0034a848");
+extern "C" u32 D_00348608 asm("D_00348608");
+extern "C" u32 D_00347f98 asm("D_00347f98");
+
+typedef void (*Fn_0031d0f8)(u32);
+
+void func_0031d0f8_impl(u32 self) asm("func_0031d0f8");
+void func_0031d0f8_impl(u32 self) {
+    *(u32*)self = (u32)&D_0034a848;
+
+    if (self != (u32)-2576) {
+        u32 end = self + 5536;
+        u32 begin = self + 2576;
+        do {
+            if (begin == end) {
+                break;
+            }
+            end -= 592;
+            Fn_0031d0f8 fn = (Fn_0031d0f8)*(u32*)(*(u32*)end + 12);
+            fn(end);
+        } while (1);
+    }
+
+    if (self != (u32)-916) {
+        u32 end = self + 2564;
+        u32 begin = self + 916;
+        do {
+            if (begin == end) {
+                break;
+            }
+            end -= 412;
+            Fn_0031d0f8 fn = (Fn_0031d0f8)*(u32*)(*(u32*)end + 12);
+            fn(end);
+        } while (1);
+    }
+
+    *(u32*)self = (u32)&D_00348608;
+    _ZN2dk4FACED1Ev_31cec0((void*)(self + 64));
+    *(u32*)self = (u32)&D_00347f98;
+}

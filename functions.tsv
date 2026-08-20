@@ -5929,6 +5929,7 @@ func_0031cd50	0031cd50
 _ZN2dk6LayoutD1Ev	0031cd90
 _ZN2dk6LayoutD0Ev	0031cdd8
 _ZN2dk15CacheBuffLayoutD0Ev	0031ce70
+func_0031cec0	0031cec0
 func_0031d6b0	0031d6b0
 func_0031d6c0	0031d6c0
 func_0031d700	0031d700
@@ -7102,3 +7103,4 @@ func_001dfa38	001dfa38
 func_001de590	001de590
 func_001ad0f8	001ad0f8
 func_001ad520	001ad520
+func_0031d0f8	0031d0f8

@@ -258,6 +258,45 @@ class Rollback:
         return touched
 
 
+UNDEF_RE = re.compile(r"undefined reference to [`']((?:func|wtarget|ctarget)_([0-9a-fA-F]{8}))'")
+
+
+def register_stub_callees(make_output: str, rb: "Rollback") -> List[str]:
+    """Add registry rows for stub callees the full link could not resolve.
+
+    A candidate is scored by mini-linking it against PROVIDEd callee addresses,
+    so it can be byte-exact while the real link still fails on a callee that has
+    no row in functions.tsv. Only addresses that are genuine layout rows are
+    added -- a typo'd or hallucinated symbol must still fail loudly.
+    """
+    rows = {r.addr for r in rc.layout()}
+    regs = rc.registry_symbols()
+    want = {}
+    for sym, hexaddr in UNDEF_RE.findall(make_output):
+        addr = int(hexaddr, 16)
+        if addr in rows and addr not in regs and sym.startswith("func_"):
+            want[sym] = hexaddr.lower()
+    if not want:
+        return []
+    registry = rc.ROOT / "functions.tsv"
+    rb.track(registry)
+    lines = registry.read_text().splitlines()
+    for sym, hexaddr in sorted(want.items(), key=lambda kv: kv[1]):
+        out, done = [], False
+        for line in lines:
+            if not done and "\t" in line and not line.startswith("#"):
+                if line.split("\t")[1].strip() > hexaddr:
+                    out.append(f"{sym}\t{hexaddr}")
+                    done = True
+            out.append(line)
+        if not done:
+            out.append(f"{sym}\t{hexaddr}")
+        lines = out
+    registry.write_text("\n".join(lines) + "\n")
+    rc._registry_cache = None
+    return sorted(want)
+
+
 def registry_check(addr: int, symbol: str) -> Optional[str]:
     """None when the registry can hold this (addr, symbol); else the conflict."""
     regs = rc.registry_symbols()
@@ -404,6 +443,25 @@ def _promote_locked(spec: str, src: Path, dest: str, *, dry_run: bool = False) -
     log = rc.ensure_out() / "last_verify.log"
     log.write_text(out)
     matched = cp.returncode == 0 and "MATCHED!" in out
+
+    if not matched:
+        added = register_stub_callees(out, rb)
+        if added:
+            # The mini-link scorer PROVIDEs every callee, so a candidate can be
+            # byte-exact and still fail the full link when a callee it calls has
+            # no registry row. That is a registry gap, not a defect in the
+            # candidate -- fill it and verify once more.
+            subprocess.run(
+                ["python3", str(rc.ROOT / "tools" / "build_elf.py"), "objects"],
+                cwd=str(rc.ROOT), capture_output=True, text=True, timeout=600,
+            )
+            cp = subprocess.run(
+                [MAKE, "verify"], cwd=str(rc.ROOT), capture_output=True, text=True, timeout=1800,
+            )
+            out = (cp.stdout or "") + (cp.stderr or "")
+            out += "\nrig: auto-registered stub callees: " + " ".join(added) + "\n"
+            log.write_text(out)
+            matched = cp.returncode == 0 and "MATCHED!" in out
 
     # A MATCHED! that did not actually build this row from source proves nothing.
     built_from = ""
