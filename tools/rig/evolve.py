@@ -234,6 +234,7 @@ def main() -> int:
     t0 = time.time()
     subprocess.run(cmd, cwd=rc.ROOT)
     cand = vector(run_dir)
+    primary = sum(cand.values())          # first-run score, before any retry merge
     basev = baseline_vector()
     regressed = [a for a, p in basev.items() if p and not cand.get(a)]
     if regressed:
@@ -266,7 +267,13 @@ def main() -> int:
     else:
         accepted = total > 0 and rate >= base
     degen = degenerate(run_dir)
+    # bench_report scores the primary run only; the gate scores the retry-merged
+    # vector. Both numbers go in the label so the row can never read as one
+    # measurement when the accept decision was made on another.
+    merged = (f", {ok}/{total} after retrying {ok - primary} flake(s)"
+              if ok != primary else "")
     label = (f"evolve candidate {ts} pareto +{len(new_passes)}/-{len(regressed)}"
+             + merged
              + (f" ({degen} degenerate: model stopped calling tools)" if degen else "")
              + (" ACCEPTED" if accepted else " rejected"))
     bench_report(run_dir, label=label, wall=time.time() - t0)
