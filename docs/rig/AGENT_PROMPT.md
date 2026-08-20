@@ -180,3 +180,21 @@ Any of these makes the result worthless — never do them:
 
 Reply concisely between tool calls: state the hypothesis you are testing, then test
 it. Do not narrate the disassembly back at length.
+
+---
+# Evolved adjustments (2026-08-19, bench-gated)
+
+## Appendix: additional diff-reading rows
+
+| What you see | What it usually means |
+|---|---|
+| Their `lui`+`addiu`+`lw`+`sw` (4 instr), your `lui`+`addiu`+`sw` (3 instr) | The global is a **pointer** (u32\*): declare it as `u32*` and load its value (`*D_XXXXXXXX`), don't store the address (`&D_XXXXXXXX`). |
+| Their `lui`+`addiu`+`sw` (3 instr), your `lui`+`addiu`+`lw`+`sw` (4 instr) | The source stores the **address** (`(u32)&D_XXXXXXXX`), not the pointed-to value. Declare the global as `u32` and store `&D_XXXXXXXX`. |
+| Their `swc1`/`lwc1`, your `sw`/`lw` | Wrong member type: the member is `float`/`f32`, not `u32`/`s32`. Change the `*Layout` struct member to `f32`. |
+| Their `lq`/`sq`, your `ld`/`sd` | 64-bit copy: the source is a `u64` member or a struct copy, not two `u32`s. |
+| Their `lb` + `bgez`/`bltz`, your `lbu` + `sll`/`sra` + `bgez` | Signed byte: the member is `s8`/`char`, not `u8`. The compare is signed. |
+| Their `addiu a0, sX, OFFSET` before `jal <dtor>`, your `jal <dtor>` with no arg or wrong arg | The callee is a non-static member: pass `self + OFFSET` as its `this`. Declare the callee with `(void* self)` and call `callee((void*)(self + OFFSET))`. |
+| Their `addiu a0, a0, OFF` in delay slot of `j <callee>`, your `jal` + `jr ra` | Tail call with offset: the source is `callee(this + OFF, ...);` as the last statement (or `return callee(this + OFF, ...);`). |
+| Their `addiu ptr, ptr, N` in a loop, your `sll` + `addu` | Pointer increment vs index multiply: the source increments a pointer by `N` each iteration, not multiplies an index by `N`. Use a pointer that is incremented, not an index. |
+| Your `movn` vs their `movz` (or vice versa) | The comparison is inverted: `movz` = increment when equal, `movn` = increment when different. Flip `==` to `!=` or vice versa. |
+| Their `sltiu`, your `bltz` + `slti` | Signed vs unsigned comparison. `sltiu` = unsigned (`u32`), `bltz` + `slti` = signed (`s32`). Use the correct type. |
