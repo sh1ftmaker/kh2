@@ -185,6 +185,7 @@ addr	size	symbol	best_fuzzy	reason	hypothesis	attempts	parked_at
 002b0de0	148	func_002b0de0	50.03	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	7	2026-08-20T01:45:23Z
 002c1f08	132	func_002c1f08	55.24	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-20T00:46:52Z
 002c5658	116	func_002c5658	77.1	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-19T23:01:32Z
+002db968	188	func_002db968	7.83	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-20T02:25:59Z
 002dcf18	116	func_002dcf18	15.67	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-20T00:37:31Z
 002dd730	96	func_002dd730	58.96	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-20T00:06:14Z
 002e36f0	92	_ZN2Ti21trap_reverse_path_wayEP8BD_VALUE	68.79	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-19T18:39:05Z
@@ -205,5 +206,5 @@ addr	size	symbol	best_fuzzy	reason	hypothesis	attempts	parked_at
 0031c6f8	172	func_0031c6f8	93.26	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	7	2026-08-20T01:48:13Z
 0031c7a8	144	func_0031c7a8	98.36	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	15	2026-08-20T01:47:55Z
 0031c838	172	func_0031c838	95.58	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	7	2026-08-20T01:51:35Z
-0031da48	168	func_0031da48	84.29	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	11	2026-08-20T01:47:40Z
+0031da48	168	func_0031da48	84.29	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	11	2026-08-20T02:25:28Z
 00321ce8	92	func_00321ce8	100.0	compile_diff returned exact:true (100.0%, size_ok, empty diff) on attempt 1 — the candidate is byte-identical to the shipped row. However, promote() fails every time because the repo's `make verify` target errors out on a pre-existing '#pragma once is obsolete' warning in src/tozawa/menu_sound.hpp (Error 1 before it can print MATCHED!). That header is outside my edit scope, so I cannot fix the build failure. The decompilation is complete and verified byte-exact; only the repo-side verify build is broken.	func_00321ce8 is a doubly-linked-list removal: head at +0, prev at +4, next at +96 (0x60). It unlinks node a1 from the list rooted at a0 (handling head/interior/tail cases), then nulls the removed node's next pointer. Exact match achieved; blocked only by an unrelated pre-existing build warning in menu_sound.hpp.	1	2026-08-19T18:40:36Z
