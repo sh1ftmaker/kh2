@@ -49,3 +49,36 @@ void JmDiagram::FadeOutAll() {
 }
 
 }  // namespace Tz
+
+// ---- 0x002a1c68 func_002a1c68 ----
+#include "../common/types.h"
+
+// ---- callees, declared by the rig: copy these lines verbatim, never retype a symbol ----
+extern "C" u32 isFlushing_292630() asm("_ZN2Tz18LoadDataIsFlushingEv");  // Tz::LoadData::isFlushing() -- arity VERIFIED
+extern "C" u32 getFileAddress_23f900(void* self) asm("_ZNK2Tz7LayFile14getFileAddressEv");  // Tz::LayFile::getFileAddress() const -- arity VERIFIED
+extern "C" u32 func_0023fad0_23fad0(u32) asm("func_0023fad0");  // arity UNKNOWN
+extern "C" u32 Clear_293d80(int) asm("_ZN2Tz6JMData5ClearEi");  // Tz::JMData::Clear(int) -- arity VERIFIED
+
+// layout row 0x002a1c68, 108 bytes
+// the definition MUST produce the symbol: func_002a1c68  (source: registry)
+// original name (E3 debug build): Tz::JmDiagram::LeaveAll(int)
+
+extern "C" u32 D_0035f5dc asm("D_0035f5dc");
+extern "C" u8 D_0035f5e0 asm("D_0035f5e0");
+extern "C" u8 D_0035f5e1 asm("D_0035f5e1");
+
+void func_002a1c68_impl(int) asm("func_002a1c68");  // declaration
+void func_002a1c68_impl(int) {
+    if (isFlushing_292630() == 0) {
+        u32* p = &D_0035f5dc;
+        if (D_0035f5e0 != 0) {
+            u32 r = getFileAddress_23f900((void*)*p);
+            if (r != 0) {
+                func_0023fad0_23fad0(*p);
+            }
+        }
+        Clear_293d80(5101);
+        D_0035f5e0 = 0;
+        D_0035f5e1 = 0;
+    }
+}
