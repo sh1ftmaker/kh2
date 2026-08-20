@@ -37,9 +37,20 @@ from list_candidates import list_candidates, parked_addrs  # noqa: E402
 from get_context import class_names_from, prototype_for  # noqa: E402
 
 def _no_requeue() -> set:
-    """Addrs whose parked.tsv reason/hypothesis says 'do not requeue' — documented
-    residues (e.g. the s1/s2 dtor-family swap) that the twin rule must not revive."""
+    """Addrs the twin rule must never revive — documented residues (e.g. the s1/s2
+    dtor-family swap). Primary source is docs/rig/no_requeue.tsv (drivers rewrite
+    parked.tsv rows on every re-park, so tags there don't survive a round);
+    'do not requeue' in a parked.tsv reason/hypothesis is honoured as well."""
     out = set()
+    nr = rc.ROOT / "docs" / "rig" / "no_requeue.tsv"
+    if nr.exists():
+        for i, line in enumerate(nr.read_text().splitlines()):
+            if i == 0 or not line.strip() or line.startswith("#"):
+                continue
+            try:
+                out.add(int(line.split("\t")[0], 16))
+            except ValueError:
+                pass
     tsv = rc.ROOT / "docs" / "rig" / "parked.tsv"
     if tsv.exists():
         for i, line in enumerate(tsv.read_text().splitlines()):
@@ -176,6 +187,8 @@ def main() -> int:
     ap.add_argument("--limit", type=int, default=40)
     ap.add_argument("--out", default=str(QUEUE))
     ap.add_argument("--json", action="store_true")
+    ap.add_argument("--tier2-quota", type=int, default=-1,
+                    help="reserve N queue slots for the best 200+B rows (-1 = limit//4 when max-size > 200)")
     ap.add_argument("--twins", type=int, default=150,
                     help="compute similarity-to-matched for the top-N pre-scored rows (0 = off)")
     args = ap.parse_args()
@@ -207,8 +220,21 @@ def main() -> int:
                 r["twin_of"] = sm.get("symbol") or sm.get("addr")
     scored = score_rows(rows, twins, recent_classes(), parked)
     if not args.include_parked:
-        scored = [r for r in scored if not r["reasons"].endswith("parked")]
-    scored = scored[: args.limit]
+        scored = [r for r in scored if not r["reasons"].endswith("parked")
+                  and "do not requeue" not in r["reasons"]]
+    quota = args.tier2_quota if args.tier2_quota >= 0 else (
+        args.limit // 4 if args.max_size > 200 else 0)
+    if quota:
+        # tier-1 twins outscore everything, so 200+B rows never surface on score
+        # alone — reserve slots for the best of them (that's where the bytes are)
+        big = [r for r in scored if r["size"] >= 200][:quota]
+        big_set = {r["addr"] for r in big}
+        small = [r for r in scored if r["addr"] not in big_set][: args.limit - len(big)]
+        scored = small + big
+        for r in big:
+            r["reasons"] += "; tier2 quota"
+    else:
+        scored = scored[: args.limit]
     outp = Path(args.out)
     outp.parent.mkdir(parents=True, exist_ok=True)
     with outp.open("w", newline="") as f:
