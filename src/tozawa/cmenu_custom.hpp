@@ -8,6 +8,7 @@ class CmCustom {
 public:
     static u32 GetItemTbl(s32);
     static void LeaveAll();
+    int Command2Item(int);
 };
 
 }  // namespace Tz

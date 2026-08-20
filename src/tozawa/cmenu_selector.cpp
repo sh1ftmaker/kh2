@@ -90,3 +90,30 @@ void Selector::PauseThread(TASK* task) {
 }
 
 }  // namespace Tz
+
+// ---- 0x0028cf28 _ZN2Tz10MenuCursor9SetParentEiPN2dk6SpriteE ----
+#include "../common/types.h"
+
+extern "C" u32 DoubleSuicideOn_1396b0(void* self) asm("_ZN2Tz6Select10BeginLeaveEz");
+extern "C" u32 is_disable_change_side_31a260(void* self, int flag) asm("_ZN2Tz6Select7SetFlagEz");
+
+extern "C" u32 D_0035f3fc asm("D_0035f3fc");
+
+namespace dk { class Sprite; }
+
+namespace Tz {
+
+
+void MenuCursor::SetParent(s32 index, dk::Sprite* spr) {
+    u32 p = D_0035f3fc + (u32)index * 408;
+    *(u32*)(p + 396) = (u32)spr;
+    DoubleSuicideOn_1396b0((void*)p);
+    if (*(u32*)(p + 396) != 0) {
+        *(u32*)(p + 400) = 0;
+        DoubleSuicideOn_1396b0((void*)p);
+        if (*(u32*)(p + 400) != 0) {
+            is_disable_change_side_31a260((void*)p, 0);
+        }
+    }
+}
+}  // namespace Tz

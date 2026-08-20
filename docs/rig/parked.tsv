@@ -13,14 +13,16 @@ addr	size	symbol	best_fuzzy	reason	hypothesis	attempts	parked_at
 0013e610	100	func_0013e610	19.16	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-20T11:25:26Z
 0013f648	156	func_0013f648	0.0	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	4	2026-08-20T14:25:51Z
 0013fd10	100	func_0013fd10	0.08	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-20T11:36:23Z
+00143ae0	128	_ZN2dk6Octree16intersectLineMapERNS_4LineERN2kn7FVectorERti	65.47	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-20T16:48:37Z
 00143b88	224	_ZN2dk6Octree13intersectLineERNS_4LineERN2kn7FVectorERtRPNS_6ObjOccEi	61.21	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	9	2026-08-20T15:43:28Z
 00143d10	188	_ZN2dk6Octree19intersectLineCameraERNS_4LineERN2kn7FVectorERtRPNS_6ObjOccE	70.51	Register allocation mismatch: gcc 3.2 assigns s-registers in a different order than the original. Best attempt (70.51%, volatile global) has correct structure, frame size, and instruction set, but variables land in wrong s-registers (s0=lui vs s3=lui, s5=occ vs s2=occ, etc.). The original's allocation (s0=this, s1=FVector, s2=occ, s3=lui, s4=dist, s5=r) requires a specific source ordering that I couldn't reproduce in remaining attempts. The volatile keyword was needed to force the double-load of the global (matching the original's two lw instructions), but it also changes register allocation behavior.	The source likely uses a non-volatile global accessed through a pointer local (e.g., `OctCollFile* f = (OctCollFile*)&D_003487f8; if (f) { f->setSelectMask(...); f->intersectLine(...); }`) where gcc 3.2 keeps the pointer in s3 and the lui in a separate register. The exact source ordering of `occ=0`, the global load, and the parameter-to-s-register copies determines the s-register assignment. A `register`-free source with the right statement order would match, but I ran out of attempts to find it.	11	2026-08-20T09:57:29Z
+00143dd0	128	_ZN2dk6Octree20intersectLineMapKindERNS_4LineERN2kn7FVectorERtii	55.31	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	7	2026-08-20T16:52:13Z
 00147240	120	func_00147240	83.38	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-20T12:29:54Z
 0014b4b0	100	func_0014b4b0	10.4	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-20T11:35:56Z
-0014cc40	116	func_0014cc40	66.31	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	7	2026-08-20T15:25:00Z
+0014cc40	116	func_0014cc40	66.31	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	7	2026-08-20T16:44:25Z
 0014f578	88	func_0014f578	99.73	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-20T10:43:50Z
-0014f8d0	212	func_0014f8d0	72.06	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	7	2026-08-20T15:31:48Z
-0014fa48	180	func_0014fa48	86.53	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	7	2026-08-20T15:50:30Z
+0014f8d0	212	func_0014f8d0	77.77	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	8	2026-08-20T16:52:32Z
+0014fa48	180	func_0014fa48	86.53	3 consecutive candidates failed to compile or link	model cannot produce a compiling candidate	7	2026-08-20T16:39:40Z
 001531f8	276	_ZN2dk12LEVELUP_INFO9openCharaEPKN2YS7MESSAGEES4_S4_iNS0_9WIN_COLORE	0.0	3 consecutive candidates failed to compile or link	model cannot produce a compiling candidate	3	2026-08-20T09:48:28Z
 00153468	212	_ZN2dk12LEVELUP_INFO10openSummonEPKN2YS7MESSAGEES4_i	0.0	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	4	2026-08-20T15:22:17Z
 001547e0	196	func_001547e0	46.78	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-20T14:44:51Z
@@ -30,9 +32,13 @@ addr	size	symbol	best_fuzzy	reason	hypothesis	attempts	parked_at
 00157160	92	func_00157160	72.46	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-20T09:45:45Z
 00159130	112	_ZN2dk14ReactionCamera6createEPKN2YS6TARGETE	71.42	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-20T15:38:18Z
 00159240	196	func_00159240	0.0	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	4	2026-08-20T14:44:06Z
+0015aaf8	120	_ZN2dk14BILLBOARD_BASE6updateEv	92.63	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	11	2026-08-20T16:59:11Z
+0015ac68	116	_ZN2dk15BILLBOARD_PLACE6updateEv	31.24	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-20T16:44:10Z
 0015d058	432	func_0015d058	0.0	3 consecutive candidates failed to compile or link	model cannot produce a compiling candidate	3	2026-08-20T14:38:50Z
 0015d208	224	func_0015d208	34.23	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-20T12:27:41Z
-0016ac80	92	func_0016ac80	72.35	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	8	2026-08-20T15:24:13Z
+00168388	136	_ZN2YS4FILE8ReadBackEPKcPvPFvS3_jS3_ES3_	0.0	3 consecutive candidates failed to compile or link	model cannot produce a compiling candidate	3	2026-08-20T16:47:08Z
+001684c0	136	_ZN2YS4FILE11ReadBarBackEPKcPvPFvPNS_6BINARCEjS3_ES3_	0.0	3 consecutive candidates failed to compile or link	model cannot produce a compiling candidate	3	2026-08-20T16:48:03Z
+0016ac80	92	func_0016ac80	72.35	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	8	2026-08-20T16:43:26Z
 0016ace0	88	_ZN2YS3OBJ7set_posERKN2kn7FVectorE	32.55	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-20T11:36:44Z
 0016b7a0	92	func_0016b7a0	52.8	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-20T10:55:57Z
 0016bf38	184	func_0016bf38	29.89	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-20T14:56:53Z
@@ -40,7 +46,9 @@ addr	size	symbol	best_fuzzy	reason	hypothesis	attempts	parked_at
 0016c6e8	104	_ZN2YS3OBJ10CountEntryEj	29.5	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-20T11:21:56Z
 0016f610	144	func_0016f610	1.58	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-20T13:18:13Z
 00170320	136	_ZN2YS10CACHE_BUFF5ClearEi	10.97	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-20T13:09:50Z
-001703a8	84	_Z16wtarget_001703a8jjjj	68.96	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	9	2026-08-20T15:20:43Z
+001703a8	84	_Z16wtarget_001703a8jjjj	68.96	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	9	2026-08-20T16:46:09Z
+00176b58	136	_ZN2YS5PARTY9GetByPartEi	90.82	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-20T16:52:32Z
+00176be0	136	_ZN2YS5PARTY11prize_recovEf	37.89	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-20T16:56:31Z
 0017a538	84	_ZN2YS6PLAYER11is_changingEv	65.71	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-20T15:21:39Z
 0017a968	124	_Z16ctarget_0017a968jjjj	0.0	3 consecutive candidates failed to compile or link	model cannot produce a compiling candidate	3	2026-08-20T12:31:27Z
 0017a9e8	204	func_0017a9e8	33.31	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	8	2026-08-20T10:58:47Z
@@ -55,7 +63,9 @@ addr	size	symbol	best_fuzzy	reason	hypothesis	attempts	parked_at
 00180e28	200	func_00180e28	24.34	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-20T10:56:14Z
 00181570	92	_ZN2YS8PROGRESS11CheckAndSetEii	88.6	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-20T15:29:49Z
 00181670	260	_ZN2YS8PROGRESS7CheckLMEv	19.51	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-20T09:43:02Z
-001819c0	88	func_001819c0	68.46	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	7	2026-08-20T15:21:17Z
+001819c0	88	func_001819c0	68.46	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	7	2026-08-20T16:41:28Z
+00182e08	140	_ZN2YS4UNIT7GetPathEi	49.8	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-20T16:55:47Z
+00182e98	140	_ZN2YS4UNIT11GetPathByIDEi	99.94	attempt budget (12) exhausted	ran out of attempts	12	2026-08-20T17:02:08Z
 00182f38	104	_ZN2YS4UNIT12InitMinigameEv	89.73	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-20T15:34:49Z
 001841f0	204	func_001841f0	70.19	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	9	2026-08-20T11:10:13Z
 00184308	204	func_00184308	66.84	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-20T10:54:22Z
@@ -63,6 +73,7 @@ addr	size	symbol	best_fuzzy	reason	hypothesis	attempts	parked_at
 00185890	124	func_00185890	28.32	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-20T12:35:02Z
 00186c58	140	func_00186c58	28.86	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-20T13:10:59Z
 00187650	216	_ZN2YS6BTLOBJ6add_mpEib	0.0	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	4	2026-08-20T15:25:35Z
+001877a0	116	_ZN2YS6BTLOBJ12bind_hitmarkEPN3ryj3PAXEi	85.83	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	10	2026-08-20T16:57:00Z
 00188340	88	_ZN2YS3ACT8callbackEiP8BD_VALUEi	49.32	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-20T15:28:26Z
 00188958	204	_ZN2YS7PARTRAM12set_item_maxEi	85.02	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-20T14:48:45Z
 0018b200	108	_ZN2YS3NPC12before_checkEv	0.0	3 consecutive candidates failed to compile or link	model cannot produce a compiling candidate	3	2026-08-20T15:32:52Z
@@ -83,6 +94,7 @@ addr	size	symbol	best_fuzzy	reason	hypothesis	attempts	parked_at
 0019f9a8	96	_ZN2YS10OBJ_ATTACK5clearEv	94.92	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	11	2026-08-20T15:35:39Z
 001a0800	288	func_001a0800	0.0	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	4	2026-08-20T13:18:17Z
 001a0d48	304	func_001a0d48	42.91	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-20T13:21:00Z
+001a3018	332	_ZN2YS4ITEM8WhereGetEiii	0.0	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	4	2026-08-20T16:47:42Z
 001a3458	132	_ZN2YS4ITEM6ReduceEii	85.44	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	7	2026-08-20T13:22:51Z
 001a34e0	144	func_001a34e0	86.03	attempt budget (12) exhausted	ran out of attempts	12	2026-08-20T13:19:13Z
 001a3958	112	func_001a3958	4.64	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-20T12:27:59Z
@@ -98,12 +110,16 @@ addr	size	symbol	best_fuzzy	reason	hypothesis	attempts	parked_at
 001a6bc8	108	func_001a6bc8	44.11	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-20T11:28:12Z
 001abe80	128	func_001abe80	5.91	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-20T13:06:45Z
 001ac108	200	func_001ac108	9.66	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	7	2026-08-20T10:49:37Z
+001acf38	120	_ZN2YS11WINDOW_BASE4drawEv	55.29	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-20T16:43:59Z
 001b14d8	132	func_001b14d8	87.03	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	10	2026-08-20T13:14:16Z
 001b1928	128	_ZN2YS5LIGHT6CreateEi	38.12	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	7	2026-08-20T13:12:48Z
 001b1a30	136	func_001b1a30	93.76	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-20T13:14:40Z
 001b3a90	124	func_001b3a90	46.32	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-20T12:34:51Z
 001b4c48	196	func_001b4c48	58.73	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-20T14:45:29Z
 001b5708	236	_ZN2YS5LIMIT19set_special_commandEi	13.66	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-20T09:40:50Z
+001b5ef0	116	_ZN2YS8CHANGEIN5StartEPNS_3OBJE	0.0	3 consecutive candidates failed to compile or link	model cannot produce a compiling candidate	3	2026-08-20T16:41:04Z
+001b6fb0	132	_ZN2YS7LEVELUP3GetEii	43.64	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	7	2026-08-20T16:49:57Z
+001b7c80	364	_ZN2YS7OBJCLSN17calc_bounding_boxERN2dk6AabboxE	0.0	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	4	2026-08-20T16:59:15Z
 001b8e00	120	func_001b8e00	51.47	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-20T12:31:36Z
 001b90f0	220	_ZNK2YS12COMMAND_ELEM7can_useEPNS_6PLAYERE	26.18	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	11	2026-08-20T15:41:53Z
 001b9bc8	92	_ZN2YS3OBJ4EachEPS0_	9.74	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	7	2026-08-20T15:32:34Z
@@ -111,7 +127,7 @@ addr	size	symbol	best_fuzzy	reason	hypothesis	attempts	parked_at
 001bc130	88	func_001bc130	21.05	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	8	2026-08-20T10:56:07Z
 001bc6a8	84	_ZN2YS12COMMAND_SLOT3setEPKNS_12COMMAND_ELEMEPNS_3OBJEPKNS_6TARGETEi	99.52	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	10	2026-08-20T15:40:37Z
 001bce00	144	func_001bce00	88.17	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	7	2026-08-20T13:17:45Z
-001bdcd0	80	func_001bdcd0	76.75	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	10	2026-08-20T15:20:57Z
+001bdcd0	80	func_001bdcd0	76.75	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	10	2026-08-20T16:40:22Z
 001be540	172	func_001be540	69.02	attempt budget (12) exhausted	ran out of attempts	12	2026-08-20T14:40:45Z
 001be890	112	func_001be890	23.21	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	8	2026-08-20T10:58:29Z
 001c1060	88	_ZN2YS3OBJ9DetachAllEv	33.64	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-20T15:26:01Z
@@ -119,6 +135,8 @@ addr	size	symbol	best_fuzzy	reason	hypothesis	attempts	parked_at
 001c1268	156	func_001c1268	85.08	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-20T14:33:40Z
 001c1308	156	func_001c1308	89.18	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	8	2026-08-20T14:55:30Z
 001c2338	112	func_001c2338	68.89	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	7	2026-08-20T12:31:28Z
+001c2c00	148	_ZN2YS7HITMARK3AddEPN3ryj6EFFECTE	3.03	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-20T17:00:44Z
+001c7ca8	228	_ZN2YS8PRIZE_MU11AppearTableERKN2kn7FVectorEPKNS_10PRIZETABLEE	0.0	3 consecutive candidates failed to compile or link	model cannot produce a compiling candidate	3	2026-08-20T16:41:43Z
 001c7d90	280	func_001c7d90	0.0	3 consecutive candidates failed to compile or link	model cannot produce a compiling candidate	3	2026-08-20T13:01:26Z
 001c8b48	92	_ZN2YS6SUMMON11IsTinkExistEv	63.4	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-20T10:59:00Z
 001c8fe8	152	func_001c8fe8	0.0	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	4	2026-08-20T13:14:39Z
@@ -148,6 +166,7 @@ addr	size	symbol	best_fuzzy	reason	hypothesis	attempts	parked_at
 001dddd0	108	_ZN3ryj3PAX4initEPv	56.48	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-20T15:36:51Z
 001de168	88	_ZN3ryj3PAX5startEiiiiPv	26.25	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-20T15:39:02Z
 00227950	184	func_00227950	43.41	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-20T14:41:51Z
+002282f0	136	_ZN2sa5EVENT10checkStartEiP4TASK	2.47	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-20T16:55:16Z
 00229728	260	_ZN2sa13MUSICAL_SCORE6updateEv	58.58	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-20T09:47:06Z
 0022b558	104	func_0022b558	83.15	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-20T11:03:15Z
 0022c758	100	func_0022c758	50.0	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-20T11:37:07Z
@@ -156,7 +175,9 @@ addr	size	symbol	best_fuzzy	reason	hypothesis	attempts	parked_at
 0022efb8	96	_ZN2sa5EVENT13set_alpha_seqERNS_13BIN_ALPHA_SEQEP4TASK	78.23	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-20T15:35:36Z
 002311c0	460	func_002311c0	54.37	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	9	2026-08-20T14:55:20Z
 00231390	304	func_00231390	56.55	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-20T13:28:34Z
+00232070	144	_ZN2sa5EVENT21set_bin_seq_objcameraERNS_17BIN_SEQ_OBJCAMERAEP4TASK	43.42	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-20T16:59:06Z
 00232398	256	func_00232398	0.0	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	4	2026-08-20T12:33:36Z
+002368e8	144	_ZN2YI5IMAGE8ClutGrayEf	95.97	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	9	2026-08-20T16:59:29Z
 00239fd0	264	_Z16wtarget_00239fd0jjjj	27.02	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-20T12:36:45Z
 0023ef50	100	_ZN2Tz6Layout13SetImageCacheEv	58.37	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-20T15:35:05Z
 00241358	148	func_00241358	48.44	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-20T13:14:36Z
@@ -171,13 +192,17 @@ addr	size	symbol	best_fuzzy	reason	hypothesis	attempts	parked_at
 00256f18	232	func_00256f18	0.0	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	4	2026-08-20T12:16:43Z
 00258080	132	func_00258080	53.26	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-20T13:04:11Z
 00258df0	196	_ZN2Tz6CmComm14SetDrawMunniesEPNS_8MultiSeqE	15.35	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-20T09:45:43Z
+00258eb8	356	_ZN2Tz6CmComm11SetDrawTimeEPNS_8MultiSeqE	0.0	3 consecutive candidates failed to compile or link	model cannot produce a compiling candidate	3	2026-08-20T16:53:54Z
 00262c40	116	_ZN2Tz6CmItem11FadeOutWarnEv	79.31	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-20T11:30:40Z
+002638e0	124	_ZN2Tz6CmItem8SelCheckEi	1.0	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-20T16:42:06Z
 00267150	152	func_00267150	34.58	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	9	2026-08-20T13:18:29Z
 0026b008	236	_ZN2Tz7CmEquip22CheckAutoReplenishmentEv	44.73	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-20T09:55:08Z
 0026bab8	292	func_0026bab8	79.59	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	7	2026-08-20T13:20:39Z
 0026d8c0	156	func_0026d8c0	0.0	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	4	2026-08-20T14:27:39Z
 00276150	208	func_00276150	57.85	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	9	2026-08-20T10:58:34Z
 00276438	116	func_00276438	23.24	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-20T10:59:17Z
+0027af58	132	_ZN2Tz9CmAbility14Cur2AbiltyTypeEv	33.42	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	7	2026-08-20T16:52:54Z
+00282d70	332	_ZN2Tz8ItemInfo12SortItemInfoEv	40.55	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-20T16:58:16Z
 00283ab8	192	func_00283ab8	52.35	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	7	2026-08-20T10:57:40Z
 00283c50	176	func_00283c50	86.52	attempt budget (12) exhausted	ran out of attempts	12	2026-08-20T14:56:44Z
 00285d58	216	func_00285d58	12.43	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-20T11:25:52Z
@@ -189,6 +214,8 @@ addr	size	symbol	best_fuzzy	reason	hypothesis	attempts	parked_at
 00287df0	200	func_00287df0	0.0	3 consecutive candidates failed to compile or link	model cannot produce a compiling candidate	3	2026-08-20T10:40:21Z
 00287f90	120	func_00287f90	31.43	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-20T12:33:01Z
 00288b78	112	_ZN2Tz6Select3EndEv	62.14	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	7	2026-08-20T12:30:41Z
+00288d80	136	_ZN2Tz6Select7SetItemEiiiPNS_6LayoutEiPKsS4_	45.08	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-20T16:59:18Z
+00288e08	124	_ZN2Tz6Select11SetExOffsetEiii	26.68	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-20T16:59:13Z
 00289038	168	func_00289038	46.27	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-20T14:35:10Z
 002891f0	264	_ZN2Tz6Select10SetCurrentEibii	67.89	Stuck at 67.89% after 10 attempts. The main blocker is register allocation: my code uses 6 callee-saved registers (s0-s5) while the original uses only 4 (s0-s3). The original keeps `cur` in `a1` (not saved), `loop` in `s1`, `x` in `s2`, `y` in `s3`. My code keeps `cur` in a callee-saved register because it's used in the comparison and the array index/seq offset. I've tried multiple approaches to reduce register pressure (using `self->m_Current` instead of `cur`, simplifying the code) but haven't been able to get gcc to use only 4 registers. The other differences (frame size, `sh a1, 0(a0)` being first, CalcNextPos call arguments) are all consequences of the register allocation difference.	The source code must be structured so that `cur` is only used in the comparison (while still in `a1`) and `self->m_Current` is used for the array index and seq offset. But gcc is still allocating 6 registers, possibly because of the CalcNextPos calls or the complex control flow. The exact source structure that produces the original codegen is unknown.	10	2026-08-20T10:02:48Z
 0028afd0	104	func_0028afd0	68.59	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-20T12:28:36Z
@@ -196,6 +223,7 @@ addr	size	symbol	best_fuzzy	reason	hypothesis	attempts	parked_at
 0028bdb8	92	_ZN2Tz13LeadDataLeaveEj	0.0	3 consecutive candidates failed to compile or link	model cannot produce a compiling candidate	3	2026-08-20T09:44:37Z
 0028c2c8	184	func_0028c2c8	63.52	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	8	2026-08-20T14:46:51Z
 0028ca78	380	_ZN2Tz10MenuCursor4ExitEv	33.11	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-20T15:07:34Z
+0028ce98	120	_ZN2Tz10MenuCursor7SetTypeEii	36.4	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	10	2026-08-20T16:53:12Z
 00290a10	80	_ZN2Tz8MenuFile5allocEPKci	87.45	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	7	2026-08-20T15:29:03Z
 002914a8	104	func_002914a8	0.0	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	4	2026-08-20T12:18:20Z
 00292eb0	100	func_00292eb0	42.76	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-20T09:47:28Z
@@ -209,6 +237,8 @@ addr	size	symbol	best_fuzzy	reason	hypothesis	attempts	parked_at
 00298c60	444	func_00298c60	1.55	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-20T15:29:18Z
 00298f90	84	_ZN2Tz12LayFileResetEv	82.83	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	7	2026-08-20T09:44:50Z
 0029c958	124	func_0029c958	90.39	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	8	2026-08-20T10:53:53Z
+0029c9d8	120	_ZN2Tz5JmDic12GetCur2WorldEi	41.27	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-20T16:45:34Z
+0029ea30	116	_ZN2Tz5JmDic14UpdateHelpMessEv	75.95	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	7	2026-08-20T16:57:34Z
 002a4b78	236	_ZN2Tz10JmTreasure12AdjustCurPosEv	62.19	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	9	2026-08-20T09:57:52Z
 002a5d30	192	_ZN2Tz8JmBattle14GetEnableLimitEv	23.06	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	8	2026-08-20T09:47:51Z
 002a74c0	108	_ZN2Tz8JmSynthe16isEnableMaterialEv	100.0	attempt budget (12) exhausted	ran out of attempts	12	2026-08-20T15:40:38Z
@@ -237,21 +267,29 @@ addr	size	symbol	best_fuzzy	reason	hypothesis	attempts	parked_at
 002ac800	224	func_002ac800	0.0	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	4	2026-08-20T12:21:33Z
 002ac8e0	208	func_002ac8e0	0.0	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	4	2026-08-20T10:58:25Z
 002ad258	220	_ZN2Tz10JmComplete10CheckAnsemEv	66.02	attempt budget (12) exhausted	ran out of attempts	12	2026-08-20T15:41:54Z
+002ad390	276	_ZN2Tz10JmComplete10CheckAlbumEv	22.61	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-20T16:46:43Z
 002ad580	220	_ZN2Tz10JmComplete11CheckBattleEv	58.82	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	7	2026-08-20T15:39:03Z
 002ad6e8	232	_ZN2Tz10JmComplete10CheckQuestEv	78.03	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	7	2026-08-20T09:41:21Z
 002ad9f8	248	_ZN2Tz10JmComplete13CheckTreasureEv	51.79	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-20T09:43:01Z
+002adaf0	224	_ZN2Tz10JmComplete14isTreasureCompEi	22.09	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-20T16:54:33Z
 002adcb0	220	_ZN2Tz10JmComplete10isNaviCompEi	23.75	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	7	2026-08-20T15:39:33Z
+002adfd0	240	_ZN2Tz10JmComplete10CheckStoryEv	57.38	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	7	2026-08-20T16:58:59Z
 002ae660	260	_ZN2Tz10JmComplete17isPuzzlePieceCompEi	0.0	3 consecutive candidates failed to compile or link	model cannot produce a compiling candidate	3	2026-08-20T09:43:22Z
+002ae768	292	_ZN2Tz10JmComplete16isPuzzleGameCompEi	31.85	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	7	2026-08-20T16:56:54Z
 002b0de0	148	func_002b0de0	63.32	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-20T13:16:05Z
 002b28b0	360	func_002b28b0	24.78	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-20T14:34:32Z
 002c1f08	132	func_002c1f08	43.3	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-20T13:07:02Z
 002c5658	116	func_002c5658	76.69	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-20T10:55:52Z
+002cf638	276	_ZN2Ti5MGObj23find_free_member_bufferEi	0.0	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	4	2026-08-20T16:39:33Z
 002cf938	96	_ZN2Ti5MGObj17reset_all_membersEb	56.25	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-20T15:33:41Z
 002d0cf0	84	_ZN2Ti5MGObj9hibernateEv	75.24	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-20T15:44:43Z
+002d3128	132	_ZN2Ti15MGOarashiGimObj18reserve_fall_prizeEi	78.35	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-20T16:49:59Z
+002db610	112	_ZN2Ti15MGHachimitsuPod14set_run_effectEi	86.5	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	7	2026-08-20T16:51:09Z
 002db968	188	func_002db968	40.64	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	11	2026-08-20T14:54:11Z
 002dc1b8	144	_ZN2Ti14MGHachimitsuPo14set_run_effectEi	39.86	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-20T09:54:17Z
 002dcf18	116	func_002dcf18	99.31	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-20T12:29:57Z
 002dd730	96	func_002dd730	58.96	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-20T11:37:16Z
+002de500	404	_ZN2Ti12MGJumpGimObj12appear_prizeERKN2kn7FVectorE	0.0	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	4	2026-08-20T16:57:11Z
 002e2d88	80	_Z16u_tail4_002e2d88jjjj	31.75	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-20T15:23:08Z
 002eb9d8	84	func_002eb9d8	34.17	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-20T11:33:20Z
 002ec170	92	func_002ec170	72.7	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	7	2026-08-20T11:25:14Z
@@ -268,4 +306,4 @@ addr	size	symbol	best_fuzzy	reason	hypothesis	attempts	parked_at
 0031c7a8	144	func_0031c7a8	98.28	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	7	2026-08-20T10:50:56Z
 0031c838	172	func_0031c838	84.53	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-20T10:48:24Z
 0031d0f8	188	func_0031d0f8	100.0	compile_diff returns exact: true (100.0%, 188/188 bytes) but promote fails: D_00347f98 is already declared in src/anon/auto80_199_queue.cpp (from the twin func_0031d9b8), so the promote tool's re-declaration causes a "previously defined here" compile error in the repo TU. The byte-exact source is: vptr store to D_0034a848, two manual dtor loops (step 592 from self+5536 to self+2576, step 412 from self+2564 to self+916, vtable offset +0xc), tail vptr store to D_00348608 + FACE dtor call at self+64 + final vptr store to D_00347f98. The fix is to remove the D_00347f98 extern declaration from the candidate (it's already in the repo TU) but then the standalone compile fails because D_00347f98 isn't available in the rig's compile environment.	The promote tool needs to deduplicate D_ global declarations against what's already in the target TU. The source is byte-exact; only the repo-side declaration management is blocking the landing.	11	2026-08-20T09:47:39Z
-0031da48	168	func_0031da48	98.88	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	10	2026-08-20T15:30:01Z
+0031da48	168	func_0031da48	98.88	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	10	2026-08-20T16:52:49Z

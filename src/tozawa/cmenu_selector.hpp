@@ -32,6 +32,7 @@ public:
     static void AttachSprite(...);
     static void DeleteAll(...);
     static u32 isAlive(...) asm("_ZN2Tz8LightCur7isExistEv");
+    static void SetParent(int, dk::Sprite*);
 };
 
 class Selector {
