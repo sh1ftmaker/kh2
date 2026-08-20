@@ -104,3 +104,49 @@ void func_0024c828_impl() {
         off += 408;
     }
 }
+
+// ---- 0x0028b078 func_0028b078 ----
+
+// ---- callees, declared by the rig: copy these lines verbatim, never retype a symbol ----
+extern "C" u32 SetMoveKey_288f48(void* self, int, int, int, int) asm("_ZN2Tz6Select10SetMoveKeyEiiii");  // Tz::Select::SetMoveKey(int, int, int, int) -- arity VERIFIED
+extern "C" u32 SetEnableButton_28af18(void* self, unsigned int) asm("_ZN2Tz6Select15SetEnableButtonEj");  // Tz::Select::SetEnableButton(unsigned int) -- arity VERIFIED
+extern "C" u32 SetSelectDisable_28b1b0(void* self, unsigned int) asm("_ZN2Tz6Select16SetSelectDisableEj");  // Tz::Select::SetSelectDisable(unsigned int) -- arity VERIFIED
+
+// layout row 0x0028b078, 100 bytes
+// the definition MUST produce the symbol: func_0028b078  (source: stub)
+// original name (E3 debug build): Tz::Select::Set2DMode(int, int)
+
+struct SelectLayout {
+    s16 m_Current;        // 0x00
+    s16 m_CurrentOld;     // 0x02
+    s16 m_MenuItemMax;    // 0x04
+    s16 m_CurUp;          // 0x06
+    s16 m_CurDown;        // 0x08
+    s16 m_CurLeft;        // 0x0a
+    s16 m_CurRight;       // 0x0c
+    s16 m_FadeOut;        // 0x0e
+    s16 m_ItemMax;        // 0x10
+    s16 m_SelectTop;      // 0x12
+    s16 m_SelectTopOld;   // 0x14
+    s16 m_SelectMax;      // 0x16
+    s16 m_SelectXMax;     // 0x18
+    s16 m_SelectYMax;     // 0x1a
+    s16 m_SizeOnPage;     // 0x1c
+    u32 m_SelectDisable;  // 0x20
+    u8  m_LoopOn;         // 0x24
+    u8  m_2DModeOn;       // 0x25
+    u8  m_2DSelCenter;    // 0x26
+    u8  m_PageOn;         // 0x27
+};
+
+void func_0028b078_impl(void* self, int a, int b) asm("func_0028b078");  // declaration
+void func_0028b078_impl(void* self, int a, int b) {  // definition: no asm() here
+    SelectLayout* s = reinterpret_cast<SelectLayout*>(self);
+    s->m_2DSelCenter = 0;
+    s->m_2DModeOn = 1;
+    s->m_SelectXMax = a;
+    s->m_SelectYMax = b;
+    SetMoveKey_288f48(self, 16, 32, 64, 128);
+    SetEnableButton_28af18(self, 127);
+    SetSelectDisable_28b1b0(self, 0);
+}

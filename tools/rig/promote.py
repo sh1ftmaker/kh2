@@ -104,6 +104,33 @@ def _block_end(text: str, open_brace: int) -> Optional[int]:
     return None
 
 
+def _scope_mismatch(info: dict, cls: str, body: str) -> bool:
+    """True when the header declares `cls` inside a namespace the candidate never
+    opens, so the header cannot stand in for the candidate's own definition.
+
+    Deliberately shallow -- one level of `namespace X {` is what the repo's
+    headers actually use, and a wrong answer here only costs a redundant local
+    definition, never a bad build.
+    """
+    try:
+        text = (rc.ROOT / info["header"]).read_text()
+    except OSError:
+        return False
+    decl = re.search(rf"^[ \t]*(?:struct|class)\s+{re.escape(cls)}\b", text, re.M)
+    if not decl:
+        return False
+    ns = None
+    for nm in re.finditer(r"^[ \t]*namespace\s+([A-Za-z_][A-Za-z0-9_]*)\s*\{", text, re.M):
+        if nm.start() < decl.start():
+            ns = nm.group(1)
+    if not ns:
+        return False
+    if re.search(rf"\bnamespace\s+{re.escape(ns)}\b|\busing\s+namespace\s+{re.escape(ns)}\b"
+                 rf"|\b{re.escape(ns)}\s*::\s*{re.escape(cls)}\b", body):
+        return False
+    return bool(re.search(rf"(?<!::)\b{re.escape(cls)}\b", body))
+
+
 def normalize_candidate(body: str, dest: Optional[Path] = None,
                         dest_text: str = "") -> tuple[str, List[dict], List[dict]]:
     """Turn a self-contained candidate into repo house style.
@@ -152,6 +179,14 @@ def normalize_candidate(body: str, dest: Optional[Path] = None,
             break
         cls = m.group("cls")
         info = rc.find_class_header(cls)
+        if info is not None and _scope_mismatch(info, cls, out):
+            # The repo header declares this type inside a namespace, but the
+            # candidate names it unqualified from a global-scope `extern "C"`
+            # function. Dropping the local definition in favour of the header
+            # would leave the type undeclared at the use site, which is how
+            # 0x0028b078 failed to promote while being byte-exact. Keep the
+            # candidate self-contained instead.
+            info = None
         if info is None:
             # not a repo class: leave it alone, but do not rescan it
             nxt = CLASS_BLOCK_RE.search(out, m.end())
