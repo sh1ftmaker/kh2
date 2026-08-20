@@ -201,3 +201,33 @@ The light-tail twin `func_0031d9b8` (auto80_199_queue.cpp:14203) matches with
 the identical loop, so the trigger is the tail's register pressure. If your
 diff is a pure s1↔s2 rename on this shape: park with reason "s1/s2 dtor-family
 swap" — do not spend attempts on it.
+
+## OPEN residue: return-value pseudo not coalesced into v0 (park, don't grind)
+
+`YS::MISSION::GetCount` (0x001d87b8): the original zeroes/loads **v0 directly**
+on every return path (`daddu v0, zero, zero` in branch delay slots, `lw v0,...`
+for the value); every source shape we produce routes the return through a
+scratch pseudo (`a0`/`t6`) plus a final `daddu v0, tN`. Tried: early-return vs
+accumulator vs branch-assigned local, int/u32 returns, extern "C", operand
+swaps, the twin transcription style (func_001d8578 family) — all identical
+95.19 %. The adjacent addu operand order (`v0+s0` vs `s0+v0`) flips with it, so
+one upstream RTL difference drives both. If your diff is exactly "extra move
+into v0 at the end + zeroed scratch in delay slots": park with reason
+"v0-coalesce residue".
+
+## VERIFIED: three more idioms from tonight's hand-closes
+
+- **Ctor callee needs `this`**: a constructor call in the target means the
+  callee's real first arg is the object; a rig-declared arity (even VERIFIED)
+  can be short by one or more leading args — trust the argument registers in
+  the original (`a0..t3` setup before `jal`), not the declared arity.
+- **Cross-jump hides a store**: `b <addr>` targeting the *delay-slot
+  instruction* of another branch executes that store with the current register
+  values — an else-path can share the taken-path's `sw`. If a path seems to
+  "not write" an out-param the source clearly should write, look for a branch
+  into the other path's delay slot (0x0027aed8: `*c = a - cnt` lived there).
+- **`u8` truncation**: `andi rX, rX, 0x1` followed by `andi rX, rX, 0xff` is a
+  bool/u8-typed flag — write `u8 f = (u8)(expr & 1)` or the twins' union
+  (`U32U8 t; t.u = ...; t.u &= 1u; if (t.b == 0)`).
+- **`a <= b` (signed)** compiles as `addiu t, b, 1; slt a, t` — write
+  `a < b + 1` or `a <= b`, both emit it.
