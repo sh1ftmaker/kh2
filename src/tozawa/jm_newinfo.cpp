@@ -130,3 +130,22 @@ void func_002ab258_impl(int flg) {  // definition: no asm() here
         sram[idx] = v | bit;
     }
 }
+
+// ---- 0x002abdc8 func_002abdc8 ----
+
+extern "C" u32 GetSram_2a9d68() asm("_ZN2Tz9JmNewInfo7GetSramEv");
+
+void func_002abdc8_impl() asm("func_002abdc8");
+void func_002abdc8_impl() {
+    u32* sram = (u32*)(GetSram_2a9d68() + 320);
+    int i = 0;
+    while (i < 4) {
+        u32 idx = (u32)i >> 5;
+        u32 bit = 1u << ((u32)i & 0x1f);
+        u32 v = sram[idx];
+        if ((v & bit) == 0u) {
+            sram[idx] = v | bit;
+        }
+        i++;
+    }
+}
