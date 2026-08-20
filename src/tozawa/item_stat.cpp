@@ -70,3 +70,34 @@ void* ItemStat::ClearSeq() {
 
 void ItemStat::Clear() { static_cast<void>(ClearSeq()); }
 }  // namespace Tz
+
+// ---- 0x00269ef8 func_00269ef8 ----
+#include "../common/types.h"
+
+// ---- callees, declared by the rig: copy these lines verbatim, never retype a symbol ----
+extern "C" u32 func_002579e0_2579e0(/* args: arity UNKNOWN -- read the call site */) asm("func_002579e0");  // arity UNKNOWN
+extern "C" u32 isExist_28be58(u32 a) asm("_ZN2Tz16LeadDataIsActiveEj");  // Tz::ScrollBar::isExist() -- arity VERIFIED
+extern "C" u32 Leave_28be18(void* self) asm("_ZN2Tz9ScrollBar5LeaveEv");  // Tz::ScrollBar::Leave() -- arity VERIFIED
+extern "C" u32 isExist_28acc8(void* self) asm("_ZN2Tz6Select9isCreatedEz");  // Tz::Select::isExist() -- arity VERIFIED
+extern "C" u32 Leave_28abe0(void* self) asm("_ZN2Tz6Select7DestroyEz");  // Tz::Select::Leave() -- arity VERIFIED
+
+// globals
+extern "C" u32 D_0035f01c asm("D_0035f01c");
+extern "C" u32 D_0035f04c asm("D_0035f04c");
+
+// layout row 0x00269ef8, 96 bytes
+// the definition MUST produce the symbol: func_00269ef8  (source: registry)
+// original name (E3 debug build): Tz::ItemStat::Leave()
+
+void func_00269ef8_impl(void) asm("func_00269ef8");  // declaration
+void func_00269ef8_impl(void) {  // definition: no asm() here
+    func_002579e0_2579e0();
+
+    if (isExist_28be58(D_0035f04c) != 0) {
+        Leave_28be18((void*)D_0035f04c);
+    }
+
+    if (isExist_28acc8((void*)D_0035f01c) != 0) {
+        Leave_28abe0((void*)D_0035f01c);
+    }
+}
