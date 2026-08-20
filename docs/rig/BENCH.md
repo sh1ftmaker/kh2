@@ -10,3 +10,5 @@ Set: `docs/rig/bench_set.tsv`. A change is accepted only if the rate does not dr
 | 2026-08-19 18:34 | 716948a2818d | evolve candidate 20260819-181733 ACCEPTED | **13/28 = 46 %** | <80 7/8 · 80-199 4/14 · 200-499 2/6 | median attempts 3 | 1015 s |
 | 2026-08-19 20:27 | b8fc7071a237 | evolve candidate 20260819-200351 pareto +0/-8 rejected — cause: self-restating appendix (26 of 34 lines already in the prompt, one row 3×); 5 workers degenerated (a few stray tokens, no tool call). Dedup guard added to evolve.py. | **5/28 = 18 %** | <80 2/8 · 80-199 1/14 · 200-499 2/6 | median attempts 1 | 1417 s |
 | 2026-08-19 22:08 | 3aba78a062d0 | evolve candidate 20260819-214553 pareto +1/-1 rejected | **12/28 = 43 %** | <80 7/8 · 80-199 4/14 · 200-499 1/6 | median attempts 2 | 1348 s |
+| 2026-08-20 01:13 | 5e5711538f1d | v2 playbook draft (unified, 8.9 KB vs 24.6 KB) — pareto gate | **4/28 = 14 %** | <80 1/8 · 80-199 1/14 · 200-499 2/6 | median attempts 3 | 1221 s |
+| 2026-08-20 01:38 | c5c1242e9091 | v2 playbook draft + catalogue appended (isolates compression from catalogue loss) | **10/28 = 36 %** | <80 4/8 · 80-199 4/14 · 200-499 2/6 | median attempts 3 | 1498 s |

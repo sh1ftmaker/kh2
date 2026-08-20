@@ -1,4 +1,28 @@
 <!--
+BENCH VERDICT 2026-08-20 (both variants, 28 held-out functions, 12 attempts, 24 workers)
+
+  current prompt + catalogue (24.6 KB)   13/28 = 46 %   <- still the champion
+  v2 draft alone,  --no-catalogue (8.9 KB)  4/28 = 14 %
+  v2 draft + catalogue appended (20.2 KB)  10/28 = 36 %
+
+Two separate losses, now measured apart:
+1. The draft does NOT subsume the catalogue. Appending the catalogue back
+   recovers 6 of the 9 regressions (0x0016a060 0x001a02f0 0x0016e650
+   0x00168fd8 0x00321ce8 0x00324380). Whatever the draft folded in, it is not
+   what those six needed -- and the catalogue keeps growing with facts found
+   after this draft was written.
+2. Compression costs 4 more on its own: 0x0016dfb8 0x00171b28 0x001581d0
+   0x00108ae0 fail even with the catalogue present. Three of the four are
+   <80 B; that bin fell 7/8 -> 4/8. Small functions turn on one rule being
+   stated plainly, and the dedup that made this draft short removed exactly
+   the restatements they leaned on.
+
+NOT ADOPTED. A v3 worth benching would start from the current prompt and cut
+only what no bench function depends on, verifying against those four addresses
+-- not from this draft.
+-->
+
+<!--
 v2 REWRITE DRAFT — not live. Bench-gate before adopting (next evolve window).
 
 This unifies AGENT_PROMPT.md + its evolved appendix + the stable rules of

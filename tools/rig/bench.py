@@ -82,6 +82,11 @@ def run(args) -> int:
         cmd.append("--no-think")
     if args.prompt:
         cmd += ["--prompt", args.prompt]
+    if getattr(args, "no_catalogue", False):
+        # for candidates that already embed the idiom catalogue (the v2 playbook
+        # merges prompt + appendix + catalogue into one document) — appending it
+        # again would double every rule
+        cmd.append("--no-catalogue")
     for r in rows:
         cmd += ["--addr", r["addr"]]
     print("running:", " ".join(cmd[:12]), f"... ({len(rows)} targets)")
@@ -135,6 +140,8 @@ def main() -> int:
     r.add_argument("--max-attempts", type=int, default=12)
     r.add_argument("--no-think", action="store_true")
     r.add_argument("--prompt")
+    r.add_argument("--no-catalogue", action="store_true",
+                   help="prompt already embeds docs/codegen-3.2.md; don't append it again")
     r.add_argument("--label", default="")
     p = sub.add_parser("report")
     p.add_argument("run_dir")
