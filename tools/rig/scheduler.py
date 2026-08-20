@@ -119,6 +119,86 @@ def recent_classes(limit_rounds_s: float = 48 * 3600) -> set:
     return classes
 
 
+PMATCH = rc.ROOT / "docs" / "rig" / "pmatch.json"
+
+
+def _signals(r: dict, twins: Dict[int, float], classes: set) -> Optional[dict]:
+    """The pick-time signals, as plain numbers. One definition, used both to
+    score the queue and to fit P(match) in calibrate.py -- a model fitted on
+    features the scheduler does not actually serve would be worthless."""
+    addr = int(r["addr"], 16)
+    scan = rc.scan_row(addr, r["size"])
+    if scan["uses_vu0"]:
+        return None
+    dem = r.get("demangled") or ""
+    cns = class_names_from(dem) if dem else []
+    conf = r.get("confidence") or ""
+    named = 0.0
+    if r.get("symbol") and not str(r["symbol"]).startswith(
+            ("func_", "wtarget_", "ctarget_", "u_call_", "u_tail_")):
+        named = {"seed": 1.0, "high": 0.85, "med": 0.4}.get(conf, 1.0)
+    ver = 0
+    for a in scan["calls"]:
+        csym = rc.registry_symbols().get(a, "") or rc.e3_map().get(a, {}).get("mangled", "")
+        if prototype_for(csym)["arity_status"] == "VERIFIED":
+            ver += 1
+    return {
+        "twin": twins.get(addr, 0.0),
+        "named": named,
+        "arity": (ver / scan["n_calls"]) if scan["n_calls"] else 1.0,
+        "layout": 1.0 if (cns and any(rc.type_block(cn) for cn in cns)) else 0.0,
+        "leaf": 1.0 if not scan["n_calls"] else (1.0 if scan["n_calls"] <= 3 else 0.0),
+        "n_calls": scan["n_calls"],
+        "classes": cns,
+        "recent_class": any(cn in classes for cn in cns),
+    }
+
+
+def queue_features(addrs: Optional[set] = None) -> Dict[str, dict]:
+    """addr-string -> signals, for calibration. Covers matched rows too: they are
+    exactly the positive examples, and dropping them would train the model on
+    failures only."""
+    twins = load_twins()
+    classes = recent_classes()
+    out: Dict[str, dict] = {}
+    for row in rc.layout():
+        key = f"0x{row.addr:08x}"
+        if addrs is not None and key not in addrs:
+            continue
+        sym = rc.registry_symbols().get(row.addr, "") or \
+            rc.e3_map().get(row.addr, {}).get("mangled", "")
+        sig = _signals({"addr": key, "size": row.size, "symbol": sym,
+                        "confidence": "", "demangled": rc.demangle(sym) if sym else ""},
+                       twins, classes)
+        if sig:
+            out[key] = sig
+    return out
+
+
+def pmatch_model() -> Optional[dict]:
+    if PMATCH.exists():
+        try:
+            return json.loads(PMATCH.read_text())
+        except ValueError:
+            return None
+    return None
+
+
+def pmatch(model: dict, sig: dict, size: int) -> float:
+    import math
+    # the served model may carry fewer features than were fitted (calibrate.py
+    # drops the ones a selection effect could have inverted), so read the list
+    # the model itself declares rather than assuming all six
+    vals = {"twin": sig.get("twin", 0.0), "named": sig.get("named", 0.0),
+            "arity": sig.get("arity", 0.0), "layout": sig.get("layout", 0.0),
+            "leaf": sig.get("leaf", 0.0), "log_size": math.log(max(size, 1))}
+    x = [vals[f] for f in model.get("features", list(vals))]
+    z = model["intercept"]
+    for v, c, mu, sd in zip(x, model["coef"], model["mean"], model["std"]):
+        z += c * (v - mu) / (sd or 1.0)
+    return 1.0 / (1.0 + math.exp(-max(min(z, 30.0), -30.0)))
+
+
 def score_rows(rows: List[dict], twins: Dict[int, float], classes: set,
                parked: set) -> List[dict]:
     out = []
@@ -157,13 +237,16 @@ def score_rows(rows: List[dict], twins: Dict[int, float], classes: set,
                 if prototype_for(csym)["arity_status"] == "VERIFIED":
                     ver += 1
             share = ver / ncall
+            arity_share = share
             s += W["arity"] * share
             why.append(f"callee arity verified {ver}/{ncall}")
             if ncall <= 3:
                 s += W["leaf_small"]
         else:
+            arity_share = 1.0
             s += W["leaf0"]; why.append("leaf")
-        if cns and any(rc.type_block(cn) for cn in cns):
+        has_layout = bool(cns and any(rc.type_block(cn) for cn in cns))
+        if has_layout:
             s += W["layout"]; why.append("DWARF layout")
         if addr in parked:
             if addr in NO_REQUEUE:
@@ -172,8 +255,31 @@ def score_rows(rows: List[dict], twins: Dict[int, float], classes: set,
                 why.append("parked, but a twin matched since -> retry")
             else:
                 s += W["parked"]; why.append("parked")
-        out.append({**r, "score": round(s, 2), "n_calls": ncall, "reasons": "; ".join(why)})
-    out.sort(key=lambda x: (-x["score"], x["size"], x["addr"]))
+        out.append({**r, "score": round(s, 2), "n_calls": ncall, "reasons": "; ".join(why),
+                    "_arity": arity_share, "_layout": 1.0 if has_layout else 0.0})
+
+    model = None if globals().get("_NO_PMATCH") else pmatch_model()
+    if model:
+        # Rank by expected *bytes*. The hand score ranks by how likely a match
+        # looks, which is how the queue ended up full of 100 B twins: 20 rounds
+        # of them averaged ~130 B a match. P(match) x size puts a 300 B row at
+        # half the odds ahead of a 100 B row at even odds, which is the trade
+        # the project's own headline metric asks for.
+        for r in out:
+            sig = {"twin": twins.get(int(r["addr"], 16), 0.0),
+                   "named": 1.0 if (r.get("symbol") and not str(r["symbol"]).startswith(
+                       ("func_", "wtarget_", "ctarget_", "u_call_", "u_tail_"))) else 0.0,
+                   "arity": r.get("_arity", 0.0), "layout": r.get("_layout", 0.0),
+                   "leaf": 1.0 if r["n_calls"] <= 3 else 0.0}
+            p = pmatch(model, sig, r["size"])
+            r["p_match"] = round(p, 4)
+            r["exp_bytes"] = round(p * r["size"], 1)
+            if r["score"] < 0:            # parked/no-requeue penalties still win
+                r["exp_bytes"] = -abs(r["exp_bytes"]) + r["score"]
+            r["reasons"] += f"; p={p:.2f} exp {r['exp_bytes']:.0f} B"
+        out.sort(key=lambda x: (-x["exp_bytes"], -x["score"], x["addr"]))
+    else:
+        out.sort(key=lambda x: (-x["score"], x["size"], x["addr"]))
     return out
 
 
@@ -187,11 +293,20 @@ def main() -> int:
     ap.add_argument("--limit", type=int, default=40)
     ap.add_argument("--out", default=str(QUEUE))
     ap.add_argument("--json", action="store_true")
-    ap.add_argument("--tier2-quota", type=int, default=-1,
-                    help="reserve N queue slots for the best 200+B rows (-1 = limit//4 when max-size > 200)")
+    ap.add_argument("--no-pmatch", action="store_true",
+                    help="rank by the hand score only. P(match) is fitted on the Qwen "
+                         "fleet's own outcomes, so it must not be used to pick targets "
+                         "for a different engine -- clibatch.py passes this.")
+    ap.add_argument("--tier2-quota", type=int, default=0,
+                    help="reserve N queue slots for the best 200+B rows. Default 0: the "
+                         "fleet has never matched a 200+ B function in 20 rounds, and the "
+                         "calibrated P(match) says expected bytes still fall with size, so "
+                         "the quota bought parks, not bytes. Tier 2 goes to clibatch.py.")
     ap.add_argument("--twins", type=int, default=150,
                     help="compute similarity-to-matched for the top-N pre-scored rows (0 = off)")
     args = ap.parse_args()
+    if args.no_pmatch:
+        globals()["_NO_PMATCH"] = True
     if args.tier == 1:
         args.min_size, args.max_size = 80, 200
     elif args.tier == 2:
@@ -218,6 +333,14 @@ def main() -> int:
             if sm and sm.get("similarity", 0) >= 0.75:
                 twins[a] = max(twins.get(a, 0.0), float(sm["similarity"]))
                 r["twin_of"] = sm.get("symbol") or sm.get("addr")
+        # persist what we computed: twin similarity is the project's strongest
+        # signal, but it was never written down, so every calibration saw it as
+        # a constant zero and could not learn it. Appending here makes the next
+        # fit able to.
+        if twins:
+            with TWINS.open("a") as tf:
+                for a, s in sorted(twins.items()):
+                    tf.write(f"0x{a:08x}\t-\t{s:.4f}\t{int(time.time())}\n")
     scored = score_rows(rows, twins, recent_classes(), parked)
     if not args.include_parked:
         scored = [r for r in scored if not r["reasons"].endswith("parked")

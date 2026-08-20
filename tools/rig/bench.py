@@ -73,6 +73,9 @@ def run(args) -> int:
         make_set()
     rows = load_set()
     ts = time.strftime("%Y%m%d-%H%M%S")
+    trials = max(1, getattr(args, "trials", 1))
+    if trials > 1:
+        return run_trials(args, rows, ts, trials)
     run_dir = rc.RIG_OUT / "runs" / f"bench-{ts}"
     cmd = [sys.executable, str(Path(__file__).parent / "driver.py"), "--bench",
            "--endpoint", args.endpoint, "--model", args.model,
@@ -93,6 +96,56 @@ def run(args) -> int:
     t0 = time.time()
     subprocess.run(cmd, cwd=rc.ROOT)
     return report(run_dir, label=args.label, wall=time.time() - t0)
+
+
+def run_trials(args, rows, ts: str, trials: int) -> int:
+    """Repeat the whole bench N times and score each function by majority.
+
+    One trial per function cannot tell a prompt change from sampling noise: the
+    same prompt family has scored 7, 13, 5 and 12 out of 28 on different runs.
+    Majority-of-N is the cheapest fix that makes a small real improvement
+    visible, and it is what any deliberate prompt change should have to clear.
+    """
+    passes = {r["addr"]: 0 for r in rows}
+    dirs = []
+    t0 = time.time()
+    for k in range(trials):
+        run_dir = rc.RIG_OUT / "runs" / f"bench-{ts}-t{k + 1}"
+        cmd = [sys.executable, str(Path(__file__).parent / "driver.py"), "--bench",
+               "--endpoint", args.endpoint, "--model", args.model,
+               "--parallel", str(args.parallel), "--max-attempts", str(args.max_attempts),
+               "--log-dir", str(run_dir)]
+        if args.no_think:
+            cmd.append("--no-think")
+        if args.prompt:
+            cmd += ["--prompt", args.prompt]
+        if getattr(args, "no_catalogue", False):
+            cmd.append("--no-catalogue")
+        for r in rows:
+            cmd += ["--addr", r["addr"]]
+        print(f"trial {k + 1}/{trials}: {len(rows)} targets", flush=True)
+        subprocess.run(cmd, cwd=rc.ROOT)
+        dirs.append(run_dir)
+        for r in rows:
+            sp = run_dir / r["addr"].replace("0x", "") / "summary.json"
+            if sp.exists():
+                d = json.loads(sp.read_text())
+                if d.get("exact") or d.get("result") == "matched" \
+                        or float(d.get("best_fuzzy") or 0) >= 100.0:
+                    passes[r["addr"]] += 1
+    need = trials // 2 + 1
+    won = [a for a, n in passes.items() if n >= need]
+    flaky = [a for a, n in passes.items() if 0 < n < need]
+    print(f"\nmajority ({need} of {trials}): {len(won)}/{len(rows)} pass; "
+          f"{len(flaky)} flaky (passed at least once but not a majority)")
+    for a in sorted(flaky):
+        print(f"  flaky {a}: {passes[a]}/{trials}")
+    label = args.label or f"{trials}-trial majority"
+    report(dirs[0], label=f"{label} [trial 1 of {trials}; majority {len(won)}/{len(rows)}]",
+                 wall=time.time() - t0)
+    (rc.RIG_OUT / "runs" / f"bench-{ts}-majority.json").write_text(
+        json.dumps({"trials": trials, "passes": passes, "won": won, "flaky": flaky}, indent=1))
+    return 0
 
 
 def report(run_dir: Path, label: str = "", wall: float = 0.0) -> int:
@@ -142,6 +195,9 @@ def main() -> int:
     r.add_argument("--prompt")
     r.add_argument("--no-catalogue", action="store_true",
                    help="prompt already embeds docs/codegen-3.2.md; don't append it again")
+    r.add_argument("--trials", type=int, default=1,
+                   help="repeat the bench N times and score each function by majority; "
+                        "1 trial cannot separate a prompt change from sampling noise")
     r.add_argument("--label", default="")
     p = sub.add_parser("report")
     p.add_argument("run_dir")

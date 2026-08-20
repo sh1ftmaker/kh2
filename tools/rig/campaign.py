@@ -98,7 +98,14 @@ def main() -> int:
     ap.add_argument("--endpoint", default="http://spark-e3f4.local:8000/v1")
     ap.add_argument("--model", default="qwen3.8-27b")
     ap.add_argument("--no-think", action="store_true")
-    ap.add_argument("--evolve-every", type=int, default=2,
+    ap.add_argument("--evolve-every", type=int, default=0,
+                    # Default off since 2026-08-20. The 28-function gate runs one
+                    # trial per function, and near-identical prompt families scored
+                    # 7 -> 13 -> 5 -> 12 across runs; at that flake rate a
+                    # no-regression gate rejects on noise, and the one candidate it
+                    # accepted was followed by rounds of 1, 1, 1, 0 matches. It also
+                    # once shipped a self-restating prompt that stopped five workers
+                    # calling tools. Use bench.py --trials 3 for deliberate changes.
                     help="run bench-gated prompt evolution every N rounds (0 = never)")
     ap.add_argument("--evolve-first", action="store_true",
                     help="run evolve once before round 1 (consumes pending proposals)")
@@ -167,6 +174,23 @@ def main() -> int:
               f"{int(time.time() - t0)} s", flush=True)
 
         sh([PY, TOOLS / "round_report.py", run_dir, "--label", f"{args.label}-r{k}"])
+
+        # A round can end holding a byte-exact attempt it never credited: promote
+        # can fail on a repo-side defect, or a candidate can be scored before the
+        # registry gains a callee it needs. Six functions were recovered that way
+        # on 2026-08-20, one of them from the previous campaign. Cheap to check,
+        # expensive to miss.
+        swept = subprocess.run([PY, str(TOOLS / "sweep.py"), "--json"], cwd=rc.ROOT,
+                               capture_output=True, text=True)
+        try:
+            found = json.loads(swept.stdout or "{}").get("found", [])
+        except ValueError:
+            found = []
+        if found:
+            msg = ", ".join(f"{f['addr']} ({f['size']} B)" for f in found[:4])
+            print(f"round {k}: SWEEP found {len(found)} exact-but-unpromoted: {msg}", flush=True)
+            notify(f"KH2: {len(found)} exact but unpromoted",
+                   f"{sum(f['size'] for f in found)} B waiting: {msg}")
         refl = [PY, TOOLS / "reflect.py", run_dir, "--llm",
                 "--endpoint", args.endpoint, "--model", args.model]
         if args.no_think:
