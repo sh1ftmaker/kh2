@@ -39,3 +39,25 @@ void CmAbility::LeaveAll() {
 }
 
 }  // namespace Tz
+
+// ---- 0x0027aed8 func_0027aed8 ----
+#include "../common/types.h"
+
+extern "C" u32 GetFormCnt_27ae20() asm("func_0027ae20");
+
+void func_0027aed8_impl(int a, int* b, int* c) asm("func_0027aed8");
+void func_0027aed8_impl(int a, int* b, int* c) {
+    if (a == 0) {
+        *b = 0;
+        *c = 0;
+    } else {
+        int cnt = (int)GetFormCnt_27ae20();
+        if (cnt != 0 && a < cnt + 1) {
+            *b = 1;
+            *c = a - 1;
+        } else {
+            *b = 0;
+            *c = a - cnt;
+        }
+    }
+}
