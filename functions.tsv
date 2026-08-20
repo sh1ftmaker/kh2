@@ -4824,6 +4824,7 @@ func_002a9888	002a9888
 _ZN2Tz9JmNewInfo4ExitEv	002a9d30
 _ZN2Tz9JmNewInfo7GetSramEv	002a9d68
 _ZN2Tz9JmNewInfo8CheckAllEv	002a9d88
+func_002abf40	002abf40
 _ZN2Tz10JmComplete4ExitEv	002aceb0
 _Z16wtarget_002ad018jjjj	002ad018
 _ZN2Tz10JmComplete16isPuzzleInfoCompEi	002ae890
@@ -7104,3 +7105,4 @@ func_001de590	001de590
 func_001ad0f8	001ad0f8
 func_001ad520	001ad520
 func_0031d0f8	0031d0f8
+func_002ac268	002ac268

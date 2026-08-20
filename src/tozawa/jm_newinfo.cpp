@@ -149,3 +149,25 @@ void func_002abdc8_impl() {
         i++;
     }
 }
+
+// ---- 0x002ac268 func_002ac268 ----
+
+// ---- callees, declared by the rig: copy these lines verbatim, never retype a symbol ----
+extern "C" u32 GetSram_2a9d68() asm("_ZN2Tz9JmNewInfo7GetSramEv");  // Tz::JmNewInfo::GetSram() -- arity VERIFIED
+extern "C" u32 GetStoryWorldIdx_2abf40(int, int) asm("func_002abf40");  // Tz::JmNewInfo::GetStoryWorldIdx(int, int) -- arity VERIFIED [links as func_002abf40: E3 name not in the registry yet]
+
+// layout row 0x002ac268, 128 bytes
+// the definition MUST produce the symbol: func_002ac268  (source: stub)
+// original name (E3 debug build): Tz::JmNewInfo::SetStoryFlg(int, int)
+
+void func_002ac268_impl(void* self, int flg) asm("func_002ac268");  // declaration
+void func_002ac268_impl(void* self, int flg) {  // definition: no asm() here
+    u32 sram = (u32)GetSram_2a9d68();
+    u32 idx = (u32)GetStoryWorldIdx_2abf40((int)self, flg);
+    u32* p = (u32*)(sram + ((int)self << 2) + 172);
+    u32 bit = 1u << (idx & 0x1f);
+    u32 v = p[idx >> 5];
+    if ((v & bit) == 0u) {
+        p[idx >> 5] = v | bit;
+    }
+}
