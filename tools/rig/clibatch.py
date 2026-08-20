@@ -131,13 +131,33 @@ def feedback(res: dict) -> str:
 
 
 def run_target(engine: str, t: dict, attempts: int, tdir: Path, system: str) -> dict:
+    """One target, up to `attempts` tries. Each call is a FRESH prompt -- system
+    + context + only the immediately previous attempt's result -- not a growing
+    conversation. This mirrors the arena harness (batch.py's run_attempt), which
+    went 8/12 on the same model; an earlier version of this function instead
+    accumulated every attempt's reply and diagnostics into one ever-growing
+    string, so by attempt 6-8 the model was reading a wall of past failures
+    instead of a clean restart focused on the current diff. That version scored
+    0/8 on the first night's targets before being replaced by this one.
+    """
     tdir.mkdir(parents=True, exist_ok=True)
     ctx = context_for(t["addr"])
-    convo = f"{system}\n\n---\n{ctx}\n\nWrite the complete C++ file. Output one code block, nothing else.\n"
+    base = f"{system}\n\n---\n{ctx}\n\nWrite the complete C++ file. Output ONLY one ```cpp code block, no commentary before or after.\n"
     best = {"fuzzy": 0.0, "exact": False, "attempts": 0, "wall": 0.0}
+    last_reply_had_no_fence = False
+    prev_att: Optional[Path] = None
     for n in range(1, attempts + 1):
-        (tdir / f"prompt_{n:03d}.txt").write_text(convo)
-        reply, wall, status = call(engine, convo)
+        prompt = base
+        if last_reply_had_no_fence:
+            prompt += "\n\n---\nYour previous reply had no ```cpp fence. Reply with ONLY the complete .cpp file in one fence.\n"
+        elif prev_att is not None:
+            res = compile_diff(t["addr"], prev_att)
+            prompt += (f"\n\n---\nAttempt {n - 1} result: {res.get('fuzzy_pct', 0):.2f} % byte match. "
+                       f"Your source:\n```cpp\n{prev_att.read_text()}\n```\n\n# Diagnostics\n"
+                       f"{(chr(10).join((res.get('compile_errors') or [])[:8])) if res.get('compile_errors') else feedback(res)}\n\n"
+                       "Revise and reply with ONLY the complete corrected .cpp file in one ```cpp fence.\n")
+        (tdir / f"prompt_{n:03d}.txt").write_text(prompt)
+        reply, wall, status = call(engine, prompt)
         best["wall"] += wall
         best["attempts"] = n
         log_call(engine, t["addr"], n, wall, status)
@@ -149,10 +169,12 @@ def run_target(engine: str, t: dict, attempts: int, tdir: Path, system: str) -> 
         (tdir / f"reply_{n:03d}.txt").write_text(reply)
         cpp = extract_cpp(reply)
         if not cpp:
-            convo += "\nYour reply had no code block. Output the complete file in one ```cpp block.\n"
+            last_reply_had_no_fence = True
             continue
+        last_reply_had_no_fence = False
         att = tdir / f"attempt_{n:03d}.cpp"
         att.write_text(cpp)
+        prev_att = att
         res = compile_diff(t["addr"], att)
         (tdir / f"score_{n:03d}.json").write_text(json.dumps(
             {"fuzzy": res.get("fuzzy_pct"), "exact": bool(res.get("exact"))}))
@@ -161,9 +183,6 @@ def run_target(engine: str, t: dict, attempts: int, tdir: Path, system: str) -> 
             print(f"    attempt {n}: EXACT", flush=True)
             return best
         best["fuzzy"] = max(best["fuzzy"], float(res.get("fuzzy_pct") or 0))
-        errs = res.get("compile_errors") or []
-        convo += (f"\n\n{'Compile errors: ' + chr(10).join(errs[:8]) if errs else feedback(res)}\n"
-                  "Fix it and output the complete file again in one code block.\n")
         print(f"    attempt {n}: {res.get('fuzzy_pct', 0):.2f} %", flush=True)
     return best
 
