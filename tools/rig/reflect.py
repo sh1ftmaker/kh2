@@ -74,9 +74,14 @@ def worklist(run_dir: Path, max_diff_rows: int = 40) -> str:
     return "\n".join(out) + "\n"
 
 
-def llm_proposals(text: str, endpoint: str, model: str, think: bool) -> str:
+def llm_proposals(text: str, endpoint: str, model: str, think: bool,
+                  char_budget: int = 130_000) -> str:
     from driver import Endpoint
     ep = Endpoint(endpoint, model, temperature=0.3, max_tokens=6000, think=think)
+    if len(text) > char_budget:
+        # worklist is near-misses-first, so the tail is the least valuable part;
+        # the server's max-model-len (65k tokens) must hold prompt+catalogue+worklist
+        text = text[:char_budget] + "\n\n[worklist truncated to fit the model context]\n"
     system = REFLECTOR_PROMPT.read_text()
     cat = (rc.ROOT / "docs" / "codegen-3.2.md").read_text()
     prompt_doc = (rc.ROOT / "docs" / "rig" / "AGENT_PROMPT.md").read_text()

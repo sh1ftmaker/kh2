@@ -36,6 +36,26 @@ import rigcommon as rc  # noqa: E402
 from list_candidates import list_candidates, parked_addrs  # noqa: E402
 from get_context import class_names_from, prototype_for  # noqa: E402
 
+def _no_requeue() -> set:
+    """Addrs whose parked.tsv reason/hypothesis says 'do not requeue' — documented
+    residues (e.g. the s1/s2 dtor-family swap) that the twin rule must not revive."""
+    out = set()
+    tsv = rc.ROOT / "docs" / "rig" / "parked.tsv"
+    if tsv.exists():
+        for i, line in enumerate(tsv.read_text().splitlines()):
+            if i == 0 or not line.strip() or line.startswith("#"):
+                continue
+            p = line.split("\t")
+            if len(p) >= 6 and "do not requeue" in (p[4] + " " + p[5]).lower():
+                try:
+                    out.add(int(p[0], 16))
+                except ValueError:
+                    pass
+    return out
+
+
+NO_REQUEUE = _no_requeue()
+
 W = {
     "twin": 40.0,        # scaled by similarity (0..1)
     "same_class": 15.0,
@@ -135,7 +155,9 @@ def score_rows(rows: List[dict], twins: Dict[int, float], classes: set,
         if cns and any(rc.type_block(cn) for cn in cns):
             s += W["layout"]; why.append("DWARF layout")
         if addr in parked:
-            if tw >= 0.85:
+            if addr in NO_REQUEUE:
+                s += 3 * W["parked"]; why.append("parked: documented residue, do not requeue")
+            elif tw >= 0.85:
                 why.append("parked, but a twin matched since -> retry")
             else:
                 s += W["parked"]; why.append("parked")
