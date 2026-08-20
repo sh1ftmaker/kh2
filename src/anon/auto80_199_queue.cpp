@@ -15964,3 +15964,23 @@ void func_002df470_impl(void* a0, u32 a1) {
     u32 t2 = config_2dc7c8(p);
     func_002deba0_2deba0(a0, a1, *(f32*)(s2 + 228), *(f32*)(t2 + 232));
 }
+
+// ---- 0x002bb3f0 func_002bb3f0 ----
+
+extern "C" u32 func_002bb100_2bb100(u32 a0, u32 a1, u32 a2) asm("func_002bb100");
+extern "C" u32 setPos_2bb5a8(u32 a0, u32 a1) asm("func_002bb5a8");
+
+void func_002bb3f0_impl(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4) asm("func_002bb3f0");
+void func_002bb3f0_impl(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4) {
+    u32 s16 = a0;
+    u32 s18 = a1;
+    u32 s19 = a2;
+    u32 s17 = a3;
+    u32 s20 = a4;
+
+    func_002bb100_2bb100(s16, 1, 6);
+    setPos_2bb5a8(s16, s17);
+    *(u32*)(s16 + 24) = s18;
+    *(u32*)(s16 + 16) = s19;
+    *(u16*)(s16 + 42) = (u16)s20;
+}

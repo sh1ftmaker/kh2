@@ -2810,6 +2810,7 @@ func_001bde88(void*)	001bde88
 func_001bdf38	001bdf38
 func_001bdf68	001bdf68
 func_001bdfe0	001bdfe0
+func_001bdff0	001bdff0
 func_001be4b0	001be4b0
 _Z16wtarget_001be4e0jjjj	001be4e0
 func_001bed30	001bed30
@@ -3129,6 +3130,7 @@ _ZN2YS10INDICATION6EnableEv	001d6c88
 func_001d6cb8	001d6cb8
 _Z16wtarget_001d6d58jjjj	001d6d58
 _ZN2YS12SUMMON_TABLE10GetCurrentEv	001d6d88
+func_001d6da8	001d6da8
 _ZN2YS12SUMMON_LEVEL6AddExpEi	001d7000
 func_001d71f0	001d71f0
 func_001d7458	001d7458
@@ -7132,3 +7134,7 @@ func_002d1028	002d1028
 func_00244db8	00244db8
 func_002a94f8	002a94f8
 func_0024b078	0024b078
+func_002d0fb0	002d0fb0
+func_001bded8	001bded8
+func_002bb3f0	002bb3f0
+func_00177540	00177540
