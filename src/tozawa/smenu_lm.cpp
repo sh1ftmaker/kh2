@@ -28,3 +28,25 @@ void LMMU::PauseThread(TASK* a0) {
 }
 
 }  // namespace Tz
+
+// ---- 0x00250748 _ZN2Tz4LMMU7CtrlSelEv ----
+#include "../common/types.h"
+
+extern "C" u32 GetCurrent_2891e8(void* self) asm("_ZN2Tz6Select10GetCurrentEv");
+extern "C" u32 Check_1a6d08(int) asm("_ZN2YS8MENUFLAG5CheckEi");
+extern "C" u32 Set_1a6c90(int) asm("func_001a6c90");
+
+extern "C" u32 D_0035ee34 asm("D_0035ee34");
+extern "C" u32 D_00372438 asm("D_00372438");
+
+namespace Tz {
+
+
+void LMMU::CtrlSel() {
+    u32 cur = GetCurrent_2891e8((void*)D_0035ee34);
+    u8 flag = *(u8*)((u32)cur + (u32)&D_00372438);
+    if (Check_1a6d08(flag) == 0) {
+        Set_1a6c90(flag);
+    }
+}
+}  // namespace Tz
