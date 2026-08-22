@@ -670,6 +670,28 @@ def generate_link_sections() -> int:
         for pattern in section_patterns(sym):
             lines.append(f"    KEEP(*({pattern}))\n")
         lines.append("  }\n")
+    # Literal pools: a TU that declares `// minilink-rodata 0xADDR` (float literals the original
+    # keeps in .sdata/.rodata at ADDR) gets its .rodata/.sdata placed at that address so the
+    # lui/addiu/lwc1 sequences resolve to the original literal addresses.  The final image is the
+    # original binary with only function text overlaid, so the literal bytes are already there.
+    # Several TUs (functions from one original TU) pin the same pool: OVERLAY gives them all the
+    # same VMA; load addresses are parked above the image.
+    pools: dict[int, list[str]] = {}
+    for source in sorted(by_source):
+        try:
+            text = (ROOT / source).read_text(errors="ignore")
+        except OSError:
+            continue
+        m = re.search(r"//\s*minilink-rodata\s+0x([0-9a-fA-F]+)", text)
+        if m:
+            pools.setdefault(int(m.group(1), 16), []).append(src_to_obj(source))
+    lma = 0x02000000
+    for base, objs in sorted(pools.items()):
+        lines.append(f"  OVERLAY 0x{base:08x} : NOCROSSREFS AT(0x{lma:08x}) {{\n")
+        for k, obj in enumerate(objs):
+            lines.append(f"    .kh2lit_{base:08x}_{k} {{ KEEP(*{obj}(.rodata .rodata.* .sdata .sdata.*)) }}\n")
+        lines.append("  }\n")
+        lma += 0x10000
 
     CXX_SECTIONS_OUT.parent.mkdir(parents=True, exist_ok=True)
     CXX_SECTIONS_OUT.write_text("".join(lines))
