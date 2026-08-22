@@ -1,0 +1,406 @@
+// coverage: addr=0x0023c008 symbol=_ZN2YI6LAYOUTC1Ev size=104 class=straight source=typed status=exact fuzzy=100.0
+// coverage-alternatives: lift:exact:100.0;m2c:near:96.88;ghidra:near:94.62
+#include "common/types.h"
+typedef float f32; typedef double f64;
+struct YI_LAYOUT;
+struct YI_LAYOUT_SEQUENCE_UNIT_FORMAT;
+struct ALLOCATOR;
+struct YI_LAYOUT_LAYOUT_FORMAT;
+struct YI_SPRITE_anon_str_sprite_h_219;
+struct YI_SPRITE_anon_str_sprite_h_241;
+struct YI_SPRITE_MODE_PARAM;
+struct YI_SPRITE;
+struct YI_SEQUENCE_anon_str_sequence_h_267;
+struct YI_SEQUENCE_anon_str_sequence_h_306;
+struct YI_SEQUENCE_anon_str_sequence_h_314;
+struct YI_SEQUENCE;
+struct YI_SPRITE_SPRITE_FORMAT;
+struct YI_SPRITE_PARTS_FORMAT;
+struct YI_SPRITE_GROUP_FORMAT;
+struct YI_IMAGE_PARAM;
+struct YI_IMAGE_INIT_PACKET;
+struct YI_IMAGE;
+struct YI_SEQUENCE_ANIMATION_FORMAT_anon_str_sequence_h_115;
+struct YI_SEQUENCE_ANIMATION_FORMAT;
+struct YI_SEQUENCE_SEQUENCE_FORMAT;
+struct YI_LAYOUT_SCREEN_FORMAT;
+struct YI_IMAGE_FREEZE;
+struct YI_IMAGE_FREEZE_INDEX_FORMAT;
+
+struct YI_LAYOUT {  // class YI::LAYOUT size=0x60
+    void *_vptr_;                                      // +0x0
+    ALLOCATOR *allocator;                              // +0x4
+    void *lad_addr;                                    // +0x8
+    void *exit_func;                                   // +0xc
+    YI_LAYOUT_SCREEN_FORMAT *screen_table;             // +0x10
+    YI_LAYOUT_LAYOUT_FORMAT *layout_table;             // +0x14
+    YI_LAYOUT_SEQUENCE_UNIT_FORMAT *sequence_unit_table; // +0x18
+    s32 screen_max;                                    // +0x1c
+    s32 layout_max;                                    // +0x20
+    s32 sequence_unit_max;                             // +0x24
+    YI_IMAGE_FREEZE *image_freeze;                     // +0x28
+    YI_SEQUENCE *entry_sequence_table;                 // +0x2c
+    YI_SEQUENCE *now_sequence_table;                   // +0x30
+    s32 now_sequence_max;                              // +0x34
+    s32 phase;                                         // +0x38
+    f32 counter;                                       // +0x3c
+    f32 time_counter;                                  // +0x40
+    f32 time_max;                                      // +0x44
+    f32 speed;                                         // +0x48
+    s32 number;                                        // +0x4c
+    s8 is_loop;                                        // +0x50
+    u8 _pad0[3];
+    s32 x_offset;                                      // +0x54
+    s32 y_offset;                                      // +0x58
+};
+
+struct YI_LAYOUT_SEQUENCE_UNIT_FORMAT {  // structure YI::LAYOUT::SEQUENCE_UNIT_FORMAT size=0x4
+    u32 ofs;                                           // +0x0
+};
+
+struct ALLOCATOR {  // class ALLOCATOR size=0x4
+    void *_vptr_;                                      // +0x0
+};
+
+struct YI_LAYOUT_LAYOUT_FORMAT {  // structure YI::LAYOUT::LAYOUT_FORMAT size=0x14
+    u16 pos;                                           // +0x0
+    u16 max;                                           // +0x2
+    s32 ex[4];                                         // +0x4
+};
+
+struct YI_SPRITE_anon_str_sprite_h_219 {  // structure YI::SPRITE::__anon_str_sprite_h_219 size=0x4
+    u32 reserved : 25;                                 // +0x0
+    u32 ExDirectUV : 1;                                // +0x4
+    u32 color_disable : 1;                             // +0x8
+    u32 scale_disable : 1;                             // +0xc
+    u32 rotate_disable : 1;                            // +0x10
+    u32 send_reset_packet : 1;                         // +0x14
+    u32 send_init_test_packet : 1;                     // +0x18
+    u32 send_init_packet : 1;                          // +0x1c
+};
+
+struct YI_SPRITE_anon_str_sprite_h_241 {  // structure YI::SPRITE::__anon_str_sprite_h_241 size=0x20
+    YI_SPRITE_GROUP_FORMAT *group_pos;                 // +0x0
+    s32 group_max;                                     // +0x4
+    f32 px0;                                           // +0x8
+    f32 py0;                                           // +0xc
+    f32 px1;                                           // +0x10
+    f32 py1;                                           // +0x14
+    f32 scl_x;                                         // +0x18
+    f32 scl_y;                                         // +0x1c
+};
+
+struct YI_SPRITE_MODE_PARAM {  // structure YI::SPRITE::MODE_PARAM size=0x18
+    s32 mode;                                          // +0x0
+    f32 counter;                                       // +0x4
+    f32 max;                                           // +0x8
+    f32 wait;                                          // +0xc
+    s32 req_max;                                       // +0x10
+    s32 req_wait;                                      // +0x14
+};
+
+struct YI_SPRITE {  // class YI::SPRITE size=0xb0
+    void *_vptr_;                                      // +0x0
+    YI_SPRITE_PARTS_FORMAT *parts_table;               // +0x4
+    YI_SPRITE_GROUP_FORMAT *group_table;               // +0x8
+    YI_SPRITE_SPRITE_FORMAT *sprite_table;             // +0xc
+    YI_SPRITE_anon_str_sprite_h_219 status;            // +0x10
+    YI_SPRITE_anon_str_sprite_h_241 calc;              // +0x14
+    s32 parts_max;                                     // +0x34
+    s32 group_max;                                     // +0x38
+    s32 sprite_max;                                    // +0x3c
+    YI_IMAGE *image;                                   // +0x40
+    f32 speed;                                         // +0x44
+    f32 counter;                                       // +0x48
+    f32 time_counter;                                  // +0x4c
+    YI_SPRITE_MODE_PARAM mode_param;                   // +0x50
+    s32 number;                                        // +0x68
+    f32 shade;                                         // +0x6c
+    f32 x_rotate;                                      // +0x70
+    f32 y_rotate;                                      // +0x74
+    f32 z_rotate;                                      // +0x78
+    f32 scale;                                         // +0x7c
+    f32 scale_x;                                       // +0x80
+    f32 scale_y;                                       // +0x84
+    u32 rgba;                                          // +0x88
+    s32 x_position;                                    // +0x8c
+    s32 y_position;                                    // +0x90
+    s32 x_offset;                                      // +0x94
+    s32 y_offset;                                      // +0x98
+    u32 draw_z;                                        // +0x9c
+    u16 u[4];                                          // +0xa0
+    u16 v[4];                                          // +0xa8
+};
+
+struct YI_SEQUENCE_anon_str_sequence_h_267 {  // structure YI::SEQUENCE::__anon_str_sequence_h_267 size=0x4
+    u32 reserved : 18;                                 // +0x0
+    u32 ExNearest : 1;                                 // +0x4
+    u32 sway_disable : 1;                              // +0x8
+    u32 curve_disable : 1;                             // +0xc
+    u32 pos_disable : 1;                               // +0x10
+    u32 scroll_disable : 1;                            // +0x14
+    u32 color_disable : 1;                             // +0x18
+    u32 scale_disable : 1;                             // +0x1c
+    u32 rotate_disable : 1;                            // +0x20
+    u32 ablend_disable : 1;                            // +0x24
+    u32 bilinear_disable : 1;                          // +0x28
+    u32 load_image : 1;                                // +0x2c
+    u32 color : 1;                                     // +0x30
+    u32 scale : 1;                                     // +0x34
+    u32 rotate : 1;                                    // +0x38
+};
+
+struct YI_SEQUENCE_anon_str_sequence_h_306 {  // structure YI::SEQUENCE::__anon_str_sequence_h_306 size=0x18
+    s8 flag;                                           // +0x0
+    u8 _pad0[3];
+    s32 number;                                        // +0x4
+    YI_SEQUENCE_ANIMATION_FORMAT *anm_pos;             // +0x8
+    s32 anm_max;                                       // +0xc
+    f32 cnt;                                           // +0x10
+    u32 rgba;                                          // +0x14
+};
+
+struct YI_SEQUENCE_anon_str_sequence_h_314 {  // structure YI::SEQUENCE::__anon_str_sequence_h_314 size=0x18
+    s8 flag;                                           // +0x0
+    u8 _pad0[3];
+    f32 scale_x;                                       // +0x4
+    f32 scale_y;                                       // +0x8
+    u32 rgba;                                          // +0xc
+    s32 x;                                             // +0x10
+    s32 y;                                             // +0x14
+};
+
+struct YI_SEQUENCE {  // class YI::SEQUENCE size=0x158
+    YI_SPRITE super_SPRITE;                            // +0x0
+    YI_SEQUENCE_ANIMATION_FORMAT *animation_table;     // +0xb0
+    YI_SEQUENCE_SEQUENCE_FORMAT *sequence_table;       // +0xb4
+    YI_SEQUENCE_anon_str_sequence_h_267 status;        // +0xb8
+    YI_SEQUENCE_anon_str_sequence_h_306 calc;          // +0xbc
+    YI_SEQUENCE_anon_str_sequence_h_314 active;        // +0xd4
+    void *exit_func;                                   // +0xec
+    void *tag_func;                                    // +0xf0
+    s32 animation_max;                                 // +0xf4
+    s32 sequence_max;                                  // +0xf8
+    s32 phase;                                         // +0xfc
+    f32 counter;                                       // +0x100
+    f32 time_counter;                                  // +0x104
+    f32 time_max;                                      // +0x108
+    s32 loop_counter;                                  // +0x10c
+    s32 tag_count;                                     // +0x110
+    s32 number;                                        // +0x114
+    f32 r_rate;                                        // +0x118
+    f32 g_rate;                                        // +0x11c
+    f32 b_rate;                                        // +0x120
+    f32 a_rate;                                        // +0x124
+    f32 x_rotate;                                      // +0x128
+    f32 y_rotate;                                      // +0x12c
+    f32 z_rotate;                                      // +0x130
+    f32 scale;                                         // +0x134
+    f32 scale_x;                                       // +0x138
+    f32 scale_y;                                       // +0x13c
+    s32 loop;                                          // +0x140
+    s32 frame;                                         // +0x144
+    s32 x_position;                                    // +0x148
+    s32 y_position;                                    // +0x14c
+    u16 u[2];                                          // +0x150
+    u16 v[2];                                          // +0x154
+};
+
+struct YI_SPRITE_SPRITE_FORMAT {  // structure YI::SPRITE::SPRITE_FORMAT size=0x4
+    u16 pos;                                           // +0x0
+    u16 max;                                           // +0x2
+};
+
+struct YI_SPRITE_PARTS_FORMAT {  // structure YI::SPRITE::PARTS_FORMAT size=0x2c
+    u32 palette;                                       // +0x0
+    u32 u0;                                            // +0x4
+    u32 v0;                                            // +0x8
+    u32 u1;                                            // +0xc
+    u32 v1;                                            // +0x10
+    f32 s_scroll;                                      // +0x14
+    f32 t_scroll;                                      // +0x18
+    u32 rgba0;                                         // +0x1c
+    u32 rgba1;                                         // +0x20
+    u32 rgba2;                                         // +0x24
+    u32 rgba3;                                         // +0x28
+};
+
+struct YI_SPRITE_GROUP_FORMAT {  // structure YI::SPRITE::GROUP_FORMAT size=0x14
+    s32 x0;                                            // +0x0
+    s32 y0;                                            // +0x4
+    s32 x1;                                            // +0x8
+    s32 y1;                                            // +0xc
+    u32 parts_id;                                      // +0x10
+};
+
+struct YI_IMAGE_PARAM {  // structure YI::IMAGE::PARAM size=0x34
+    s32 tex_bp;                                        // +0x0
+    s32 tex_w;                                         // +0x4
+    s32 tex_h;                                         // +0x8
+    s32 tex_tw;                                        // +0xc
+    s32 tex_th;                                        // +0x10
+    s32 tex_bw;                                        // +0x14
+    s32 tex_psm;                                       // +0x18
+    s32 clut_bp;                                       // +0x1c
+    s32 clut_w;                                        // +0x20
+    s32 clut_h;                                        // +0x24
+    s32 clut_bw;                                       // +0x28
+    s32 clut_psm;                                      // +0x2c
+    u32 pad : 29;                                      // +0x30
+    u32 tex_cnv : 1;                                   // +0x34
+    u32 clut_load : 1;                                 // +0x38
+    u32 tex_load : 1;                                  // +0x3c
+};
+
+struct YI_IMAGE_INIT_PACKET {  // structure YI::IMAGE::INIT_PACKET size=0x90
+    u64 dmatag[2];                                     // +0x0
+    u64 giftag[2];                                     // +0x10
+    u64 clamp[2];                                      // +0x20
+    u64 texflush[2];                                   // +0x30
+    u64 tex0[2];                                       // +0x40
+    u64 tex1[2];                                       // +0x50
+    u64 tex2_0[2];                                     // +0x60
+    u64 tex2_1[2];                                     // +0x70
+    u64 alpha[2];                                      // +0x80
+};
+
+struct YI_IMAGE {  // class YI::IMAGE size=0xe0
+    void *_vptr_;                                      // +0x0
+    YI_IMAGE_PARAM param;                              // +0x4
+    void *tex_buf;                                     // +0x38
+    void *clut_buf;                                    // +0x3c
+    YI_IMAGE_INIT_PACKET init_packet;                  // +0x40
+    s8 cache;                                          // +0xd0
+    u8 _pad0[3];
+    s32 id;                                            // +0xd4
+    u8 _pad1[192];
+    s8 *grayflag_buff;                                 // +0x198
+    u8 _pad2[4];
+};
+
+struct YI_SEQUENCE_ANIMATION_FORMAT_anon_str_sequence_h_115 {  // structure YI::SEQUENCE::ANIMATION_FORMAT::__anon_str_sequence_h_115 size=0x4
+    u8 a;                                              // +0x0
+    u8 b;                                              // +0x1
+    u8 g;                                              // +0x2
+    u8 r;                                              // +0x3
+};
+
+struct YI_SEQUENCE_ANIMATION_FORMAT {  // structure YI::SEQUENCE::ANIMATION_FORMAT size=0x90
+    u32 reserved : 12;                                 // +0x0
+    u32 tag : 1;                                       // +0x4
+    u32 pos_disable : 1;                               // +0x8
+    u32 base_ofs_disable : 1;                          // +0xc
+    u32 base_disable : 1;                              // +0x10
+    u32 last_cut : 1;                                  // +0x14
+    u32 ofs_disable : 1;                               // +0x18
+    u32 ofs_stop : 1;                                  // +0x1c
+    u32 base_stop : 1;                                 // +0x20
+    u32 sway_stop : 1;                                 // +0x24
+    u32 color_disable : 1;                             // +0x28
+    u32 scale_stop : 1;                                // +0x2c
+    u32 rotate_stop : 1;                               // +0x30
+    u32 color_stop : 1;                                // +0x34
+    u32 scale_disable : 1;                             // +0x38
+    u32 rotate_disable : 1;                            // +0x3c
+    u32 sway_disable : 1;                              // +0x40
+    u32 sway_lag : 1;                                  // +0x44
+    u32 bilinear_disable : 1;                          // +0x48
+    u32 active : 1;                                    // +0x4c
+    u32 curve_disable : 1;                             // +0x50
+    s32 sprite_id;                                     // +0x54
+    s32 time[2];                                       // +0x58
+    s32 x_base[2];                                     // +0x60
+    s32 y_base[2];                                     // +0x68
+    s32 x_ofs[2];                                      // +0x70
+    s32 y_ofs[2];                                      // +0x78
+    f32 x_rotate[2];                                   // +0x80
+    f32 y_rotate[2];                                   // +0x88
+    f32 z_rotate[2];                                   // +0x90
+    f32 scale[2];                                      // +0x98
+    f32 scale_x[2];                                    // +0xa0
+    f32 scale_y[2];                                    // +0xa8
+    f32 curve[4];                                      // +0xb0
+    f32 x_sway[2];                                     // +0xc0
+    f32 y_sway[2];                                     // +0xc8
+    u16 x_sway_count;                                  // +0xd0
+    u16 y_sway_count;                                  // +0xd2
+    u32 alpha_blend;                                   // +0xd4
+    YI_SEQUENCE_ANIMATION_FORMAT_anon_str_sequence_h_115 color[2]; // +0xd8
+};
+
+struct YI_SEQUENCE_SEQUENCE_FORMAT {  // structure YI::SEQUENCE::SEQUENCE_FORMAT size=0x24
+    u16 pos;                                           // +0x0
+    u16 max;                                           // +0x2
+    u16 loop;                                          // +0x4
+    u16 reserved : 6;                                  // +0x6
+    u16 sway_disable : 1;                              // +0x8
+    u16 curve_disable : 1;                             // +0xa
+    u16 active_disable : 1;                            // +0xc
+    u16 pos_disable : 1;                               // +0xe
+    u16 scroll_disable : 1;                            // +0x10
+    u16 color_disable : 1;                             // +0x12
+    u16 scale_disable : 1;                             // +0x14
+    u16 rotate_disable : 1;                            // +0x16
+    u16 ablend_disable : 1;                            // +0x18
+    u16 bilinear_disable : 1;                          // +0x1a
+    u32 frame;                                         // +0x1c
+    u32 end;                                           // +0x20
+    s32 x;                                             // +0x24
+    s32 y;                                             // +0x28
+    s32 size;                                          // +0x2c
+    s32 cr;                                            // +0x30
+    s32 ex;                                            // +0x34
+};
+
+struct YI_LAYOUT_SCREEN_FORMAT {  // structure YI::LAYOUT::SCREEN_FORMAT size=0x18
+    u32 image_unit;                                    // +0x0
+    u32 sequence_unit;                                 // +0x4
+    u32 sequence_id;                                   // +0x8
+    s32 time;                                          // +0xc
+    s32 x;                                             // +0x10
+    s32 y;                                             // +0x14
+};
+
+struct YI_IMAGE_FREEZE {  // class YI::IMAGE_FREEZE size=0x18
+    void *_vptr_;                                      // +0x0
+    ALLOCATOR *allocator;                              // +0x4
+    void *imz_addr;                                    // +0x8
+    YI_IMAGE_FREEZE_INDEX_FORMAT *index_table;         // +0xc
+    s32 image_max;                                     // +0x10
+    YI_IMAGE *image_table;                             // +0x14
+};
+
+struct YI_IMAGE_FREEZE_INDEX_FORMAT {  // structure YI::IMAGE_FREEZE::INDEX_FORMAT size=0x8
+    u32 ofs;                                           // +0x0
+    u32 size;                                          // +0x4
+};
+
+extern "C" u32 D_0035eb08 asm("D_0035eb08");
+
+// 0x0023c008 YI::LAYOUT::LAYOUT()
+void lift_0023c008(u32 a0) asm("_ZN2YI6LAYOUTC1Ev");
+void lift_0023c008(u32 a0) {
+    *(u32*)(a0) = (u32)&D_0035eb08;
+    *(u32*)&(((YI_LAYOUT*)a0)->allocator) = 0;
+    *(u32*)&(((YI_LAYOUT*)a0)->lad_addr) = 0;
+    *(u32*)&(((YI_LAYOUT*)a0)->exit_func) = 0;
+    *(u32*)&(((YI_LAYOUT*)a0)->screen_table) = 0;
+    *(u32*)&(((YI_LAYOUT*)a0)->layout_table) = 0;
+    *(u32*)&(((YI_LAYOUT*)a0)->sequence_unit_table) = 0;
+    *(u32*)&(((YI_LAYOUT*)a0)->screen_max) = 0;
+    *(u32*)&(((YI_LAYOUT*)a0)->layout_max) = 0;
+    *(u32*)&(((YI_LAYOUT*)a0)->sequence_unit_max) = 0;
+    *(u32*)&(((YI_LAYOUT*)a0)->image_freeze) = 0;
+    *(u32*)&(((YI_LAYOUT*)a0)->entry_sequence_table) = 0;
+    *(u32*)&(((YI_LAYOUT*)a0)->now_sequence_table) = 0;
+    *(u32*)&(((YI_LAYOUT*)a0)->now_sequence_max) = 0;
+    *(u32*)&(((YI_LAYOUT*)a0)->phase) = 0;
+    *(u32*)&(((YI_LAYOUT*)a0)->counter) = 0;
+    *(u32*)&(((YI_LAYOUT*)a0)->time_counter) = 0;
+    *(u32*)&(((YI_LAYOUT*)a0)->time_max) = 0;
+    *(u32*)&(((YI_LAYOUT*)a0)->speed) = 0;
+    *(u32*)&(((YI_LAYOUT*)a0)->number) = 0;
+    *(u8*)&(((YI_LAYOUT*)a0)->is_loop) = 0;
+    *(u32*)&(((YI_LAYOUT*)a0)->x_offset) = 0;
+    *(u32*)&(((YI_LAYOUT*)a0)->y_offset) = 0;
+}

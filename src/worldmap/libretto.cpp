@@ -1,6 +1,6 @@
 #include "libretto.hpp"
 
-extern "C" void func_00170dd0(...);
+extern "C" void func_00170dd0(...) asm("_ZN2YS10CACHE_BUFF9WaitFlushEP4TASK");
 extern "C" void func_002be0b0(...);
 extern void* YS_CACHE_BUFF_Alloc(char const*, s32) asm("_ZN2YS10CACHE_BUFF5AllocEPKci");
 

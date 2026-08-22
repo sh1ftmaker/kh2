@@ -8,7 +8,7 @@ extern "C" void func_00102448(u32, u32);
 extern "C" void func_002499b8();
 extern "C" void func_00242678(u32);
 extern "C" void func_00236d60();
-extern "C" u32 func_0024a270();
+extern "C" u32 func_0024a270() asm("_ZN2Tz4TRTE7ControlEv");
 extern "C" void func_0024a710();
 
 void TRTE::PauseThread(TASK* a0) {

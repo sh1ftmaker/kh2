@@ -5,7 +5,7 @@ extern "C" u32 is_exist_1805a8(void* self, int) asm("_ZN2YS6MOTION8is_existEi");
 extern "C" u32 start_17f488(void* self, int, f32, f32) asm("_Z13func_0017f488iiff");
 extern "C" void func_00169f98_169f98(void* self) asm("func_00169f98");
 
-void func_00198450_impl(void* self) asm("func_00198450");
+void func_00198450_impl(void* self) asm("_ZN2YS6STDOBJ15_OVR_initializeEv");
 void func_00198450_impl(void* self) {
     void* m = (u8*)self + 320;
     if (is_no_motion_180cd0(m)) {

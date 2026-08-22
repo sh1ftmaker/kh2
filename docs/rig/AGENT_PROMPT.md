@@ -11,6 +11,14 @@ compiled output is bit-identical to the shipped binary.
    `similar_matched` entry with similarity ≥ 0.85, that is a **twin**: your first
    attempt is its source with only the class/offsets/constants/callees changed to
    what the disassembly shows — do not start from scratch.
+   If it carries an `e3` entry, the function is mapped to the PS3 debug build: `e3.demangled`
+   is the real name and signature, `e3.params`/`e3.locals` the real variable names,
+   `ps3_pseudo_c` the decompiled PS3 source (correct control flow, calls, field names, asserts
+   show intent), `e3_candidate` that source already converted to ee-gcc C++ (compiles; the
+   remaining diffs are PS2 struct layout deltas and expression forms), and
+   `best_candidate_named` the best deterministic PS2 candidate with real names and `// self->field`
+   comments. Follow `e3.hint`: start from the named candidate when it is ≥ 80 %, else from
+   `e3_candidate`; never start from the raw disassembly when either exists.
 2. Write a complete candidate `.cpp` file. It must compile standing alone.
 3. `compile_diff` it. Read the diff before you touch the file again.
 4. Change **one** thing per attempt, and say which hypothesis you are testing.

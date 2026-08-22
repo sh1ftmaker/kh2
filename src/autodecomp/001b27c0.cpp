@@ -1,0 +1,13 @@
+// coverage: addr=0x001b27c0 symbol=func_001b27c0 size=48 class=straight source=lift status=exact fuzzy=100.0
+// coverage-alternatives: ghidra:exact:100.0;m2c:near:82.92;corpus:near:65.42;e3:near:0.0
+#include "common/types.h"
+
+extern "C" u32 func_0016bd60(u32, u32) asm("func_0016bd60");
+extern "C" void func_0017c430(u32) asm("func_0017c430");
+
+// 0x001b27c0 func_001b27c0
+u32 func_001b27c0(u32 a0, u32 a1) asm("func_001b27c0");
+u32 func_001b27c0(u32 a0, u32 a1) {
+    func_0017c430(a1);
+    return func_0016bd60(a1, 0x14);
+}

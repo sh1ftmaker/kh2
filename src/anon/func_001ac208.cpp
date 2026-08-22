@@ -1,6 +1,6 @@
 #include "../common/types.h"
 
-extern "C" u32 SEQUENCE_239700(void* self) asm("func_00239700");
+extern "C" u32 SEQUENCE_239700(void* self) asm("_ZN2YI8SEQUENCEC1Ev");
 extern "C" u32 func_001ab810_1ab810() asm("func_001ab810");
 extern "C" u32 GetImage_1ab800() asm("_ZN2YS4FONT8GetImageEv");
 extern "C" u32 Init_239988(void*, void*, void*) asm("func_00239988");

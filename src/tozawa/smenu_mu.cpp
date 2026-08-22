@@ -7,7 +7,7 @@ extern "C" void func_002430d8(u32);
 extern "C" void func_00102448(u32, u32);
 extern "C" void func_00248060();
 extern "C" void func_00236d60();
-extern "C" u32 func_00248900();
+extern "C" u32 func_00248900() asm("_ZN2Tz4MUMI7ControlEv");
 extern "C" void func_00248d28();
 
 void MUMI::PauseThread(TASK* a0) {

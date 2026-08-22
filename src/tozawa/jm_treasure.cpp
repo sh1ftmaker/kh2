@@ -28,7 +28,7 @@ u32 JmTreasure::isEnableNavi(YS::TREASURE::TABLE const* entry) {
 #include "../common/types.h"
 
 // ---- callees, declared by the rig: copy these lines verbatim, never retype a symbol ----
-extern "C" u32 Cur2WorldId_2a4990(int) asm("func_002a4990");  // Tz::JmTreasure::Cur2WorldId(int) -- arity VERIFIED [links as func_002a4990: E3 name not in the registry yet]
+extern "C" u32 Cur2WorldId_2a4990(int) asm("_ZN2Tz10JmTreasure11Cur2WorldIdEi");  // Tz::JmTreasure::Cur2WorldId(int) -- arity VERIFIED [links as func_002a4990: E3 name not in the registry yet]
 
 // global pointer at 0x35f5e4 (lui 0x36 + lw -2588)
 extern "C" u32 D_0035f5e4 asm("D_0035f5e4");

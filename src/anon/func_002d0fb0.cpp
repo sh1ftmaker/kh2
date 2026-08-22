@@ -11,7 +11,7 @@ extern "C" u32 D_00362050 asm("D_00362050");
 extern "C" u32 D_0034e8b8 asm("D_0034e8b8");
 extern "C" u32 D_0034ee08 asm("D_0034ee08");
 
-void func_002d0fb0_impl(u32 self) asm("func_002d0fb0");
+void func_002d0fb0_impl(u32 self) asm("_ZN2Ti8MGPlayerD2Ev");
 void func_002d0fb0_impl(u32 self) {
     u32 s16 = self;
     *(u32*)s16 = (u32)&D_00362060;

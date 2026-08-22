@@ -9,7 +9,7 @@ extern "C" u32 get_entry_id_16a020(void* self) asm("_ZN2YS3OBJ12get_entry_idEv")
 
 extern "C" u32 D_003513a8 asm("D_003513a8");
 
-void func_001c2338_impl(void* self, const void* objentry, const void* fvec, float f) asm("func_001c2338");
+void func_001c2338_impl(void* self, const void* objentry, const void* fvec, float f) asm("_ZN2YS9SHOPPOINTC1EPKNS_8OBJENTRYERKN2kn7FVectorEf");
 void func_001c2338_impl(void* self, const void* objentry, const void* fvec, float f) {
     _ZN2YS6SUMMOND1Ev_1980d0(self, (u32)objentry, 9, (u32)fvec);
     *(u32*)((char*)self + 0) = (u32)&D_003513a8;

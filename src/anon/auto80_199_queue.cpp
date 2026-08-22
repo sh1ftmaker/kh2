@@ -15928,11 +15928,11 @@ void func_00103500_impl(void* self) {
 extern "C" u32 func_002def70_2def70(void) asm("func_002def70");
 extern "C" u32 config_2dc7c8(u32 p) asm("_ZN2Ti6MGJump6configEv");
 extern "C" u32 func_002deac0_2deac0(void* a0, f32 x, f32 y) asm("func_002deac0");
-extern "C" void func_002deba0_2deba0(void* a0, u32 a1, f32 x, f32 y) asm("func_002deba0");
+extern "C" void func_002deba0_2deba0(void* a0, u32 a1, f32 x, f32 y) asm("_ZN2Ti14ACTION_PO_JUMP10decide_wayEPN2YS3OBJEff");
 
 extern "C" u32 D_00361f60 asm("D_00361f60");
 
-void func_002df7d8_impl(void* a0, u32 a1) asm("func_002df7d8");
+void func_002df7d8_impl(void* a0, u32 a1) asm("_ZN2Ti18ACTION_PO_JUMP_ROO7on_landEPN2YS3OBJE");
 void func_002df7d8_impl(void* a0, u32 a1) {
     func_002def70_2def70();
     u32 p = D_00361f60;
@@ -15949,11 +15949,11 @@ void func_002df7d8_impl(void* a0, u32 a1) {
 extern "C" u32 func_002def70_2def70(void) asm("func_002def70");
 extern "C" u32 config_2dc7c8(u32 p) asm("_ZN2Ti6MGJump6configEv");
 extern "C" u32 func_002deac0_2deac0(void* a0, f32 x, f32 y) asm("func_002deac0");
-extern "C" void func_002deba0_2deba0(void* a0, u32 a1, f32 x, f32 y) asm("func_002deba0");
+extern "C" void func_002deba0_2deba0(void* a0, u32 a1, f32 x, f32 y) asm("_ZN2Ti14ACTION_PO_JUMP10decide_wayEPN2YS3OBJEff");
 
 extern "C" u32 D_00361f60 asm("D_00361f60");
 
-void func_002df470_impl(void* a0, u32 a1) asm("func_002df470");
+void func_002df470_impl(void* a0, u32 a1) asm("_ZN2Ti21ACTION_PO_JUMP_TIGGER7on_landEPN2YS3OBJE");
 void func_002df470_impl(void* a0, u32 a1) {
     func_002def70_2def70();
     u32 p = D_00361f60;

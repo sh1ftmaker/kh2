@@ -340,7 +340,7 @@ extern "C" void func_0016c5b8(...);
 extern "C" void func_0016c640(...);
 extern "C" void func_0016ed50(...);
 extern "C" void func_00170570(...);
-extern "C" void func_00170dd0(...);
+extern "C" void func_00170dd0(...) asm("_ZN2YS10CACHE_BUFF9WaitFlushEP4TASK");
 extern "C" void func_00177dc8(...);
 extern "C" void func_0017c578(...);
 extern "C" void func_0017f488(...);
@@ -354,11 +354,11 @@ extern "C" u32 func_00191e40(...);
 extern "C" u32 func_001923c8(...);
 extern "C" void func_00195858(...);
 extern "C" void func_00197cc0(...);
-extern "C" void func_00198450(...);
+extern "C" void func_00198450(...) asm("_ZN2YS6STDOBJ15_OVR_initializeEv");
 extern "C" u32 func_0019f7d0(...);
 extern "C" u32 func_001a0e78(...);
 extern "C" void func_001a0ee0(...);
-extern "C" void func_001a1a20(...);
+extern "C" void func_001a1a20(...) asm("_ZN2YS5SHEET6add_mpEib");
 extern "C" void func_001a1db8(...);
 extern "C" u32 func_001a35f8(...);
 extern "C" void func_001a52a8(...);
@@ -405,7 +405,7 @@ extern "C" u32 func_001d5af8(...);
 extern "C" void func_001d5f30(...);
 extern "C" void func_001d71f0(...);
 extern "C" u32 func_001d83c0(...);
-void func_001d8d08(f32, u32);
+void func_001d8d08(f32, u32) asm("_ZN2YS7MISSION8AddGaugeEfi");
 void func_001d8da0(f32, u32);
 extern "C" void func_001d8fa8(...);
 void func_001d9050(u32, u32, f32);
@@ -420,7 +420,7 @@ extern "C" u32 func_001de568(...);
 extern "C" void func_001de590(...);
 extern "C" void func_001de610(...);
 extern "C" void func_001de750(...);
-extern "C" f32 func_001e09d0(...);
+extern "C" f32 func_001e09d0(...) asm("_ZN3ryj18SAVERAM_GUMIBATTLE25get_all_treasure_completeEv");
 extern "C" void func_001e1988(...);
 extern "C" u32 func_001e3650(...);
 extern "C" u32 func_001e3660(...);
@@ -470,7 +470,7 @@ extern "C" void func_00242408(...);
 extern "C" void func_00242418(...);
 extern "C" u32 func_00242708(...);
 extern "C" void func_00242880(...);
-extern "C" u32 func_0024ac88(...);
+extern "C" u32 func_0024ac88(...) asm("_ZN2Tz4TRTE10GetSeqInfoEi");
 extern "C" u32 func_00252110(...);
 extern "C" void func_00252ce0(...);
 extern "C" void func_00252d88(...);
@@ -562,17 +562,17 @@ extern "C" void func_002b8c78(...);
 extern "C" u32 func_002ba810(...);
 extern "C" void func_002baa08(...);
 extern "C" void func_002baa60(...);
-extern "C" void func_002bbed0(...);
+extern "C" void func_002bbed0(...) asm("_ZN5SOUND12silentBgSeOnEv");
 extern "C" void func_002bbf18(...);
-extern "C" void func_002bc188(...);
+extern "C" void func_002bc188(...) asm("_ZN5SOUND8createSeEiRKN2kn7FVectorE");
 extern "C" void func_002bc470(...);
 extern "C" void func_002bc608(...);
 extern "C" void func_002bd760(...);
 extern "C" void func_002bd7d8(...);
 extern "C" void func_002be0b0(...);
 u32 func_002be5b8();
-extern "C" void func_002c0ca0(...);
-extern "C" void func_002c1b60(...);
+extern "C" void func_002c0ca0(...) asm("_ZN2dk13WM_TOTAL_INFOC1Ev");
+extern "C" void func_002c1b60(...) asm("_ZN8worldmap4Gumi8setStateEPKN2YS6COURSEE");
 extern "C" u32 func_002c5140(...);
 extern "C" void func_002c6158(...);
 extern "C" u32 func_002cab48(...);
@@ -720,7 +720,7 @@ extern "C" u32 func_00113668(...);
 extern u8 D_00346960;
 
 
-extern "C" u32 func_00113fb0(...);
+extern "C" u32 func_00113fb0(...) asm("_ZN2kn17FriendPersonality16execScriptActionEPNS_12FriendActionEPN2YS6TARGETEPPvb");
 
 
 extern "C" u32 func_00113668(...);
@@ -731,7 +731,7 @@ extern "C" u32 func_00113668(...);
 extern u8 D_00346b08;
 
 
-extern "C" u32 func_00113fb0(...);
+extern "C" u32 func_00113fb0(...) asm("_ZN2kn17FriendPersonality16execScriptActionEPNS_12FriendActionEPN2YS6TARGETEPPvb");
 
 
 extern "C" u32 func_00113668(...);
@@ -742,21 +742,21 @@ extern "C" u32 func_00113668(...);
 extern u8 D_00346cd8;
 
 
-extern "C" u32 func_00113fb0(...);
+extern "C" u32 func_00113fb0(...) asm("_ZN2kn17FriendPersonality16execScriptActionEPNS_12FriendActionEPN2YS6TARGETEPPvb");
 
 
-extern "C" u32 func_00113fb0(...);
-
-
-extern "C" u32 func_00113668(...);
-extern u8 D_00346e80;
+extern "C" u32 func_00113fb0(...) asm("_ZN2kn17FriendPersonality16execScriptActionEPNS_12FriendActionEPN2YS6TARGETEPPvb");
 
 
 extern "C" u32 func_00113668(...);
 extern u8 D_00346e80;
 
 
-extern "C" u32 func_00113fb0(...);
+extern "C" u32 func_00113668(...);
+extern u8 D_00346e80;
+
+
+extern "C" u32 func_00113fb0(...) asm("_ZN2kn17FriendPersonality16execScriptActionEPNS_12FriendActionEPN2YS6TARGETEPPvb");
 
 
 extern "C" u32 func_00113668(...);
@@ -767,21 +767,21 @@ extern "C" u32 func_00113668(...);
 extern u8 D_00347050;
 
 
-extern "C" u32 func_00113fb0(...);
+extern "C" u32 func_00113fb0(...) asm("_ZN2kn17FriendPersonality16execScriptActionEPNS_12FriendActionEPN2YS6TARGETEPPvb");
 
 
-extern "C" u32 func_00113fb0(...);
-
-
-extern "C" u32 func_00113668(...);
-extern u8 D_00347220;
+extern "C" u32 func_00113fb0(...) asm("_ZN2kn17FriendPersonality16execScriptActionEPNS_12FriendActionEPN2YS6TARGETEPPvb");
 
 
 extern "C" u32 func_00113668(...);
 extern u8 D_00347220;
 
 
-extern "C" u32 func_00113fb0(...);
+extern "C" u32 func_00113668(...);
+extern u8 D_00347220;
+
+
+extern "C" u32 func_00113fb0(...) asm("_ZN2kn17FriendPersonality16execScriptActionEPNS_12FriendActionEPN2YS6TARGETEPPvb");
 
 
 extern "C" u32 func_00113668(...);
@@ -840,7 +840,7 @@ extern u8 D_003479a8;
 extern "C" u32 func_0011ef20(...);
 
 
-extern "C" u32 func_0011f7a8(...);
+extern "C" u32 func_0011f7a8(...) asm("_ZN2kn7ModelBG10drawCommonEPNS_16ProjectionCameraEPNS_9DrawParamEPcPNS_13AnimationWorkEbPNS_7FMatrixE");
 
 
 extern "C" u32 func_0011ee58(...);
@@ -2885,7 +2885,7 @@ u32 duplicate_unplaced_0028c170(u32 a0) {
     return ((u32(*)(u32))func_00139510)(r4);
 }
 
-extern "C" u32 func_00239700(...);
+extern "C" u32 func_00239700(...) asm("_ZN2YI8SEQUENCEC1Ev");
 extern "C" u32 func_0028d188(...);
 extern u8 D_00347e60;
 extern u8 D_0035f420;
@@ -2904,7 +2904,7 @@ u32 duplicate_unplaced_0028d0f8(u32 a0) {
     return ((u32(*)(u32))func_0028d188)(r4);
 }
 
-extern "C" u32 func_00239700(...);
+extern "C" u32 func_00239700(...) asm("_ZN2YI8SEQUENCEC1Ev");
 extern "C" u32 func_0028d188(...);
 extern u8 D_00347e60;
 extern u8 D_0035f420;
@@ -6813,7 +6813,7 @@ void duplicate_unplaced_00138480(u32 a0) {
 }
 
 extern "C" u32 func_002362b0(...);
-extern "C" u32 func_002367c8(...);
+extern "C" u32 func_002367c8(...) asm("_ZN2YI5IMAGE13InitLoadImageEv");
 
 u32 duplicate_unplaced_00138698(u32 a0) {
     u32 r4 = a0, r2, r16;
@@ -6907,7 +6907,7 @@ void duplicate_unplaced_0013b1a0(u32 a0) {
     func_0013b128(s0);
 }
 
-extern "C" u32 func_0013b1d0(...);
+extern "C" u32 func_0013b1d0(...) asm("_ZN2dk12COMMAND_DRAW6createEPN2YS14PLAYER_COMMANDE");
 extern "C" u32 func_0013b258(...);
 extern "C" u32 func_0013d208(...);
 
@@ -11294,7 +11294,7 @@ void func_0016a2e0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a
     }
 }
 
-extern "C" u32 func_0016cd48(...);
+extern "C" u32 func_0016cd48(...) asm("_ZN2YS2VM4execEPS0_");
 extern "C" u32 func_00187ca0(...);
 
 void func_0016a950(u32 a0) {
@@ -11794,7 +11794,7 @@ void func_00173a60(u32 a0) {
     *(f32*)((u32)s0 + (s32)(0)) = f0;
 }
 
-extern "C" u32 func_00180770(...);
+extern "C" u32 func_00180770(...) asm("_ZN2YS6MOTION12get_loop_topEi");
 
 void func_00173a98(u32 a0) {
     u32 s0 = a0;

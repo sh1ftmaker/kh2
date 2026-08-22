@@ -35,7 +35,7 @@ void CmCustom::LeaveAll() {
 #include "../common/types.h"
 
 extern "C" u32 Each_1a8110(void* /* YS::ITEM_TABLE const* */) asm("_ZN2YS10ITEM_TABLE4EachEPKS0_");
-extern "C" u32 GetCommand_1a3820(int) asm("func_001a3820");
+extern "C" u32 GetCommand_1a3820(int) asm("_ZN2YS4ITEM10GetCommandEi");
 
 namespace Tz {
 

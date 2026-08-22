@@ -18,7 +18,7 @@ struct LINK_FLAG_Layout {
     u32 m_Num;       // 0x38
 };
 
-u32 func_001d5868_impl(void* self) asm("func_001d5868");  // declaration
+u32 func_001d5868_impl(void* self) asm("_ZNK2YS9LINK_FLAG5is_okEv");  // declaration
 u32 func_001d5868_impl(void* self) {  // definition: no asm() here
     LINK_FLAG_Layout* lf = reinterpret_cast<LINK_FLAG_Layout*>(self);
     u32 result;
