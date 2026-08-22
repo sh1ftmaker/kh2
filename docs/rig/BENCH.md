@@ -17,3 +17,5 @@ Set: `docs/rig/bench_set.tsv`. A change is accepted only if the rate does not dr
 | 2026-08-20 07:17 | 5d97207bbd2c | evolve candidate 20260820-064930 pareto +1/-3 rejected | **11/28 = 39 %** | <80 5/8 · 80-199 4/14 · 200-499 2/6 | median attempts 2 | 1684 s |
 | 2026-08-20 09:32 | 8b1c22c49686 | evolve candidate 20260820-085730 pareto +0/-4 rejected | **9/28 = 32 %** | <80 3/8 · 80-199 4/14 · 200-499 2/6 | median attempts 1 | 2129 s |
 | 2026-08-20 11:44 | da46b68af8aa | evolve candidate 20260820-111205 pareto +2/-4 rejected | **12/28 = 43 %** | <80 4/8 · 80-199 6/14 · 200-499 2/6 | median attempts 2 | 1945 s |
+| 2026-08-22 08:57 | 11ae37cb0c52 | ornith baseline, no e3 (RIG_NO_E3=1) | **7/28 = 25 %** | <80 4/8 · 80-199 3/14 · 200-499 0/6 | median attempts 3 | 2864 s |
+| 2026-08-22 09:26 | 11ae37cb0c52 | ornith + e3 context | **7/28 = 25 %** | <80 2/8 · 80-199 4/14 · 200-499 1/6 | median attempts 3 | 1702 s |
