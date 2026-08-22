@@ -484,6 +484,91 @@ def build_skeleton(target, dem: str, includes: List[str], proto: dict,
 # ---------------------------------------------------------------- main
 
 
+AUTODECOMP = Path("/data/agent-tom/kh2/autodecomp/out")
+
+
+def _tsv_row(path: Path, key: str, value: str) -> Optional[dict]:
+    try:
+        import csv
+        with path.open() as f:
+            for r in csv.DictReader(f, delimiter="\t"):
+                if r.get(key) == value:
+                    return r
+    except OSError:
+        return None
+    return None
+
+
+def e3_context(addr: int, outdir: Path, *, brief: bool = False) -> Optional[dict]:
+    """Everything the E3 map knows about this address, or None when it is unmapped."""
+    import os
+    if os.environ.get("RIG_NO_E3"):
+        return None
+    a8 = f"{addr:08x}"
+    row = _tsv_row(AUTODECOMP / "names" / "map_functions.tsv", "ee_addr", a8)
+    if not row:
+        return None
+    e3: dict = {
+        "ppc_addr": row["ppc_addr"], "tier": row["tier"], "mangled": row["mangled"],
+        "demangled": row["demangled"], "params": row.get("params") or "", "locals": row.get("locals") or "",
+        "files": {},
+    }
+    # PS3 pseudo-C (Ghidra, DWARF-typed) for the mapped function
+    raw = AUTODECOMP / "e3pilot" / "raw" / f"{row['ppc_addr']}.json"
+    if raw.exists():
+        try:
+            j = json.loads(raw.read_text())
+            code = j.get("code") or ""
+            e3["files"]["ps3_pseudo_c"] = str(raw)
+            e3["ps3_signature"] = j.get("signature")
+            if not brief:
+                e3["ps3_pseudo_c"] = code if len(code) < 5000 else code[:5000] + "\n/* ... truncated, see file ... */"
+        except ValueError:
+            pass
+    # converted, compiling ee-gcc candidate (E3 round 5)
+    cand = AUTODECOMP / "e3pilot" / "cand" / f"{a8}.cpp"
+    res = _tsv_row(AUTODECOMP / "e3pilot" / "results_round5.tsv", "ee_addr", a8)
+    if cand.exists():
+        e3["files"]["e3_candidate"] = str(cand)
+        if res:
+            e3["e3_candidate_status"] = res.get("status"); e3["e3_candidate_fuzzy"] = res.get("fuzzy")
+            e3["e3_candidate_notes"] = (res.get("notes") or "")[:600]
+    # best deterministic candidate, annotated with DWARF parameter names, real callee/global names
+    # and field paths (codegen-neutral renames + comments)
+    named = AUTODECOMP / "names" / "src" / f"{a8}.cpp"
+    cov = _tsv_row(AUTODECOMP / "coverage" / "index.tsv", "addr", a8)
+    if named.exists():
+        e3["files"]["best_candidate_named"] = str(named)
+        if cov:
+            e3["best_candidate_source"] = cov.get("source"); e3["best_candidate_status"] = cov.get("status")
+            e3["best_candidate_fuzzy"] = cov.get("fuzzy")
+        if not brief:
+            txt = named.read_text()
+            e3["best_candidate_named"] = txt if len(txt) < 6000 else txt[:6000] + "\n/* ... truncated, see file ... */"
+    # PS2-corrected class headers for the self class
+    cls = e3["demangled"].split("(")[0]
+    if "::" in cls:
+        cls_q = "::".join(cls.split("::")[:-1])
+        hdr = AUTODECOMP / "e3pilot" / "hdr_ps2" / (cls_q.replace("::", "_") + ".hpp")
+        if hdr.exists():
+            e3["files"]["ps2_class_header"] = str(hdr)
+    # how to use it
+    best_fz = float(cov.get("fuzzy") or 0) if cov else 0.0
+    e3_fz = float(res.get("fuzzy") or 0) if res else 0.0
+    if cov and cov.get("status") == "near" and best_fz >= 80:
+        e3["hint"] = (f"best_candidate_named is {cov.get('source')} at {best_fz:.1f}% and compiles: start from it, "
+                      "keep its statement shapes, and use ps3_pseudo_c only to fix control flow/structure it got wrong. "
+                      "Remaining diffs at this level are usually register allocation, not C shape.")
+    elif res and res.get("status") == "near" and e3_fz >= 40:
+        e3["hint"] = (f"e3_candidate is the PS3 source converted to ee-gcc ({e3_fz:.1f}%, compiles): it has the right "
+                      "control flow, calls and field names; the differences are PS2 struct layout deltas, asserts stripped "
+                      "in retail (already dropped), and expression forms. Start from it.")
+    else:
+        e3["hint"] = ("use ps3_pseudo_c as the structural reference (real names, asserts show intent) and "
+                      "best_candidate_named for the PS2 expression forms.")
+    return e3
+
+
 def get_context(spec: str, *, ghidra: bool = True, m2c: bool = True,
                 similar: bool = True, preview: int = DISASM_PREVIEW,
                 brief: bool = False) -> dict:
@@ -580,6 +665,13 @@ def get_context(spec: str, *, ghidra: bool = True, m2c: bool = True,
     elif scan["uses_vu0"]:
         out["m2c"] = None
         out["m2c_skipped"] = "row uses VU0/COP2 instructions; m2c cannot model them"
+
+    # E3 (PS3 debug build) prior from the autodecomp pipeline: real name/signature, PS3 pseudo-C,
+    # a compiling ee-gcc candidate converted from it, and the best deterministic candidate annotated
+    # with DWARF names and field paths.  See /data/agent-tom/kh2/autodecomp/out/simmatch/NOTES.md.
+    e3 = e3_context(t.addr, outdir, brief=brief)
+    if e3:
+        out["e3"] = e3
 
     # nearest matched source
     if similar:
