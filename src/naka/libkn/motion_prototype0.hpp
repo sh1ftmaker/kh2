@@ -20,7 +20,7 @@ namespace kn {
      MotionPrototype0(MotionPrototype0* a0, void* a1);
      ~MotionPrototype0();
      void calcLimitValue(MotionPrototype0RAWLimiter* a0, FVector* a1, FVector* a2);
-     void getTimeIndex(f32 a0, int* a1, int* a2);
+     void getTimeIndex(f32 a0, int& a1, int& a2);
      double calcFcurveValue(MotionPrototype0RAWFcurve* a0, s32 a1, s32 a2, f32 a3);
      void setConstantValue(ModelObj* a0);
      void setFcurveValue(ModelObj* a0, f32 a1);

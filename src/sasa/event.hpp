@@ -7,6 +7,11 @@ class OBJ;
 }
 
 namespace sa {
+class BIN_CAMERA_DATA_WK;
+class OBJ_DEFAULT_CAMERA_DATA;
+}
+
+namespace sa {
 
 class EVENT {
 public:
@@ -17,6 +22,7 @@ public:
     static void readWaitInit();
     void setActorParam(YS::OBJ*);
     void leaveAllEffect();
+    static void calcValue_objDefault(sa::BIN_CAMERA_DATA_WK&, sa::OBJ_DEFAULT_CAMERA_DATA&, float);
 };
 
 }  // namespace sa

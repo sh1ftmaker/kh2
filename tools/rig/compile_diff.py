@@ -38,14 +38,39 @@ INCLUDE {symbols_ld}
 SECTIONS {{
   .kh2fn 0x{addr:08x} : {{ KEEP(*(.text.{sym})) KEEP(*(.gnu.linkonce.t.{sym})) }}
   .text.other 0x01e00000 : {{ *(.text*) *(.gnu.linkonce.t.*) }}
-  .rodata 0x01e80000 : {{ *(.rodata*) }}
+{lit_section}  .rodata 0x01e80000 : {{ *(.rodata*) }}
   .data 0x01f00000 : {{ *(.data*) *(.sdata*) *(.bss*) *(.sbss*) *(COMMON) }}
   .reginfo : {{ *(.reginfo) }}
   /DISCARD/ : {{ *(.MIPS.abiflags) *(.comment) *(.pdr) *(.mdebug*) *(.gnu.attributes) }}
 }}
 """
 
+# A candidate may declare `// minilink-rodata 0xADDR` to say "the compiler-owned
+# literal pool of this TU (float constants, switch jump tables) lives at ADDR in
+# the original".  Mirrors tools/build_elf.py:generate_link_sections(), which emits
+# the same placement for the full build; without it the pool lands at the synthetic
+# 0x01e80000 and every lui/addiu that addresses it can never match the ROM.
+MINILINK_RODATA_RE = re.compile(r"//\s*minilink-rodata\s+0x([0-9a-fA-F]+)")
+
+# Unlike build_elf, the mini-link has a single candidate object (libgcc members
+# come after it on the command line, so the candidate's own literals still start
+# at the base), hence no per-object filename spec: ld's file globs are matched
+# against the name as spelled on the command line, and the object is absolute.
+# .sdata comes FIRST: without -G0 ee-gcc splits one literal pool in two -- the FP
+# constants (<= 8 bytes) go to .sdata, the switch jump tables to .rodata -- while
+# the original build kept them contiguous in emission order, constants before
+# tables (cf. `ee-g++ -G0 -S`: both land in .rdata in that order).
+LIT_SECTION_TEMPLATE = (
+    "  .kh2lit_{base:08x} 0x{base:08x} : "
+    "{{ KEEP(*(.sdata .sdata.* .lit4 .lit8 .rodata .rodata.*)) }}\n"
+)
+
 UNDEF_RE = re.compile(r"undefined reference to [`'\"]([^'\"`]+)")
+
+
+def minilink_rodata_base(src_text: str) -> Optional[int]:
+    m = MINILINK_RODATA_RE.search(src_text)
+    return int(m.group(1), 16) if m else None
 
 
 def clean_compiler_output(text: str, src_path: Path) -> List[str]:
@@ -261,10 +286,11 @@ def byte_fuzzy(a: bytes, b: bytes) -> float:
 # ---------------------------------------------------------------- banned-move lint
 
 # statement-level / file-scope inline asm: `asm(` or `__asm__ volatile (` whose
-# preceding non-blank char is not a declarator end (`)` or identifier char).
-# `void f() asm("sym");` and `extern "C" u32 D_x asm("D_x");` are asm *labels*
-# and are allowed -- they are how candidates bind to registry symbols.
-_ASM_RE = re.compile(r'(?<![A-Za-z0-9_)])\s*(?:__asm__|asm)\s*(?:__volatile__|volatile)?\s*\(')
+# preceding non-blank char is not a declarator end (`)`, `]` or identifier char).
+# `void f() asm("sym");`, `extern "C" u32 D_x asm("D_x");` and
+# `extern "C" f32 D_x[4] asm("D_x");` are asm *labels* and are allowed -- they are
+# how candidates bind to registry symbols.
+_ASM_RE = re.compile(r'(?<![A-Za-z0-9_)\]])\s*(?:__asm__|asm)\s*(?:__volatile__|volatile)?\s*\(')
 _BANNED = [
     (re.compile(r'__attribute__\s*\(\(\s*naked'), "__attribute__((naked))"),
     (re.compile(r'\bregister\b[^;]*\basm\s*\('), "register variable pinned with asm()"),
@@ -278,7 +304,9 @@ def banned_constructs(src_text: str) -> List[str]:
         # skip when the asm( directly follows a declarator on the same line
         line_start = src_text.rfind("\n", 0, m.start()) + 1
         before = src_text[line_start:m.start()].rstrip()
-        decl = re.search(r'([A-Za-z_]\w*)\s*(?:\([^()]*\))?$', before)
+        # a declarator end: `name`, `name(args)` or `name[N]` (array global with
+        # an asm label, e.g. `extern "C" f32 D_00371294[2] asm("D_00371294");`)
+        decl = re.search(r'([A-Za-z_]\w*)\s*(?:\([^()]*\)|(?:\[[^\[\]]*\])+)?$', before)
         if decl and decl.group(1) not in ("if", "while", "for", "switch", "return", "else", "do"):
             continue   # asm label on a declarator
         found.append("inline asm statement (only asm *labels* on declarations are allowed)")
@@ -353,6 +381,11 @@ def compile_diff(
 
         # ---- mini-link
         src_text = src.read_text(errors="ignore")
+        lit_base = minilink_rodata_base(src_text)
+        lit_section = ""
+        if lit_base is not None:
+            result["minilink_rodata"] = f"0x{lit_base:08x}"
+            lit_section = LIT_SECTION_TEMPLATE.format(base=lit_base)
         ld = workdir / "mini.ld"
         ld.write_text(
             MINILINK_TEMPLATE.format(
@@ -360,6 +393,7 @@ def compile_diff(
                 extra_provides="\n".join(rc.extra_provides(src_text)),
                 addr=target.addr,
                 sym=sym,
+                lit_section=lit_section,
             )
         )
         elf = workdir / "mini.elf"
@@ -438,6 +472,18 @@ def compile_diff(
                     "%lo is SIGNED -- derive the address as (hi << 16) + sign_extend16(lo), "
                     "e.g. lui 0x36 + addiu -0x5... is 0x35..., not 0x36....")
                 break
+        # a lui at the synthetic pool base = a compiler-owned literal (float
+        # constant / switch jump table) the candidate never pinned
+        if lit_base is None:
+            for pair in pairs or []:
+                if re.match(r"lui \w+, 0x1(e8|f0)$", (pair.get("left") or "").strip()):
+                    result.setdefault("hints", []).append(
+                        "a lui loads the mini-link's synthetic .rodata/.data base (0x01e80000 / "
+                        "0x01f00000): this is a compiler-owned literal pool (float constant or "
+                        "switch jump table). Find its real address in the original disassembly "
+                        "(the lui/addiu pair feeding the lwc1 / jr) and add "
+                        "`// minilink-rodata 0xADDR` at file scope to pin the pool there.")
+                    break
         if match_pct is not None and not result["exact"]:
             result["fuzzy_pct"] = round(match_pct, 2)
         if len(diff_lines) > diff_cap:

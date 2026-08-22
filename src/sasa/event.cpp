@@ -119,3 +119,51 @@ void func_0022bb60_impl(void* self) {  // definition: no asm() here
     fadeOut_14aa58(fade, 0, 0);
     functionCall_2ef7a0(2, self);
 }
+
+// ---- 0x00231390 _ZN2sa5EVENT20calcValue_objDefaultERNS_18BIN_CAMERA_DATA_WKERNS_23OBJ_DEFAULT_CAMERA_DATAEf ----
+
+// ---- callees, declared by the rig: copy these lines verbatim, never retype a symbol ----
+extern "C" f32 calcValue_230f10(f32, void* /* sa::BIN_CAMERA_DATA_ENC_WK* */, int, void* /* sa::BIN_CAMERA_DATA_ENC_WK* */) asm("_ZN2sa5EVENT9calcValueEfPNS_22BIN_CAMERA_DATA_ENC_WKEiS2_");  // sa::EVENT::calcValue(float, sa::BIN_CAMERA_DATA_ENC_WK*, int, sa::BIN_CAMERA_DATA_ENC_WK*) -- arity VERIFIED
+
+// The two constants are compiler-owned literal-pool entries (pi @0x003712a4,
+// 180.0f @0x003712a8), not named globals: write them as bare literals and pin the
+// TU's pool at its original address so the lui/addiu/lwc1 sequences resolve there.
+// minilink-rodata 0x003712a4   (float literals live here in the original)
+
+// layout row 0x00231390, 304 bytes
+// the definition MUST produce the symbol: _ZN2sa5EVENT20calcValue_objDefaultERNS_18BIN_CAMERA_DATA_WKERNS_23OBJ_DEFAULT_CAMERA_DATAEf  (source: registry)
+// original name (E3 debug build): sa::EVENT::calcValue_objDefault(sa::BIN_CAMERA_DATA_WK&, sa::OBJ_DEFAULT_CAMERA_DATA&, float)
+
+namespace sa { class BIN_CAMERA_DATA_WK; }
+namespace sa { class OBJ_DEFAULT_CAMERA_DATA; }
+
+namespace sa {
+
+
+// class_layouts: sa::BIN_CAMERA_DATA_WK size=32 (DWARF)
+struct BIN_CAMERA_DATA_WKLayout {
+    f32 eyex;     // 0x00
+    f32 eyey;     // 0x04
+    f32 eyez;     // 0x08
+    f32 centerx;  // 0x0c
+    f32 centery;  // 0x10
+    f32 centerz;  // 0x14
+    f32 camroll;  // 0x18
+    f32 camfov;   // 0x1c
+};
+
+/* sa::EVENT::calcValue_objDefault(sa::BIN_CAMERA_DATA_WK&, sa::OBJ_DEFAULT_CAMERA_DATA&, float) */
+void EVENT::calcValue_objDefault(sa::BIN_CAMERA_DATA_WK& camera, sa::OBJ_DEFAULT_CAMERA_DATA& objDefaultCameraData, float frame) {
+    BIN_CAMERA_DATA_WKLayout* cam = reinterpret_cast<BIN_CAMERA_DATA_WKLayout*>(&camera);
+    u8* obj = reinterpret_cast<u8*>(&objDefaultCameraData);
+
+    cam->eyex    =  calcValue_230f10(frame, obj + 0x00, 2, 0);
+    cam->eyey    = -calcValue_230f10(frame, obj + 0x20, 2, 0);
+    cam->eyez    = -calcValue_230f10(frame, obj + 0x40, 2, 0);
+    cam->centerx =  calcValue_230f10(frame, obj + 0x60, 2, 0);
+    cam->centery = -calcValue_230f10(frame, obj + 0x80, 2, 0);
+    cam->centerz = -calcValue_230f10(frame, obj + 0xa0, 2, 0);
+    cam->camroll =  calcValue_230f10(frame, obj + 0xc0, 2, 0) * 3.14159274f / 180.0f;
+    cam->camfov  =  calcValue_230f10(frame, obj + 0xe0, 2, 0);
+}
+}  // namespace sa

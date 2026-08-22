@@ -16,6 +16,7 @@ STOP file, endpoint unreachable for > 10 min.
 from __future__ import annotations
 
 import argparse
+import csv
 import json
 import shutil
 import subprocess
@@ -32,6 +33,13 @@ STATE = rc.RIG_OUT / "campaign_state.json"
 QUEUE = rc.RIG_OUT / "queue.tsv"
 PY = sys.executable
 TOOLS = Path(__file__).resolve().parent
+
+# conf/tier values seen in the E3 pipeline's TSVs (out/e3pilot/pilot.tsv,
+# pilot_big.tsv, out/names/map_functions.tsv): higher is a stronger prior that
+# the row is a real match, not just plausible. Unrecognized values rank last.
+_SEED_TIER = {"seed": 5, "high": 4, "sim-vt-high": 4, "sim-high": 4,
+              "med": 3, "sim-vt-med": 3, "sim-med": 3,
+              "sim-sandwich": 2, "sim-low": 1, "low": 1}
 
 
 def sh(cmd: list[str], **kw) -> subprocess.CompletedProcess:
@@ -54,6 +62,69 @@ def endpoint_up(url: str, wait_s: int = 600) -> bool:
         except Exception:
             time.sleep(15)
     return False
+
+
+def write_seed_queue(seed_file: Path, out_path: Path, *, tier: int | None,
+                     min_size: int | None, max_size: int | None, limit: int) -> int:
+    """Write out_path as a scheduler.py-shaped queue.tsv from a TSV of addresses
+    with priors, e.g. out/e3pilot/pilot_big.tsv from the E3 mapping pipeline
+    (columns: ee_addr, size, ..., mangled, demangled, ..., conf). Used by
+    --seed-file to drive a campaign toward E3-mapped, high-confidence functions
+    instead of scheduler.py's own (E3-agnostic) heuristics. See
+    docs/rig/E3_CAMPAIGN.md for the exact seeding command.
+
+    Rows already matched (layout_status mode != asm) or parked are dropped, the
+    same as scheduler.py; the rest are ranked by (confidence tier, size) desc,
+    biggest bytes at the highest confidence first."""
+    if tier == 1:
+        min_size, max_size = 80, 200
+    elif tier == 2:
+        min_size, max_size = 200, 500
+    elif tier == 3:
+        min_size, max_size = 500, 1000
+
+    status = rc.layout_status()
+    from list_candidates import parked_addrs
+    parked = parked_addrs()
+
+    rows = []
+    with seed_file.open(newline="") as f:
+        for r in csv.DictReader(f, delimiter="\t"):
+            araw = r.get("ee_addr") or r.get("addr")
+            if not araw:
+                continue
+            try:
+                addr = int(araw, 16)
+                size = int(r.get("size") or 0)
+            except ValueError:
+                continue
+            if status.get(addr, ("asm", ""))[0] != "asm":
+                continue
+            if addr in parked:
+                continue
+            if min_size is not None and size < min_size:
+                continue
+            if max_size is not None and size > max_size:
+                continue
+            conf = r.get("conf") or r.get("confidence") or ""
+            rows.append({
+                "addr": f"0x{addr:08x}", "size": size,
+                "symbol": r.get("mangled") or r.get("symbol") or "",
+                "score": _SEED_TIER.get(conf, 0), "n_calls": "",
+                "confidence": conf,
+                "reasons": f"seeded from {seed_file.name} (conf={conf or 'unknown'})",
+            })
+    rows.sort(key=lambda x: (-x["score"], -x["size"], x["addr"]))
+    rows = rows[:limit]
+
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    with out_path.open("w", newline="") as f:
+        w = csv.writer(f, delimiter="\t", lineterminator="\n")
+        w.writerow(["addr", "size", "symbol", "score", "n_calls", "confidence", "reasons"])
+        for r in rows:
+            w.writerow([r["addr"], r["size"], r["symbol"], r["score"], r["n_calls"],
+                       r["confidence"], r["reasons"]])
+    return len(rows)
 
 
 def queue_rows() -> int:
@@ -94,6 +165,11 @@ def main() -> int:
     ap.add_argument("--min-size", type=int)
     ap.add_argument("--max-size", type=int)
     ap.add_argument("--namespace")
+    ap.add_argument("--seed-file",
+                    help="TSV of addresses with priors (ee_addr/addr, size, conf columns; "
+                         "e.g. out/e3pilot/pilot_big.tsv from the E3 mapping pipeline) to "
+                         "rank the queue by instead of scheduler.py's heuristics -- see "
+                         "docs/rig/E3_CAMPAIGN.md")
     ap.add_argument("--twins", type=int, default=150)
     ap.add_argument("--endpoint", default="http://spark-e3f4.local:8000/v1")
     ap.add_argument("--model", default="qwen3.8-27b")
@@ -143,17 +219,23 @@ def main() -> int:
             return 1
 
         print(f"== round {k}/{args.rounds} ==", flush=True)
-        sched = [PY, TOOLS / "scheduler.py", "--limit", str(max(2 * count, 40)),
-                 "--twins", str(args.twins)]
-        if args.tier:
-            sched += ["--tier", str(args.tier)]
-        if args.min_size is not None:
-            sched += ["--min-size", str(args.min_size)]
-        if args.max_size is not None:
-            sched += ["--max-size", str(args.max_size)]
-        if args.namespace:
-            sched += ["--namespace", args.namespace]
-        sh(sched)
+        if args.seed_file:
+            n = write_seed_queue(Path(args.seed_file), QUEUE, tier=args.tier,
+                                 min_size=args.min_size, max_size=args.max_size,
+                                 limit=max(2 * count, 40))
+            print(f"wrote {n} rows to {QUEUE} from {args.seed_file}", flush=True)
+        else:
+            sched = [PY, TOOLS / "scheduler.py", "--limit", str(max(2 * count, 40)),
+                     "--twins", str(args.twins)]
+            if args.tier:
+                sched += ["--tier", str(args.tier)]
+            if args.min_size is not None:
+                sched += ["--min-size", str(args.min_size)]
+            if args.max_size is not None:
+                sched += ["--max-size", str(args.max_size)]
+            if args.namespace:
+                sched += ["--namespace", args.namespace]
+            sh(sched)
         if queue_rows() == 0:
             print("queue exhausted — campaign done")
             notify("KH2 campaign done", "queue exhausted")

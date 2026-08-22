@@ -1,0 +1,1088 @@
+ee_addr	ppc_addr	votes	c_ident	mangled	demangled	dwarf_type
+0032b91c	0084cac0	14.0	SystemTask	SystemTask	SystemTask	TASK_MANAGER *
+0032b948	00742ecc	1.0	vtbl__TASK_MANAGER	_ZTV12TASK_MANAGER	vtable for TASK_MANAGER	
+0032b968	0084b6d0	28.0	FIELD__Mode	_ZN5FIELD4ModeE	FIELD::Mode	GAME_MODE
+0032b994	0084b6fc	1.0	FIELD__StartArea	_ZN5FIELD9StartAreaE	FIELD::StartArea	AREA *
+0032b998	007e90f0	1.0	CacheBuffDestroy	CacheBuffDestroy	CacheBuffDestroy	bool
+0032b9cc	007e95c8	4.0	TITLE__Allocator	_ZN5TITLE9AllocatorE	TITLE::Allocator	kn::MemoryAllocator *
+0032b9d8	007e95c0	2.0	TITLE__m_Stat	_ZN5TITLE6m_StatE	TITLE::m_Stat	TITLE::Stat
+0032ba14	007e9524	19.0	MENU__Allocator	_ZN4MENU9AllocatorE	MENU::Allocator	kn::MemoryAllocator *
+0032ba18	007e9528	3.0	MENU__ObjAllocator	_ZN4MENU12ObjAllocatorE	MENU::ObjAllocator	kn::MemoryAllocator *
+0032ba1c	007e9518	2.0	s_isPauseDisable	s_isPauseDisable	s_isPauseDisable	bool
+0032ba20	007e951c	2.0	s_ReserveType	s_ReserveType	s_ReserveType	int
+0032ba24	008f4be8	7.0	MENU__m_GMode	_ZN4MENU7m_GModeE	MENU::m_GMode	int
+0032ba28	008f4be4	3.0	MENU__m_MenuRunning	_ZN4MENU13m_MenuRunningE	MENU::m_MenuRunning	BOOL_1
+0032ba2c	008f4bec	2.0	MENU__m_MapJump	_ZN4MENU9m_MapJumpE	MENU::m_MapJump	int
+0032ba30	008f4bf0	4.0	MENU__m_SetAllocator	_ZN4MENU14m_SetAllocatorE	MENU::m_SetAllocator	BOOL_1
+0032ba34	007e9520	2.0	MENU__m_CallBack	_ZN4MENU10m_CallBackE	MENU::m_CallBack	MenuCallBack
+0032ba48	0084b828	8.0	GUMIBATTLE__Mode	_ZN10GUMIBATTLE4ModeE	GUMIBATTLE::Mode	GAME_MODE
+0032ba74	007e90f4	2.0	GUMIBATTLE__Allocator	_ZN10GUMIBATTLE9AllocatorE	GUMIBATTLE::Allocator	kn::MemoryAllocator *
+0032ba78	007e9100	4.0	GUMIBATTLE__m_PauseParam	_ZN10GUMIBATTLE12m_PauseParamE	GUMIBATTLE::m_PauseParam	GUMIBATTLE::PauseParam *
+0032ba7c	0084b854	1.0	GUMIBATTLE__StageNo	_ZN10GUMIBATTLE7StageNoE	GUMIBATTLE::StageNo	int
+0032bad8	0090611c	3.0	AREA__IsIn	_ZN4AREA4IsInE	AREA::IsIn	BOOL_1
+0032bae0	00906108	56.0	AREA__Current	_ZN4AREA7CurrentE	AREA::Current	AREA
+0032bb1c	007e95d0	5.0	Allocator	Allocator	Allocator	kn::MemoryAllocator *
+0032bb20	007e95d4	1.0	TaskMapJump	TaskMapJump	TaskMapJump	TASK *
+0032bb30	008f4d50	108.0	SaveRam	SaveRam	SaveRam	SAVERAM
+0033caf4	007e9534	12.0	REGION__Lang	_ZN6REGION4LangE	REGION::Lang	const char *
+0033cbb0	00905e5c	3.0	SHOP__m_isRunning	_ZN4SHOP11m_isRunningE	SHOP::m_isRunning	BOOL_1
+0033cc38	007ef1d4	2.0	kn__cameraMode	_ZN2kn10cameraModeE	kn::cameraMode	int
+0033cc3c	007ef1d8	1.0	kn__cameraModeSave	_ZN2kn14cameraModeSaveE	kn::cameraModeSave	int
+0033cc40	007ef1dc	3.0	kn__cameraNumber	_ZN2kn12cameraNumberE	kn::cameraNumber	int
+0033cc44	007ef1e0	4.0	kn__cameraMulti	_ZN2kn11cameraMultiE	kn::cameraMulti	bool
+0033cc64	007f6970	2.0	kn__VU1Draw__packet_buffer_	_ZN2kn7VU1Draw14packet_buffer_E	kn::VU1Draw::packet_buffer_	void *
+0033cc68	00a2f1f0	3.0	kn__VU1Draw__draw_obj_max_	_ZN2kn7VU1Draw13draw_obj_max_E	kn::VU1Draw::draw_obj_max_	u_int
+0033cc70	007f6978	2.0	kn__VU1Draw__shadow_queue_	_ZN2kn7VU1Draw13shadow_queue_E	kn::VU1Draw::shadow_queue_	kn::DrawShadowQueue *
+00340ea8	00a3341c	1.0	kn__VU1Draw__temporaryMomoryPtr_	_ZN2kn7VU1Draw19temporaryMomoryPtr_E	kn::VU1Draw::temporaryMomoryPtr_	BUFFER4 *
+00340ed4	00a33444	1.0	kn__VU1Draw__phase_	_ZN2kn7VU1Draw6phase_E	kn::VU1Draw::phase_	kn::VU1Draw::PHASE
+00340ed8	00a33448	4.0	kn__VU1Draw__context_	_ZN2kn7VU1Draw8context_E	kn::VU1Draw::context_	kn::VU1DrawContext
+00341060	007f6a20	1.0	kn__shadowTextureSoftSmallPacket	_ZN2kn28shadowTextureSoftSmallPacketE	kn::shadowTextureSoftSmallPacket	ULONGLONG[66]
+00341270	007f6e40	1.0	kn__shadowTextureSoftLargePacket	_ZN2kn28shadowTextureSoftLargePacketE	kn::shadowTextureSoftLargePacket	ULONGLONG[66]
+00341480	007f6c30	1.0	kn__shadowTextureSoftMiddlePacket	_ZN2kn29shadowTextureSoftMiddlePacketE	kn::shadowTextureSoftMiddlePacket	ULONGLONG[66]
+00341700	00a1ca70	3.0	kn__Friend__battleStatusOld	_ZN2kn6Friend15battleStatusOldE	kn::Friend::battleStatusOld	BOOL_1
+00341708	007ef218	19.0	kn__Friend__partyChara	_ZN2kn6Friend10partyCharaE	kn::Friend::partyChara	YS::PARTY *[3]
+00341780	007ef224	3.0	kn__Friend__warpLevel	_ZN2kn6Friend9warpLevelE	kn::Friend::warpLevel	kn::Friend::WARP_LEVEL
+003417a8	00a1cb00	1.0	kn__Friend__playerAttackerNum	_ZN2kn6Friend17playerAttackerNumE	kn::Friend::playerAttackerNum	int
+003417b0	00a1cb04	17.0	kn__Friend__playerTarget	_ZN2kn6Friend12playerTargetE	kn::Friend::playerTarget	YS::TARGET
+003417c4	007ef228	2.0	kn__Friend__playerTargetNotifyObj	_ZN2kn6Friend21playerTargetNotifyObjE	kn::Friend::playerTargetNotifyObj	YS::OBJ *
+00345b28	007f5550	3.0	LS_361_func_tbl	LS.361.func_tbl	LS.361.func_tbl	void (kn::Friend::*[12]
+00345cf0	00745678	5.0	vtbl__kn__FriendPersonality	_ZTVN2kn17FriendPersonalityE	vtable for kn::FriendPersonality	
+00345d30	007f56c8	1.0	kn__item_id_tbl	_ZN2kn11item_id_tblE	kn::item_id_tbl	short[7]
+00345d32	00701a1a	1.0	LS_30_LV_1	LS.30.LV.1	LS.30.LV.1	
+00345f10	007f7988	1.0	kn__actTbl	_ZN2kn6actTblE	kn::actTbl	kn::FriendAction[20]
+003461e0	00746408	3.0	vtbl__kn__Donald	_ZTVN2kn6DonaldE	vtable for kn::Donald	
+00346690	007f5d98	1.0	kn__actTbl_2	_ZN2kn6actTblE	kn::actTbl	kn::FriendAction[8]
+003467b0	00745aa8	3.0	vtbl__kn__Pin	_ZTVN2kn3PinE	vtable for kn::Pin	
+00346998	007f5bdc	1.0	kn__actTbl_3	_ZN2kn6actTblE	kn::actTbl	kn::FriendAction[10]
+00346b00	007459c0	3.0	vtbl__kn__Mulan	_ZTVN2kn5MulanE	vtable for kn::Mulan	
+00346eb8	007f5a1c	1.0	kn__actTbl_4	_ZN2kn6actTblE	kn::actTbl	kn::FriendAction[11]
+00347048	00745738	3.0	vtbl__kn__Jack	_ZTVN2kn4JackE	vtable for kn::Jack	
+00347050	007f574c	1.0	kn__actTbl_5	_ZN2kn6actTblE	kn::actTbl	kn::FriendAction[18]
+00347400	007f5ed8	1.0	kn__actTbl_6	_ZN2kn6actTblE	kn::actTbl	kn::FriendAction[9]
+00347548	00745ae8	3.0	vtbl__kn__Riku	_ZTVN2kn4RikuE	vtable for kn::Riku	
+003476e8	00745c00	2.0	vtbl__kn__Stitch	_ZTVN2kn6StitchE	vtable for kn::Stitch	
+00347728	007f56d8	1.0	kn__actTbl_7	_ZN2kn6actTblE	kn::actTbl	kn::FriendAction[2]
+00347798	007456b8	3.0	vtbl__kn__Genie	_ZTVN2kn5GenieE	vtable for kn::Genie	
+003477d8	007f5d70	1.0	kn__Peterpan_actTbl	_ZN2kn15Peterpan_actTblE	kn::Peterpan_actTbl	kn::FriendAction[1]
+00347800	00745a68	3.0	vtbl__kn__Peterpan	_ZTVN2kn8PeterpanE	vtable for kn::Peterpan	
+00347840	00745c98	3.0	vtbl__kn__Tink	_ZTVN2kn4TinkE	vtable for kn::Tink	
+00347880	007f7960	1.0	kn__ChickenLittle_actTbl	_ZN2kn20ChickenLittle_actTblE	kn::ChickenLittle_actTbl	kn::FriendAction[1]
+003478a8	007463c8	3.0	vtbl__kn__ChickenLittle	_ZTVN2kn13ChickenLittleE	vtable for kn::ChickenLittle	
+00347930	007f5bd4	1.0	kn__ModelObj__mobjLinkTop	_ZN2kn8ModelObj11mobjLinkTopE	kn::ModelObj::mobjLinkTop	kn::ModelObj *
+00347938	007457a8	2.0	vtbl__kn__Model	_ZTVN2kn5ModelE	vtable for kn::Model	
+003479a0	00745810	3.0	vtbl__kn__ModelBG	_ZTVN2kn7ModelBGE	vtable for kn::ModelBG	
+00347a20	007458e0	3.0	vtbl__kn__ModelSKL	_ZTVN2kn8ModelSKLE	vtable for kn::ModelSKL	
+00347a88	00745878	3.0	vtbl__kn__ModelMulti	_ZTVN2kn10ModelMultiE	vtable for kn::ModelMulti	
+00347a90	007214b1	1.0	LS_46_LV_4	LS.46.LV.4	LS.46.LV.4	
+00347b80	00745948	4.0	vtbl__kn__Motion	_ZTVN2kn6MotionE	vtable for kn::Motion	
+00347ba8	00745970	3.0	vtbl__kn__MotionPrototype0	_ZTVN2kn16MotionPrototype0E	vtable for kn::MotionPrototype0	
+00347bd0	00745998	3.0	vtbl__kn__MotionRAW	_ZTVN2kn9MotionRAWE	vtable for kn::MotionRAW	
+00347bf8	00746318	4.0	vtbl__kn__AnimationWork	_ZTVN2kn13AnimationWorkE	vtable for kn::AnimationWork	
+00347c28	00745c40	3.0	vtbl__kn__TEXAnmWork	_ZTVN2kn10TEXAnmWorkE	vtable for kn::TEXAnmWork	
+00347c58	00745d18	3.0	vtbl__kn__UVScrollWork	_ZTVN2kn12UVScrollWorkE	vtable for kn::UVScrollWork	
+00347c88	00a2f120	7.0	kn__Vif1__buffer_	_ZN2kn4Vif17buffer_E	kn::Vif1::buffer_	kn::Vif1PacketBuffer
+00347cf0	007f5d6c	4.0	kn__ObjObserver__s_top	_ZN2kn11ObjObserver5s_topE	kn::ObjObserver::s_top	kn::ObjObserver *
+00347cf8	00745a00	1.0	vtbl__kn__ObjObserver	_ZTVN2kn11ObjObserverE	vtable for kn::ObjObserver	
+00347d08	007f7ca8	1.0	kn__EffectObserver__s_top	_ZN2kn14EffectObserver5s_topE	kn::EffectObserver::s_top	kn::EffectObserver *
+00347d56	009068f8	2.0	dk__BGM__s_gameOverChangeType	_ZN2dk3BGM20s_gameOverChangeTypeE	dk::BGM::s_gameOverChangeType	BOOL_1
+00347d58	007ea668	3.0	dk__s_eventArticles	_ZN2dk15s_eventArticlesE	dk::s_eventArticles	int
+00347d5c	007ea66c	2.0	dk__s_image	_ZN2dk7s_imageE	dk::s_image	dk::SpriteImage *
+00347d60	007ea670	3.0	dk__s_event	_ZN2dk7s_eventE	dk::s_event	dk::TREASURE_EVENT_INFO *
+00347d64	007ea674	5.0	dk__s_info	_ZN2dk6s_infoE	dk::s_info	dk::TREASURE_INFO *
+00347d88	007442b0	3.0	vtbl__dk__TREASURE_EVENT_INFO	_ZTVN2dk19TREASURE_EVENT_INFOE	vtable for dk::TREASURE_EVENT_INFO	
+00347dc8	00744270	2.0	vtbl__dk__TREASURE_BOX_INFO	_ZTVN2dk17TREASURE_BOX_INFOE	vtable for dk::TREASURE_BOX_INFO	
+00347e08	00a09c90	4.0	dk__Pause__	_ZN2dk5Pause32_GLOBAL__N__9_pause_cpp_d0933c4c14s_pauseDisableE	dk::Pause::(anonymous namespace)::s_pauseDisable	u_int
+00347e38	00744228	17.0	vtbl__dk__SpriteMessage	_ZTVN2dk13SpriteMessageE	vtable for dk::SpriteMessage	
+00347e58	00744208	118.0	vtbl__dk__Sprite	_ZTVN2dk6SpriteE	vtable for dk::Sprite	
+00347f80	007ea0ec	98.0	dk__Obj2D__sm_manager_ptr	_ZN2dk5Obj2D14sm_manager_ptrE	dk::Obj2D::sm_manager_ptr	dk::Obj2D::MANAGER *
+00347f90	00743ef0	85.0	vtbl__dk__Obj2D	_ZTVN2dk5Obj2DE	vtable for dk::Obj2D	
+00347ff4	007e9bd8	2.0	dk__s_readConfigCommand	_ZN2dk19s_readConfigCommandE	dk::s_readConfigCommand	bool
+00347ff8	00a08fc8	4.0	dk__Monochrome__s_currentType	_ZN2dk10Monochrome13s_currentTypeE	dk::Monochrome::s_currentType	int
+00348050	007e96b0	6.0	dk__s_image_2	_ZN2dk7s_imageE	dk::s_image	dk::SpriteImage *
+00348054	007e96b4	4.0	dk__s_recsp	_ZN2dk7s_recspE	dk::s_recsp	YS::CLASS_BLOCK<dk::ReactionDecideSprite, 32> *
+00348058	007e96b8	2.0	dk__s_sp	_ZN2dk4s_spE	dk::s_sp	YS::CLASS_BLOCK<dk::COMMAND_ONE, 36> *
+0034805c	007e96bc	3.0	dk__s_stock_draw_limit	_ZN2dk18s_stock_draw_limitE	dk::s_stock_draw_limit	int
+003484a0	007e9aec	9.0	dk__s_commanddraw	_ZN2dk13s_commanddrawE	dk::s_commanddraw	dk::COMMAND_DRAW *
+003484a4	007e9af0	2.0	dk__s_commandSkip	_ZN2dk13s_commandSkipE	dk::s_commandSkip	bool
+00348548	007e9b88	1.0	dk__reactionTable	_ZN2dk13reactionTableE	dk::reactionTable	int[2][6]
+00348588	007431f8	3.0	vtbl__dk__COMMAND_DRAW	_ZTVN2dk12COMMAND_DRAWE	vtable for dk::COMMAND_DRAW	
+003485a8	007431d8	3.0	vtbl__dk__COMMAND_ONE	_ZTVN2dk11COMMAND_ONEE	vtable for dk::COMMAND_ONE	
+003485c8	007431b8	1.0	vtbl__dk__ReactionDecideSprite	_ZTVN2dk20ReactionDecideSpriteE	vtable for dk::ReactionDecideSprite	
+003485fc	007ea054	3.0	dk__s_drawExec	_ZN2dk10s_drawExecE	dk::s_drawExec	bool
+00348638	00a07bf8	4.0	dk__s_gauge	_ZN2dk7s_gaugeE	dk::s_gauge	dk::GAUGE
+003486a0	007ea0e0	3.0	dk__s_image_3	_ZN2dk7s_imageE	dk::s_image	dk::SpriteImage *
+003486a4	007ea0e4	3.0	dk__s_lockon	_ZN2dk8s_lockonE	dk::s_lockon	YS::CLASS_BLOCK<dk::LockOn, 9> *
+003486a8	00744248	3.0	vtbl__dk__Sprite3D	_ZTVN2dk8Sprite3DE	vtable for dk::Sprite3D	
+00348700	007ea060	3.0	dk__JumpEffect__sm_outExist	_ZN2dk10JumpEffect11sm_outExistE	dk::JumpEffect::sm_outExist	bool
+00348704	00a08218	1.0	dk__JumpEffect__sm_effectType	_ZN2dk10JumpEffect13sm_effectTypeE	dk::JumpEffect::sm_effectType	u_int
+00348710	00a09170	11.0	dk__	_ZN2dk37_GLOBAL__N__13_objcamera_cpp_81f22b8514s_playerCameraE	dk::(anonymous namespace)::s_playerCamera	dk::ObjCamera
+00348800	007ea160	9.0	dk__Octree__s_drawTree	_ZN2dk6Octree10s_drawTreeE	dk::Octree::s_drawTree	dk::OctDrawFile *
+00348804	007ea164	16.0	dk__Octree__s_collTree	_ZN2dk6Octree10s_collTreeE	dk::Octree::s_collTree	dk::OctCollFile *
+00348808	007ea168	5.0	dk__Octree__s_cameraTree	_ZN2dk6Octree12s_cameraTreeE	dk::Octree::s_cameraTree	dk::OctCollFile *
+0034880c	007ea16c	4.0	dk__Octree__s_colorTree	_ZN2dk6Octree11s_colorTreeE	dk::Octree::s_colorTree	dk::OctCollFile *
+00348810	007ea170	3.0	dk__Octree__s_wallTree	_ZN2dk6Octree10s_wallTreeE	dk::Octree::s_wallTree	dk::OctCollFile *
+00348814	007ea174	3.0	dk__Octree__s_moonTree	_ZN2dk6Octree10s_moonTreeE	dk::Octree::s_moonTree	dk::OctCollFile *
+00348818	007ea17c	5.0	dk__Octree__s_drawMapModel	_ZN2dk6Octree14s_drawMapModelE	dk::Octree::s_drawMapModel	dk::DrawMapModel *
+0034881c	00a094e0	2.0	dk__Octree__s_spotBlend	_ZN2dk6Octree11s_spotBlendE	dk::Octree::s_spotBlend	BOOL_1
+0034881e	00a094e2	2.0	dk__Octree__s_skipAll	_ZN2dk6Octree9s_skipAllE	dk::Octree::s_skipAll	BOOL_1
+0034881f	007ea178	2.0	dk__Octree__s_wallClip	_ZN2dk6Octree10s_wallClipE	dk::Octree::s_wallClip	BOOL_1
+00348d68	0090629c	5.0	dk__Area__	_ZN2dk4Area31_GLOBAL__N__8_area_cpp_018a842e9s_mapfileE	dk::Area::(anonymous namespace)::s_mapfile	dk::MapFile
+00349268	00a08ab0	3.0	dk__LoopDemo__	_ZN2dk8LoopDemo36_GLOBAL__N__12_loopdemo_cpp_f948158f10s_loopDemoE	dk::LoopDemo::(anonymous namespace)::s_loopDemo	bool
+0034926b	00a0a670	2.0	dk__SoftReset__	_ZN2dk9SoftReset37_GLOBAL__N__13_softreset_cpp_ce26954114s_resetDisableE	dk::SoftReset::(anonymous namespace)::s_resetDisable	bool
+00349270	00a0bb50	4.0	dk__Blur__s_ft4	_ZN2dk4Blur5s_ft4E	dk::Blur::s_ft4	dk::Ft4
+00349398	00a0bc78	2.0	dk__Blur__s_blurFrameCounter	_ZN2dk4Blur18s_blurFrameCounterE	dk::Blur::s_blurFrameCounter	float
+0034939c	00a0bc7c	3.0	dk__Blur__s_blurFlag	_ZN2dk4Blur10s_blurFlagE	dk::Blur::s_blurFlag	BOOL_1
+0034939d	00a0bc7d	3.0	dk__Blur__s_blurType	_ZN2dk4Blur10s_blurTypeE	dk::Blur::s_blurType	BOOL_1
+0034939e	007ea6a8	1.0	LS_37_first	LS.37.first	LS.37.first	
+003493a0	00907020	1.0	dk___2	_ZN2dk31_GLOBAL__N__8_fade_cpp_65b4a55a9s_allFadeE	dk::(anonymous namespace)::s_allFade	dk::Fade
+003494b0	00907130	2.0	dk___3	_ZN2dk31_GLOBAL__N__8_fade_cpp_65b4a55a8s_3DFadeE	dk::(anonymous namespace)::s_3DFade	dk::Fade
+003495c0	00907240	3.0	dk___4	_ZN2dk31_GLOBAL__N__8_fade_cpp_65b4a55a15s_3DwideMaskTopE	dk::(anonymous namespace)::s_3DwideMaskTop	dk::Fade
+003496d0	00907350	3.0	dk___5	_ZN2dk31_GLOBAL__N__8_fade_cpp_65b4a55a18s_3DwideMaskBottomE	dk::(anonymous namespace)::s_3DwideMaskBottom	dk::Fade
+003497e0	00907460	3.0	dk___6	_ZN2dk31_GLOBAL__N__8_fade_cpp_65b4a55a13s_wideMaskTopE	dk::(anonymous namespace)::s_wideMaskTop	dk::Fade
+003498f0	00907570	3.0	dk___7	_ZN2dk31_GLOBAL__N__8_fade_cpp_65b4a55a16s_wideMaskBottomE	dk::(anonymous namespace)::s_wideMaskBottom	dk::Fade
+00349a00	00907680	2.0	dk___8	_ZN2dk31_GLOBAL__N__8_fade_cpp_65b4a55a16s_wideMaskBeforeE	dk::(anonymous namespace)::s_wideMaskBefore	dk::Fade
+00349b10	00907790	2.0	dk___9	_ZN2dk31_GLOBAL__N__8_fade_cpp_65b4a55a16s_allFadeDisableE	dk::(anonymous namespace)::s_allFadeDisable	bool
+00349dec	00a0ac2c	2.0	dk___10	_ZN2dk32_GLOBAL__N__9_timer_cpp_2289f6ee15s_updateDisableE	dk::(anonymous namespace)::s_updateDisable	volatile u_int
+00349df0	00a0ac30	2.0	dk___11	_ZN2dk32_GLOBAL__N__9_timer_cpp_2289f6ee11s_startTimeE	dk::(anonymous namespace)::s_startTime	int
+00349e00	00a0ac40	3.0	dk___12	_ZN2dk32_GLOBAL__N__9_timer_cpp_2289f6ee8s_upDownE	dk::(anonymous namespace)::s_upDown	bool
+00349e04	00a0ad68	1.0	dk__Vsync__s_vCount	_ZN2dk5Vsync8s_vCountE	dk::Vsync::s_vCount	volatile u_int
+00349e08	00a0ad6c	1.0	dk__Vsync__s_localVCount	_ZN2dk5Vsync13s_localVCountE	dk::Vsync::s_localVCount	volatile u_int
+00349e1c	00a0ad80	4.0	dk__Vsync__s_limit	_ZN2dk5Vsync7s_limitE	dk::Vsync::s_limit	u_int
+00349e20	007ea678	3.0	dk__Vsync__s_frameType	_ZN2dk5Vsync11s_frameTypeE	dk::Vsync::s_frameType	BOOL_1
+00349f00	00a07db0	2.0	dk__Dbuf__s_dbuf	_ZN2dk4Dbuf6s_dbufE	dk::Dbuf::s_dbuf	dk::Dbuf
+0034a3e0	00a07fa0	2.0	dk___13	_ZN2dk32_GLOBAL__N__9_gdbuf_cpp_1a438d0123s_clearDrawFrameDisableE	dk::(anonymous namespace)::s_clearDrawFrameDisable	bool
+0034a400	00a09ff0	3.0	dk__s_count	_ZN2dk7s_countE	dk::s_count	int
+0034a408	00a09ff4	3.0	dk__s_buff	_ZN2dk6s_buffE	dk::s_buff	int[8]
+0034a428	007ea7bc	3.0	dk__s_timer	_ZN2dk7s_timerE	dk::s_timer	dk::TIMER *
+0034a42c	007ea7c0	3.0	dk__s_informationWindow	_ZN2dk19s_informationWindowE	dk::s_informationWindow	dk::INFORMATION_WINDOW *
+0034a430	007ea7c4	2.0	dk__s_next_exp	_ZN2dk10s_next_expE	dk::s_next_exp	dk::NEXT_EXP *
+0034a434	007ea7c8	2.0	dk__s_get_munny	_ZN2dk11s_get_munnyE	dk::s_get_munny	dk::GET_MUNNY *
+0034a4f0	007ebca8	1.0	dk__numberTable	_ZN2dk11numberTableE	dk::numberTable	int[10]
+0034a518	007ebcd0	1.0	dk__numberSubTable	_ZN2dk14numberSubTableE	dk::numberSubTable	int[10]
+0034a540	00744f50	2.0	vtbl__dk__COUNTER	_ZTVN2dk7COUNTERE	vtable for dk::COUNTER	
+0034a560	00744d10	2.0	vtbl__dk__INFORMATION_WINDOW	_ZTVN2dk18INFORMATION_WINDOWE	vtable for dk::INFORMATION_WINDOW	
+0034a580	007ebc80	1.0	dk__numberTable_2	_ZN2dk11numberTableE	dk::numberTable	int[10]
+0034a5a8	00744e78	2.0	vtbl__dk__TIMER	_ZTVN2dk5TIMERE	vtable for dk::TIMER	
+0034a5c8	00744d30	2.0	vtbl__dk__MISSION_GAUGE	_ZTVN2dk13MISSION_GAUGEE	vtable for dk::MISSION_GAUGE	
+0034a610	00744f70	2.0	vtbl__dk__GET_MUNNY	_ZTVN2dk9GET_MUNNYE	vtable for dk::GET_MUNNY	
+0034a658	00744d50	2.0	vtbl__dk__NEXT_EXP	_ZTVN2dk8NEXT_EXPE	vtable for dk::NEXT_EXP	
+0034a6f0	007ea0dc	5.0	dk__s_info_2	_ZN2dk6s_infoE	dk::s_info	dk::LEVELUP_INFO *
+0034a718	007438c8	1.0	vtbl__dk__LEVEL_UP_SUMMON	_ZTVN2dk15LEVEL_UP_SUMMONE	vtable for dk::LEVEL_UP_SUMMON	
+0034a738	007438a8	1.0	vtbl__dk__LEVEL_UP_FORM	_ZTVN2dk13LEVEL_UP_FORME	vtable for dk::LEVEL_UP_FORM	
+0034a758	00743888	1.0	vtbl__dk__LEVEL_UP	_ZTVN2dk8LEVEL_UPE	vtable for dk::LEVEL_UP	
+0034a918	00744880	1.0	vtbl__dk__GAUGE_ENEMY	_ZTVN2dk11GAUGE_ENEMYE	vtable for dk::GAUGE_ENEMY	
+0034a990	00a0a420	2.0	dk__ScopeCamera__s_obj	_ZN2dk11ScopeCamera5s_objE	dk::ScopeCamera::s_obj	YS::OBJ *
+0034a9a0	00a0a430	3.0	dk__ScopeCamera__s_targetPos	_ZN2dk11ScopeCamera11s_targetPosE	dk::ScopeCamera::s_targetPos	kn::FVector
+0034a9b0	00a0c340	2.0	dk__DangleCamera__s_headPos	_ZN2dk12DangleCamera9s_headPosE	dk::DangleCamera::s_headPos	kn::FVector
+0034a9e8	00a0c378	2.0	dk__DangleCamera__s_startTrigger	_ZN2dk12DangleCamera14s_startTriggerE	dk::DangleCamera::s_startTrigger	BOOL_1
+0034a9f0	00a0a250	6.0	dk__ReactionCamera__s_activeTarget	_ZN2dk14ReactionCamera14s_activeTargetE	dk::ReactionCamera::s_activeTarget	YS::TARGET
+0034aa18	00a0a8ec	6.0	dk__TalkCamera__s_activeTarget	_ZN2dk10TalkCamera14s_activeTargetE	dk::TalkCamera::s_activeTarget	YS::TARGET
+0034aa70	00a0aa50	5.0	dk__TargetCamera__s_activeTarget	_ZN2dk12TargetCamera14s_activeTargetE	dk::TargetCamera::s_activeTarget	YS::TARGET
+0034aa90	007e964c	3.0	dk__s_blindCollision	_ZN2dk16s_blindCollisionE	dk::s_blindCollision	YS::COLLISION *
+0034aa94	007e9650	1.0	dk__s_max	_ZN2dk5s_maxE	dk::s_max	int
+0034aa98	007e9634	1.0	dk__s_counter	_ZN2dk9s_counterE	dk::s_counter	int
+0034aa9c	007e9638	2.0	dk__s_disableReason	_ZN2dk15s_disableReasonE	dk::s_disableReason	dk::BILLBOARD_DISABLE_REASON *
+0034aaa0	007e963c	3.0	dk__s_guide	_ZN2dk7s_guideE	dk::s_guide	dk::BILLBOARD_GUIDE *
+0034aaa4	007e9640	2.0	dk__s_place	_ZN2dk7s_placeE	dk::s_place	dk::BILLBOARD_PLACE *
+0034aaa8	007e9644	2.0	dk__s_placeM	_ZN2dk8s_placeME	dk::s_placeM	dk::BILLBOARD_PLACE_M *
+0034aaac	007e9648	1.0	dk__s_mapfile	_ZN2dk9s_mapfileE	dk::s_mapfile	dk::MapFile *
+0034aab0	007430c8	1.0	vtbl__dk__BILLBOARD_PLACE_M	_ZTVN2dk17BILLBOARD_PLACE_ME	vtable for dk::BILLBOARD_PLACE_M	
+0034aad0	007430a8	3.0	vtbl__dk__BILLBOARD_PLACE	_ZTVN2dk15BILLBOARD_PLACEE	vtable for dk::BILLBOARD_PLACE	
+0034aaf0	00743088	1.0	vtbl__dk__BILLBOARD_DISABLE_REASON	_ZTVN2dk24BILLBOARD_DISABLE_REASONE	vtable for dk::BILLBOARD_DISABLE_REASON	
+0034ab78	00744838	3.0	vtbl__dk__Exp	_ZTVN2dk3ExpE	vtable for dk::Exp	
+0034ae80	007ea41c	3.0	dk__s_radar	_ZN2dk7s_radarE	dk::s_radar	dk::Radar *
+0034af24	00a093a0	2.0	dk__ObjEntry__m_bopNum	_ZN2dk8ObjEntry8m_bopNumE	dk::ObjEntry::m_bopNum	int
+0034af28	00a093a4	2.0	dk__ObjEntry__m_offset	_ZN2dk8ObjEntry8m_offsetE	dk::ObjEntry::m_offset	int
+0034af30	00a093a8	3.0	dk__ObjEntry__m_createFlag	_ZN2dk8ObjEntry12m_createFlagE	dk::ObjEntry::m_createFlag	ULONGLONG
+0034af38	007ea6d0	2.0	dk__s_interpolate	_ZN2dk13s_interpolateE	dk::s_interpolate	bool
+0034af40	00a082c0	4.0	dk__KeyHoleJumpEffect__s_image	_ZN2dk17KeyHoleJumpEffect7s_imageE	dk::KeyHoleJumpEffect::s_image	YI::IMAGE
+0034b0e0	00a083a0	10.0	dk__KeyHoleJumpEffect__s_sequence	_ZN2dk17KeyHoleJumpEffect10s_sequenceE	dk::KeyHoleJumpEffect::s_sequence	YI::SEQUENCE
+0034b240	007ea058	5.0	dk__s_glow	_ZN2dk6s_glowE	dk::s_glow	dk::Glow *
+0034c6f0	00a08ac0	8.0	dk__Map__pax	_ZN2dk3Map3paxE	dk::Map::pax	ryj::PAX
+0034c70c	00a08adc	10.0	dk__Map__paxInit	_ZN2dk3Map7paxInitE	dk::Map::paxInit	bool
+0034c70d	00a08add	1.0	dk__Map__s_changeColorDisable	_ZN2dk3Map20s_changeColorDisableE	dk::Map::s_changeColorDisable	bool
+0034c710	00a08ae0	8.0	dk__Map__s_groupOnBit	_ZN2dk3Map12s_groupOnBitE	dk::Map::s_groupOnBit	ULONGLONG
+0034c718	007441c8	3.0	vtbl__dk__Sky	_ZTVN2dk3SkyE	vtable for dk::Sky	
+0034c738	007ea6a0	5.0	dk__BgObj__sm_allocator	_ZN2dk5BgObj12sm_allocatorE	dk::BgObj::sm_allocator	ALLOCATOR *
+0034c73c	007ea6a4	2.0	dk__BgObj__sm_mapfile	_ZN2dk5BgObj10sm_mapfileE	dk::BgObj::sm_mapfile	dk::MapFile *
+0034c748	00744598	2.0	vtbl__dk__BgObj	_ZTVN2dk5BgObjE	vtable for dk::BgObj	
+0034c770	007e9655	3.0	dk__Camera__singleCrossFade	_ZN2dk6Camera15singleCrossFadeE	dk::Camera::singleCrossFade	bool
+0034c771	007e9656	3.0	dk__Camera__multiCrossFade	_ZN2dk6Camera14multiCrossFadeE	dk::Camera::multiCrossFade	bool
+0034c772	007e9654	2.0	dk__Camera__s_kickFlag	_ZN2dk6Camera10s_kickFlagE	dk::Camera::s_kickFlag	bool
+0034c774	007e9658	3.0	dk__Camera__s_calctask	_ZN2dk6Camera10s_calctaskE	dk::Camera::s_calctask	TASK *
+0034c778	007e965c	3.0	dk__Camera__s_drawtask	_ZN2dk6Camera10s_drawtaskE	dk::Camera::s_drawtask	TASK *
+0034d788	0072664c	1.0	LS_44_LV_4	LS.44.LV.4	LS.44.LV.4	
+0034d7ac	007fe808	2.0	YS__SoftPadTable	_ZN2YS12SoftPadTableE	YS::SoftPadTable	const YS::SOFTPAD_TABLE *
+0034d800	02a949e8	3.0	YS__OPENFILE_HOLDER__OpenFile	_ZN2YS15OPENFILE_HOLDER8OpenFileE	YS::OPENFILE_HOLDER::OpenFile	YS::OPENFILE[4]
+0034d840	02a949e0	3.0	YS__FILE__Queue	_ZN2YS4FILE5QueueE	YS::FILE::Queue	YS::SLIST<YS::FILE::QUEUE, 0>
+0034d8a0	007fe85c	6.0	YS__VM__Current	_ZN2YS2VM7CurrentE	YS::VM::Current	YS::VM *
+0034d8a4	007fe860	2.0	YS__Executing	_ZN2YS9ExecutingE	YS::Executing	YS::VM *
+0034d8a8	02ab06b0	2.0	YS__Random	_ZN2YS6RandomE	YS::Random	RANDOM
+0034dca0	02a78f40	14.0	YS__CACHE_BUFF__HeaderList	_ZN2YS10CACHE_BUFF10HeaderListE	YS::CACHE_BUFF::HeaderList	YS::SLIST<YS::CACHE_BUFF::HEADER, 0>
+0034dcb0	007fe68c	2.0	YS__FlushBottom	_ZN2YS11FlushBottomE	YS::FlushBottom	char *
+0034dcb8	02a78f48	2.0	YS__CACHE_BUFF__ClearList	_ZN2YS10CACHE_BUFF9ClearListE	YS::CACHE_BUFF::ClearList	YS::SLIST<YS::CACHE_BUFF::HEADER, 0>
+0034e880	00750f14	3.0	vtbl__YS__TUTORIAL_PAUSE	_ZTVN2YS14TUTORIAL_PAUSEE	vtable for YS::TUTORIAL_PAUSE	
+0034e8a0	0074f4d0	11.0	vtbl__YI__WIN_SEQ	_ZTVN2YI7WIN_SEQE	vtable for YI::WIN_SEQ	
+0034e8b0	0074f198	7.0	vtbl__YS__VOICE_IOP	_ZTVN2YS9VOICE_IOPE	vtable for YS::VOICE_IOP	
+0034e948	007fe80c	89.0	YS__PLAYER__Player	_ZN2YS6PLAYER6PlayerE	YS::PLAYER::Player	YS::PLAYER *
+0034e94c	007fe810	2.0	YS__StunPlayer	_ZN2YS10StunPlayerE	YS::StunPlayer	YS::PLAYER *
+0034e958	02aa06e0	1.0	YS__PLAYER___vtable	_ZN2YS6PLAYER7_vtableE	YS::PLAYER::_vtable	YS::PLAYER::VTABLE<YS::PLAYER>
+0034ec70	02aa24a0	1.0	YS__PROGRESS__Table	_ZN2YS8PROGRESS5TableE	YS::PROGRESS::Table	YS::PROGRESS::TABLE *[19]
+0034ecc0	00c780f8	2.0	YS__AREADATA__BgFlag	_ZN2YS8AREADATA6BgFlagE	YS::AREADATA::BgFlag	ULONGLONG
+0034ecc8	00c78110	3.0	YS__AREADATA__BarrierFlag	_ZN2YS8AREADATA11BarrierFlagE	YS::AREADATA::BarrierFlag	ULONGLONG
+0034ecd0	00c78100	3.0	YS__AREADATA__WorkSize	_ZN2YS8AREADATA8WorkSizeE	YS::AREADATA::WorkSize	u_int
+0034ece0	00c78118	1.0	YS__AREADATA__NaviMap	_ZN2YS8AREADATA7NaviMapE	YS::AREADATA::NaviMap	u_int
+0034ece4	00c7811c	3.0	YS__AREADATA__MsgWall	_ZN2YS8AREADATA7MsgWallE	YS::AREADATA::MsgWall	int
+0034ece8	00c78120	4.0	YS__AREADATA__Camera	_ZN2YS8AREADATA6CameraE	YS::AREADATA::Camera	int
+0034ecf4	007fe65c	5.0	YS__AreaData	_ZN2YS8AreaDataE	YS::AreaData	YS::BINARC *
+0034ed00	007fe850	7.0	YS__UnitPt	_ZN2YS6UnitPtE	YS::UnitPt	int
+0034ed04	007fe854	2.0	YS__Player	_ZN2YS6PlayerE	YS::Player	YS::OBJ *
+0034edf8	007fe668	1.0	LS_192_motion_table	LS.192.motion_table	LS.192.motion_table	u_short[4]
+0034ee08	00c78d50	1.0	YS__BTLOBJ___vtable	_ZN2YS6BTLOBJ7_vtableE	YS::BTLOBJ::_vtable	YS::BTLOBJ::VTABLE<YS::BTLOBJ>
+0034ef10	0074ba38	2.0	vtbl__YS__ATTACK	_ZTVN2YS6ATTACKE	vtable for YS::ATTACK	
+0034f240	02aad548	46.0	YS__STATUS__Flag	_ZN2YS6STATUS4FlagE	YS::STATUS::Flag	YS::BITFLAG<, u_int>
+00350378	02a945b8	3.0	YS__EVENT__IsAreaStart	_ZN2YS5EVENT11IsAreaStartE	YS::EVENT::IsAreaStart	bool
+00350379	02a945b9	3.0	YS__EVENT__CanSkip	_ZN2YS5EVENT7CanSkipE	YS::EVENT::CanSkip	bool
+0035037c	007fe71c	17.0	YS__Current	_ZN2YS7CurrentE	YS::Current	YS::EVENT *
+00350438	02aaca60	2.0	YS__SIGNAL__LastGimmick	_ZN2YS6SIGNAL11LastGimmickE	YS::SIGNAL::LastGimmick	YS::OBJ *
+00350440	007fe858	2.0	YS__GroupPt	_ZN2YS7GroupPtE	YS::GroupPt	int
+00350750	0074bb90	3.0	vtbl__YS__ATTACK_OBJ	_ZTVN2YS10ATTACK_OBJE	vtable for YS::ATTACK_OBJ	
+00350790	007fe818	5.0	YS__Prize	_ZN2YS5PrizeE	YS::Prize	YS::PRIZE *
+003507a0	02aa1560	1.0	YS__PRIZE___vtable	_ZN2YS5PRIZE7_vtableE	YS::PRIZE::_vtable	YS::PRIZEOBJ::VTABLE<YS::PRIZE>
+00350800	02a9dc3c	10.0	YS__MagicData	_ZN2YS9MagicDataE	YS::MagicData	YS::MAGIC_DATA[6]
+00350910	02b74c20	1.0	YS__FIELDOBJ___vtable	_ZN2YS8FIELDOBJ7_vtableE	YS::FIELDOBJ::_vtable	YS::BTLOBJ::VTABLE<YS::FIELDOBJ>
+00350990	00c78960	3.0	YS__BG__BeltConveyor	_ZN2YS2BG12BeltConveyorE	YS::BG::BeltConveyor	kn::FVector
+00350a56	007fec3a	3.0	YS__IsSystemTutorialWindowOpen	_ZN2YS26IsSystemTutorialWindowOpenE	YS::IsSystemTutorialWindowOpen	bool
+00350ae8	0074f410	1.0	vtbl__YS__WINDOW_CHECK	_ZTVN2YS12WINDOW_CHECKE	vtable for YS::WINDOW_CHECK	
+00350b28	0074f3d0	1.0	vtbl__YS__WINDOW_TALK	_ZTVN2YS11WINDOW_TALKE	vtable for YS::WINDOW_TALK	
+00350ba8	0074f350	13.0	vtbl__YS__WINDOW_BASE	_ZTVN2YS11WINDOW_BASEE	vtable for YS::WINDOW_BASE	
+00350be8	0074f310	3.0	vtbl__YS__WINDOW_CREDIT	_ZTVN2YS13WINDOW_CREDITE	vtable for YS::WINDOW_CREDIT	
+00350c28	0074f2f0	3.0	vtbl__YS__WINDOW_OBJ2D	_ZTVN2YS12WINDOW_OBJ2DE	vtable for YS::WINDOW_OBJ2D	
+00350c48	0074f2b0	2.0	vtbl__YS__WINDOW	_ZTVN2YS6WINDOWE	vtable for YS::WINDOW	
+00350cd0	02ab383c	1.0	YS__BOSS__LastDeadEntryId	_ZN2YS4BOSS15LastDeadEntryIdE	YS::BOSS::LastDeadEntryId	OBJENTRY_ID
+00350df0	007fe734	5.0	YS__GameOver	_ZN2YS8GameOverE	YS::GameOver	YS::GAMEOVER *
+00350df8	007febd8	2.0	YS__CurrentTask	_ZN2YS11CurrentTaskE	YS::CurrentTask	TASK *
+00350e48	02aad680	1.0	YS__STDOBJ___vtable	_ZN2YS6STDOBJ7_vtableE	YS::STDOBJ::_vtable	YS::STDOBJ::VTABLE<YS::STDOBJ>
+00350e60	02aa0250	1.0	YS__PARTY___vtable	_ZN2YS5PARTY7_vtableE	YS::PARTY::_vtable	YS::PARTY::VTABLE<YS::PARTY>
+00350e8c	02a9d328	2.0	YS__LIGHT__IsHideBG	_ZN2YS5LIGHT8IsHideBGE	YS::LIGHT::IsHideBG	BOOL_1
+00350e98	02ab0fa0	2.0	YS__ZAKO___vtable	_ZN2YS4ZAKO7_vtableE	YS::ZAKO::_vtable	YS::BTLOBJ::VTABLE<YS::ZAKO>
+00350f18	007fe738	4.0	YS__Phase	_ZN2YS5PhaseE	YS::Phase	YS::PHASE
+00350f1c	007fe73c	2.0	YS__CachePic	_ZN2YS8CachePicE	YS::CachePic	int
+00351068	02ab3954	3.0	YS__BTLNPC__Carpet	_ZN2YS6BTLNPC6CarpetE	YS::BTLNPC::Carpet	YS::BTLNPC *
+00351078	02ab3950	1.0	YS__BTLNPC___vtable	_ZN2YS6BTLNPC7_vtableE	YS::BTLNPC::_vtable	YS::BTLOBJ::VTABLE<YS::BTLNPC>
+00351100	02aa05b8	1.0	YS__PIERROT___vtable	_ZN2YS7PIERROT7_vtableE	YS::PIERROT::_vtable	YS::BTLOBJ::VTABLE<YS::PIERROT>
+00351180	007fe700	1.0	YS__ChangeInTask	_ZN2YS12ChangeInTaskE	YS::ChangeInTask	TASK *
+00351184	007fed54	4.0	YS__Current_2	_ZN2YS7CurrentE	YS::Current	YS::CHANGEFORM *
+003511d0	02a9fbd0	1.0	YS__OBJ__LastCameraMatrix	_ZN2YS3OBJ16LastCameraMatrixE	YS::OBJ::LastCameraMatrix	kn::FMatrix
+00351214	02a9fc10	8.0	YS__OBJ__TaskManager	_ZN2YS3OBJ11TaskManagerE	YS::OBJ::TaskManager	TASK_MANAGER *
+00351220	0074d990	5.0	vtbl__YS__PLAYER_COMMAND	_ZTVN2YS14PLAYER_COMMANDE	vtable for YS::PLAYER_COMMAND	
+003513a8	02aac948	1.0	YS__SHOPPOINT___vtable	_ZN2YS9SHOPPOINT7_vtableE	YS::SHOPPOINT::_vtable	YS::STDOBJ::VTABLE<YS::SHOPPOINT>
+00351408	02a9de70	1.0	YS__MASSOBJ___vtable	_ZN2YS7MASSOBJ7_vtableE	YS::MASSOBJ::_vtable	YS::STDOBJ::VTABLE<YS::MASSOBJ>
+00351580	02b75360	1.0	YS__LARGEZAKO___vtable	_ZN2YS9LARGEZAKO7_vtableE	YS::LARGEZAKO::_vtable	YS::BTLOBJ::VTABLE<YS::LARGEZAKO>
+0035160c	007fed60	2.0	YS__IsDeadCrowd	_ZN2YS11IsDeadCrowdE	YS::IsDeadCrowd	bool
+00351670	007fed64	2.0	YS__Ex760ExpSheetNo	_ZN2YS15Ex760ExpSheetNoE	YS::Ex760ExpSheetNo	int
+00351674	007fed68	3.0	YS__Ex770ExpSheetNo	_ZN2YS15Ex770ExpSheetNoE	YS::Ex770ExpSheetNo	int
+00351d38	02aa2270	1.0	YS__PRIZEOBJ___vtable	_ZN2YS8PRIZEOBJ7_vtableE	YS::PRIZEOBJ::_vtable	YS::PRIZEOBJ::VTABLE<YS::PRIZEOBJ>
+00351d98	007fe828	2.0	YS__PrizeMu	_ZN2YS7PrizeMuE	YS::PrizeMu	YS::PRIZE_MU *
+00351e08	007fe84c	1.0	YS__SummonThread	_ZN2YS12SummonThreadE	YS::SummonThread	TASK *
+00351eb8	02a9f318	13.0	YS__MUTEX__Limit	_ZN2YS5MUTEX5LimitE	YS::MUTEX::Limit	YS::MUTEX
+00351ec0	02a9f31c	15.0	YS__MUTEX__CampMenu	_ZN2YS5MUTEX8CampMenuE	YS::MUTEX::CampMenu	YS::MUTEX
+00351ec8	02a9f320	10.0	YS__MUTEX__Mission	_ZN2YS5MUTEX7MissionE	YS::MUTEX::Mission	YS::MUTEX
+00351f30	007fe840	3.0	YS__SacrificePt	_ZN2YS11SacrificePtE	YS::SacrificePt	int
+00351f34	007fed50	4.0	YS__Pref	_ZN2YS4PrefE	YS::Pref	const PREF_PARTY *
+00351fe4	007fe830	4.0	YS__PrizePo	_ZN2YS7PrizePoE	YS::PrizePo	YS::PRIZE_PO *
+00351ff0	02aa1b24	1.0	YS__PRIZE_PO___vtable	_ZN2YS8PRIZE_PO7_vtableE	YS::PRIZE_PO::_vtable	YS::PRIZEOBJ::VTABLE<YS::PRIZE_PO>
+00352050	007fe81c	7.0	YS__PrizeCa	_ZN2YS7PrizeCaE	YS::PrizeCa	YS::PRIZE_CA *
+003520c0	007fe838	1.0	YS__PrizeTt	_ZN2YS7PrizeTtE	YS::PrizeTt	YS::PRIZE_TT *
+00352130	02aa1548	47.0	YS__PREF__System	_ZN2YS4PREF6SystemE	YS::PREF::System	const PREF_SYSTEM *
+00352134	007fe814	2.0	YS__Pref_2	_ZN2YS4PrefE	YS::Pref	YS::BINARC *
+00352140	02ab3da8	1.0	YS__CROWD_EVENT___vtable	_ZN2YS11CROWD_EVENT7_vtableE	YS::CROWD_EVENT::_vtable	YS::CROWD_EVENT::VTABLE<YS::CROWD_EVENT>
+003521d0	007fed78	2.0	YS__LightCycle	_ZN2YS10LightCycleE	YS::LightCycle	YS::LIGHTCYCLE *
+003521e0	02aaeda0	1.0	YS__TRPLAYER___vtable	_ZN2YS8TRPLAYER7_vtableE	YS::TRPLAYER::_vtable	YS::PLAYER::VTABLE<YS::TRPLAYER>
+00352360	02a9e4d0	1.0	YS__MICKEY___vtable	_ZN2YS6MICKEY7_vtableE	YS::MICKEY::_vtable	YS::PLAYER::VTABLE<YS::MICKEY>
+00352400	007fe848	2.0	YS__Sora	_ZN2YS4SoraE	YS::Sora	YS::SORA *
+00352410	02aad2a8	1.0	YS__SORA___vtable	_ZN2YS4SORA7_vtableE	YS::SORA::_vtable	YS::PLAYER::VTABLE<YS::SORA>
+003524b8	02b75598	1.0	YS__LMPLAYER___vtable	_ZN2YS8LMPLAYER7_vtableE	YS::LMPLAYER::_vtable	YS::PLAYER::VTABLE<YS::LMPLAYER>
+00352558	0074cfc8	5.0	vtbl__YS__MISSION_GAUGE	_ZTVN2YS13MISSION_GAUGEE	vtable for YS::MISSION_GAUGE	
+00352580	0074cfa0	2.0	vtbl__YS__MISSION_COUNT	_ZTVN2YS13MISSION_COUNTE	vtable for YS::MISSION_COUNT	
+003525a0	0074cf78	2.0	vtbl__YS__MISSION_TIMER	_ZTVN2YS13MISSION_TIMERE	vtable for YS::MISSION_TIMER	
+003525c0	0074cf50	5.0	vtbl__YS__MISSION2D	_ZTVN2YS9MISSION2DE	vtable for YS::MISSION2D	
+003525e0	00750178	3.0	vtbl__YS__COMBOCOUNTER	_ZTVN2YS12COMBOCOUNTERE	vtable for YS::COMBOCOUNTER	
+00352668	007fe834	1.0	YS__PrizeTr	_ZN2YS7PrizeTrE	YS::PrizeTr	YS::PRIZE_TR *
+00352748	0074d018	1.0	vtbl__YS__MISSION_SCORE	_ZTVN2YS13MISSION_SCOREE	vtable for YS::MISSION_SCORE	
+00352770	007fe720	2.0	YS__SkipFlag	_ZN2YS8SkipFlagE	YS::SkipFlag	bool
+003527e0	007fed74	4.0	YS__Current_3	_ZN2YS7CurrentE	YS::Current	YS::INDICATION *
+00352878	02a94378	1.0	YS__ENEMYBASE___vtable	_ZN2YS9ENEMYBASE7_vtableE	YS::ENEMYBASE::_vtable	YS::BTLOBJ::VTABLE<YS::ENEMYBASE>
+00352908	02b75128	1.0	YS__JIGSAWPIECE___vtable	_ZN2YS11JIGSAWPIECE7_vtableE	YS::JIGSAWPIECE::_vtable	YS::STDOBJ::VTABLE<YS::JIGSAWPIECE>
+003529d0	0074f7d8	1.0	vtbl__YS__ZONE_CYLINDER	_ZTVN2YS13ZONE_CYLINDERE	vtable for YS::ZONE_CYLINDER	
+003529e8	0074f7f0	1.0	vtbl__YS__ZONE_INFINITY	_ZTVN2YS13ZONE_INFINITYE	vtable for YS::ZONE_INFINITY	
+00352a00	0074f7c0	1.0	vtbl__YS__ZONE_BOX	_ZTVN2YS8ZONE_BOXE	vtable for YS::ZONE_BOX	
+00352a18	0074f7a8	7.0	vtbl__YS__ZONE	_ZTVN2YS4ZONEE	vtable for YS::ZONE	
+00352a30	0074e968	2.0	vtbl__YS__SIZEBLOCK	_ZTVN2YS9SIZEBLOCKE	vtable for YS::SIZEBLOCK	
+00352a60	02a93b60	8.0	YS__CROWDOBJ__PlayerPos	_ZN2YS8CROWDOBJ9PlayerPosE	YS::CROWDOBJ::PlayerPos	kn::FVector
+00352a78	02a93b70	1.0	YS__CROWDOBJ___vtable	_ZN2YS8CROWDOBJ7_vtableE	YS::CROWDOBJ::_vtable	YS::STDOBJ::VTABLE<YS::CROWDOBJ>
+00352ae0	00a8ced0	14.0	ryj__EffectList	_ZN3ryj10EffectListE	ryj::EffectList	YS::SLIST<ryj::EFFECT, 0>
+00352ae8	00a8ced8	5.0	ryj__EffectNum	_ZN3ryj9EffectNumE	ryj::EffectNum	int
+00352af0	007fd1f8	3.0	ryj__TexCommonIsLoaded	_ZN3ryj17TexCommonIsLoadedE	ryj::TexCommonIsLoaded	bool
+00352af1	007fd1f9	4.0	ryj__StopEffectTask	_ZN3ryj14StopEffectTaskE	ryj::StopEffectTask	bool
+00352b00	00acf700	1.0	ryj__VFrustum	_ZN3ryj8VFrustumE	ryj::VFrustum	dk::ViewFrustum
+00352b40	007498f8	2.0	vtbl__ryj__EFFECT	_ZTVN3ryj6EFFECTE	vtable for ryj::EFFECT	
+00352b50	007fd240	5.0	ryj__ModeNo	_ZN3ryj6ModeNoE	ryj::ModeNo	int
+00352bd0	00807488	5.0	ryj__LastXemnusLaser	_ZN3ryj15LastXemnusLaserE	ryj::LastXemnusLaser	ryj::LAST_XEMNUS_LASER *
+00354680	00a8ad88	3.0	ppvReferencePosList	ppvReferencePosList	ppvReferencePosList	FVECTOR *
+00354684	00a8ad8c	3.0	ppvReferencePosNum	ppvReferencePosNum	ppvReferencePosNum	int
+00354688	00a8ad90	3.0	ppvReferenceMatrixList	ppvReferenceMatrixList	ppvReferenceMatrixList	FMATRIX *
+0035468c	00a8ad94	3.0	ppvReferenceMatrixNum	ppvReferenceMatrixNum	ppvReferenceMatrixNum	int
+00354690	00a8ade0	6.0	g_CurrentEffData	g_CurrentEffData	g_CurrentEffData	CURRENT_EFFDATA
+00354bc0	02bacee0	8.0	ppvParLoc	ppvParLoc	ppvParLoc	FVECTOR
+00354be0	02bacf00	15.0	ppvParScl	ppvParScl	ppvParScl	FVECTOR
+003590b0	00802b00	1.0	LS_50_KeLns_LpTCnt	LS.50.KeLns_LpTCnt	LS.50.KeLns_LpTCnt	
+0035dac0	00ad1ba8	1.0	sa__MUSICAL__s_stage	_ZN2sa7MUSICAL7s_stageE	sa::MUSICAL::s_stage	int
+0035dac4	00ad1bac	3.0	sa__MUSICAL__s_score	_ZN2sa7MUSICAL7s_scoreE	sa::MUSICAL::s_score	int
+0035dacc	00ad1bb4	1.0	sa__MUSICAL__s_comboNow	_ZN2sa7MUSICAL10s_comboNowE	sa::MUSICAL::s_comboNow	int
+0035dad4	00ad1bbc	3.0	sa__MUSICAL__s_successNgCount	_ZN2sa7MUSICAL16s_successNgCountE	sa::MUSICAL::s_successNgCount	int
+0035dad8	00ad1bc0	2.0	sa__MUSICAL__s_successNgFrame	_ZN2sa7MUSICAL16s_successNgFrameE	sa::MUSICAL::s_successNgFrame	int
+0035dae4	007fd304	2.0	sa__s_bgm_memory	_ZN2sa12s_bgm_memoryE	sa::s_bgm_memory	sa::EVENT_ALLOC *
+0035dae8	007fd308	2.0	sa__s_bgmbuff	_ZN2sa9s_bgmbuffE	sa::s_bgmbuff	void *
+0035daec	00ad0860	2.0	sa__EVENT__m_waitSoundFlag	_ZN2sa5EVENT15m_waitSoundFlagE	sa::EVENT::m_waitSoundFlag	BOOL_1
+0035daed	00ad0861	2.0	sa__EVENT__m_waitMessageFlag	_ZN2sa5EVENT17m_waitMessageFlagE	sa::EVENT::m_waitMessageFlag	BOOL_1
+0035daf0	00ad0864	2.0	sa__EVENT__m_ReadWaitFrame	_ZN2sa5EVENT15m_ReadWaitFrameE	sa::EVENT::m_ReadWaitFrame	int
+0035db00	00acfa80	2.0	sa__EVENT__s_read_buff_memory	_ZN2sa5EVENT18s_read_buff_memoryE	sa::EVENT::s_read_buff_memory	sa::EVENT_ALLOC
+0035db10	00acfbec	5.0	sa__EVENT__m_event_mode	_ZN2sa5EVENT12m_event_modeE	sa::EVENT::m_event_mode	sa::EVENT::EVENT_FLAG_MODE
+0035db14	007fd2bc	2.0	sa__EVENT__m_event_buffer	_ZN2sa5EVENT14m_event_bufferE	sa::EVENT::m_event_buffer	void *
+0035db18	00acfa8c	5.0	sa__EVENT__m_event_buffer_size	_ZN2sa5EVENT19m_event_buffer_sizeE	sa::EVENT::m_event_buffer_size	int
+0035db50	00acfbf4	2.0	sa__EVENT__m_bin_q	_ZN2sa5EVENT7m_bin_qE	sa::EVENT::m_bin_q	sa::EVENT_WK[1]
+0035dce0	007fd2d0	3.0	sa__EVENT__m_camera_data	_ZN2sa5EVENT13m_camera_dataE	sa::EVENT::m_camera_data	sa::CAMERA_DATA_TBL *
+0035dce4	007fd2d4	3.0	sa__EVENT__m_camera_seq_data	_ZN2sa5EVENT17m_camera_seq_dataE	sa::EVENT::m_camera_seq_data	sa::CAMERA_SEQ_TBL *
+0035dce8	007fd2d8	4.0	sa__EVENT__m_spline_data	_ZN2sa5EVENT13m_spline_dataE	sa::EVENT::m_spline_data	sa::SPLINE_SEQ_TBL *
+0035dcec	007fd2dc	4.0	sa__EVENT__m_spline_move	_ZN2sa5EVENT13m_spline_moveE	sa::EVENT::m_spline_move	sa::SPLINE_MOVE_TBL *
+0035dcf0	007fd2e4	5.0	sa__EVENT__m_read_wk	_ZN2sa5EVENT9m_read_wkE	sa::EVENT::m_read_wk	sa::READ_WK *
+0035dcf4	007fd2e0	5.0	sa__EVENT__m_effect_wk	_ZN2sa5EVENT11m_effect_wkE	sa::EVENT::m_effect_wk	sa::EFFECT_WK *
+0035dcf8	007fd2e8	3.0	sa__EVENT__m_motion_ctrl_wk	_ZN2sa5EVENT16m_motion_ctrl_wkE	sa::EVENT::m_motion_ctrl_wk	sa::MOTION_CTRL_WK *
+0035dcfc	007fd2ec	10.0	sa__EVENT__m_entry	_ZN2sa5EVENT7m_entryE	sa::EVENT::m_entry	sa::ENTRY_WK *
+0035dd00	007fd2f0	1.0	sa__EVENT__m_lightParam_wk	_ZN2sa5EVENT15m_lightParam_wkE	sa::EVENT::m_lightParam_wk	kn::LightParam *
+0035dd04	00acfac8	3.0	sa__EVENT__m_bin_read_ctrl_ofs	_ZN2sa5EVENT19m_bin_read_ctrl_ofsE	sa::EVENT::m_bin_read_ctrl_ofs	int
+0035dd08	00acfacc	2.0	sa__EVENT__m_bin_read_ctrl	_ZN2sa5EVENT15m_bin_read_ctrlE	sa::EVENT::m_bin_read_ctrl	sa::BIN_READ_CTRL *[64]
+0035de0a	00acfa9a	3.0	sa__EVENT__m_objcamera	_ZN2sa5EVENT11m_objcameraE	sa::EVENT::m_objcamera	BOOL_1
+0035de0c	00acfa9c	3.0	sa__EVENT__m_interpolate	_ZN2sa5EVENT13m_interpolateE	sa::EVENT::m_interpolate	BOOL_1
+0035de14	00acfa9e	3.0	sa__EVENT__m_cameraCollision	_ZN2sa5EVENT17m_cameraCollisionE	sa::EVENT::m_cameraCollision	BOOL_1
+0035de15	00acfa9f	3.0	sa__EVENT__m_cameraCollisionBlind	_ZN2sa5EVENT22m_cameraCollisionBlindE	sa::EVENT::m_cameraCollisionBlind	BOOL_1
+0035de20	00acfa94	13.0	sa__EVENT__m_frame	_ZN2sa5EVENT7m_frameE	sa::EVENT::m_frame	int
+0035de25	00acfaa1	3.0	sa__EVENT__m_musical	_ZN2sa5EVENT9m_musicalE	sa::EVENT::m_musical	BOOL_1
+0035de27	00acfa9d	2.0	sa__EVENT__m_event_task_kill	_ZN2sa5EVENT17m_event_task_killE	sa::EVENT::m_event_task_kill	BOOL_1
+0035de28	00acfab4	6.0	sa__EVENT__m_event_end_frame	_ZN2sa5EVENT17m_event_end_frameE	sa::EVENT::m_event_end_frame	int
+0035de2c	00acfab8	2.0	sa__EVENT__m_voice_play_count	_ZN2sa5EVENT18m_voice_play_countE	sa::EVENT::m_voice_play_count	int
+0035de40	00acfabc	2.0	sa__EVENT__m_fade_frame	_ZN2sa5EVENT12m_fade_frameE	sa::EVENT::m_fade_frame	int
+0035de44	00acfaa2	2.0	sa__EVENT__m_pre_start_flag	_ZN2sa5EVENT16m_pre_start_flagE	sa::EVENT::m_pre_start_flag	BOOL_1
+0035de4c	00acfbe4	4.0	sa__EVENT__m_audio_tbl_ptr	_ZN2sa5EVENT15m_audio_tbl_ptrE	sa::EVENT::m_audio_tbl_ptr	sa::BIN_AUDIO *
+0035de50	00acfbe8	2.0	sa__EVENT__m_light_tbl_ptr	_ZN2sa5EVENT15m_light_tbl_ptrE	sa::EVENT::m_light_tbl_ptr	sa::BIN_LIGHT *
+0035de54	00acfaa3	2.0	sa__EVENT__m_jumpMode	_ZN2sa5EVENT10m_jumpModeE	sa::EVENT::m_jumpMode	BOOL_1
+0035de55	00acfaa4	4.0	sa__EVENT__m_camera_start	_ZN2sa5EVENT14m_camera_startE	sa::EVENT::m_camera_start	BOOL_1
+0035de56	00acfaa5	3.0	sa__EVENT__m_ctrl_end	_ZN2sa5EVENT10m_ctrl_endE	sa::EVENT::m_ctrl_end	BOOL_1
+0035de58	00acfaa8	2.0	sa__EVENT__m_next_map_read	_ZN2sa5EVENT15m_next_map_readE	sa::EVENT::m_next_map_read	int
+0035de5c	00acfbcc	2.0	sa__EVENT__m_jumpFrame	_ZN2sa5EVENT11m_jumpFrameE	sa::EVENT::m_jumpFrame	int
+0035df90	00749ad8	2.0	vtbl__sa__MUSICAL_CLEAR	_ZTVN2sa13MUSICAL_CLEARE	vtable for sa::MUSICAL_CLEAR	
+0035e118	007fd378	1.0	sa__insertTable	_ZN2sa11insertTableE	sa::insertTable	int[5]
+0035e130	007fd3a0	1.0	sa__offTable	_ZN2sa8offTableE	sa::offTable	int[5]
+0035e148	007fd38c	1.0	sa__loopTable	_ZN2sa9loopTableE	sa::loopTable	int[5]
+0035e1b0	00749d08	2.0	vtbl__sa__MUSICAL_COMBO	_ZTVN2sa13MUSICAL_COMBOE	vtable for sa::MUSICAL_COMBO	
+0035e230	00749dc0	3.0	vtbl__sa__MUSICAL_INPUT	_ZTVN2sa13MUSICAL_INPUTE	vtable for sa::MUSICAL_INPUT	
+0035e298	007fd4c0	3.0	sa__s_image	_ZN2sa7s_imageE	sa::s_image	dk::SpriteImage *
+0035e2e8	007fd340	5.0	sa__MUSICAL_2D__s_2d_data	_ZN2sa10MUSICAL_2D9s_2d_dataE	sa::MUSICAL_2D::s_2d_data	sa::MUSICAL_2D_DATA *
+0035e2ec	007fd338	3.0	sa__s_secret_movie	_ZN2sa14s_secret_movieE	sa::s_secret_movie	bool
+0035e358	00ad0158	4.0	sa__EVENT__m_wide_flag	_ZN2sa5EVENT11m_wide_flagE	sa::EVENT::m_wide_flag	BOOL_1
+0035e359	007fd300	2.0	sa__s_ttvoice_patch	_ZN2sa15s_ttvoice_patchE	sa::s_ttvoice_patch	bool
+0035e35c	007fd33c	2.0	sa__s_sebNumber	_ZN2sa11s_sebNumberE	sa::s_sebNumber	int
+0035e364	00a1257c	3.0	YI__TASK__IndexNow	_ZN2YI4TASK8IndexNowE	YI::TASK::IndexNow	int
+0035e370	00a12588	5.0	YI__TASK__ExecCommand	_ZN2YI4TASK11ExecCommandE	YI::TASK::ExecCommand	YI::COMMANDS
+0035eac0	00744fa0	2.0	vtbl__YI__IMAGE_FREEZE	_ZTVN2YI12IMAGE_FREEZEE	vtable for YI::IMAGE_FREEZE	
+0035ead0	00744f90	3.0	vtbl__YI__IMAGE	_ZTVN2YI5IMAGEE	vtable for YI::IMAGE	
+0035eae0	00745040	4.0	vtbl__YI__SPRITE	_ZTVN2YI6SPRITEE	vtable for YI::SPRITE	
+0035eae8	007009b9	1.0	LS_111_LV_33	LS.111.LV.33	LS.111.LV.33	
+0035eaf0	00745000	4.0	vtbl__YI__SEQUENCE	_ZTVN2YI8SEQUENCEE	vtable for YI::SEQUENCE	
+0035eb00	00744ff0	3.0	vtbl__YI__LAYOUT	_ZTVN2YI6LAYOUTE	vtable for YI::LAYOUT	
+0035eb30	00a124d4	2.0	YI__VIBRATION__time_max	_ZN2YI9VIBRATION8time_maxE	YI::VIBRATION::time_max	int
+0035eb38	00745068	3.0	vtbl__YI__VIBRATION	_ZTVN2YI9VIBRATIONE	vtable for YI::VIBRATION	
+0035eb48	007fde30	1.0	Tz__MenuCommon__m_McLastAccessSlot	_ZN2Tz10MenuCommon18m_McLastAccessSlotE	Tz::MenuCommon::m_McLastAccessSlot	int
+0035eb4c	007fde34	1.0	Tz__MenuCommon__m_McLastAccessData	_ZN2Tz10MenuCommon18m_McLastAccessDataE	Tz::MenuCommon::m_McLastAccessData	int
+0035eb50	007fde38	3.0	Tz__MenuCommon__m_isFrameTypeFixed	_ZN2Tz10MenuCommon18m_isFrameTypeFixedE	Tz::MenuCommon::m_isFrameTypeFixed	BOOL_1
+0035eb54	007fde3c	2.0	Tz__MenuCommon__m_FrameLimit	_ZN2Tz10MenuCommon12m_FrameLimitE	Tz::MenuCommon::m_FrameLimit	int
+0035eb58	0074a748	3.0	vtbl__Tz__MenuObj	_ZTVN2Tz7MenuObjE	vtable for Tz::MenuObj	
+0035eb81	007fde64	2.0	Tz__MenuPad__m_PushEnable	_ZN2Tz7MenuPad12m_PushEnableE	Tz::MenuPad::m_PushEnable	BOOL_1
+0035eb84	007fdda4	1.0	Tz__s_InitCnt	_ZN2Tz9s_InitCntE	Tz::s_InitCnt	char
+0035eb88	007fdd9c	2.0	Tz__Layout__m_Allocator	_ZN2Tz6Layout11m_AllocatorE	Tz::Layout::m_Allocator	ALLOCATOR *
+0035eb8c	007fdda0	1.0	Tz__Layout__m_BackUpAllocator	_ZN2Tz6Layout17m_BackUpAllocatorE	Tz::Layout::m_BackUpAllocator	ALLOCATOR *
+0035ebd0	0074a5b8	4.0	vtbl__Tz__LayFile	_ZTVN2Tz7LayFileE	vtable for Tz::LayFile	
+0035ec84	007fdda8	2.0	Tz__MCard__m_Allocator	_ZN2Tz5MCard11m_AllocatorE	Tz::MCard::m_Allocator	ALLOCATOR *
+0035ec88	007fddac	10.0	Tz__MCard__m_Fname	_ZN2Tz5MCard7m_FnameE	Tz::MCard::m_Fname	char *
+0035ec8c	007fddb0	4.0	Tz__MCard__m_Dir	_ZN2Tz5MCard5m_DirE	Tz::MCard::m_Dir	char *
+0035ec90	007fddb4	6.0	Tz__MCard__m_DataBuff	_ZN2Tz5MCard10m_DataBuffE	Tz::MCard::m_DataBuff	char *
+0035ec94	007fddb8	29.0	Tz__MCard__m_MCInfo	_ZN2Tz5MCard8m_MCInfoE	Tz::MCard::m_MCInfo	Tz::MCInfo *
+0035ec98	007fddbc	5.0	Tz__MCard__m_LocalInfo	_ZN2Tz5MCard11m_LocalInfoE	Tz::MCard::m_LocalInfo	Tz::MCLocalInfo *
+0035ec9c	007fddc0	4.0	Tz__MCard__m_DirParam	_ZN2Tz5MCard10m_DirParamE	Tz::MCard::m_DirParam	McTblGetDir *
+0035eca0	007fddc4	2.0	Tz__MCard__m_DirParamBuff	_ZN2Tz5MCard14m_DirParamBuffE	Tz::MCard::m_DirParamBuff	char *
+0035ecb8	00b5d82c	2.0	Tz__McSys__m_Stat	_ZN2Tz5McSys6m_StatE	Tz::McSys::m_Stat	u_int
+0035ecbc	007fdf2c	2.0	Tz__Crc__m_Allocator	_ZN2Tz3Crc11m_AllocatorE	Tz::Crc::m_Allocator	ALLOCATOR *
+0035ecc0	007fdf30	2.0	Tz__Crc__m_CrcTable	_ZN2Tz3Crc10m_CrcTableE	Tz::Crc::m_CrcTable	u_int *
+0035ecd4	00b5dffc	2.0	Tz__MenuSound__m_SeId	_ZN2Tz9MenuSound6m_SeIdE	Tz::MenuSound::m_SeId	u_int
+0035ecd8	00b5bb00	6.0	Tz__Config__m_ExStatus	_ZN2Tz6Config10m_ExStatusE	Tz::Config::m_ExStatus	Tz::Config::EX_STATUS
+0035ece8	007fdfd0	10.0	Tz__HEFT__m_MenuPtr	_ZN2Tz4HEFT9m_MenuPtrE	Tz::HEFT::m_MenuPtr	Tz::Select *
+0035ecec	007fdfd4	4.0	Tz__HEFT__m_SelPtr	_ZN2Tz4HEFT8m_SelPtrE	Tz::HEFT::m_SelPtr	Tz::Select *
+0035ecf0	007fdfd8	8.0	Tz__HEFT__m_Lay	_ZN2Tz4HEFT5m_LayE	Tz::HEFT::m_Lay	Tz::Layout *
+0035ecf4	007fdfdc	6.0	Tz__HEFT__m_LayBg2	_ZN2Tz4HEFT8m_LayBg2E	Tz::HEFT::m_LayBg2	Tz::Layout *
+0035ecf8	007fdfe0	7.0	Tz__HEFT__m_LayPic	_ZN2Tz4HEFT8m_LayPicE	Tz::HEFT::m_LayPic	Tz::Layout *
+0035ecfc	007fdfe4	6.0	Tz__HEFT__m_Jiminy	_ZN2Tz4HEFT8m_JiminyE	Tz::HEFT::m_Jiminy	dk::SpriteMessage *
+0035ed00	007fdfe8	6.0	Tz__HEFT__m_Score	_ZN2Tz4HEFT7m_ScoreE	Tz::HEFT::m_Score	dk::SpriteMessage *
+0035ed04	007fdfec	4.0	Tz__HEFT__m_New	_ZN2Tz4HEFT5m_NewE	Tz::HEFT::m_New	dk::Sprite *
+0035ed08	007fdff0	4.0	Tz__HEFT__m_HelpMsg	_ZN2Tz4HEFT9m_HelpMsgE	Tz::HEFT::m_HelpMsg	Tz::SmHelpMsg *
+0035ed0c	00b5f880	3.0	Tz__HEFT__m_FadeWait	_ZN2Tz4HEFT10m_FadeWaitE	Tz::HEFT::m_FadeWait	BOOL_1
+0035ed10	007fdff4	3.0	Tz__HEFT__m_ScoreStr	_ZN2Tz4HEFT10m_ScoreStrE	Tz::HEFT::m_ScoreStr	char *
+0035ed14	00b5f881	4.0	Tz__HEFT__m_NewInfo	_ZN2Tz4HEFT9m_NewInfoE	Tz::HEFT::m_NewInfo	char
+0035ed20	007fdff8	13.0	Tz__HECO__m_MenuPtr	_ZN2Tz4HECO9m_MenuPtrE	Tz::HECO::m_MenuPtr	Tz::Select *
+0035ed24	007fdffc	6.0	Tz__HECO__m_SelPtr	_ZN2Tz4HECO8m_SelPtrE	Tz::HECO::m_SelPtr	Tz::Select *
+0035ed28	007fe000	10.0	Tz__HECO__m_Lay	_ZN2Tz4HECO5m_LayE	Tz::HECO::m_Lay	Tz::Layout *
+0035ed2c	007fe004	7.0	Tz__HECO__m_LayBg2	_ZN2Tz4HECO8m_LayBg2E	Tz::HECO::m_LayBg2	Tz::Layout *
+0035ed30	007fe008	8.0	Tz__HECO__m_LayPic	_ZN2Tz4HECO8m_LayPicE	Tz::HECO::m_LayPic	Tz::Layout *
+0035ed34	007fe010	3.0	Tz__HECO__m_New	_ZN2Tz4HECO5m_NewE	Tz::HECO::m_New	dk::Sprite *
+0035ed38	007fe00c	7.0	Tz__HECO__m_HelpMsg	_ZN2Tz4HECO9m_HelpMsgE	Tz::HECO::m_HelpMsg	Tz::SmHelpMsg *
+0035ed3c	00b5f9a0	4.0	Tz__HECO__m_FadeWait	_ZN2Tz4HECO10m_FadeWaitE	Tz::HECO::m_FadeWait	BOOL_1
+0035ed40	007fe014	9.0	Tz__HECO__m_SeqTbl	_ZN2Tz4HECO8m_SeqTblE	Tz::HECO::m_SeqTbl	Tz::HECO::SeqTbl *
+0035ed44	00b5f9a1	3.0	Tz__HECO__m_NewInfo	_ZN2Tz4HECO9m_NewInfoE	Tz::HECO::m_NewInfo	char
+0035ed4c	007fe034	8.0	Tz__MUMI__m_MenuPtr	_ZN2Tz4MUMI9m_MenuPtrE	Tz::MUMI::m_MenuPtr	Tz::Select *
+0035ed50	007fe038	4.0	Tz__MUMI__m_SelPtr	_ZN2Tz4MUMI8m_SelPtrE	Tz::MUMI::m_SelPtr	Tz::Select *
+0035ed54	007fe03c	8.0	Tz__MUMI__m_Lay	_ZN2Tz4MUMI5m_LayE	Tz::MUMI::m_Lay	Tz::Layout *
+0035ed58	007fe040	6.0	Tz__MUMI__m_LayBg2	_ZN2Tz4MUMI8m_LayBg2E	Tz::MUMI::m_LayBg2	Tz::Layout *
+0035ed5c	007fe044	7.0	Tz__MUMI__m_LayPic	_ZN2Tz4MUMI8m_LayPicE	Tz::MUMI::m_LayPic	Tz::Layout *
+0035ed60	007fe04c	5.0	Tz__MUMI__m_HelpMsg	_ZN2Tz4MUMI9m_HelpMsgE	Tz::MUMI::m_HelpMsg	Tz::SmHelpMsg *
+0035ed64	007fe048	3.0	Tz__MUMI__m_New	_ZN2Tz4MUMI5m_NewE	Tz::MUMI::m_New	dk::Sprite *
+0035ed68	00b5fc70	4.0	Tz__MUMI__m_FadeWait	_ZN2Tz4MUMI10m_FadeWaitE	Tz::MUMI::m_FadeWait	BOOL_1
+0035ed69	00b5fc71	3.0	Tz__MUMI__m_NewInfo	_ZN2Tz4MUMI9m_NewInfoE	Tz::MUMI::m_NewInfo	char
+0035ed70	007fe050	7.0	Tz__TRTE__m_MenuPtr	_ZN2Tz4TRTE9m_MenuPtrE	Tz::TRTE::m_MenuPtr	Tz::Select *
+0035ed78	007fe058	7.0	Tz__TRTE__m_Lay	_ZN2Tz4TRTE5m_LayE	Tz::TRTE::m_Lay	Tz::Layout *
+0035ed7c	007fe05c	4.0	Tz__TRTE__m_LayBg2	_ZN2Tz4TRTE8m_LayBg2E	Tz::TRTE::m_LayBg2	Tz::Layout *
+0035ed80	007fe060	5.0	Tz__TRTE__m_LayPic	_ZN2Tz4TRTE8m_LayPicE	Tz::TRTE::m_LayPic	Tz::Layout *
+0035ed90	007fe070	3.0	Tz__TRTE__m_HelpMsg	_ZN2Tz4TRTE9m_HelpMsgE	Tz::TRTE::m_HelpMsg	Tz::SmHelpMsg *
+0035ed94	00b5fd88	2.0	Tz__TRTE__m_FadeWait	_ZN2Tz4TRTE10m_FadeWaitE	Tz::TRTE::m_FadeWait	BOOL_1
+0035ed9c	00b5fd89	3.0	Tz__TRTE__m_NewInfo	_ZN2Tz4TRTE9m_NewInfoE	Tz::TRTE::m_NewInfo	char
+0035eda8	007fdfb4	8.0	Tz__HBTE__m_MenuPtr	_ZN2Tz4HBTE9m_MenuPtrE	Tz::HBTE::m_MenuPtr	Tz::Select *
+0035edac	007fdfb8	5.0	Tz__HBTE__m_SelPtr	_ZN2Tz4HBTE8m_SelPtrE	Tz::HBTE::m_SelPtr	Tz::Select *
+0035edb0	007fdfbc	8.0	Tz__HBTE__m_Lay	_ZN2Tz4HBTE5m_LayE	Tz::HBTE::m_Lay	Tz::Layout *
+0035edb4	007fdfc0	6.0	Tz__HBTE__m_LayBg2	_ZN2Tz4HBTE8m_LayBg2E	Tz::HBTE::m_LayBg2	Tz::Layout *
+0035edb8	007fdfc4	7.0	Tz__HBTE__m_LayPic	_ZN2Tz4HBTE8m_LayPicE	Tz::HBTE::m_LayPic	Tz::Layout *
+0035edbc	007fdfcc	3.0	Tz__HBTE__m_New	_ZN2Tz4HBTE5m_NewE	Tz::HBTE::m_New	dk::Sprite *
+0035edc0	007fdfc8	5.0	Tz__HBTE__m_HelpMsg	_ZN2Tz4HBTE9m_HelpMsgE	Tz::HBTE::m_HelpMsg	Tz::SmHelpMsg *
+0035edc4	00b5f768	4.0	Tz__HBTE__m_FadeWait	_ZN2Tz4HBTE10m_FadeWaitE	Tz::HBTE::m_FadeWait	BOOL_1
+0035edc5	00b5f769	3.0	Tz__HBTE__m_NewInfo	_ZN2Tz4HBTE9m_NewInfoE	Tz::HBTE::m_NewInfo	char
+0035edcc	007fe090	7.0	Tz__TTPT__m_MenuPtr	_ZN2Tz4TTPT9m_MenuPtrE	Tz::TTPT::m_MenuPtr	Tz::Select *
+0035edd4	007fe098	7.0	Tz__TTPT__m_Lay	_ZN2Tz4TTPT5m_LayE	Tz::TTPT::m_Lay	Tz::Layout *
+0035edd8	007fe0a0	5.0	Tz__TTPT__m_LayBg2	_ZN2Tz4TTPT8m_LayBg2E	Tz::TTPT::m_LayBg2	Tz::Layout *
+0035eddc	007fe0a4	6.0	Tz__TTPT__m_LayPic	_ZN2Tz4TTPT8m_LayPicE	Tz::TTPT::m_LayPic	Tz::Layout *
+0035edf0	00b5ffd4	2.0	Tz__TTPT__m_FadeWait	_ZN2Tz4TTPT10m_FadeWaitE	Tz::TTPT::m_FadeWait	BOOL_1
+0035edf4	00b5ffd0	2.0	Tz__TTPT__m_MenuType	_ZN2Tz4TTPT10m_MenuTypeE	Tz::TTPT::m_MenuType	int
+0035edfc	00b5ffd5	3.0	Tz__TTPT__m_NewInfo	_ZN2Tz4TTPT9m_NewInfoE	Tz::TTPT::m_NewInfo	char
+0035ee04	007fe07c	6.0	Tz__TTMY__m_MenuPtr	_ZN2Tz4TTMY9m_MenuPtrE	Tz::TTMY::m_MenuPtr	Tz::Select *
+0035ee34	007fe018	8.0	Tz__LMMU__m_MenuPtr	_ZN2Tz4LMMU9m_MenuPtrE	Tz::LMMU::m_MenuPtr	Tz::Select *
+0035ee38	007fe01c	4.0	Tz__LMMU__m_SelPtr	_ZN2Tz4LMMU8m_SelPtrE	Tz::LMMU::m_SelPtr	Tz::Select *
+0035ee3c	007fe020	8.0	Tz__LMMU__m_Lay	_ZN2Tz4LMMU5m_LayE	Tz::LMMU::m_Lay	Tz::Layout *
+0035ee40	007fe024	6.0	Tz__LMMU__m_LayBg2	_ZN2Tz4LMMU8m_LayBg2E	Tz::LMMU::m_LayBg2	Tz::Layout *
+0035ee44	007fe028	7.0	Tz__LMMU__m_LayPic	_ZN2Tz4LMMU8m_LayPicE	Tz::LMMU::m_LayPic	Tz::Layout *
+0035ee48	007fe030	3.0	Tz__LMMU__m_New	_ZN2Tz4LMMU5m_NewE	Tz::LMMU::m_New	dk::Sprite *
+0035ee4c	007fe02c	5.0	Tz__LMMU__m_HelpMsg	_ZN2Tz4LMMU9m_HelpMsgE	Tz::LMMU::m_HelpMsg	Tz::SmHelpMsg *
+0035ee50	00b5fb58	4.0	Tz__LMMU__m_FadeWait	_ZN2Tz4LMMU10m_FadeWaitE	Tz::LMMU::m_FadeWait	BOOL_1
+0035ee51	00b5fb59	3.0	Tz__LMMU__m_NewInfo	_ZN2Tz4LMMU9m_NewInfoE	Tz::LMMU::m_NewInfo	char
+0035ee58	007fdf88	7.0	Tz__CANA__m_MenuPtr	_ZN2Tz4CANA9m_MenuPtrE	Tz::CANA::m_MenuPtr	Tz::Select *
+0035ee5c	007fdf8c	5.0	Tz__CANA__m_SelPtr	_ZN2Tz4CANA8m_SelPtrE	Tz::CANA::m_SelPtr	Tz::Select *
+0035ee60	007fdf90	9.0	Tz__CANA__m_Lay	_ZN2Tz4CANA5m_LayE	Tz::CANA::m_Lay	Tz::Layout *
+0035ee64	007fdf94	3.0	Tz__CANA__m_Title	_ZN2Tz4CANA7m_TitleE	Tz::CANA::m_Title	Tz::LayMsg *
+0035ee68	007fdf98	4.0	Tz__CANA__m_Help	_ZN2Tz4CANA6m_HelpE	Tz::CANA::m_Help	dk::SpriteMessage *
+0035ee6c	007fdf9c	3.0	Tz__CANA__m_MapBP	_ZN2Tz4CANA7m_MapBPE	Tz::CANA::m_MapBP	Tz::LaySeq *
+0035ee70	007fdfa0	5.0	Tz__CANA__m_NewMark	_ZN2Tz4CANA9m_NewMarkE	Tz::CANA::m_NewMark	Tz::LaySeq *
+0035ee74	007fdfa4	3.0	Tz__CANA__m_NextMark	_ZN2Tz4CANA10m_NextMarkE	Tz::CANA::m_NextMark	Tz::LaySeq *
+0035ee78	007fdfa8	3.0	Tz__CANA__m_Ship	_ZN2Tz4CANA6m_ShipE	Tz::CANA::m_Ship	Tz::LaySeq *
+0035ee7c	007fdfac	4.0	Tz__CANA__m_Gra	_ZN2Tz4CANA5m_GraE	Tz::CANA::m_Gra	dk::Sprite *
+0035ee80	007fdfb0	3.0	Tz__CANA__m_Base	_ZN2Tz4CANA6m_BaseE	Tz::CANA::m_Base	dk::Sprite *
+0035ee9c	007fdf70	5.0	Tz__ALCA__m_LayList	_ZN2Tz4ALCA9m_LayListE	Tz::ALCA::m_LayList	short *
+0035eea0	00b5f538	4.0	Tz__ALCA__m_LayListMax	_ZN2Tz4ALCA12m_LayListMaxE	Tz::ALCA::m_LayListMax	short
+0035eea4	007fdf74	7.0	Tz__ALCA__m_Lay	_ZN2Tz4ALCA5m_LayE	Tz::ALCA::m_Lay	Tz::Layout *
+0035eea8	007fdf78	3.0	Tz__ALCA__m_Mess	_ZN2Tz4ALCA6m_MessE	Tz::ALCA::m_Mess	dk::SpriteMessage *
+0035eeb0	00ad2f98	2.0	Tz__CampMenu__m_WorldMapType	_ZN2Tz8CampMenu14m_WorldMapTypeE	Tz::CampMenu::m_WorldMapType	int
+0035eec0	007fd574	2.0	Tz__s_Fname	_ZN2Tz7s_FnameE	Tz::s_Fname	const char *[7]
+0035eec4	00713b5f	1.0	LS_10_LV_0	LS.10.LV.0	LS.10.LV.0	
+0035ef50	00ad3270	3.0	Tz__CMData__m_TotalSize	_ZN2Tz6CMData11m_TotalSizeE	Tz::CMData::m_TotalSize	int
+0035ef58	00ad3278	5.0	Tz__CMData__m_BackRead	_ZN2Tz6CMData10m_BackReadE	Tz::CMData::m_BackRead	BOOL_1
+0035ef60	007fd748	2.0	Tz__s_DispDelay	_ZN2Tz11s_DispDelayE	Tz::s_DispDelay	bool
+0035ef6c	007fd6fc	24.0	Tz__CmTop__m_DummySeq	_ZN2Tz5CmTop10m_DummySeqE	Tz::CmTop::m_DummySeq	int
+0035ef70	00b5b828	2.0	Tz__CmTop__m_EnableSelector	_ZN2Tz5CmTop16m_EnableSelectorE	Tz::CmTop::m_EnableSelector	u_short
+0035f010	007fd700	47.0	Tz__CmTop__m_PartyInfo	_ZN2Tz5CmTop11m_PartyInfoE	Tz::CmTop::m_PartyInfo	Tz::PartyInfo *
+0035f014	007fd704	6.0	Tz__CmTop__m_ItemInfo	_ZN2Tz5CmTop10m_ItemInfoE	Tz::CmTop::m_ItemInfo	Tz::ItemInfo *
+0035f018	007fd708	5.0	Tz__CmTop__m_ItemStat	_ZN2Tz5CmTop10m_ItemStatE	Tz::CmTop::m_ItemStat	Tz::ItemStat *
+0035f01c	007fd70c	96.0	Tz__CmTop__m_MenuPtr	_ZN2Tz5CmTop9m_MenuPtrE	Tz::CmTop::m_MenuPtr	Tz::Select *
+0035f020	007fd710	11.0	Tz__CmTop__m_MenuPtr2	_ZN2Tz5CmTop10m_MenuPtr2E	Tz::CmTop::m_MenuPtr2	Tz::Select *
+0035f024	007fd714	21.0	Tz__CmTop__m_SelPtr	_ZN2Tz5CmTop8m_SelPtrE	Tz::CmTop::m_SelPtr	Tz::Select *
+0035f028	007fd718	2.0	Tz__CmTop__m_Base	_ZN2Tz5CmTop6m_BaseE	Tz::CmTop::m_Base	dk::Sprite *
+0035f030	007fd720	3.0	Tz__CmTop__m_Delay	_ZN2Tz5CmTop7m_DelayE	Tz::CmTop::m_Delay	dk::Sprite *
+0035f034	007fd724	7.0	Tz__CmTop__m_Warning	_ZN2Tz5CmTop9m_WarningE	Tz::CmTop::m_Warning	dk::SpriteMessage *
+0035f040	007fd730	2.0	Tz__CmTop__m_Place	_ZN2Tz5CmTop7m_PlaceE	Tz::CmTop::m_Place	Tz::LayMsg *
+0035f044	007fd734	4.0	Tz__CmTop__m_Munny	_ZN2Tz5CmTop7m_MunnyE	Tz::CmTop::m_Munny	Tz::MunnyDraw *
+0035f048	007fd738	4.0	Tz__CmTop__m_Time	_ZN2Tz5CmTop6m_TimeE	Tz::CmTop::m_Time	Tz::TimeDraw *
+0035f04c	007fd73c	22.0	Tz__CmTop__m_SclBar	_ZN2Tz5CmTop8m_SclBarE	Tz::CmTop::m_SclBar	Tz::ScrollBar *
+0035f050	007fd740	6.0	Tz__CmTop__m_Light	_ZN2Tz5CmTop7m_LightE	Tz::CmTop::m_Light	Tz::LightCur *
+0035f054	00b5b8c2	2.0	Tz__CmTop__m_HideCursor	_ZN2Tz5CmTop12m_HideCursorE	Tz::CmTop::m_HideCursor	BOOL_1
+0035f056	00b5b8c3	2.0	Tz__CmTop__m_InitSetupObj	_ZN2Tz5CmTop14m_InitSetupObjE	Tz::CmTop::m_InitSetupObj	BOOL_1
+0035f057	00b5b8c4	3.0	Tz__CmTop__m_FadeWait	_ZN2Tz5CmTop10m_FadeWaitE	Tz::CmTop::m_FadeWait	BOOL_1
+0035f05c	00b5b8c7	2.0	Tz__CmTop__m_isNewJiminy	_ZN2Tz5CmTop13m_isNewJiminyE	Tz::CmTop::m_isNewJiminy	char
+0035f060	00b5b8c8	3.0	Tz__CmTop__m_OldMember	_ZN2Tz5CmTop11m_OldMemberE	Tz::CmTop::m_OldMember	YS::MEMBER
+0035f068	007fd650	2.0	Tz__s_isPause	_ZN2Tz9s_isPauseE	Tz::s_isPause	char
+0035f069	007fd651	1.0	Tz__s_MenuCancel	_ZN2Tz12s_MenuCancelE	Tz::s_MenuCancel	bool
+0035f06a	007fd652	2.0	Tz__s_isMenuRunning	_ZN2Tz15s_isMenuRunningE	Tz::s_isMenuRunning	bool
+0035f06e	007fd632	3.0	Tz__Pause__m_NextMenu	_ZN2Tz5Pause10m_NextMenuE	Tz::Pause::m_NextMenu	short
+0035f070	00b5b2f0	2.0	Tz__Pause__m_ExitMenuThread	_ZN2Tz5Pause16m_ExitMenuThreadE	Tz::Pause::m_ExitMenuThread	BOOL_1
+0035f078	007fd638	3.0	Tz__Pause__m_Lay	_ZN2Tz5Pause5m_LayE	Tz::Pause::m_Lay	Tz::Layout *
+0035f07c	007fd63c	2.0	Tz__Pause__m_Bg	_ZN2Tz5Pause4m_BgE	Tz::Pause::m_Bg	dk::Sprite *
+0035f088	007fd648	5.0	Tz__Pause__m_Fade	_ZN2Tz5Pause6m_FadeE	Tz::Pause::m_Fade	dk::Sprite *
+0035f08c	007fd64c	2.0	Tz__Pause__m_Func	_ZN2Tz5Pause6m_FuncE	Tz::Pause::m_Func	void (*)()
+0035f092	007fd562	2.0	Tz__CmComm__m_TimeDelimiter	_ZN2Tz6CmComm15m_TimeDelimiterE	Tz::CmComm::m_TimeDelimiter	short
+0035f0b0	007fd654	7.0	Tz__CmSave__m_McCheck	_ZN2Tz6CmSave9m_McCheckE	Tz::CmSave::m_McCheck	BOOL_1
+0035f0b1	00b5b410	1.0	Tz__CmSave__m_FadeWait	_ZN2Tz6CmSave10m_FadeWaitE	Tz::CmSave::m_FadeWait	BOOL_1
+0035f0dc	007fd5c4	4.0	Tz__CMenuHelp__m_HelpMess	_ZN2Tz9CMenuHelp10m_HelpMessE	Tz::CMenuHelp::m_HelpMess	Tz::LaySeqMess *
+0035f0e0	007fdc94	1.0	Tz__IShopInfo__m_Data	_ZN2Tz9IShopInfo6m_DataE	Tz::IShopInfo::m_Data	char *
+0035f0e4	007fdf28	13.0	Tz__CmStat__m_Info	_ZN2Tz6CmStat6m_InfoE	Tz::CmStat::m_Info	Tz::CmStat::Info *
+0035f0e8	00b5f2e8	5.0	Tz__CmStat__m_isChgSelector	_ZN2Tz6CmStat15m_isChgSelectorE	Tz::CmStat::m_isChgSelector	BOOL_1
+0035f0ec	007fdf1c	8.0	Tz__CmEquip__m_StockInfo	_ZN2Tz7CmEquip11m_StockInfoE	Tz::CmEquip::m_StockInfo	Tz::ItemInfo *
+0035f0f0	007fd62c	5.0	Tz__s_DispDelay_2	_ZN2Tz11s_DispDelayE	Tz::s_DispDelay	bool
+0035f0f4	007fd620	7.0	Tz__CmParty__m_List	_ZN2Tz7CmParty6m_ListE	Tz::CmParty::m_List	Tz::CmParty::List *
+0035f0f8	007fd624	2.0	Tz__CmParty__m_OldMember	_ZN2Tz7CmParty11m_OldMemberE	Tz::CmParty::m_OldMember	const YS::MEMBER *
+0035f0fc	007fd628	3.0	Tz__CmParty__m_SaveMember	_ZN2Tz7CmParty12m_SaveMemberE	Tz::CmParty::m_SaveMember	YS::MEMBER *
+0035f100	007fd668	7.0	Tz__Selector__m_Lay	_ZN2Tz8Selector5m_LayE	Tz::Selector::m_Lay	Tz::Layout *
+0035f104	007fd66c	7.0	Tz__Selector__m_Seq	_ZN2Tz8Selector5m_SeqE	Tz::Selector::m_Seq	dk::SpriteMessage *
+0035f10c	007fd674	8.0	Tz__Selector__m_SelPtr	_ZN2Tz8Selector8m_SelPtrE	Tz::Selector::m_SelPtr	Tz::Select *
+0035f110	007fd678	4.0	Tz__Selector__m_Light	_ZN2Tz8Selector7m_LightE	Tz::Selector::m_Light	Tz::LightCur *
+0035f114	007fd67c	4.0	Tz__Selector__m_SelList	_ZN2Tz8Selector9m_SelListE	Tz::Selector::m_SelList	short *
+0035f118	007fd680	3.0	Tz__Selector__m_SelData	_ZN2Tz8Selector9m_SelDataE	Tz::Selector::m_SelData	const YS::SELECTOR *
+0035f120	007fd688	4.0	Tz__Selector__m_InitCurPos	_ZN2Tz8Selector12m_InitCurPosE	Tz::Selector::m_InitCurPos	char
+0035f124	007fd68c	4.0	Tz__Selector__m_Gra	_ZN2Tz8Selector5m_GraE	Tz::Selector::m_Gra	Tz::HelpGra *
+0035f128	007fdf18	4.0	Tz__s_AutoConfirmSel	_ZN2Tz16s_AutoConfirmSelE	Tz::s_AutoConfirmSel	char
+0035f129	007fdf19	2.0	Tz__s_ChgSelCharaNext	_ZN2Tz17s_ChgSelCharaNextE	Tz::s_ChgSelCharaNext	char
+0035f12c	007fdf14	16.0	Tz__CmCustom__m_ListInfo	_ZN2Tz8CmCustom10m_ListInfoE	Tz::CmCustom::m_ListInfo	Tz::CmCustom::ListInfo *
+0035f138	007fd5c8	1.0	Tz__Jiminy__m_InitWorld	_ZN2Tz6Jiminy11m_InitWorldE	Tz::Jiminy::m_InitWorld	int
+0035f144	007fd5d0	2.0	Tz__Jiminy__m_ParentAnimMode	_ZN2Tz6Jiminy16m_ParentAnimModeE	Tz::Jiminy::m_ParentAnimMode	int
+0035f1fc	007fd5e0	5.0	Tz__Jiminy__m_MenuInfo	_ZN2Tz6Jiminy10m_MenuInfoE	Tz::Jiminy::m_MenuInfo	Tz::Jiminy::MenuInfo *
+0035f200	007fd5e4	81.0	Tz__Jiminy__m_MenuPtr	_ZN2Tz6Jiminy9m_MenuPtrE	Tz::Jiminy::m_MenuPtr	Tz::Select *
+0035f204	007fd5ec	6.0	Tz__Jiminy__m_Parent	_ZN2Tz6Jiminy8m_ParentE	Tz::Jiminy::m_Parent	dk::Sprite *
+0035f214	007fd5f8	23.0	Tz__Jiminy__m_SclBar	_ZN2Tz6Jiminy8m_SclBarE	Tz::Jiminy::m_SclBar	Tz::ScrollBar *
+0035f21c	007fd600	5.0	Tz__Jiminy__m_SeqTbl	_ZN2Tz6Jiminy8m_SeqTblE	Tz::Jiminy::m_SeqTbl	Tz::Jiminy::SeqTbl *
+0035f220	00b5af1c	2.0	Tz__Jiminy__m_HideCursor	_ZN2Tz6Jiminy12m_HideCursorE	Tz::Jiminy::m_HideCursor	BOOL_1
+0035f221	00b5af1d	2.0	Tz__Jiminy__m_HideLightCursor	_ZN2Tz6Jiminy17m_HideLightCursorE	Tz::Jiminy::m_HideLightCursor	BOOL_1
+0035f224	007fd604	5.0	Tz__Jiminy__m_Scissor	_ZN2Tz6Jiminy9m_ScissorE	Tz::Jiminy::m_Scissor	dk::Scis *
+0035f230	007fdf0c	19.0	Tz__CmAbility__m_Info	_ZN2Tz9CmAbility6m_InfoE	Tz::CmAbility::m_Info	Tz::CmAbility::Info *
+0035f234	007fdf10	7.0	Tz__CmConfig__m_Sel	_ZN2Tz8CmConfig5m_SelE	Tz::CmConfig::m_Sel	char *
+0035f238	007fd5b0	3.0	Tz__CmGra__m_Gra	_ZN2Tz5CmGra5m_GraE	Tz::CmGra::m_Gra	Tz::HelpGra *
+0035f23c	007fd5b4	2.0	Tz__CmGra__m_Imd	_ZN2Tz5CmGra5m_ImdE	Tz::CmGra::m_Imd	void *
+0035f240	007fd5b8	3.0	Tz__CmGra__m_Sqd	_ZN2Tz5CmGra5m_SqdE	Tz::CmGra::m_Sqd	void *
+0035f244	007fdea0	6.0	Tz__SimpleStat__m_Base	_ZN2Tz10SimpleStat6m_BaseE	Tz::SimpleStat::m_Base	dk::Sprite *
+0035f248	007fdea4	5.0	Tz__SimpleStat__m_Info	_ZN2Tz10SimpleStat6m_InfoE	Tz::SimpleStat::m_Info	Tz::SimpleStat::Info *
+0035f250	007fdc4c	10.0	Tz__GumiPause__m_Lay	_ZN2Tz9GumiPause5m_LayE	Tz::GumiPause::m_Lay	Tz::Layout *
+0035f254	007fdc50	8.0	Tz__GumiPause__m_MenuPtr	_ZN2Tz9GumiPause9m_MenuPtrE	Tz::GumiPause::m_MenuPtr	Tz::Select *
+0035f258	007fdc54	7.0	Tz__GumiPause__m_Bg	_ZN2Tz9GumiPause4m_BgE	Tz::GumiPause::m_Bg	dk::Sprite *
+0035f25c	007fdc58	5.0	Tz__GumiPause__m_Mess	_ZN2Tz9GumiPause6m_MessE	Tz::GumiPause::m_Mess	dk::SpriteMessage *
+0035f260	007fdc5c	6.0	Tz__GumiPause__m_Info	_ZN2Tz9GumiPause6m_InfoE	Tz::GumiPause::m_Info	Tz::GumiPause::AdviceInfo *
+0035f264	007fdc60	4.0	Tz__GumiPause__m_AdviceSeq	_ZN2Tz9GumiPause11m_AdviceSeqE	Tz::GumiPause::m_AdviceSeq	Tz::GumiPause::AdviceSeq *
+0035f268	007fdc64	2.0	Tz__GumiPause__m_SelNum	_ZN2Tz9GumiPause8m_SelNumE	Tz::GumiPause::m_SelNum	char
+0035f280	007fdc74	4.0	Tz__ItemPicDraw__m_PicNum	_ZN2Tz11ItemPicDraw8m_PicNumE	Tz::ItemPicDraw::m_PicNum	short
+0035f288	007fdc80	3.0	Tz__ItemPicDraw__m_BaseGra	_ZN2Tz11ItemPicDraw9m_BaseGraE	Tz::ItemPicDraw::m_BaseGra	dk::Sprite *
+0035f28c	007fdc84	4.0	Tz__ItemPicDraw__m_BaseGraPtr	_ZN2Tz11ItemPicDraw12m_BaseGraPtrE	Tz::ItemPicDraw::m_BaseGraPtr	dk::Sprite *
+0035f298	00b5bf04	2.0	Tz__ItemPicDraw__m_ChgGra	_ZN2Tz11ItemPicDraw8m_ChgGraE	Tz::ItemPicDraw::m_ChgGra	BOOL_1
+0035f299	007fdc8c	2.0	Tz__ItemPicDraw__m_BaseControl	_ZN2Tz11ItemPicDraw13m_BaseControlE	Tz::ItemPicDraw::m_BaseControl	BOOL_1
+0035f2c0	007fd5ac	3.0	Tz__s_stream_memory	_ZN2Tz15s_stream_memoryE	Tz::s_stream_memory	void *
+0035f2c4	007fd590	3.0	Tz__Ending__m_File	_ZN2Tz6Ending6m_FileE	Tz::Ending::m_File	Tz::LayFile *
+0035f2c8	007fd594	6.0	Tz__Ending__m_Lay	_ZN2Tz6Ending5m_LayE	Tz::Ending::m_Lay	Tz::Layout *
+0035f2cc	007fd598	4.0	Tz__Ending__m_SeqTbl	_ZN2Tz6Ending8m_SeqTblE	Tz::Ending::m_SeqTbl	Tz::Ending::SeqTbl *
+0035f2d0	00b5aa84	5.0	Tz__Ending__m_FadeWait	_ZN2Tz6Ending10m_FadeWaitE	Tz::Ending::m_FadeWait	BOOL_1
+0035f2d4	00b5aa80	3.0	Tz__Ending__m_SelMode	_ZN2Tz6Ending9m_SelModeE	Tz::Ending::m_SelMode	int
+0035f2d8	007fd59c	4.0	Tz__Ending__m_Win	_ZN2Tz6Ending5m_WinE	Tz::Ending::m_Win	dk::SpriteMessage *
+0035f2dc	007fd5a0	5.0	Tz__Ending__m_SelPtr	_ZN2Tz6Ending8m_SelPtrE	Tz::Ending::m_SelPtr	Tz::Select *
+0035f2e0	007fd5a4	2.0	Tz__Ending__m_Light	_ZN2Tz6Ending7m_LightE	Tz::Ending::m_Light	Tz::LightCur *
+0035f2e4	007fdf24	12.0	Tz__CmNewFlg__m_Info	_ZN2Tz8CmNewFlg6m_InfoE	Tz::CmNewFlg::m_Info	Tz::CmNewFlg::Info *
+0035f2f0	00b5d9ac	2.0	Tz__MenuBase__m_ModeMax	_ZN2Tz8MenuBase9m_ModeMaxE	Tz::MenuBase::m_ModeMax	int
+0035f2f4	00b5d9b0	2.0	Tz__MenuBase__m_SModeMax	_ZN2Tz8MenuBase10m_SModeMaxE	Tz::MenuBase::m_SModeMax	int
+0035f2f8	00b5d9b4	4.0	Tz__MenuBase__m_Mode	_ZN2Tz8MenuBase6m_ModeE	Tz::MenuBase::m_Mode	int
+0035f2fc	007fddf8	2.0	Tz__MenuBase__m_OldMode	_ZN2Tz8MenuBase9m_OldModeE	Tz::MenuBase::m_OldMode	int
+0035f304	00b5d9b8	3.0	Tz__MenuBase__m_SMode	_ZN2Tz8MenuBase7m_SModeE	Tz::MenuBase::m_SMode	int
+0035f308	007fde00	1.0	Tz__MenuBase__m_OldSMode	_ZN2Tz8MenuBase10m_OldSModeE	Tz::MenuBase::m_OldSMode	int
+0035f30c	00b5d9bc	3.0	Tz__MenuBase__m_Phase	_ZN2Tz8MenuBase7m_PhaseE	Tz::MenuBase::m_Phase	int
+0035f310	007fde04	1.0	Tz__MenuBase__m_OldPhase	_ZN2Tz8MenuBase10m_OldPhaseE	Tz::MenuBase::m_OldPhase	int
+0035f314	00b5d9c0	3.0	Tz__MenuBase__m_Exit	_ZN2Tz8MenuBase6m_ExitE	Tz::MenuBase::m_Exit	BOOL_1
+0035f31c	007fde08	3.0	Tz__MenuBase__m_Obj	_ZN2Tz8MenuBase5m_ObjE	Tz::MenuBase::m_Obj	Tz::MenuObj *
+0035f320	00b5d9c8	3.0	Tz__MenuBase__m_LoadImage	_ZN2Tz8MenuBase11m_LoadImageE	Tz::MenuBase::m_LoadImage	BOOL_1
+0035f324	007fde0c	3.0	Tz__MenuBase__m_Pad	_ZN2Tz8MenuBase5m_PadE	Tz::MenuBase::m_Pad	YS::PAD *
+0035f328	007fde2c	1.0	Tz__s_isMenuRunning_2	_ZN2Tz15s_isMenuRunningE	Tz::s_isMenuRunning	bool
+0035f32a	007fde10	2.0	Tz__MenuBasic__m_Menu	_ZN2Tz9MenuBasic6m_MenuE	Tz::MenuBasic::m_Menu	short
+0035f32c	007fde12	3.0	Tz__MenuBasic__m_NextMenu	_ZN2Tz9MenuBasic10m_NextMenuE	Tz::MenuBasic::m_NextMenu	short
+0035f32e	007fde14	3.0	Tz__MenuBasic__m_NextMenu2	_ZN2Tz9MenuBasic11m_NextMenu2E	Tz::MenuBasic::m_NextMenu2	short
+0035f330	00b5dae0	2.0	Tz__MenuBasic__m_ExitMenuThread	_ZN2Tz9MenuBasic16m_ExitMenuThreadE	Tz::MenuBasic::m_ExitMenuThread	BOOL_1
+0035f338	007fde1c	4.0	Tz__MenuBasic__m_Fade	_ZN2Tz9MenuBasic6m_FadeE	Tz::MenuBasic::m_Fade	dk::Sprite *
+0035f344	007fde28	2.0	Tz__MenuBasic__m_Func	_ZN2Tz9MenuBasic6m_FuncE	Tz::MenuBasic::m_Func	void (*)()
+0035f348	007fde9c	1.0	Tz__s_InitCnt_2	_ZN2Tz9s_InitCntE	Tz::s_InitCnt	char
+0035f34c	007fde94	4.0	Tz__Select__m_Allocator	_ZN2Tz6Select11m_AllocatorE	Tz::Select::m_Allocator	ALLOCATOR *
+0035f350	007fde98	2.0	Tz__Select__m_BackUpAllocator	_ZN2Tz6Select17m_BackUpAllocatorE	Tz::Select::m_BackUpAllocator	ALLOCATOR *
+0035f398	0074a7a0	2.0	vtbl__Tz__SaveFile	_ZTVN2Tz8SaveFileE	vtable for Tz::SaveFile	
+0035f3a8	00b5ddb0	4.0	Tz__MenuItem__m_LayFile	_ZN2Tz8MenuItem9m_LayFileE	Tz::MenuItem::m_LayFile	Tz::LayFile
+0035f3c4	007fde5c	2.0	Tz__MenuItem__m_sp	_ZN2Tz8MenuItem4m_spE	Tz::MenuItem::m_sp	YS::CLASS_BLOCK<Tz::MenuItem, 32> *
+0035f3cc	00b5ddcc	2.0	Tz__MenuItem__m_count	_ZN2Tz8MenuItem7m_countE	Tz::MenuItem::m_count	int
+0035f3d0	00b5ddd0	1.0	Tz__MenuItem__m_count_backup	_ZN2Tz8MenuItem14m_count_backupE	Tz::MenuItem::m_count_backup	int
+0035f3d4	007fde58	87.0	Tz__MenuItem__m_pri	_ZN2Tz8MenuItem5m_priE	Tz::MenuItem::m_pri	int
+0035f3d8	0074a680	1.0	vtbl__Tz__MenuItem	_ZTVN2Tz8MenuItemE	vtable for Tz::MenuItem	
+0035f3f8	007fde4c	3.0	Tz__MenuCursor__m_Allocator	_ZN2Tz10MenuCursor11m_AllocatorE	Tz::MenuCursor::m_Allocator	ALLOCATOR *
+0035f400	007fde44	4.0	Tz__MenuCursor__m_CurType	_ZN2Tz10MenuCursor9m_CurTypeE	Tz::MenuCursor::m_CurType	Tz::MenuCursor::CurType *
+0035f408	007fde48	4.0	Tz__MenuCursor__m_Type	_ZN2Tz10MenuCursor6m_TypeE	Tz::MenuCursor::m_Type	int *
+0035f40c	007fde50	5.0	Tz__MenuCursor__m_Pri	_ZN2Tz10MenuCursor5m_PriE	Tz::MenuCursor::m_Pri	int *
+0035f410	00b5dd14	4.0	Tz__MenuCursor__m_DeleteFlg	_ZN2Tz10MenuCursor11m_DeleteFlgE	Tz::MenuCursor::m_DeleteFlg	int
+0035f414	007fde54	2.0	Tz__MenuCursor__m_PushBuff	_ZN2Tz10MenuCursor10m_PushBuffE	Tz::MenuCursor::m_PushBuff	Tz::MenuCursor::Backup *
+0035f438	0074a780	1.0	vtbl__Tz__MultiSeq	_ZTVN2Tz8MultiSeqE	vtable for Tz::MultiSeq	
+0035f468	00b5e4a0	3.0	Tz__SelHist__m_SeqNum	_ZN2Tz7SelHist8m_SeqNumE	Tz::SelHist::m_SeqNum	short[3]
+0035f470	00b5e4a6	3.0	Tz__SelHist__m_SeqNum2	_ZN2Tz7SelHist9m_SeqNum2E	Tz::SelHist::m_SeqNum2	short[3]
+0035f478	00b5e4ac	2.0	Tz__SelHist__m_LightSeqNum	_ZN2Tz7SelHist13m_LightSeqNumE	Tz::SelHist::m_LightSeqNum	short[3]
+0035f480	007fde90	9.0	Tz__SelHist__m_SeqBuff	_ZN2Tz7SelHist9m_SeqBuffE	Tz::SelHist::m_SeqBuff	Tz::SelHist::SeqBuff *
+0035f488	0074a190	3.0	vtbl__Tz__HelpGra	_ZTVN2Tz7HelpGraE	vtable for Tz::HelpGra	
+0035f4b8	00b5d828	4.0	Tz__LoadData__m_isRequest	_ZN2Tz8LoadData11m_isRequestE	Tz::LoadData::m_isRequest	BOOL_1
+0035f4e0	00b5e93e	2.0	Tz__UnitLoad__m_EntryCnt	_ZN2Tz8UnitLoad10m_EntryCntE	Tz::UnitLoad::m_EntryCnt	short
+0035f4e2	00b5e940	4.0	Tz__UnitLoad__m_BackRead	_ZN2Tz8UnitLoad10m_BackReadE	Tz::UnitLoad::m_BackRead	BOOL_1
+0035f4e8	007fdf04	5.0	Tz__ChgWeapon__m_Info	_ZN2Tz9ChgWeapon6m_InfoE	Tz::ChgWeapon::m_Info	Tz::ChgWeapon::Info *
+0035f4ec	007fdf08	4.0	Tz__ChgWeapon__m_OrgInfo	_ZN2Tz9ChgWeapon9m_OrgInfoE	Tz::ChgWeapon::m_OrgInfo	Tz::ChgWeapon::Info *
+0035f4f0	00b5eb00	4.0	Tz__ChgWeapon__m_Pause	_ZN2Tz9ChgWeapon7m_PauseE	Tz::ChgWeapon::m_Pause	BOOL_1
+0035f4f4	00b5e9e0	4.0	Tz__ChgMember__m_Member	_ZN2Tz9ChgMember8m_MemberE	Tz::ChgMember::m_Member	YS::MEMBER *
+0035f4f8	00b5e9e4	2.0	Tz__ChgMember__m_isCheck	_ZN2Tz9ChgMember9m_isCheckE	Tz::ChgMember::m_isCheck	BOOL_1
+0035f4f9	00b5e9e5	2.0	Tz__ChgMember__m_isLoadExec	_ZN2Tz9ChgMember12m_isLoadExecE	Tz::ChgMember::m_isLoadExec	BOOL_1
+0035f4fa	007fdf00	3.0	Tz__ChgMember__m_isInitInfo	_ZN2Tz9ChgMember12m_isInitInfoE	Tz::ChgMember::m_isInitInfo	BOOL_1
+0035f570	007fdd54	3.0	Tz__JmInfo__m_Allocator	_ZN2Tz6JmInfo11m_AllocatorE	Tz::JmInfo::m_Allocator	ALLOCATOR *
+0035f574	007fdd50	4.0	Tz__JmInfo__m_JimFile	_ZN2Tz6JmInfo9m_JimFileE	Tz::JmInfo::m_JimFile	Tz::MenuFile *
+0035f578	007fdd58	2.0	Tz__JmInfo__m_EnableChara	_ZN2Tz6JmInfo13m_EnableCharaE	Tz::JmInfo::m_EnableChara	YS::BITFLAG<, u_int> *
+0035f57c	007fdd98	3.0	Tz__JmWorldSel__m_ImgFile	_ZN2Tz10JmWorldSel9m_ImgFileE	Tz::JmWorldSel::m_ImgFile	Tz::LayFile *
+0035f580	00b5d4a8	3.0	Tz__JmWorldSel__m_isFileAlloc	_ZN2Tz10JmWorldSel13m_isFileAllocE	Tz::JmWorldSel::m_isFileAlloc	BOOL_1
+0035f581	00b5d4a9	1.0	Tz__JmWorldSel__m_isCreateGra	_ZN2Tz10JmWorldSel13m_isCreateGraE	Tz::JmWorldSel::m_isCreateGra	BOOL_1
+0035f590	00b5d040	3.0	Tz__JmReport__m_isFileAlloc	_ZN2Tz8JmReport13m_isFileAllocE	Tz::JmReport::m_isFileAlloc	BOOL_1
+0035f591	00b5d041	1.0	Tz__JmReport__m_isCreateGra	_ZN2Tz8JmReport13m_isCreateGraE	Tz::JmReport::m_isCreateGra	BOOL_1
+0035f594	007fdd80	6.0	Tz__JmStory__m_MessInfo	_ZN2Tz7JmStory10m_MessInfoE	Tz::JmStory::m_MessInfo	Tz::JmStory::MessInfo *
+0035f598	007fdc98	10.0	Tz__JmAlbum__m_AlbumInfo	_ZN2Tz7JmAlbum11m_AlbumInfoE	Tz::JmAlbum::m_AlbumInfo	Tz::JmAlbum::AlbumInfo *
+0035f59c	007fdc9c	4.0	Tz__JmAlbum__m_ImgFile	_ZN2Tz7JmAlbum9m_ImgFileE	Tz::JmAlbum::m_ImgFile	Tz::LayFile *
+0035f5a3	00b5c2f1	5.0	Tz__JmAlbum__m_isRequest	_ZN2Tz7JmAlbum11m_isRequestE	Tz::JmAlbum::m_isRequest	BOOL_1
+0035f5a4	007fdcb0	4.0	Tz__JmCollection__m_ImgFile	_ZN2Tz12JmCollection9m_ImgFileE	Tz::JmCollection::m_ImgFile	Tz::LayFile *
+0035f5a8	00b5c640	4.0	Tz__JmCollection__m_isFileAlloc	_ZN2Tz12JmCollection13m_isFileAllocE	Tz::JmCollection::m_isFileAlloc	BOOL_1
+0035f5a9	00b5c641	3.0	Tz__JmCollection__m_isCreateGra	_ZN2Tz12JmCollection13m_isCreateGraE	Tz::JmCollection::m_isCreateGra	BOOL_1
+0035f5ac	007fdd38	19.0	Tz__JmDic__m_DicInfo	_ZN2Tz5JmDic9m_DicInfoE	Tz::JmDic::m_DicInfo	Tz::JmDic::DicInfo *
+0035f5b0	007fdd3c	4.0	Tz__JmDic__m_DicSeq	_ZN2Tz5JmDic8m_DicSeqE	Tz::JmDic::m_DicSeq	Tz::JmDic::DicSeq *
+0035f5b6	007fdd40	3.0	Tz__JmDic__m_LoadObjNo	_ZN2Tz5JmDic11m_LoadObjNoE	Tz::JmDic::m_LoadObjNo	short
+0035f5bc	007fdd44	4.0	Tz__JmDic__m_ZoomObj	_ZN2Tz5JmDic9m_ZoomObjE	Tz::JmDic::m_ZoomObj	Tz::MenuObj *
+0035f5d0	007fdca4	11.0	Tz__JmAnsem__m_ReportInfo	_ZN2Tz7JmAnsem12m_ReportInfoE	Tz::JmAnsem::m_ReportInfo	Tz::JmAnsem::ReportInfo *
+0035f5d4	007fdd2c	10.0	Tz__JmDiagram__m_Info	_ZN2Tz9JmDiagram6m_InfoE	Tz::JmDiagram::m_Info	Tz::JmDiagram::Info *
+0035f5d8	007fdd30	10.0	Tz__JmDiagram__m_SeqList	_ZN2Tz9JmDiagram9m_SeqListE	Tz::JmDiagram::m_SeqList	Tz::JmDiagram::SeqList *
+0035f5dc	007fdd34	4.0	Tz__JmDiagram__m_ImgFile	_ZN2Tz9JmDiagram9m_ImgFileE	Tz::JmDiagram::m_ImgFile	Tz::LayFile *
+0035f5e0	00b5c888	4.0	Tz__JmDiagram__m_isFileAlloc	_ZN2Tz9JmDiagram13m_isFileAllocE	Tz::JmDiagram::m_isFileAlloc	BOOL_1
+0035f5e1	00b5c889	3.0	Tz__JmDiagram__m_isRequest	_ZN2Tz9JmDiagram11m_isRequestE	Tz::JmDiagram::m_isRequest	BOOL_1
+0035f5e4	007fdd90	16.0	Tz__JmTreasure__m_Info	_ZN2Tz10JmTreasure6m_InfoE	Tz::JmTreasure::m_Info	Tz::JmTreasure::Info *
+0035f5e8	007fdd94	10.0	Tz__JmTreasure__m_SeqTbl	_ZN2Tz10JmTreasure8m_SeqTblE	Tz::JmTreasure::m_SeqTbl	Tz::JmTreasure::SeqTbl *
+0035f5ec	007fdca8	10.0	Tz__JmBattle__m_ReportInfo	_ZN2Tz8JmBattle12m_ReportInfoE	Tz::JmBattle::m_ReportInfo	Tz::JmBattle::ReportInfo *
+0035f5f0	007fdcac	4.0	Tz__JmBattle__m_Cnt	_ZN2Tz8JmBattle5m_CntE	Tz::JmBattle::m_Cnt	dk::SpriteMessage *
+0035f5f4	007fdd88	2.0	Tz__JmSynthe__m_SeqTbl	_ZN2Tz8JmSynthe8m_SeqTblE	Tz::JmSynthe::m_SeqTbl	Tz::JmSynthe::SeqTbl *
+0035f5f8	007fdd84	2.0	Tz__JmSynthe__m_File	_ZN2Tz8JmSynthe6m_FileE	Tz::JmSynthe::m_File	Tz::MenuFile *
+0035f608	007fdd74	6.0	Tz__JmQuest__m_Info	_ZN2Tz7JmQuest6m_InfoE	Tz::JmQuest::m_Info	Tz::JmQuest::Info *
+0035f60c	007fdd78	4.0	Tz__JmQuest__m_SeqTbl	_ZN2Tz7JmQuest8m_SeqTblE	Tz::JmQuest::m_SeqTbl	Tz::JmQuest::SeqTbl *
+0035f610	007fdd64	29.0	Tz__JmNewInfo__m_New	_ZN2Tz9JmNewInfo5m_NewE	Tz::JmNewInfo::m_New	Tz::MenuSramJiminy *
+0035f614	007fdcb8	2.0	Tz__s_InfoInit	_ZN2Tz10s_InfoInitE	Tz::s_InfoInit	char
+0035f618	007fdcbc	2.0	Tz__s_Allocator	_ZN2Tz11s_AllocatorE	Tz::s_Allocator	kn::MemoryAllocator *
+0035f630	007fdd68	7.0	Tz__JmPuzzle__m_ImageInfo	_ZN2Tz8JmPuzzle11m_ImageInfoE	Tz::JmPuzzle::m_ImageInfo	Tz::JmPuzzle::ImageInfo *
+0035f634	007fdd6c	13.0	Tz__JmPuzzle__m_SeqTbl	_ZN2Tz8JmPuzzle8m_SeqTblE	Tz::JmPuzzle::m_SeqTbl	Tz::JmPuzzle::SeqTbl *
+0035f638	007fdd70	17.0	Tz__JmPuzzle__m_Info	_ZN2Tz8JmPuzzle6m_InfoE	Tz::JmPuzzle::m_Info	Tz::JmPuzzle::Info *
+0035f640	007fd6a4	6.0	Tz__CmSLBase__m_ImgUnit	_ZN2Tz8CmSLBase9m_ImgUnitE	Tz::CmSLBase::m_ImgUnit	int
+0035f644	007fd6a8	4.0	Tz__CmSLBase__m_SeqUnit	_ZN2Tz8CmSLBase9m_SeqUnitE	Tz::CmSLBase::m_SeqUnit	int
+0035f648	007fd6ac	4.0	Tz__CmSLBase__m_DummySeq	_ZN2Tz8CmSLBase10m_DummySeqE	Tz::CmSLBase::m_DummySeq	int
+0035f64c	007fd6b0	20.0	Tz__CmSLBase__m_MenuPtr	_ZN2Tz8CmSLBase9m_MenuPtrE	Tz::CmSLBase::m_MenuPtr	Tz::Select *
+0035f650	007fd6b4	17.0	Tz__CmSLBase__m_SelPtr	_ZN2Tz8CmSLBase8m_SelPtrE	Tz::CmSLBase::m_SelPtr	Tz::Select *
+0035f654	007fd6b8	11.0	Tz__CmSLBase__m_WarningPtr	_ZN2Tz8CmSLBase12m_WarningPtrE	Tz::CmSLBase::m_WarningPtr	dk::SpriteMessage *
+0035f658	007fd6bc	6.0	Tz__CmSLBase__m_ListBase	_ZN2Tz8CmSLBase10m_ListBaseE	Tz::CmSLBase::m_ListBase	dk::Sprite *
+0035f65c	007fd6c0	3.0	Tz__CmSLBase__m_ListMsgBuff	_ZN2Tz8CmSLBase13m_ListMsgBuffE	Tz::CmSLBase::m_ListMsgBuff	Tz::ListMsgBuff *
+0035f660	007fd6c4	3.0	Tz__CmSLBase__m_DrawListMsg	_ZN2Tz8CmSLBase13m_DrawListMsgE	Tz::CmSLBase::m_DrawListMsg	DRAW_LIST_MSG *
+0035f664	007fd6c8	13.0	Tz__CmSLBase__m_Lay	_ZN2Tz8CmSLBase5m_LayE	Tz::CmSLBase::m_Lay	Tz::Layout *
+0035f668	007fd6cc	3.0	Tz__CmSLBase__m_Place	_ZN2Tz8CmSLBase7m_PlaceE	Tz::CmSLBase::m_Place	Tz::LayMsg *
+0035f66c	007fd6d0	4.0	Tz__CmSLBase__m_Munny	_ZN2Tz8CmSLBase7m_MunnyE	Tz::CmSLBase::m_Munny	Tz::MunnyDraw *
+0035f670	007fd6d4	4.0	Tz__CmSLBase__m_Time	_ZN2Tz8CmSLBase6m_TimeE	Tz::CmSLBase::m_Time	Tz::TimeDraw *
+0035f678	007fd6dc	7.0	Tz__CmSLBase__m_SclBar	_ZN2Tz8CmSLBase8m_SclBarE	Tz::CmSLBase::m_SclBar	Tz::ScrollBar *
+0035f67c	007fd6e0	5.0	Tz__CmSLBase__m_Light	_ZN2Tz8CmSLBase7m_LightE	Tz::CmSLBase::m_Light	Tz::LightCur *
+0035f680	00b5b6c8	6.0	Tz__CmSLBase__m_ListMsg	_ZN2Tz8CmSLBase9m_ListMsgE	Tz::CmSLBase::m_ListMsg	Tz::MenuItem *[4]
+0035f6c0	007fd6e4	2.0	Tz__CmSLBase__m_HelpMess	_ZN2Tz8CmSLBase10m_HelpMessE	Tz::CmSLBase::m_HelpMess	Tz::LaySeqMess *
+0035f6c4	007fd6e8	2.0	Tz__CmSLBase__m_HelpBuff	_ZN2Tz8CmSLBase10m_HelpBuffE	Tz::CmSLBase::m_HelpBuff	char *
+0035f6c8	007fd6ec	3.0	Tz__CmSLBase__m_WarningBuff	_ZN2Tz8CmSLBase13m_WarningBuffE	Tz::CmSLBase::m_WarningBuff	char *
+0035f6cc	007fd6f0	11.0	Tz__CmSLBase__m_SeqTbl	_ZN2Tz8CmSLBase8m_SeqTblE	Tz::CmSLBase::m_SeqTbl	const Tz::SLSeqNumTbl *
+0035f6d0	00b5b708	6.0	Tz__CmSLBase__m_WaningPadWait	_ZN2Tz8CmSLBase15m_WaningPadWaitE	Tz::CmSLBase::m_WaningPadWait	char
+0035f6dc	007fdeec	2.0	Tz__SyntheData__m_File	_ZN2Tz10SyntheData6m_FileE	Tz::SyntheData::m_File	Tz::MenuFile *
+00360001	00716810	1.0	LS_41_LV_1	LS.41.LV.1	LS.41.LV.1	
+00360006	0071a874	1.0	LS_33_LV_0	LS.33.LV.0	LS.33.LV.0	
+00360198	00717fb2	1.0	LS_90_LV_8	LS.90.LV.8	LS.90.LV.8	
+003616e4	007f7d56	2.0	seAlertPlay	seAlertPlay	seAlertPlay	bool
+003616f0	007f7d48	3.0	s_disable	s_disable	s_disable	bool
+003616f8	007f7d60	11.0	FIELD_INIT_BANK	FIELD_INIT_BANK	FIELD_INIT_BANK	int[27]
+003617fc	007fe1bc	9.0	worldmap__currentLibretto	_ZN8worldmap15currentLibrettoE	worldmap::currentLibretto	worldmap::Libretto *
+00361800	007fe16c	2.0	dk__s_isWorldMap	_ZN2dk12s_isWorldMapE	dk::s_isWorldMap	char
+00361810	00b60830	1.0	worldmap__Obj___vtable	_ZN8worldmap3Obj7_vtableE	worldmap::Obj::_vtable	worldmap::Obj::VTABLE<worldmap::Obj>
+00361898	007fe0b8	3.0	worldmap__execFlag	_ZN8worldmap8execFlagE	worldmap::execFlag	bool
+00361899	007fe0b9	3.0	worldmap__readPackDisableFlag	_ZN8worldmap19readPackDisableFlagE	worldmap::readPackDisableFlag	bool
+00361978	0074ab68	2.0	vtbl__worldmap__MessageWidget	_ZTVN8worldmap13MessageWidgetE	vtable for worldmap::MessageWidget	
+00361998	007fe168	4.0	worldmap__rootWindow	_ZN8worldmap10rootWindowE	worldmap::rootWindow	worldmap::RootWindow *
+003619a0	0074aa98	2.0	vtbl__worldmap__RootWindow	_ZTVN8worldmap10RootWindowE	vtable for worldmap::RootWindow	
+003619c8	00b60d70	1.0	worldmap__Symbol___vtable	_ZN8worldmap6Symbol7_vtableE	worldmap::Symbol::_vtable	worldmap::Obj::VTABLE<worldmap::Symbol>
+00361a50	007fe1b8	3.0	worldmap__currentEvent	_ZN8worldmap12currentEventE	worldmap::currentEvent	worldmap::Event *
+00361a70	00807b0c	1.0	YS__CurrentThread	_ZN2YS13CurrentThreadE	YS::CurrentThread	TASK *
+00361a90	007fe170	3.0	dk__currentTotalInfo	_ZN2dk16currentTotalInfoE	dk::currentTotalInfo	dk::WM_TOTAL_INFO *
+00361b20	00b61988	1.0	worldmap__Gumi___vtable	_ZN8worldmap4Gumi7_vtableE	worldmap::Gumi::_vtable	worldmap::Obj::VTABLE<worldmap::Gumi>
+00361be8	0074ad20	3.0	vtbl__worldmap__ObjWidget	_ZTVN8worldmap9ObjWidgetE	vtable for worldmap::ObjWidget	
+00361c0c	007fe1cc	2.0	dk__episode_select	_ZN2dk14episode_selectE	dk::episode_select	Tz::Select *
+00361c10	007fe1d0	4.0	dk__currentLanding	_ZN2dk14currentLandingE	dk::currentLanding	dk::WM_LANDING *
+00361c18	0074b098	2.0	vtbl__dk__WM_LANDING	_ZTVN2dk10WM_LANDINGE	vtable for dk::WM_LANDING	
+00361d00	00b60c30	1.0	worldmap__Player___vtable	_ZN8worldmap6Player7_vtableE	worldmap::Player::_vtable	YS::PLAYER::VTABLE<worldmap::Player>
+00361dd8	007fe1d4	4.0	dk__currentLandingInfo	_ZN2dk18currentLandingInfoE	dk::currentLandingInfo	dk::WM_LANDING_INFO *
+00361de0	0074b0b8	2.0	vtbl__dk__WM_LANDING_INFO	_ZTVN2dk15WM_LANDING_INFOE	vtable for dk::WM_LANDING_INFO	
+00361e00	007fe1c8	4.0	dk__currentInfo	_ZN2dk11currentInfoE	dk::currentInfo	dk::WM_GLANDING_INFO *
+00361e08	0074b078	2.0	vtbl__dk__WM_GLANDING_INFO	_ZTVN2dk16WM_GLANDING_INFOE	vtable for dk::WM_GLANDING_INFO	
+00361e28	007fe1c4	4.0	dk__currentGLanding	_ZN2dk15currentGLandingE	dk::currentGLanding	dk::WM_GLANDING *
+00361e30	0074b058	2.0	vtbl__dk__WM_GLANDING	_ZTVN2dk11WM_GLANDINGE	vtable for dk::WM_GLANDING	
+00361f60	008079e4	81.0	Ti__MiniGame__current_	_ZN2Ti8MiniGame8current_E	Ti::MiniGame::current_	Ti::MiniGame *
+00361f68	00758ee0	4.0	vtbl__Ti__MiniGame	_ZTVN2Ti8MiniGameE	vtable for Ti::MiniGame	
+00361fa0	008079bc	6.0	Ti__MGObj__member_buffer_size_	_ZN2Ti5MGObj19member_buffer_size_E	Ti::MGObj::member_buffer_size_	int
+00361fa4	008079c0	7.0	Ti__MGObj__members_	_ZN2Ti5MGObj8members_E	Ti::MGObj::members_	Ti::MGObjMember *
+00361fa8	03eaed3c	2.0	Ti__MGObj__live_counter_	_ZN2Ti5MGObj13live_counter_E	Ti::MGObj::live_counter_	int
+00361fc8	03eaed40	1.0	Ti__MGObj___vtable	_ZN2Ti5MGObj7_vtableE	Ti::MGObj::_vtable	Ti::MGObj::VTABLE<Ti::MGObj>
+00362050	007fd554	4.0	Ti__MGPlayer__current_	_ZN2Ti8MGPlayer8current_E	Ti::MGPlayer::current_	Ti::MGPlayer *
+00362060	00ad2e80	1.0	Ti__MGPlayer___vtable	_ZN2Ti8MGPlayer7_vtableE	Ti::MGPlayer::_vtable	Ti::MGPlayer::VTABLE<Ti::MGPlayer>
+003621a0	03eae9d4	1.0	Ti__MGOarashiPiglet___vtable	_ZN2Ti15MGOarashiPiglet7_vtableE	Ti::MGOarashiPiglet::_vtable	Ti::MGObj::VTABLE<Ti::MGOarashiPiglet>
+00362230	03eae9d0	1.0	Ti__MGOarashiGimObj___vtable	_ZN2Ti15MGOarashiGimObj7_vtableE	Ti::MGOarashiGimObj::_vtable	Ti::MGObj::VTABLE<Ti::MGOarashiGimObj>
+00362380	008079b6	3.0	voice_table_c	voice_table_c	voice_table_c	u_char[2]
+00362388	008079b8	2.0	voice_table_d	voice_table_d	voice_table_d	u_char[3]
+003625a0	00758468	3.0	vtbl__Ti__MGHachimitsu	_ZTVN2Ti12MGHachimitsuE	vtable for Ti::MGHachimitsu	
+003625e0	03eae328	1.0	Ti__MGHachimitsuPlayer___vtable	_ZN2Ti18MGHachimitsuPlayer7_vtableE	Ti::MGHachimitsuPlayer::_vtable	Ti::MGPlayer::VTABLE<Ti::MGHachimitsuPlayer>
+003627c8	03eaf3fc	1.0	Ti__MGHachimitsuGopher___vtable	_ZN2Ti18MGHachimitsuGopher7_vtableE	Ti::MGHachimitsuGopher::_vtable	Ti::MGObj::VTABLE<Ti::MGHachimitsuGopher>
+00362858	03eaf3f8	1.0	Ti__MGHachimitsuGimObj___vtable	_ZN2Ti18MGHachimitsuGimObj7_vtableE	Ti::MGHachimitsuGimObj::_vtable	Ti::MGObj::VTABLE<Ti::MGHachimitsuGimObj>
+003628f0	0080790f	3.0	voice_table_d_2	voice_table_d	voice_table_d	u_char[2]
+00362908	03eae448	1.0	Ti__MGHachimitsuPo___vtable	_ZN2Ti14MGHachimitsuPo7_vtableE	Ti::MGHachimitsuPo::_vtable	Ti::MGHachimitsuPo::VTABLE<Ti::MGHachimitsuPo>
+003629e0	00758668	3.0	vtbl__Ti__MGJump	_ZTVN2Ti6MGJumpE	vtable for Ti::MGJump	
+00362b68	03eae680	1.0	Ti__MGJumpGimObj___vtable	_ZN2Ti12MGJumpGimObj7_vtableE	Ti::MGJumpGimObj::_vtable	Ti::MGObj::VTABLE<Ti::MGJumpGimObj>
+00362d90	00807870	1.0	Ti__MG_ALEscape__task_params_	_ZN2Ti11MG_ALEscape12task_params_E	Ti::MG_ALEscape::task_params_	Ti::MiniGame::TaskParam[3]
+00362dc0	007583f8	3.0	vtbl__Ti__MG_ALEscape	_ZTVN2Ti11MG_ALEscapeE	vtable for Ti::MG_ALEscape	
+00362e70	03eae0e0	1.0	Ti__MG_EHSidecar__camera_to_player_offset_	_ZN2Ti12MG_EHSidecar24camera_to_player_offset_E	Ti::MG_EHSidecar::camera_to_player_offset_	kn::FVector
+00362e80	008078a4	1.0	Ti__MG_EHSidecar__task_params_	_ZN2Ti12MG_EHSidecar12task_params_E	Ti::MG_EHSidecar::task_params_	Ti::MiniGame::TaskParam[3]
+00362eb0	00758430	3.0	vtbl__Ti__MG_EHSidecar	_ZTVN2Ti12MG_EHSidecarE	vtable for Ti::MG_EHSidecar	
+003633c8	00807834	2.0	Ts__FlareTask	_ZN2Ts9FlareTaskE	Ts::FlareTask	TASK *
+00363548	008074b4	1.0	OnEdge	OnEdge	OnEdge	bool
+00363630	03eace00	5.0	Ts__ACTION_LIMIT_HOVER__Spec	_ZN2Ts18ACTION_LIMIT_HOVER4SpecE	Ts::ACTION_LIMIT_HOVER::Spec	Ts::ACTION_LIMIT_HOVER::SPEC
+00363748	00807830	2.0	Ts__ShotObj	_ZN2Ts7ShotObjE	Ts::ShotObj	Ts::TRINITY_SHOT_OBJ *
+003637d0	008074c4	9.0	Ts__SKATEBOARDSCORE__Self	_ZN2Ts15SKATEBOARDSCORE4SelfE	Ts::SKATEBOARDSCORE::Self	Ts::SKATEBOARDSCORE *
+003637d8	00745348	12.0	vtbl__menu__Widget	_ZTVN4menu6WidgetE	vtable for menu::Widget	
+003637f8	007ef0c0	2.0	menu__WindowTask	_ZN4menu10WindowTaskE	menu::WindowTask	TASK *
+00363800	007452c0	1.0	vtbl__menu__Window	_ZTVN4menu6WindowE	vtable for menu::Window	
+00363858	00757938	4.0	vtbl__menu__ObjWidget	_ZTVN4menu9ObjWidgetE	vtable for menu::ObjWidget	
+00363878	00757918	4.0	vtbl__menu__LayoutWidget	_ZTVN4menu12LayoutWidgetE	vtable for menu::LayoutWidget	
+00363898	00807200	1.0	menu__imageCache	_ZN4menu10imageCacheE	menu::imageCache	const YI::IMAGE *
+003638c0	00806b2c	3.0	s_movieIn	s_movieIn	s_movieIn	bool
+003638c4	00806b30	2.0	MOVIE__Allocator	_ZN5MOVIE9AllocatorE	MOVIE::Allocator	kn::MemoryAllocator *
+003638c8	00806b2d	2.0	s_PausePushCnt	s_PausePushCnt	s_PausePushCnt	char
+003638d0	02bb1ca0	27.0	Random	Random	Random	RANDOM
+003638ec	00807204	4.0	donald_motions	donald_motions	donald_motions	FRIEND_FLY_MOTIONS
+00363c24	007fe740	2.0	YS__LandingList	_ZN2YS11LandingListE	YS::LandingList	const YS::ELEMDATA<YS::LANDING> *
+0036a290	00703296	1.0	LS_214_LV_70	LS.214.LV.70	LS.214.LV.70	
+0036a440	007ef200	2.0	LV_3	LV.3	LV.3	
+0036a448	007ef208	2.0	LV_4	LV.4	LV.4	
+0036a450	007ef210	2.0	LV_5	LV.5	LV.5	
+0036a578	007018e4	1.0	LS_506_LV_131	LS.506.LV.131	LS.506.LV.131	
+0036a9f0	0070238e	1.0	LS_113_LV_12	LS.113.LV.12	LS.113.LV.12	
+0036acf0	006fb5a1	1.0	LS_39_LV_7	LS.39.LV.7	LS.39.LV.7	
+0036ad70	006faf8c	1.0	dk__RC_COLOR_RATE_TABLE	_ZN2dk19RC_COLOR_RATE_TABLEE	dk::RC_COLOR_RATE_TABLE	const const float[9]
+0036aed4	006fdeb0	1.0	LS_77_LV_11	LS.77.LV.11	LS.77.LV.11	
+0036aedc	006fe4b4	1.0	LS_172_LV_21	LS.172.LV.21	LS.172.LV.21	
+0036aeec	006fe4a7	1.0	LS_159_LV_18	LS.159.LV.18	LS.159.LV.18	
+0036af3c	006fcee1	1.0	LS_144_LV_40	LS.144.LV.40	LS.144.LV.40	
+0036afb0	006ff58a	1.0	LS_108_LV_27	LS.108.LV.27	LS.108.LV.27	
+0036b228	006ffe5c	1.0	LS_38_LV_1	LS.38.LV.1	LS.38.LV.1	
+0036b240	006ff284	1.0	LS_38_LV_1_2	LS.38.LV.1	LS.38.LV.1	
+0036b300	006feee8	1.0	LS_143_LV_16	LS.143.LV.16	LS.143.LV.16	
+0036b318	006fe820	1.0	LS_46_LV_4_2	LS.46.LV.4	LS.46.LV.4	
+0036c188	02a9f330	1.0	YS__OBJ___vtable	_ZN2YS3OBJ7_vtableE	YS::OBJ::_vtable	YS::OBJ::VTABLE<YS::OBJ>
+0036c18c	00724ea9	1.0	LS_199_LV_29	LS.199.LV.29	LS.199.LV.29	
+0036c1b4	00724e6d	1.0	LS_170_LV_26	LS.170.LV.26	LS.170.LV.26	
+0036c4c4	0072683f	1.0	LS_290_LV_24	LS.290.LV.24	LS.290.LV.24	
+0036c514	007209e5	1.0	LS_110_LV_14	LS.110.LV.14	LS.110.LV.14	
+0036c850	00720ada	1.0	LS_61_LV_3	LS.61.LV.3	LS.61.LV.3	
+0036c8a0	007258c8	1.0	LS_111_LV_19	LS.111.LV.19	LS.111.LV.19	
+0036c8a4	00745ba8	1.0	kn__FVector__dump	_ZZNK2kn7FVector4dumpEvEs	kn::FVector::dump() const::string literal	
+0036c930	0072151c	1.0	LS_237_LV_32	LS.237.LV.32	LS.237.LV.32	
+0036cb68	00721dbf	1.0	LS_56_LV_18	LS.56.LV.18	LS.56.LV.18	
+0036cc28	007220f0	1.0	LS_59_LV_9	LS.59.LV.9	LS.59.LV.9	
+0036cce0	00720cbc	1.0	YS__IsReflectTable	_ZN2YS14IsReflectTableE	YS::IsReflectTable	const const u_char[7][7]
+0036cd20	00729050	1.0	LS_72_LV_10	LS.72.LV.10	LS.72.LV.10	
+0036cea0	00724230	1.0	YS__SizeTable	_ZN2YS9SizeTableE	YS::SizeTable	const const u_char[32]
+0036d340	0072953c	1.0	LS_131_LV_20	LS.131.LV.20	LS.131.LV.20	
+0036d400	00727dee	1.0	LS_109_items	LS.109.items	LS.109.items	const const u_short[4]
+0036d4cc	00727125	1.0	LS_184_LV_13	LS.184.LV.13	LS.184.LV.13	
+0036d4d0	0072711c	1.0	LS_184_table	LS.184.table	LS.184.table	const const u_char[9]
+0036d4d4	00727044	1.0	YS__ParamTable	_ZN2YS10ParamTableE	YS::ParamTable	const const YS::PRIZEEFFECT::PARAM[9]
+0036d8b0	00722e01	1.0	LS_68_LV_6	LS.68.LV.6	LS.68.LV.6	
+0036d9c4	007208b0	1.0	LS_43_LV_4	LS.43.LV.4	LS.43.LV.4	
+0036dcf8	007278e8	1.0	YS__Table	_ZN2YS5TableE	YS::Table	const const YS::PRIZEBOX_TABLE[12]
+0036dd84	0072aa68	1.0	LS_61_LV_8	LS.61.LV.8	LS.61.LV.8	
+0036dd88	00724010	1.0	LS_132_LV_14	LS.132.LV.14	LS.132.LV.14	
+0036dfe0	00727414	1.0	YS__ParamTable_2	_ZN2YS10ParamTableE	YS::ParamTable	const const YS::PARAM[3]
+0036e000	007274d8	1.0	LS_121_to_mu	LS.121.to_mu	LS.121.to_mu	const const u_char[9]
+0036e030	00727444	1.0	YS__GaugeTable	_ZN2YS10GaugeTableE	YS::GaugeTable	const const float[3]
+0036e180	00727580	3.0	YS__ParamTable_3	_ZN2YS10ParamTableE	YS::ParamTable	const const YS::PRIZEEFFECT::PARAM[3]
+0036e238	00727760	1.0	YS__ParamTable_4	_ZN2YS10ParamTableE	YS::ParamTable	const const YS::PARAM[4]
+0036e3a8	0072b72e	1.0	YS__CommandTable	_ZN2YS12CommandTableE	YS::CommandTable	const const YS::TABLE[2]
+0036e5e0	02a938d0	1.0	PARAM_B		PARAM_B	const YS::CROWDEFFECT::PARAM
+00371280	0071192d	1.0	LS_61_LV_29	LS.61.LV.29	LS.61.LV.29	
+00371368	007117b1	1.0	LS_77_LV_8	LS.77.LV.8	LS.77.LV.8	
+0037138c	007116cb	1.0	LS_68_LV_6_2	LS.68.LV.6	LS.68.LV.6	
+003714b4	007006e6	1.0	LS_86_LV_0	LS.86.LV.0	LS.86.LV.0	
+003714f8	007005fc	1.0	LS_67_LV_7	LS.67.LV.7	LS.67.LV.7	
+00371698	00718965	1.0	LS_324_LV_8	LS.324.LV.8	LS.324.LV.8	
+00371914	0071c8dd	1.0	LS_59_LV_4	LS.59.LV.4	LS.59.LV.4	
+00371a58	0071cbf8	1.0	LS_71_LV_4	LS.71.LV.4	LS.71.LV.4	
+00371c50	0071cae6	2.0	Tz__s_SelSeq	_ZN2Tz8s_SelSeqE	Tz::s_SelSeq	const const Tz::SeqInfo[2]
+00371cc0	0071cb36	1.0	Tz__s_GameId0	_ZN2Tz9s_GameId0E	Tz::s_GameId0	const const u_char[4]
+00371d3c	0071ce58	2.0	Tz__s_LayPicNum	_ZN2Tz11s_LayPicNumE	Tz::s_LayPicNum	const const short[3][3]
+00371d40	0071ce52	2.0	Tz__s_LayBg2Num	_ZN2Tz11s_LayBg2NumE	Tz::s_LayBg2Num	const const short[3]
+00371d80	0071ce88	2.0	Tz__s_DisSeqNum	_ZN2Tz11s_DisSeqNumE	Tz::s_DisSeqNum	const const short[2][4]
+00371e54	0071d175	1.0	LS_67_LV_3	LS.67.LV.3	LS.67.LV.3	
+00371fec	0071c60c	2.0	Tz__s_LayPicNum_2	_ZN2Tz11s_LayPicNumE	Tz::s_LayPicNum	const const short[3][3]
+00371ff0	0071c606	2.0	Tz__s_LayBg2Num_2	_ZN2Tz11s_LayBg2NumE	Tz::s_LayBg2Num	const const short[3]
+003720f4	0071d5b8	1.0	LS_76_LV_4	LS.76.LV.4	LS.76.LV.4	
+00372298	0071d4ae	3.0	Tz__s_SelSeq_2	_ZN2Tz8s_SelSeqE	Tz::s_SelSeq	const const Tz::SeqInfo[2]
+00372444	0071cc90	2.0	Tz__s_LayPicNum_3	_ZN2Tz11s_LayPicNumE	Tz::s_LayPicNum	const const short[5][3]
+00372448	0071cc8a	2.0	Tz__s_LayBg2Num_3	_ZN2Tz11s_LayBg2NumE	Tz::s_LayBg2Num	const const short[3]
+00372650	0071c48a	1.0	Tz__s_GraSeqNum	_ZN2Tz11s_GraSeqNumE	Tz::s_GraSeqNum	const const short[4][3]
+0037299e	0071549a	1.0	Tz__s_CommSeqNum	_ZN2Tz12s_CommSeqNumE	Tz::s_CommSeqNum	const const short[2][3]
+003729c8	007154bc	1.0	Tz__s_ScrollBarSeqNum	_ZN2Tz17s_ScrollBarSeqNumE	Tz::s_ScrollBarSeqNum	const const short[12]
+003729e0	007154d4	1.0	Tz__s_TopPlateSeqNum	_ZN2Tz16s_TopPlateSeqNumE	Tz::s_TopPlateSeqNum	const const short[2][4]
+003729f0	007154e4	1.0	Tz__s_TopPlate2SeqNum	_ZN2Tz17s_TopPlate2SeqNumE	Tz::s_TopPlate2SeqNum	const const short[2][4]
+00372a00	00715500	10.0	Tz__s_WarningWin2SeqNum	_ZN2Tz19s_WarningWin2SeqNumE	Tz::s_WarningWin2SeqNum	const const short[3]
+00372e8e	00714a36	1.0	Tz__s_CommSeqNum_2	_ZN2Tz12s_CommSeqNumE	Tz::s_CommSeqNum	const const short[2][3]
+00372ea0	00714a5e	1.0	Tz__s_ScrollBarSeqNum_2	_ZN2Tz17s_ScrollBarSeqNumE	Tz::s_ScrollBarSeqNum	const const short[12]
+003732e8	0071bf41	1.0	LS_83_LV_11	LS.83.LV.11	LS.83.LV.11	
+00373478	0071bf2a	1.0	LS_80_s_SummonItem	LS.80.s_SummonItem	LS.80.s_SummonItem	const const u_short[4]
+003736f8	0071b6be	0.0	LS_56_s_Type	LS.56.s_Type	LS.56.s_Type	const const short[5]
+00373738	0071b542	1.0	Tz__s_TopSubSeq	_ZN2Tz11s_TopSubSeqE	Tz::s_TopSubSeq	const const short[5]
+00373758	0071b54c	1.0	Tz__s_TopSubMsg	_ZN2Tz11s_TopSubMsgE	Tz::s_TopSubMsg	const const u_short[5]
+00373768	0071b556	1.0	Tz__s_TopSubSeqForm	_ZN2Tz15s_TopSubSeqFormE	Tz::s_TopSubSeqForm	const const short[7]
+00373788	0071b564	2.0	Tz__s_TopSubMsgForm	_ZN2Tz15s_TopSubMsgFormE	Tz::s_TopSubMsgForm	const const u_short[7]
+00373800	0071b5d2	1.0	Tz__s_EqSubSeq	_ZN2Tz10s_EqSubSeqE	Tz::s_EqSubSeq	const const short[5]
+003738d8	00714fa0	1.0	Tz__s_LightSeqNum	_ZN2Tz13s_LightSeqNumE	Tz::s_LightSeqNum	const const short[3]
+00373990	0071b39a	1.0	LS_103_s_Seq	LS.103.s_Seq	LS.103.s_Seq	const const short[5]
+00373d60	0071405e	2.0	Tz__s_ParentPrev	_ZN2Tz12s_ParentPrevE	Tz::s_ParentPrev	const const short[3]
+00373d70	0071407c	2.0	Tz__s_TopMess	_ZN2Tz9s_TopMessE	Tz::s_TopMess	const const u_short[3]
+00373d88	0071408e	1.0	Tz__s_ScrollBarSeqNum_3	_ZN2Tz17s_ScrollBarSeqNumE	Tz::s_ScrollBarSeqNum	const const short[12]
+00373e10	0071a8e2	1.0	Tz__s_TopListSeq	_ZN2Tz12s_TopListSeqE	Tz::s_TopListSeq	const const short[4]
+00374168	00715fe6	4.0	Tz__s_Result	_ZN2Tz8s_ResultE	Tz::s_Result	const const char[9]
+00374178	00716002	1.0	Tz__s_GOResult	_ZN2Tz10s_GOResultE	Tz::s_GOResult	const const char[9]
+003741d0	00716442	1.0	LS_37_LV_0	LS.37.LV.0	LS.37.LV.0	
+003742c8	00715854	8.0	Tz__s_GraInfo	_ZN2Tz9s_GraInfoE	Tz::s_GraInfo	const const Tz::GraInfo[10]
+00374348	00713ea8	1.0	LS_86_LV_5	LS.86.LV.5	LS.86.LV.5	
+00374380	00713d32	1.0	Tz__s_LightSeqNum_2	_ZN2Tz13s_LightSeqNumE	Tz::s_LightSeqNum	const const short[3]
+00374388	00713d08	0.0	Tz__s_LayNum	_ZN2Tz8s_LayNumE	Tz::s_LayNum	const const char[6][3]
+00374428	00719c8c	1.0	LS_30_LV_2	LS.30.LV.2	LS.30.LV.2	
+00374470	00719568	1.0	LS_50_LV_3	LS.50.LV.3	LS.50.LV.3	
+00374498	00716654	2.0	LS_45_LV_0	LS.45.LV.0	LS.45.LV.0	
+003744dc	0071671f	1.0	LS_54_LV_2	LS.54.LV.2	LS.54.LV.2	
+00374520	0071677f	1.0	LS_65_LV_4	LS.65.LV.4	LS.65.LV.4	
+00374770	00717c86	1.0	Tz__s_HelpMsg	_ZN2Tz9s_HelpMsgE	Tz::s_HelpMsg	const const u_short[9]
+00374928	00716aec	1.0	Tz__s_HelpMsg_2	_ZN2Tz9s_HelpMsgE	Tz::s_HelpMsg	const const u_short[12]
+00374ba8	00716a10	2.0	LS_58_LV_3	LS.58.LV.3	LS.58.LV.3	
+00374bf8	00717e30	1.0	Tz__s_Mess	_ZN2Tz6s_MessE	Tz::s_Mess	const const u_short[4]
+00374cd0	00717874	5.0	Tz__s_DivisionInfo	_ZN2Tz14s_DivisionInfoE	Tz::s_DivisionInfo	const const Tz::DivisionInfo[2]
+00374ce8	0071789a	1.0	Tz__s_ItemPicSeq	_ZN2Tz12s_ItemPicSeqE	Tz::s_ItemPicSeq	const const short[2]
+00374fa8	00a34e08	1.0	bgmFileName		bgmFileName	char[64]
+00375400	00b60190	1.0	filename		filename	char[40]
+00375420	0071df1c	1.0	worldmap__paramTable	_ZN8worldmap10paramTableE	worldmap::paramTable	const const worldmap::Symbol::ParamTable[12]
+00375428	0071df94	1.0	LS_166_LV_7	LS.166.LV.7	LS.166.LV.7	
+00375480	0071df7c	1.0	worldmap__stateColorTable	_ZN8worldmap15stateColorTableE	worldmap::stateColorTable	const const u_int[6]
+00375598	0071e2ec	2.0	dk__light_Table	_ZN2dk11light_TableE	dk::light_Table	const const short[3]
+003755f0	0071e342	1.0	dk__scroll_bar_seq	_ZN2dk14scroll_bar_seqE	dk::scroll_bar_seq	const const short[12]
+003757d8	0071e15c	1.0	dk__title_in_table	_ZN2dk14title_in_tableE	dk::title_in_table	const const short[3]
+003757e0	0071e162	1.0	dk__title_out_table	_ZN2dk15title_out_tableE	dk::title_out_table	const const short[3]
+003757e8	0071e168	1.0	dk__title_loop_table	_ZN2dk16title_loop_tableE	dk::title_loop_table	const const short[3]
+003757f0	0071e16e	1.0	dk__rank_table	_ZN2dk10rank_tableE	dk::rank_table	const const short[17]
+003758ec	0073ec37	1.0	LS_129_LV_80	LS.129.LV.80	LS.129.LV.80	
+003758f0	0073eca1	1.0	LS_143_LV_85	LS.143.LV.85	LS.143.LV.85	
+003758f4	0073ec54	1.0	LS_132_LV_82	LS.132.LV.82	LS.132.LV.82	
+00375988	0073ea5a	1.0	LS_228_LV_34	LS.228.LV.34	LS.228.LV.34	
+00375a84	0073e6e0	1.0	LS_144_LV_15	LS.144.LV.15	LS.144.LV.15	
+00375af8	0073e75c	1.0	LS_105_LV_5	LS.105.LV.5	LS.105.LV.5	
+00375b20	0073e87c	1.0	LS_115_LV_8	LS.115.LV.8	LS.115.LV.8	
+00375b5c	0073d580	1.0	LS_42_LV_1	LS.42.LV.1	LS.42.LV.1	
+00375b7c	0073dc24	1.0	LS_131_LV_34	LS.131.LV.34	LS.131.LV.34	
+00375cb8	0073dc33	1.0	LS_138_LV_36	LS.138.LV.36	LS.138.LV.36	
+00375cd8	0073dec1	1.0	LS_99_LV_13	LS.99.LV.13	LS.99.LV.13	
+00375cdc	0073decf	1.0	LS_109_LV_15	LS.109.LV.15	LS.109.LV.15	
+00375d18	0073f154	1.0	LS_160_LV_7	LS.160.LV.7	LS.160.LV.7	
+00375d1c	0073f1d8	1.0	LS_338_LV_21	LS.338.LV.21	LS.338.LV.21	
+00375da8	0073e15b	1.0	LS_127_LV_13	LS.127.LV.13	LS.127.LV.13	
+00375dec	0073e249	1.0	LS_224_LV_14	LS.224.LV.14	LS.224.LV.14	
+00375e68	0073d508	1.0	LS_122_LV_16	LS.122.LV.16	LS.122.LV.16	
+00375e6c	0073d526	1.0	LS_136_LV_20	LS.136.LV.20	LS.136.LV.20	
+00375e8c	0073d53e	1.0	LS_150_LV_23	LS.150.LV.23	LS.150.LV.23	
+00375eb8	0073d634	1.0	LS_62_LV_8	LS.62.LV.8	LS.62.LV.8	
+00375ed0	0073d6f3	1.0	LS_82_LV_15	LS.82.LV.15	LS.82.LV.15	
+00375f18	0073d71c	1.0	LS_63_LV_9	LS.63.LV.9	LS.63.LV.9	
+00375f64	0073d451	1.0	LS_65_LV_13	LS.65.LV.13	LS.65.LV.13	
+00376040	0073ee4b	1.0	LS_46_LV_1	LS.46.LV.1	LS.46.LV.1	
+0038aa40	0084b820	3.0	ExecMode		ExecMode	YS::SLIST<GAME_MODE, 0>
+0038aa50	008376d0	1.0	TaskBuff		TaskBuff	BUFFER16[81920]
+0039ea50	008ecbe0	1.0	TaskBuff_2		TaskBuff	BUFFER16[32768]
+003a6a50	008f4be0	4.0	s_type		s_type	int
+003a7b08	009060f8	1.0	SkipArea		SkipArea	AREA
+003a7b10	009060fc	1.0				
+003a7b70	00a1bd70	1.0	projection		projection	kn::Projection[2]
+003a7d70	00a1c090	2.0	projection_old		projection_old	kn::Projection[2]
+003a7f70	00a1c4d0	2.0	camera_old		camera_old	kn::Camera[2]
+003a8090	00a1c3b0	1.0	camera		camera	kn::Camera[2]
+003a8cd0	00a33d90	7.0	kn__system_default_env	_ZN2kn18system_default_envE	kn::system_default_env	kn::GSEnv
+003a8db0	00a33e70	7.0	kn__vu1draw_default_env	_ZN2kn19vu1draw_default_envE	kn::vu1draw_default_env	kn::GSEnv
+003a8ed0	007f7060	1.0	kn__frame_buffer2accum	_ZN2kn18frame_buffer2accumE	kn::frame_buffer2accum	ULONGLONG[46]
+003a9040	00a1cba0	3.0	player_position		player_position	kn::PositionBuffer
+003b8b80	00907a50	1.0	file_name		file_name	char[32]
+004574b8	00a0ae98	2.0	s_gameSpeedFade		s_gameSpeedFade	dk::Linear
+004f35a0	00a0bd20	1.0	dk__BookCamera__s_zoom	_ZN2dk10BookCamera6s_zoomE	dk::BookCamera::s_zoom	int
+004f3700	00a08db8	1.0	s_mapColor		s_mapColor	dk::MapColor
+004f37f0	00a0c850	1.0	s_event_at		s_event_at	kn::FVector
+004f3800	00a0c860	1.0	s_event_eye		s_event_eye	kn::FVector
+004f3b30	00a0bab0	2.0	TaskManager		TaskManager	TASK_MANAGER *
+004f3b38	00a0bab8	7.0	ObjList		ObjList	YS::SLIST<dk::BgObj, 0>
+004f3b40	00a0bac0	1.0	DrawQueue		DrawQueue	YS::SLIST<dk::BgObj, 1>
+004f3b44	00a0bac4	1.0				
+004f5250	02aa0110	1.0	Mode		Mode	int
+004f5280	02a94a30	1.0	threadStack		threadStack	BUFFER16[8192]
+004f6280	02a98198	2.0	CurrentWorld		CurrentWorld	int
+004f6288	02ab0580	3.0	Allocator_2		Allocator	ALLOCATOR *
+004f6290	02ab0588	3.0	DestroyList		DestroyList	YS::SLIST<YS::VM, 0>
+004f62a0	02ab06c0	3.0	ResultVector		ResultVector	kn::FVector
+01c5f480	02b75d50	15.0	ResultVector_2		ResultVector	kn::FVector
+01c5f48c	02b75d5c	1.0				
+01c5f530	02aa06f0	3.0	PlayerIndication		PlayerIndication	YS::INDICATION
+01c5fff0	02aa11b0	1.0				
+01c60528	02a96dc8	4.0	Friend		Friend	YS::FRIEND *[2]
+01c6052c	02a96dcc	1.0				
+01c60530	00c78130	1.0	Cache		Cache	AREA
+01c60594	02aaf05c	3.0				
+01c60888	02ab0a14	2.0	WeaponEntry		WeaponEntry	u_int *
+01c6088c	02ab0a18	2.0	WeaponMset		WeaponMset	YS::WEAPON_MSET *
+01c608b8	02a9425c	3.0	LastAttacker		LastAttacker	YS::OBJ *
+01c608c0	00c77a88	2.0	ShoutBuff		ShoutBuff	YS::SHOUT[64]
+01c60bc0	00c77d88	2.0	CurrentAct		CurrentAct	YS::ACT *
+01c60bc8	00c77eb0	1.0	args		args	BD_VALUE[2]
+01c60bcc	00c77eb4	1.0				
+01c60bd0	00c77eb8	1.0	args_2		args	BD_VALUE[3]
+01c60bd4	00c77ebc	1.0				
+01c60bd8	00c77ec0	1.0				
+01c60be0	00c77ea8	1.0	args_3		args	BD_VALUE[2]
+01c60be4	00c77eac	1.0				
+01c60cd8	00c78378	9.0	AttackList		AttackList	YS::SLIST<YS::ATTACK, 0>
+01c60cdc	00c7837c	2.0				
+01c60ce0	00c78380	3.0	IsExec		IsExec	bool
+01c60d10	02aaddd0	3.0	BeforePlayer		BeforePlayer	YS::PRIORITYTARGET
+01c61950	02aaea10	3.0				
+01c61960	02aad554	1.0	ModeChangeDelay		ModeChangeDelay	float
+01c61af4	00c7822c	2.0	NavimapFlag		NavimapFlag	bool
+01c61af5	00c7822d	2.0	NavimapDisable		NavimapDisable	bool
+01c61afc	02ab352c	2.0	BattleBar		BattleBar	YS::BINARC *
+01c61b00	02ab06a8	2.0	CommonBdx		CommonBdx	void *
+01c61b04	02ab0d28	3.0	WorldPoint		WorldPoint	YS::WORLDPOINT *
+01c61b40	02a945f0	2.0	Count		Count	int
+01c62140	02aacae0	2.0	ReserveList		ReserveList	YS::SLIST<YS::RESERVE, 0>
+01c62f98	02a9cf68	2.0	ExitWorld		ExitWorld	int
+01c62fb0	02aa06d8	2.0	PlaceBar		PlaceBar	YS::BINARC *
+01c62fb4	00c786f8	2.0	AttackParam		AttackParam	const YS::ELEMDATA<YS::ATTACKPARAM> *
+01c6cabc	02aac82c	2.0	PlayerMinHp		PlayerMinHp	int
+01c6cae0	02a94110	3.0	SystemPax		SystemPax	ryj::PAX
+01c6cafc	02a9412c	2.0	SystemPaxData		SystemPaxData	YS::BINARC *
+01c6cb20	02a9dc30	5.0	MagicList		MagicList	YS::SLIST<YS::MAGIC, 0>
+01c6cb28	02a9dc38	1.0	MagicTable		MagicTable	const YS::ELEMDATA<YS::MAGIC_TABLE> *
+01c6cb70	02aaeaf8	3.0	TeamWorkPt		TeamWorkPt	int
+01c6cb7c	02aadc28	2.0	Exec		Exec	YS::EXEC
+01c6cb90	02a9ce40	2.0	ItemTable		ItemTable	YS::ELEMDATA<YS::ITEM_TABLE> *
+01c6cb98	02aaeb00	3.0	TreasureTable		TreasureTable	YS::TABLE_DATA *
+01c6cba0	02aaeb08	5.0	InfoQueue		InfoQueue	YS::QUEUE<YS::TREASURE::INFO, 8>
+01c6cba4	02aaeb0c	4.0				
+01c6cc08	02a9dfb0	1.0	MemberTable		MemberTable	const YS::ELEMDATA<YS::MEMBER::TABLE> *
+01c6cc22	02a9dfb8	1.0	Current		Current	YS::MEMBER::TABLE
+01c6cd20	02a96b20	2.0	Image		Image	YI::IMAGE
+01c6cec0	02a96c00	2.0	Sequence		Sequence	void *
+01c6ced0	02ab0b60	3.0	WindowList		WindowList	YS::SLIST<YS::WINDOW, 0>
+01c6ced4	02ab0b64	2.0				
+01d44100	02a9d330	4.0	LightList		LightList	YS::SLIST<YS::LIGHT, 0>
+01d44440	02a98580	2.0	ImageBuff		ImageBuff	BUFFER64[18432]
+01d48c40	02a9cd80	2.0	SequenceData		SequenceData	void *
+01d48c44	02a9cd84	3.0	Task		Task	TASK *
+01d48c90	02a9fe70	2.0	OccGroup		OccGroup	int
+01d48cb0	02a9d718	14.0	Limit		Limit	YS::LIMIT *
+01d48d90	02ab0c08	3.0	WorldFlag		WorldFlag	const YS::ELEMDATA<YS::WORLDFLAG> *
+01d48d94	02ab0c0c	1.0	IsWorldMap		IsWorldMap	bool
+01d48da0	02a9fc18	8.0	ObjList_2		ObjList	YS::SLIST<YS::OBJ, 0>
+01d48db0	02a9fc28	2.0	MotionQueue		MotionQueue	YS::SLIST<YS::OBJ, 1>
+01d48db4	02a9fc2c	1.0				
+01d48dc0	02ab0f78	2.0	WorldWork		WorldWork	YS::WORLDWORK
+01d48de0	02a983f0	3.0	ItemEffectList		ItemEffectList	YS::SLIST<YS::ITEM_EFFECT, 0>
+01d49320	02a9ec40	17.0	Current_2		Current	YS::MISSION *
+01d49324	02a9ec44	3.0	CurrentTable		CurrentTable	const YS::MISSION_TABLE *
+01d49350	00c784c8	4.0	CheckList		CheckList	YS::SLIST<YS::ATTACK_CHECK, 0>
+01d49520	02a9de80	1.0	ZeroVector		ZeroVector	const kn::FVector
+01d49610	02ab3f90	2.0	CameraMatrix		CameraMatrix	kn::FMatrix
+01d49650	02ab3fd0	2.0	AppearUnitArg		AppearUnitArg	int
+01d498a8	02ab4998	2.0	RealEnemyNum		RealEnemyNum	int
+01d498b0	02ab49a0	5.0	DeadCount		DeadCount	int
+01d499b0	02a81660	1.0	Continue		Continue	YS::structure 
+01d5b9d0	02aa154c	2.0	PlayerTable		PlayerTable	const YS::PREF *
+01d5b9d8	02aa1554	2.0	PartyTable		PartyTable	const YS::PREF *
+01d5b9e0	02ab3db0	1.0	PARAM_FLY		PARAM_FLY	const YS::CROWDEFFECT::PARAM
+01d5ba24	02ab0354	2.0				
+01d5ba28	02a9d838	5.0	LimitTable		LimitTable	YS::ELEMDATA<YS::LIMIT_TABLE> *
+01d5ba6c	02b75590	1.0	LinkFlag		LinkFlag	const YS::ELEMDATA<YS::LINK_FLAG> *
+01d5ba98	02aadb08	2.0	SummonTable		SummonTable	const YS::ELEMDATA<YS::SUMMON_TABLE> *
+01d5baa8	02a9ce48	3.0	JigsawTable		JigsawTable	const YS::ELEMDATA<YS::JIGSAW> *
+01d5baac	02b74c18	1.0	EnemyParam		EnemyParam	const YS::ELEMDATA<YS::ENEMYPARAM> *
+01d5bab0	02a93a00	1.0	PlayerPos		PlayerPos	kn::FVector
+01d5bb00	00a8cedc	2.0	Allocator_3		Allocator	ALLOCATOR *
+01d9e340	00acf890	1.0	Allocator_4		Allocator	ALLOCATOR *
+01d9e348	00acf898	8.0	PaxList		PaxList	YS::SLIST<ryj::PAX, 0>
+01d9e34c	00acf89c	4.0				
+01d9e360	00a8add0	7.0	ppvDbgTemp	ppvDbgTemp	ppvDbgTemp	Axa::QWORD[1]
+01d9e6b0	00a8ada8	1.0	ppvVu1SprDbId	ppvVu1SprDbId	ppvVu1SprDbId	u_char
+01d9e6e0	02b9caf0	54.0	ppvMng	ppvMng	ppvMng	pppMngSt *
+01d9e6e4	02b9caf4	36.0	ppvEnv	ppvEnv	ppvEnv	pppEnvSt *
+01d9e6e8	02b9caf8	35.0	ppvPObj	ppvPObj	ppvPObj	pppPObject *
+01d9e730	02b9cb40	11.0	ppvCameraMatrix	ppvCameraMatrix	ppvCameraMatrix	FMATRIX
+01d9e770	02b9cb80	1.0	ppvCameraMatrixOld	ppvCameraMatrixOld	ppvCameraMatrixOld	FMATRIX
+01d9e8c0	02b9ccd0	20.0	ppvScreenMatrix	ppvScreenMatrix	ppvScreenMatrix	FMATRIX
+01d9e940	02b9cd50	3.0	ppvSWMatrixWood	ppvSWMatrixWood	ppvSWMatrixWood	FMATRIX
+01d9ea9c	02b9ceac	29.0	ppvUserStopPartF	ppvUserStopPartF	ppvUserStopPartF	BOOL
+01d9eaa4	02bacec4	11.0	ppvCurPrimp	ppvCurPrimp	ppvCurPrimp	u_qword *
+01d9eab4	02baced4	6.0	ppvEmptyLoop	ppvEmptyLoop	ppvEmptyLoop	int
+01da8b50	02bb0f80	1.0	g_matUnit		g_matUnit	FMATRIX
+01dad990	00ad06d0	2.0	s_shake		s_shake	dk::Shake
+01dae688	007fdddc	2.0	Tz__s_FileSizeInfo	_ZN2Tz14s_FileSizeInfoE	Tz::s_FileSizeInfo	const const Tz::FileSizeInfo[3]
+01e21ee0	00b5ed28	1.0	s_SelSeq		s_SelSeq	short[2][4]
+01e21ee8	00b5ed30	1.0				
+01e2a410	00a364a0	7.0	s_se_bank		s_se_bank	SE_BANK
+01e2a5f4	00a3664c	2.0				
+01e2aa80	00a352c8	8.0	s_seList		s_seList	YS::SLIST<SE3D, 0>
+01e2aa90	00a352e0	2.0	s_seBuff		s_seBuff	YS::CLASS_BLOCK<SE3D, 64>
+01e2bba0	00703b74	1.0	LS_6_LV_0	LS.6.LV.0	LS.6.LV.0	
+01e2bcc0	00b60bf0	1.0	rootMatrix		rootMatrix	kn::FMatrix
+01e2bd00	00b61aa8	1.0	KeyTable		KeyTable	const YS::ELEMDATA<worldmap::Key> *
+01e2bd10	00b61400	2.0	episode_world		episode_world	int
+01e2bda0	00b60518	2.0	cameraManager		cameraManager	worldmap::CameraManager
+01e2bf00	03eaf2e0	3.0	IntervalVoiceList		IntervalVoiceList	YS::SLIST<Ti::IntervalVoice, 0>
+01e2bf04	03eaf2e4	3.0				
+01e2bf80	03ead630	2.0	ResultVector_3		ResultVector	kn::FVector
+01e2bfa0	03ead990	4.0	FlareList		FlareList	YS::CLASS_BLOCK<Ts::FLARE, 30> *
+01e2bfa4	03ead994	2.0	FlareCounter		FlareCounter	int
+01e2c064	03eacf80	2.0	IsAddEdgePoint		IsAddEdgePoint	bool
+01e2c080	00a1b170	1.0	WindowList_2		WindowList	YS::SLIST<menu::Widget, 0>
+01e2c084	00a1b174	1.0				
+01e2c088	00a1b178	1.0	MenuMode		MenuMode	menu::Mode
+01e2c0d0	02a9d098	4.0	LandingData		LandingData	YS::BINARC *
+01f18014	0084cbe0	2.0	menu_heap_pointer		menu_heap_pointer	u_char[655360]

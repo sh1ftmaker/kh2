@@ -455,6 +455,35 @@ def build_skeleton(target, dem: str, includes: List[str], proto: dict,
             for nsn in reversed(parts[:-1]):
                 inner = f"namespace {nsn} {{ {inner} }}"
             lines.append(inner)
+
+    # Task D fix: the E3 DWARF (tools/rig/gen_prototypes.py -> data/prototypes.tsv)
+    # knows whether a member function is `static` (Itanium mangling never encodes
+    # an implicit `this`, so a plain demangled signature can't tell static from
+    # non-static).  Defining a static method the same way as a non-static one
+    # (`Cls::fn(args) { ... }` with no `static` anywhere) silently threads a
+    # phantom `this` into $a0 at the ABI level, shifting every real argument
+    # register by one.  When a real repo header is assumed (not self_contained)
+    # we cannot add `static` to it (that header is out of reach here), so define
+    # the function as a free function bound to the exact mangled symbol via
+    # asm() instead -- this cannot introduce an implicit `this` no matter what
+    # the (possibly still-wrong) header says.  When self_contained, we own the
+    # synthesized class stub, so just mark it `static` there.
+    proto_row = rc.prototypes_by_addr().get(target.addr, {})
+    is_static = proto_row.get("static") == "1"
+
+    if is_static and not self_contained and not is_ctor_dtor:
+        if fwd:
+            lines.append("")
+        lines.append(f"// {fn} is a static member per the E3 DWARF (this=false, no implicit `this`):")
+        lines.append(f"// defined as a free function bound to the exact mangled symbol via asm(), so the")
+        lines.append(f"// calling convention gets no phantom leading argument, regardless of how any")
+        lines.append(f"// existing header declares it.  /* {dem} */")
+        lines.append(f'{ret}{fn}_impl({arglist}) asm("{target.symbol}");  // declaration')
+        lines.append(f'{ret}{fn}_impl({arglist}) {{  // definition: no asm() here')
+        lines.append("    /* TODO */")
+        lines.append("}")
+        return "\n".join(lines) + "\n"
+
     if fwd:
         lines.append("")
     if ns:
@@ -464,7 +493,8 @@ def build_skeleton(target, dem: str, includes: List[str], proto: dict,
         # promote drops it and adds the declaration to the real header.
         lines.append(f"class {cls} {{")
         lines.append("public:")
-        lines.append(f"    {ret}{fn}({decl_arglist});" + ("" if is_ctor_dtor else "   // return type is free (not mangled)"))
+        decl_prefix = "static " if (is_static and not is_ctor_dtor) else ""
+        lines.append(f"    {decl_prefix}{ret}{fn}({decl_arglist});" + ("" if is_ctor_dtor else "   // return type is free (not mangled)"))
         lines.append("};")
         lines.append("")
     lines.append(f"struct {cls}Layout {{")
@@ -484,7 +514,32 @@ def build_skeleton(target, dem: str, includes: List[str], proto: dict,
 # ---------------------------------------------------------------- main
 
 
-AUTODECOMP = Path("/data/agent-tom/kh2/autodecomp/out")
+# The E3 context (PS3 EBOOT DWARF mapped onto PS2 functions) lives in three
+# possible places, checked in this order for every file:
+#   1. data/e3/            -- small assets (<~10 MB), committed to this repo
+#   2. $KH2_E3_DATA/        -- large assets, fetched by tools/rig/fetch_e3.sh
+#      (default ~/.cache/kh2-e3, matching fetch_e3.sh's own default)
+#   3. /data/agent-tom/kh2/autodecomp/out -- the original workspace, kept as a
+#      fallback so this machine keeps working even before anything is fetched
+# See docs/rig/E3_CAMPAIGN.md for what each file is and how to install them.
+import os as _os
+
+_E3_SMALL = rc.ROOT / "data" / "e3"
+_E3_LARGE = Path(_os.environ.get("KH2_E3_DATA", str(Path.home() / ".cache" / "kh2-e3")))
+_E3_LEGACY = Path("/data/agent-tom/kh2/autodecomp/out")
+
+
+def _e3_path(*parts: str) -> Path:
+    """Resolve one E3-context file across the three roots above. Never raises;
+    callers already treat a missing/unreadable path as "no data for this row"
+    (via .exists() or _tsv_row's own OSError handling), so a path that exists
+    nowhere is returned as-is (under the small root) and simply won't be found."""
+    rel = Path(*parts)
+    for root in (_E3_SMALL, _E3_LARGE, _E3_LEGACY):
+        p = root / rel
+        if p.exists():
+            return p
+    return _E3_SMALL / rel
 
 
 def _tsv_row(path: Path, key: str, value: str) -> Optional[dict]:
@@ -505,7 +560,7 @@ def e3_context(addr: int, outdir: Path, *, brief: bool = False) -> Optional[dict
     if os.environ.get("RIG_NO_E3"):
         return None
     a8 = f"{addr:08x}"
-    row = _tsv_row(AUTODECOMP / "names" / "map_functions.tsv", "ee_addr", a8)
+    row = _tsv_row(_e3_path("names", "map_functions.tsv"), "ee_addr", a8)
     if not row:
         return None
     e3: dict = {
@@ -514,7 +569,7 @@ def e3_context(addr: int, outdir: Path, *, brief: bool = False) -> Optional[dict
         "files": {},
     }
     # PS3 pseudo-C (Ghidra, DWARF-typed) for the mapped function
-    raw = AUTODECOMP / "e3pilot" / "raw" / f"{row['ppc_addr']}.json"
+    raw = _e3_path("e3pilot", "raw", f"{row['ppc_addr']}.json")
     if raw.exists():
         try:
             j = json.loads(raw.read_text())
@@ -526,8 +581,8 @@ def e3_context(addr: int, outdir: Path, *, brief: bool = False) -> Optional[dict
         except ValueError:
             pass
     # converted, compiling ee-gcc candidate (E3 round 5)
-    cand = AUTODECOMP / "e3pilot" / "cand" / f"{a8}.cpp"
-    res = _tsv_row(AUTODECOMP / "e3pilot" / "results_round5.tsv", "ee_addr", a8)
+    cand = _e3_path("e3pilot", "cand", f"{a8}.cpp")
+    res = _tsv_row(_e3_path("e3pilot", "results_round5.tsv"), "ee_addr", a8)
     if cand.exists():
         e3["files"]["e3_candidate"] = str(cand)
         if res:
@@ -535,8 +590,8 @@ def e3_context(addr: int, outdir: Path, *, brief: bool = False) -> Optional[dict
             e3["e3_candidate_notes"] = (res.get("notes") or "")[:600]
     # best deterministic candidate, annotated with DWARF parameter names, real callee/global names
     # and field paths (codegen-neutral renames + comments)
-    named = AUTODECOMP / "names" / "src" / f"{a8}.cpp"
-    cov = _tsv_row(AUTODECOMP / "coverage" / "index.tsv", "addr", a8)
+    named = _e3_path("names", "src", f"{a8}.cpp")
+    cov = _tsv_row(_e3_path("coverage", "index.tsv"), "addr", a8)
     if named.exists():
         e3["files"]["best_candidate_named"] = str(named)
         if cov:
@@ -549,7 +604,7 @@ def e3_context(addr: int, outdir: Path, *, brief: bool = False) -> Optional[dict
     cls = e3["demangled"].split("(")[0]
     if "::" in cls:
         cls_q = "::".join(cls.split("::")[:-1])
-        hdr = AUTODECOMP / "e3pilot" / "hdr_ps2" / (cls_q.replace("::", "_") + ".hpp")
+        hdr = _e3_path("e3pilot", "hdr_ps2", cls_q.replace("::", "_") + ".hpp")
         if hdr.exists():
             e3["files"]["ps2_class_header"] = str(hdr)
     # how to use it

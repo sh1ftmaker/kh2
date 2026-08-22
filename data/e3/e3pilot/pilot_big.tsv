@@ -1,0 +1,1265 @@
+ee_addr	size	class	cov_status	cov_source	cov_fuzzy	ppc_addr	mangled	demangled	decl_file	conf
+00121cc8	5232	float	near	ghidra	19.66	00121568	_ZN2kn8ModelSKL10drawNormalEPNS_16ProjectionCameraEPPN3Axa11DMA_SET_TAGEPNS_9DrawParamEPcPNS_13AnimationWorkEbPNS_7FMatrixE	kn::ModelSKL::drawNormal(kn::ProjectionCamera*, Axa::DMA_SET_TAG**, kn::DrawParam*, char*, kn::AnimationWork*, bool, kn::FMatrix*)		sim-high
+0017aad0	5160	float	near	lift	65.62	004c65c0	__sti___10_action_cpp_23cfd07e	__sti___10_action_cpp_23cfd07e		sim-high
+0011f7a8	3448	float	near	ghidra	34.46	0011ef40	_ZN2kn7ModelBG10drawCommonEPNS_16ProjectionCameraEPNS_9DrawParamEPcPNS_13AnimationWorkEbPNS_7FMatrixE	kn::ModelBG::drawCommon(kn::ProjectionCamera*, kn::DrawParam*, char*, kn::AnimationWork*, bool, kn::FMatrix*)		sim-high
+00267e00	3376	switch	near	ghidra	14.80	0039f7f0	_ZN2Tz7CmEquip10SetupEquipEv	Tz::CmEquip::SetupEquip()		sim-high
+001e4320	2808	float	near	lift	34.50	002ac1d0	_Z27dpd_set_monochrome_rsd_dataPi	dpd_set_monochrome_rsd_data(int*)		sim-med
+0023ade0	2484	float	near	lift	41.67	000c3c58	_ZN2YI8SEQUENCE4DrawEv	YI::SEQUENCE::Draw()		high
+00255df0	2304	loop	near	lift	50.38	0030f740	_ZN2Tz5CmTop4DrawEv	Tz::CmTop::Draw()		med
+00194a30	2276	branchy	near	lift	55.93	004d9f58	_ZN2YS6BATTLE7SysInitEv	YS::BATTLE::SysInit()		high
+002c90c8	2256	float	near	ghidra	82.77	003e171c	_ZN2dk16WM_GLANDING_INFOC1Ei	dk::WM_GLANDING_INFO::WM_GLANDING_INFO(int)		sim-high
+0020b4e8	2248	float	near	m2c	74.65	005ccdd0	_Z5birthP18VRyjMegaBirthModelP18PRyjMegaBirthModelP6VColorP14_PARTICLE_DATAP14_PARTICLE_WMATP15_PARTICLE_COLOR	birth(VRyjMegaBirthModel*, PRyjMegaBirthModel*, VColor*, _PARTICLE_DATA*, _PARTICLE_WMAT*, _PARTICLE_COLOR*)		sim-high
+0027dee8	2036	loop	near	ghidra	52.13	00384098	_ZN2Tz10SimpleStat6CreateEiii	Tz::SimpleStat::Create(int, int, int)		med
+002c44b8	2028	loop	near	ghidra	62.88	003e3644	_ZN2dk10WM_LANDING12createSelectEv	dk::WM_LANDING::createSelect()		med
+0023a0d8	1996	float	near	ghidra	18.58	000c2d20	_ZN2YI8SEQUENCE12UpdateActiveEv	YI::SEQUENCE::UpdateActive()		sim-high
+00149448	1928	loop	near	lift	84.66	00062be0	_ZN2dk7MapFile4initEv	dk::MapFile::init()		med
+0029d318	1872	loop	near	ghidra	62.99	0033b468	_ZN2Tz5JmDic15CreateCharaInfoEv	Tz::JmDic::CreateCharaInfo()		med
+00238570	1824	float	near	lift	46.64	000c7c60	_ZN2YI6SPRITE5_DrawEiiii	YI::SPRITE::_Draw(int, int, int, int)		sim-high
+0025cde0	1800	switch	near	lift	55.42	00302808	_ZN2Tz6CmSave4DrawEv	Tz::CmSave::Draw()		sim-high
+0010c078	1792	branchy	near	lift	91.44	000e24f4	_ZN2kn6FriendC1EPKN2YS8OBJENTRYERKNS_7FVectorEf	kn::Friend::Friend(YS::OBJENTRY const*, kn::FVector const&, float)		sim-high
+00286628	1792	loop	near	ghidra	59.58	003acebc	_ZN2Tz8CmNewFlg12CheckAbilityEv	Tz::CmNewFlg::CheckAbility()		med
+0025c3c0	1716	switch	near	m2c	91.28	003035b0	_ZN2Tz6CmSave11CtrlSysSaveEv	Tz::CmSave::CtrlSysSave()		med
+00270c70	1636	switch	near	ghidra	37.28	003994a4	_ZN2Tz8CmCustom11GetListInfoEi	Tz::CmCustom::GetListInfo(int)		med
+002847e0	1632	float	near	lift	76.85	002ef838	_ZN2Tz6Ending5SetupEv	Tz::Ending::Setup()		high
+002c3638	1620	float	near	m2c	68.33	003e44e4	_ZN2dk10WM_LANDING10selectListEv	dk::WM_LANDING::selectList()		med
+0025bd98	1572	switch	near	m2c	91.99	003042cc	_ZN2Tz6CmSave12CtrlDataSaveEv	Tz::CmSave::CtrlDataSave()		med
+0026f920	1548	switch	near	m2c	79.10	0039c6f4	_ZN2Tz8CmCustom14CtrlCustomListEv	Tz::CmCustom::CtrlCustomList()		med
+0010ff08	1524	float	near	ghidra	41.86	000dfd98	_ZN2kn6Friend12battleActionEv	kn::Friend::battleAction()		sim-low
+00277d20	1524	loop	near	lift	74.87	0038ca40	_ZN2Tz9CmAbility8SetupSelEv	Tz::CmAbility::SetupSel()		high
+00265c78	1488	branchy	near	ghidra	0.00	003b2468	_ZN2Tz6CmStat16UpdateTopListNumEv	Tz::CmStat::UpdateTopListNum()		med
+00278318	1444	switch	near	ghidra	73.51	00391cc8	_ZN2Tz9CmAbility7CtrlTopEv	Tz::CmAbility::CtrlTop()		med
+00238c90	1436	float	near	ghidra	50.32	000c8d80	_ZN2YI6SPRITE6_Draw2Eiiii	YI::SPRITE::_Draw2(int, int, int, int)		sim-high
+00243740	1432	float	near	lift	82.04	003c0b68	_ZN2Tz4HEFT5SetupEv	Tz::HEFT::Setup()		high
+0026f388	1432	loop	near	m2c	62.26	00397aec	_ZN2Tz8CmCustom15SetupCustomListEv	Tz::CmCustom::SetupCustomList()		med
+00248060	1380	float	near	ghidra	55.94	003cad28	_ZN2Tz4MUMI5SetupEv	Tz::MUMI::Setup()		high
+002272b8	1372	float	near	ghidra	88.84	002bae00	_ZN2sa5EVENT10event_ctrlEP4TASK	sa::EVENT::event_ctrl(TASK*)		med
+002700f0	1368	loop	near	ghidra	74.93	00398ca4	_ZN2Tz8CmCustom11SetupCustomEv	Tz::CmCustom::SetupCustom()		high
+002678a8	1364	loop	near	m2c	71.24	003a2cb0	_ZN2Tz7CmEquip8SetupTopEv	Tz::CmEquip::SetupTop()		med
+00299920	1356	switch	near	m2c	83.78	0032fb60	_ZN2Tz12JmCollection12SetupSelMessEv	Tz::JmCollection::SetupSelMess()		high
+0025eee8	1348	switch	near	lift	72.31	002f95dc	_ZN2Tz6CmLoad4DrawEv	Tz::CmLoad::Draw()		sim-high
+002499b8	1332	loop	near	m2c	59.92	003cd898	_ZN2Tz4TRTE5SetupEv	Tz::TRTE::Setup()		high
+0024ce18	1328	loop	near	ghidra	69.33	003d2164	_ZN2Tz4TTPT5SetupEv	Tz::TTPT::Setup()		high
+0029c098	1328	switch	near	m2c	73.64	0033eb88	_ZN2Tz5JmDic13CtrlCharaInfoEv	Tz::JmDic::CtrlCharaInfo()		med
+002a3ba8	1308	loop	near	ghidra	65.08	0035effc	_ZN2Tz10JmTreasure10CreateListEv	Tz::JmTreasure::CreateList()		med
+002788c0	1296	loop	near	lift	79.15	0038da8c	_ZN2Tz9CmAbility12SetupAbilityEv	Tz::CmAbility::SetupAbility()		med
+002a5590	1276	loop	near	lift	66.33	0032cad4	_ZN2Tz8JmBattle9SetupInfoEv	Tz::JmBattle::SetupInfo()		med
+00255900	1260	switch	near	m2c	81.56	00310b14	_ZN2Tz5CmTop7CtrlTopEv	Tz::CmTop::CtrlTop()		med
+00254020	1252	loop	near	lift	91.75	00314a6c	_ZN2Tz5CmTop4ExitEv	Tz::CmTop::Exit()		sim-high
+00181da0	1248	float	near	m2c	68.63	00404748	_ZNK2YS8AREADATA8SETINDEX10parse_codeEPKNS0_4CODEE	YS::AREADATA::SETINDEX::parse_code(YS::AREADATA::CODE const*) const		high
+00245488	1244	loop	near	m2c	68.00	003c50d8	_ZN2Tz4HECO5SetupEv	Tz::HECO::Setup()		high
+00260808	1236	loop	near	lift	77.13	003a7260	_ZN2Tz6CmItem12SetupItemUseEv	Tz::CmItem::SetupItemUse()		med
+0024b588	1232	loop	near	ghidra	53.91	003be21c	_ZN2Tz4HBTE5SetupEv	Tz::HBTE::Setup()		high
+0027a208	1228	loop	near	m2c	60.45	0038b8c8	_ZN2Tz9CmAbility13UpdateSelListEv	Tz::CmAbility::UpdateSelList()		med
+00246ab8	1220	loop	near	lift	80.62	003c4a90	_ZN2Tz4HECO13CleateSelInfoEv	Tz::HECO::CleateSelInfo()		high
+002b3440	1220	loop	near	ghidra	23.64	00353ffc	_ZN2Tz8JmPuzzle8SetPieceEv	Tz::JmPuzzle::SetPiece()		sim-high
+0024f710	1216	loop	near	ghidra	54.80	003c8a24	_ZN2Tz4LMMU5SetupEv	Tz::LMMU::Setup()		high
+002a6e50	1204	loop	near	lift	9.49	0035ba4c	_ZN2Tz8JmSynthe10CreateListEv	Tz::JmSynthe::CreateList()		med
+002b5c30	1204	loop	near	m2c	60.17	0030c73c	_ZN2Tz8CmSLBase14UpdateListMessEi	Tz::CmSLBase::UpdateListMess(int)		high
+002bdb70	1200	float	near	lift	60.14	003d84f0	_ZN8worldmap8Libretto5parseEPKN2YS4CODEE	worldmap::Libretto::parse(YS::CODE const*)		high
+002b0950	1168	loop	near	m2c	67.54	0035229c	_ZN2Tz8JmPuzzle7CtrlPadEv	Tz::JmPuzzle::CtrlPad()		med
+0025fb48	1160	branchy	near	ghidra	48.78	003a9dd8	_ZN2Tz6CmItem7CtrlTopEv	Tz::CmItem::CtrlTop()		med
+001a9c20	1156	float	near	lift	65.96	0044e520	_ZN2YS11MESSAGEDRAW9draw_lineEPNS0_3ENVEPKNS_7MESSAGEE	YS::MESSAGEDRAW::draw_line(YS::MESSAGEDRAW::ENV*, YS::MESSAGE const*)		high
+00297e68	1156	loop	near	lift	72.59	00328280	_ZN2Tz7JmAlbum5SetupEv	Tz::JmAlbum::Setup()		med
+002d0290	1156	float	near	lift	77.27	0064e4c8	_ZN2Ti5MGObj6createEPKN2YS8OBJENTRYERKN2kn7FVectorEf	Ti::MGObj::create(YS::OBJENTRY const*, kn::FVector const&, float)		sim-high
+0020a090	1148	float	near	lift	88.22	005c93d8	_Z5birthP11_pppPObjectP13VRyjMegaBirthP13PRyjMegaBirthP6VColorP14_PARTICLE_DATAP14_PARTICLE_WMATP15_PARTICLE_COLOR	birth(_pppPObject*, VRyjMegaBirth*, PRyjMegaBirth*, VColor*, _PARTICLE_DATA*, _PARTICLE_WMAT*, _PARTICLE_COLOR*)		sim-high
+002958b0	1144	loop	near	lift	71.45	003586f0	_ZN2Tz8JmReport5SetupEv	Tz::JmReport::Setup()		high
+002a4e38	1144	loop	near	lift	78.14	0032e5bc	_ZN2Tz8JmBattle8SetupTopEv	Tz::JmBattle::SetupTop()		med
+001b65e0	1136	float	near	m2c	63.14	004df2a0	_ZN2YS10CHANGEFORM4execEP4TASK	YS::CHANGEFORM::exec(TASK*)		high
+001892d8	1124	float	near	lift	84.68	004d7500	_ZN2YS6ANMATR18CheckRangeCallbackEPKNS0_5RANGEEPv	YS::ANMATR::CheckRangeCallback(YS::ANMATR::RANGE const*, void*)		sim-high
+0014fe00	1116	loop	near	lift	80.14	000b8890	_ZN2dk7COUNTER6createEPvS1_NS_9INFO_BASE5ALIGNEiiPiS4_i	dk::COUNTER::create(void*, void*, dk::INFO_BASE::ALIGN, int, int, int*, int*, int)		sim-high
+00271ee8	1108	loop	near	lift	46.30	00396a34	_ZN2Tz8CmCustom16UpdateCustomListEv	Tz::CmCustom::UpdateCustomList()		med
+0029af20	1108	loop	near	lift	76.14	0033a034	_ZN2Tz5JmDic13SetupWorldSelEv	Tz::JmDic::SetupWorldSel()		med
+001c3150	1100	float	near	lift	90.59	004c5310	_ZN2YS7ABILITY8set_itemEi	YS::ABILITY::set_item(int)		sim-high
+0025e450	1100	switch	near	m2c	75.51	002fa678	_ZN2Tz6CmLoad12CtrlLoadListEv	Tz::CmLoad::CtrlLoadList()		med
+0025ffd0	1096	loop	near	lift	78.01	003a6900	_ZN2Tz6CmItem10SetupStockEv	Tz::CmItem::SetupStock()		med
+001097e8	1092	switch	near	ghidra	53.25	00118e48	_ZN2kn7VU1Draw19makeSendImagePacketEPNS_15SendImagePacketEjjjjjjjPv	kn::VU1Draw::makeSendImagePacket(kn::SendImagePacket*, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, void*)		sim-low
+002c0ca0	1088	loop	near	lift	77.95	003d5f30	_ZN2dk13WM_TOTAL_INFOC1Ev	dk::WM_TOTAL_INFO::WM_TOTAL_INFO()		sim-high
+00166da8	1084	branchy	near	m2c	16.47	003f4028	__sti___9_model_cpp_9c2e5057	__sti___9_model_cpp_9c2e5057		sim-med
+002772c8	1084	loop	near	ghidra	84.24	0039152c	_ZN2Tz9CmAbility8SetupTopEi	Tz::CmAbility::SetupTop(int)		high
+00264be0	1080	loop	near	lift	81.44	003b36c0	_ZN2Tz6CmStat9SetupHelpEv	Tz::CmStat::SetupHelp()		high
+0026bc10	1080	loop	near	ghidra	58.48	002fe82c	_ZN2Tz7CmParty5SetupEv	Tz::CmParty::Setup()		med
+0016f000	1072	float	near	lift	95.03	0046b340	_ZN2YS8OBJENTRY6AppearEjRKN2kn7FVectorEf	YS::OBJENTRY::Appear(unsigned int, kn::FVector const&, float)		med
+0013bc50	1068	float	near	lift	72.47	0004c0e0	_ZN2dk12COMMAND_DRAW15drawCurrentIconEPN2YS12COMMAND_MENUEiibjPKNS1_12COMMAND_ELEMEPNS_11COMMAND_ONEE	dk::COMMAND_DRAW::drawCurrentIcon(YS::COMMAND_MENU*, int, int, bool, unsigned int, YS::COMMAND_ELEM const*, dk::COMMAND_ONE*)		med
+00299e70	1068	switch	near	m2c	79.18	00330f10	_ZN2Tz12JmCollection7ControlEv	Tz::JmCollection::Control()		med
+0011ac10	1064	loop	near	m2c	38.79	00132808	_ZN2kn13ChickenLittle13update_lockonEv	kn::ChickenLittle::update_lockon()		med
+001473e8	1064	float	near	lift	73.32	000ae130	_ZN2dk11OctDrawFile13drawObjectAllEv	dk::OctDrawFile::drawObjectAll()		sim-high
+00297050	1064	loop	near	ghidra	71.35	0035a940	_ZN2Tz7JmStory5SetupEv	Tz::JmStory::Setup()		med
+00123228	1060	float	near	ghidra	44.34	00123288	_ZN2kn8ModelSKL14drawSilhouetteEPNS_16ProjectionCameraEPPN3Axa11DMA_SET_TAGEPNS_9DrawParamEPcPNS_13AnimationWorkEbPNS_7FMatrixE	kn::ModelSKL::drawSilhouette(kn::ProjectionCamera*, Axa::DMA_SET_TAG**, kn::DrawParam*, char*, kn::AnimationWork*, bool, kn::FMatrix*)		sim-high
+0025b7b8	1060	branchy	near	m2c	92.90	00304ca8	_ZN2Tz6CmSave8CtrlListEv	Tz::CmSave::CtrlList()		sim-high
+002a0cb8	1060	branchy	near	m2c	75.62	00338a28	_ZN2Tz9JmDiagram7CtrlSelEv	Tz::JmDiagram::CtrlSel()		med
+00296168	1056	switch	near	ghidra	74.60	00358d54	_ZN2Tz8JmReport7ControlEv	Tz::JmReport::Control()		med
+00251a70	1052	branchy	near	m2c	48.16	003ba280	_ZN2Tz4CANA4DrawEv	Tz::CANA::Draw()		high
+002b01d8	1052	loop	near	lift	74.41	0034d7a4	_ZN2Tz8JmPuzzle13SetupTutorialEv	Tz::JmPuzzle::SetupTutorial()		med
+001ff958	1044	float	near	m2c	35.82	005b23a0	pppKeShpTail3X	pppKeShpTail3X		sim-high
+002644a0	1044	switch	near	m2c	57.81	003b5288	_ZN2Tz6CmStat8SetupTopEb	Tz::CmStat::SetupTop(bool)		high
+0029f520	1044	loop	near	lift	74.79	00329ef0	_ZN2Tz7JmAnsem9SetupInfoEv	Tz::JmAnsem::SetupInfo()		med
+002a8330	1044	loop	near	ghidra	68.98	00342498	_ZN2Tz10JmMiniGame10UpdateListEv	Tz::JmMiniGame::UpdateList()		high
+00268db8	1040	branchy	near	lift	49.70	003a43c8	_ZN2Tz7CmEquip9CtrlEquipEv	Tz::CmEquip::CtrlEquip()		high
+001e66e8	1036	float	near	lift	72.86	002aebf0	_Z11pppPartDrawP9_pppMngSt	pppPartDraw(_pppMngSt*)		sim-high
+00269658	1032	loop	near	ghidra	69.63	003a0478	_ZN2Tz7CmEquip13UpdateTopListEv	Tz::CmEquip::UpdateTopList()		high
+00291510	1032	switch	near	m2c	76.20	00324460	_ZN2Tz8ItemStat6UpdateEiii	Tz::ItemStat::Update(int, int, int)		high
+002200c0	1028	float	near	m2c	70.50	005cc918	_Z4calcP18VRyjMegaBirthModelP18PRyjMegaBirthModelP14_PARTICLE_DATAP6VColorP15_PARTICLE_COLOR	calc(VRyjMegaBirthModel*, PRyjMegaBirthModel*, _PARTICLE_DATA*, VColor*, _PARTICLE_COLOR*)		sim-low
+0029b698	1008	loop	near	ghidra	77.65	0033ae1c	_ZN2Tz5JmDic13SetupCharaSelEv	Tz::JmDic::SetupCharaSel()		med
+00260418	1004	switch	near	ghidra	73.59	003aa708	_ZN2Tz6CmItem9CtrlStockEv	Tz::CmItem::CtrlStock()		med
+00128750	996	float	near	m2c	57.04	000fa118	_ZN2kn16MotionPrototype015calcFcurveValueEPNS_25MotionPrototype0RAWFcurveEiif	kn::MotionPrototype0::calcFcurveValue(kn::MotionPrototype0RAWFcurve*, int, int, float)		sim-med
+0015bc80	996	float	near	lift	79.74	00073fd8	_ZN2dk5Radar4drawEv	dk::Radar::draw()		sim-high
+00277938	996	branchy	near	m2c	82.02	003925f4	_ZN2Tz9CmAbility7CtrlSelEv	Tz::CmAbility::CtrlSel()		med
+0025aa10	988	branchy	near	m2c	81.00	00306364	_ZN2Tz6CmSave9CtrlYesNoEv	Tz::CmSave::CtrlYesNo()		med
+001fc720	984	float	near	lift	60.61	005adbe8	pppKeMdlDttDraw	pppKeMdlDttDraw		sim-low
+00154f30	976	loop	near	lift	93.35	0009f558	_ZN2dk12GAUGE_FRIEND6createEPN2YS3OBJEi	dk::GAUGE_FRIEND::create(YS::OBJ*, int)		high
+002551b8	976	loop	near	lift	78.33	003126c0	_ZN2Tz5CmTop8SetupTopEv	Tz::CmTop::SetupTop()		med
+00266248	968	switch	near	ghidra	66.09	003b2cd0	_ZN2Tz6CmStat14UpdateHelpListEv	Tz::CmStat::UpdateHelpList()		med
+0013ce08	964	float	near	lift	58.36	0004bb20	_ZN2dk12COMMAND_DRAW5recomEi	dk::COMMAND_DRAW::recom(int)		med
+0025b218	964	switch	near	lift	80.84	00305aec	_ZN2Tz6CmSave12CtrlLoadListEv	Tz::CmSave::CtrlLoadList()		med
+0025dfb0	960	branchy	near	ghidra	85.31	002fb498	_ZN2Tz6CmLoad16CtrlErrorConfirmEv	Tz::CmLoad::CtrlErrorConfirm()		med
+00269a60	956	branchy	near	lift	44.81	003a11e0	_ZN2Tz7CmEquip14UpdateHelpMessEv	Tz::CmEquip::UpdateHelpMess()		med
+002afe18	956	branchy	near	m2c	77.08	003525f8	_ZN2Tz8JmPuzzle8CtrlGameEv	Tz::JmPuzzle::CtrlGame()		med
+0029ee68	952	loop	near	ghidra	73.31	0032b508	_ZN2Tz7JmAnsem8SetupTopEv	Tz::JmAnsem::SetupTop()		high
+002708c0	944	branchy	near	m2c	82.47	0039d6b0	_ZN2Tz8CmCustom10CtrlCustomEv	Tz::CmCustom::CtrlCustom()		high
+002945e8	944	loop	near	ghidra	81.28	00362c94	_ZN2Tz10JmWorldSel5SetupEv	Tz::JmWorldSel::Setup()		high
+002a0908	944	loop	near	lift	63.00	003383d0	_ZN2Tz9JmDiagram5SetupEi	Tz::JmDiagram::Setup(int)		med
+0025a660	940	branchy	near	m2c	90.60	00306904	_ZN2Tz6CmSave16CtrlErrorConfirmEv	Tz::CmSave::CtrlErrorConfirm()		med
+00295d28	936	switch	near	m2c	94.53	003578f0	_ZN2Tz8JmReport12SetupSelMessEv	Tz::JmReport::SetupSelMess()		med
+00254ab8	932	float	near	lift	46.90	003105e8	_ZN2Tz5CmTop13SetupPartyObjEv	Tz::CmTop::SetupPartyObj()		high
+002af748	932	branchy	near	m2c	96.24	00350b28	_ZN2Tz8JmPuzzle7CtrlSelEv	Tz::JmPuzzle::CtrlSel()		sim-high
+0022a7e0	928	float	near	ghidra	80.81	002e0300	_ZN2sa13MUSICAL_INPUT6createEi	sa::MUSICAL_INPUT::create(int)		med
+001f6298	920	float	near	lift	23.64	005a9ec0	pppKeBornRnd4	pppKeBornRnd4		sim-high
+0010fb10	912	loop	near	ghidra	53.29	000df554	_ZN2kn6Friend15emergencyActionEv	kn::Friend::emergencyAction()		sim-med
+001b1560	904	float	near	ghidra	0.00	0043e2c8	_ZN2YS5LIGHT4ExecEP4TASK	YS::LIGHT::Exec(TASK*)		sim-high
+00265018	904	switch	near	m2c	83.82	003b6010	_ZN2Tz6CmStat8CtrlHelpEv	Tz::CmStat::CtrlHelp()		high
+001c4520	900	float	near	ghidra	37.12	004e3930	_ZN2YS13CROWD_M_EX6606CreateEPKNS_8OBJENTRYERKN2kn7FVectorEf	YS::CROWD_M_EX660::Create(YS::OBJENTRY const*, kn::FVector const&, float)		sim-med
+0020c9d0	896	float	near	lift	60.32	005d0528	pppRyjDrawMegaBirthModelFilter	pppRyjDrawMegaBirthModelFilter		sim-high
+002cfb30	896	float	near	m2c	65.68	0064cfa8	_ZN2Ti5MGObj11exec_appearEv	Ti::MGObj::exec_appear()		med
+0029ba88	892	branchy	near	m2c	84.91	0033e7a8	_ZN2Tz5JmDic12CtrlCharaSelEv	Tz::JmDic::CtrlCharaSel()		high
+00151138	888	branchy	near	lift	67.24	000b6d1c	_ZN2dk5TIMER6updateEv	dk::TIMER::update()		high
+00166148	888	switch	near	lift	52.11	0007e6d8	_ZN2dk4Tim29loadImageEPvii	dk::Tim2::loadImage(void*, int, int)		sim-low
+00255588	888	switch	near	ghidra	27.06	00311e90	_ZN2Tz5CmTop7ControlEv	Tz::CmTop::Control()		med
+002af0a0	884	branchy	near	m2c	95.31	0034ea64	_ZN2Tz8JmPuzzle7CtrlTopEv	Tz::JmPuzzle::CtrlTop()		high
+00279040	876	loop	near	ghidra	66.43	0038f16c	_ZN2Tz9CmAbility14GetAbilityInfoEv	Tz::CmAbility::GetAbilityInfo()		med
+002a4620	876	branchy	near	m2c	61.14	0035fde0	_ZN2Tz10JmTreasure10MoveCurcorEPN2YS3PADE	Tz::JmTreasure::MoveCurcor(YS::PAD*)		med
+00152bd8	868	loop	near	lift	52.97	0005cee4	_ZN2dk12LEVELUP_INFO6updateEv	dk::LEVELUP_INFO::update()		sim-med
+002566f0	868	branchy	near	ghidra	68.87	0030f1c8	_ZN2Tz5CmTop12DrawSelectorEPNS_6SelectEii	Tz::CmTop::DrawSelector(Tz::Select*, int, int)		med
+0026a5a0	864	loop	near	m2c	66.48	0039ee48	_ZN2Tz7CmEquip15UpdateEquipListEv	Tz::CmEquip::UpdateEquipList()		med
+002725d8	864	switch	near	lift	15.20	00398608	_ZN2Tz8CmCustom20UpdateIndiCustomListEv	Tz::CmCustom::UpdateIndiCustomList()		sim-high
+002b4440	864	loop	near	ghidra	78.73	0030df24	_ZN2Tz8CmSLBase4InitEv	Tz::CmSLBase::Init()		high
+0026d208	856	loop	near	m2c	82.31	002fdc3c	_ZN2Tz7CmParty19MakeInOutMemberNameEv	Tz::CmParty::MakeInOutMemberName()		med
+00250a50	852	loop	near	lift	74.95	003bbdfc	_ZN2Tz4CANA4InitEv	Tz::CANA::Init()		sim-high
+002b05f8	852	branchy	near	m2c	93.05	00352dc8	_ZN2Tz8JmPuzzle12CtrlTutorialEv	Tz::JmPuzzle::CtrlTutorial()		sim-high
+00296588	844	loop	near	lift	74.98	00359354	_ZN2Tz8JmReport10SetupRoxasEv	Tz::JmReport::SetupRoxas()		med
+001569d8	840	loop	near	lift	86.53	000a41ec	_ZN2dk12GAUGE_PLAYER6createEPN2YS3OBJE	dk::GAUGE_PLAYER::create(YS::OBJ*)		med
+001e6280	840	float	near	ghidra	42.28	002ada78	_Z11pppPartCalcPvi	pppPartCalc(void*, int)		sim-low
+0023bc58	836	straight	near	lift	81.37	000c48bc	_ZN2YI7WIN_SEQ7SetSizeEii	YI::WIN_SEQ::SetSize(int, int)		med
+00247198	836	float	near	lift	68.36	003c45b0	_ZN2Tz4HECO11UpdateScoreEv	Tz::HECO::UpdateScore()		sim-high
+00254770	836	branchy	near	stub	0.00	00312be0	_ZN2Tz5CmTop5SetupEv	Tz::CmTop::Setup()		high
+002713c8	836	loop	near	lift	67.83	00397630	_ZN2Tz8CmCustom21MakeListInfo2ItemMessEv	Tz::CmCustom::MakeListInfo2ItemMess()		med
+00181178	832	switch	near	lift	70.70	0048f874	_ZN2YS8PROGRESS7SetFlagEi	YS::PROGRESS::SetFlag(int)		seed
+0019ce48	832	float	near	m2c	63.06	00443b68	_ZN2YS6LOCKON12check_lockonEv	YS::LOCKON::check_lockon()		med
+002ae320	832	loop	near	lift	70.75	003326d8	_ZN2Tz10JmComplete11CheckPuzzleEv	Tz::JmComplete::CheckPuzzle()		high
+002450c8	820	loop	near	lift	74.87	003c612c	_ZN2Tz4HECO4ExitEv	Tz::HECO::Exit()		sim-high
+002995e8	820	loop	near	ghidra	82.48	00330ab4	_ZN2Tz12JmCollection5SetupEv	Tz::JmCollection::Setup()		med
+002a3318	812	loop	near	ghidra	65.73	0035ea90	_ZN2Tz10JmTreasure10UpdateListEv	Tz::JmTreasure::UpdateList()		med
+002af418	812	loop	near	ghidra	75.06	0034e2a0	_ZN2Tz8JmPuzzle8SetupSelEv	Tz::JmPuzzle::SetupSel()		med
+00226478	808	loop	near	lift	94.20	002bc8c8	_ZN2sa5EVENT8fixAllocEv	sa::EVENT::fixAlloc()		high
+0022dd80	808	float	near	m2c	86.43	002c83dc	_ZN2sa5EVENT14set_effect_seqERNS_14BIN_EFFECT_SEQEP4TASK	sa::EVENT::set_effect_seq(sa::BIN_EFFECT_SEQ&, TASK*)		sim-high
+002405a8	804	branchy	near	lift	66.52	0036953c	_ZN2Tz5MCard9MakeTitleEPci	Tz::MCard::MakeTitle(char*, int)		sim-high
+002648b8	804	branchy	near	m2c	89.07	003b5894	_ZN2Tz6CmStat7CtrlTopEv	Tz::CmStat::CtrlTop()		high
+002859f0	804	loop	near	ghidra	72.90	003ae3ec	_ZN2Tz8CmNewFlg9CheckItemEv	Tz::CmNewFlg::CheckItem()		med
+002afaf0	804	loop	near	lift	65.90	00350154	_ZN2Tz8JmPuzzle9SetupGameEv	Tz::JmPuzzle::SetupGame()		med
+002b47a0	804	loop	near	lift	96.78	0030e59c	_ZN2Tz8CmSLBase4ExitEv	Tz::CmSLBase::Exit()		med
+00260ce0	800	branchy	near	lift	83.23	003ab098	_ZN2Tz6CmItem11CtrlItemUseEv	Tz::CmItem::CtrlItemUse()		med
+002a2ff8	800	loop	near	ghidra	50.15	0035d3f8	_ZN2Tz10JmTreasure8SortListEv	Tz::JmTreasure::SortList()		high
+001169e8	796	float	near	lift	82.29	001084b0	_ZN2kn6Stitch16calc_move_targetEi	kn::Stitch::calc_move_target(int)		sim-high
+0029b378	796	branchy	near	m2c	88.41	0033e400	_ZN2Tz5JmDic12CtrlWorldSelEv	Tz::JmDic::CtrlWorldSel()		med
+00273818	788	loop	near	ghidra	28.42	0039b0b4	_ZN2Tz8CmCustom23ChangeAutoReplenishmentEv	Tz::CmCustom::ChangeAutoReplenishment()		med
+0025e8a0	784	branchy	near	m2c	95.06	002fa080	_ZN2Tz6CmLoad8CtrlListEv	Tz::CmLoad::CtrlList()		sim-high
+0027ccf8	784	loop	near	lift	73.26	00394c44	_ZN2Tz8CmConfig10CreateListEv	Tz::CmConfig::CreateList()		med
+0029d008	784	loop	near	m2c	86.94	0033a8d4	_ZN2Tz5JmDic14UpdateCharaSelEv	Tz::JmDic::UpdateCharaSel()		med
+001219b8	780	branchy	near	ghidra	78.81	00120f40	_ZN2kn8ModelSKL10setTexfadeEPNS_16Vif1PacketBufferEiPNS_9DrawParamEPNS_13AnimationWorkEbPNS_7TextureES8_	kn::ModelSKL::setTexfade(kn::Vif1PacketBuffer*, int, kn::DrawParam*, kn::AnimationWork*, bool, kn::Texture*, kn::Texture*)		sim-med
+0026c140	780	float	near	lift	85.00	002fd348	_ZN2Tz7CmParty13SetupPartyObjEv	Tz::CmParty::SetupPartyObj()		med
+00107d20	776	loop	near	lift	83.44	00124178	_ZN2kn8ModelObj11drawShadow_ERKNS_16ProjectionCameraEPNS_9DrawParamEPsS3_S3_PPN2dk11ObjDrawListENS_11SHADOW_SIZEE	kn::ModelObj::drawShadow_(kn::ProjectionCamera const&, kn::DrawParam*, short*, kn::ProjectionCamera const&, kn::ProjectionCamera const&, dk::ObjDrawList**, kn::SHADOW_SIZE)		sim-med
+001516b0	776	float	near	lift	89.23	000a9490	_ZN2dk13MISSION_GAUGE6createEPvS1_NS_9INFO_BASE5ALIGNEfPfi	dk::MISSION_GAUGE::create(void*, void*, dk::INFO_BASE::ALIGN, float, float*, int)		sim-high
+002b5188	776	loop	near	lift	77.88	0030d024	_ZN2Tz8CmSLBase9SetupListEPKsi	Tz::CmSLBase::SetupList(short const*, int)		med
+001620a8	772	straight	near	e3	99.88	0004826c	_ZN2dk6Camera21createMultiCameraTaskEv	dk::Camera::createMultiCameraTask()		med
+0020aff8	772	float	near	lift	53.44	005ca878	pppRyjDrawMegaBirth	pppRyjDrawMegaBirth		sim-high
+001f59b0	768	float	near	lift	57.81	005a9398	pppKeBornRnd	pppKeBornRnd		sim-high
+002b24c8	768	loop	near	lift	75.74	0034fde8	_ZN2Tz8JmPuzzle9UpdateGraEv	Tz::JmPuzzle::UpdateGra()		med
+002b4070	768	branchy	near	ghidra	81.77	003c7164	_ZN2Tz9SmHelpMsg6CreateEiPNS_6LayoutEPKsS4_S4_S4_S4_S4_iPKNS_7SeqInfoEii	Tz::SmHelpMsg::Create(int, Tz::Layout*, short const*, short const*, short const*, short const*, short const*, short const*, int, Tz::SeqInfo const*, int, int)		med
+0029f220	764	branchy	near	m2c	87.44	0032b9e4	_ZN2Tz7JmAnsem7CtrlTopEv	Tz::JmAnsem::CtrlTop()		high
+002b1db8	764	loop	near	ghidra	0.00	0034dee0	_ZN2Tz8JmPuzzle12ChkImageInfoEv	Tz::JmPuzzle::ChkImageInfo()		med
+00323110	760	loop	near	m2c	84.69	002e39f8	_ZN2sa14MUSICAL_SCORE24initEv	sa::MUSICAL_SCORE2::init()		sim-high
+00193038	756	float	near	m2c	21.05	00468fc8	_ZN2YS3OBJ4drawEv	YS::OBJ::draw()		med
+002ce2a0	756	float	near	ghidra	35.93	00651ad0	_ZN2Ti4Path17search_near_pointERiRfRKN2kn7FVectorE	Ti::Path::search_near_point(int&, float&, kn::FVector const&)		sim-med
+001e1e40	752	float	near	ghidra	44.30	006190f0	_ZN3ryj17LAST_XEMNUS_LASER11exec_attackEv	ryj::LAST_XEMNUS_LASER::exec_attack()		sim-low
+00247580	752	float	near	lift	69.57	003c24fc	_ZN2Tz4HECO11UpdateMakerEb	Tz::HECO::UpdateMaker(bool)		sim-high
+0026c470	752	branchy	near	m2c	92.00	002fee8c	_ZN2Tz7CmParty4CtrlEv	Tz::CmParty::Ctrl()		med
+001a1e20	744	float	near	m2c	72.86	00499454	_ZNK2YS5SHEET11calc_damageEPNS_6ATTACKEPKNS_11ATTACKPARAMEi	YS::SHEET::calc_damage(YS::ATTACK*, YS::ATTACKPARAM const*, int) const		med
+002612c8	740	branchy	near	lift	69.05	003ab558	_ZN2Tz6CmItem16CtrlItemUsePartyEv	Tz::CmItem::CtrlItemUseParty()		med
+00263ee0	740	loop	near	ghidra	6.69	00321140	_ZN2Tz9IShopInfo10GetShopTblEiPNS0_7ShopTblE	Tz::IShopInfo::GetShopTbl(int, Tz::IShopInfo::ShopTbl*)		sim-high
+0026f0a0	740	branchy	near	m2c	87.97	0039c078	_ZN2Tz8CmCustom7CtrlTopEv	Tz::CmCustom::CtrlTop()		high
+0029e4c8	740	float	near	lift	82.56	0033c6e0	_ZN2Tz5JmDic14CreateCharaObjEi	Tz::JmDic::CreateCharaObj(int)		med
+00291de0	736	switch	near	lift	77.20	003258f4	_ZN2Tz8ItemStat14UpdateNextStatEiiiiii	Tz::ItemStat::UpdateNextStat(int, int, int, int, int, int)		sim-high
+002a95a8	736	loop	near	m2c	81.55	00355f50	_ZN2Tz7JmQuest10UpdateListEv	Tz::JmQuest::UpdateList()		med
+00119830	732	float	near	m2c	59.29	0010c5f0	_ZN2kn6Stitch10shotEffectEi	kn::Stitch::shotEffect(int)		high
+00165ad8	732	float	near	ghidra	11.77	0006b144	_ZN2dk6ObjOcc13collisionDownEPNS_14CollisionParamERf	dk::ObjOcc::collisionDown(dk::CollisionParam*, float&)		sim-high
+00175c88	732	branchy	near	m2c	87.19	00477884	_ZN2YS5PARTY12exec_commandERNS_7COMMANDE	YS::PARTY::exec_command(YS::COMMAND&)		high
+002666a8	732	switch	near	m2c	74.01	003b1e78	_ZN2Tz6CmStat14UpdateHelpMessEv	Tz::CmStat::UpdateHelpMess()		med
+0027d008	732	loop	near	ghidra	65.30	003952f8	_ZN2Tz8CmConfig10UpdateListEv	Tz::CmConfig::UpdateList()		med
+002a52b0	732	branchy	near	m2c	85.79	0032eba0	_ZN2Tz8JmBattle7CtrlTopEv	Tz::JmBattle::CtrlTop()		high
+002c29d8	732	loop	near	m2c	84.72	003e5fbc	_ZN2dk10WM_LANDINGC1Ev	dk::WM_LANDING::WM_LANDING()		sim-high
+001a55a8	728	float	near	m2c	70.10	00483478	_ZN2YS5PRIZE6AppearERKN2kn7FVectorEi	YS::PRIZE::Appear(kn::FVector const&, int)		high
+0025ebb0	728	branchy	near	m2c	73.34	002f9c98	_ZN2Tz6CmLoad12CtrlDataLoadEv	Tz::CmLoad::CtrlDataLoad()		med
+00298988	728	switch	near	m2c	79.83	00329240	_ZN2Tz7JmAlbum12PhotoControlEv	Tz::JmAlbum::PhotoControl()		high
+002a13e0	724	float	near	lift	76.83	003377a0	_ZN2Tz9JmDiagram10MoveCursorEPN2YS3PADE	Tz::JmDiagram::MoveCursor(YS::PAD*)		med
+00236d98	720	loop	near	m2c	63.62	000ba704	_ZN2YI11IMAGE_CACHE4LoadEPNS_5IMAGEE	YI::IMAGE_CACHE::Load(YI::IMAGE*)		sim-low
+00298410	720	branchy	near	m2c	97.12	00328df0	_ZN2Tz7JmAlbum7ControlEv	Tz::JmAlbum::Control()		high
+002dff60	720	float	near	m2c	68.80	00630068	_ZN2Ti21ACTION_PO_JUMP_PLAYER17exec_land_balloonEPN2YS3OBJE	Ti::ACTION_PO_JUMP_PLAYER::exec_land_balloon(YS::OBJ*)		med
+0013c3b8	716	float	near	lift	50.21	0004cb60	_ZN2dk12COMMAND_DRAW15drawCommandPageEPN2YS12COMMAND_MENUEiib	dk::COMMAND_DRAW::drawCommandPage(YS::COMMAND_MENU*, int, int, bool)		sim-high
+002a8ac8	716	loop	near	lift	83.07	00356910	_ZN2Tz7JmQuest5SetupEv	Tz::JmQuest::Setup()		high
+001a6178	712	float	near	ghidra	10.48	00447070	_ZN2YS5MAGIC4CastEPNS_6PLAYEREib	YS::MAGIC::Cast(YS::PLAYER*, int, bool)		med
+00138de0	708	float	near	ghidra	62.98	0007b5c8	_ZN2dk13SpriteMessage11drawMessageEv	dk::SpriteMessage::drawMessage()		high
+001408a0	708	float	near	m2c	34.03	00068258	_ZN2dk9ObjCamera9setCameraEb	dk::ObjCamera::setCamera(bool)		med
+0015efa0	708	float	near	ghidra	45.62	0005fef0	_ZN2dk3Map8setColorEhhh	dk::Map::setColor(unsigned char, unsigned char, unsigned char)		med
+00259998	708	branchy	near	stub	0.00	00308088	_ZN2Tz6CmSave5SetupEv	Tz::CmSave::Setup()		high
+00261000	708	loop	near	lift	87.46	003a7c34	_ZN2Tz6CmItem17SetupItemUsePartyEv	Tz::CmItem::SetupItemUseParty()		med
+00279a10	708	loop	near	m2c	18.53	0038e128	_ZN2Tz9CmAbility15SortAbilityInfoEv	Tz::CmAbility::SortAbilityInfo()		high
+00294b80	708	switch	near	m2c	87.14	003632c8	_ZN2Tz10JmWorldSel7ControlEv	Tz::JmWorldSel::Control()		med
+001bc2a8	704	branchy	near	ghidra	39.19	0041d8ec	_ZN2YS12COMMAND_SLOT9GetStatusEPKNS_12COMMAND_ELEMEPNS_3OBJEPKNS_6TARGETE	YS::COMMAND_SLOT::GetStatus(YS::COMMAND_ELEM const*, YS::OBJ*, YS::TARGET const*)		high
+002a3648	704	loop	near	m2c	67.39	0035e784	_ZN2Tz10JmTreasure13UpdateGraListEv	Tz::JmTreasure::UpdateGraList()		med
+00142c90	700	branchy	near	lift	95.26	0006be64	_ZN2dk6Octree6createEPNS_7MapFileEP9ALLOCATORby	dk::Octree::create(dk::MapFile*, ALLOCATOR*, bool, unsigned long long)		sim-high
+0015b7f8	700	loop	near	m2c	77.37	00073460	_ZN2dk9RadarRect10createRectEv	dk::RadarRect::createRect()		med
+001823d0	700	float	near	lift	77.13	00405388	_ZN2YS8AREADATA7InitSetEPKN4AREA3SETE	YS::AREADATA::InitSet(AREA::SET const*)		sim-low
+00275438	700	switch	near	lift	80.83	002f405c	_ZN2Tz6Jiminy4DrawEv	Tz::Jiminy::Draw()		med
+002a77a0	700	loop	near	lift	76.41	00342ff8	_ZN2Tz10JmMiniGame5SetupEv	Tz::JmMiniGame::Setup()		high
+0029c5c8	696	switch	near	m2c	88.67	0033f394	_ZN2Tz5JmDic8CtrlZoomEv	Tz::JmDic::CtrlZoom()		med
+00246070	692	switch	near	ghidra	43.75	003c3044	_ZN2Tz4HECO7CtrlSelEv	Tz::HECO::CtrlSel()		med
+00272c90	692	branchy	near	m2c	67.85	0039a9e0	_ZN2Tz8CmCustom14UpdateHelpMessEb	Tz::CmCustom::UpdateHelpMess(bool)		med
+00275180	692	switch	near	ghidra	81.37	002f4a78	_ZN2Tz6Jiminy7ControlEv	Tz::Jiminy::Control()		med
+0029f938	692	switch	near	m2c	91.21	0032bde4	_ZN2Tz7JmAnsem8CtrlInfoEv	Tz::JmAnsem::CtrlInfo()		high
+00322e58	692	loop	near	ghidra	93.10	0033d8e4	_ZN2Tz5JmDic4InitEv	Tz::JmDic::Init()		sim-high
+00230f10	688	float	near	m2c	60.40	002c3cf0	_ZN2sa5EVENT9calcValueEfPNS_22BIN_CAMERA_DATA_ENC_WKEiS2_	sa::EVENT::calcValue(float, sa::BIN_CAMERA_DATA_ENC_WK*, int, sa::BIN_CAMERA_DATA_ENC_WK*)		sim-med
+0026b5a0	688	loop	near	m2c	68.08	003a2370	_ZN2Tz7CmEquip8SortItemEi	Tz::CmEquip::SortItem(int)		med
+0028d320	688	float	near	m2c	62.38	00367788	_ZN2Tz8LightCur4drawEv	Tz::LightCur::draw()		med
+002a7a60	688	branchy	near	m2c	90.76	00343378	_ZN2Tz10JmMiniGame7ControlEv	Tz::JmMiniGame::Control()		sim-high
+002a8d98	688	branchy	near	m2c	90.76	00356c94	_ZN2Tz7JmQuest7ControlEv	Tz::JmQuest::Control()		sim-high
+002aed60	688	loop	near	lift	88.02	003507b8	_ZN2Tz8JmPuzzle8SetupTopEv	Tz::JmPuzzle::SetupTop()		med
+001fe398	684	float	near	lift	72.20	005b42a8	pppKeTh	pppKeTh		sim-med
+0027b6b8	680	loop	near	m2c	73.49	00390248	_ZN2Tz9CmAbility14UpdateHelpMessEv	Tz::CmAbility::UpdateHelpMess()		med
+0027c700	676	switch	near	m2c	88.18	003959f4	_ZN2Tz8CmConfig4CtrlEv	Tz::CmConfig::Ctrl()		high
+002986e0	676	loop	near	lift	73.64	003289e8	_ZN2Tz7JmAlbum10PhotoSetupEv	Tz::JmAlbum::PhotoSetup()		med
+0027b248	672	float	near	m2c	47.22	0038c1c0	_ZN2Tz9CmAbility11UpdateGaugeEb	Tz::CmAbility::UpdateGauge(bool)		med
+002d1550	672	float	near	lift	61.58	00643798	_ZN2Ti9MGOarashiC1Eii	Ti::MGOarashi::MGOarashi(int, int)		sim-high
+002e6210	672	switch	near	lift	55.51	00657f74	_ZN2Ti4Tim211make_packetERN2kn16Vif1PacketBufferEi	Ti::Tim2::make_packet(kn::Vif1PacketBuffer&, int)		sim-low
+00229e58	668	float	near	lift	79.05	002dd148	_ZN2sa13MUSICAL_COMBO9printTaskEP4TASK	sa::MUSICAL_COMBO::printTask(TASK*)		sim-high
+002a5a90	668	switch	near	m2c	91.26	0032efc8	_ZN2Tz8JmBattle8CtrlInfoEv	Tz::JmBattle::CtrlInfo()		med
+00323540	668	loop	near	m2c	91.29	000a63b0	_ZN2dk11INFORMATION4initEv	dk::INFORMATION::init()		sim-high
+002209f0	660	float	near	m2c	81.55	005cee18	_Z10init_paramP24PRyjMegaBirthModelFilterP14_PARTICLE_DATAP15_PARTICLE_COLOR	init_param(PRyjMegaBirthModelFilter*, _PARTICLE_DATA*, _PARTICLE_COLOR*)		sim-med
+002a5df0	660	loop	near	lift	80.29	0032d18c	_ZN2Tz8JmBattle13UpdateTopListEv	Tz::JmBattle::UpdateTopList()		med
+002d9220	660	float	near	lift	58.62	006366a0	_ZN2Ti12MGHachimitsu9play_demoEi	Ti::MGHachimitsu::play_demo(int)		med
+00107a90	656	float	near	lift	97.82	0019b550	_ZN2gb13PLAYER_CAMERA4execEv	gb::PLAYER_CAMERA::exec()		sim-high
+00291918	656	switch	near	m2c	82.32	003249b4	_ZN2Tz8ItemStat13UpdateNewItemEiiii	Tz::ItemStat::UpdateNewItem(int, int, int, int)		high
+00271b78	652	loop	near	ghidra	78.28	0039a16c	_ZN2Tz8CmCustom13UpdateTopListEv	Tz::CmCustom::UpdateTopList()		sim-high
+00154558	648	loop	near	ghidra	92.60	0009dd1c	_ZN2dk11GAUGE_ENEMY6createEv	dk::GAUGE_ENEMY::create()		med
+0031b130	648	loop	near	m2c	98.44	000a7184	_ZN2dk11INFORMATION11openHiTimerEPvS1_NS_9INFO_BASE5ALIGNEij	dk::INFORMATION::openHiTimer(void*, void*, dk::INFO_BASE::ALIGN, int, unsigned int)		sim-high
+00138988	644	float	near	m2c	57.86	0007af78	_ZN2dk6Sprite4drawEv	dk::Sprite::draw()		high
+002c4e98	644	float	near	lift	97.65	003e5b50	_ZN2dk10WM_LANDING6createEPKcRKN2YS6TARGETE	dk::WM_LANDING::create(char const*, YS::TARGET const&)		high
+001a11e0	640	float	near	m2c	78.67	00499140	_ZN2YS5SHEET4loadEPNS_7PARTRAME	YS::SHEET::load(YS::PARTRAM*)		high
+002298a8	640	loop	near	ghidra	84.39	002dca38	_ZN2sa13MUSICAL_COMBO6createEi	sa::MUSICAL_COMBO::create(int)		med
+0028bae0	640	float	near	lift	76.36	0037d678	_ZN2Tz9ScrollBar6CreateEiPvPN2YI5IMAGEEPKsiiPN2dk6SpriteEi	Tz::ScrollBar::Create(int, void*, YI::IMAGE*, short const*, int, int, dk::Sprite*, int)		med
+00157c88	636	branchy	near	lift	55.18	000a1964	_ZN2dk12GAUGE_PLAYER11updateDriveEv	dk::GAUGE_PLAYER::updateDrive()		med
+0022d9b0	636	loop	near	m2c	70.33	002cbb60	_ZN2sa5EVENT24set_bin_seq_wait_messageERNS_20BIN_SEQ_WAIT_MESSAGEEP4TASK	sa::EVENT::set_bin_seq_wait_message(sa::BIN_SEQ_WAIT_MESSAGE&, TASK*)		med
+002c3e58	636	loop	near	m2c	92.26	003e53f0	_ZN2dk10WM_LANDING6updateEv	dk::WM_LANDING::update()		sim-high
+002da670	636	float	near	lift	63.83	0063bf30	_ZN2Ti18MGHachimitsuPlayer20decide_pos_with_poohEv	Ti::MGHachimitsuPlayer::decide_pos_with_pooh()		med
+001baa58	632	float	near	m2c	82.55	0045238c	_ZN2YS7MISSIONC1EiPKc	YS::MISSION::MISSION(int, char const*)		sim-high
+0021cdd0	632	float	near	lift	41.34	005c6e68	_Z7shipolyP10pppModelStP19PRyjDrawShipolyBoneP19VRyjDrawShipolyBone	shipoly(pppModelSt*, PRyjDrawShipolyBone*, VRyjDrawShipolyBone*)		sim-low
+0024c1a8	632	branchy	near	lift	94.95	003bd35c	_ZN2Tz4HBTE4DrawEv	Tz::HBTE::Draw()		high
+00104a48	628	loop	near	ghidra	59.58	00041d00	_ZN4AREA10InitThreadEP4TASK	AREA::InitThread(TASK*)		med
+001112a8	628	float	near	lift	64.29	000e1f18	_ZN2kn6Friend11normal_execEv	kn::Friend::normal_exec()		med
+0013eb00	628	float	near	lift	28.71	0009cee8	_ZN2dk7Ft4Base7calcXYZEv	dk::Ft4Base::calcXYZ()		sim-high
+0018e420	628	float	near	lift	60.90	00406b50	_ZN2YS11ATTACK_WORK7hitmarkEPNS_6BTLOBJEPNS_6DAMAGEERKNS_9COLLISIONEy	YS::ATTACK_WORK::hitmark(YS::BTLOBJ*, YS::DAMAGE*, YS::COLLISION const&, unsigned long long)		med
+00246490	628	loop	near	m2c	39.89	003c299c	_ZN2Tz4HECO12DrawSelectorEPNS_6SelectEii	Tz::HECO::DrawSelector(Tz::Select*, int, int)		med
+002818b8	628	float	near	lift	71.89	003200e0	_ZN2Tz11ItemPicDraw6CreateEi	Tz::ItemPicDraw::Create(int)		high
+00261d48	624	loop	near	lift	78.29	003a8a5c	_ZN2Tz6CmItem15UpdateEquipListEv	Tz::CmItem::UpdateEquipList()		med
+00278dd0	624	branchy	near	m2c	94.54	003930d0	_ZN2Tz9CmAbility11CtrlAbilityEv	Tz::CmAbility::CtrlAbility()		med
+002793b0	624	loop	near	ghidra	51.18	0038e9a0	_ZN2Tz9CmAbility18GetFormAbilityInfoEv	Tz::CmAbility::GetFormAbilityInfo()		med
+002823b0	624	loop	near	m2c	59.53	00322180	_ZN2Tz8ItemInfo8SetEquipEij	Tz::ItemInfo::SetEquip(int, unsigned int)		sim-high
+001dfa38	620	float	near	lift	91.73	002b7948	_ZN3ryj3PAX7MANAGER4execEv	ryj::PAX::MANAGER::exec()		med
+002a6be0	620	branchy	near	m2c	90.18	0035c6b0	_ZN2Tz8JmSynthe7ControlEv	Tz::JmSynthe::Control()		sim-high
+001aa0a8	616	float	near	lift	72.71	0044e128	_ZN2YS11MESSAGEDRAW11draw_letterEPNS0_3ENVEiii	YS::MESSAGEDRAW::draw_letter(YS::MESSAGEDRAW::ENV*, int, int, int)		med
+002a2818	616	branchy	near	m2c	82.03	003613f8	_ZN2Tz10JmTreasure13CtrlPieceInfoEv	Tz::JmTreasure::CtrlPieceInfo()		sim-high
+002b2a18	616	loop	near	lift	62.45	0034f5ec	_ZN2Tz8JmPuzzle12CreateCursorEv	Tz::JmPuzzle::CreateCursor()		med
+00136d40	612	branchy	near	lift	88.52	000443a4	_ZN2dk3BGM8areaReadEP4TASK	dk::BGM::areaRead(TASK*)		med
+0017f938	612	float	near	lift	81.10	00459c20	_ZN2YS6MOTION4execEv	YS::MOTION::exec()		med
+00243298	612	loop	near	ghidra	64.01	003c155c	_ZN2Tz4HEFT4InitEv	Tz::HEFT::Init()		high
+00118da0	608	float	near	m2c	40.69	00108968	_ZN2kn6Stitch10set_targetEv	kn::Stitch::set_target()		high
+00148ef0	608	float	near	lift	68.90	000b45e0	_ZN2dk11OctDrawFile15drawShadowModelEPPNS_11ObjDrawListEi	dk::OctDrawFile::drawShadowModel(dk::ObjDrawList**, int)		sim-low
+002a23a0	608	branchy	near	m2c	81.80	00360bd8	_ZN2Tz10JmTreasure7ControlEv	Tz::JmTreasure::Control()		sim-high
+002bf650	600	float	near	m2c	59.37	003de160	_ZN8worldmap6Symbol8setStateEPKN2YS10WORLDSTATEE	worldmap::Symbol::setState(YS::WORLDSTATE const*)		sim-high
+002618d8	596	switch	near	lift	87.84	003abc58	_ZN2Tz6CmItem19CtrlItemDumpConfirmEv	Tz::CmItem::CtrlItemDumpConfirm()		high
+00271900	596	loop	near	ghidra	84.88	00399d98	_ZN2Tz8CmCustom13CreateTopListEv	Tz::CmCustom::CreateTopList()		high
+00180f28	592	loop	near	m2c	63.00	0048ffa4	_ZN2YS8PROGRESS4ReadEv	YS::PROGRESS::Read()		high
+001b9420	592	float	near	lift	97.21	0046cdf8	_ZN2YS3OBJ8sys_execEv	YS::OBJ::sys_exec()		med
+00237ae8	592	float	near	lift	75.28	000c6ea0	_ZN2YI6SPRITE7ControlEv	YI::SPRITE::Control()		med
+002444b8	592	branchy	near	lift	93.26	003bf90c	_ZN2Tz4HEFT4DrawEv	Tz::HEFT::Draw()		high
+002a7f58	592	loop	near	ghidra	77.68	0034213c	_ZN2Tz10JmMiniGame10CreateListEv	Tz::JmMiniGame::CreateList()		high
+00150328	588	loop	near	lift	84.80	000b85f8	_ZN2dk7COUNTER6updateEv	dk::COUNTER::update()		high
+002b12a0	588	straight	near	lift	81.43	00351004	_ZN2Tz8JmPuzzle12SetupItemGetEv	Tz::JmPuzzle::SetupItemGet()		med
+0019d790	584	branchy	near	m2c	72.95	00492864	_ZN2YS5RECOM4execEv	YS::RECOM::exec()		sim-high
+001b4a00	584	float	near	lift	92.65	0043f884	_ZN2YS5LIMIT5setupEf	YS::LIMIT::setup(float)		high
+00259108	584	loop	near	lift	85.30	002ec7d4	_ZN2Tz6CmComm21CreateConfirmSelectorEPNS_6SelectEiiiPNS_6LayoutEiPKs	Tz::CmComm::CreateConfirmSelector(Tz::Select*, int, int, int, Tz::Layout*, int, short const*)		high
+00281fe0	584	loop	near	ghidra	72.25	00321b48	_ZN2Tz8ItemInfo15GetItemTypeMaskEii	Tz::ItemInfo::GetItemTypeMask(int, int)		sim-high
+00297630	580	branchy	near	m2c	90.32	0035ae90	_ZN2Tz7JmStory7ControlEv	Tz::JmStory::Control()		med
+0029cb28	580	loop	near	m2c	78.25	0033cd24	_ZN2Tz5JmDic8MovePageEi	Tz::JmDic::MovePage(int)		med
+002a18d0	580	loop	near	ghidra	17.25	00336b34	_ZN2Tz9JmDiagram11GetCharaIdxEii	Tz::JmDiagram::GetCharaIdx(int, int)		high
+00141c38	576	loop	near	ghidra	71.88	0009096c	_ZN2dk11OctCollFile13selectPolygonEiRNS_7SAabboxERti	dk::OctCollFile::selectPolygon(int, dk::SAabbox&, unsigned short&, int)		sim-high
+001bc9e8	576	branchy	near	lift	50.81	0041cbe0	_ZN2YS12COMMAND_MENU4execEv	YS::COMMAND_MENU::exec()		med
+00232a48	576	loop	near	m2c	76.02	002d62a8	_ZN2sa5EVENT12read_se_dataERNS_11BIN_SE_DATAEP4TASK	sa::EVENT::read_se_data(sa::BIN_SE_DATA&, TASK*)		high
+0024db28	576	branchy	near	lift	93.07	003d1068	_ZN2Tz4TTPT4DrawEv	Tz::TTPT::Draw()		high
+002b0fc8	576	branchy	near	ghidra	38.99	00351874	_ZN2Tz8JmPuzzle8PieceSelEj	Tz::JmPuzzle::PieceSel(unsigned int)		med
+00279620	572	loop	near	lift	65.79	0038ed88	_ZN2Tz9CmAbility20GetWeaponAbilityInfoEv	Tz::CmAbility::GetWeaponAbilityInfo()		med
+00279ec8	572	loop	near	m2c	77.52	0038f9dc	_ZN2Tz9CmAbility13UpdateTopListEv	Tz::CmAbility::UpdateTopList()		med
+0010e130	568	float	near	m2c	75.68	000e1c50	_ZN2kn6Friend12updateTargetEb	kn::Friend::updateTarget(bool)		high
+0019f070	568	branchy	near	ghidra	57.63	0043ac18	_ZN2YS6JUMPER4execEj	YS::JUMPER::exec(unsigned int)		med
+0024a710	568	branchy	near	lift	92.97	003cc5ac	_ZN2Tz4TRTE4DrawEv	Tz::TRTE::Draw()		high
+0027eb10	568	float	near	m2c	74.43	00383be0	_ZN2Tz10SimpleStat9UpdateNumEv	Tz::SimpleStat::UpdateNum()		high
+0013b5d0	564	float	near	m2c	54.67	0004b890	_ZN2dk12COMMAND_DRAW4openEiiPN2YS12COMMAND_SLOTEbiiPKNS1_7MESSAGEEiif	dk::COMMAND_DRAW::open(int, int, YS::COMMAND_SLOT*, bool, int, int, YS::MESSAGE const*, int, int, float)		med
+0029fcb0	564	loop	near	lift	72.39	0032a4dc	_ZN2Tz7JmAnsem13UpdateTopListEv	Tz::JmAnsem::UpdateTopList()		med
+00259c60	560	switch	near	lift	88.83	00307c40	_ZN2Tz6CmSave7ControlEv	Tz::CmSave::Control()		med
+00277708	560	loop	near	lift	95.12	0038b38c	_ZN2Tz9CmAbility17SetupFormSelectorEi	Tz::CmAbility::SetupFormSelector(int)		med
+00251780	556	branchy	near	m2c	90.35	003ba79c	_ZN2Tz4CANA10ControlSelEv	Tz::CANA::ControlSel()		med
+001a2b50	552	branchy	near	e3	45.35	004361c8	_ZN2YS4ITEM6UseSubEPKNS_10ITEM_TABLEEiii	YS::ITEM::UseSub(YS::ITEM_TABLE const*, int, int, int)		med
+00227e30	552	switch	near	ghidra	96.21	002bb804	_ZN2sa5EVENT10event_fileEP4TASK	sa::EVENT::event_file(TASK*)		med
+00248d28	552	branchy	near	lift	92.77	003c9e14	_ZN2Tz4MUMI4DrawEv	Tz::MUMI::Draw()		high
+00250328	552	branchy	near	lift	92.77	003c7b94	_ZN2Tz4LMMU4DrawEv	Tz::LMMU::Draw()		high
+0026ee78	552	loop	near	lift	70.07	0039bd9c	_ZN2Tz8CmCustom8SetupTopEv	Tz::CmCustom::SetupTop()		high
+002bd310	552	loop	near	lift	88.12	001363e4	_ZN5SOUND13readBgmThreadEP4TASK	SOUND::readBgmThread(TASK*)		sim-high
+0013c190	548	float	near	lift	83.39	0004c6b0	_ZN2dk12COMMAND_DRAW11drawCurrentEPN2YS12COMMAND_MENUEiibiiiPNS1_12COMMAND_SLOTE	dk::COMMAND_DRAW::drawCurrent(YS::COMMAND_MENU*, int, int, bool, int, int, int, YS::COMMAND_SLOT*)		med
+001b47d8	548	float	near	m2c	93.62	004402b0	_ZN2YS5LIMITC1EPKNS_11LIMIT_TABLEEPNS_6PLAYEREf	YS::LIMIT::LIMIT(YS::LIMIT_TABLE const*, YS::PLAYER*, float)		sim-high
+001e8330	548	loop	near	ghidra	71.53	005a732c	_Z14pppRunPartDrawP9_pppMngSti	pppRunPartDraw(_pppMngSt*, int)		sim-med
+00224fa0	548	switch	near	lift	56.03	002d9680	_ZN2sa5EVENT22set_bin_musical_targetERNS_18BIN_MUSICAL_TARGETEP4TASK	sa::EVENT::set_bin_musical_target(sa::BIN_MUSICAL_TARGET&, TASK*)		med
+00296b80	548	loop	near	ghidra	65.80	0035808c	_ZN2Tz8JmReport9CreateGraEb	Tz::JmReport::CreateGra(bool)		high
+002ca828	548	loop	near	lift	77.76	003dfc74	_ZN2dk11WM_GLANDING21createSelectDepartureEv	dk::WM_GLANDING::createSelectDeparture()		med
+002dc4e0	548	float	near	lift	92.81	0063e9c0	_ZN2Ti6MGJumpC1Eii	Ti::MGJump::MGJump(int, int)		sim-high
+0023aab8	544	float	near	ghidra	62.86	000c387c	_ZN2YI8SEQUENCE4CalcEv	YI::SEQUENCE::Calc()		med
+002657a8	544	switch	near	ghidra	64.85	003b4134	_ZN2Tz6CmStat13UpdateTopListEv	Tz::CmStat::UpdateTopList()		med
+00156e48	540	branchy	near	m2c	84.87	000a3244	_ZN2dk12GAUGE_PLAYER6reloadEv	dk::GAUGE_PLAYER::reload()		med
+0016fda8	540	loop	near	lift	61.64	00415f74	_ZN2YS10CACHE_BUFF6HEADER8transferEv	YS::CACHE_BUFF::HEADER::transfer()		med
+0010df18	536	branchy	near	lift	72.82	000e1870	_ZN2kn6Friend11searchEnemyEv	kn::Friend::searchEnemy()		med
+001217a0	536	loop	near	lift	79.56	00120c54	_ZN2kn8ModelSKL10setTextureEPNS_16Vif1PacketBufferEiPNS_13AnimationWorkEPNS_7TextureE	kn::ModelSKL::setTexture(kn::Vif1PacketBuffer*, int, kn::AnimationWork*, kn::Texture*)		sim-high
+0018c650	536	float	near	m2c	43.01	004eef38	_ZN2YS3NPC10RTN_ACTION3lotERN2kn7FVectorEiPKNS_19UNIT_DATA_RTN_PARAMEPKNS_4ZONEEff	YS::NPC::RTN_ACTION::lot(kn::FVector&, int, YS::UNIT_DATA_RTN_PARAM const*, YS::ZONE const*, float, float)		sim-high
+001af420	536	float	near	ghidra	75.02	00433168	_ZN2YS8GAMEOVER4execEv	YS::GAMEOVER::exec()		med
+0022c1f8	536	loop	near	lift	83.69	002c51a8	_ZN2sa12ROUND_NUMBER6createEiPNS_9COUNTDOWNE	sa::ROUND_NUMBER::create(int, sa::COUNTDOWN*)		med
+00230b50	536	float	near	lift	85.87	002cf9d8	_ZN2sa5EVENT20set_bin_seq_pos_moveERNS_16BIN_SEQ_POS_MOVEEP4TASK	sa::EVENT::set_bin_seq_pos_move(sa::BIN_SEQ_POS_MOVE&, TASK*)		med
+002a2600	532	loop	near	lift	98.05	00361010	_ZN2Tz10JmTreasure14SetupPieceInfoEv	Tz::JmTreasure::SetupPieceInfo()		high
+002bad20	532	loop	near	ghidra	16.40	0013ccbc	_ZN8TRANSFER8sendTaskEP4TASK	TRANSFER::sendTask(TASK*)		high
+001fc320	528	float	near	m2c	67.46	005ab4c0	pppKeHitChkPxB	pppKeHitChkPxB		sim-med
+0022bef8	528	switch	near	lift	88.37	002c56b4	_ZN2sa5EVENT17set_bin_countdownERNS_13BIN_COUNTDOWNEP4TASK	sa::EVENT::set_bin_countdown(sa::BIN_COUNTDOWN&, TASK*)		high
+0025dbd8	528	switch	near	m2c	94.84	002fbbf0	_ZN2Tz6CmLoad8CtrlSlotEv	Tz::CmLoad::CtrlSlot()		med
+00262820	528	loop	near	lift	84.57	003a65d0	_ZN2Tz6CmItem14UpdateListMessEv	Tz::CmItem::UpdateListMess()		med
+0029cdf8	528	loop	near	lift	74.32	00339dc4	_ZN2Tz5JmDic14UpdateWorldSelEv	Tz::JmDic::UpdateWorldSel()		med
+002a2de8	528	loop	near	e3	51.48	0035df58	_ZN2Tz10JmTreasure12GetPieceListEv	Tz::JmTreasure::GetPieceList()		med
+002d7698	528	float	near	ghidra	60.10	00637ef8	_ZN2Ti12MGHachimitsu11run_commandEv	Ti::MGHachimitsu::run_command()		med
+00132850	524	float	near	ghidra	21.24	0010e300	_ZN2kn10TEXAnmWork4playEf	kn::TEXAnmWork::play(float)		sim-med
+0013cbb8	524	float	near	ghidra	48.07	0004d538	_ZN2dk12COMMAND_DRAW8shortCutEPN2YS12COMMAND_MENUEb	dk::COMMAND_DRAW::shortCut(YS::COMMAND_MENU*, bool)		sim-high
+0023d5b8	524	loop	near	ghidra	91.44	00374178	_ZN2Tz7MenuObj4InitEv	Tz::MenuObj::Init()		sim-high
+0026df30	524	loop	near	lift	90.88	0030a87c	_ZN2Tz8Selector13SetupSelectorEv	Tz::Selector::SetupSelector()		high
+00290d68	524	loop	near	ghidra	85.66	00323df8	_ZN2Tz8ItemStat9CreateSeqEPN2dk6SpriteE	Tz::ItemStat::CreateSeq(dk::Sprite*)		high
+0029a3e0	524	loop	near	ghidra	73.46	00330410	_ZN2Tz12JmCollection9CreateGraEb	Tz::JmCollection::CreateGra(bool)		high
+002bb9b8	524	branchy	near	lift	57.89	00138660	_ZN4SE3D6calcSeEv	SE3D::calcSe()		sim-high
+00128b38	520	float	near	lift	80.39	000fa8ec	_ZN2kn16MotionPrototype014setFcurveValueEPNS_8ModelObjEf	kn::MotionPrototype0::setFcurveValue(kn::ModelObj*, float)		sim-high
+0016eb48	520	loop	near	m2c	88.22	0046ac3c	_ZN2YS8OBJENTRY14ReadRequestSubEjiii	YS::OBJENTRY::ReadRequestSub(unsigned int, int, int, int)		high
+001e3690	520	loop	near	lift	66.70	002abfec	_Z11pppGetPdataP9_pppMngSt	pppGetPdata(_pppMngSt*)		sim-med
+00107888	516	float	near	lift	49.01	000da42c	_ZN2kn11camera_taskEP4TASK	kn::camera_task(TASK*)		high
+0026e3b0	516	loop	near	lift	82.48	0030a468	_ZN2Tz8Selector12AdjustSeqPosEv	Tz::Selector::AdjustSeqPos()		high
+0026e638	516	switch	near	lift	87.45	00309ee8	_ZN2Tz8Selector12CtrlSelectorEP4TASK	Tz::Selector::CtrlSelector(TASK*)		med
+0029fee8	516	loop	near	ghidra	50.45	0032ab1c	_ZN2Tz7JmAnsem8MovePageEi	Tz::JmAnsem::MovePage(int)		med
+002a6088	516	loop	near	ghidra	49.24	0032d7f8	_ZN2Tz8JmBattle8MovePageEi	Tz::JmBattle::MovePage(int)		med
+001037f8	512	branchy	near	ghidra	86.48	0003bca8	_ZN4MENU13pauseExecTaskEP4TASK	MENU::pauseExecTask(TASK*)		high
+00108730	512	float	near	ghidra	1.24	00116770	_ZN2kn9DrawParam9setPacketEPNS_16Vif1PacketBufferE	kn::DrawParam::setPacket(kn::Vif1PacketBuffer*)		sim-med
+00148690	512	float	near	m2c	69.87	000acce0	_ZN2dk11OctDrawFile12calcPartsLODEPNS_11ObjDrawListEf	dk::OctDrawFile::calcPartsLOD(dk::ObjDrawList*, float)		sim-high
+00175f68	512	branchy	near	m2c	76.12	00478e14	_ZN2YS5PARTY12ChangeWeaponEP4TASKiii	YS::PARTY::ChangeWeapon(TASK*, int, int, int)		med
+0023c100	512	float	near	ghidra	78.94	000c100c	_ZN2YI6LAYOUT4InitEPvPNS_12IMAGE_FREEZEEP9ALLOCATOR	YI::LAYOUT::Init(void*, YI::IMAGE_FREEZE*, ALLOCATOR*)		high
+002b9c80	512	loop	near	lift	98.03	0013ad48	_ZN5SOUND12initCommonSeEv	SOUND::initCommonSe()		high
+001c0690	508	loop	near	ghidra	77.64	004dd010	_ZNK2YS10BONUSLEVEL2upEPNS_5SHEETE	YS::BONUSLEVEL::up(YS::SHEET*) const		med
+0028c878	508	loop	near	lift	72.46	003706cc	_ZN2Tz10MenuCursor4InitEP9ALLOCATORi	Tz::MenuCursor::Init(ALLOCATOR*, int)		high
+002c14e8	508	loop	near	lift	95.97	003d5a6c	_ZN2dk13WM_TOTAL_INFO6updateEv	dk::WM_TOTAL_INFO::update()		med
+00324510	508	loop	near	m2c	70.98	002e42e0	_ZN2sa14MUSICAL_SCORE54initEv	sa::MUSICAL_SCORE5::init()		sim-high
+0016e920	504	branchy	near	m2c	76.63	0046a4dc	_ZN2YS8OBJENTRY3GetEj	YS::OBJENTRY::Get(unsigned int)		high
+0026d968	504	loop	near	lift	81.63	003091a8	_ZN2Tz8Selector4InitEv	Tz::Selector::Init()		high
+002d36f0	504	float	near	m2c	54.84	00646e30	_ZN2Ti15MGOarashiGimObj17appear_fall_prizeEv	Ti::MGOarashiGimObj::appear_fall_prize()		sim-high
+0019dd10	500	branchy	near	lift	97.87	00492454	_ZN2YS11RC_SEARCHER4execEv	YS::RC_SEARCHER::exec()		sim-high
+001a9560	500	loop	near	lift	60.22	00467790	_ZN2YS7OBJDATA18start_model_effectEPvRN3ryj3PAXEPPNS2_6EFFECTE	YS::OBJDATA::start_model_effect(void*, ryj::PAX&, ryj::EFFECT**)		high
+001b5cf8	500	float	near	lift	81.03	00418510	_ZN2YS8CHANGEIN4execEP4TASK	YS::CHANGEIN::exec(TASK*)		med
+0022a3d0	500	float	near	lift	64.57	002df820	_ZN2sa13MUSICAL_INPUT16createCircleSizeEifRiS1_S1_S1_S1_S1_S1_S1_Rf	sa::MUSICAL_INPUT::createCircleSize(int, float, int&, int&, int&, int&, int&, int&, int&, int&, float&)		sim-high
+0023cfb8	500	float	near	m2c	35.63	000cadc8	_ZN2YI9VIBRATION10ManagementEv	YI::VIBRATION::Management()		sim-low
+0028ebf8	500	float	near	m2c	82.23	00377d60	_ZN2Tz8MultiSeq6updateEv	Tz::MultiSeq::update()		med
+00148c50	496	loop	near	lift	60.36	000b40c4	_ZN2dk11OctDrawFile17selectShadowGroupEiRNS_6AabboxERiiPPNS_11ObjDrawListE	dk::OctDrawFile::selectShadowGroup(int, dk::Aabbox&, int&, int, dk::ObjDrawList**)		sim-low
+001fbd78	496	float	near	lift	75.24	005aae48	pppKeHmgEff	pppKeHmgEff		sim-low
+00240c08	496	branchy	near	m2c	77.70	0036a318	_ZN2Tz5MCard11SetFileInfoEiPvi	Tz::MCard::SetFileInfo(int, void*, int)		med
+0024bfb8	496	switch	near	lift	97.69	003bd79c	_ZN2Tz4HBTE7CtrlSelEv	Tz::HBTE::CtrlSel()		sim-high
+00279cd8	496	loop	near	lift	88.75	0038f6c8	_ZN2Tz9CmAbility13CreateTopListEv	Tz::CmAbility::CreateTopList()		high
+002854d8	496	loop	near	lift	64.02	002ef270	_ZN2Tz6Ending9CreateWinEib	Tz::Ending::CreateWin(int, bool)		med
+00287028	496	loop	near	ghidra	82.40	003b08e4	_ZN2Tz8CmNewFlg19isAbilityHistMemberEii	Tz::CmNewFlg::isAbilityHistMember(int, int)		sim-high
+002922e0	496	loop	near	m2c	88.47	00325238	_ZN2Tz8ItemStat8CalcElemERiiiiPKN2YS5SHEETE	Tz::ItemStat::CalcElem(int&, int, int, int, YS::SHEET const*)		sim-low
+002c4ca8	496	loop	near	ghidra	78.06	003e2ff0	_ZN2dk10WM_LANDING21createSelectDepartureEv	dk::WM_LANDING::createSelectDeparture()		med
+002dcc90	496	float	near	lift	89.54	0063f400	_ZN2Ti6MGJump8pre_execEv	Ti::MGJump::pre_exec()		med
+002a21b0	492	loop	near	lift	97.89	0036081c	_ZN2Tz10JmTreasure5SetupEv	Tz::JmTreasure::Setup()		high
+00127a88	488	float	near	ghidra	41.67	000f892c	_ZN2kn6Motion22duplicateMotionContextEPNS_8ModelObjEP9ALLOCATOR	kn::Motion::duplicateMotionContext(kn::ModelObj*, ALLOCATOR*)		sim-low
+001bfda0	488	float	near	e3	38.30	00474d20	_ZN2YS11PARTS_COLOR15make_draw_colorERKNS_5COLORE	YS::PARTS_COLOR::make_draw_color(YS::COLOR const&)		sim-med
+00229b28	488	float	near	ghidra	0.00	002dc1f8	_ZN2sa13MUSICAL_COMBO12createCircleEfiii	sa::MUSICAL_COMBO::createCircle(float, int, int, int)		sim-high
+0022a5c8	488	float	near	ghidra	0.00	002dfa40	_ZN2sa13MUSICAL_INPUT12createCircleEfiii	sa::MUSICAL_INPUT::createCircle(float, int, int, int)		sim-high
+0026a3b8	488	branchy	near	m2c	80.10	003a5270	_ZN2Tz7CmEquip18UpdateTopSelActiveEib	Tz::CmEquip::UpdateTopSelActive(int, bool)		sim-high
+00280a50	488	loop	near	lift	84.17	0031e5d4	_ZN2Tz12GumiGameOver5SetupEv	Tz::GumiGameOver::Setup()		med
+00294998	488	loop	near	m2c	79.70	00361f08	_ZN2Tz10JmWorldSel17AdjustSelectorPosEv	Tz::JmWorldSel::AdjustSelectorPos()		med
+002b1bd0	488	loop	near	ghidra	70.67	0034f95c	_ZN2Tz8JmPuzzle11UpdatePieceEb	Tz::JmPuzzle::UpdatePiece(bool)		high
+00146498	484	loop	near	m2c	77.12	000b1bf0	_ZN2dk11OctDrawFile8drawTreeEiRi	dk::OctDrawFile::drawTree(int, int&)		sim-med
+00179fd0	484	float	near	m2c	92.33	0047f588	_ZN2YS6PLAYER6AppearEPKNS_8OBJENTRYEiRKN2kn7FVectorEf	YS::PLAYER::Appear(YS::OBJENTRY const*, int, kn::FVector const&, float)		high
+0018d238	484	branchy	near	lift	74.69	00407fcc	_ZN2YS6ATTACKC1EPNS_6BTLOBJEPNS_6STDOBJEiiii	YS::ATTACK::ATTACK(YS::BTLOBJ*, YS::STDOBJ*, int, int, int, int)		sim-high
+001bae38	484	branchy	near	lift	81.66	004516f0	_ZN2YS7MISSION8activateEv	YS::MISSION::activate()		med
+0022f018	484	loop	near	m2c	47.35	002d23f4	_ZN2sa5EVENT14set_attach_seqERNS_14BIN_ATTACH_SEQEP4TASK	sa::EVENT::set_attach_seq(sa::BIN_ATTACH_SEQ&, TASK*)		med
+0011e600	480	loop	near	m2c	97.24	000efe54	_ZN2kn8ModelObj20synchronizeAnimationEPvS1_	kn::ModelObj::synchronizeAnimation(void*, void*)		sim-high
+001c20e8	480	loop	near	m2c	56.31	0047a65c	_ZN2YS7PATTERN7ConvertEjPNS_6DAMAGEEPNS_6BTLOBJE	YS::PATTERN::Convert(unsigned int, YS::DAMAGE*, YS::BTLOBJ*)		sim-high
+001f6c58	480	float	near	lift	88.22	005a90e0	KeBornPtCmlp	KeBornPtCmlp		sim-high
+0023d820	480	loop	near	lift	84.44	0037324c	_ZN2Tz7MenuObj10DestroyObjEv	Tz::MenuObj::DestroyObj()		med
+0027bd40	480	branchy	near	m2c	82.52	00393bf8	_ZN2Tz9CmAbility18UpdateTopSelActiveEib	Tz::CmAbility::UpdateTopSelActive(int, bool)		sim-high
+0014a500	476	float	near	m2c	66.75	0008b548	_ZN2dk4Blur6updateEv	dk::Blur::update()		high
+001678f0	476	branchy	near	ghidra	57.08	00473f88	_ZN2YS7HARDPAD4readERKN3Axa7PADDATAE	YS::HARDPAD::read(Axa::PADDATA const&)		sim-med
+001e3e48	476	loop	near	ghidra	66.33	002ad698	_Z19dpd_set_object_dataP9_pppMngSt	dpd_set_object_data(_pppMngSt*)		sim-low
+002515a0	476	loop	near	lift	86.32	003babc4	_ZN2Tz4CANA8SetupSelEv	Tz::CANA::SetupSel()		sim-high
+002653a0	476	loop	near	lift	92.99	003b3cf8	_ZN2Tz6CmStat13CreateTopListEv	Tz::CmStat::CreateTopList()		high
+00294f78	476	loop	near	ghidra	64.36	003622e0	_ZN2Tz10JmWorldSel9CreateGraEb	Tz::JmWorldSel::CreateGra(bool)		med
+0014b290	472	branchy	near	lift	22.29	000763c8	_ZN2dk8RectBase12createPacketEv	dk::RectBase::createPacket()		sim-high
+0016ed50	472	branchy	near	lift	74.39	0046b084	_ZN2YS8OBJENTRY11ReadRequestEjii	YS::OBJENTRY::ReadRequest(unsigned int, int, int)		high
+0019f2a8	472	branchy	near	m2c	58.81	0043a97c	_ZNK2YS6JUMPER13get_jump_areaER4AREA	YS::JUMPER::get_jump_area(AREA&) const		med
+00226090	472	switch	near	lift	90.70	002d58b0	_ZN2sa5EVENT9read_ctrlEv	sa::EVENT::read_ctrl()		high
+0023c728	472	float	near	ghidra	68.99	000c0b70	_ZN2YI6LAYOUT12ChangeNumberEi	YI::LAYOUT::ChangeNumber(int)		med
+002851e0	472	branchy	near	lift	96.06	002eed14	_ZN2Tz6Ending4DrawEv	Tz::Ending::Draw()		high
+00150be8	468	loop	near	m2c	98.12	000b7224	_ZN2dk5TIMER4initEv	dk::TIMER::init()		sim-high
+0017efa0	468	float	near	lift	76.62	0045a1f8	_ZN2YS6MOTION12start_motionEPNS_6BINARCEff	YS::MOTION::start_motion(YS::BINARC*, float, float)		high
+00241c40	468	loop	near	m2c	62.92	0036c7c4	_ZN2Tz5MCard11ChkFileSizeEi	Tz::MCard::ChkFileSize(int)		high
+0025b5e0	468	branchy	near	lift	79.24	00305558	_ZN2Tz6CmSave15CtrlChkFreeSizeEv	Tz::CmSave::CtrlChkFreeSize()		med
+00274fa8	468	branchy	near	lift	79.66	002f5098	_ZN2Tz6Jiminy5SetupEv	Tz::Jiminy::Setup()		high
+002eea80	468	float	near	lift	51.60	0060b3f8	_ZN4menu9ObjWidgetC1EP9ALLOCATORj	menu::ObjWidget::ObjWidget(ALLOCATOR*, unsigned int)		sim-high
+0013c938	464	loop	near	lift	91.35	0004dda8	_ZN2dk12COMMAND_DRAW6updateEv	dk::COMMAND_DRAW::update()		sim-high
+0015c500	464	float	near	ghidra	37.11	00071b68	_ZN2dk10PointLight8getColorEPhRN2kn7FVectorE	dk::PointLight::getColor(unsigned char*, kn::FVector&)		sim-low
+00251148	464	loop	near	lift	29.38	003bb7cc	_ZN2Tz4CANA5SetupEv	Tz::CANA::Setup()		high
+00266988	464	switch	near	lift	52.30	003b44f0	_ZN2Tz6CmStat9UpdateNewEv	Tz::CmStat::UpdateNew()		high
+002add90	464	loop	near	ghidra	45.90	00332dc4	_ZN2Tz10JmComplete14CheckSynthesisEv	Tz::JmComplete::CheckSynthesis()		high
+0018ddc0	460	branchy	near	lift	82.76	00407a58	_ZN2YS6ATTACK6hit_bgEtRKN2kn7FVectorERPN2dk6ObjOccE	YS::ATTACK::hit_bg(unsigned short, kn::FVector const&, dk::ObjOcc*&)		med
+00199dc0	460	switch	near	m2c	76.19	004affc0	_ZN2YS10UNIT_GROUP11init_appearEv	YS::UNIT_GROUP::init_appear()		med
+001aa388	460	float	near	lift	88.40	0044de7c	_ZN2YS11MESSAGEDRAW8set_pageEPKNS_7MESSAGEE	YS::MESSAGEDRAW::set_page(YS::MESSAGE const*)		sim-high
+001aaa08	460	branchy	near	m2c	54.76	0042ebb4	_ZN2YS4FONT4InitEv	YS::FONT::Init()		med
+001afc00	460	loop	near	lift	86.16	004b9c78	_ZN2YS5VOICE11ReadEntryIdEjPv	YS::VOICE::ReadEntryId(unsigned int, void*)		high
+0025caf0	460	branchy	near	lift	98.00	0030328c	_ZN2Tz6CmSave15CtrlWMapConfirmEv	Tz::CmSave::CtrlWMapConfirm()		sim-high
+0027dd18	460	loop	near	lift	58.45	00383984	_ZN2Tz10SimpleStat4ExitEv	Tz::SimpleStat::Exit()		sim-low
+0027ff00	460	loop	near	m2c	82.46	0031d688	_ZN2Tz9GumiPause13GetAdviceInfoEv	Tz::GumiPause::GetAdviceInfo()		sim-med
+001031d0	456	branchy	near	lift	95.92	0003cdd0	_ZN4MENU6EnsureEP4TASK	MENU::Ensure(TASK*)		med
+002267a0	456	loop	near	lift	85.86	002bc3d8	_ZN2sa5EVENT7fixFreeEv	sa::EVENT::fixFree()		high
+0025b050	456	branchy	near	m2c	96.23	00305790	_ZN2Tz6CmSave12CtrlCheckSysEv	Tz::CmSave::CtrlCheckSys()		med
+0027fd38	456	loop	near	m2c	60.75	0031cca0	_ZN2Tz9GumiPause17UpdateSubSelectorEv	Tz::GumiPause::UpdateSubSelector()		med
+00283230	456	branchy	near	lift	98.28	00317d40	_ZN2Tz10CmTutorial4CtrlEv	Tz::CmTutorial::Ctrl()		sim-high
+00297b30	456	loop	near	ghidra	54.94	0035a680	_ZN2Tz7JmStory13UpdateNewMarkEv	Tz::JmStory::UpdateNewMark()		high
+00176458	452	float	near	m2c	44.23	004763b0	_ZN2YS5PARTY17_OVR_exec_reflectEPNS_11ATTACK_WORKES2_	YS::PARTY::_OVR_exec_reflect(YS::ATTACK_WORK*, YS::ATTACK_WORK*)		sim-high
+0019e848	452	loop	near	m2c	66.81	004914e8	_ZN2YS11RC_SEARCHER10check_autoEPNS_6PLAYEREPKti	YS::RC_SEARCHER::check_auto(YS::PLAYER*, unsigned short const*, int)		sim-high
+001a2e50	452	branchy	near	lift	30.34	00436420	_ZN2YS4ITEM9CanUseSubEPKNS_10ITEM_TABLEEi	YS::ITEM::CanUseSub(YS::ITEM_TABLE const*, int)		high
+001bc780	452	branchy	near	lift	85.29	0041c7c8	_ZN2YS12COMMAND_MENU3addEiPKNS_6TARGETEi	YS::COMMAND_MENU::add(int, YS::TARGET const*, int)		high
+0022c590	452	float	near	lift	89.29	002cc6c0	_ZN2sa5EVENT26set_bin_seq_mission_effectERNS_22BIN_SEQ_MISSION_EFFECTEP4TASK	sa::EVENT::set_bin_seq_mission_effect(sa::BIN_SEQ_MISSION_EFFECT&, TASK*)		sim-high
+00273368	452	branchy	near	lift	84.51	0039e3dc	_ZN2Tz8CmCustom18UpdateTopSelActiveEib	Tz::CmCustom::UpdateTopSelActive(int, bool)		sim-high
+0027f9d8	452	branchy	near	m2c	82.06	0031c638	_ZN2Tz9GumiPause10CtrlAdviceEv	Tz::GumiPause::CtrlAdvice()		med
+00280720	452	loop	near	lift	96.28	0031e86c	_ZN2Tz12GumiGameOver4InitEv	Tz::GumiGameOver::Init()		high
+002d84a8	452	float	near	lift	66.99	006381d0	_ZN2Ti12MGHachimitsu4execEv	Ti::MGHachimitsu::exec()		med
+00152f40	448	loop	near	ghidra	87.60	0005d630	_ZN2dk12LEVELUP_INFO4initEv	dk::LEVELUP_INFO::init()		high
+00198290	448	branchy	near	lift	88.76	004a1e8c	_ZN2YS6STDOBJC1EPKNS_8OBJENTRYEjRKN2kn7FVectorEf	YS::STDOBJ::STDOBJ(YS::OBJENTRY const*, unsigned int, kn::FVector const&, float)		high
+00293948	448	loop	near	m2c	65.18	00389a84	_ZN2Tz9ChgMember15ChkChangeMemberEv	Tz::ChgMember::ChkChangeMember()		med
+002a2a80	448	loop	near	m2c	73.39	0035d984	_ZN2Tz10JmTreasure15GetTreasureListEv	Tz::JmTreasure::GetTreasureList()		med
+002a99c8	448	branchy	near	m2c	40.68	0035579c	_ZN2Tz7JmQuest12GetQuestStatEPKNS_15JmQuestDataInfoE	Tz::JmQuest::GetQuestStat(Tz::JmQuestDataInfo const*)		high
+002deba0	448	float	near	lift	78.14	0062e408	_ZN2Ti14ACTION_PO_JUMP10decide_wayEPN2YS3OBJEff	Ti::ACTION_PO_JUMP::decide_way(YS::OBJ*, float, float)		sim-high
+00241160	444	loop	near	lift	76.47	0036af44	_ZN2Tz5MCard12ChkLocalInfoEv	Tz::MCard::ChkLocalInfo()		sim-low
+0027f7f0	444	switch	near	m2c	90.67	0031ced4	_ZN2Tz9GumiPause7CtrlTopEv	Tz::GumiPause::CtrlTop()		med
+00282940	444	loop	near	m2c	98.02	00322fa4	_ZN2Tz8ItemInfo14MakeCommandMsgEii	Tz::ItemInfo::MakeCommandMsg(int, int)		med
+00298c60	444	loop	near	ghidra	49.67	0032726c	_ZN2Tz7JmAlbum8MovePageEi	Tz::JmAlbum::MovePage(int)		sim-high
+002c8028	444	loop	near	m2c	87.47	003e87a8	_ZN2dk15WM_LANDING_INFOD1Ev	dk::WM_LANDING_INFO::~WM_LANDING_INFO()		sim-high
+002cd018	444	float	near	m2c	52.48	00656948	_ZN2Ti4Path6CreateEPN2YS3OBJEPKNS1_14UNIT_DATA_PATHERKN2kn7FVectorEf	Ti::Path::Create(YS::OBJ*, YS::UNIT_DATA_PATH const*, kn::FVector const&, float)		med
+00132ab0	440	loop	near	lift	75.98	0010e69c	_ZNK2kn10TEXAnmWork12isSameTargetEPNS_13AnimationWorkE	kn::TEXAnmWork::isSameTarget(kn::AnimationWork*) const		sim-med
+0015af48	440	branchy	near	ghidra	73.40	000464f0	_ZN2dk9BILLBOARD4initEPNS_7MapFileE	dk::BILLBOARD::init(dk::MapFile*)		high
+001e5458	440	loop	near	lift	60.92	005ca3c8	pppRyjMegaBirth	pppRyjMegaBirth		sim-low
+00244f10	440	loop	near	ghidra	70.14	003c5b78	_ZN2Tz4HECO4InitEv	Tz::HECO::Init()		sim-high
+00245eb8	440	switch	near	m2c	90.13	003c3c1c	_ZN2Tz4HECO7CtrlTopEv	Tz::HECO::CtrlTop()		med
+0024a948	440	branchy	near	m2c	79.93	003cc244	_ZN2Tz4TRTE12DrawSelectorEPNS_6SelectEii	Tz::TRTE::DrawSelector(Tz::Select*, int, int)		med
+0025bbe0	440	branchy	near	m2c	98.20	003049c0	_ZN2Tz6CmSave15CtrlChkDataSizeEv	Tz::CmSave::CtrlChkDataSize()		med
+00261b30	440	loop	near	lift	92.42	003a84d4	_ZN2Tz6CmItem15CreateEquipListEv	Tz::CmItem::CreateEquipList()		med
+00297478	440	loop	near	m2c	71.09	0035a0ec	_ZN2Tz7JmStory12GetStoryInfoEv	Tz::JmStory::GetStoryInfo()		med
+001572e8	436	branchy	near	lift	98.91	000a1ea0	_ZN2dk12GAUGE_PLAYER13setSummonFaceEii	dk::GAUGE_PLAYER::setSummonFace(int, int)		med
+001acbc0	436	switch	near	lift	76.50	004bceec	_ZN2YS11WINDOW_BASE6updateEv	YS::WINDOW_BASE::update()		high
+001b6298	436	branchy	near	m2c	54.72	004def08	_ZN2YS10CHANGEFORMC1EPNS_4SORAEij	YS::CHANGEFORM::CHANGEFORM(YS::SORA*, int, unsigned int)		med
+001d03a0	436	float	near	lift	91.33	0044f768	_ZN2YS6MICKEY13_OVR_pre_execEv	YS::MICKEY::_OVR_pre_exec()		med
+001e4028	436	loop	near	ghidra	65.71	002ae554	_Z17dpd_set_shape_texPiPhss	dpd_set_shape_tex(int*, unsigned char*, short, short)		sim-low
+0028f4d8	436	branchy	near	lift	88.71	0037e8f8	_ZN2Tz7SelHist6CreateEiib	Tz::SelHist::Create(int, int, bool)		med
+002d7128	436	float	near	lift	89.92	00636fa0	_ZN2Ti12MGHachimitsuC1Eiii	Ti::MGHachimitsu::MGHachimitsu(int, int, int)		sim-high
+0015c6d0	432	float	near	ghidra	22.78	000751c0	_ZNK2dk3Ray16intersectPolygonERNS_7PolygonERKNS_5PlaneERN2kn7FVectorE	dk::Ray::intersectPolygon(dk::Polygon&, dk::Plane const&, kn::FVector&) const		sim-med
+0017dcc0	432	float	near	m2c	66.42	00430840	_ZN2YS6FRIEND9exec_stunEv	YS::FRIEND::exec_stun()		high
+001ddef0	432	float	near	m2c	90.01	002b5470	_ZN3ryj3PAX6createEPNS0_4ELEMEiiiPv	ryj::PAX::create(ryj::PAX::ELEM*, int, int, int, void*)		med
+001e1350	432	float	near	lift	37.06	0061826c	_ZN3ryj5LASER13check_obj_hitEPN2YS6BTLOBJE	ryj::LASER::check_obj_hit(YS::BTLOBJ*)		sim-high
+00247870	432	branchy	near	lift	70.36	003c35dc	_ZN2Tz4HECO9MoveMakerEb	Tz::HECO::MoveMaker(bool)		high
+00253180	432	branchy	near	m2c	83.85	002ead84	_ZN2Tz8CampMenu5StartEii	Tz::CampMenu::Start(int, int)		high
+00274b40	432	loop	near	ghidra	90.39	002f56dc	_ZN2Tz6Jiminy11PauseThreadEP4TASK	Tz::Jiminy::PauseThread(TASK*)		med
+002833f8	432	branchy	near	lift	95.56	00316860	_ZN2Tz10CmTutorial10CreateListEv	Tz::CmTutorial::CreateList()		sim-high
+0011e450	428	loop	near	ghidra	90.61	000f00dc	_ZN2kn8ModelObj12addAnimationEPv	kn::ModelObj::addAnimation(void*)		med
+00145830	428	float	near	lift	93.87	000b0d18	_ZN2dk11OctDrawFileC1EPvby	dk::OctDrawFile::OctDrawFile(void*, bool, unsigned long long)		sim-high
+0015c2a0	428	float	near	ghidra	18.92	00069798	_ZN2dk8ObjEntry6createEiy	dk::ObjEntry::create(int, unsigned long long)		sim-med
+001b5250	428	float	near	m2c	52.33	0043fff0	_ZN2YS5LIMIT4execEb	YS::LIMIT::exec(bool)		med
+001e3c98	428	loop	near	ghidra	63.82	002add24	_Z11pppInitVramv	pppInitVram()		sim-low
+002294c8	428	loop	near	lift	93.26	002e2444	_ZN2sa13MUSICAL_SCORE6createEiPiS1_i	sa::MUSICAL_SCORE::create(int, int*, int*, int)		med
+0026c818	428	branchy	near	m2c	90.70	002ff420	_ZN2Tz7CmParty10Ctrl2ndSelEv	Tz::CmParty::Ctrl2ndSel()		high
+0027bf68	428	loop	near	m2c	74.97	00390de8	_ZN2Tz9CmAbility8ChgEquipEv	Tz::CmAbility::ChgEquip()		sim-high
+0027cb48	428	switch	near	lift	74.86	00394824	_ZN2Tz8CmConfig9SetConfigEv	Tz::CmConfig::SetConfig()		sim-high
+0027e770	428	loop	near	lift	93.83	00384bb0	_ZN2Tz10SimpleStat5LeaveEv	Tz::SimpleStat::Leave()		sim-med
+002b1850	428	loop	near	m2c	71.57	0034dcd8	_ZN2Tz8JmPuzzle13UpdateSelListEv	Tz::JmPuzzle::UpdateSelList()		med
+002dcf90	428	float	near	lift	52.42	0063f920	_ZN2Ti6MGJump13update_cameraEv	Ti::MGJump::update_camera()		med
+0011b0a8	424	float	near	lift	89.85	00133108	_ZN2kn13ChickenLittle11start_limitEv	kn::ChickenLittle::start_limit()		high
+001379e0	424	float	near	lift	91.07	0007f9c8	_ZN2dk19TREASURE_EVENT_INFO6updateEv	dk::TREASURE_EVENT_INFO::update()		high
+0013ff08	424	float	near	m2c	70.26	000669d8	_ZN2dk9ObjCamera17objective_controlEPN2YS3PADEf	dk::ObjCamera::objective_control(YS::PAD*, float)		med
+001aedf8	424	branchy	near	m2c	76.68	00432b4c	_ZN2YS8GAMEOVERC1EPNS_3OBJEi	YS::GAMEOVER::GAMEOVER(YS::OBJ*, int)		sim-high
+00299090	424	branchy	near	m2c	78.45	00327ba0	_ZN2Tz7JmAlbum9UpdateGraEv	Tz::JmAlbum::UpdateGra()		med
+002a2c40	424	loop	near	m2c	73.04	0035dd30	_ZN2Tz10JmTreasure11GetNaviListEv	Tz::JmTreasure::GetNaviList()		med
+00157ae0	420	float	near	lift	99.76	000a23a0	_ZN2dk12GAUGE_PLAYER8updateMPEv	dk::GAUGE_PLAYER::updateMP()		med
+001bcf80	420	float	near	lift	91.39	00480234	_ZN2YS14PLAYER_COMMANDC1Ev	YS::PLAYER_COMMAND::PLAYER_COMMAND()		sim-high
+00232f08	420	float	near	lift	62.69	002ce108	_ZN2sa5EVENT11motion_ctrlEv	sa::EVENT::motion_ctrl()		med
+002571e0	420	loop	near	lift	99.86	00315560	_ZN2Tz5CmTop19SetupWarningConfirmEi	Tz::CmTop::SetupWarningConfirm(int)		med
+00257e00	420	loop	near	ghidra	73.23	00312518	_ZN2Tz5CmTop18GetEnbableSelectorEv	Tz::CmTop::GetEnbableSelector()		med
+0026e940	420	branchy	near	lift	87.46	00309ab4	_ZN2Tz8Selector4DrawEv	Tz::Selector::Draw()		high
+001cd7a8	416	loop	near	m2c	49.06	004f1270	_ZN2YS14PRIORITYTARGET3setEiPNS_3OBJE	YS::PRIORITYTARGET::set(int, YS::OBJ*)		sim-med
+002291d0	416	loop	near	ghidra	77.15	002e2eb8	_ZN2sa14MUSICAL_SCORE16updateEv	sa::MUSICAL_SCORE1::update()		high
+0023fe60	416	branchy	near	m2c	68.08	00368af4	_ZN2Tz5MCard12CreateBufferEv	Tz::MCard::CreateBuffer()		med
+0027c9a8	416	switch	near	lift	94.81	00394568	_ZN2Tz8CmConfig9GetConfigEv	Tz::CmConfig::GetConfig()		med
+00286d28	416	loop	near	ghidra	75.74	003b0348	_ZN2Tz8CmNewFlg18isAbilityNewMemberEii	Tz::CmNewFlg::isAbilityNewMember(int, int)		sim-high
+00164578	412	float	near	lift	32.50	00094af4	_ZN2dk11OctCollFile15collisionSphereEPNS_14CollisionParamERNS_6SphereEftRiRKN2kn7FVectorE	dk::OctCollFile::collisionSphere(dk::CollisionParam*, dk::Sphere&, float, unsigned short, int&, kn::FVector const&)		sim-sandwich
+001d3148	412	float	near	lift	67.12	00429bbc	_ZN2YS12EVENT_CAMERA11make_matrixEv	YS::EVENT_CAMERA::make_matrix()		sim-high
+001d4940	412	switch	near	lift	79.58	0049fd7c	_ZN2YS15SPECIAL_COMMAND6_checkEPNS_3OBJEPNS_12COMMAND_MENUE	YS::SPECIAL_COMMAND::_check(YS::OBJ*, YS::COMMAND_MENU*)		high
+002a9100	412	loop	near	lift	66.47	00355a44	_ZN2Tz7JmQuest12ChkQuestInfoEv	Tz::JmQuest::ChkQuestInfo()		high
+002c9998	412	loop	near	m2c	82.21	003e2390	_ZN2dk16WM_GLANDING_INFOD1Ev	dk::WM_GLANDING_INFO::~WM_GLANDING_INFO()		sim-high
+002d0718	412	float	near	lift	59.86	0064ed18	_ZN2Ti5MGObj25get_bbox_for_appear_checkEPKN2YS13UNIT_DATA_OBJE	Ti::MGObj::get_bbox_for_appear_check(YS::UNIT_DATA_OBJ const*)		med
+0018dc28	408	float	near	lift	67.78	00407d88	_ZN2YS6ATTACK12check_bg_hitERKN2kn7FVectorES4_	YS::ATTACK::check_bg_hit(kn::FVector const&, kn::FVector const&)		med
+0023ca80	408	float	near	lift	49.14	000c1950	_ZN2YI6LAYOUT7ControlEv	YI::LAYOUT::Control()		sim-high
+0029eaa8	408	switch	near	ghidra	87.84	0033a63c	_ZN2Tz5JmDic13UpdateNewMarkEv	Tz::JmDic::UpdateNewMark()		high
+002a92d8	408	loop	near	ghidra	79.64	00355d34	_ZN2Tz7JmQuest10CreateListEv	Tz::JmQuest::CreateList()		high
+002b57e0	408	loop	near	lift	78.49	0030ce2c	_ZN2Tz8CmSLBase12SetupListGraEv	Tz::CmSLBase::SetupListGra()		med
+0016fc10	404	loop	near	lift	34.22	00416348	_ZN2YS10CACHE_BUFF6HEADER5flushEv	YS::CACHE_BUFF::HEADER::flush()		sim-high
+001975a0	404	branchy	near	m2c	89.45	00427e30	_ZN2YS5EVENT9phase_endEv	YS::EVENT::phase_end()		med
+00241a88	404	loop	near	lift	95.51	0036c4d0	_ZN2Tz5MCard11CheckSystemEb	Tz::MCard::CheckSystem(bool)		med
+0027aaa0	404	loop	near	m2c	76.53	0038d568	_ZN2Tz9CmAbility21UpdateIndiAbilityListEv	Tz::CmAbility::UpdateIndiAbilityList()		med
+002cf998	404	float	near	lift	67.86	0064c9f0	_ZN2Ti5MGObj12exec_prepareEv	Ti::MGObj::exec_prepare()		med
+002dd7d0	404	float	near	lift	81.88	00642d48	_ZN2Ti12MGJumpPlayer9_OVR_execEv	Ti::MGJumpPlayer::_OVR_exec()		sim-high
+002de500	404	float	near	m2c	66.85	00642070	_ZN2Ti12MGJumpGimObj12appear_prizeERKN2kn7FVectorE	Ti::MGJumpGimObj::appear_prize(kn::FVector const&)		high
+00144630	400	float	near	lift	54.17	00087c18	_ZN2dk6Aabbox3setERNS_7PolygonE	dk::Aabbox::set(dk::Polygon&)		sim-med
+0019c218	400	float	near	m2c	77.25	004654c0	_ZN2YS3OBJ10can_decideEPKNS_12COMMAND_ELEME	YS::OBJ::can_decide(YS::COMMAND_ELEM const*)		high
+002253a0	400	loop	near	lift	73.06	002c166c	_ZN2sa5EVENT11set_bgm_seqERNS_11BIN_SEQ_BGMEP4TASK	sa::EVENT::set_bgm_seq(sa::BIN_SEQ_BGM&, TASK*)		med
+00247a20	400	loop	near	lift	97.30	003c3834	_ZN2Tz4HECO13CreateNewMarkEv	Tz::HECO::CreateNewMark()		high
+00247cf0	400	loop	near	ghidra	65.50	003cb5bc	_ZN2Tz4MUMI4InitEv	Tz::MUMI::Init()		sim-high
+0024b210	400	loop	near	ghidra	65.49	003be914	_ZN2Tz4HBTE4InitEv	Tz::HBTE::Init()		high
+0024f398	400	loop	near	ghidra	65.49	003c9060	_ZN2Tz4LMMU4InitEv	Tz::LMMU::Init()		high
+00276888	400	loop	near	ghidra	94.34	002f6c60	_ZN2Tz6Jiminy13isExistSeqTblEv	Tz::Jiminy::isExistSeqTbl()		sim-low
+002a1d38	400	loop	near	lift	72.63	00337c8c	_ZN2Tz9JmDiagram9UpdateGraEv	Tz::JmDiagram::UpdateGra()		high
+001094e0	396	switch	near	m2c	42.12	001188a8	_ZN2kn7VU1Draw9checkVRAMEPNS_15SendImagePacketEPv	kn::VU1Draw::checkVRAM(kn::SendImagePacket*, void*)		sim-low
+0011b250	396	float	near	ghidra	74.18	00133328	_ZN2kn13ChickenLittle9end_limitEv	kn::ChickenLittle::end_limit()		high
+001798d8	396	float	near	lift	60.00	0047d3d8	_ZN2YS6PLAYER20_OVR_attack_callbackEPNS_6BTLOBJEPNS_6ATTACKEPKNS_11ATTACKPARAME	YS::PLAYER::_OVR_attack_callback(YS::BTLOBJ*, YS::ATTACK*, YS::ATTACKPARAM const*)		med
+001a32c8	396	loop	near	lift	65.84	00436f88	_ZN2YS4ITEM11GetBackyardEii	YS::ITEM::GetBackyard(int, int)		high
+001bb090	396	float	near	lift	72.83	00451c60	_ZN2YS7MISSION4execEv	YS::MISSION::exec()		med
+002306a8	396	float	near	lift	66.57	002d068c	_ZN2sa5EVENT11spline_ctrlEv	sa::EVENT::spline_ctrl()		med
+0026dda0	396	loop	near	lift	78.62	0030ae00	_ZN2Tz8Selector5SetupEv	Tz::Selector::Setup()		high
+002a41f0	396	loop	near	lift	97.02	0035f888	_ZN2Tz10JmTreasure9LeaveListEv	Tz::JmTreasure::LeaveList()		sim-high
+002a6a50	396	loop	near	lift	97.37	0035c4c0	_ZN2Tz8JmSynthe5SetupEv	Tz::JmSynthe::Setup()		high
+002ae908	396	branchy	near	lift	86.35	00335a00	_ZN2Tz10JmComplete11isWorldCompEi	Tz::JmComplete::isWorldComp(int)		high
+002cf4a8	396	float	near	lift	43.68	0064ccdc	_ZN2Ti5MGObj6appearERNS_11MGObjMemberE	Ti::MGObj::appear(Ti::MGObjMember&)		med
+00103ca0	392	branchy	near	m2c	38.73	0003c960	_ZN4MENU7MapJumpEv	MENU::MapJump()		med
+001376b8	392	float	near	lift	92.45	0007f698	_ZN2dk17TREASURE_BOX_INFO6updateEv	dk::TREASURE_BOX_INFO::update()		high
+001be5f0	392	branchy	near	lift	55.58	0042aae8	_ZN2YS13FIELD_COMMAND10make_top_aEv	YS::FIELD_COMMAND::make_top_a()		med
+00232738	392	loop	near	lift	80.51	002bfcb4	_ZN2sa5EVENT10audio_ctrlEv	sa::EVENT::audio_ctrl()		high
+00244c30	392	loop	near	ghidra	90.42	003c01d0	_ZN2Tz4HEFT13CreateNewMarkEv	Tz::HEFT::CreateNewMark()		high
+002491d0	392	loop	near	lift	97.55	003ca5f4	_ZN2Tz4MUMI13CreateNewMarkEv	Tz::MUMI::CreateNewMark()		sim-high
+0024aef0	392	loop	near	lift	97.55	003cce8c	_ZN2Tz4TRTE13CreateNewMarkEv	Tz::TRTE::CreateNewMark()		high
+0024c6a0	392	loop	near	lift	97.55	003bdbb0	_ZN2Tz4HBTE13CreateNewMarkEv	Tz::HBTE::CreateNewMark()		sim-high
+0024e3a8	392	loop	near	lift	97.55	003d194c	_ZN2Tz4TTPT13CreateNewMarkEv	Tz::TTPT::CreateNewMark()		sim-high
+0024ec50	392	switch	near	ghidra	46.06	003cfb2c	_ZN2Tz4TTMY8CtrlMenuEv	Tz::TTMY::CtrlMenu()		med
+002507a0	392	loop	near	lift	97.55	003c83b0	_ZN2Tz4LMMU13CreateNewMarkEv	Tz::LMMU::CreateNewMark()		med
+00257c78	392	loop	near	lift	68.86	003139b8	_ZN2Tz5CmTop9ChkCurPosEv	Tz::CmTop::ChkCurPos()		med
+00294020	392	loop	near	m2c	88.32	00347214	_ZN2Tz9JmNewInfo10isAlbumNewEii	Tz::JmNewInfo::isAlbumNew(int, int)		sim-low
+00177f50	388	branchy	near	lift	85.02	0047eb7c	_ZN2YS6PLAYERC1EPKNS_8OBJENTRYEiPNS_3PADERKN2kn7FVectorEf	YS::PLAYER::PLAYER(YS::OBJENTRY const*, int, YS::PAD*, kn::FVector const&, float)		sim-high
+0018e298	388	branchy	near	lift	88.80	00407148	_ZN2YS11ATTACK_WORK3hitEPNS_6BTLOBJERNS_9COLLISIONE	YS::ATTACK_WORK::hit(YS::BTLOBJ*, YS::COLLISION&)		med
+001b3d00	388	branchy	near	lift	90.49	0047b310	_ZN2YS7PIERROT16_OVR_exec_damageEPNS_6DAMAGEE	YS::PIERROT::_OVR_exec_damage(YS::DAMAGE*)		med
+00226268	388	branchy	near	m2c	77.49	002d54f8	_ZN2sa5EVENT15readNextMapFileEv	sa::EVENT::readNextMapFile()		high
+00240e50	388	loop	near	m2c	72.62	0036a904	_ZN2Tz5MCard13UpdateDirInfoEv	Tz::MCard::UpdateDirInfo()		high
+0025da20	388	switch	near	lift	83.93	002fc084	_ZN2Tz6CmLoad7ControlEv	Tz::CmLoad::Control()		high
+0026b2c0	388	loop	near	m2c	87.35	003a2198	_ZN2Tz7CmEquip8isApFullEv	Tz::CmEquip::isApFull()		med
+002d3568	388	float	near	lift	50.69	00647d28	_ZN2Ti15MGOarashiGimObj16appear_rot_prizeERKNS_9MGOarashi13RotPrizeParamEi	Ti::MGOarashiGimObj::appear_rot_prize(Ti::MGOarashi::RotPrizeParam const&, int)		sim-high
+0031a850	388	float	near	ghidra	54.62	006a7628	_ZN2dk18TREASURE_INFO_BASEaSERKS0_	dk::TREASURE_INFO_BASE::operator=(dk::TREASURE_INFO_BASE const&)		sim-high
+00158dc0	384	float	near	lift	78.07	00095fe0	_ZN2dk12DangleCamera6updateEPNS_9ObjCameraE	dk::DangleCamera::update(dk::ObjCamera*)		high
+00179718	384	float	near	lift	95.11	0047c5a8	_ZN2YS6PLAYER19exec_barrier_effectEv	YS::PLAYER::exec_barrier_effect()		high
+00187ca0	384	float	near	m2c	60.55	00400f98	_ZN2YS3ACT4execEv	YS::ACT::exec()		high
+0018eb98	384	loop	near	m2c	96.88	004090cc	_ZN2YS19ATTACK_WORK_MANAGER13check_reflectERNS_11ATTACK_WORKE	YS::ATTACK_WORK_MANAGER::check_reflect(YS::ATTACK_WORK&)		med
+001b4430	384	float	near	m2c	68.21	004408e0	_ZN2YS5LIMIT5StartEiPNS_6PLAYERE	YS::LIMIT::Start(int, YS::PLAYER*)		med
+0022e818	384	float	near	m2c	76.46	002d3300	_ZN2sa5EVENT13set_scale_seqERNS_9BIN_SCALEEP4TASK	sa::EVENT::set_scale_seq(sa::BIN_SCALE&, TASK*)		sim-high
+0025adf0	384	branchy	near	ghidra	52.67	00306dc4	_ZN2Tz6CmSave13CtrlSlotCheckEv	Tz::CmSave::CtrlSlotCheck()		sim-high
+00286298	384	loop	near	lift	61.99	003addb8	_ZN2Tz8CmNewFlg9CheckStatEv	Tz::CmNewFlg::CheckStat()		sim-med
+0029de18	384	branchy	near	ghidra	78.42	0033d2e4	_ZN2Tz5JmDic9UpdateGraEv	Tz::JmDic::UpdateGra()		med
+0011dd08	380	float	near	lift	64.81	000eefc0	_ZN2kn16mergeBoundingBoxEPNS_7FVectorEPPN2dk11ObjDrawListE	kn::mergeBoundingBox(kn::FVector*, dk::ObjDrawList**)		sim-low
+0013e688	380	loop	near	lift	93.04	0005ef34	_ZN2dk6LockOn4initEv	dk::LockOn::init()		high
+0017fba0	380	float	near	lift	84.82	0045c068	_ZN2YS6MOTION4calcEPN2kn7FMatrixE	YS::MOTION::calc(kn::FMatrix*)		high
+001b0580	380	float	near	lift	44.18	00445040	_ZN2YS6LOOKAT12make_to_faceEv	YS::LOOKAT::make_to_face()		med
+0024e228	380	branchy	near	lift	73.34	003d0bc0	_ZN2Tz4TTPT11UpdateScoreEv	Tz::TTPT::UpdateScore()		high
+0026a238	380	branchy	near	m2c	94.14	003a4e20	_ZN2Tz7CmEquip10DrawUpdateEPNS_6SelectEii	Tz::CmEquip::DrawUpdate(Tz::Select*, int, int)		high
+0027d868	380	branchy	near	lift	63.89	00395630	_ZN2Tz8CmConfig9ChgConfigEb	Tz::CmConfig::ChgConfig(bool)		med
+0028ca78	380	loop	near	lift	87.65	00370b44	_ZN2Tz10MenuCursor4ExitEv	Tz::MenuCursor::Exit()		seed
+002b2da8	380	branchy	near	m2c	85.46	0034f344	_ZN2Tz8JmPuzzle10ShowCursorEi	Tz::JmPuzzle::ShowCursor(int)		med
+00128480	376	float	near	lift	91.49	000fa658	_ZN2kn16MotionPrototype016setConstantValueEPNS_8ModelObjE	kn::MotionPrototype0::setConstantValue(kn::ModelObj*)		sim-med
+00161aa8	376	branchy	near	lift	98.47	00082f04	_ZN2dk6Camera11draw2CameraEv	dk::Camera::draw2Camera()		seed
+001acdc0	376	loop	near	lift	93.35	004bca60	_ZN2YS11WINDOW_BASE5_drawEiiiii	YS::WINDOW_BASE::_draw(int, int, int, int, int)		med
+001ccac0	376	float	near	lift	40.14	00484608	_ZN2YS11PRIZEEFFECT9vacuum_caEPNS_6BTLOBJE	YS::PRIZEEFFECT::vacuum_ca(YS::BTLOBJ*)		med
+00233ce0	376	loop	near	ghidra	61.38	000cb594	_ZN2YI5MCARD4InitEv	YI::MCARD::Init()		med
+002a1220	376	branchy	near	m2c	65.02	00336fbc	_ZN2Tz9JmDiagram12CreateActiveEv	Tz::JmDiagram::CreateActive()		high
+002acb20	376	branchy	near	e3	92.98	0034c964	_ZN2Tz9JmNewInfo11isWorldHistEi	Tz::JmNewInfo::isWorldHist(int)		med
+002c8680	376	loop	near	ghidra	96.57	003e855c	_ZN2dk15WM_LANDING_INFO8setupKeyEPKN8worldmap3KeyE	dk::WM_LANDING_INFO::setupKey(worldmap::Key const*)		sim-high
+002cb200	376	loop	near	m2c	80.19	003e8e68	_ZN2dk15WM_LANDING_LIST17createLandingListEiRi	dk::WM_LANDING_LIST::createLandingList(int, int&)		med
+00186d48	372	branchy	near	ghidra	67.59	00411e8c	_ZN2YS6BTLOBJ10add_damageEPNS_6DAMAGEE	YS::BTLOBJ::add_damage(YS::DAMAGE*)		med
+0019a308	372	loop	near	m2c	72.04	004b1f48	_ZN2YS10UNIT_GROUP13init_minigameEv	YS::UNIT_GROUP::init_minigame()		med
+001a5f50	372	loop	near	m2c	80.96	00446df0	_ZN2YS5MAGIC4InitEv	YS::MAGIC::Init()		med
+001fbfd8	372	float	near	lift	78.91	005ab110	pppKeGrvEff	pppKeGrvEff		sim-med
+0023cde8	372	loop	near	ghidra	69.71	000caa2c	_ZN2YI9VIBRATION6CreateEPc	YI::VIBRATION::Create(char*)		high
+0026ff78	372	switch	near	lift	78.65	0039d480	_ZN2Tz8CmCustom15CtrlAutoConfirmEv	Tz::CmCustom::CtrlAutoConfirm()		high
+00299290	372	branchy	near	lift	88.77	00326fc4	_ZN2Tz7JmAlbum13UpdateNewMarkEv	Tz::JmAlbum::UpdateNewMark()		med
+001b50e0	368	float	near	lift	89.03	00440610	_ZN2YS5LIMIT12camera_startEPKcfb	YS::LIMIT::camera_start(char const*, float, bool)		med
+001bb2c8	368	float	near	m2c	86.59	00452050	_ZN2YS7MISSION10CodeParserEPKNS_4CODEEPv	YS::MISSION::CodeParser(YS::CODE const*, void*)		med
+0024e850	368	loop	near	lift	97.72	003cff84	_ZN2Tz4TTMY5SetupEv	Tz::TTMY::Setup()		high
+002623c8	368	loop	near	lift	82.81	003a5ddc	_ZN2Tz6CmItem14CreateCategoryEv	Tz::CmItem::CreateCategory()		med
+00283790	368	branchy	near	lift	73.83	00316d94	_ZN2Tz10CmTutorial9CreateGraEv	Tz::CmTutorial::CreateGra()		sim-high
+002b14f0	368	branchy	near	lift	96.76	0035325c	_ZN2Tz8JmPuzzle11CtrlItemGetEv	Tz::JmPuzzle::CtrlItemGet()		med
+002b3050	368	branchy	near	ghidra	80.85	0034f13c	_ZN2Tz8JmPuzzle12UpdateCursorEb	Tz::JmPuzzle::UpdateCursor(bool)		med
+001b4dd0	364	float	near	lift	97.14	0043fbe8	_ZN2YS5LIMITD1Ev	YS::LIMIT::~LIMIT()		sim-high
+001b7c80	364	float	near	lift	92.64	004667a4	_ZN2YS7OBJCLSN17calc_bounding_boxERN2dk6AabboxE	YS::OBJCLSN::calc_bounding_box(dk::Aabbox&)		high
+0020c860	364	float	near	m2c	84.58	005d0348	_Z10set_matrixPA4_fS0_P24PRyjMegaBirthModelFilterP24VRyjMegaBirthModelFilterP14_PARTICLE_DATA	set_matrix(float (*) [4], float (*) [4], PRyjMegaBirthModelFilter*, VRyjMegaBirthModelFilter*, _PARTICLE_DATA*)		sim-med
+00239988	364	float	near	lift	63.81	000c23d8	_ZN2YI8SEQUENCE4InitEPvPNS_5IMAGEE	YI::SEQUENCE::Init(void*, YI::IMAGE*)		sim-high
+00256cc0	364	branchy	near	ghidra	78.94	00313424	_ZN2Tz5CmTop13CreatePadHelpEiii	Tz::CmTop::CreatePadHelp(int, int, int)		high
+0026cc30	364	loop	near	lift	95.38	002fd8fc	_ZN2Tz7CmParty9LeaveListEv	Tz::CmParty::LeaveList()		seed
+00285070	364	branchy	near	m2c	88.85	002ef058	_ZN2Tz6Ending8CtrlInfoEv	Tz::Ending::CtrlInfo()		med
+002ac9b0	364	branchy	near	e3	94.95	0034c7dc	_ZN2Tz9JmNewInfo10isWorldNewEi	Tz::JmNewInfo::isWorldNew(int)		sim-high
+002cf750	364	branchy	near	lift	92.40	0064d6d8	_ZN2Ti5MGObj13append_memberEjPN2YS10UNIT_GROUPEPKNS1_13UNIT_DATA_OBJEPNS_11MGObjMemberES8_	Ti::MGObj::append_member(unsigned int, YS::UNIT_GROUP*, YS::UNIT_DATA_OBJ const*, Ti::MGObjMember*, Ti::MGObjMember*)		med
+001a5140	360	float	near	lift	69.38	00482f68	_ZN2YS5PRIZE14_OVR_check_getEPNS_11PRIZEEFFECTE	YS::PRIZE::_OVR_check_get(YS::PRIZEEFFECT*)		sim-high
+001b4198	360	float	near	m2c	90.01	0047aebc	_ZN2YS7PIERROT6AddExpEPKNS_10ENEMYPARAMEPNS_3OBJERKN2kn7FVectorE	YS::PIERROT::AddExp(YS::ENEMYPARAM const*, YS::OBJ*, kn::FVector const&)		med
+001d0678	360	float	near	lift	70.34	0044fae8	_ZN2YS6MICKEY24_OVR_exec_command_playerEPKNS_12COMMAND_ELEME	YS::MICKEY::_OVR_exec_command_player(YS::COMMAND_ELEM const*)		sim-high
+001d0f08	360	float	near	lift	95.11	0049e3d8	_ZN2YS4SORA9_OVR_execEv	YS::SORA::_OVR_exec()		med
+001d3c78	360	loop	near	ghidra	83.02	00441cc4	_ZNK2YS11LIMIT_TABLE9is_enableEv	YS::LIMIT_TABLE::is_enable() const		med
+001d7218	360	branchy	near	lift	86.14	00457190	_ZN2YS7MISSION11OptionStartEi	YS::MISSION::OptionStart(int)		sim-med
+001fc1a0	360	branchy	near	m2c	74.41	005ab30c	pppKeHitBorn	pppKeHitBorn		sim-med
+00209178	360	float	near	lift	48.72	005c3de0	_Z6get_stP14PRyjDrawKekotoP14VRyjDrawKekoto	get_st(PRyjDrawKekoto*, VRyjDrawKekoto*)		sim-high
+00246328	360	branchy	near	lift	91.17	003c2d28	_ZN2Tz4HECO4DrawEv	Tz::HECO::Draw()		high
+00282b00	360	loop	near	lift	83.25	00322734	_ZN2Tz8ItemInfo12MakeEquipMsgEv	Tz::ItemInfo::MakeEquipMsg()		med
+002b28b0	360	branchy	near	m2c	37.68	0034ef9c	_ZN2Tz8JmPuzzle6CalcUVEiiiPNS0_6SprtUVE	Tz::JmPuzzle::CalcUV(int, int, int, Tz::JmPuzzle::SprtUV*)		sim-med
+002bfb90	360	loop	near	lift	74.43	003d77f0	_ZN8worldmap5Event4execEv	worldmap::Event::exec()		sim-high
+00121218	356	loop	near	e3	52.02	000f484c	_ZN2kn8ModelSKL14setDisplayFlagEPcPs	kn::ModelSKL::setDisplayFlag(char*, short*)		sim-med
+00170670	356	loop	near	lift	81.93	00415890	_ZN2YS10CACHE_BUFF15FlushCompactionEv	YS::CACHE_BUFF::FlushCompaction()		sim-med
+001beb00	356	loop	near	m2c	95.19	0042b538	_ZN2YS13FIELD_COMMAND9make_formEv	YS::FIELD_COMMAND::make_form()		med
+00258eb8	356	loop	near	m2c	62.46	002ec27c	_ZN2Tz6CmComm11SetDrawTimeEPNS_8MultiSeqE	Tz::CmComm::SetDrawTime(Tz::MultiSeq*)		high
+00266c90	356	switch	near	lift	69.25	003b47b8	_ZN2Tz6CmStat14GetTopSelectorEv	Tz::CmStat::GetTopSelector()		med
+0028f280	356	loop	near	lift	89.70	0037e2b8	_ZN2Tz7SelHist4InitEiiPNS_6LayoutEPKsS4_	Tz::SelHist::Init(int, int, Tz::Layout*, short const*, short const*)		high
+002d74c8	356	float	near	lift	96.37	00636c48	_ZN2Ti12MGHachimitsu12reset_courseEib	Ti::MGHachimitsu::reset_course(int, bool)		med
+002e20d8	356	straight	near	lift	92.73	00634744	_ZN2Ti12MG_EHSidecarC1Ei	Ti::MG_EHSidecar::MG_EHSidecar(int)		sim-high
+00104f58	352	branchy	near	m2c	55.52	00041444	_ZN4AREA7MapJumpERS_jibi	AREA::MapJump(AREA&, unsigned int, int, bool, int)		high
+001382e0	352	straight	near	lift	87.98	00081154	_ZN2dk13TREASURE_INFO15createEventInfoEv	dk::TREASURE_INFO::createEventInfo()		high
+00140210	352	float	near	m2c	77.24	00066768	_ZN2dk9ObjCamera11auto_cameraEPN2YS3PADEf	dk::ObjCamera::auto_camera(YS::PAD*, float)		sim-med
+0026e1e0	352	float	near	lift	88.30	0030abe8	_ZN2Tz8Selector9CreateObjEv	Tz::Selector::CreateObj()		med
+0027bbe0	352	branchy	near	lift	92.49	00393a30	_ZN2Tz9CmAbility10DrawUpdateEPNS_6SelectEii	Tz::CmAbility::DrawUpdate(Tz::Select*, int, int)		med
+0029dba0	352	straight	near	ghidra	73.75	0033d004	_ZN2Tz5JmDic8DrawMessEiijjPN2dk13SpriteMessageE	Tz::JmDic::DrawMess(int, int, unsigned int, unsigned int, dk::SpriteMessage*)		sim-high
+002a0200	352	straight	near	ghidra	74.40	0032b018	_ZN2Tz7JmAnsem8DrawMessEiijjPN2dk13SpriteMessageE	Tz::JmAnsem::DrawMess(int, int, unsigned int, unsigned int, dk::SpriteMessage*)		sim-high
+002a63a0	352	straight	near	ghidra	74.40	0032dcf4	_ZN2Tz8JmBattle8DrawMessEiijjPN2dk13SpriteMessageE	Tz::JmBattle::DrawMess(int, int, unsigned int, unsigned int, dk::SpriteMessage*)		high
+00140b68	348	switch	near	m2c	99.99	000687a8	_ZN2dk9ObjCamera6updateEb	dk::ObjCamera::update(bool)		high
+001762f8	348	branchy	near	lift	71.77	004761d8	_ZN2YS5PARTY16_OVR_exec_damageEPNS_6DAMAGEE	YS::PARTY::_OVR_exec_damage(YS::DAMAGE*)		high
+001b8520	348	float	near	lift	76.76	0043d2e8	_ZN2YS8LIBRETTO10CodeParserEPKNS_4CODEEPv	YS::LIBRETTO::CodeParser(YS::CODE const*, void*)		sim-high
+001be9a0	348	loop	near	m2c	80.38	0042b358	_ZN2YS13FIELD_COMMAND9make_itemEv	YS::FIELD_COMMAND::make_item()		sim-high
+002362b0	348	straight	near	e3	33.67	000ba3c8	_ZN2YI5IMAGE4InitEPv	YI::IMAGE::Init(void*)		sim-high
+00236a58	348	loop	near	ghidra	83.68	000bb004	_ZN2YI12IMAGE_FREEZE4InitEPvP9ALLOCATOR	YI::IMAGE_FREEZE::Init(void*, ALLOCATOR*)		high
+0023f1e0	348	loop	near	lift	94.75	003654c8	_ZN2Tz6LayMsg6createEiPNS_6LayoutEPKsS4_iii	Tz::LayMsg::create(int, Tz::Layout*, short const*, short const*, int, int, int)		high
+002489d8	348	switch	near	lift	72.23	003ca98c	_ZN2Tz4MUMI7CtrlTopEv	Tz::MUMI::CtrlTop()		med
+00286ec8	348	loop	near	ghidra	87.84	003b06cc	_ZN2Tz8CmNewFlg16isAbilityNewFormEii	Tz::CmNewFlg::isAbilityNewForm(int, int)		sim-high
+001612b8	344	branchy	near	lift	96.98	0008a6fc	_ZN2dk5BgObj4initEP9ALLOCATORPNS_7MapFileE	dk::BgObj::init(ALLOCATOR*, dk::MapFile*)		sim-high
+0017c930	344	float	near	lift	68.67	004031b0	_ZN2YS11ACTION_JUMP15calc_movement_yEPNS_3OBJE	YS::ACTION_JUMP::calc_movement_y(YS::OBJ*)		sim-high
+001d7098	344	branchy	near	lift	76.51	00456fe0	_ZN2YS7MISSION10OptionInitEi	YS::MISSION::OptionInit(int)		sim-high
+001dd920	344	loop	near	lift	96.93	002b3908	_ZN3ryj6EFFECT8DrawTaskEP4TASK	ryj::EFFECT::DrawTask(TASK*)		med
+001f6eb8	344	float	near	m2c	86.03	005ac258	_Z17pppKeLnsLpTOtFuncP9VKeLnsLpTii	pppKeLnsLpTOtFunc(VKeLnsLpT*, int, int)		sim-low
+002223f0	344	float	near	m2c	86.03	005cf8d0	_Z4calcP24VRyjMegaBirthModelFilterP24PRyjMegaBirthModelFilterP14_PARTICLE_DATAP6VColorP15_PARTICLE_COLOR	calc(VRyjMegaBirthModelFilter*, PRyjMegaBirthModelFilter*, _PARTICLE_DATA*, VColor*, _PARTICLE_COLOR*)		sim-med
+0022ea28	344	float	near	m2c	66.33	002d3600	_ZN2sa5EVENT12set_turn_seqERNS_8BIN_TURNEP4TASK	sa::EVENT::set_turn_seq(sa::BIN_TURN&, TASK*)		med
+00241008	344	loop	near	lift	96.81	0036acf4	_ZN2Tz5MCard15UpdateLocalInfoEv	Tz::MCard::UpdateLocalInfo()		high
+002a7dc8	344	loop	near	ghidra	51.03	00341e6c	_ZN2Tz10JmMiniGame12ChkMGameInfoEv	Tz::JmMiniGame::ChkMGameInfo()		high
+0015b368	340	loop	near	lift	85.91	00098ed4	_ZN2dk3Exp6createEiPN2YI5IMAGEEi	dk::Exp::create(int, YI::IMAGE*, int)		high
+00178d28	340	float	near	m2c	77.91	0047d670	_ZN2YS6PLAYER11_OVR_attackEv	YS::PLAYER::_OVR_attack()		med
+00180058	340	float	near	lift	91.76	0045afb0	_ZN2YS6MOTION8_captureEPNS_6BINARCEPKcfPN3ryj3PAXEPNS_3OBJEPi	YS::MOTION::_capture(YS::BINARC*, char const*, float, ryj::PAX*, YS::OBJ*, int*)		sim-high
+0019a048	340	float	near	lift	94.19	004b1af8	_ZN2YS10UNIT_GROUP4execERN2kn7FVectorE	YS::UNIT_GROUP::exec(kn::FVector&)		med
+001b99d0	340	loop	near	ghidra	70.93	0046cb14	_ZN2YS3OBJ10CalcMotionEv	YS::OBJ::CalcMotion()		med
+00225898	340	branchy	near	lift	81.15	002c1f5c	_ZN2sa5EVENT12set_bgm_sendERNS_12BIN_SEND_BGMEP4TASK	sa::EVENT::set_bgm_send(sa::BIN_SEND_BGM&, TASK*)		med
+00240450	340	loop	near	m2c	77.74	0036995c	_ZN2Tz5MCard11MakeIconsysEPci	Tz::MCard::MakeIconsys(char*, int)		sim-med
+0026db60	340	loop	near	lift	96.22	00309680	_ZN2Tz8Selector4ExitEv	Tz::Selector::Exit()		high
+002a3950	340	branchy	near	m2c	71.43	0035e438	_ZN2Tz10JmTreasure14UpdateItemMessEv	Tz::JmTreasure::UpdateItemMess()		med
+002b31c0	340	straight	near	ghidra	75.22	00353620	_ZN2Tz8JmPuzzle8DrawMessEiijjPN2dk13SpriteMessageE	Tz::JmPuzzle::DrawMess(int, int, unsigned int, unsigned int, dk::SpriteMessage*)		high
+002bbf98	340	loop	near	ghidra	26.23	00139084	_ZN5SOUND8calcSe3DEv	SOUND::calcSe3D()		sim-low
+001808c0	336	float	near	m2c	62.00	0045992c	_ZN2YS6MOTION14make_ik_adjustEPN2kn8IKAdjustE	YS::MOTION::make_ik_adjust(kn::IKAdjust*)		high
+001d5518	336	branchy	near	lift	80.64	00458140	_ZN2YS14MISSION_CAMERA5startEPN3ryj3PAXEb	YS::MISSION_CAMERA::start(ryj::PAX*, bool)		med
+001dfe88	336	float	near	lift	41.19	002b6c20	_ZN3ryj3PAX7MANAGER12set_bg_colorEb	ryj::PAX::MANAGER::set_bg_color(bool)		med
+00225b88	336	branchy	near	e3	85.62	002c96fc	_ZN2sa5EVENT8checkEndEv	sa::EVENT::checkEnd()		med
+0024ada0	336	branchy	near	m2c	73.54	003cd60c	_ZN2Tz4TRTE11CreateScoreEv	Tz::TRTE::CreateScore()		high
+002748a0	336	branchy	near	ghidra	89.78	002f3ea4	_ZN2Tz6Jiminy10FadeOutAllEv	Tz::Jiminy::FadeOutAll()		med
+00279860	336	loop	near	ghidra	83.99	0038e798	_ZN2Tz9CmAbility18GetFriendAbilityAIEv	Tz::CmAbility::GetFriendAbilityAI()		high
+0029a8e0	336	loop	near	lift	94.42	0033dc48	_ZN2Tz5JmDic4ExitEv	Tz::JmDic::Exit()		sim-med
+002e1288	336	float	near	lift	89.93	006332e8	_ZN2Ti11MG_ALEscape9post_execEv	Ti::MG_ALEscape::post_exec()		sim-med
+00150a18	332	float	near	ghidra	50.09	000a8710	_ZN2dk18INFORMATION_WINDOW6updateEv	dk::INFORMATION_WINDOW::update()		high
+00182280	332	switch	near	m2c	91.78	0040446c	_ZNK2YS8AREADATA8SETINDEX11signal_hookEPKNS0_4CODEE	YS::AREADATA::SETINDEX::signal_hook(YS::AREADATA::CODE const*) const		sim-med
+0019dbc0	332	branchy	near	e3	80.75	00491ae4	_ZN2YS11RC_SEARCHER9check_setEiRKNS_6TARGETEii	YS::RC_SEARCHER::check_set(int, YS::TARGET const&, int, int)		sim-high
+001a3018	332	loop	near	m2c	67.49	00436cfc	_ZN2YS4ITEM8WhereGetEiii	YS::ITEM::WhereGet(int, int, int)		high
+001aabd8	332	straight	near	ghidra	99.94	0042dd3c	_ZN2YS4FONT11InitTextureEv	YS::FONT::InitTexture()		med
+001d4180	332	loop	near	lift	77.55	00441f6c	_ZN2YS11LIMIT_TABLE9CheckReadEv	YS::LIMIT_TABLE::CheckRead()		med
+001d42d0	332	loop	near	m2c	86.46	004422b4	_ZN2YS11LIMIT_TABLE8MakeMenuEPNS_12COMMAND_MENUE	YS::LIMIT_TABLE::MakeMenu(YS::COMMAND_MENU*)		med
+001d63a8	332	float	near	lift	76.78	004d9590	_ZN2YS9ANTI_FORM7IsFinalEPNS_4SORAE	YS::ANTI_FORM::IsFinal(YS::SORA*)		sim-high
+001f6148	332	float	near	lift	83.62	005a9d04	pppKeBornRnd4_Born	pppKeBornRnd4_Born		sim-high
+00268c68	332	loop	near	m2c	78.94	0039f3ec	_ZN2Tz7CmEquip18SetEquipDefaultPosEv	Tz::CmEquip::SetEquipDefaultPos()		med
+00277178	332	branchy	near	lift	94.19	00391af0	_ZN2Tz9CmAbility14SetupFromEquipEii	Tz::CmAbility::SetupFromEquip(int, int)		med
+0027b0f8	332	branchy	near	lift	79.13	0038c604	_ZN2Tz9CmAbility11CreateGaugeEv	Tz::CmAbility::CreateGauge()		med
+00282d70	332	loop	near	m2c	55.89	00323574	_ZN2Tz8ItemInfo12SortItemInfoEv	Tz::ItemInfo::SortItemInfo()		high
+002b0e78	332	branchy	near	ghidra	58.05	00351d98	_ZN2Tz8JmPuzzle8PieceRotEj	Tz::JmPuzzle::PieceRot(unsigned int)		high
+002d8670	332	float	near	lift	67.11	00638620	_ZN2Ti12MGHachimitsu9post_execEv	Ti::MGHachimitsu::post_exec()		med
+00140618	328	float	near	m2c	52.24	00067370	_ZN2dk9ObjCamera18subjective_controlEPN2YS3PADE	dk::ObjCamera::subjective_control(YS::PAD*)		med
+0016cd48	328	loop	near	lift	88.88	004b5770	_ZN2YS2VM4execEPS0_	YS::VM::exec(YS::VM*)		sim-high
+00179308	328	float	near	m2c	70.54	0047dc90	_ZN2YS6PLAYER13ability_glideEv	YS::PLAYER::ability_glide()		med
+001e7a98	328	loop	near	ghidra	64.60	005a63c8	_Z16pppCreatePObjectP9_pppMngStP12_pppPDataVal	pppCreatePObject(_pppMngSt*, _pppPDataVal*)		sim-med
+00248f50	328	branchy	near	lift	88.20	003c9c04	_ZN2Tz4MUMI12DrawSelectorEPNS_6SelectEii	Tz::MUMI::DrawSelector(Tz::Select*, int, int)		high
+0024c420	328	branchy	near	lift	88.20	003bd150	_ZN2Tz4HBTE12DrawSelectorEPNS_6SelectEii	Tz::HBTE::DrawSelector(Tz::Select*, int, int)		high
+00250550	328	branchy	near	lift	88.20	003c7988	_ZN2Tz4LMMU12DrawSelectorEPNS_6SelectEii	Tz::LMMU::DrawSelector(Tz::Select*, int, int)		high
+00252e50	328	loop	near	lift	84.48	003b8880	_ZN2Tz4ALCA7SetMessEv	Tz::ALCA::SetMess()		high
+0029e808	328	float	near	m2c	60.27	0033d570	_ZN2Tz5JmDic8ZoomYrotEi	Tz::JmDic::ZoomYrot(int)		med
+002a03d0	328	branchy	near	ghidra	87.55	0032a8a8	_ZN2Tz7JmAnsem13UpdateNewMarkEv	Tz::JmAnsem::UpdateNewMark()		high
+002a65d0	328	branchy	near	ghidra	87.55	0032d584	_ZN2Tz8JmBattle13UpdateNewMarkEv	Tz::JmBattle::UpdateNewMark()		med
+002aeba0	328	loop	near	m2c	88.27	00353c7c	_ZN2Tz8JmPuzzle4ExitEv	Tz::JmPuzzle::Exit()		sim-high
+002b1708	328	loop	near	m2c	86.85	00350640	_ZN2Tz8JmPuzzle13UpdateTopListEv	Tz::JmPuzzle::UpdateTopList()		high
+002d5748	328	branchy	near	lift	93.41	0064a478	_ZN2Ti15MGOarashiPlayer24_OVR_exec_command_playerEPKN2YS12COMMAND_ELEME	Ti::MGOarashiPlayer::_OVR_exec_command_player(YS::COMMAND_ELEM const*)		med
+00106de8	324	float	near	m2c	63.21	000d9600	_ZN2kn10Projection6setFOVEfNS0_4WorHE	kn::Projection::setFOV(float, kn::Projection::WorH)		high
+001125d8	324	branchy	near	lift	86.45	000e5288	_ZN2kn6Friend9setTargetENS0_15SET_TARGET_MODEEPN2YS6TARGETE	kn::Friend::setTarget(kn::Friend::SET_TARGET_MODE, YS::TARGET*)		med
+00113848	324	float	near	lift	77.21	000e6d88	_ZN2kn17FriendPersonality4idleEPNS_12FriendActionEPN2YS6TARGETEPPvb	kn::FriendPersonality::idle(kn::FriendAction*, YS::TARGET*, void**, bool)		med
+00138840	324	float	near	ghidra	41.59	0007accc	_ZN2dk6Sprite6updateEv	dk::Sprite::update()		high
+0016c168	324	switch	near	lift	92.82	00462218	_ZN2YS3OBJ8footstepEi	YS::OBJ::footstep(int)		sim-low
+00196028	324	loop	near	m2c	67.83	00495548	_ZN2YS9SAVEPOINT7recoverEv	YS::SAVEPOINT::recover()		sim-high
+00198ee8	324	loop	near	lift	80.22	0049c428	_ZN2YS11SIGNAL_HOOK4execEv	YS::SIGNAL_HOOK::exec()		sim-high
+001ada38	324	switch	near	ghidra	77.69	004936fc	_ZN2YS5RECOV4ExecEi	YS::RECOV::Exec(int)		high
+0022f3a8	324	float	near	lift	91.36	002d471c	_ZN2sa5EVENT10entry_ctrlEv	sa::EVENT::entry_ctrl()		med
+00239700	324	straight	near	lift	0.00	000c2040	_ZN2YI8SEQUENCEC1Ev	YI::SEQUENCE::SEQUENCE()		med
+00262af8	324	branchy	near	lift	85.63	003a6130	_ZN2Tz6CmItem14UpdateHelpMessEv	Tz::CmItem::UpdateHelpMess()		med
+0028be78	324	float	near	e3	48.14	0037dc10	_ZN2Tz9ScrollBar6SetPosEi	Tz::ScrollBar::SetPos(int)		high
+00293520	324	loop	near	ghidra	35.42	0038a9c4	_ZN2Tz9ChgWeapon6UpdateEv	Tz::ChgWeapon::Update()		high
+00146250	320	loop	near	lift	88.71	000b0810	_ZN2dk11OctDrawFile10drawObjectERKNS_8DrawNodeE	dk::OctDrawFile::drawObject(dk::DrawNode const&)		sim-med
+001a3188	320	branchy	near	ghidra	50.76	004371d4	_ZN2YS4ITEM3GetEiib	YS::ITEM::Get(int, int, bool)		high
+001b5b20	320	float	near	m2c	81.75	00440ff0	_ZN2YS5LIMIT16GetCommandStatusEPNS_6PLAYEREPKNS_12COMMAND_ELEMEi	YS::LIMIT::GetCommandStatus(YS::PLAYER*, YS::COMMAND_ELEM const*, int)		high
+001d5d80	320	branchy	near	ghidra	92.41	0042f5ec	_ZN2YS10FORM_LEVEL7LevelUpEPNS_6PLAYEREi	YS::FORM_LEVEL::LevelUp(YS::PLAYER*, int)		med
+0022d098	320	float	near	m2c	71.40	002c6c90	_ZN2sa5EVENT17set_bin_black_fogERNS_13BIN_BLACK_FOGEP4TASK	sa::EVENT::set_bin_black_fog(sa::BIN_BLACK_FOG&, TASK*)		sim-high
+00287218	320	loop	near	ghidra	84.24	003b0df8	_ZN2Tz8CmNewFlg17isAbilityHistFormEii	Tz::CmNewFlg::isAbilityHistForm(int, int)		sim-med
+0028cc78	320	branchy	near	lift	84.76	00370dd0	_ZN2Tz10MenuCursor6CreateEiiiPNS_6LayoutEiii	Tz::MenuCursor::Create(int, int, int, Tz::Layout*, int, int, int)		high
+00103590	316	branchy	near	m2c	77.51	0003bfd8	_ZN4MENU15CreateAllocatorEiPN2kn15MemoryAllocatorE	MENU::CreateAllocator(int, kn::MemoryAllocator*)		high
+0018b338	316	float	near	m2c	84.34	004f0670	_ZN2YS3NPC10after_talkEf	YS::NPC::after_talk(float)		high
+001bb4f0	316	branchy	near	m2c	91.75	00451ee4	_ZN2YS7MISSION8completeEii	YS::MISSION::complete(int, int)		high
+001fe798	316	branchy	near	lift	46.49	005b4c48	pppKeThTp	pppKeThTp		sim-low
+0023cc18	316	float	near	lift	80.37	000c1b3c	_ZN2YI6LAYOUT4DrawEv	YI::LAYOUT::Draw()		high
+00273228	316	branchy	near	m2c	93.29	0039e228	_ZN2Tz8CmCustom10DrawUpdateEPNS_6SelectEii	Tz::CmCustom::DrawUpdate(Tz::Select*, int, int)		high
+0029aac0	316	branchy	near	ghidra	90.64	0033e05c	_ZN2Tz5JmDic8LeaveAllEi	Tz::JmDic::LeaveAll(int)		med
+002a10e0	316	branchy	near	lift	79.96	003372d8	_ZN2Tz9JmDiagram12CreateCursorEv	Tz::JmDiagram::CreateCursor()		med
+001028b0	312	loop	near	m2c	92.37	00040ad4	_ZN12TASK_MANAGER11masked_execEii	TASK_MANAGER::masked_exec(int, int)		sim-low
+00139e00	312	branchy	near	lift	94.85	00065840	_ZN2dk5Obj2D8menuInitEP9ALLOCATORb	dk::Obj2D::menuInit(ALLOCATOR*, bool)		med
+00165db8	312	loop	near	ghidra	55.01	0006b540	_ZN2dk6ObjOcc13intersectLineERNS_4LineERN2kn7FVectorERtjjbRPS0_ii	dk::ObjOcc::intersectLine(dk::Line&, kn::FVector&, unsigned short&, unsigned int, unsigned int, bool, dk::ObjOcc*&, int, int)		high
+00185468	312	float	near	lift	89.92	004bb468	_ZN2YS6WEAPONC1EPKNS_8OBJENTRYEPNS_5PARTYEiii	YS::WEAPON::WEAPON(YS::OBJENTRY const*, YS::PARTY*, int, int, int)		sim-high
+00194468	312	switch	near	m2c	71.40	004697f4	_ZN2YS3OBJ11show_shadowEv	YS::OBJ::show_shadow()		sim-low
+00197148	312	float	near	m2c	62.85	00428548	_ZN2YS5EVENT13phase_fadeoutEv	YS::EVENT::phase_fadeout()		med
+00197430	312	float	near	m2c	69.13	004280d0	_ZN2YS5EVENT12phase_fadeinEv	YS::EVENT::phase_fadein()		med
+001a0ee0	312	float	near	lift	72.47	00497be4	_ZN2YS5SHEET3setEPKNS_10ENEMYPARAME	YS::SHEET::set(YS::ENEMYPARAM const*)		sim-med
+001a9ae8	312	float	near	lift	64.02	0044ef90	_ZN2YS11MESSAGEDRAW4drawEiij	YS::MESSAGEDRAW::draw(int, int, unsigned int)		high
+001b9db0	312	loop	near	e3	58.26	0046dcbc	_ZN2YS3OBJ8LeaveAllEi	YS::OBJ::LeaveAll(int)		high
+001d94f8	312	loop	near	ghidra	83.38	004ad960	_ZN2YS7UNDRESS4ExecENS_6MEMBEREPKS1_	YS::UNDRESS::Exec(YS::MEMBER, YS::MEMBER const*)		sim-low
+001dd568	312	float	near	ghidra	82.44	002b0ed4	_ZN3ryj12qsort_effectEPPNS_6EFFECTEPfii	ryj::qsort_effect(ryj::EFFECT**, float*, int, int)		sim-low
+001e8048	312	loop	near	m2c	66.92	005a6b34	_Z12pppStartPartP9_pppMngStPxi	pppStartPart(_pppMngSt*, long long*, int)		sim-med
+00268b30	312	branchy	near	lift	92.45	0039f658	_ZN2Tz7CmEquip17SetupTitleAbilityEi	Tz::CmEquip::SetupTitleAbility(int)		med
+0027c1c0	312	branchy	near	lift	70.44	00391044	_ZN2Tz9CmAbility15ChgEquipAbilityEv	Tz::CmAbility::ChgEquipAbility()		sim-high
+002875e8	312	loop	near	lift	98.97	0065f020	_ZN2Tz8Mg2DTronC1Ev	Tz::Mg2DTron::Mg2DTron()		sim-high
+002dc850	312	float	near	lift	57.91	0063e70c	_ZN2Ti6MGJump5resetEv	Ti::MGJump::reset()		med
+00322790	312	loop	near	m2c	99.13	002e0ea8	_ZN2sa13MUSICAL_INPUT5startEi	sa::MUSICAL_INPUT::start(int)		sim-med
+0013a4c8	308	branchy	near	lift	72.45	0005120c	_ZN2dk8Field2DD11readCommandEv	dk::Field2DD::readCommand()		high
+001cc220	308	float	near	m2c	36.44	004846c8	_ZN2YS8PRIZE_CA14_OVR_check_getEPNS_11PRIZEEFFECTE	YS::PRIZE_CA::_OVR_check_get(YS::PRIZEEFFECT*)		sim-high
+001cd388	308	loop	near	ghidra	30.71	0041ebac	_ZN2YS8CONTINUE4LoadEv	YS::CONTINUE::Load()		sim-med
+001e3330	308	float	near	lift	76.77	002abc98	_Z8pppSetUpPv	pppSetUp(void*)		sim-med
+001ebcf0	308	float	near	m2c	63.70	005be9a8	pppPointAp	pppPointAp		sim-med
+00276c88	308	branchy	near	lift	96.36	002f6f1c	_ZN2Tz6Jiminy10CreateHelpEPKN2YS7MESSAGEEb	Tz::Jiminy::CreateHelp(YS::MESSAGE const*, bool)		sim-high
+002a2010	308	loop	near	m2c	84.24	003605b8	_ZN2Tz10JmTreasure4ExitEv	Tz::JmTreasure::Exit()		sim-sandwich
+002ac2e8	308	loop	near	lift	75.45	00344444	_ZN2Tz9JmNewInfo11CheckPuzzleEv	Tz::JmNewInfo::CheckPuzzle()		sim-med
+00144be0	304	float	near	lift	99.79	0008840c	_ZNK2dk6Aabbox19generateDrawVertex8EPN2kn7FVectorE	dk::Aabbox::generateDrawVertex8(kn::FVector*) const		med
+00178758	304	float	near	lift	85.13	0047c788	_ZN2YS6PLAYER13_OVR_pre_execEv	YS::PLAYER::_OVR_pre_exec()		high
+0017c160	304	float	near	m2c	87.80	004cfa60	_ZN2YS11ACTION_IDLE7controlEPNS_3OBJE	YS::ACTION_IDLE::control(YS::OBJ*)		sim-high
+00187520	304	branchy	near	lift	75.13	00413924	_ZN2YS6BTLOBJ11_OVR_add_hpEiib	YS::BTLOBJ::_OVR_add_hp(int, int, bool)		high
+001bed48	304	loop	near	lift	83.09	0042b6b0	_ZN2YS13FIELD_COMMAND13make_shortcutEv	YS::FIELD_COMMAND::make_shortcut()		sim-high
+001bee78	304	loop	near	e3	98.07	0042b810	_ZN2YS13FIELD_COMMAND13make_changeinEv	YS::FIELD_COMMAND::make_changein()		med
+001c2d88	304	loop	near	lift	88.14	00481dd0	_ZNK2YS11PLAYERPARAM5applyEv	YS::PLAYERPARAM::apply() const		sim-high
+001e6ed8	304	float	near	lift	42.30	002af69c	_Z16pppSetPartMatrixPA4_fS0_PfS1_	pppSetPartMatrix(float (*) [4], float (*) [4], float*, float*)		med
+0022d880	304	loop	near	lift	96.58	002cb930	_ZN2sa5EVENT15set_bin_seq_mesERNS_11BIN_SEQ_MESEP4TASK	sa::EVENT::set_bin_seq_mes(sa::BIN_SEQ_MES&, TASK*)		med
+00231390	304	float	near	lift	87.40	002c3fb0	_ZN2sa5EVENT20calcValue_objDefaultERNS_18BIN_CAMERA_DATA_WKERNS_23OBJ_DEFAULT_CAMERA_DATAEf	sa::EVENT::calcValue_objDefault(sa::BIN_CAMERA_DATA_WK&, sa::OBJ_DEFAULT_CAMERA_DATA&, float)		sim-med
+0024f070	304	branchy	near	ghidra	64.20	003cf7c0	_ZN2Tz4TTMY13CreateHelpWinEi	Tz::TTMY::CreateHelpWin(int)		med
+002a4470	304	branchy	near	ghidra	80.80	0035fb00	_ZN2Tz10JmTreasure12CreateCursorEv	Tz::JmTreasure::CreateCursor()		med
+00137fb8	300	loop	near	lift	96.48	000808a0	_ZN2dk13TREASURE_INFO4initEv	dk::TREASURE_INFO::init()		sim-low
+001558b8	300	float	near	lift	84.71	000a286c	_ZN2dk12GAUGE_PLAYER12createCircleEii	dk::GAUGE_PLAYER::createCircle(int, int)		med
+0018e7c0	300	branchy	near	lift	96.97	00408a84	_ZN2YS11ATTACK_WORK7reflectEPS0_	YS::ATTACK_WORK::reflect(YS::ATTACK_WORK*)		med
+001c0890	300	loop	near	lift	75.49	004dd4f8	_ZN2YS10BONUSLEVEL2UpEi	YS::BONUSLEVEL::Up(int)		seed
+001f5cc8	300	float	near	lift	83.73	005a97c0	pppKeBornRnd2_Born	pppKeBornRnd2_Born		sim-high
+001f6648	300	float	near	lift	83.73	005aa338	pppKeBornRnd5_Born	pppKeBornRnd5_Born		sim-high
+0020aec8	300	float	near	lift	95.01	005cc2b8	_Z10set_matrixPA4_fS0_P19PRyjMegaBirthFilterP19VRyjMegaBirthFilterP14_PARTICLE_DATA	set_matrix(float (*) [4], float (*) [4], PRyjMegaBirthFilter*, VRyjMegaBirthFilter*, _PARTICLE_DATA*)		sim-med
+00230de0	300	float	near	lift	35.22	002c3b68	_ZN2sa5EVENT9calcValueEifPNS_22BIN_CAMERA_DATA_ENC_WKES2_	sa::EVENT::calcValue(int, float, sa::BIN_CAMERA_DATA_ENC_WK*, sa::BIN_CAMERA_DATA_ENC_WK*)		sim-med
+002529a8	300	loop	near	lift	67.76	003b8fd0	_ZN2Tz4ALCA10SetLayListEv	Tz::ALCA::SetLayList()		med
+00253638	300	loop	near	lift	99.60	002eda60	_ZN2Tz6CMData4InitEv	Tz::CMData::Init()		med
+0028c198	300	branchy	near	lift	88.32	003721d8	_ZN2Tz8MenuItem5startEiiiPNS_6LayoutEiii	Tz::MenuItem::start(int, int, int, Tz::Layout*, int, int, int)		high
+002a16b8	300	loop	near	lift	80.67	003371a8	_ZN2Tz9JmDiagram10CalcSelIdxEv	Tz::JmDiagram::CalcSelIdx()		high
+0010d918	296	loop	near	e3	42.47	000e4644	_ZN2kn6Friend26searchEnemy_playerAttackerEPN2YS6TARGETES3_	kn::Friend::searchEnemy_playerAttacker(YS::TARGET*, YS::TARGET*)		med
+001208f8	296	loop	near	m2c	94.86	00123108	_ZN2kn8ModelSKL19getDMATagBufferSizeEv	kn::ModelSKL::getDMATagBufferSize()		sim-vt-high
+0015e3b8	296	straight	near	lift	89.07	000b5218	_ZN2dk9SpotBlendC1Ev	dk::SpotBlend::SpotBlend()		sim-high
+0015e4e0	296	straight	near	lift	89.07	00202ea0	_ZN2gm12SPRITEFROM3D11draw_commonERKN2kn16ProjectionCameraERKNS1_7FVectorE	gm::SPRITEFROM3D::draw_common(kn::ProjectionCamera const&, kn::FVector const&)		sim-high
+0017da90	296	float	near	m2c	68.78	00431010	_ZN2YS6FRIENDC1EPKNS_8OBJENTRYERKN2kn7FVectorEf	YS::FRIEND::FRIEND(YS::OBJENTRY const*, kn::FVector const&, float)		sim-high
+001801b0	296	float	near	lift	94.82	0045b2ec	_ZN2YS6MOTION8_CaptureEPNS_3OBJEPNS_6BINARCEPN3ryj3PAXES2_fPi	YS::MOTION::_Capture(YS::OBJ*, YS::BINARC*, ryj::PAX*, YS::OBJ*, float, int*)		high
+00192cc0	296	switch	near	ghidra	84.30	0044cc5c	_ZN2YS7MESSAGE7SprintfEPcPKcz	YS::MESSAGE::Sprintf(char*, char const*, ...)		med
+00196f00	296	float	near	lift	91.69	00427c48	_ZN2YS5EVENT5startEv	YS::EVENT::start()		sim-high
+0019d5f8	296	branchy	near	m2c	93.35	00490f30	_ZN2YS5RECOM5startERNS_12COMMAND_SLOTE	YS::RECOM::start(YS::COMMAND_SLOT&)		sim-high
+001a6658	296	loop	near	ghidra	73.58	00446a98	_ZN2YS5MAGIC8GetTableEi	YS::MAGIC::GetTable(int)		med
+001a82f0	296	branchy	near	ghidra	70.41	004ab18c	_ZNK2YS8TREASURE5TABLE4_getEv	YS::TREASURE::TABLE::_get() const		high
+001aca98	296	loop	near	lift	94.59	004bccc8	_ZN2YS11WINDOW_BASEC1ENS_4FONT4TYPEEiiiiii	YS::WINDOW_BASE::WINDOW_BASE(YS::FONT::TYPE, int, int, int, int, int, int)		sim-high
+001b5460	296	loop	near	lift	92.33	0043fe68	_ZN2YS5LIMIT7destroyEv	YS::LIMIT::destroy()		med
+001b72c0	296	branchy	near	m2c	84.19	0043bf48	_ZNK2YS7LEVELUP4execEiii	YS::LEVELUP::exec(int, int, int) const		med
+001bd988	296	loop	near	lift	57.34	004810cc	_ZN2YS14PLAYER_COMMAND6decideEv	YS::PLAYER_COMMAND::decide()		high
+0022f7c0	296	float	near	lift	66.96	002d1f40	_ZN2sa5EVENT16set_bin_seq_posiERNS_12BIN_SEQ_POSIEP4TASK	sa::EVENT::set_bin_seq_posi(sa::BIN_SEQ_POSI&, TASK*)		med
+00240118	296	branchy	near	m2c	46.78	00368fb4	_ZN2Tz5MCard8GetFnameEPcii	Tz::MCard::GetFname(char*, int, int)		med
+00245968	296	float	near	lift	92.80	003c43e0	_ZN2Tz4HECO9CreateObjEv	Tz::HECO::CreateObj()		med
+00273cb8	296	loop	near	lift	60.40	0039ae5c	_ZN2Tz8CmCustom12ChageAbilityEi	Tz::CmCustom::ChageAbility(int)		med
+002a40c8	296	loop	near	lift	66.85	0035f6a4	_ZN2Tz10JmTreasure11isExistListEv	Tz::JmTreasure::isExistList()		sim-sandwich
+002c4390	296	branchy	near	lift	84.28	003e6fe8	_ZN2dk10mitem_drawEiijjPNS_13SpriteMessageE	dk::mitem_draw(int, int, unsigned int, unsigned int, dk::SpriteMessage*)		med
+002dfe38	296	float	near	lift	91.89	006303e8	_ZN2Ti21ACTION_PO_JUMP_PLAYER12land_balloonEPN2YS3OBJES3_fi	Ti::ACTION_PO_JUMP_PLAYER::land_balloon(YS::OBJ*, YS::OBJ*, float, int)		med
+002e9690	296	loop	near	lift	76.76	0062ae90	_ZN2Ts5FLARE4InitEv	Ts::FLARE::Init()		seed
+001136b8	292	loop	near	m2c	75.53	000e6b68	_ZN2kn17FriendPersonality15linkActionParamEv	kn::FriendPersonality::linkActionParam()		med
+0011c8f8	292	loop	near	ghidra	79.89	000edd30	_ZN2kn8ModelObj5draw_EPNS_9DrawParamEbPNS_5ModelEPPN3Axa11DMA_SET_TAGEPc	kn::ModelObj::draw_(kn::DrawParam*, bool, kn::Model*, Axa::DMA_SET_TAG**, char*)		sim-med
+00137058	292	loop	near	lift	84.19	00043dd8	_ZN2dk3BGM8typeHoldEPi	dk::BGM::typeHold(int*)		sim-low
+00146f28	292	loop	near	lift	70.94	000adeac	_ZN2dk11OctDrawFile16insertDrawObjectEPNS_11ObjDrawListEb	dk::OctDrawFile::insertDrawObject(dk::ObjDrawList*, bool)		sim-med
+00228ab0	292	float	near	lift	95.62	002ddec0	_ZN2sa14MUSICAL_GAUGE36createEv	sa::MUSICAL_GAUGE3::create()		med
+00259e90	292	loop	near	lift	91.25	0030b8d4	_ZN2Tz8CmSLBase9SetupSlotEv	Tz::CmSLBase::SetupSlot()		high
+0026bab8	292	loop	near	lift	82.77	002fe658	_ZN2Tz7CmParty4ExitEv	Tz::CmParty::Exit()		sim-med
+0026d620	292	branchy	near	lift	97.66	002ffa1c	_ZN2Tz7CmParty18UpdateTopSelActiveEib	Tz::CmParty::UpdateTopSelActive(int, bool)		med
+00291380	292	branchy	near	ghidra	81.84	00324260	_ZN2Tz8ItemStat10CheckParamEi	Tz::ItemStat::CheckParam(int)		med
+002933d8	292	loop	near	ghidra	80.08	0038a740	_ZN2Tz9ChgWeapon3SetEiiiPNS0_4InfoE	Tz::ChgWeapon::Set(int, int, int, Tz::ChgWeapon::Info*)		sim-low
+0029a5f0	292	loop	near	lift	63.60	00330664	_ZN2Tz12JmCollection10Cur2SelNumEi	Tz::JmCollection::Cur2SelNum(int)		high
+002ae768	292	loop	near	ghidra	52.58	003355dc	_ZN2Tz10JmComplete16isPuzzleGameCompEi	Tz::JmComplete::isPuzzleGameComp(int)		high
+002b2f28	292	branchy	near	lift	85.34	00351348	_ZN2Tz8JmPuzzle10HideCursorEi	Tz::JmPuzzle::HideCursor(int)		med
+002b7148	292	loop	near	lift	0.00	0038701c	_ZN2Tz8TimeDrawD1Ev	Tz::TimeDraw::~TimeDraw()		sim-low
+002edd20	292	float	near	m2c	56.53	0061c1d0	_ZN2Ts10ACTION_LIB15HeightFromFloorEPN2YS3OBJE	Ts::ACTION_LIB::HeightFromFloor(YS::OBJ*)		sim-high
+00113fb0	288	branchy	near	lift	67.53	000e7680	_ZN2kn17FriendPersonality16execScriptActionEPNS_12FriendActionEPN2YS6TARGETEPPvb	kn::FriendPersonality::execScriptAction(kn::FriendAction*, YS::TARGET*, void**, bool)		med
+00175790	288	branchy	near	lift	83.86	00476ab0	_ZN2YS5PARTYC1EPKNS_8OBJENTRYEjRKN2kn7FVectorEf	YS::PARTY::PARTY(YS::OBJENTRY const*, unsigned int, kn::FVector const&, float)		sim-high
+00182c60	288	loop	near	lift	74.12	004ae318	_ZN2YS4UNIT8ExecTaskEP4TASK	YS::UNIT::ExecTask(TASK*)		med
+0018da18	288	branchy	near	ghidra	80.36	00406de8	_ZN2YS6ATTACK12force_strikeEPNS_6BTLOBJEPKNS_11ATTACKPARAMEi	YS::ATTACK::force_strike(YS::BTLOBJ*, YS::ATTACKPARAM const*, int)		med
+001a0800	288	float	near	ghidra	89.44	004798b0	_ZNK2YS11PARTYATTACK5is_inEPNS_5PARTYEfffRKNS_9COLLISIONE	YS::PARTYATTACK::is_in(YS::PARTY*, float, float, float, YS::COLLISION const&) const		sim-med
+001b8838	288	branchy	near	m2c	55.38	004beae0	_ZN2YS9WORLDFLAG3SetEi	YS::WORLDFLAG::Set(int)		sim-low
+001cfcf8	288	float	near	lift	54.93	0044fcfc	_ZN2YS6MICKEYC1EPKNS_8OBJENTRYEPNS_3PADERKN2kn7FVectorEf	YS::MICKEY::MICKEY(YS::OBJENTRY const*, YS::PAD*, kn::FVector const&, float)		sim-high
+001dec78	288	float	near	m2c	40.67	002b595c	_ZN3ryj3PAX7MANAGERC1EPNS_6EFFECTEPNS0_4ELEMEPNS0_14USER_BIND_ARGSEf	ryj::PAX::MANAGER::MANAGER(ryj::EFFECT*, ryj::PAX::ELEM*, ryj::PAX::USER_BIND_ARGS*, float)		sim-high
+0022ee30	288	float	near	lift	62.68	002d3c40	_ZN2sa5EVENT20set_shadow_alpha_seqERNS_16BIN_SHADOW_ALPHAEP4TASK	sa::EVENT::set_shadow_alpha_seq(sa::BIN_SHADOW_ALPHA&, TASK*)		sim-high
+002309c8	288	float	near	lift	91.77	002cfe94	_ZN2sa5EVENT11objMoveTaskEP4TASK	sa::EVENT::objMoveTask(TASK*)		high
+002633a8	288	branchy	near	lift	80.48	003ac654	_ZN2Tz6CmItem18UpdateTopSelActiveEib	Tz::CmItem::UpdateTopSelActive(int, bool)		med
+00270648	288	switch	near	e3	9.17	00398940	_ZN2Tz8CmCustom23SetIndiCustomDefaultPosEv	Tz::CmCustom::SetIndiCustomDefaultPos()		high
+0027fba0	288	loop	near	lift	60.99	0031bda4	_ZN2Tz9GumiPause4DrawEv	Tz::GumiPause::Draw()		sim-low
+002d00e0	288	loop	near	m2c	51.73	0064e354	_ZN2Ti5MGObj15check_all_leaveEv	Ti::MGObj::check_all_leave()		high
+002ed8e0	288	float	near	lift	69.17	0062bda0	_ZN2Ts12SUMMON_ENEMY3GetEPN2YS3OBJE	Ts::SUMMON_ENEMY::Get(YS::OBJ*)		high
+002ef028	288	float	near	lift	41.20	0060cccc	_ZN4menu6Motion6updateEf	menu::Motion::update(float)		sim-low
+00188550	284	float	near	ghidra	25.54	00400880	_ZN2YS3ACT8ExecTaskEP4TASK	YS::ACT::ExecTask(TASK*)		med
+00197028	284	float	near	m2c	80.81	004286f8	_ZN2YS5EVENT4execEv	YS::EVENT::exec()		med
+001aefa0	284	float	near	m2c	65.70	004329f0	_ZN2YS8GAMEOVER12check_mickeyEv	YS::GAMEOVER::check_mickey()		med
+001bc568	284	branchy	near	lift	70.00	0041d748	_ZN2YS12COMMAND_SLOT8CanDriveEPKNS_12COMMAND_ELEMEPNS_6PLAYERE	YS::COMMAND_SLOT::CanDrive(YS::COMMAND_ELEM const*, YS::PLAYER*)		med
+001e17b8	284	loop	near	m2c	94.71	006189f4	_ZN3ryj17LAST_XEMNUS_LASER4initEv	ryj::LAST_XEMNUS_LASER::init()		sim-high
+001f5f10	284	float	near	lift	84.92	005a9a70	pppKeBornRnd3_Born	pppKeBornRnd3_Born		sim-sandwich
+00263a90	284	branchy	near	ghidra	81.49	002f2240	_ZN2Tz9CMenuHelp6CreateEPKN2YS7MESSAGEEb	Tz::CMenuHelp::Create(YS::MESSAGE const*, bool)		high
+002736f8	284	loop	near	m2c	43.79	0039b4a8	_ZN2Tz8CmCustom12ChageMpDriveEv	Tz::CmCustom::ChageMpDrive()		med
+00275f68	284	branchy	near	ghidra	89.60	002f6234	_ZN2Tz6Jiminy18SetMainFrameLRMessEii	Tz::Jiminy::SetMainFrameLRMess(int, int)		high
+002a98a8	284	loop	near	ghidra	82.07	003563d4	_ZN2Tz7JmQuest13UpdateNewMarkEv	Tz::JmQuest::UpdateNewMark()		high
+002abff0	284	loop	near	lift	90.78	0034adb8	_ZN2Tz9JmNewInfo10isStoryNewEii	Tz::JmNewInfo::isStoryNew(int, int)		high
+00106af0	280	float	near	ghidra	54.92	000d8f18	_ZN2kn10Projection14calcClipMatrixERNS_7FMatrixEff	kn::Projection::calcClipMatrix(kn::FMatrix&, float, float)		sim-low
+0015e8c8	280	straight	near	lift	89.31	002459d8	_ZN2gm11FRAMEBUFFER4InitEv	gm::FRAMEBUFFER::Init()		sim-high
+0015e9e0	280	straight	near	lift	89.31	000b5c4c	_ZN2dk11ModelSpriteC1Ev	dk::ModelSprite::ModelSprite()		sim-high
+00169030	280	loop	near	ghidra	83.64	00435658	_ZN2YS8AreaInitEP4TASK	YS::AreaInit(TASK*)		med
+00186ec0	280	branchy	near	ghidra	82.11	00411d54	_ZN2YS6BTLOBJ17_OVR_is_withstandEPNS_6DAMAGEE	YS::BTLOBJ::_OVR_is_withstand(YS::DAMAGE*)		sim-med
+0018d620	280	loop	near	m2c	90.63	00407550	_ZN2YS6ATTACK8ExecTaskEP4TASK	YS::ATTACK::ExecTask(TASK*)		med
+001c4188	280	float	near	m2c	50.47	004e3418	_ZN2YS11DEADREQUEST3AddEPNS_11CROWDEFFECTEf	YS::DEADREQUEST::Add(YS::CROWDEFFECT*, float)		sim-low
+001cd690	280	loop	near	m2c	84.86	004f1480	_ZN2YS14PRIORITYTARGET6searchEv	YS::PRIORITYTARGET::search()		sim-high
+001ce930	280	branchy	near	lift	64.72	004ec9f4	_ZN2YS10LIGHTCYCLE4execEv	YS::LIGHTCYCLE::exec()		sim-low
+001dcdb8	280	straight	near	lift	69.94	002b282c	_ZN3ryj6EFFECT4InitEP9ALLOCATORii	ryj::EFFECT::Init(ALLOCATOR*, int, int)		sim-low
+002539e8	280	branchy	near	lift	85.44	002ee43c	_ZN2Tz6CMData8BackReadEiPc	Tz::CMData::BackRead(int, char*)		high
+00271710	280	branchy	near	m2c	84.93	00397478	_ZN2Tz8CmCustom12MakeItemMessEiPcbbi	Tz::CmCustom::MakeItemMess(int, char*, bool, bool, int)		high
+0027afe0	280	loop	near	lift	83.20	0038d810	_ZN2Tz9CmAbility24SetIndiAbilityDefaultPosEv	Tz::CmAbility::SetIndiAbilityDefaultPos()		high
+002ac420	280	loop	near	ghidra	55.16	0034b9d4	_ZN2Tz9JmNewInfo16isPuzzlePieceNewEi	Tz::JmNewInfo::isPuzzlePieceNew(int)		sim-high
+002bf9d8	280	branchy	near	lift	12.24	003d75dc	_ZN8worldmap5EventC1EP4TASKi	worldmap::Event::Event(TASK*, int)		sim-high
+002dbb88	280	float	near	lift	76.54	0063d580	_ZN2Ti14MGHachimitsuPo14_OVR_post_execEv	Ti::MGHachimitsuPo::_OVR_post_exec()		med
+001531f8	276	branchy	near	ghidra	77.78	0005db34	_ZN2dk12LEVELUP_INFO9openCharaEPKN2YS7MESSAGEES4_S4_iNS0_9WIN_COLORE	dk::LEVELUP_INFO::openChara(YS::MESSAGE const*, YS::MESSAGE const*, YS::MESSAGE const*, int, dk::LEVELUP_INFO::WIN_COLOR)		high
+00170400	276	branchy	near	m2c	78.03	00414e4c	_ZN2YS10CACHE_BUFF14ReadRequestSubEPKcij	YS::CACHE_BUFF::ReadRequestSub(char const*, int, unsigned int)		high
+00179530	276	float	near	ghidra	65.23	0047da60	_ZN2YS6PLAYER17ability_dodgerollEv	YS::PLAYER::ability_dodgeroll()		med
+00179cb8	276	branchy	near	lift	83.67	0047c338	_ZN2YS6PLAYER18exec_lkdash_effectEv	YS::PLAYER::exec_lkdash_effect()		sim-high
+0018ad18	276	loop	near	lift	75.26	004eed0c	_ZN2YS3NPC15_OVR_initializeEv	YS::NPC::_OVR_initialize()		sim-high
+001af7c0	276	branchy	near	lift	49.80	00432eb4	_ZN2YS8GAMEOVER10get_motionEj	YS::GAMEOVER::get_motion(unsigned int)		med
+001b70d0	276	loop	near	m2c	34.57	0043c740	_ZN2YS7LEVELUP6AddExpEi	YS::LEVELUP::AddExp(int)		high
+001be778	276	branchy	near	m2c	76.33	0042aff0	_ZN2YS13FIELD_COMMAND10make_top_bEv	YS::FIELD_COMMAND::make_top_b()		med
+00226bd0	276	float	near	lift	99.13	002bbd78	_ZN2sa5EVENT13event_end_subEP4TASK	sa::EVENT::event_end_sub(TASK*)		med
+00250fb8	276	loop	near	lift	80.27	003b9c38	_ZN2Tz4CANA10isExistAllEv	Tz::CANA::isExistAll()		sim-low
+00252208	276	loop	near	lift	83.99	003bb3f0	_ZN2Tz4CANA13CreateNewMarkEv	Tz::CANA::CreateNewMark()		sim-med
+0026a060	276	branchy	near	lift	96.17	003a0f54	_ZN2Tz7CmEquip11SetLoopListEv	Tz::CmEquip::SetLoopList()		sim-high
+00275b60	276	branchy	near	e3	99.58	002f5e00	_ZN2Tz6Jiminy16SetLoopMainFrameEv	Tz::Jiminy::SetLoopMainFrame()		med
+002815d8	276	straight	near	lift	88.52	0031fa7c	_ZN2Tz11ItemPicDraw4InitEv	Tz::ItemPicDraw::Init()		sim-high
+002ad390	276	loop	near	ghidra	90.13	00333a08	_ZN2Tz10JmComplete10CheckAlbumEv	Tz::JmComplete::CheckAlbum()		high
+002cf638	276	loop	near	m2c	76.42	0064d4b8	_ZN2Ti5MGObj23find_free_member_bufferEi	Ti::MGObj::find_free_member_buffer(int)		high
+0013e940	272	straight	near	ghidra	70.96	0009d200	_ZN2dk7Ft4Base12createPacketEv	dk::Ft4Base::createPacket()		sim-high
+0015d2e8	272	float	near	lift	91.14	000982b8	_ZN2dk11EventCamera6lookAtERKN2kn7FVectorES4_ffNS1_10Projection4WorHEbbb	dk::EventCamera::lookAt(kn::FVector const&, kn::FVector const&, float, float, kn::Projection::WorH, bool, bool, bool)		med
+0017ec98	272	loop	near	ghidra	66.53	004593e8	_ZN2YS6MOTION9id_to_numEi	YS::MOTION::id_to_num(int)		sim-high
+00185770	272	float	near	lift	54.04	004baf10	_ZN2YS6WEAPON6appearEv	YS::WEAPON::appear()		sim-low
+00190570	272	loop	near	ghidra	47.43	004aa38c	_ZN2YS6TARGET7ReplaceEPNS_3OBJES2_	YS::TARGET::Replace(YS::OBJ*, YS::OBJ*)		med
+00198860	272	straight	near	lift	72.32	004a25d4	_ZN2YS6STDOBJ19set_special_commandEi	YS::STDOBJ::set_special_command(int)		seed
+0026cda0	272	loop	near	ghidra	91.96	002fdb0c	_ZN2Tz7CmParty11isExistListEv	Tz::CmParty::isExistList()		high
+00273b30	272	loop	near	lift	80.29	0039b9bc	_ZN2Tz8CmCustom9isTakeOffEv	Tz::CmCustom::isTakeOff()		med
+002aa4a8	272	loop	near	ghidra	80.32	00345874	_ZN2Tz9JmNewInfo10CheckAlbumEv	Tz::JmNewInfo::CheckAlbum()		sim-med
+002acc98	272	loop	near	lift	95.26	0034caec	_ZN2Tz9JmNewInfo8isAnyNewEv	Tz::JmNewInfo::isAnyNew()		sim-high
+002b4dd0	272	branchy	near	lift	96.00	0030bbcc	_ZN2Tz8CmSLBase15SetupWarningWinEi	Tz::CmSLBase::SetupWarningWin(int)		high
+002d0a78	272	loop	near	ghidra	96.47	0064ebf4	_ZN2Ti5MGObj16leave_gimobj_allEv	Ti::MGObj::leave_gimobj_all()		med
+00158b78	268	float	near	lift	64.77	00095ea0	_ZN2dk12DangleCamera7controlEPN2YS3PADEPNS_9ObjCameraE	dk::DangleCamera::control(YS::PAD*, dk::ObjCamera*)		high
+00161f48	268	float	near	m2c	84.65	00048668	_ZN2dk6Camera14crossFadeStartEfb	dk::Camera::crossFadeStart(float, bool)		med
+0019afd8	268	float	near	lift	84.59	004b0cf8	_ZN2YS10UNIT_GROUP15RandomPosPlayerEj	YS::UNIT_GROUP::RandomPosPlayer(unsigned int)		high
+001abbf0	268	branchy	near	m2c	60.96	004bbe68	_ZN2YS6CURSOR4execEPNS_6WINDOWEPNS_3PADE	YS::CURSOR::exec(YS::WINDOW*, YS::PAD*)		sim-high
+001adf00	268	loop	near	ghidra	62.65	0049750c	_ZN2YS8SELECTOR3GetEi	YS::SELECTOR::Get(int)		sim-low
+001c9c78	268	float	near	m2c	63.03	00494170	_ZN2YS9SACRIFICE6ReturnEi	YS::SACRIFICE::Return(int)		med
+001dfca8	268	float	near	lift	73.39	002b6e20	_ZN3ryj3PAX7MANAGER13set_obj_colorEb	ryj::PAX::MANAGER::set_obj_color(bool)		med
+00226ac0	268	float	near	lift	88.33	002bdc78	_ZN2sa5EVENT9event_runEPcPN2kn7FMatrixEPN2YS3OBJEPN3ryj3PAXEPFviEii	sa::EVENT::event_run(char*, kn::FMatrix*, YS::OBJ*, ryj::PAX*, void (*)(int), int, int)		med
+0022ad88	268	loop	near	ghidra	74.51	002e0b2c	_ZN2sa13MUSICAL_INPUT10scorePrintEiPN2dk6SpriteE	sa::MUSICAL_INPUT::scorePrint(int, dk::Sprite*)		high
+002b4b00	268	loop	near	lift	86.91	002818a4	_ZN7OvlShop8ItemShop12SetupConfirmEv	OvlShop::ItemShop::SetupConfirm()		sim-high
+002c3c90	268	branchy	near	m2c	58.91	003e4380	_ZN2dk10WM_LANDING6selectEv	dk::WM_LANDING::select()		med
+001043e8	264	loop	near	lift	94.63	0003acd0	_ZN8GUMIMENU5StartEP4TASK	GUMIMENU::Start(TASK*)		med
+0015a158	264	float	near	lift	84.60	0007cfb8	_ZN2dk12TargetCamera7controlEPN2YS3PADEPNS_9ObjCameraE	dk::TargetCamera::control(YS::PAD*, dk::ObjCamera*)		med
+0016c060	264	branchy	near	lift	75.41	00462148	_ZN2YS3OBJ8get_faceEPPvS2_	YS::OBJ::get_face(void**, void**)		med
+00176868	264	float	near	ghidra	85.67	0047764c	_ZN2YS5PARTY16check_blow_recovERNS_7COMMANDE	YS::PARTY::check_blow_recov(YS::COMMAND&)		sim-med
+00178ae8	264	branchy	near	lift	76.71	0047ede8	_ZN2YS6PLAYER24_OVR_exec_command_playerEPKNS_12COMMAND_ELEME	YS::PLAYER::_OVR_exec_command_player(YS::COMMAND_ELEM const*)		sim-high
+001bacd0	264	branchy	near	lift	89.29	00451418	_ZN2YS7MISSION7prepareEv	YS::MISSION::prepare()		high
+001bf270	264	float	near	lift	98.53	0048baf0	_ZN2YS8PRIZEBOXC1EPKNS_8OBJENTRYERKN2kn7FVectorEif	YS::PRIZEBOX::PRIZEBOX(YS::OBJENTRY const*, kn::FVector const&, int, float)		med
+001c99b0	264	float	near	lift	89.32	00494918	_ZN2YS9SACRIFICE13GetFormStatusEi	YS::SACRIFICE::GetFormStatus(int)		med
+001e8180	264	loop	near	lift	41.90	005a6cf4	_Z10pppInitPdtPxP7pppProg	pppInitPdt(long long*, pppProg*)		sim-med
+0023acd8	264	float	near	lift	84.63	000c3ac8	_ZN2YI8SEQUENCE7ControlEv	YI::SEQUENCE::Control()		med
+00252320	264	loop	near	lift	93.91	003bb6a0	_ZN2Tz4CANA18CreateMapBlackPerlEv	Tz::CANA::CreateMapBlackPerl()		sim-med
+002880b8	264	straight	near	lift	89.67	0036ecd0	_ZN2Tz9MenuBasic4InitEv	Tz::MenuBasic::Init()		sim-high
+002891f0	264	branchy	near	lift	96.03	00381e1c	_ZN2Tz6Select10SetCurrentEibii	Tz::Select::SetCurrent(int, bool, int, int)		high
+002a8768	264	loop	near	ghidra	87.40	00342aa8	_ZN2Tz10JmMiniGame13UpdateNewMarkEv	Tz::JmMiniGame::UpdateNewMark()		high
+002b3318	264	loop	near	m2c	76.39	00351654	_ZN2Tz8JmPuzzle13CheckCompleteEv	Tz::JmPuzzle::CheckComplete()		med
+002dfba8	264	float	near	lift	78.56	00631538	_ZN2Ti21ACTION_PO_JUMP_PLAYER5startEPN2YS3OBJE	Ti::ACTION_PO_JUMP_PLAYER::start(YS::OBJ*)		sim-high
+00146390	260	loop	near	lift	83.98	000b04ec	_ZN2dk11OctDrawFile15setNotScisGroupEiRi	dk::OctDrawFile::setNotScisGroup(int, int&)		sim-low
+00189e18	260	branchy	near	ghidra	51.37	004d73c4	_ZN2YS6ANMATR15ReactionCommandEPNS_3OBJEii	YS::ANMATR::ReactionCommand(YS::OBJ*, int, int)		sim-high
+0018ee60	260	branchy	near	lift	78.14	004088cc	_ZN2YS6ATTACK6StrikeEPNS_6BTLOBJEiS2_RKN2kn7FVectorEb	YS::ATTACK::Strike(YS::BTLOBJ*, int, YS::BTLOBJ*, kn::FVector const&, bool)		med
+0019cd40	260	float	near	lift	76.49	00443598	_ZN2YS6LOCKON13check_releaseEv	YS::LOCKON::check_release()		med
+001bdd50	260	float	near	lift	91.88	00480cc0	_ZN2YS14PLAYER_COMMAND11check_alphaEv	YS::PLAYER_COMMAND::check_alpha()		med
+001be060	260	branchy	near	lift	73.41	0042bfd4	_ZN2YS13FIELD_COMMAND5_execEv	YS::FIELD_COMMAND::_exec()		med
+001d0980	260	branchy	near	lift	90.15	0049eadc	_ZN2YS4SORAC1EPKNS_8OBJENTRYEiPNS_3PADERKN2kn7FVectorEf	YS::SORA::SORA(YS::OBJENTRY const*, int, YS::PAD*, kn::FVector const&, float)		med
+001e9c28	260	float	near	lift	63.88	005c38d8	pppVertexAttend	pppVertexAttend		sim-med
+00229728	260	loop	near	lift	95.37	002e22fc	_ZN2sa13MUSICAL_SCORE6updateEv	sa::MUSICAL_SCORE::update()		high
+0022a0f8	260	float	near	ghidra	66.61	002df5c8	_ZN2sa17CIRCLE_MASK_INPUT6createEiii	sa::CIRCLE_MASK_INPUT::create(int, int, int)		med
+0022e4f0	260	float	near	lift	84.43	002d3ecc	_ZN2sa5EVENT14set_mirror_seqERNS_10BIN_MIRROREP4TASK	sa::EVENT::set_mirror_seq(sa::BIN_MIRROR&, TASK*)		sim-high
+0022f6b8	260	float	near	lift	53.05	002d1d98	_ZN2sa5EVENT7set_rotEPN2YS3OBJERN2kn7FVectorE	sa::EVENT::set_rot(YS::OBJ*, kn::FVector&)		med
+0025d918	260	straight	near	lift	95.86	002fc3a0	_ZN2Tz6CmLoad5SetupEv	Tz::CmLoad::Setup()		high
+0026b0f8	260	loop	near	lift	73.43	003a4940	_ZN2Tz7CmEquip15CtrlAutoConfirmEv	Tz::CmEquip::CtrlAutoConfirm()		sim-high
+0027a6d8	260	branchy	near	ghidra	60.77	0038c05c	_ZN2Tz9CmAbility9UpdateNewEv	Tz::CmAbility::UpdateNew()		high
+00280c38	260	branchy	near	lift	94.31	0031e484	_ZN2Tz12GumiGameOver7ControlEv	Tz::GumiGameOver::Control()		high
+0028c3f0	260	loop	near	lift	93.42	00372690	_ZN2Tz8MenuItem4initEP9ALLOCATOR	Tz::MenuItem::init(ALLOCATOR*)		high
+002ae660	260	loop	near	ghidra	61.40	003353ec	_ZN2Tz10JmComplete17isPuzzlePieceCompEi	Tz::JmComplete::isPuzzlePieceComp(int)		high
+002e5fb8	260	loop	near	m2c	74.69	00657bc4	_ZN2Ti4Tim24initEPv	Ti::Tim2::init(void*)		sim-med
+001213c0	256	loop	near	lift	96.06	000f4a0c	_ZN2kn8ModelSKL8showPartEPci	kn::ModelSKL::showPart(char*, int)		sim-vt-high
+00130c18	256	float	near	m2c	66.30	00101cd4	_ZN2kn16MotionPrototype023setConstraintActivationEf	kn::MotionPrototype0::setConstraintActivation(float)		sim-med
+001ad838	256	loop	near	lift	89.06	006ccf28	_ZN2YS15WINDOW_TUTORIALD0Ev	YS::WINDOW_TUTORIAL::~WINDOW_TUTORIAL()		sim-high
+001f5df8	256	branchy	near	lift	94.69	005a9954	pppKeBornRnd2	pppKeBornRnd2		sim-med
+001f6030	256	branchy	near	lift	94.69	005a9be8	pppKeBornRnd3	pppKeBornRnd3		sim-sandwich
+0024e9c0	256	loop	near	ghidra	87.55	003cf94c	_ZN2Tz4TTMY10SetupCMarkEv	Tz::TTMY::SetupCMark()		med
+0025dde8	256	switch	near	ghidra	4.64	002fb920	_ZN2Tz6CmLoad13CtrlSlotCheckEv	Tz::CmLoad::CtrlSlotCheck()		high
+0026a9f8	256	branchy	near	m2c	69.70	003a17b0	_ZN2Tz7CmEquip12DrawStockNumEiijjPN2dk13SpriteMessageE	Tz::CmEquip::DrawStockNum(int, int, unsigned int, unsigned int, dk::SpriteMessage*)		med
+00296da8	256	loop	near	ghidra	82.28	003582ec	_ZN2Tz8JmReport13PadSel2SelNumEi	Tz::JmReport::PadSel2SelNum(int)		high
+002b6138	256	loop	near	m2c	67.01	0030db48	_ZN2Tz8CmSLBase12DrawListMessEiijjPN2dk13SpriteMessageE	Tz::CmSLBase::DrawListMess(int, int, unsigned int, unsigned int, dk::SpriteMessage*)		med
+003259a0	256	loop	near	lift	87.17	006cc79c	_ZN2YS15WINDOW_TUTORIALD1Ev	YS::WINDOW_TUTORIAL::~WINDOW_TUTORIAL()		sim-high
+00111e50	252	loop	near	lift	81.83	000e0f50	_ZN2kn6Friend20setPartyCharaAddressEv	kn::Friend::setPartyCharaAddress()		med
+00135ad0	252	loop	near	ghidra	87.36	001042a0	_ZN2kn11ObjObserver11removeEntryEPN2YS3OBJE	kn::ObjObserver::removeEntry(YS::OBJ*)		sim-high
+00179a68	252	float	near	lift	72.04	0047c494	_ZN2YS6PLAYER9add_driveEf	YS::PLAYER::add_drive(float)		high
+00180a10	252	loop	near	m2c	47.35	0045b1b8	_ZN2YS6MOTION8check_ikEPN2kn8IKAdjustE	YS::MOTION::check_ik(kn::IKAdjust*)		med
+001a2a50	252	loop	near	m2c	96.19	00436b7c	_ZN2YS4ITEM3UseEiiii	YS::ITEM::Use(int, int, int, int)		high
+001ad638	252	loop	near	lift	79.12	004bdb58	_ZN2YS22WINDOW_SYSTEM_TUTORIALD1Ev	YS::WINDOW_SYSTEM_TUTORIAL::~WINDOW_SYSTEM_TUTORIAL()		sim-high
+001ad738	252	loop	near	lift	79.12	006cc49c	_ZN2YS11WINDOW_BASED1Ev	YS::WINDOW_BASE::~WINDOW_BASE()		sim-vt-med
+001b3e88	252	branchy	near	m2c	85.24	0047b1bc	_ZN2YS7PIERROT9damage_seEPNS_6DAMAGEE	YS::PIERROT::damage_se(YS::DAMAGE*)		high
+001d7538	252	float	near	m2c	70.41	004859b8	_ZN2YS15PRIZE_COLOSSEUM11AppearTableERKN2kn7FVectorEPKNS_10PRIZETABLEE	YS::PRIZE_COLOSSEUM::AppearTable(kn::FVector const&, YS::PRIZETABLE const*)		sim-high
+001dbe78	252	float	near	lift	77.05	00420790	_ZN2YS11CROWDEFFECT10appear_objERKN2kn7FVectorE	YS::CROWDEFFECT::appear_obj(kn::FVector const&)		sim-low
+001e9d48	252	float	near	lift	73.19	005c2f14	_Z4apeaP11_pppPObjectP9PVertexApP10pppSVECTOR	apea(_pppPObject*, PVertexAp*, pppSVECTOR*)		sim-high
+002308c8	252	loop	near	ghidra	77.62	002cf6fc	_ZN2sa5EVENT18set_bin_spline_seqERNS_14BIN_SPLINE_SEQE	sa::EVENT::set_bin_spline_seq(sa::BIN_SPLINE_SEQ&)		sim-low
+0028b3c0	252	loop	near	m2c	95.32	00366bd8	_ZN2Tz6LaySeq6updateEv	Tz::LaySeq::update()		sim-high
+002e9b58	252	loop	near	m2c	96.14	006224f4	_ZN2Ts15TARGET_SEARCHER3addEPN2YS3OBJEi	Ts::TARGET_SEARCHER::add(YS::OBJ*, int)		sim-high
+002f12b0	252	float	near	m2c	62.23	005ea600	_ZN2dk4Turn5startEPN2YS3OBJEiff	dk::Turn::start(YS::OBJ*, int, float, float)		high
+001214c0	248	loop	near	lift	95.94	000f4af8	_ZN2kn8ModelSKL8hidePartEPci	kn::ModelSKL::hidePart(char*, int)		sim-vt-high
+001216a8	248	loop	near	lift	95.94	000f4cc0	_ZN2kn8ModelSKL12resetStealthEPci	kn::ModelSKL::resetStealth(char*, int)		sim-vt-high
+0013a368	248	loop	near	lift	92.15	0005106c	_ZN2dk8Field2DD14restartCommandEv	dk::Field2DD::restartCommand()		med
+001618f0	248	straight	near	ghidra	89.92	000480e0	_ZN2dk6Camera22createSingleCameraTaskEv	dk::Camera::createSingleCameraTask()		med
+0018a008	248	float	near	ghidra	60.32	004d8ab8	_ZNK2YS6ANMATR12each_triggerEffPFvPKNS0_7TRIGGEREPvES4_	YS::ANMATR::each_trigger(float, float, void (*)(YS::ANMATR::TRIGGER const*, void*), void*) const		sim-med
+00194120	248	float	near	lift	85.22	00468358	_ZN2YS3OBJ9exec_fadeEv	YS::OBJ::exec_fade()		med
+001a2340	248	branchy	near	m2c	58.97	004980f4	_ZNK2YS5SHEET19adjust_combo_damageEiPKS0_PKNS_11ATTACKPARAME	YS::SHEET::adjust_combo_damage(int, YS::SHEET const*, YS::ATTACKPARAM const*) const		sim-med
+001d61b8	248	branchy	near	lift	87.16	004d9740	_ZN2YS9ANTI_FORM9CheckFormEPNS_4SORAEi	YS::ANTI_FORM::CheckForm(YS::SORA*, int)		sim-high
+002ab448	248	loop	near	ghidra	69.85	00344ef8	_ZN2Tz9JmNewInfo13CheckTreasureEv	Tz::JmNewInfo::CheckTreasure()		sim-high
+002ad9f8	248	loop	near	lift	84.22	003333d4	_ZN2Tz10JmComplete13CheckTreasureEv	Tz::JmComplete::CheckTreasure()		high
+002ed738	248	float	near	lift	79.76	00629798	_ZN2Ts19TRINITY_SHOT_EFFECT4mainEv	Ts::TRINITY_SHOT_EFFECT::main()		sim-high
+00161df0	244	float	near	m2c	62.57	00048df0	_ZN2dk6Camera18crossFadeStartTaskEP4TASK	dk::Camera::crossFadeStartTask(TASK*)		med
+0016a1b8	244	float	near	m2c	69.25	0045dd5c	_ZN2YS3OBJ8set_clsnEPv	YS::OBJ::set_clsn(void*)		med
+0018ed18	244	loop	near	m2c	60.79	00407414	_ZN2YS19ATTACK_WORK_MANAGER5checkEv	YS::ATTACK_WORK_MANAGER::check()		high
+0019d260	244	branchy	near	ghidra	77.85	004436dc	_ZN2YS6LOCKON11update_markEv	YS::LOCKON::update_mark()		high
+001a0a48	244	float	near	lift	66.54	004ca968	_ZN2YS15ACTION_DUSKJUMP13calc_movementEPNS_3OBJE	YS::ACTION_DUSKJUMP::calc_movement(YS::OBJ*)		sim-med
+001a2108	244	branchy	near	m2c	60.26	00497e30	_ZNK2YS5SHEET17adjust_game_levelEiPNS_6BTLOBJE	YS::SHEET::adjust_game_level(int, YS::BTLOBJ*) const		med
+001cea48	244	branchy	near	m2c	81.15	004ec8d0	_ZN2YS10LIGHTCYCLE10check_turnEPNS_8TRPLAYEREPKNS_3PADE	YS::LIGHTCYCLE::check_turn(YS::TRPLAYER*, YS::PAD const*)		sim-high
+001d3e40	244	loop	near	m2c	88.56	004419f8	_ZNK2YS11LIMIT_TABLE8can_execEv	YS::LIMIT_TABLE::can_exec() const		med
+001d62b0	244	loop	near	ghidra	72.31	004d9438	_ZN2YS9ANTI_FORM6IsAntiEPNS_4SORAEPNS_7FORMRAME	YS::ANTI_FORM::IsAnti(YS::SORA*, YS::FORMRAM*)		sim-high
+00244b38	244	branchy	near	m2c	75.03	003bf4b0	_ZN2Tz4HEFT11UpdateScoreEv	Tz::HEFT::UpdateScore()		med
+0027c3e0	244	branchy	near	lift	65.90	00391200	_ZN2Tz9CmAbility8SelCheckEi	Tz::CmAbility::SelCheck(int)		high
+00280148	244	straight	near	lift	93.70	0031caf0	_ZN2Tz9GumiPause12CreateAdviceEv	Tz::GumiPause::CreateAdvice()		sim-high
+002926c0	244	straight	near	lift	96.72	00388078	_ZN2Tz8UnitLoad4InitEi	Tz::UnitLoad::Init(int)		sim-high
+002ca4c0	244	branchy	near	lift	62.41	003e0320	_ZN2dk11WM_GLANDING6selectEv	dk::WM_GLANDING::select()		high
+002caa50	244	straight	near	lift	89.18	003e094c	_ZN2dk11WM_GLANDING6createEPKci	dk::WM_GLANDING::create(char const*, int)		high
+00322300	244	loop	near	m2c	90.34	006b6de8	_ZN2sa13MUSICAL_COMBOD0Ev	sa::MUSICAL_COMBO::~MUSICAL_COMBO()		sim-vt-high
+00119d70	240	float	near	m2c	79.82	000e8fc0	_ZN2kn5Genie6potionEPNS_12FriendActionEPN2YS6TARGETEPPvb	kn::Genie::potion(kn::FriendAction*, YS::TARGET*, void**, bool)		med
+0011e260	240	loop	near	lift	85.64	000f033c	_ZN2kn8ModelObj11bindTextureEPv	kn::ModelObj::bindTexture(void*)		sim-low
+001215b8	240	loop	near	lift	95.81	000f4bdc	_ZN2kn8ModelSKL10setStealthEPci	kn::ModelSKL::setStealth(char*, int)		sim-vt-high
+001384d0	240	loop	near	ghidra	76.72	00070c8c	_ZN2dk5Pause12pause_threadEP4TASK	dk::Pause::pause_thread(TASK*)		med
+0016f520	240	branchy	near	lift	89.73	0046a84c	_ZNK2YS8OBJENTRY8get_msetEjPc	YS::OBJENTRY::get_mset(unsigned int, char*) const		sim-med
+00176168	240	float	near	ghidra	73.01	00477e58	_ZN2YS5PARTY10set_weaponEji	YS::PARTY::set_weapon(unsigned int, int)		med
+0017cd20	240	float	near	lift	82.22	00403658	_ZN2YS11ACTION_JUMP10party_jumpEPNS_3OBJEb	YS::ACTION_JUMP::party_jump(YS::OBJ*, bool)		sim-high
+001c3060	240	loop	near	m2c	85.78	004c5818	_ZN2YS7ABILITY5checkEv	YS::ABILITY::check()		sim-high
+001cd078	240	switch	near	lift	90.46	0048a680	_ZN2YS8PRIZE_TT10ExecDamageEPNS_6DAMAGEE	YS::PRIZE_TT::ExecDamage(YS::DAMAGE*)		sim-high
+001d5f30	240	loop	near	m2c	96.08	0042f9f4	_ZN2YS10FORM_LEVEL6AddExpEPNS_6PLAYEREi	YS::FORM_LEVEL::AddExp(YS::PLAYER*, int)		med
+001e1070	240	float	near	ghidra	71.35	00618124	_ZN3ryj5LASER6strikeEPN2YS6BTLOBJE	ryj::LASER::strike(YS::BTLOBJ*)		sim-high
+001e8ac8	240	loop	near	lift	82.97	005a6f44	_Z14pppRunPartExecP9_pppMngSt	pppRunPartExec(_pppMngSt*)		sim-med
+00228150	240	branchy	near	lift	95.25	002bd060	_ZN2sa5EVENT17event_task_createEi	sa::EVENT::event_task_create(int)		med
+0022c108	240	branchy	near	lift	89.74	002c5a9c	_ZN2sa5EVENT14last_countdownEv	sa::EVENT::last_countdown()		high
+0028d980	240	branchy	near	lift	95.30	0037687c	_ZN2Tz8MenuUtil10CreateMessEPN2dk13SpriteMessageEiiiPNS_6LayoutEiiiii	Tz::MenuUtil::CreateMess(dk::SpriteMessage*, int, int, int, Tz::Layout*, int, int, int, int, int)		high
+002adfd0	240	loop	near	ghidra	87.48	00332500	_ZN2Tz10JmComplete10CheckStoryEv	Tz::JmComplete::CheckStory()		high
+00147050	236	loop	near	ghidra	82.09	000ad2d4	_ZN2dk11OctDrawFile14findDrawObjectEiPNS_11ObjDrawListEiRi	dk::OctDrawFile::findDrawObject(int, dk::ObjDrawList*, int, int&)		sim-med
+00152820	236	straight	near	ghidra	92.34	0005c250	_ZN2dk8LEVEL_UP7calcPosERiS1_S1_S1_Rj	dk::LEVEL_UP::calcPos(int&, int&, int&, int&, unsigned int&)		sim-high
+0015b680	236	loop	near	m2c	92.62	000992c8	_ZN2dk3Exp5printERKN2kn7FVectorEii	dk::Exp::print(kn::FVector const&, int, int)		high
+00177760	236	branchy	near	lift	84.95	004766c8	_ZN2YS5PARTY20_OVR_attack_callbackEPNS_6BTLOBJEPNS_6ATTACKEPKNS_11ATTACKPARAME	YS::PARTY::_OVR_attack_callback(YS::BTLOBJ*, YS::ATTACK*, YS::ATTACKPARAM const*)		med
+0018c150	236	float	near	lift	55.02	004f0020	_ZN2YS3NPC14end_rtn_actionEv	YS::NPC::end_rtn_action()		sim-med
+0019e758	236	loop	near	m2c	66.31	004916d4	_ZN2YS11RC_SEARCHER17check_auto_summonEPNS_6PLAYERE	YS::RC_SEARCHER::check_auto_summon(YS::PLAYER*)		sim-high
+001b3118	236	loop	near	lift	59.20	004728e0	_ZN2YS6OBJOCC10set_matrixEPNS_3OBJE	YS::OBJOCC::set_matrix(YS::OBJ*)		med
+001b5708	236	straight	near	lift	80.28	0043f4e4	_ZN2YS5LIMIT19set_special_commandEi	YS::LIMIT::set_special_command(int)		high
+001c0320	236	float	near	lift	89.27	0040a1c8	_ZN2YS12ATTACK_CHECK3hitEPNS_6ATTACKERb	YS::ATTACK_CHECK::hit(YS::ATTACK*, bool&)		sim-high
+001d89e8	236	loop	near	e3	95.08	00455c60	_ZN2YS7MISSION17SetCountFigureNumEiii	YS::MISSION::SetCountFigureNum(int, int, int)		sim-high
+0026b008	236	loop	near	ghidra	70.11	003a1f04	_ZN2Tz7CmEquip22CheckAutoReplenishmentEv	Tz::CmEquip::CheckAutoReplenishment()		high
+00292fe8	236	straight	near	lift	50.62	0038787c	_ZN2Tz8UnitLoad12BackReadFaceEv	Tz::UnitLoad::BackReadFace()		sim-med
+002a4b78	236	loop	near	ghidra	77.36	003601ac	_ZN2Tz10JmTreasure12AdjustCurPosEv	Tz::JmTreasure::AdjustCurPos()		high
+002ae0c0	236	loop	near	ghidra	32.00	00332298	_ZN2Tz10JmComplete11isStoryCompEi	Tz::JmComplete::isStoryComp(int)		med
+002e2570	236	float	near	lift	67.80	00634fa0	_ZN2Ti12MG_EHSidecar9post_execEv	Ti::MG_EHSidecar::post_exec()		sim-med
+002ea360	236	float	near	m2c	48.76	00169b00	_ZN2gb6PLAYER12calc_postureEv	gb::PLAYER::calc_posture()		sim-low
+0015c958	232	float	near	lift	63.67	00061450	_ZN2dk8MapColor6setFogEiiiiii	dk::MapColor::setFog(int, int, int, int, int, int)		sim-low
+0015f8d8	232	branchy	near	lift	56.83	00078200	_ZN2dk3SkyC1EjRKN2kn7FVectorES4_S4_ii	dk::Sky::Sky(unsigned int, kn::FVector const&, kn::FVector const&, kn::FVector const&, int, int)		sim-low
+0017c578	232	float	near	lift	67.93	00402ac8	_ZN2YS11ACTION_JUMP5startEPNS_3OBJE	YS::ACTION_JUMP::start(YS::OBJ*)		sim-high
+0017e720	232	float	near	m2c	84.75	00431bc0	_ZN2YS6FRIEND8AutoHealEv	YS::FRIEND::AutoHeal()		med
+00189f20	232	float	near	ghidra	81.29	004d8898	_ZNK2YS6ANMATR10each_rangeEfPFvPKNS0_5RANGEEPvES4_	YS::ANMATR::each_range(float, void (*)(YS::ANMATR::RANGE const*, void*), void*) const		sim-med
+0018b7f8	232	float	near	lift	63.36	004ef1e0	_ZN2YS3NPC13check_in_zoneEv	YS::NPC::check_in_zone()		sim-high
+001920f0	232	loop	near	lift	59.50	0044d304	_ZN2YS7MESSAGE7GetDataEi	YS::MESSAGE::GetData(int)		sim-low
+001a35f8	232	loop	near	m2c	41.74	00437534	_ZN2YS4ITEM6GetNumEii	YS::ITEM::GetNum(int, int)		med
+001c2490	232	float	near	lift	98.90	00448f60	_ZN2YS7MASSOBJC1EPKNS_8OBJENTRYEiiijj	YS::MASSOBJ::MASSOBJ(YS::OBJENTRY const*, int, int, int, unsigned int, unsigned int)		sim-high
+001cfaf0	232	float	near	lift	76.28	004d5218	_ZN2YS12ACTION_NMGUN7controlEPNS_3OBJE	YS::ACTION_NMGUN::control(YS::OBJ*)		sim-high
+00209ed0	232	float	near	lift	76.25	005c5478	pppRyjDrawDrawMatrixWorldDttFr	pppRyjDrawDrawMatrixWorldDttFr		sim-high
+0022ca00	232	loop	near	lift	91.21	002caf44	_ZN2sa5EVENT10light_ctrlEv	sa::EVENT::light_ctrl()		high
+00237068	232	straight	near	lift	54.43	000c6a28	_ZN2YI6SPRITE4InitEPvPNS_5IMAGEE	YI::SPRITE::Init(void*, YI::IMAGE*)		sim-med
+00245dd0	232	branchy	near	lift	95.09	003c4220	_ZN2Tz4HECO7ControlEv	Tz::HECO::Control()		high
+0027b5d0	232	loop	near	m2c	77.30	0039003c	_ZN2Tz9CmAbility16GetTopSelMessageEv	Tz::CmAbility::GetTopSelMessage()		med
+0028de08	232	loop	near	ghidra	86.16	00376fdc	_ZN2Tz8MenuUtil15MakeQuestionStrEiPci	Tz::MenuUtil::MakeQuestionStr(int, char*, int)		high
+002ad6e8	232	loop	near	lift	89.10	00333708	_ZN2Tz10JmComplete10CheckQuestEv	Tz::JmComplete::CheckQuest()		high
+001c7ca8	228	float	near	lift	72.29	00486c98	_ZN2YS8PRIZE_MU11AppearTableERKN2kn7FVectorEPKNS_10PRIZETABLEE	YS::PRIZE_MU::AppearTable(kn::FVector const&, YS::PRIZETABLE const*)		high
+001e4e18	228	float	near	lift	53.59	002ad068	_Z10pppInitDpdPc	pppInitDpd(char*)		sim-med
+00261fb8	228	loop	near	lift	94.51	003a8860	_ZN2Tz6CmItem15UpdateStockListEv	Tz::CmItem::UpdateStockList()		high
+002826f8	228	switch	near	m2c	91.49	0032200c	_ZN2Tz8ItemInfo12CalcEquipMaxEii	Tz::ItemInfo::CalcEquipMax(int, int)		sim-high
+00282858	228	loop	near	lift	95.51	00322570	_ZN2Tz8ItemInfo12MakeStockMsgEii	Tz::ItemInfo::MakeStockMsg(int, int)		med
+00284650	228	loop	near	lift	95.32	002ee9dc	_ZN2Tz6Ending7LoopAllEv	Tz::Ending::LoopAll()		med
+00284ef0	228	branchy	near	m2c	90.82	002ef52c	_ZN2Tz6Ending7ControlEv	Tz::Ending::Control()		high
+00291110	228	straight	near	ghidra	91.95	00326468	_ZN2Tz8ItemStat11CreateEquipEiiiPN2dk6SpriteEii	Tz::ItemStat::CreateEquip(int, int, int, dk::Sprite*, int, int)		med
+0029e170	228	branchy	near	lift	87.16	0033c3f4	_ZN2Tz5JmDic15CreateCharaBaseEi	Tz::JmDic::CreateCharaBase(int)		med
+002d6518	228	float	near	lift	99.65	0064bed8	_ZN2Ti11MGOarashiPo7combineEv	Ti::MGOarashiPo::combine()		med
+002ed350	228	branchy	near	m2c	75.80	0062929c	_ZN2Ts16TRINITY_SHOT_OBJ5startEPN2YS3OBJEPNS1_6TARGETERKN2kn7FVectorES9_	Ts::TRINITY_SHOT_OBJ::start(YS::OBJ*, YS::TARGET*, kn::FVector const&, kn::FVector const&)		med
+002f1670	228	float	near	m2c	44.08	005ea4c8	_ZN2dk5Shake4execEv	dk::Shake::exec()		med
+0031c368	228	loop	near	lift	81.73	006aa014	_ZN2dk5TIMERD0Ev	dk::TIMER::~TIMER()		sim-vt-high
+00133078	224	loop	near	ghidra	91.59	0010f178	_ZN2kn10TEXAnmWork19getActiveTEXAnmWorkEPNS_13AnimationWorkEPPvjjS3_	kn::TEXAnmWork::getActiveTEXAnmWork(kn::AnimationWork*, void**, unsigned int, unsigned int, void*)		sim-med
+00136878	224	branchy	near	ghidra	53.70	00045d58	_ZN2dk4BGSE16playBackGroundSeEv	dk::BGSE::playBackGroundSe()		sim-low
+00143b88	224	branchy	near	lift	78.12	0006d7bc	_ZN2dk6Octree13intersectLineERNS_4LineERN2kn7FVectorERtRPNS_6ObjOccEi	dk::Octree::intersectLine(dk::Line&, kn::FVector&, unsigned short&, dk::ObjOcc*&, int)		high
+001515b0	224	loop	near	lift	95.71	000b6bfc	_ZN2dk5TIMER10forceLeaveEv	dk::TIMER::forceLeave()		sim-low
+00177c50	224	float	near	e3	67.17	004767e0	_ZN2YS5PARTY11_OVR_add_hpEiib	YS::PARTY::_OVR_add_hp(int, int, bool)		med
+00184ad0	224	float	near	m2c	77.00	00471840	_ZN2YS3OBJ11turn_to_dirERKN2kn7FVectorEf	YS::OBJ::turn_to_dir(kn::FVector const&, float)		high
+0019b180	224	loop	near	ghidra	27.89	004b19b4	_ZN2YS10UNIT_GROUP11exec_battleEv	YS::UNIT_GROUP::exec_battle()		med
+001b1ee8	224	loop	near	lift	89.86	004391a8	_ZN2YS7ITEMPIC15ReadImageThreadEP4TASK	YS::ITEMPIC::ReadImageThread(TASK*)		high
+001b2f38	224	loop	near	ghidra	87.36	004726f8	_ZN2YS6OBJOCC4initEPvb	YS::OBJOCC::init(void*, bool)		med
+001cf9e0	224	branchy	near	lift	81.27	004ee104	_ZN2YS8NMPLAYER8set_lampEi	YS::NMPLAYER::set_lamp(int)		sim-high
+001e7be0	224	loop	near	lift	79.38	005a65ec	_Z17pppAllFreePObjectP9_pppMngSt	pppAllFreePObject(_pppMngSt*)		sim-med
+00244068	224	branchy	near	lift	97.81	003c0a4c	_ZN2Tz4HEFT7ControlEv	Tz::HEFT::Control()		med
+00252fe8	224	branchy	near	lift	79.68	002ea9bc	_ZN2Tz8CampMenu4InitEi	Tz::CampMenu::Init(int)		med
+00288670	224	branchy	near	lift	79.70	0036f198	_ZN2Tz9MenuBasic9StartFadeEPFvvE	Tz::MenuBasic::StartFade(void (*)())		med
+0028aa40	224	loop	near	lift	88.62	00382610	_ZN2Tz6Select7FadeOutEv	Tz::Select::FadeOut()		high
+0028bfc0	224	float	near	lift	95.36	0037de20	_ZN2Tz9ScrollBar6SetMaxEi	Tz::ScrollBar::SetMax(int)		med
+0028d1c0	224	loop	near	lift	96.07	00367b94	_ZN2Tz8LightCur6CreateEiiiPNS_6LayoutEPKsii	Tz::LightCur::Create(int, int, int, Tz::Layout*, short const*, int, int)		high
+0029ae40	224	switch	near	ghidra	90.50	0033e314	_ZN2Tz5JmDic5SetupEv	Tz::JmDic::Setup()		high
+002ab020	224	loop	near	m2c	73.57	00345184	_ZN2Tz9JmNewInfo13CheckMiniGameEv	Tz::JmNewInfo::CheckMiniGame()		sim-med
+002adaf0	224	loop	near	lift	73.62	00334e54	_ZN2Tz10JmComplete14isTreasureCompEi	Tz::JmComplete::isTreasureComp(int)		high
+002e8d08	224	float	near	m2c	55.87	00623650	_ZN2Ts39trap_limit_aladdin_exclamation_mark_posEP8BD_VALUE	Ts::trap_limit_aladdin_exclamation_mark_pos(BD_VALUE*)		med
+00132f98	220	loop	near	lift	88.38	0010efc8	_ZN2kn10TEXAnmWork19getActiveTEXAnmWorkEPNS_13AnimationWorkEjPPS0_jPv	kn::TEXAnmWork::getActiveTEXAnmWork(kn::AnimationWork*, unsigned int, kn::TEXAnmWork**, unsigned int, void*)		sim-med
+00149de0	220	branchy	near	lift	96.49	000434bc	_ZN2dk4Area16cacheBuffDestroyEPK4AREA	dk::Area::cacheBuffDestroy(AREA const*)		med
+0014ccb8	220	branchy	near	lift	38.31	0004979c	_ZN2dk5Clock15iupdatePlayTimeEv	dk::Clock::iupdatePlayTime()		sim-med
+00179450	220	float	near	m2c	84.48	0047de20	_ZN2YS6PLAYER14ability_lkdashEv	YS::PLAYER::ability_lkdash()		med
+0017e418	220	float	near	lift	87.29	00431640	_ZN2YS6FRIEND6AppearEPKNS_8OBJENTRYERKN2kn7FVectorEf	YS::FRIEND::Appear(YS::OBJENTRY const*, kn::FVector const&, float)		high
+00189d38	220	branchy	near	lift	83.89	004d72c8	_ZN2YS6ANMATR13TriggerEffectEPNS_6MOTIONEPKNS0_7TRIGGERE	YS::ANMATR::TriggerEffect(YS::MOTION*, YS::ANMATR::TRIGGER const*)		sim-high
+0018aba0	220	float	near	lift	66.53	004efc48	_ZN2YS3NPCC1EPKNS_8OBJENTRYEiRKN2kn7FVectorEf	YS::NPC::NPC(YS::OBJENTRY const*, int, kn::FVector const&, float)		sim-low
+001b90f0	220	branchy	near	m2c	70.19	0041b9dc	_ZNK2YS12COMMAND_ELEM7can_useEPNS_6PLAYERE	YS::COMMAND_ELEM::can_use(YS::PLAYER*) const		high
+001bcc28	220	loop	near	lift	80.43	0041c6a4	_ZN2YS12COMMAND_MENU13exec_shortcutEv	YS::COMMAND_MENU::exec_shortcut()		med
+001d50b8	220	loop	near	ghidra	49.35	00414380	_ZN2YS7CA_SHIP10IsSkipAreaERK4AREARNS_6JUMPERE	YS::CA_SHIP::IsSkipArea(AREA const&, YS::JUMPER&)		sim-med
+001d98a0	220	branchy	near	m2c	61.35	0040cdc4	_ZN2YS13BATTLE_REPORT15IsFMSecretMovieEv	YS::BATTLE_REPORT::IsFMSecretMovie()		sim-high
+002325f0	220	branchy	near	ghidra	86.41	002bf978	_ZN2sa5EVENT18isTTPacheVoicePlayEPNS_7READ_WKE	sa::EVENT::isTTPacheVoicePlay(sa::READ_WK*)		sim-low
+002331a0	220	straight	near	lift	92.69	002cdfdc	_ZN2sa5EVENT15motion_read_setEPcNS_11EVENT_ALLOC10ALLOC_TYPEEiii	sa::EVENT::motion_read_set(char*, sa::EVENT_ALLOC::ALLOC_TYPE, int, int, int)		med
+002641c8	220	loop	near	lift	78.62	00320e18	_ZN2Tz9IShopInfo11AddItemDataEPNS0_7ShopTblEPtit	Tz::IShopInfo::AddItemData(Tz::IShopInfo::ShopTbl*, unsigned short*, int, unsigned short)		sim-low
+00286418	220	loop	near	lift	79.29	003afcbc	_ZN2Tz8CmNewFlg9isStatNewEi	Tz::CmNewFlg::isStatNew(int)		sim-high
+0028def0	220	loop	near	ghidra	82.29	0037712c	_ZN2Tz8MenuUtil15MakeQuestionStrEPci	Tz::MenuUtil::MakeQuestionStr(char*, int)		sim-high
+002ab540	220	loop	near	lift	67.46	00349914	_ZN2Tz9JmNewInfo13isTreasureNewEi	Tz::JmNewInfo::isTreasureNew(int)		high
+002ab8e8	220	loop	near	ghidra	85.23	00349f94	_ZN2Tz9JmNewInfo9isNaviNewEi	Tz::JmNewInfo::isNaviNew(int)		high
+002ad258	220	loop	near	ghidra	92.38	00333bf8	_ZN2Tz10JmComplete10CheckAnsemEv	Tz::JmComplete::CheckAnsem()		high
+002ad580	220	loop	near	ghidra	92.38	00333888	_ZN2Tz10JmComplete11CheckBattleEv	Tz::JmComplete::CheckBattle()		high
+002adbd0	220	loop	near	lift	81.98	00333258	_ZN2Tz10JmComplete9CheckNaviEv	Tz::JmComplete::CheckNavi()		med
+002adcb0	220	loop	near	ghidra	85.23	00334fec	_ZN2Tz10JmComplete10isNaviCompEi	Tz::JmComplete::isNaviComp(int)		high
+001285f8	216	float	near	lift	89.41	000fa028	_ZN2kn16MotionPrototype012getTimeIndexEfRiS1_	kn::MotionPrototype0::getTimeIndex(float, int&, int&)		sim-med
+0013a6f8	216	loop	near	lift	90.98	000517d0	_ZN2dk8Field2DD8initAreaEv	dk::Field2DD::initArea()		sim-med
+00145ab8	216	loop	near	ghidra	71.38	000b1388	_ZN2dk11OctDrawFileD1Ev	dk::OctDrawFile::~OctDrawFile()		sim-low
+0014ca80	216	float	near	ghidra	73.06	000496b8	_ZN2dk5Clock13vCountToHMSMSEjRjS1_S1_S1_	dk::Clock::vCountToHMSMS(unsigned int, unsigned int&, unsigned int&, unsigned int&, unsigned int&)		high
+001506e0	216	loop	near	lift	93.72	000b84e4	_ZN2dk7COUNTER10forceLeaveEv	dk::COUNTER::forceLeave()		med
+00150940	216	branchy	near	m2c	81.83	000a8b4c	_ZN2dk18INFORMATION_WINDOW10setMessageEPKN2YS7MESSAGEE	dk::INFORMATION_WINDOW::setMessage(YS::MESSAGE const*)		med
+00151c70	216	loop	near	lift	93.72	000a92cc	_ZN2dk13MISSION_GAUGE10forceLeaveEv	dk::MISSION_GAUGE::forceLeave()		high
+0015ca40	216	float	near	lift	68.07	000611f8	_ZN2dk8MapColor5setupEPS0_	dk::MapColor::setup(dk::MapColor*)		sim-med
+00184eb8	216	float	near	lift	93.18	00471958	_ZN2YS3OBJ8set_pathEiPNS_10UNIT_GROUPE	YS::OBJ::set_path(int, YS::UNIT_GROUP*)		med
+00187650	216	float	near	lift	61.67	00413b54	_ZN2YS6BTLOBJ6add_mpEib	YS::BTLOBJ::add_mp(int, bool)		high
+00187fd8	216	branchy	near	lift	79.51	003fff64	_ZN2YS3ACT5startEPKNS0_5TABLE4ELEME	YS::ACT::start(YS::ACT::TABLE::ELEM const*)		med
+001991a8	216	switch	near	m2c	98.16	0049b708	_ZN2YS6SIGNAL4CallEii	YS::SIGNAL::Call(int, int)		sim-low
+001a24a0	216	loop	near	lift	99.59	00497d48	_ZN2YS5SHEET10apply_itemEi	YS::SHEET::apply_item(int)		med
+001a2d78	216	loop	near	m2c	76.56	00437a48	_ZN2YS4ITEM6CanUseEii	YS::ITEM::CanUse(int, int)		high
+001bcd08	216	loop	near	e3	11.93	0041c5b0	_ZN2YS12COMMAND_MENU11check_closeEv	YS::COMMAND_MENU::check_close()		high
+001c1a30	216	float	near	lift	64.63	0044885c	_ZN2YS10MASSEFFECT14make_referenceERNS0_9REFERENCEE	YS::MASSEFFECT::make_reference(YS::MASSEFFECT::REFERENCE&)		sim-med
+001c2eb8	216	loop	near	m2c	82.98	00481fd8	_ZN2YS11PLAYERPARAM5ApplyEi	YS::PLAYERPARAM::Apply(int)		sim-med
+001cd548	216	branchy	near	lift	74.57	004c03fc	_ZN2YS10WORLDSTART7GetAreaEi	YS::WORLDSTART::GetArea(int)		sim-low
+001d4ae0	216	branchy	near	lift	25.37	0049fbac	_ZN2YS15SPECIAL_COMMAND20make_skateboard_menuEPNS_4SORAEPNS_12COMMAND_MENUE	YS::SPECIAL_COMMAND::make_skateboard_menu(YS::SORA*, YS::COMMAND_MENU*)		sim-med
+0023dd28	216	float	near	lift	96.87	00374840	_ZN2Tz7MenuObj16SetProjectionPosEiii	Tz::MenuObj::SetProjectionPos(int, int, int)		med
+00240a70	216	loop	near	m2c	49.89	00369e34	_ZN2Tz5MCard20CopySaveRam2DataBuffEPv	Tz::MCard::CopySaveRam2DataBuff(void*)		sim-med
+00248900	216	branchy	near	lift	97.73	003cab68	_ZN2Tz4MUMI7ControlEv	Tz::MUMI::Control()		med
+0024a270	216	branchy	near	lift	97.73	003cd504	_ZN2Tz4TRTE7ControlEv	Tz::TRTE::Control()		med
+0024bd90	216	branchy	near	lift	97.73	003be114	_ZN2Tz4HBTE7ControlEv	Tz::HBTE::Control()		med
+0024d6c8	216	branchy	near	lift	97.73	003d205c	_ZN2Tz4TTPT7ControlEv	Tz::TTPT::Control()		med
+0024ff08	216	branchy	near	lift	97.73	003c891c	_ZN2Tz4LMMU7ControlEv	Tz::LMMU::Control()		high
+00252540	216	branchy	near	lift	94.05	003b9d7c	_ZN2Tz4CANA9UpdateGraEv	Tz::CANA::UpdateGra()		high
+00257458	216	branchy	near	lift	94.67	0031586c	_ZN2Tz5CmTop15SetupWarningWinEPKN2YS7MESSAGEEi	Tz::CmTop::SetupWarningWin(YS::MESSAGE const*, int)		sim-sandwich
+002655e8	216	loop	near	lift	94.78	003b404c	_ZN2Tz6CmStat12LeaveTopListEv	Tz::CmStat::LeaveTopList()		sim-med
+00281d48	216	float	near	lift	84.59	00320768	_ZN2Tz11ItemPicDraw12ChkLoadEntryEv	Tz::ItemPicDraw::ChkLoadEntry()		sim-med
+002aa220	216	loop	near	lift	76.44	00345b28	_ZN2Tz9JmNewInfo10CheckAnsemEv	Tz::JmNewInfo::CheckAnsem()		sim-med
+002aa960	216	loop	near	lift	76.44	0034562c	_ZN2Tz9JmNewInfo11CheckBattleEv	Tz::JmNewInfo::CheckBattle()		sim-med
+002ad4a8	216	loop	near	m2c	55.06	003347c0	_ZN2Tz10JmComplete11isAlbumCompEi	Tz::JmComplete::isAlbumComp(int)		high
+002ad878	216	loop	near	ghidra	92.06	00333584	_ZN2Tz10JmComplete13CheckMiniGameEv	Tz::JmComplete::CheckMiniGame()		med
+002cef80	216	float	near	lift	64.04	006507b4	_ZN2Ti8MiniGame16prize_is_visibleEPN2YS14PRIZEEFFECT_POE	Ti::MiniGame::prize_is_visible(YS::PRIZEEFFECT_PO*)		sim-med
+002cf320	216	loop	near	ghidra	75.56	0064c80c	_ZN2Ti5MGObj10alloc_workEi	Ti::MGObj::alloc_work(int)		med
+00322228	216	loop	near	m2c	85.49	006b6d2c	_ZN2sa13MUSICAL_COMBOD1Ev	sa::MUSICAL_COMBO::~MUSICAL_COMBO()		sim-vt-high
+00153468	212	branchy	near	ghidra	77.87	0005e368	_ZN2dk12LEVELUP_INFO10openSummonEPKN2YS7MESSAGEES4_i	dk::LEVELUP_INFO::openSummon(YS::MESSAGE const*, YS::MESSAGE const*, int)		high
+0016b668	212	branchy	near	m2c	99.81	0046047c	_ZN2YS3OBJ10_OVR_leaveEv	YS::OBJ::_OVR_leave()		high
+00178fe8	212	branchy	near	m2c	84.64	0047db90	_ZN2YS6PLAYER14ability_attackEi	YS::PLAYER::ability_attack(int)		sim-high
+0017cc30	212	float	near	lift	85.56	00403460	_ZN2YS11ACTION_JUMP5_landEPNS_3OBJENS_6ACTION2IDE	YS::ACTION_JUMP::_land(YS::OBJ*, YS::ACTION::ID)		sim-high
+0017e138	212	float	near	lift	65.66	00431218	_ZN2YS6FRIEND10stun_recovEi	YS::FRIEND::stun_recov(int)		med
+0018d940	212	branchy	near	e3	88.02	00406f6c	_ZN2YS6ATTACK9is_strikeEPNS_6BTLOBJE	YS::ATTACK::is_strike(YS::BTLOBJ*)		med
+0019aec0	212	loop	near	lift	91.32	004b0b18	_ZN2YS10UNIT_GROUP13check_levelupEv	YS::UNIT_GROUP::check_levelup()		sim-med
+0019b500	212	float	near	lift	72.78	004b0688	_ZN2YS10UNIT_GROUP10appear_npcEv	YS::UNIT_GROUP::appear_npc()		sim-med
+001a52a8	212	float	near	lift	99.62	00482cd8	_ZN2YS5PRIZE10get_commonEPNS_6BTLOBJEPNS_11PRIZEEFFECTE	YS::PRIZE::get_common(YS::BTLOBJ*, YS::PRIZEEFFECT*)		med
+001b71e8	212	loop	near	m2c	76.49	0043c5bc	_ZN2YS7LEVELUP5CheckEiPNS_7PARTRAMEPNS_5PARTYE	YS::LEVELUP::Check(int, YS::PARTRAM*, YS::PARTY*)		high
+001ccfa0	212	float	near	ghidra	50.55	0048a4b0	_ZN2YS8PRIZE_TT14_OVR_check_getEPNS_11PRIZEEFFECTE	YS::PRIZE_TT::_OVR_check_get(YS::PRIZEEFFECT*)		sim-high
+001d02c8	212	float	near	lift	83.81	0044ff50	_ZN2YS6MICKEY12recov_elixirEv	YS::MICKEY::recov_elixir()		med
+001dea80	212	float	near	m2c	88.13	002b5268	_ZN3ryj3PAX7MANAGERC1EPNS_6EFFECTEPNS0_4ELEMEPvf	ryj::PAX::MANAGER::MANAGER(ryj::EFFECT*, ryj::PAX::ELEM*, void*, float)		sim-med
+001f6778	212	branchy	near	lift	85.00	005aa4cc	pppKeBornRnd5	pppKeBornRnd5		sim-med
+001f6b68	212	branchy	near	lift	85.00	005aa8d0	pppKeBornRnd6	pppKeBornRnd6		sim-med
+0023c3e0	212	loop	near	ghidra	85.28	000c14f4	_ZN2YI6LAYOUT14SearchSequenceEii	YI::LAYOUT::SearchSequence(int, int)		high
+00269e20	212	branchy	near	m2c	89.75	003a0acc	_ZN2Tz7CmEquip11FadeOutListEv	Tz::CmEquip::FadeOutList()		high
+00282620	212	loop	near	ghidra	63.59	00322be4	_ZN2Tz8ItemInfo15AddKnowItemInfoEv	Tz::ItemInfo::AddKnowItemInfo()		med
+00287358	212	branchy	near	m2c	82.61	003b1094	_ZN2Tz8CmNewFlg19SetAbilityFlgMemberEii	Tz::CmNewFlg::SetAbilityFlgMember(int, int)		sim-high
+0029c880	212	loop	near	ghidra	80.33	0033f9a0	_ZN2Tz5JmDic21SetupDiagramCharaInfoEPKNS_9JmDiagram4InfoEi	Tz::JmDic::SetupDiagramCharaInfo(Tz::JmDiagram::Info const*, int)		high
+0029ca50	212	loop	near	ghidra	88.61	0033ac98	_ZN2Tz5JmDic11GetCharaIdxEv	Tz::JmDic::GetCharaIdx()		high
+002a4a00	212	loop	near	ghidra	92.55	0035fce4	_ZN2Tz10JmTreasure10GetCurXMaxEi	Tz::JmTreasure::GetCurXMax(int)		med
+002d60e8	212	float	near	lift	81.15	0064b4c8	_ZN2Ti11MGOarashiPo18get_separate_speedEv	Ti::MGOarashiPo::get_separate_speed()		sim-high
+00322c98	212	loop	near	lift	84.78	006bbd08	_ZN2Tz7MenuObjD0Ev	Tz::MenuObj::~MenuObj()		high
+0010c9f8	208	float	near	lift	65.59	00665c28	_ZN2YS11TEST_ACTION9ActionHopEi	YS::TEST_ACTION::ActionHop(int)		sim-med
+0010f7b0	208	loop	near	lift	93.56	000e47a8	_ZN2kn6Friend14equipedAbilityEii	kn::Friend::equipedAbility(int, int)		high
+00137180	208	loop	near	lift	78.42	0004400c	_ZN2dk3BGM10typeChangeEPi	dk::BGM::typeChange(int*)		sim-med
+0013d550	208	float	near	lift	90.54	0004eba8	_ZN2dk12COMMAND_DRAW22setSpecialCommandImageEPvS1_	dk::COMMAND_DRAW::setSpecialCommandImage(void*, void*)		med
+0015f548	208	loop	near	e3	57.59	000604a8	_ZN2dk3Map7drawAllEv	dk::Map::drawAll()		med
+0015f618	208	loop	near	e3	57.59	000605a4	_ZN2dk3Map9noDrawAllEv	dk::Map::noDrawAll()		high
+00165898	208	loop	near	lift	88.40	0006ac58	_ZN2dk6ObjOcc4initEP9ALLOCATOR	dk::ObjOcc::init(ALLOCATOR*)		med
+00175bb8	208	float	near	m2c	47.75	00476cb8	_ZN2YS5PARTY16_OVR_is_wish_dirEv	YS::PARTY::_OVR_is_wish_dir()		sim-low
+00186478	208	float	near	ghidra	61.69	00411790	_ZN2YS6BTLOBJ22exec_damage_small_spotEPNS_6DAMAGEE	YS::BTLOBJ::exec_damage_small_spot(YS::DAMAGE*)		sim-high
+0019bc38	208	switch	near	m2c	75.00	00464c0c	_ZN2YS3OBJ10can_lockonEv	YS::OBJ::can_lockon()		high
+001a1840	208	float	near	lift	80.27	004984e0	_ZN2YS5SHEET4saveEv	YS::SHEET::save()		med
+001af0c0	208	branchy	near	lift	91.51	00432900	_ZN2YS8GAMEOVER5setupEv	YS::GAMEOVER::setup()		med
+001b0250	208	branchy	near	lift	95.17	004b9a48	_ZN2YS5VOICE4execEv	YS::VOICE::exec()		high
+001bd418	208	branchy	near	ghidra	89.30	004808ec	_ZN2YS14PLAYER_COMMAND14force_overrideEiiRKNS_6TARGETEii	YS::PLAYER_COMMAND::force_override(int, int, YS::TARGET const&, int, int)		med
+001c2f90	208	float	near	lift	82.66	004c5238	_ZN2YS7ABILITY4initEPNS_5SHEETE	YS::ABILITY::init(YS::SHEET*)		sim-med
+001c39d0	208	float	near	m2c	64.08	004cd858	_ZN2YS17ACTION_GLIDEHOVER8_controlEPNS_3OBJE	YS::ACTION_GLIDEHOVER::_control(YS::OBJ*)		sim-high
+001db440	208	branchy	near	m2c	98.71	004c2844	_ZN2YS4ZONE6CreateEPKNS_14UNIT_DATA_ZONEE	YS::ZONE::Create(YS::UNIT_DATA_ZONE const*)		sim-high
+00224c20	208	branchy	near	lift	91.13	002d9c00	_ZN2sa5EVENT18checkMusicalMemoryEv	sa::EVENT::checkMusicalMemory()		med
+0023e9f0	208	loop	near	m2c	88.80	003739bc	_ZN2Tz7MenuObj9SyncAlphaEv	Tz::MenuObj::SyncAlpha()		med
+00257388	208	branchy	near	lift	94.46	0031575c	_ZN2Tz5CmTop15SetupWarningWinEii	Tz::CmTop::SetupWarningWin(int, int)		sim-sandwich
+00272468	208	branchy	near	m2c	97.96	0039a5b8	_ZN2Tz8CmCustom11SetLoopListEv	Tz::CmCustom::SetLoopList()		sim-high
+0028b520	208	loop	near	lift	85.62	0036718c	_ZN2Tz10LaySeqMess6createEiiiPNS_6LayoutEPKsS4_iii	Tz::LaySeqMess::create(int, int, int, Tz::Layout*, short const*, short const*, int, int, int)		sim-high
+002952f8	208	loop	near	m2c	92.12	00362790	_ZN2Tz10JmWorldSel12GetId2CurPosEi	Tz::JmWorldSel::GetId2CurPos(int)		med
+002ab818	208	loop	near	ghidra	84.95	00344cb4	_ZN2Tz9JmNewInfo9CheckNaviEv	Tz::JmNewInfo::CheckNavi()		sim-med
+002ac678	208	loop	near	lift	76.56	0034be84	_ZN2Tz9JmNewInfo17SetPuzzlePieceFlgEi	Tz::JmNewInfo::SetPuzzlePieceFlg(int)		sim-med
+002ae1b0	208	loop	near	e3	51.38	003352f4	_ZN2Tz10JmComplete13isDiagramCompEii	Tz::JmComplete::isDiagramComp(int, int)		med
+002d54a8	208	float	near	lift	70.97	0064a0d8	_ZN2Ti15MGOarashiPlayer11_OVR_attackEv	Ti::MGOarashiPlayer::_OVR_attack()		med
+002d94b8	208	float	near	lift	78.54	00638438	_ZN2Ti12MGHachimitsu11demo_is_endEv	Ti::MGHachimitsu::demo_is_end()		med
+00102528	204	loop	near	lift	77.61	000405e8	_ZN12TASK_MANAGER4linkEP4TASK	TASK_MANAGER::link(TASK*)		med
+00131f48	204	loop	near	m2c	99.20	00111444	_ZN2kn12textureSetupEPv	kn::textureSetup(void*)		sim-med
+0013e0f8	204	float	near	ghidra	61.74	00064230	_ZN2dk11CIRCLE_MASK6createEiiii	dk::CIRCLE_MASK::create(int, int, int, int)		med
+0016cc18	204	branchy	near	lift	89.14	004b5aa8	_ZN2YS2VM11syscallbackEiP8BD_VALUEiPS0_	YS::VM::syscallback(int, BD_VALUE*, int, YS::VM*)		sim-low
+00170018	204	loop	near	lift	74.76	00416b3c	_ZN2YS10CACHE_BUFF6HEADER5clearEv	YS::CACHE_BUFF::HEADER::clear()		med
+0017a9e8	204	float	near	lift	28.61	004c61a4	_ZN2YS6ACTION4blowEPNS_3OBJE	YS::ACTION::blow(YS::OBJ*)		sim-med
+00181ad0	204	branchy	near	ghidra	81.56	00404218	_ZN2YS8AREADATA4InitEPK4AREA	YS::AREADATA::Init(AREA const*)		med
+001863a8	204	float	near	lift	92.77	00412bf8	_ZN2YS6BTLOBJ17exec_damage_smallEPNS_6DAMAGEEf	YS::BTLOBJ::exec_damage_small(YS::DAMAGE*, float)		sim-low
+00187920	204	branchy	near	m2c	80.90	00412500	_ZN2YS6BTLOBJ12_OVR_is_starEv	YS::BTLOBJ::_OVR_is_star()		med
+00188958	204	loop	near	lift	85.94	00495e64	_ZN2YS7PARTRAM12set_item_maxEi	YS::PARTRAM::set_item_max(int)		high
+00194318	204	branchy	near	e3	84.04	0046843c	_ZN2YS3OBJ11exec_pirateEv	YS::OBJ::exec_pirate()		med
+00196ca8	204	branchy	near	lift	56.84	00427958	_ZN2YS5EVENTC1EiPv	YS::EVENT::EVENT(int, void*)		sim-high
+001a0920	204	branchy	near	m2c	73.67	004799c8	_ZNK2YS11PARTYATTACK9is_activeEPNS_5PARTYE	YS::PARTYATTACK::is_active(YS::PARTY*) const		sim-med
+001a9458	204	loop	near	e3	69.92	00467654	_ZN2YS7OBJDATA7get_knaEii	YS::OBJDATA::get_kna(int, int)		high
+001c0490	204	float	near	lift	88.94	00409a80	_ZN2YS12ATTACK_CHECK4execEv	YS::ATTACK_CHECK::exec()		sim-med
+001dfdb8	204	float	near	ghidra	67.22	002b6a10	_ZN3ryj3PAX7MANAGER12set_obj_fadeEv	ryj::PAX::MANAGER::set_obj_fade()		med
+002225a8	204	float	near	lift	75.69	005d5e18	_Z17KeVu0ItrsBallLineP19_KeaVu0ItrsBallLine	KeVu0ItrsBallLine(_KeaVu0ItrsBallLine*)		sim-low
+0022f5e8	204	loop	near	lift	91.82	002d4b90	_ZN2sa5EVENT11leaveAllObjEv	sa::EVENT::leaveAllObj()		med
+00240360	204	branchy	near	lift	72.12	00369378	_ZN2Tz5MCard9MakeFnameEi	Tz::MCard::MakeFname(int)		high
+0027f3d8	204	branchy	near	lift	91.76	0031d0f8	_ZN2Tz9GumiPause7ControlEv	Tz::GumiPause::Control()		high
+00295158	204	loop	near	m2c	46.18	00362640	_ZN2Tz10JmWorldSel10GetCur2IdxEi	Tz::JmWorldSel::GetCur2Idx(int)		high
+002969e0	204	branchy	near	m2c	87.78	00357e64	_ZN2Tz8JmReport9FileAllocEv	Tz::JmReport::FileAlloc()		med
+002acf48	204	loop	near	e3	99.88	00333ed8	_ZN2Tz10JmComplete8CheckAllEv	Tz::JmComplete::CheckAll()		high
+002da040	204	float	near	lift	68.51	0063c820	_ZN2Ti18MGHachimitsuPlayer5resetEv	Ti::MGHachimitsuPlayer::reset()		med
+0011c148	200	float	near	ghidra	18.62	000ed82c	_ZN2kn8IKAdjust3setEPNS_5ModelEjbbf	kn::IKAdjust::set(kn::Model*, unsigned int, bool, bool, float)		sim-low
+0011f2f0	200	branchy	near	m2c	83.86	000f1334	_ZN2kn10modelSetupEPv	kn::modelSetup(void*)		sim-low
+00131810	200	float	near	lift	64.42	001032e8	_ZN2kn9MotionRAW4calcEPNS_8ModelObjEPKNS_7FMatrixEfPKNS_6ToFaceEPNS_8IKAdjustE	kn::MotionRAW::calc(kn::ModelObj*, kn::FMatrix const*, float, kn::ToFace const*, kn::IKAdjust*)		sim-vt-med
+0013aed8	200	loop	near	ghidra	73.11	0004b0b0	_ZN2dk11COMMAND_ONE4exitEv	dk::COMMAND_ONE::exit()		sim-low
+00143860	200	branchy	near	lift	86.08	0006ec48	_ZN2dk6Octree12getColorInfoERNS_4LineE	dk::Octree::getColorInfo(dk::Line&)		med
+001705a8	200	loop	near	lift	80.58	0041518c	_ZN2YS10CACHE_BUFF9clearLinkEv	YS::CACHE_BUFF::clearLink()		med
+00180448	200	float	near	m2c	79.14	0045ad34	_ZN2YS6MOTION11walk_to_runEiff	YS::MOTION::walk_to_run(int, float, float)		sim-low
+00180e28	200	loop	near	m2c	98.56	0045964c	_ZN2YS6MOTION11exec_effectEv	YS::MOTION::exec_effect()		sim-low
+00195d00	200	float	near	lift	94.12	004ce390	_ZN2YS11ACTION_HANG7controlEPNS_3OBJE	YS::ACTION_HANG::control(YS::OBJ*)		sim-high
+00196540	200	branchy	near	lift	90.28	004bfba0	_ZN2YS10WORLDPOINT16ProgressCallbackEi	YS::WORLDPOINT::ProgressCallback(int)		sim-med
+001a1b68	200	float	near	m2c	84.85	00498c38	_ZN2YS5SHEET14add_drive_timeEf	YS::SHEET::add_drive_time(float)		sim-high
+001ba340	200	branchy	near	lift	75.42	004383d0	_ZN2YS11ITEM_EFFECT4execEv	YS::ITEM_EFFECT::exec()		sim-high
+001bec68	200	loop	near	lift	91.58	0042bdf8	_ZN2YS13FIELD_COMMAND4makeEv	YS::FIELD_COMMAND::make()		sim-med
+001cf8d0	200	float	near	lift	63.98	004ee370	_ZN2YS8NMPLAYER24_OVR_exec_command_playerEPKNS_12COMMAND_ELEME	YS::NMPLAYER::_OVR_exec_command_player(YS::COMMAND_ELEM const*)		sim-high
+002328c0	200	loop	near	m2c	87.89	002bfb38	_ZN2sa5EVENT25set_bin_voice_all_fadeoutERNS_21BIN_VOICE_ALL_FADEOUTEP4TASK	sa::EVENT::set_bin_voice_all_fadeout(sa::BIN_VOICE_ALL_FADEOUT&, TASK*)		med
+00272938	200	loop	near	lift	99.20	003982a4	_ZN2Tz8CmCustom14UpdateItemListEv	Tz::CmCustom::UpdateItemList()		sim-high
+00274cf0	200	branchy	near	ghidra	27.42	002f55c0	_ZN2Tz6Jiminy8LoadDataEi	Tz::Jiminy::LoadData(int)		high
+00285760	200	branchy	near	lift	86.86	002eef50	_ZN2Tz6Ending7SelCtrlEv	Tz::Ending::SelCtrl()		sim-high
+00287df0	200	branchy	near	lift	69.02	0036dc2c	_ZN2Tz8MenuBase5PadSEEibbPFbiEb	Tz::MenuBase::PadSE(int, bool, bool, bool (*)(int), bool)		sim-med
+0028dbf8	200	loop	near	ghidra	63.66	00376bcc	_ZN2Tz8MenuUtil9GetLaySeqEPNS_6LayoutEPKsS4_	Tz::MenuUtil::GetLaySeq(Tz::Layout*, short const*, short const*)		sim-high
+002b3c38	200	branchy	near	m2c	57.23	00351fa0	_ZN2Tz8JmPuzzle12GameSelCheckEj	Tz::JmPuzzle::GameSelCheck(unsigned int)		sim-high
+0031c450	200	loop	near	m2c	88.51	006a9f00	_ZN2dk5TIMERD1Ev	dk::TIMER::~TIMER()		sim-vt-high

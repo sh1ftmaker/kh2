@@ -327,3 +327,54 @@ void CmSLBase::SetLeadData() {
 }
 
 }  // namespace Tz
+
+// ---- 0x002b6138 _ZN2Tz8CmSLBase12DrawListMessEiijjPN2dk13SpriteMessageE ----
+#include "../common/types.h"
+
+namespace dk { class SpriteMessage; }
+
+namespace Tz {
+
+struct DrawListMsgLine {
+    s32 param;      // 0x00
+    void* message;  // 0x04
+};
+
+struct DrawListMsg {
+    DrawListMsgLine line[5]; // 0x00..0x28 (40 bytes total, 5 lines of 8 bytes)
+};
+
+
+
+}  // namespace Tz
+
+extern "C" dk::SpriteMessage* D_0035f680 asm("D_0035f680");   // m_ListMsg[0] (array of 4)
+extern "C" Tz::DrawListMsg* D_0035f660 asm("D_0035f660");     // m_DrawListMsg (global pointer to array)
+
+struct PosInfo { s32 x; s32 y; s32 align; };
+
+extern "C" PosInfo* func_002b6118(s32) asm("func_002b6118");
+extern "C" void func_001a98e8(void* self, s32 type, void* message, s32 n, s32 align) asm("func_001a98e8");
+extern "C" void draw_1a9ae8(void* self, int, int, unsigned int) asm("_ZN2YS11MESSAGEDRAW4drawEiij");
+
+void Tz::CmSLBase::DrawListMess(int active_x, int active_y, unsigned int color, unsigned int p_color, dk::SpriteMessage* mess)
+{
+    int i;
+    int pos = -1;
+    for (i = 0; i < 4; i++) {
+        if ((&D_0035f680)[i] == mess) {
+            pos = i;
+            break;
+        }
+    }
+    Tz::DrawListMsg* draw = &D_0035f660[pos];
+    u8 msgdraw[0x60];
+    for (i = 0; i < 5; i++) {
+        if (draw->line[i].message == 0) {
+            return;
+        }
+        PosInfo* info = func_002b6118(draw->line[i].param);
+        func_001a98e8(msgdraw, 1, draw->line[i].message, 0xe, info->align);
+        draw_1a9ae8(msgdraw, info->x + active_x, info->y + active_y, p_color);
+    }
+}
