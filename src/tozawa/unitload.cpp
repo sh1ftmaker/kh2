@@ -44,7 +44,7 @@ extern "C" u16 D_0035f4d8 asm("D_0035f4d8");
 extern "C" u16 D_0035f4e0 asm("D_0035f4e0");
 extern "C" u8  D_0035f4e2 asm("D_0035f4e2");
 
-void func_002927b8_impl(void) asm("func_002927b8");
+void func_002927b8_impl(void) asm("_ZN2Tz8UnitLoad4ExitEv");
 void func_002927b8_impl(void) {
     D_0035f4bc = 0;
     D_0035f4c0 = 0;

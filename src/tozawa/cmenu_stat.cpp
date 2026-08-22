@@ -22,7 +22,7 @@ extern "C" u32 func_0028fb28(...);
 extern "C" u32 func_00266b58(...);
 extern "C" void func_00256e80(...);
 extern "C" void func_0027a108(...);
-extern "C" void func_0027a7e0(...);
+extern "C" void func_0027a7e0(...) asm("_ZN7OvlShop8ItemShop10FadeOutAllEv");
 extern "C" void func_0027ac38(...);
 extern "C" void func_0027b4e8(...);
 

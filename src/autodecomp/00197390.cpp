@@ -1963,7 +1963,7 @@ struct YS_OBJ_IVTABLE {  // class YS::OBJ::IVTABLE size=0x4
 };
 
 extern "C" u32 func_00196e88(u32, u32, u32, f32) asm("func_00196e88");
-extern "C" u32 func_00197c28(u32) asm("func_00197c28");
+extern "C" u32 func_00197c28(u32) asm("_ZN2YS5EVENT15phase_wait_fadeEv");
 
 // 0x00197390 func_00197390
 void func_00197390(u32 a0) asm("func_00197390");

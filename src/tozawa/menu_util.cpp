@@ -30,7 +30,7 @@ extern "C" u32 FadeOut_28aa40(u32) asm("_ZN2Tz6Select5StartEz");
 extern "C" u32 D_0035f04c asm("D_0035f04c");
 extern "C" u32 D_0035f01c asm("D_0035f01c");
 
-void func_0027a7e0_impl(u32 a) asm("func_0027a7e0");
+void func_0027a7e0_impl(u32 a) asm("_ZN7OvlShop8ItemShop10FadeOutAllEv");
 void func_0027a7e0_impl(u32 a) {
     u8 s1 = (u8)a;
     u32 s0 = GetListBuffer_257770();

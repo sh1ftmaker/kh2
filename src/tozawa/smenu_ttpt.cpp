@@ -7,7 +7,7 @@ extern "C" void func_002430d8(u32);
 extern "C" void func_00102448(u32, u32);
 extern "C" void func_0024ce18();
 extern "C" void func_00236d60();
-extern "C" u32 func_0024d6c8();
+extern "C" u32 func_0024d6c8() asm("_ZN2Tz4TTPT7ControlEv");
 extern "C" void func_0024db28();
 
 void TTPT::PauseThread(TASK* a0) {

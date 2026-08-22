@@ -62,7 +62,7 @@ struct AnyVal {
 #define _GHIDRA_ANY(F) static inline AnyVal F() { AnyVal r; return r; } template <class A> static inline AnyVal F(const A &) { AnyVal r; return r; } template <class A, class B> static inline AnyVal F(const A &, const B &) { AnyVal r; return r; } template <class A, class B, class C> static inline AnyVal F(const A &, const B &, const C &) { AnyVal r; return r; } template <class A, class B, class C, class D> static inline AnyVal F(const A &, const B &, const C &, const D &) { AnyVal r; return r; } template <class A, class B, class C, class D, class E> static inline AnyVal F(const A &, const B &, const C &, const D &, const E &) { AnyVal r; return r; } template <class A, class B, class C, class D, class E, class G> static inline AnyVal F(const A &, const B &, const C &, const D &, const E &, const G &) { AnyVal r; return r; }
 
 s32 FUN_001386e0(...) asm("_ZN2dk6Sprite6createEiPvPN2YI5IMAGEEiii");
-s32 FUN_00138748(...) asm("func_00138748");
+s32 FUN_00138748(...) asm("_ZN2dk6Sprite8initWorkEi");
 s32 FUN_001387f8(...) asm("func_001387f8");
 s32 FUN_001391c8(...) asm("func_001391c8");
 

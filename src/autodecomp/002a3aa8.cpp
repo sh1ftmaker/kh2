@@ -6,7 +6,7 @@ extern "C" u32 D_0035f5e4 asm("D_0035f5e4");
 extern "C" u32 func_002a3318() asm("func_002a3318");
 extern "C" u32 func_002a43f0() asm("func_002a43f0");
 extern "C" u32 func_002a4430() asm("func_002a4430");
-extern "C" u32 func_002a4990(u32) asm("func_002a4990");
+extern "C" u32 func_002a4990(u32) asm("_ZN2Tz10JmTreasure11Cur2WorldIdEi");
 extern "C" void func_002ab728(u32) asm("func_002ab728");
 extern "C" void func_002abac8(u32) asm("func_002abac8");
 extern "C" void func_002ac8e0(u32) asm("func_002ac8e0");

@@ -30,7 +30,7 @@ extern "C" int func_002b6f28(int, int, int) asm("func_002b6f28");
 extern "C" u32 e3g___LNst__ZN5SOUND16iopVoiceTransferEiii_0 asm("E3_UNMAPPED_007044ac");
 
 // E3 0x0013b818 SOUND::iopVoiceTransfer -> PS2 0x002ba140
-void e3_002ba140(int bank, int adrs, int size) asm("func_002ba140");
+void e3_002ba140(int bank, int adrs, int size) asm("_ZN5SOUND16iopVoiceTransferEiii");
 void e3_002ba140(int bank, int adrs, int size)
 
 {

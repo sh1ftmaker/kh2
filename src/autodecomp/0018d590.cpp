@@ -5,7 +5,7 @@
 extern "C" u32 D_0034ef18 asm("D_0034ef18");
 extern "C" u32 D_01c60cd8 asm("D_01c60cd8");
 extern "C" u32 func_00105110(u32) asm("func_00105110");
-extern "C" void func_0018e040(u32) asm("func_0018e040");
+extern "C" void func_0018e040(u32) asm("_ZN2YS6ATTACK7refreshEv");
 extern "C" void func_001c0058(u32) asm("func_001c0058");
 extern "C" void func_001c0248(u32) asm("func_001c0248");
 extern "C" void func_0031ee68(u32, u32) asm("func_0031ee68");

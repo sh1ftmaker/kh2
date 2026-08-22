@@ -2,7 +2,7 @@
 // coverage-alternatives: m2c:exact:100.0;ghidra:near:86.67
 #include "common/types.h"
 
-extern "C" u32 func_00198450(u32) asm("func_00198450");
+extern "C" u32 func_00198450(u32) asm("_ZN2YS6STDOBJ15_OVR_initializeEv");
 extern "C" void func_00190920(u32, u32, u32) asm("func_00190920");
 
 // 0x001d7e00 func_001d7e00

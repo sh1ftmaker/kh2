@@ -11,7 +11,7 @@ extern "C" u32 D_0035f24d asm("D_0035f24d");
 extern "C" u32 D_0035f24e asm("D_0035f24e");
 extern "C" u32 func_00103570() asm("func_00103570");
 extern "C" u32 func_001063f0(u32, u32) asm("func_001063f0");
-extern "C" void func_00239700(u32) asm("func_00239700");
+extern "C" void func_00239700(u32) asm("_ZN2YI8SEQUENCEC1Ev");
 extern "C" void func_003237e0(u32) asm("func_003237e0");
 
 // 0x0027dc40 Tz::SimpleStat::Init()

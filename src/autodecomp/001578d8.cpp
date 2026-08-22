@@ -3,7 +3,7 @@
 #include "common/types.h"
 
 extern "C" u32 func_00139d78(u32) asm("func_00139d78");
-extern "C" u32 func_0013c7d0(u32) asm("func_0013c7d0");
+extern "C" u32 func_0013c7d0(u32) asm("_ZN2dk12COMMAND_DRAW13isCommandSkipEv");
 extern "C" u32 func_00155d58(u32, u32) asm("func_00155d58");
 extern "C" u32 func_00155f40(u32) asm("func_00155f40");
 extern "C" u32 func_00155fc0(u32) asm("func_00155fc0");

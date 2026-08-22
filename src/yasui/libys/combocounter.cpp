@@ -10,7 +10,7 @@ extern "C" u32 set_image_1d16e8(void* self, u32, int) asm("_ZN2YS9MISSION2D9set_
 extern "C" u32 D_003525c8 asm("D_003525c8");
 extern "C" u32 D_003525e8 asm("D_003525e8");
 
-void func_001d1f38_impl(void* self) asm("func_001d1f38");
+void func_001d1f38_impl(void* self) asm("_ZN2YS12COMBOCOUNTERC1Ev");
 
 void func_001d1f38_impl(void* self) {
     u32* p = (u32*)self;

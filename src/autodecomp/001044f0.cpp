@@ -8,7 +8,7 @@ extern "C" u32 D_0032bac0 asm("D_0032bac0");
 extern "C" u32 D_0032bac4 asm("D_0032bac4");
 extern "C" u32 func_00170320(u32) asm("func_00170320");
 extern "C" void func_00170c00(u32) asm("func_00170c00");
-extern "C" void func_00170dd0() asm("func_00170dd0");
+extern "C" void func_00170dd0() asm("_ZN2YS10CACHE_BUFF9WaitFlushEP4TASK");
 extern "C" void func_003058a0(u32) asm("func_003058a0");
 extern "C" void func_01f18014(u32, u32) asm("func_01f18014");
 

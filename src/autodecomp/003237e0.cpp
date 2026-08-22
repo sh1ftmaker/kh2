@@ -112,7 +112,7 @@ struct _m2c_stack_func_003237E0 {
     /* 0x00 */ char pad0[0x40];
 };                                                  /* size = 0x40 */
 
-s32 func_00239700(void * = 0) asm("func_00239700");
+s32 func_00239700(void * = 0) asm("_ZN2YI8SEQUENCEC1Ev");
 s32 func_0031A838(void * = 0) asm("func_0031A838");
 extern s32 D_00347E40 asm("D_00347E40");
 extern s32 D_00347E60 asm("D_00347E60");

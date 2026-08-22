@@ -7,7 +7,7 @@ extern "C" void func_002430d8(u32);
 extern "C" void func_00102448(u32, u32);
 extern "C" void func_00243740();
 extern "C" void func_00236d60();
-extern "C" u32 func_00244068();
+extern "C" u32 func_00244068() asm("_ZN2Tz4HEFT7ControlEv");
 extern "C" void func_002444b8();
 
 void HEFT::PauseThread(TASK* a0) {

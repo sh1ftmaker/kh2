@@ -492,7 +492,7 @@ struct Tz_MultiSeq_Localnfo {  // structure Tz::MultiSeq::Localnfo size=0x17c
 extern "C" u32 D_00347e60 asm("D_00347e60");
 extern "C" u32 D_00347f80 asm("D_00347f80");
 extern "C" u32 func_00258d58(u32, u32, u32) asm("func_00258d58");
-extern "C" void func_00239700(u32) asm("func_00239700");
+extern "C" void func_00239700(u32) asm("_ZN2YI8SEQUENCEC1Ev");
 extern "C" void func_0028dfe8(u32) asm("func_0028dfe8");
 
 // 0x00290098 func_00290098

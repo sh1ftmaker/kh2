@@ -6,8 +6,8 @@ extern "C" u32 D_00347e60 asm("D_00347e60");
 extern "C" u32 D_00347f80 asm("D_00347f80");
 extern "C" u32 D_00347f98 asm("D_00347f98");
 extern "C" u32 D_0035e050 asm("D_0035e050");
-extern "C" u32 func_00228ab0(u32) asm("func_00228ab0");
-extern "C" void func_00239700(u32) asm("func_00239700");
+extern "C" u32 func_00228ab0(u32) asm("_ZN2sa14MUSICAL_GAUGE36createEv");
+extern "C" void func_00239700(u32) asm("_ZN2YI8SEQUENCEC1Ev");
 extern "C" void func_0031a838(u32) asm("func_0031a838");
 
 // 0x00228e58 sa::MUSICAL_GAUGE3::init()

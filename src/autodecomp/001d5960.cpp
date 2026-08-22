@@ -3,7 +3,7 @@
 #include "common/types.h"
 
 extern "C" u32 func_001d5800(u32) asm("func_001d5800");
-extern "C" u32 func_001d5868(u32) asm("func_001d5868");
+extern "C" u32 func_001d5868(u32) asm("_ZNK2YS9LINK_FLAG5is_okEv");
 extern "C" u32 func_001d58f0(u32) asm("func_001d58f0");
 
 // 0x001d5960 func_001d5960

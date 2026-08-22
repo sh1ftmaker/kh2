@@ -5,7 +5,7 @@
 extern "C" u32 func_001c5f38(u32) asm("func_001c5f38");
 extern "C" u32 func_001c6748(u32) asm("func_001c6748");
 extern "C" u32 func_001c6760(u32) asm("func_001c6760");
-extern "C" u32 func_001dbd68(u32) asm("func_001dbd68");
+extern "C" u32 func_001dbd68(u32) asm("_ZN2YS11CROWDEFFECT10is_cullingEv");
 
 // 0x001c6850 func_001c6850
 void func_001c6850(u32 a0) asm("func_001c6850");

@@ -425,9 +425,9 @@ struct YI_SEQUENCE_SEQUENCE_FORMAT {  // structure YI::SEQUENCE::SEQUENCE_FORMAT
 
 extern "C" u32 D_00350ab0 asm("D_00350ab0");
 extern "C" u32 func_001a9970(u32, u32) asm("func_001a9970");
-extern "C" void func_001ac258(u32) asm("func_001ac258");
+extern "C" void func_001ac258(u32) asm("_ZN2YS15WINDOW_TUTORIALC1Ei");
 extern "C" void func_001ac970(u32, u32, u32, u32, u32, u32, u32, u32) asm("func_001ac970");
-extern "C" void func_00239700(u32) asm("func_00239700");
+extern "C" void func_00239700(u32) asm("_ZN2YI8SEQUENCEC1Ev");
 
 // 0x001ad280 func_001ad280
 u32 func_001ad280(u32 a0, u32 a1) asm("func_001ad280");

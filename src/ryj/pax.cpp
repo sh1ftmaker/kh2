@@ -1,7 +1,7 @@
 #include "../common/types.h"
 
 extern "C" u32 is_active_1dc9e0(void* self) asm("_ZN3ryj6EFFECT9is_activeEv");
-extern "C" u32 exec_1dfa38(void* self) asm("func_001dfa38");
+extern "C" u32 exec_1dfa38(void* self) asm("_ZN3ryj3PAX7MANAGER4execEv");
 extern "C" u32 D_00352b58 asm("D_00352b58");
 
 void func_001de590_impl(void* task) asm("func_001de590");

@@ -2,7 +2,7 @@
 // coverage-alternatives: e3:exact:100.0;m2c:near:97.67;ghidra:near:86.4
 #include "common/types.h"
 
-extern "C" u32 func_002367c8(u32) asm("func_002367c8");
+extern "C" u32 func_002367c8(u32) asm("_ZN2YI5IMAGE13InitLoadImageEv");
 extern "C" void func_001391c8(u32, u32, u32) asm("func_001391c8");
 extern "C" void func_002362b0(u32, u32) asm("func_002362b0");
 

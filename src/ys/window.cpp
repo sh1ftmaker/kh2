@@ -3,7 +3,7 @@
 extern "C" u32 WINDOW_BASE_1ac970(void* self, u32 type, int, int, int, int, int, int) asm("func_001ac970");
 extern "C" u32 D_00350af0 asm("D_00350af0");
 
-void func_001ad228_impl(void* self, int arg) asm("func_001ad228");
+void func_001ad228_impl(void* self, int arg) asm("_ZN2YS12WINDOW_CHECKC1Ei");
 void func_001ad228_impl(void* self, int arg) {
     WINDOW_BASE_1ac970(self, 3, 4, arg, 0, 256, 32, 3);
     *(u32*)((u8*)self + 104) = 0;
@@ -17,7 +17,7 @@ extern "C" u32 Alloc_1050d8(unsigned int) asm("_ZN4AREA5AllocEj");
 extern "C" u32 WINDOW_BALLOON_1ad0f8(u32 self, int, int) asm("func_001ad0f8");
 extern "C" u32 WINDOW_OBJ2D_1ac7c8(u32 self, u32 parent) asm("_ZN2YS12WINDOW_OBJ2DC1EPNS_6WINDOWE");
 
-void func_001ad520_impl(void* self, int a1, int a2, int a3) asm("func_001ad520");
+void func_001ad520_impl(void* self, int a1, int a2, int a3) asm("_ZN2YS11WINDOW_TALK11open_windowEiii");
 void func_001ad520_impl(void* self, int a1, int a2, int a3) {
     u32 p1 = Alloc_1050d8(2924);
     WINDOW_BALLOON_1ad0f8(p1, a3, 0);

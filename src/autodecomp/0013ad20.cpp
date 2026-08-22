@@ -14,7 +14,7 @@ extern "C" u32 D_003485d0 asm("D_003485d0");
 extern "C" u32 func_001050c8() asm("func_001050c8");
 extern "C" u32 func_001063c0(u32, u32) asm("func_001063c0");
 extern "C" u32 func_002361a0(u32) asm("func_002361a0");
-extern "C" void func_00239700(u32) asm("func_00239700");
+extern "C" void func_00239700(u32) asm("_ZN2YI8SEQUENCEC1Ev");
 extern "C" void func_0031a838(u32) asm("func_0031a838");
 
 // 0x0013ad20 dk::COMMAND_ONE::init()

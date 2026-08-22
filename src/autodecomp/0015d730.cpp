@@ -6,7 +6,7 @@ extern "C" u32 D_0034af40 asm("D_0034af40");
 extern "C" u32 D_0034b0e0 asm("D_0034b0e0");
 extern "C" u32 func_002361d0(u32) asm("func_002361d0");
 extern "C" void func_002361a0(u32, u32) asm("func_002361a0");
-extern "C" void func_00239700(u32) asm("func_00239700");
+extern "C" void func_00239700(u32) asm("_ZN2YI8SEQUENCEC1Ev");
 extern "C" void func_00239870(u32) asm("func_00239870");
 
 // 0x0015d730 wtarget_0015d730(unsigned int, unsigned int, unsigned int, unsigned int)

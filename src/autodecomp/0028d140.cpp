@@ -508,7 +508,7 @@ struct YI_SEQUENCE_SEQUENCE_FORMAT {  // structure YI::SEQUENCE::SEQUENCE_FORMAT
 extern "C" u32 D_00347e60 asm("D_00347e60");
 extern "C" u32 D_0035f420 asm("D_0035f420");
 extern "C" u32 func_0028d188(u32) asm("func_0028d188");
-extern "C" void func_00239700(u32) asm("func_00239700");
+extern "C" void func_00239700(u32) asm("_ZN2YI8SEQUENCEC1Ev");
 
 // 0x0028d140 Tz::ItemStat::ItemStat()
 u32 lift_0028d140(u32 a0) asm("_ZN2Tz8ItemStatC1Ev");

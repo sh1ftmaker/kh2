@@ -7,7 +7,7 @@ extern "C" u32 func_0016f460(u32) asm("func_0016f460");
 extern "C" u32 func_0016f470(u32, u32) asm("func_0016f470");
 extern "C" u32 func_0016f4b8(u32, u32) asm("func_0016f4b8");
 extern "C" u32 func_0016f520(u32, u32, u32) asm("func_0016f520");
-extern "C" u32 func_0016f6f8(u32) asm("func_0016f6f8");
+extern "C" u32 func_0016f6f8(u32) asm("_ZN2YS8OBJENTRY7IsActorEj");
 extern "C" u32 func_0016f770(u32) asm("func_0016f770");
 extern "C" u32 func_00170978(u32) asm("func_00170978");
 

@@ -4,7 +4,7 @@
 
 extern "C" u32 func_001c2b58(u32) asm("func_001c2b58");
 extern "C" u32 func_002c1b48(u32) asm("func_002c1b48");
-extern "C" u32 func_002c1b60(u32, u32) asm("func_002c1b60");
+extern "C" u32 func_002c1b60(u32, u32) asm("_ZN8worldmap4Gumi8setStateEPKN2YS6COURSEE");
 
 // 0x002c1c50 func_002c1c50
 u32 func_002c1c50(u32 a0) asm("func_002c1c50");

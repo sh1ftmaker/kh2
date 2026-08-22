@@ -8,7 +8,7 @@ extern "C" void func_00102448(u32, u32);
 extern "C" void func_0024b588();
 extern "C" void func_00242678(u32);
 extern "C" void func_00236d60();
-extern "C" u32 func_0024bd90();
+extern "C" u32 func_0024bd90() asm("_ZN2Tz4HBTE7ControlEv");
 extern "C" void func_0024c1a8();
 
 void HBTE::PauseThread(TASK* a0) {

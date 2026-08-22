@@ -9,7 +9,7 @@ extern "C" u32 func_002891e8(u32) asm("func_002891e8");
 extern "C" u32 func_00289310(u32) asm("func_00289310");
 extern "C" u32 func_00289358(u32) asm("func_00289358");
 extern "C" u32 func_0028cf28(u32, u32) asm("func_0028cf28");
-extern "C" u32 func_0028d008(u32) asm("func_0028d008");
+extern "C" u32 func_0028d008(u32) asm("_ZN2Tz10MenuCursor7isExistEi");
 extern "C" void func_00289038(u32, u32, u32, u32, u32, u32, u32) asm("func_00289038");
 extern "C" void func_002890e0(u32, u32, u32, u32, u32) asm("func_002890e0");
 extern "C" void func_002b5c30(u32) asm("func_002b5c30");

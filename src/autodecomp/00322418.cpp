@@ -7,7 +7,7 @@ extern "C" u32 D_00347f98 asm("D_00347f98");
 extern "C" u32 D_0034a958 asm("D_0034a958");
 extern "C" u32 D_0035e1b8 asm("D_0035e1b8");
 extern "C" u32 D_0035e280 asm("D_0035e280");
-extern "C" u32 func_00239700(u32) asm("func_00239700");
+extern "C" u32 func_00239700(u32) asm("_ZN2YI8SEQUENCEC1Ev");
 extern "C" void func_0013ee88(u32) asm("func_0013ee88");
 extern "C" void func_0014b668(u32) asm("func_0014b668");
 extern "C" void func_0031a838(u32) asm("func_0031a838");

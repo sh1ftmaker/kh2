@@ -3,7 +3,7 @@
 #include "common/types.h"
 
 extern "C" u32 func_0013b1a0(u32) asm("func_0013b1a0");
-extern "C" void func_0013b1d0(u32) asm("func_0013b1d0");
+extern "C" void func_0013b1d0(u32) asm("_ZN2dk12COMMAND_DRAW6createEPN2YS14PLAYER_COMMANDE");
 extern "C" void func_0013b258(u32) asm("func_0013b258");
 extern "C" void func_0013d208(u32) asm("func_0013d208");
 

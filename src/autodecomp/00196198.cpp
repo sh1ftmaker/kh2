@@ -10,7 +10,7 @@ extern "C" void func_0016c750(u32) asm("func_0016c750");
 extern "C" void func_0016c7d8(u32) asm("func_0016c7d8");
 extern "C" void func_0016cab8(u32) asm("func_0016cab8");
 extern "C" void func_0016cbc8(u32, u32, u32, u32) asm("func_0016cbc8");
-extern "C" void func_0016cd48(u32, u32) asm("func_0016cd48");
+extern "C" void func_0016cd48(u32, u32) asm("_ZN2YS2VM4execEPS0_");
 
 // 0x00196198 func_00196198
 u32 func_00196198() asm("func_00196198");

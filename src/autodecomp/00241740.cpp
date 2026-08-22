@@ -63,7 +63,7 @@ extern "C" void func_00240c08(int, void *, int) asm("func_00240c08");
 extern "C" Tz_MCInfo * D_0035ec94 asm("D_0035ec94");
 
 // E3 0x0036bdf8 Tz::MCard::SetDataBuff2MCInfo -> PS2 0x00241740
-void e3_00241740(int num) asm("func_00241740");
+void e3_00241740(int num) asm("_ZN2Tz5MCard18SetDataBuff2MCInfoEi");
 void e3_00241740(int num)
 
 {

@@ -7,7 +7,7 @@ extern "C" u32 InitShortcut_1bdf68(void* self) asm("func_001bdf68");
 extern "C" u32 InitShortcut_1bdff0(void) asm("func_001bdff0");
 extern "C" u32 func_001d6da8_1d6da8(void* self) asm("func_001d6da8");
 
-void func_001bded8_impl(void* self) asm("func_001bded8");
+void func_001bded8_impl(void* self) asm("_ZN2YS13FIELD_COMMAND9init_areaEv");
 
 void func_001bded8_impl(void* self) {
     func_001bd370_1bd370();

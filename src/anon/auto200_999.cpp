@@ -23,7 +23,7 @@ void func_001c0458(u32, u32);
 void func_001c1708(u32);
 void func_001d5718(u32);
 void func_002361a0(...);
-u32 func_00239700(...);
+u32 func_00239700(...) asm("_ZN2YI8SEQUENCEC1Ev");
 void func_00239870(u32);
 void func_002579e0(void);
 void func_0028abe0(u32);

@@ -154,7 +154,7 @@ void func_002abdc8_impl() {
 
 // ---- callees, declared by the rig: copy these lines verbatim, never retype a symbol ----
 extern "C" u32 GetSram_2a9d68() asm("_ZN2Tz9JmNewInfo7GetSramEv");  // Tz::JmNewInfo::GetSram() -- arity VERIFIED
-extern "C" u32 GetStoryWorldIdx_2abf40(int, int) asm("func_002abf40");  // Tz::JmNewInfo::GetStoryWorldIdx(int, int) -- arity VERIFIED [links as func_002abf40: E3 name not in the registry yet]
+extern "C" u32 GetStoryWorldIdx_2abf40(int, int) asm("_ZN2Tz9JmNewInfo16GetStoryWorldIdxEii");  // Tz::JmNewInfo::GetStoryWorldIdx(int, int) -- arity VERIFIED [links as func_002abf40: E3 name not in the registry yet]
 
 // layout row 0x002ac268, 128 bytes
 // the definition MUST produce the symbol: func_002ac268  (source: stub)
@@ -176,7 +176,7 @@ void func_002ac268_impl(void* self, int flg) {  // definition: no asm() here
 
 // ---- callees, declared by the rig: copy these lines verbatim, never retype a symbol ----
 extern "C" u32 GetSram_2a9d68() asm("_ZN2Tz9JmNewInfo7GetSramEv");  // Tz::JmNewInfo::GetSram() -- arity VERIFIED
-extern "C" u32 GetAlbumWorldIdx_2aa5b8(int, int) asm("func_002aa5b8");  // Tz::JmNewInfo::GetAlbumWorldIdx(int, int) -- arity VERIFIED [links as func_002aa5b8: E3 name not in the registry yet]
+extern "C" u32 GetAlbumWorldIdx_2aa5b8(int, int) asm("_ZN2Tz9JmNewInfo16GetAlbumWorldIdxEii");  // Tz::JmNewInfo::GetAlbumWorldIdx(int, int) -- arity VERIFIED [links as func_002aa5b8: E3 name not in the registry yet]
 
 // layout row 0x002aa8e0, 128 bytes
 // the definition MUST produce the symbol: func_002aa8e0  (source: stub)

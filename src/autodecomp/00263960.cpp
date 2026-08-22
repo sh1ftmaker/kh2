@@ -9,7 +9,7 @@ extern "C" u32 D_0035f0bc asm("D_0035f0bc");
 extern "C" u32 D_0035f0c0 asm("D_0035f0c0");
 extern "C" u32 D_0035f0dc asm("D_0035f0dc");
 extern "C" u32 D_0035f360 asm("D_0035f360");
-extern "C" u32 func_00239700(u32) asm("func_00239700");
+extern "C" u32 func_00239700(u32) asm("_ZN2YI8SEQUENCEC1Ev");
 extern "C" void func_00263bb0(u32, u32, u32, u32, u32) asm("func_00263bb0");
 
 // 0x00263960 Tz::CMenuHelp::Init(int, int, Tz::Layout*, short const*, short const*)

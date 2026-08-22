@@ -40,7 +40,7 @@ extern "C" SelectItemLayout* GetItemPtr_2891b8(void* self, int) asm("_ZN2Tz6Sele
 extern "C" u32 GetParamCr_23aa78(void* self) asm("_ZN2YI8SEQUENCE10GetParamCrEv");  // YI::SEQUENCE::GetParamCr() -- arity VERIFIED
 extern "C" u32 SetExOffset_288e08(void* self, int, int, int) asm("_ZN2Tz6Select11SetExOffsetEiii");  // Tz::Select::SetExOffset(int, int, int) -- arity VERIFIED
 extern "C" u32 GetParamEx_23aa98(void* self) asm("_ZN2YI8SEQUENCE10GetParamExEv");  // YI::SEQUENCE::GetParamEx() -- arity VERIFIED
-extern "C" u32 GetAlignType_28dd90(int) asm("func_0028dd90");  // Tz::MenuUtil::GetAlignType(int) -- arity VERIFIED [links as func_0028dd90: E3 name not in the registry yet]
+extern "C" u32 GetAlignType_28dd90(int) asm("_ZN2Tz8MenuUtil12GetAlignTypeEi");  // Tz::MenuUtil::GetAlignType(int) -- arity VERIFIED [links as func_0028dd90: E3 name not in the registry yet]
 extern "C" u32 GetFontType_28ddd8(int) asm("_ZN2Tz8MenuUtil11GetFontTypeEi");  // Tz::MenuUtil::GetFontType(int) -- arity VERIFIED
 extern "C" u32 resetSeqAlphaOnly_1395f8(void* self) asm("_ZN2dk5Obj2D17resetSeqAlphaOnlyEv");  // dk::Obj2D::resetSeqAlphaOnly() -- arity VERIFIED
 extern "C" u32 SetCurrent_2891f0(void* self, int, bool, int, int) asm("_ZN2Tz6Select10SetCurrentEibii");  // Tz::Select::SetCurrent(int, bool, int, int) -- arity VERIFIED
