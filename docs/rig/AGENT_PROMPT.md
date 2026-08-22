@@ -218,3 +218,19 @@ it. Do not narrate the disassembly back at length.
 | Their `lq`/`sq`, your `ld`/`sd` (for a 16-byte copy) | The source uses a 16-byte struct type (`FVector`, `u32[4]`, `float[4]`), not `u64`. A `u64` local produces two 64-bit ops; a 16-byte struct produces one 128-bit op. |
 | Their `fv0f`/`c.lt.s`, your `fv0`/`c.lt.d` | The source uses `float` (32-bit), not `double`. Change the `*Layout` member to `f32` and the comparison to `0.0f`. |
 | Their `movz rd, rs, rt`, your `addiu`+`bnel` | The source is `if (cond) x++;` (bare increment in an if, no else). gcc 3.2 emits `movz` for this. Writing `x = x + 1` or `x += 1` inside the if produces `addiu`+`bnel`. |
+
+---
+# Lessons from the 2026-08-22 Sonnet trial
+
+- Trust disassembly argument registers over the registry prototype for arity/static-ness (00231390, 00158b78, 00241c40 were static declared non-static; `operator new[]` takes size+allocator; `JmReport::GetData` takes 1 arg).
+- When E3 DWARF locals list one `i`, reuse one loop variable across loops (002b6138, 00257e00).
+- `(x ^ K) == 0` compiles to xori+bnez; `x == K` compiles to li+bne (001b3e88) — match the source shape to the compare form you see.
+- Bind a discarded vcall result to a named int to keep it off `$v0` (0011c8f8).
+- Batch block copies as load-all/compute-all/store-all (002cf998).
+- Check whether the PS2 row is only one branch of the E3 function (0026b0f8).
+- Non-cached re-reads of a global at each use when the ROM reloads it (002529a8, 00257e00).
+- A register-allocation-only residue with every instruction matching is a park, not a 12-attempt grind (00291110).
+- A sibcalled trailing call to a base-class dtor (`j` instead of `jal`+`jr ra`) can mean the source uses **real inheritance**, not an explicit call — the compiler's own implicit dtor-chaining call is not sibcall-eligible the way an explicit trailing call is (001ad738).
+- asm-labeling a constructor/destructor declaration is silently ignored by this gcc 3.2 — the object still comes out under the real mangled name, so an implicit base-dtor call can only resolve once the base's *real* mangled symbol has a functions.tsv row (001ad738, 0x001ac5b8 -> `_ZN2YS6WINDOWD2Ev`).
+- `promote`'s header-merge picks the first repo header with a matching bare class name, not namespace-aware — a locally-declared `class WINDOW {}` can silently bind to an unrelated global-scope `WINDOW` in another file. `#include` the real namespaced header yourself instead of redeclaring the class when the name is common (001ad738).
+- A `float`/`double` literal used as a compile-time-constant multiplier (`* 3.14159274f / 180.0f`) can hit an unfolded 3-instruction `lui+addiu+lwc1` load sequence from a fixed literal pool; pin it with `// minilink-rodata <addr>` rather than declaring a named global (00231390).
