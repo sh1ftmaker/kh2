@@ -1,5 +1,5 @@
-// coverage: addr=0x003237e0 symbol=func_003237e0 size=404 class=loop source=m2c status=exact fuzzy=100.0
-// coverage-alternatives: ghidra:near:88.59;lift:near:81.26
+// coverage: addr=0x002bc188 symbol=func_002bc188 size=92 class=branchy source=m2c status=exact fuzzy=100.0
+// coverage-alternatives: corpus:near:92.92;lift:near:85.83;ghidra:near:79.57
 #include "common/types.h"
 
 #define NULL 0
@@ -107,77 +107,24 @@ static AnyCell saved_reg_ra, saved_reg_fp, saved_reg_gp, saved_reg_s0, saved_reg
     saved_reg_s3, saved_reg_s4, saved_reg_s5, saved_reg_s6, saved_reg_s7, temp_fp, arg0, arg1, arg2,
     arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11;
 
-// m2c raw+unkfix output for 0x003237e0, wrapped mechanically (ad/fallback.py)
-struct _m2c_stack_func_003237E0 {
-    /* 0x00 */ char pad0[0x40];
-};                                                  /* size = 0x40 */
+// m2c raw+unkfix output for 0x002bc188, wrapped mechanically (ad/fallback.py)
+struct _m2c_stack_func_002BC188 {
+    /* 0x00 */ char pad0[0x20];
+};                                                  /* size = 0x20 */
 
-s32 func_00239700(void * = 0) asm("func_00239700");
-s32 func_0031A838(void * = 0) asm("func_0031A838");
-extern s32 D_00347E40 asm("D_00347E40");
-extern s32 D_00347E60 asm("D_00347E60");
-extern s32 D_00347F98 asm("D_00347F98");
-void func_003237E0(void *arg0 = 0, ...) asm("func_003237e0");
-void func_003237e0_impl(void *arg0) asm("func_003237e0");
-void func_003237e0_impl(void *arg0) {
-    s32 var_s1_2;
-    s32 var_s1_3;
-    s32 var_s1_4;
-    s32 var_s3;
-    void *var_s0;
-    void *var_s0_2;
-    void *var_s0_3;
-    void *var_s1;
+s32 func_002BB1C8(void * = 0, s32 = 0, s32 = 0) asm("func_002BB1C8");
+void *func_002BC158() asm("func_002BC158");
+s32 func_002BC188(s32 arg0 = 0, s32 arg1 = 0, ...) asm("func_002bc188");
+s32 func_002bc188_impl(s32 arg0, s32 arg1) asm("func_002bc188");
+s32 func_002bc188_impl(s32 arg0, s32 arg1) {
+    s32 var_v0;
+    void *temp_v0;
 
-    (*(s32*)((s8*)arg0 + 0x0)) = &D_00347F98;
-    var_s1 = arg0 + 0x34C;
-    var_s3 = 1;
-    func_0031A838(arg0 + 0xC);
-    (*(s32*)((s8*)arg0 + 0x0)) = &D_00347E60;
-    func_00239700(arg0 + 0x18);
-    (*(s32*)((s8*)arg0 + 0x198)) = 0;
-    (*(s32*)((s8*)arg0 + 0x1C0)) = 0;
-    (*(s32*)((s8*)arg0 + 0x0)) = &D_00347E40;
-    (*(s32*)((s8*)arg0 + 0x1B4)) = &D_00347E60;
-    func_00239700(arg0 + 0x1CC);
-    do {
-        (*(s32*)((s8*)var_s1 + 0xC)) = 0;
-        (*(s32*)((s8*)var_s1 + 0x0)) = &D_00347E60;
-        var_s3 -= 1;
-        func_00239700(var_s1 + 0x18);
-        var_s1 += 0x198;
-    } while (var_s3 != -1);
-    var_s0 = arg0 + 0x67C;
-    var_s1_2 = 1;
-    do {
-        (*(s32*)((s8*)var_s0 + 0xC)) = 0;
-        (*(s32*)((s8*)var_s0 + 0x0)) = &D_00347E60;
-        var_s1_2 -= 1;
-        func_00239700(var_s0 + 0x18);
-        var_s0 += 0x198;
-    } while (var_s1_2 != -1);
-    var_s0_2 = arg0 + 0x9AC;
-    var_s1_3 = 2;
-    do {
-        (*(s32*)((s8*)var_s0_2 + 0x0)) = &D_00347F98;
-        var_s1_3 -= 1;
-        func_0031A838(var_s0_2 + 0xC);
-        (*(s32*)((s8*)var_s0_2 + 0x0)) = &D_00347E60;
-        func_00239700(var_s0_2 + 0x18);
-        (*(s32*)((s8*)var_s0_2 + 0x0)) = &D_00347E40;
-        (*(s32*)((s8*)var_s0_2 + 0x198)) = 0;
-        var_s0_2 += 0x1B4;
-    } while (var_s1_3 != -1);
-    var_s0_3 = arg0 + 0xEC8;
-    var_s1_4 = 2;
-    do {
-        (*(s32*)((s8*)var_s0_3 + 0x0)) = &D_00347F98;
-        var_s1_4 -= 1;
-        func_0031A838(var_s0_3 + 0xC);
-        (*(s32*)((s8*)var_s0_3 + 0x0)) = &D_00347E60;
-        func_00239700(var_s0_3 + 0x18);
-        (*(s32*)((s8*)var_s0_3 + 0x0)) = &D_00347E40;
-        (*(s32*)((s8*)var_s0_3 + 0x198)) = 0;
-        var_s0_3 += 0x1B4;
-    } while (var_s1_4 != -1);
+    temp_v0 = func_002BC158();
+    var_v0 = 0;
+    if (temp_v0 != NULL) {
+        func_002BB1C8(temp_v0, arg0, arg1);
+        var_v0 = (*(s32*)((s8*)temp_v0 + 0x14));
+    }
+    return var_v0;
 }
