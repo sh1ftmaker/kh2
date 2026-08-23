@@ -34,3 +34,4 @@ One row per driver run (see tools/rig/round_report.py).
 | 2026-08-20 15:54 | c0820b-r7 | c0820b-r7 | qwen3.8-27b | c9384231fe8d | 48 | 3 | 276 | 4 | 4 | [3, 4, 9] | 5030943/149261 | 1164 s |
 | 2026-08-20 16:31 | c0820b-r8 | c0820b-r8 | qwen3.8-27b | c9384231fe8d | 48 | 1 | 96 | 3 | 0 | [3] | 5002002/164768 | 1305 s |
 | 2026-08-23 08:57 | qwen-e3-nothink-r1 | qwen-e3-nothink-r1 | qwen3.8-27b | 45bdc1cd7cd7 | 16 | 1 | 376 | 1 | 2 | [5] | 3103395/165698 | 3176 s |
+| 2026-08-23 10:29 | qwen-e3-nothink-r2 | qwen-e3-nothink-r2 | qwen3.8-27b | 45bdc1cd7cd7 | 16 | 0 | 0 | 1 | 1 | [] | 3215134/172340 | 3705 s |

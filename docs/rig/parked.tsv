@@ -1,6 +1,9 @@
 addr	size	symbol	best_fuzzy	reason	hypothesis	attempts	parked_at
+0010e130	568	_ZN2kn6Friend12updateTargetEb	59.26	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-23T16:34:05Z
 0011c8f8	292	_ZN2kn8ModelObj5draw_EPNS_9DrawParamEbPNS_5ModelEPPN3Axa11DMA_SET_TAGEPc	0.0	3 consecutive candidates failed to compile or link	model cannot produce a compiling candidate	3	2026-08-22T16:29:29Z
+001217a0	536	_ZN2kn8ModelSKL10setTextureEPNS_16Vif1PacketBufferEiPNS_13AnimationWorkEPNS_7TextureE	52.23	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	7	2026-08-23T17:19:45Z
 001285f8	216	_ZN2kn16MotionPrototype012getTimeIndexEfRiS1_	0.0	3 consecutive candidates failed to compile or link	model cannot produce a compiling candidate	3	2026-08-22T16:28:48Z
+00141c38	576	_ZN2dk11OctCollFile13selectPolygonEiRNS_7SAabboxERti	71.85	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	9	2026-08-23T16:49:06Z
 00150328	588	_ZN2dk7COUNTER6updateEv	97.6	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	10	2026-08-23T15:48:11Z
 00158b78	268	_ZN2dk12DangleCamera7controlEPN2YS3PADEPNS_9ObjCameraE	0.0	3 consecutive candidates failed to compile or link	model cannot produce a compiling candidate	3	2026-08-22T16:32:17Z
 00180f28	592	_ZN2YS8PROGRESS4ReadEv	9.1	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-23T15:20:21Z
@@ -11,26 +14,39 @@ addr	size	symbol	best_fuzzy	reason	hypothesis	attempts	parked_at
 001aca98	296	func_001aca98	0.0	3 consecutive candidates failed to compile or link	model cannot produce a compiling candidate	3	2026-08-22T16:35:36Z
 001ad738	252	func_001ad738	0.0	3 consecutive candidates failed to compile or link	model cannot produce a compiling candidate	3	2026-08-22T16:29:13Z
 001b3e88	252	_ZN2YS7PIERROT9damage_seEPNS_6DAMAGEE	0.0	3 consecutive candidates failed to compile or link	model cannot produce a compiling candidate	3	2026-08-22T16:39:56Z
+001b47d8	548	_ZN2YS5LIMITC1EPKNS_11LIMIT_TABLEEPNS_6PLAYEREf	85.6	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	10	2026-08-23T17:29:44Z
 001b4a00	584	_ZN2YS5LIMIT5setupEf	68.2	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	10	2026-08-23T15:57:47Z
 001be060	260	_ZN2YS13FIELD_COMMAND5_execEv	0.0	3 consecutive candidates failed to compile or link	model cannot produce a compiling candidate	3	2026-08-22T16:42:50Z
 001c0890	300	_ZN2YS10BONUSLEVEL2UpEi	30.03	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-23T15:02:59Z
 001d3148	412	_ZN2YS12EVENT_CAMERA11make_matrixEv	0.0	3 consecutive candidates failed to compile or link	model cannot produce a compiling candidate	3	2026-08-22T16:44:36Z
 0020c860	364	_Z10set_matrixPA4_fS0_P24PRyjMegaBirthModelFilterP24VRyjMegaBirthModelFilterP14_PARTICLE_DATA	63.78	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-22T16:40:53Z
 00231390	304	_ZN2sa5EVENT20calcValue_objDefaultERNS_18BIN_CAMERA_DATA_WKERNS_23OBJ_DEFAULT_CAMERA_DATAEf	0.0	3 consecutive candidates failed to compile or link	model cannot produce a compiling candidate	3	2026-08-22T16:41:42Z
+00232a48	576	_ZN2sa5EVENT12read_se_dataERNS_11BIN_SE_DATAEP4TASK	57.72	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	8	2026-08-23T16:58:51Z
 00241c40	468	_ZN2Tz5MCard11ChkFileSizeEi	0.0	3 consecutive candidates failed to compile or link	model cannot produce a compiling candidate	3	2026-08-22T16:33:21Z
 002444b8	592	_ZN2Tz4HEFT4DrawEv	85.66	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-23T15:43:33Z
+00248d28	552	_ZN2Tz4MUMI4DrawEv	64.23	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-23T16:51:29Z
+0024a710	568	_ZN2Tz4TRTE4DrawEv	77.84	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-23T16:42:01Z
+0024db28	576	_ZN2Tz4TTPT4DrawEv	81.51	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-23T16:45:04Z
+00250328	552	_ZN2Tz4LMMU4DrawEv	84.6	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-23T16:49:39Z
 002529a8	300	_ZN2Tz4ALCA10SetLayListEv	55.42	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-22T16:37:33Z
 00257e00	420	_ZN2Tz5CmTop18GetEnbableSelectorEv	14.56	attempt budget (8) exhausted	ran out of attempts	8	2026-08-22T16:34:56Z
 00259108	584	_ZN2Tz6CmComm21CreateConfirmSelectorEPNS_6SelectEiiiPNS_6LayoutEiPKs	62.02	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-23T15:45:27Z
 002618d8	596	_ZN2Tz6CmItem19CtrlItemDumpConfirmEv	38.04	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-23T15:28:46Z
 0026b0f8	260	_ZN2Tz7CmEquip15CtrlAutoConfirmEv	83.26	attempt budget (8) exhausted	ran out of attempts	8	2026-08-22T16:42:34Z
 0026cc30	364	_ZN2Tz7CmParty9LeaveListEv	0.0	3 consecutive candidates failed to compile or link	model cannot produce a compiling candidate	3	2026-08-23T14:49:19Z
+0026ee78	552	_ZN2Tz8CmCustom8SetupTopEv	37.99	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	5	2026-08-23T17:08:13Z
 00271900	596	_ZN2Tz8CmCustom13CreateTopListEv	0.0	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	4	2026-08-23T15:02:26Z
 0027a6d8	260	_ZN2Tz9CmAbility9UpdateNewEv	57.88	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-22T16:45:05Z
+0027eb10	568	_ZN2Tz10SimpleStat9UpdateNumEv	91.26	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	9	2026-08-23T17:05:56Z
+00281fe0	584	_ZN2Tz8ItemInfo15GetItemTypeMaskEii	0.0	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	4	2026-08-23T16:10:48Z
 0028ca78	380	_ZN2Tz10MenuCursor4ExitEv	88.19	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	7	2026-08-23T15:11:34Z
 00291110	228	_ZN2Tz8ItemStat11CreateEquipEiiiPN2dk6SpriteEii	90.54	attempt budget (8) exhausted	ran out of attempts	8	2026-08-22T16:38:04Z
+00296b80	548	_ZN2Tz8JmReport9CreateGraEb	56.26	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	6	2026-08-23T17:16:22Z
+002a18d0	580	_ZN2Tz9JmDiagram11GetCharaIdxEii	0.0	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	4	2026-08-23T16:13:37Z
 002a7f58	592	_ZN2Tz10JmMiniGame10CreateListEv	0.0	3 consecutive candidates failed to compile or link	model cannot produce a compiling candidate	3	2026-08-23T15:20:55Z
 002b6138	256	_ZN2Tz8CmSLBase12DrawListMessEiijjPN2dk13SpriteMessageE	63.19	attempt budget (8) exhausted	ran out of attempts	8	2026-08-22T16:42:19Z
+002bd310	552	_ZN5SOUND13readBgmThreadEP4TASK	86.8	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	7	2026-08-23T17:11:44Z
 002bf650	600	_ZN8worldmap6Symbol8setStateEPKN2YS10WORLDSTATEE	45.55	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	7	2026-08-23T15:21:20Z
 002cf998	404	_ZN2Ti5MGObj12exec_prepareEv	0.0	3 consecutive candidates failed to compile or link	model cannot produce a compiling candidate	3	2026-08-22T16:43:27Z
+002dc4e0	548	_ZN2Ti6MGJumpC1Eii	0.0	3 consecutive candidates failed to compile or link	model cannot produce a compiling candidate	3	2026-08-23T17:08:03Z
 002e9690	296	_ZN2Ts5FLARE4InitEv	54.22	4 consecutive attempts without improving fuzzy_pct	stuck on the same codegen difference	9	2026-08-23T15:08:59Z
