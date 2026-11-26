@@ -1,0 +1,200 @@
+// FIXME(lane): not matching; origin: ghidra (machine-written, unreviewed).
+// Scores are in nonmatching/SCORES.tsv. Not linked; see docs/PLAN.md K1.
+#include "common/types.h"
+
+// Ghidra pseudo-C type aliases (mechanical, standard for any Ghidra decompile export)
+typedef u8  undefined;
+typedef u8  undefined1;
+typedef u16 undefined2;
+typedef u32 undefined3;
+typedef u32 undefined4;
+typedef u64 undefined5;
+typedef u64 undefined6;
+typedef u64 undefined7;
+typedef u64 undefined8;
+typedef u32 uint;
+typedef u16 ushort;
+typedef u8  byte;
+typedef u8  uchar;
+typedef u32 ulong;
+typedef u64 ulonglong;
+typedef s64 longlong;
+typedef s32 int3;
+typedef u32 uint3;
+typedef s64 int5;
+typedef u64 uint5;
+typedef s64 int6;
+typedef u64 uint6;
+typedef s64 int7;
+typedef u64 uint7;
+typedef s32 code(...);            // Ghidra's opaque code type: callable through a pointer
+// Byte-block locals (`undefined1 auVar [16]`, [12], [8], [4]): Ghidra both *assigns* them
+// (`auVar = _lqc2(..)`) and lets them decay to a byte pointer (`*(int*)pauVar[4]`,
+// `pauVar[5] + 0xc`) or an integer (`(int)auStack_2c0`), so: structs with those conversions.
+#define _GHIDRA_BYTES(NAME, N, AL) struct __attribute__((aligned(AL))) NAME {     u8 b[N];     NAME() {}     NAME(s64 v) { *(s64*)b = v; }     template <class T> bool operator==(const T &o) const { return (s64)*this == (s64)o; }     template <class T> bool operator!=(const T &o) const { return (s64)*this != (s64)o; }     template <class T> operator T*() const { return (T*)b; }     operator s64() const { return *(s64*)b; }     u8 &operator[](int i) { return b[i]; }     u8 *operator+(int o) const { return (u8*)b + o; } };
+_GHIDRA_BYTES(Q16, 16, 16)
+_GHIDRA_BYTES(B12, 12, 4)
+_GHIDRA_BYTES(B8, 8, 8)
+_GHIDRA_BYTES(B4, 4, 4)
+// Untyped global cell (used for DAT_ tokens on the second attempt): Ghidra types each DAT_
+// by its use site (uint*, char, float, ...); AnyCell reads/writes as whatever that is, and
+// arithmetic / deref / index / address-of on it yield further untyped values.
+struct AnyCell;
+struct AnyPtr {
+    void *p;
+    template <class T> operator T*() const { return (T*)p; }
+    AnyCell &operator*() const { return *(AnyCell*)p; }
+    AnyCell &operator[](int i) const;
+    operator s64() const { return (s64)(u32)(unsigned long)p; }
+    AnyPtr operator+(s64 o) const { AnyPtr r; r.p = (u8*)p + o; return r; }
+    AnyPtr operator-(s64 o) const { AnyPtr r; r.p = (u8*)p - o; return r; }
+    template <class T> bool operator==(T *q) const { return p == (void*)q; }
+    template <class T> bool operator!=(T *q) const { return p != (void*)q; }
+    bool operator==(s64 v) const { return (s64)*this == v; }
+    bool operator!=(s64 v) const { return (s64)*this != v; }
+};
+struct AnyCell {
+    u32 w;
+    template <class T> operator T() const { return *(const T*)this; }
+    operator s64() const { return *(const s32*)this; }
+    template <class T> AnyCell &operator=(const T &v) { *(T*)this = v; return *this; }
+    AnyCell &operator=(const AnyCell &v) { w = v.w; return *this; }
+    template <class T> bool operator==(T *p) const { return *(T* const*)this == p; }
+    template <class T> bool operator!=(T *p) const { return *(T* const*)this != p; }
+    bool operator==(s64 v) const { return *(const s32*)this == v; }
+    bool operator!=(s64 v) const { return *(const s32*)this != v; }
+    bool operator==(const AnyCell &o) const { return w == o.w; }
+    bool operator!=(const AnyCell &o) const { return w != o.w; }
+    bool operator<(const AnyCell &o) const { return (s32)w < (s32)o.w; }
+    bool operator>(const AnyCell &o) const { return (s32)w > (s32)o.w; }
+    bool operator<=(const AnyCell &o) const { return (s32)w <= (s32)o.w; }
+    bool operator>=(const AnyCell &o) const { return (s32)w >= (s32)o.w; }
+    AnyCell &operator*() const { return **(AnyCell* const*)this; }
+    AnyCell &operator[](int i) const { return (*(AnyCell* const*)this)[i]; }
+    AnyPtr operator&() const { AnyPtr r; r.p = (void*)this; return r; }
+    AnyCell operator+(s64 v) const { AnyCell r; r.w = w + (u32)v; return r; }
+    AnyCell operator-(s64 v) const { AnyCell r; r.w = w - (u32)v; return r; }
+    AnyCell operator*(s64 v) const { AnyCell r; r.w = w * (u32)v; return r; }
+    AnyCell operator&(s64 v) const { AnyCell r; r.w = w & (u32)v; return r; }
+    AnyCell operator|(s64 v) const { AnyCell r; r.w = w | (u32)v; return r; }
+    AnyCell operator^(s64 v) const { AnyCell r; r.w = w ^ (u32)v; return r; }
+    AnyCell operator<<(s64 v) const { AnyCell r; r.w = w << (u32)v; return r; }
+    AnyCell operator>>(s64 v) const { AnyCell r; r.w = w >> (u32)v; return r; }
+    template <class T> AnyCell &operator+=(const T &v) { w += (u32)(s64)v; return *this; }
+    template <class T> AnyCell &operator-=(const T &v) { w -= (u32)(s64)v; return *this; }
+    template <class T> AnyCell &operator|=(const T &v) { w |= (u32)(s64)v; return *this; }
+    template <class T> AnyCell &operator&=(const T &v) { w &= (u32)(s64)v; return *this; }
+    AnyCell &operator++() { ++w; return *this; }
+    AnyCell &operator--() { --w; return *this; }
+    AnyCell operator++(int) { AnyCell r = *this; ++w; return r; }
+    AnyCell operator--(int) { AnyCell r = *this; --w; return r; }
+    AnyCell operator()() const { return *this; }
+    template <class A> AnyCell operator()(const A &) const { return *this; }
+    template <class A, class B> AnyCell operator()(const A &, const B &) const { return *this; }
+    template <class A, class B, class C> AnyCell operator()(const A &, const B &, const C &) const { return *this; }
+    template <class A, class B, class C, class D> AnyCell operator()(const A &, const B &, const C &, const D &) const { return *this; }
+    template <class A, class B, class C, class D, class E> AnyCell operator()(const A &, const B &, const C &, const D &, const E &) const { return *this; }
+    template <class A, class B, class C, class D, class E, class F> AnyCell operator()(const A &, const B &, const C &, const D &, const E &, const F &) const { return *this; }
+};
+inline AnyCell &AnyPtr::operator[](int i) const { return ((AnyCell*)p)[i]; }
+template <class T> inline bool operator==(T *p, const AnyCell &c) { return c == p; }
+template <class T> inline bool operator!=(T *p, const AnyCell &c) { return c != p; }
+template <class T> inline bool operator==(T *p, const AnyPtr &c) { return c == p; }
+template <class T> inline bool operator!=(T *p, const AnyPtr &c) { return c != p; }
+inline bool operator==(s64 v, const AnyCell &c) { return c == v; }
+inline bool operator!=(s64 v, const AnyCell &c) { return c != v; }
+inline bool operator<(const AnyCell &c, s64 v) { return (s64)c < v; }
+inline bool operator>(const AnyCell &c, s64 v) { return (s64)c > v; }
+inline bool operator<=(const AnyCell &c, s64 v) { return (s64)c <= v; }
+inline bool operator>=(const AnyCell &c, s64 v) { return (s64)c >= v; }
+inline bool operator<(s64 v, const AnyCell &c) { return v < (s64)c; }
+inline bool operator>(s64 v, const AnyCell &c) { return v > (s64)c; }
+inline bool operator<=(s64 v, const AnyCell &c) { return v <= (s64)c; }
+inline bool operator>=(s64 v, const AnyCell &c) { return v >= (s64)c; }
+typedef u8 BADSPACEBASE;
+// Generic stand-in result for Ghidra intrinsics (_lqc2, _vadd..., CONCAT44, SUB168, ...):
+// converts to whatever the use site needs. Mechanical, never a match, always compiles.
+struct AnyVal {
+    template <class T> operator T() const { T t; return t; }
+    operator s64() const { return 0; }
+    template <class T> bool operator==(const T &) const { return false; }
+    template <class T> bool operator!=(const T &) const { return false; }
+    template <class T> bool operator<(const T &) const { return false; }
+    template <class T> bool operator>(const T &) const { return false; }
+    operator Q16() const { Q16 q; return q; }
+    operator B12() const { B12 q; return q; }
+    operator B8() const { B8 q; return q; }
+    operator B4() const { B4 q; return q; }
+};
+#define _GHIDRA_ANY(F) static inline AnyVal F() { AnyVal r; return r; } template <class A> static inline AnyVal F(const A &) { AnyVal r; return r; } template <class A, class B> static inline AnyVal F(const A &, const B &) { AnyVal r; return r; } template <class A, class B, class C> static inline AnyVal F(const A &, const B &, const C &) { AnyVal r; return r; } template <class A, class B, class C, class D> static inline AnyVal F(const A &, const B &, const C &, const D &) { AnyVal r; return r; } template <class A, class B, class C, class D, class E> static inline AnyVal F(const A &, const B &, const C &, const D &, const E &) { AnyVal r; return r; } template <class A, class B, class C, class D, class E, class G> static inline AnyVal F(const A &, const B &, const C &, const D &, const E &, const G &) { AnyVal r; return r; }
+
+s32 FUN_00102818(...) asm("func_00102818");
+s32 FUN_00103eb0(...) asm("func_00103eb0");
+s32 FUN_00239700(...) asm("func_00239700");
+s32 FUN_00247cf0(...) asm("_ZN2Tz4MUMI4InitEv");
+s32 FUN_00287b18(...) asm("func_00287b18");
+s32 FUN_002889f0(...) asm("func_002889f0");
+s32 FUN_00288be8(...) asm("func_00288be8");
+s32 FUN_00288f48(...) asm("func_00288f48");
+s32 FUN_0028d068(...) asm("func_0028d068");
+s32 FUN_002b3df8(...) asm("func_002b3df8");
+extern AnyCell DAT_0032ba14 asm("D_0032ba14");
+extern AnyCell DAT_00347f80 asm("D_00347f80");
+extern AnyCell DAT_0035ed4c asm("D_0035ed4c");
+extern AnyCell DAT_0035ed50 asm("D_0035ed50");
+extern AnyCell DAT_0035ed54 asm("D_0035ed54");
+extern AnyCell DAT_0035ed58 asm("D_0035ed58");
+extern AnyCell DAT_0035ed5c asm("D_0035ed5c");
+extern AnyCell DAT_0035ed60 asm("D_0035ed60");
+extern AnyCell DAT_0035ed64 asm("D_0035ed64");
+extern AnyCell DAT_0035ed68 asm("D_0035ed68");
+extern AnyCell DAT_0035ed69 asm("D_0035ed69");
+extern AnyCell PTR_LAB_00347e60 asm("D_00347e60");
+
+// Ghidra decompile of 0x00247cf0, wrapped mechanically (ad/fallback.py)
+
+void FUN_00247cf0_impl(void) asm("_ZN2Tz4MUMI4InitEv");
+void FUN_00247cf0_impl(void) {
+  undefined4 *puVar1;
+  undefined8 uVar2;
+  undefined4 *puVar3;
+  int iVar4;
+  undefined8 uVar5;
+  
+  iVar4 = 2;
+  FUN_00287b18(2,3);
+  uVar2 = FUN_00288be8(0x38);
+  FUN_002889f0(uVar2,3,1);
+  DAT_0035ed4c = (undefined4)uVar2;
+  uVar2 = FUN_00288be8(0x38);
+  FUN_002889f0(uVar2,2,0);
+  DAT_0035ed50 = (undefined4)uVar2;
+  uVar5 = 0x247d80;
+  FUN_00288f48(uVar2,0x40,0x80,0,0);
+  DAT_0035ed54 = 0;
+  DAT_0035ed58 = 0;
+  DAT_0035ed5c = 0;
+  uVar2 = (**(code **)*DAT_0032ba14)(DAT_0032ba14,0xc,uVar5);
+  FUN_002b3df8(uVar2);
+  DAT_0035ed60 = (undefined4)uVar2;
+  DAT_0035ed68 = 0;
+  puVar1 = (undefined4 *)
+           (**(code **)**(undefined4 **)(DAT_00347f80 + 0x14))
+                     (*(undefined4 **)(DAT_00347f80 + 0x14),0x4cc,0);
+  *puVar1 = 3;
+  puVar3 = puVar1 + 1;
+  do {
+    puVar3[3] = 0;
+    *puVar3 = &PTR_LAB_00347e60;
+    iVar4 = iVar4 + -1;
+    FUN_00239700(puVar3 + 6);
+    puVar3 = puVar3 + 0x66;
+  } while (iVar4 != -1);
+  DAT_0035ed69 = 0;
+  DAT_0035ed64 = puVar1 + 1;
+  FUN_0028d068(0x754a,0xffffffffffffffff);
+  iVar4 = FUN_00103eb0();
+  FUN_00102818(*(undefined4 *)(iVar4 + 4),0,2000,0x247ff0,0x1000);
+  return;
+}
+

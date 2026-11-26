@@ -18,6 +18,7 @@ source <toolchain>/env.sh              # written by tools/setup_toolchain.sh
 python3 tools/build_elf.py objects     # regenerate the object list (see below)
 make                                   # compile, link, byte-compare: must end in MATCHED!
 python3 tools/progress_bytes.py        # totals
+python3 tools/lane.py score            # re-score the non-matching lane (about 10 s)
 ```
 
 `SLPM_666.75` (sha256 `d869ce4b…bc87`) sits at the repository root, extracted
@@ -50,16 +51,17 @@ Three grades, kept apart in every report:
 2. **Reviewed**: matched, and it has passed review: evidenced names, real
    types, in the source file that owned it. Functions in `src/anon` and
    `src/autodecomp` are matched but not reviewed.
-3. **Structural** (planned, docs/PLAN.md K2): written and correct in shape,
-   differing only in register choice, scheduling or delay-slot fill. Shown as
-   a separate weighted figure once the tool exists. Do not estimate it by
-   hand.
+3. **Structural**: written, in the non-matching lane, and differing from the
+   original only in register choice or instruction order (`tools/lane.py`
+   classes `regalloc` and `scheduling`). Shown as a separate weighted figure:
+   matched bytes plus size x match % of those functions. A further figure
+   counts every written function the same way. Neither is called matched.
 
 In public text (README, site, commit summaries) say "matched" or
 "byte-matched". Do not write "honest".
 
 <!-- status:start -->
-Status (2026-11-26, written by `tools/site_data.py`): 6,247 of 14,618 functions, 402,992 of 2,226,245 bytes of code matched (18.1 %). By function size: under 80 B 64.5 %, 80–199 B 39.2 %, 200–999 B 4.30 %, 1 KB and more 0.32 %. Game code 6,097 / 13,806 functions (19.1 % of its bytes; Menus & Jiminy's Journal 18.7 %, Core gameplay 24.3 %, Camera, maps & HUD 28.7 %, Party members & models 14.6 %, Minigames 13.6 %, World map 22.1 %, Cutscenes & musical 27.6 %, Effects & particles 16.9 %, Smaller directories 20.0 %, Not placed yet 10.5 %); SDK & runtime 150 / 812 functions (3.40 %). 32 of 574 files in the file map have every function matched. The five overlays are not started. `make` ends in MATCHED!.
+Status (2026-11-26, written by `tools/site_data.py`): 6,247 of 14,618 functions, 402,992 of 2,226,245 bytes of code matched (18.1 %); structural progress 20.1 % (448,513 bytes, matched code plus partial credit for 351 structurally matched functions); 10,552 functions are written (72.9 % of the code), 54.5 % counting each by how closely it matches. By function size: under 80 B 64.5 %, 80–199 B 39.2 %, 200–999 B 4.30 %, 1 KB and more 0.32 %. Game code 6,097 / 13,806 functions (19.1 % of its bytes; Menus & Jiminy's Journal 18.7 %, Core gameplay 24.3 %, Camera, maps & HUD 28.7 %, Party members & models 14.6 %, Minigames 13.6 %, World map 22.1 %, Cutscenes & musical 27.6 %, Effects & particles 16.9 %, Smaller directories 20.0 %, Not placed yet 10.5 %); SDK & runtime 150 / 812 functions (3.40 %). 32 of 574 files in the file map have every function matched. The five overlays are not started. `make` ends in MATCHED!.
 <!-- status:end -->
 
 ## Layout
@@ -71,7 +73,8 @@ Status (2026-11-26, written by `tools/site_data.py`): 6,247 of 14,618 functions,
 | `src/<area>/` | Sources by original developer library (`tozawa`, `yasui`, `ys`, `tz`, `kn`, …), as the E3 debug build names them |
 | `src/anon/` | Matched functions with no home yet, many generated upstream. Unreviewed |
 | `src/autodecomp/` | One file per address, written by the machine lifter. Matched, unreviewed, placeholder names, raw offset access |
-| `nonmatchings/`, `wip/` | Not built. Old dumps; do not add to them (the non-matching lane of PLAN K1 replaces them) |
+| `nonmatching/` | The non-matching lane: one written-but-not-matching function per file, scored by `tools/lane.py` into `SCORES.tsv`, never linked. Machine-written and unreviewed unless its header says otherwise. `legacy/` is an old upstream dump, not scored |
+| `wip/` | Not built. Old experiments; do not add to it |
 | `data/e3/` | Names, prototypes and class layouts recovered from the E3 2014 PS3 debug build, and the PS3-to-PS2 function map with its confidence grades |
 | `docs/codegen-3.2.md` | What ee-gcc 3.2 does: the idiom catalogue. Read before matching anything |
 | `docs/rig/` | The matching rig's own documents (tools/rig) |

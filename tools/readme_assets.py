@@ -128,6 +128,9 @@ def status_text(summary):
     if t.get("code_weighted") is not None:
         s += (f"; structural progress {pct(t['code_weighted'], t['code'])} ({num(t['code_weighted'])} bytes, matched code "
               f"plus partial credit for {num(t['fns_structural'] - t['fns_matched'])} structurally matched functions)")
+    if t.get("fns_written") is not None:
+        s += (f"; {num(t['fns_written'])} functions are written ({pct(t['code_written'], t['code'])} of the code), "
+              f"{pct(t['code_weighted_all'], t['code'])} counting each by how closely it matches")
     s += ". By function size: " + ", ".join(f"{b['label']} {pct(b['cm'], b['c'])}" for b in summary["bins"]) + ". "
     s += (f"Game code {num(game['fm'])} / {num(game['f'])} functions ({pct(game['cm'], game['c'])} of its bytes; "
           + ", ".join(f"{l['n']} {pct(l['cm'], l['c'])}" for l in game["libs"]) + "); "

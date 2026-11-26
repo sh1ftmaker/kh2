@@ -33,7 +33,14 @@ python3 tools/rig/compile_diff.py <addr> --src f.cpp # every attempt: compile, m
 python3 tools/rig/permuter.py <addr> --src f.cpp     # a near-miss of 85 % or more
 python3 tools/rig/promote.py <addr> --src f.cpp --dest src/<area>/<tu>.cpp
 python3 tools/rig/park.py <addr> …                   # give-up record
+python3 tools/lane.py score <addr>                   # re-score a file in nonmatching/
 ```
+
+A function that will not match goes to `nonmatching/<addr>.cpp` (replace the
+machine draft if yours scores higher), headed
+`// FIXME(lane): not matching; origin: hand` and a line saying what differs.
+Start from the draft already there when its score is high; rewrite it with
+real names and types rather than polishing decompiler output.
 
 Always pass absolute `--src` paths. `compile_diff` rejects, unscored, any
 candidate with an asm statement, `naked`, a register pin or `.incbin`.

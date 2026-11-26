@@ -1,0 +1,107 @@
+// FIXME(lane): not matching; origin: ghidra (machine-written, unreviewed).
+// Scores are in nonmatching/SCORES.tsv. Not linked; see docs/PLAN.md K1.
+#include "common/types.h"
+
+// Ghidra pseudo-C type aliases (mechanical, standard for any Ghidra decompile export)
+typedef u8  undefined;
+typedef u8  undefined1;
+typedef u16 undefined2;
+typedef u32 undefined3;
+typedef u32 undefined4;
+typedef u64 undefined5;
+typedef u64 undefined6;
+typedef u64 undefined7;
+typedef u64 undefined8;
+typedef u32 uint;
+typedef u16 ushort;
+typedef u8  byte;
+typedef u8  uchar;
+typedef u32 ulong;
+typedef u64 ulonglong;
+typedef s64 longlong;
+typedef s32 int3;
+typedef u32 uint3;
+typedef s64 int5;
+typedef u64 uint5;
+typedef s64 int6;
+typedef u64 uint6;
+typedef s64 int7;
+typedef u64 uint7;
+typedef s32 code(...);            // Ghidra's opaque code type: callable through a pointer
+// Byte-block locals (`undefined1 auVar [16]`, [12], [8], [4]): Ghidra both *assigns* them
+// (`auVar = _lqc2(..)`) and lets them decay to a byte pointer (`*(int*)pauVar[4]`,
+// `pauVar[5] + 0xc`) or an integer (`(int)auStack_2c0`), so: structs with those conversions.
+#define _GHIDRA_BYTES(NAME, N, AL) struct __attribute__((aligned(AL))) NAME {     u8 b[N];     NAME() {}     NAME(s64 v) { *(s64*)b = v; }     template <class T> bool operator==(const T &o) const { return (s64)*this == (s64)o; }     template <class T> bool operator!=(const T &o) const { return (s64)*this != (s64)o; }     template <class T> operator T*() const { return (T*)b; }     operator s64() const { return *(s64*)b; }     u8 &operator[](int i) { return b[i]; }     u8 *operator+(int o) const { return (u8*)b + o; } };
+_GHIDRA_BYTES(Q16, 16, 16)
+_GHIDRA_BYTES(B12, 12, 4)
+_GHIDRA_BYTES(B8, 8, 8)
+_GHIDRA_BYTES(B4, 4, 4)
+// Untyped global cell (used for DAT_ tokens on the second attempt): Ghidra types each DAT_
+// by its use site (uint*, char, float, ...); AnyCell reads/writes as whatever that is.
+struct AnyCell {
+    u32 w;
+    template <class T> operator T() const { return *(const T*)this; }
+    operator s64() const { return *(const s32*)this; }
+    template <class T> AnyCell &operator=(const T &v) { *(T*)this = v; return *this; }
+    template <class T> bool operator==(T *p) const { return *(T* const*)this == p; }
+    template <class T> bool operator!=(T *p) const { return *(T* const*)this != p; }
+    bool operator==(s64 v) const { return *(const s32*)this == v; }
+    bool operator!=(s64 v) const { return *(const s32*)this != v; }
+    u8 &operator[](int i) { return ((u8*)this)[i]; }
+};
+// Generic stand-in result for Ghidra intrinsics (_lqc2, _vadd..., CONCAT44, SUB168, ...):
+// converts to whatever the use site needs. Mechanical, never a match, always compiles.
+struct AnyVal {
+    template <class T> operator T() const { T t; return t; }
+    operator s64() const { return 0; }
+    operator Q16() const { Q16 q; return q; }
+    operator B12() const { B12 q; return q; }
+    operator B8() const { B8 q; return q; }
+    operator B4() const { B4 q; return q; }
+};
+#define _GHIDRA_ANY(F) static inline AnyVal F() { AnyVal r; return r; } template <class A> static inline AnyVal F(const A &) { AnyVal r; return r; } template <class A, class B> static inline AnyVal F(const A &, const B &) { AnyVal r; return r; } template <class A, class B, class C> static inline AnyVal F(const A &, const B &, const C &) { AnyVal r; return r; } template <class A, class B, class C, class D> static inline AnyVal F(const A &, const B &, const C &, const D &) { AnyVal r; return r; } template <class A, class B, class C, class D, class E> static inline AnyVal F(const A &, const B &, const C &, const D &, const E &) { AnyVal r; return r; } template <class A, class B, class C, class D, class E, class G> static inline AnyVal F(const A &, const B &, const C &, const D &, const E &, const G &) { AnyVal r; return r; }
+
+s32 FUN_002f3dd8(...) asm("func_002f3dd8");
+_GHIDRA_ANY(SUB168)
+_GHIDRA_ANY(_pcpyld)
+_GHIDRA_ANY(_pcpyud)
+_GHIDRA_ANY(_pextlw)
+_GHIDRA_ANY(_pextuw)
+
+// Ghidra decompile of 0x002f3dd8, wrapped mechanically (ad/fallback.py)
+
+void FUN_002f3dd8_impl(undefined4 *param_1,Q16 *param_2) asm("func_002f3dd8");
+void FUN_002f3dd8_impl(undefined4 *param_1,Q16 *param_2) {
+  Q16 auVar1;
+  Q16 auVar2;
+  Q16 auVar3;
+  Q16 auVar4;
+  Q16 auVar5;
+  
+  auVar2 = _pextlw(SUB168(param_2[1],0),SUB168(*param_2,0));
+  auVar3 = _pextuw(param_2[1],*param_2);
+  auVar4 = _pextlw(SUB168(param_2[3],0),SUB168(param_2[2],0));
+  auVar5 = _pextuw(param_2[3],param_2[2]);
+  auVar1 = _pcpyld(auVar4,auVar2);
+  auVar2 = _pcpyud(auVar2,auVar4);
+  auVar4 = _pcpyld(auVar5,auVar3);
+  auVar3 = _pcpyud(auVar3,auVar5);
+  *param_1 = (*(u32*)((u8*)&auVar1 + 0));
+  param_1[1] = (*(u32*)((u8*)&auVar1 + 4));
+  param_1[2] = (*(u32*)((u8*)&auVar1 + 8));
+  param_1[3] = (*(u32*)((u8*)&auVar1 + 12));
+  param_1[4] = (*(u32*)((u8*)&auVar2 + 0));
+  param_1[5] = (*(u32*)((u8*)&auVar2 + 4));
+  param_1[6] = (*(u32*)((u8*)&auVar2 + 8));
+  param_1[7] = (*(u32*)((u8*)&auVar2 + 12));
+  param_1[8] = (*(u32*)((u8*)&auVar4 + 0));
+  param_1[9] = (*(u32*)((u8*)&auVar4 + 4));
+  param_1[10] = (*(u32*)((u8*)&auVar4 + 8));
+  param_1[0xb] = (*(u32*)((u8*)&auVar4 + 12));
+  param_1[0xc] = (*(u32*)((u8*)&auVar3 + 0));
+  param_1[0xd] = (*(u32*)((u8*)&auVar3 + 4));
+  param_1[0xe] = (*(u32*)((u8*)&auVar3 + 8));
+  param_1[0xf] = (*(u32*)((u8*)&auVar3 + 12));
+  return;
+}
+

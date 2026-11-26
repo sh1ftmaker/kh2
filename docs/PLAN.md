@@ -37,7 +37,12 @@ delay-slot fill.
 Standalone repository, one `matching` branch, CLAUDE.md, AGENTS.md, rules
 card, review brief, coordinator runbook, website, README status block.
 
-### K1: the non-matching lane
+### K1: the non-matching lane (done 2026-11-25)
+
+`nonmatching/<addr>.cpp`, `tools/lane.py` (`import`, `score`, `exact`, `prune`), scoreboard
+`nonmatching/SCORES.tsv`. 4,305 lifter candidates imported; VU0 candidates with inline asm,
+stubs, other projects' sources and 0 % candidates stayed out. What follows is the original
+reasoning.
 
 FSA keeps every written function compiled and reported whether or not it
 matches. Here an inexact function cannot be in the tree at all, so 5,100
@@ -51,7 +56,12 @@ candidates sit outside it and each new attempt starts from nothing.
   VU0 inline asm stay out.
 - `promote.py` moves a function from the lane into `src/` when it is exact.
 
-### K2: the structural metric
+### K2: the structural metric (first version 2026-11-25)
+
+`tools/lane.py` classes each lane function `regalloc`, `scheduling`, `operands` or
+`different` from objdiff's differing rows; the first two are structurally matched and get
+size x match % in the weighted figure. Still to do: a delay-slot class, a stack-frame class
+(same code, another frame size), and a check of the classes against hand-read samples.
 
 A port of FSA's `tools/structural.py` to MIPS: classify each inexact
 function's diff (register-only, scheduling or delay-slot, operands,

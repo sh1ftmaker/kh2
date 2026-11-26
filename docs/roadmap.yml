@@ -117,18 +117,18 @@ phases:
       - id: nonmatching-lane
         title: Non-matching lane
         desc: >-
-          Functions that compile but do not yet match are kept in the tree,
-          compiled and scored, never linked. Brings the 5,100 lifter
-          candidates into the repository.
-        status: next
+          Functions that compile but do not yet match are kept in
+          nonmatching/, scored by tools/lane.py, never linked. 4,305 lifter
+          candidates came in with it.
+        status: done
         covers: []
       - id: structural
         title: Structural progress metric
         desc: >-
           Partial credit for functions whose only differences are register
-          choice, scheduling or delay-slot fill, shown beside the matched
-          figure.
-        status: next
+          choice or instruction order, shown beside the matched figure. First
+          version in tools/lane.py; delay-slot and stack-frame classes to come.
+        status: active
         covers: []
       - id: gate
         title: Mechanical gate

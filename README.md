@@ -9,6 +9,7 @@ executable.
 
 <!-- assets:start -->
 <p align="center">
+  <a href="https://sh1ftmaker.github.io/kh2/"><img alt="Structural progress" src="https://img.shields.io/endpoint?url=https%3A%2F%2Fsh1ftmaker.github.io%2Fkh2%2Fdata%2Fbadge-structural.json&style=flat-square"></a>
   <a href="https://sh1ftmaker.github.io/kh2/"><img alt="Matched code" src="https://img.shields.io/endpoint?url=https%3A%2F%2Fsh1ftmaker.github.io%2Fkh2%2Fdata%2Fbadge-code.json&style=flat-square"></a>
   <a href="https://sh1ftmaker.github.io/kh2/"><img alt="Functions matched" src="https://img.shields.io/endpoint?url=https%3A%2F%2Fsh1ftmaker.github.io%2Fkh2%2Fdata%2Fbadge-functions.json&style=flat-square"></a>
   <a href="https://sh1ftmaker.github.io/kh2/"><img alt="SLPM_666.75 rebuilt byte-identical" src="https://img.shields.io/endpoint?url=https%3A%2F%2Fsh1ftmaker.github.io%2Fkh2%2Fdata%2Fbadge-elf.json&style=flat-square"></a>
@@ -25,7 +26,7 @@ executable.
 <!-- assets:end -->
 
 <!-- status:start -->
-Status (2026-11-26, written by `tools/site_data.py`): 6,247 of 14,618 functions, 402,992 of 2,226,245 bytes of code matched (18.1 %). By function size: under 80 B 64.5 %, 80–199 B 39.2 %, 200–999 B 4.30 %, 1 KB and more 0.32 %. Game code 6,097 / 13,806 functions (19.1 % of its bytes; Menus & Jiminy's Journal 18.7 %, Core gameplay 24.3 %, Camera, maps & HUD 28.7 %, Party members & models 14.6 %, Minigames 13.6 %, World map 22.1 %, Cutscenes & musical 27.6 %, Effects & particles 16.9 %, Smaller directories 20.0 %, Not placed yet 10.5 %); SDK & runtime 150 / 812 functions (3.40 %). 32 of 574 files in the file map have every function matched. The five overlays are not started. `make` ends in MATCHED!.
+Status (2026-11-26, written by `tools/site_data.py`): 6,247 of 14,618 functions, 402,992 of 2,226,245 bytes of code matched (18.1 %); structural progress 20.1 % (448,513 bytes, matched code plus partial credit for 351 structurally matched functions); 10,552 functions are written (72.9 % of the code), 54.5 % counting each by how closely it matches. By function size: under 80 B 64.5 %, 80–199 B 39.2 %, 200–999 B 4.30 %, 1 KB and more 0.32 %. Game code 6,097 / 13,806 functions (19.1 % of its bytes; Menus & Jiminy's Journal 18.7 %, Core gameplay 24.3 %, Camera, maps & HUD 28.7 %, Party members & models 14.6 %, Minigames 13.6 %, World map 22.1 %, Cutscenes & musical 27.6 %, Effects & particles 16.9 %, Smaller directories 20.0 %, Not placed yet 10.5 %); SDK & runtime 150 / 812 functions (3.40 %). 32 of 574 files in the file map have every function matched. The five overlays are not started. `make` ends in MATCHED!.
 <!-- status:end -->
 
 This repository contains no game data. You need your own copy of the game to
@@ -40,9 +41,12 @@ build it.
 - **Reviewed** is the part of the matched code with evidenced names, real
   types and a place in its original source file. Code in `src/anon` and
   `src/autodecomp` is matched but machine-written and not yet reviewed.
-- A weighted figure with partial credit for functions that are structurally
-  right will be added when the tool that measures it exists
-  ([docs/PLAN.md](docs/PLAN.md), K2).
+- **Structural progress** adds partial credit (size times match percentage)
+  for functions that are written and differ from the original only in the
+  compiler's register choice or instruction order. These live in
+  `nonmatching/`, are never linked, and are not counted as matched.
+- **Written** counts every function that has compiling source at all,
+  matched or not. Most unmatched ones are machine-written first drafts.
 
 ## Building
 

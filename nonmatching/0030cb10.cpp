@@ -1,0 +1,116 @@
+// FIXME(lane): not matching; origin: lift (machine-written, unreviewed).
+// Scores are in nonmatching/SCORES.tsv. Not linked; see docs/PLAN.md K1.
+#include "common/types.h"
+
+extern "C" u32 D_00366164 asm("D_00366164");
+extern "C" u32 D_00378320 asm("D_00378320");
+extern "C" u32 D_01e37280 asm("D_01e37280");
+extern "C" u32 D_01e37ec0 asm("D_01e37ec0");
+extern "C" u32 D_01e38980 asm("D_01e38980");
+extern "C" u32 func_00305620(u32, u32, u32) asm("func_00305620");
+extern "C" u32 func_00309d60(u32, u32, u32, u32, u32, u32, u32, u32) asm("func_00309d60");
+extern "C" void func_00305630(u32) asm("func_00305630");
+extern "C" void func_00305660(u32) asm("func_00305660");
+extern "C" void func_0030a2d0(u32, u32) asm("func_0030a2d0");
+extern "C" void func_0030a300() asm("func_0030a300");
+extern "C" void func_0030a3f8() asm("func_0030a3f8");
+
+// 0x0030cb10 func_0030cb10
+u32 func_0030cb10(u32 a0, u32 a1) asm("func_0030cb10");
+u32 func_0030cb10(u32 a0, u32 a1) {
+    u32 loc_30;
+    u32 a1_0;
+    u32 loc_8;
+    u32 loc_14;
+    u32 loc_24;
+    u32 loc_18;
+    u32 loc_0;
+    u32 s1;
+    u32 s0;
+    u32 v0;
+    u32 v0_1;
+    u32 a1_2;
+    u32 s1_3;
+    u32 s0_4;
+    u32 v0_5;
+    u32 v0_6;
+    func_0030a2d0(0x13, a1);
+    if ((*(u32*)(&D_00366164) == 0)) {
+        func_0030a3f8();
+    }
+    *(u8*)(((u32)&D_01e37280 + 0x14)) = *(u8*)(a0);
+    if (((s32)((*(u8*)(a0) << 0x18)) != 0)) {
+        a1_0 = 1;
+        do {
+            if (((s32)(((s32)((a1_0 + 1)) < (s32)(0x400))) == 0)) {
+                if (((a1_0 + 1) == 0x400)) {
+                    *(u8*)(((u32)&D_01e37280 + 0x413)) = 0;
+                }
+                loc_14 = 1;
+                loc_18 = 0;
+                loc_24 = (u32)&D_00378320;
+                *(u32*)(((u32)&D_01e37280 + 0x10)) = a1;
+                loc_0 = 0;
+                loc_8 = 0;
+                *(u32*)((u32)&D_01e37280) = func_00305620((u32)&loc_8 + 8, a1_0 + 1, 0x380000);
+                *(u32*)(((u32)&D_01e37280 + 4)) = (u32)&loc_30;
+                *(u32*)(((u32)&D_01e37280 + 8)) = 4;
+                s1 = func_00305620((u32)&loc_8 + 8, a1_0 + 1, 0x380000);
+                if (((s32)(func_00309d60((u32)&D_01e38980, 0x13, 0, (u32)&D_01e37280, 0x414, (u32)&D_01e37ec0, 4, 0)) < 0)) {
+                    func_00305630(s1);
+                    func_0030a300();
+                    v0_1 = 0xfffffff5;
+                } else {
+                    s0 = *(u32*)(((u32)&D_01e37ec0 | 0x20000000));
+                    func_0030a300();
+                    if (((s32)(s0) == 0)) {
+                        func_00305630(s1);
+                        v0 = 0xfffffff5;
+                    } else {
+                        func_00305660(s1);
+                        func_00305630(s1);
+                        v0 = loc_30;
+                    }
+                    v0_1 = v0;
+                }
+                return v0_1;
+            }
+            *(u8*)((((u32)&D_01e37280 + (a1_0 + 1)) + 0x14)) = *(u8*)((a0 + (a1_0 + 1)));
+            a1_0 = (a1_0 + 1);
+        } while (((*(u8*)((a0 + a1_0)) << 0x18) != 0));
+        a1_2 = a1_0;
+    } else {
+        a1_2 = 0;
+    }
+    if ((a1_2 == 0x400)) {
+        *(u8*)(((u32)&D_01e37280 + 0x413)) = 0;
+    }
+    loc_14 = 1;
+    loc_18 = 0;
+    loc_24 = (u32)&D_00378320;
+    *(u32*)(((u32)&D_01e37280 + 0x10)) = a1;
+    loc_0 = 0;
+    loc_8 = 0;
+    *(u32*)((u32)&D_01e37280) = func_00305620((u32)&loc_8 + 8, a1_2, 0x380000);
+    *(u32*)(((u32)&D_01e37280 + 4)) = (u32)&loc_30;
+    *(u32*)(((u32)&D_01e37280 + 8)) = 4;
+    s1_3 = func_00305620((u32)&loc_8 + 8, a1_2, 0x380000);
+    if (((s32)(func_00309d60((u32)&D_01e38980, 0x13, 0, (u32)&D_01e37280, 0x414, (u32)&D_01e37ec0, 4, 0)) < 0)) {
+        func_00305630(s1_3);
+        func_0030a300();
+        v0_6 = 0xfffffff5;
+    } else {
+        s0_4 = *(u32*)(((u32)&D_01e37ec0 | 0x20000000));
+        func_0030a300();
+        if (((s32)(s0_4) == 0)) {
+            func_00305630(s1_3);
+            v0_5 = 0xfffffff5;
+        } else {
+            func_00305660(s1_3);
+            func_00305630(s1_3);
+            v0_5 = loc_30;
+        }
+        v0_6 = v0_5;
+    }
+    return v0_6;
+}

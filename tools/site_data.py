@@ -26,12 +26,11 @@ Outputs:
   site/badges/*.svg            README visuals (tools/readme_assets.py)
   README.md, CLAUDE.md         the text between <!-- status:start --> and <!-- status:end -->
 
-Structural (weighted) progress is not measured for this project yet. When a tool
-provides it, write out/generated/structural.json as
-  {"functions": {"<addr hex>": <match percent 0-100>, ...}}
-for functions that are structurally matched but not byte-identical; the totals
-then gain `code_weighted` and `fns_structural`, and the site shows them. Without
-that file those fields are absent and the site hides everything about them.
+Structural (weighted) progress comes from the non-matching lane's scoreboard,
+nonmatching/SCORES.tsv (tools/lane.py): functions classed regalloc or scheduling
+count as structurally matched and add size x match % to `code_weighted`; every
+lane function adds the same to `code_weighted_all` and counts as written.
+Without that file those fields are absent and the site hides them.
 
 Only names, addresses, sizes and match flags are written: never bytes, asm or
 data contents of the game.
@@ -64,7 +63,7 @@ OUT = ROOT / "site/data"
 ROADMAP = ROOT / "docs/roadmap.yml"
 TARGET = "SLPM_666.75"
 TARGET_SHA256 = "d869ce4b8edd61cb978c4ff9ede595fe4d7d7b21cbb96a145275217120d8bc87"
-STRUCTURAL = ROOT / "out/generated/structural.json"
+LANE_SCORES = ROOT / "nonmatching/SCORES.tsv"
 
 # The game's own code, by the directory of the original source tree each file sat in
 # (C:/hd25/kingdom2/<dir>/...). key, directories, name, hue, short label.
@@ -212,9 +211,16 @@ def build():
     spans.sort()
     span_lo = [s[0] for s in spans]
     names = registry_names()
-    structural = {}
-    if STRUCTURAL.exists():
-        structural = {int(a, 16): float(p) for a, p in json.loads(STRUCTURAL.read_text())["functions"].items()}
+    # the non-matching lane (tools/lane.py): written functions that do not match yet
+    structural, lane = {}, {}
+    if LANE_SCORES.exists():
+        for r in read_tsv(LANE_SCORES):
+            pct = float(r["pct"])
+            if r["class"] == "error" or pct <= 0:
+                continue
+            lane[int(r["addr"], 16)] = min(pct, 99.99)
+            if r["class"] in ("regalloc", "scheduling") and pct >= 50:
+                structural[int(r["addr"], 16)] = pct
 
     fns = []
     for r in rows:
@@ -244,7 +250,8 @@ def build():
             w = size * max(0.0, min(100.0, structural[addr])) / 100
         fns.append({"addr": addr, "size": size, "done": done, "name": name, "src": src, "region": region,
                     "group": group, "path": path, "file": fname, "conf": conf, "ev": ev, "w": w,
-                    "structural": addr in structural and not done})
+                    "structural": addr in structural and not done,
+                    "lane": 0.0 if done else lane.get(addr, 0.0)})
     dm = demangle([f["name"] for f in fns])
     for f in fns:
         f["name"] = dm.get(f["name"], f["name"])
@@ -274,12 +281,12 @@ def write(fns, subject, elf_ok):
     for old in (OUT / "lib").glob("*.json"):
         old.unlink()
 
-    has_w = STRUCTURAL.exists()
+    has_w = LANE_SCORES.exists()
     files = defaultdict(lambda: {"fns": [], "c": 0, "cm": 0, "w": 0.0, "f": 0, "fm": 0, "conf": Counter(), "ev": Counter()})
     for f in fns:
         rec = files[(f["region"], f["group"], f["path"])]
         rec["name"], rec["path"] = f["file"], f["path"]
-        rec["fns"].append([f["name"], f["addr"], f["size"], 100 if f["done"] else 0] + ([round(f["w"])] if f["w"] else []))
+        rec["fns"].append([f["name"], f["addr"], f["size"], 100 if f["done"] else int(f["lane"])] + ([round(f["w"])] if f["w"] else []))
         rec["c"] += f["size"]; rec["f"] += 1
         if f["done"]:
             rec["cm"] += f["size"]; rec["fm"] += 1
@@ -360,6 +367,9 @@ def write(fns, subject, elf_ok):
         totals["code_weighted"] = round(code_m + sum(f["w"] for f in fns))
         totals["fns_structural"] = totals["fns_matched"] + sum(1 for f in fns if f["structural"])
         totals["code_structural"] = code_m + sum(f["size"] for f in fns if f["structural"])
+        totals["fns_written"] = totals["fns_matched"] + sum(1 for f in fns if f["lane"])
+        totals["code_written"] = code_m + sum(f["size"] for f in fns if f["lane"])
+        totals["code_weighted_all"] = round(code_m + sum(f["size"] * f["lane"] / 100 for f in fns))
     if sum(r["c"] for r in regions) != code:
         raise SystemExit("regions do not add up to the function table")
 
