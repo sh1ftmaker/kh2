@@ -36,7 +36,7 @@ function exactly as it was and say what you learned.
 source /data/agent-tom/kh2/env.sh
 python3 tools/try_unit.py <file>                 # same / which functions differ
 python3 tools/try_unit.py <file> --show <symbol> # assembly diff, target against yours
-python3 tools/get_context.py <addr>              # the original function's disassembly
+python3 tools/rig/get_context.py <addr>             # the original function's disassembly
 ```
 
 - Take the trick out, run the check, read the diff. The diff tells you what
