@@ -14,6 +14,13 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 : "${KH2_OBJDIFF_DIR:?source the toolchain env.sh first (tools/setup_toolchain.sh)}"
 command -v bwrap >/dev/null || { echo "error: bubblewrap (bwrap) is required for KH2_NATIVE=1" >&2; exit 1; }
 [ $# -gt 0 ] || set -- bash
+# A symlinked SLPM_666.75 must resolve inside the sandbox too: expose its target read-only at
+# the same path.
+EXTRA=()
+if [ -L "$ROOT/SLPM_666.75" ]; then
+  SLPM_REAL="$(readlink -f "$ROOT/SLPM_666.75")"
+  EXTRA=(--ro-bind "$SLPM_REAL" "$SLPM_REAL")
+fi
 exec bwrap --unshare-all --die-with-parent --new-session \
   --ro-bind /usr /usr --symlink usr/bin /bin --symlink usr/lib /lib --symlink usr/lib /lib64 --symlink usr/bin /sbin \
   --ro-bind-try /etc/ld.so.cache /etc/ld.so.cache --ro-bind-try /etc/passwd /etc/passwd \
@@ -22,6 +29,6 @@ exec bwrap --unshare-all --die-with-parent --new-session \
   --symlink /opt/ps2/gcc/bin/ee-as /usr/local/bin/as --symlink /opt/ps2/gcc/bin/ee-ld /usr/local/bin/ld \
   --ro-bind "$KH2_OBJDIFF_DIR/objdiff-cli" /usr/local/bin/objdiff-cli \
   --ro-bind "$PS2_TOOLCHAIN" /opt/ps2/gcc \
-  --bind "$ROOT" /work --tmpfs /tmp --proc /proc --dev /dev --tmpfs /home \
+  --bind "$ROOT" /work "${EXTRA[@]}" --tmpfs /tmp --proc /proc --dev /dev --tmpfs /home \
   --setenv PATH /usr/local/bin:/usr/bin --setenv HOME /tmp --setenv PS2_TOOLCHAIN /opt/ps2/gcc \
   --chdir /work "$@"
