@@ -1,0 +1,99 @@
+#include "../common/types.h"
+
+// Built with -g (see BRIEF_G): register saves stay ahead of jal with a nop delay slot.
+
+struct W1578Elem {
+    u8 pad[0x1c];
+    s32 x1c;
+    u8 pad2[0x10];
+    W1578Elem() { x1c = 0; }
+    ~W1578Elem() {}
+} __attribute__((aligned(16)));
+
+extern "C" {
+void* W1578_AREA_Alloc(u32) asm("_ZN4AREA5AllocEj");
+void W1578_AREA_Free(void*) asm("_ZN4AREA4FreeEPv");
+}
+
+struct W1578Cont {
+    s32 n;
+    W1578Elem e[256];
+    W1578Cont() : n(0) {}
+    ~W1578Cont() {}
+    static void* operator new(unsigned int s) { return W1578_AREA_Alloc(s); }
+    static void operator delete(void* p) { W1578_AREA_Free(p); }
+};
+
+struct W1578Obj {
+    virtual ~W1578Obj();
+    virtual void v2();
+    virtual void v3();
+    virtual void v4(W1578Cont*);
+    u32 flags;
+    u8 pad[0xc0 - 8];
+    W1578Obj* next;
+};
+
+extern "C" {
+struct W1578Mode { s32 pad; s32 id; };
+struct W1578Task { u8 pad[0x30]; s32 fn; };
+typedef void (*W1578TaskFn)(W1578Task*);
+
+s32 func_00134258(void);
+void func_00133f20(void);
+s32 func_001adf00(void);
+void FlushCache(s32);
+void func_001c70e8(void);
+void* W1578_JmInfo_GetCharaData(u32) asm("_ZN2Tz6JmInfo12GetCharaDataEj");
+void func_001a4df0(void*, void*, s32, s32);
+void* W1578_YS_TABLE_Get(void) asm("_ZN2YS6MEMBER5TABLE3GetEv");
+void* W1578_YS_CACHE_BUFF_Clear(s32) asm("_ZN2YS10CACHE_BUFF5ClearEi");
+void W1578_wtarget_0016ed50(void*, u32, u32) asm("_Z25YS__OBJENTRY__ReadRequestjjjj");
+W1578Mode* W1578_getFieldMode(void) asm("_Z12getFieldModev");
+W1578Mode* W1578_getGumiBattleMode(void) asm("_Z17getGumiBattleModev");
+void func_00102180(W1578Mode**);
+void func_001e02f8(s32);
+void func_001de8a8(s32, s32, s32, s32);
+void W1578_YS_SUMMON_LeaveTink(void) asm("_ZN2YS6SUMMON9LeaveTinkEv");
+s32 YS__OBJ__get_pos(u32);
+f32 W1578_ObjCamera_getObjBackDirection(u32) asm("_ZN2dk9ObjCamera19getObjBackDirectionEv");
+void YS__SUMMON__SUMMON(f32, u8*, void*, s32);
+void W1578_YS_ACT_push(u8*, char*) asm("_ZN2YS3ACT4pushEPc");
+void dk__BGM__Continue(void);
+void func_001c2ba8(void);
+void func_001c0560(void);
+void YS__ATTACK_OBJ__Exec(void);
+void YS__ATTACK_WORK_MANAGER__check(W1578Cont*);
+void func_00161228(void);
+W1578Task* W1578_FIELD_CreateTask(s32, s32, W1578TaskFn) asm("_ZN5FIELD10CreateTaskEiiPFvP4TASKE");
+W1578Task* W1578_TM_create_task(s32, s32, s32, W1578TaskFn) asm("_ZN12TASK_MANAGER11create_taskEiiPFvP4TASKE");
+s32 func_001024b0(s32);
+void func_00160b10(W1578Task*);
+void func_00160b88(W1578Task*);
+void func_00160bb8(W1578Task*);
+void func_00160bd8(W1578Task*);
+void func_00160cf0(W1578Task*);
+extern u32 D_0034e948;
+extern u32 D_0034f240;
+extern char D_0036d8b8[];
+extern W1578Obj* D_01c60cd8;
+extern s32 D_0034c738;
+extern s32 D_0034c73c;
+extern s32 D_004f3b30;
+
+s32 func_00134278(void);  // 0x00134278: definition moved into src/anon/unit_00133cf0.cpp
+
+// 001682b8: moved to src/yasui/libys/file.cpp
+
+// 001a5928: moved to src/anon/unit_001a4db0.cpp
+
+void YS__MICKEY__ReadRequest(void);  // 0x001d0068: definition moved into src/anon/unit_001cf0b0.cpp
+
+void ryj__PAX__TaskStart(void);  // 0x001de808: definition moved into src/anon/unit_001ddcf0.cpp
+
+void YS__GAMEOVER__Reraise(void);  // 0x001af938: definition moved into src/anon/unit_001ada38.cpp
+
+void func_0018d620(void);  // 0x0018d620: definition moved into src/anon/unit_0018d050.cpp
+
+// 001612b8: moved to src/anon/unit_001611a8.cpp
+}

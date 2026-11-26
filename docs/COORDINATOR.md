@@ -1,7 +1,9 @@
 # Coordinator runbook
 
 For whoever runs the agents and merges into `matching`. Workers read
-`docs/RULES_CARD.md` instead.
+`docs/RULES_CARD.md` instead. Written before the 2026-11-25 adoption of the
+fork's source; the loop and the rakes still hold, the engine table is about
+matching from scratch and is history.
 
 ## The loop
 
@@ -10,7 +12,7 @@ pick work (scheduler.py / a file's function list) and lock it
   -> worktree + branch off matching
   -> worker with a compact brief (below); wait for its report
   -> fresh reviewer with docs/REVIEW_BRIEF.md; never the worker itself
-  -> ACCEPT: rebase onto matching, build_elf.py objects, make, progress not lower
+  -> ACCEPT: rebase onto matching, make, gate.py, quality.py not worse
   -> merge, python3 tools/site_data.py --stage, commit, push matching
   -> update docs/roadmap.yml when a milestone starts, moves or finishes
   -> close the finished agents and stop their background processes
@@ -53,8 +55,10 @@ Measured on this project (docs/rig/ARENA.md, docs/rig/BENCH.md) and on FSA:
 ## Rakes (each cost time once)
 
 **Build and measurement**
-- `make` alone can print `MATCHED!` without compiling a new source. Run
-  `python3 tools/build_elf.py objects` first.
+- A failed compile leaves the previous `kh2.elf` in place, so `cmp` alone can
+  pass on a stale file. Trust `make`'s exit status and last line.
+- The fork's `tools/rename_fn.py` does not follow token-pasting macros
+  (`fn##__suffix`): one file needed two pasted identifiers renamed by hand.
 - An unsourced shell breaks every compile ("Assembler: unknown option -g0").
   A bench run in that state scored a false 0 %.
 - Only the toolchain's `shim/` goes on `PATH`; its `bin/` has an ancient

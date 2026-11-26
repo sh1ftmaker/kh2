@@ -1,0 +1,232 @@
+#include "../common/types.h"
+
+// VU0 quadword vector helpers (16-byte aligned xyzw).
+struct W93V { f32 x, y, z, w; } __attribute__((aligned(16)));
+static inline __attribute__((always_inline)) void W93Set(W93V* d, const W93V* s)
+{
+    if (d != s) asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(d), "r"(s) : "$8", "memory");
+}
+struct W93Vec { W93V v; W93Vec& operator=(const W93Vec& o) { W93Set(&v, &o.v); return *this; } };
+static inline __attribute__((always_inline)) W93Vec operator-(const W93Vec& a, const W93Vec& b)
+{ W93Vec r; asm volatile(".set noreorder\n\tlqc2 $vf1, 0(%1)\n\tlqc2 $vf2, 0(%2)\n\tvsub.wxyz $vf1, $vf1, $vf2\n\tsqc2 $vf1, 0(%0)\n\t.set reorder" : : "r"(&r), "r"(&a), "r"(&b) : "memory"); return r; }
+static inline __attribute__((always_inline)) W93Vec operator+(const W93Vec& a, const W93Vec& b)
+{ W93Vec r; asm volatile(".set noreorder\n\tlqc2 $vf1, 0(%1)\n\tlqc2 $vf2, 0(%2)\n\tvadd.wxyz $vf1, $vf1, $vf2\n\tsqc2 $vf1, 0(%0)\n\t.set reorder" : : "r"(&r), "r"(&a), "r"(&b) : "memory"); return r; }
+static inline __attribute__((always_inline)) W93Vec operator*(const W93Vec& a, f32 k)
+{ W93Vec r; asm volatile("lqc2 $vf1, 0(%1)\n\tmfc1 $8, %2\n\tqmtc2 $8, $vf2\n\tvmulx.wxyz $vf1, $vf1, $vf2x\n\tsqc2 $vf1, 0(%0)" : : "r"(&r), "r"(&a), "f"(k) : "$8", "memory"); return r; }
+static inline __attribute__((always_inline)) void W93Normalize(W93Vec* v)
+{
+    asm volatile("lqc2 $vf1, 0(%0)\n\tvmul.xyz $vf2, $vf1, $vf1\n\tvaddy.x $vf2, $vf2, $vf2y\n\tvaddz.x $vf2, $vf2, $vf2z\n\t"
+                 "vsqrt Q, $vf2x\n\tvwaitq\n\tcfc2.ni $8, $vi22\n\tvaddq.x $vf2, $vf0, Q\n\tmtc1 $8, $f0\n\tvnop\n\t"
+                 "vdiv Q, $vf0w, $vf2x\n\tvwaitq\n\tvmulq.xyz $vf1, $vf1, Q\n\tsqc2 $vf1, 0(%0)"
+                 : : "r"(v) : "$8", "$f0", "memory");
+}
+
+extern "C" {
+
+void func_0011b6a8(f32* m);
+
+struct ProjCam {
+    u8 pad0[64];
+    f32 scale;      // 0x40
+    u8 pad1[8];
+    f32 aspectX;    // 0x4c
+    f32 aspectY;    // 0x50
+    u8 pad2[24];
+    f32 nearZ;      // 0x6c
+    f32 farZ;       // 0x70
+};
+
+// Builds a perspective projection matrix from the camera's near/far planes.
+// 00106af0: moved to src/naka/libkn/camera.cpp
+
+s32 YS__OBJ__is_exist(u32);
+extern u32 D_00341788[8];
+extern s32 D_003417a8;
+
+// Drops dead entries from the 8-slot list, compacting the survivors.
+void func_001127c0(void);  // 0x001127c0: definition moved into src/anon/unit_001117d8.cpp
+
+s16* func_001aec40(u32);  // get_global_1c9408c
+u32 func_002ba0b0(s32);
+u32 func_002ba0f8(s32);
+u32 func_00136790(u32, u32*);
+void func_001367e0(u32, u32, u32);
+void func_001367c8(u32);
+void func_002ba7c8(u32);
+void func_002ba3e8(u32, u32, u32, u32, u32, s32*, u32, u32);
+struct W93Pair { u32 pad; s16 b; s16 a; };
+extern W93Pair D_003b8b20;
+extern s32 D_003b8b38;
+
+// Loads and binds the two resources named by the entry unless already current.
+// 001363a0: moved to src/harata/libdk/bgse.cpp
+
+struct W93Task { u32 f0; void* owner; u8 pad[40]; void* fn; };
+struct W93G { u32 f0; u32 f4; u32 f8; u8 pad[8]; u32 f20; };
+extern W93G* D_00347f80;
+void func_00139dc0(s32);
+W93Task* func_00105d78(u32, u32, void*);
+W93Task* func_00103b48(u32, u32, void*);
+u32 func_001024b0(u32);
+W93Task* func_00102788(u32, u32, u32, void*);
+void func_00139390(); void func_001393e0(); void func_001394c0(); void func_001394d8(); void func_00139308();
+
+// Creates the scene's two worker tasks and its root object, all owned by the global context.
+// (Raw pointer-typed stores reproduce the original's reloads of the context pointer.)
+void func_00139e00(u32 a, u8 flag);  // 0x00139e00: definition moved into src/anon/unit_001393c8.cpp
+
+struct W93Q16 { u8 v[16]; } __attribute__((aligned(16)));
+static inline void W93Copy(W93Q16* d, const W93Q16* s)
+{
+    if (d != s) asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(d), "r"(s) : "$8", "memory");
+}
+struct W93A { u64 p0; u64 flags; u8 pad[44 - 16]; f32 speed; };
+struct W93B { u8 pad[16]; W93Q16 cur; u8 p2[68 - 32]; u32 f68; u32 f72; f32 val; f32 out; u8 p3[96 - 84]; W93Q16 tgt; };
+extern f32 D_004f35a4;
+extern f32 D_00349e10;
+f32 func_0013fd10(W93B*);
+void func_0013fd78(W93B*);
+s32 func_0019c4d0(u32);
+void func_0013fdf0(W93B*, W93A*, f32);
+s32 func_001584f8(W93A*);
+s32 func_00158548(W93A*);
+f32 func_0017ce10(f32);
+void dk__DangleCamera__calcEyeTarget(W93B*);
+
+// Steps the value toward its target (or snaps it while the hold flag is set).
+// 00158b78: moved to src/harata/libdk/bookcamera.cpp
+
+struct W93Orb { u8 pad[4]; f32 dist; f32 radius; u8 p2[4]; W93V center; };
+struct W93Pos { u8 pad[32]; W93V pos; };
+f32 fabsf(f32);  // fabsf
+// Places a point on the orb around o->center at the height of p, clamped to the radius.
+W93V func_0018e160(const W93Pos* p, const W93Orb* o);  // 0x0018e160: definition moved into src/anon/unit_0018d050.cpp
+
+struct W93Hdr { u32 p0; u32 flags; };
+struct W93Act { W93Hdr* h; u8 pad[16]; f32 f20; u8 p2[8]; W93Vec pos; };
+void* ryj__PAX__start(u32, u32, s32, s32, s32, s32);  // scan_list_by_half
+W93Vec* func_001dc5f8(void*);
+void YS__HITMARK__Add(void*);
+void func_0018efe8(W93Hdr*);
+// Pushes b out of a's radius along the line between them.
+void func_0018e8f0(W93Act* a, u32 x, u32 y, W93Act* b);  // 0x0018e8f0: definition moved into src/anon/unit_0018d050.cpp
+
+struct W93Map { u8 pad[4]; u16 flags; };
+struct W93Res { u8 pad[8]; W93Map* map; };
+struct W93Fld { u8 pad[8]; W93Map* map; u8 p2[40 - 12]; u8 f40[32]; u32 f72; };
+u32 func_001708f8(void*, s32);
+W93Res* func_00168b38(u32, s32, s32);  // entry_array_find_nth
+void func_001d5458(W93Map*);
+void func_00191990(void);
+union W93UM { W93Map* p; u32 u; };
+extern W93UM D_01d49324;
+extern W93UM D_0034f240;
+// Loads the field's map resource, publishes it, and folds its flags into the global field state.
+// 001bacd0: moved to src/anon/unit_001ba7e0.cpp
+
+struct W93Ob;
+struct W93ObVt { u8 pad[40]; void (*kill)(W93Ob*); u8 p2[60 - 44]; s32 (*prio)(W93Ob*); };
+struct W93Ob { W93ObVt* vt; u8 pad[264 - 4]; u32 flags; u8 p2[768 - 268]; u8 f768[2228 - 768]; W93Ob* next; };
+void YS__PRIZE__ClearAll(void); void func_001bf6a8(void); void YS__OBJ__DetachAll(void); void func_001b5400(void);
+void func_001b6038(void); void func_001b6d00(void); void func_001c8d08(void); void func_001a5e38(void);
+void func_001ba740(void); void func_0018d790(void); void func_001d6c58(void);
+extern W93Ob* D_01d48da0;
+extern u8 D_0036dbd8[];
+void func_00188120(void*, void*);
+s32 func_001c0cd8(W93Ob*);
+void YS__OBJ__reset_first_pos(W93Ob*);
+static inline W93Ob* W93Next(W93Ob* o) { if (!o) return D_01d48da0; return o->next; }
+// Runs the per-frame subsystem updates, then culls or refreshes every live object by priority.
+void YS__OBJ__LeaveAll(s32 lim);  // 0x001b9db0: definition moved into src/anon/unit_001b9880.cpp
+
+struct W93Gold { u8 pad[14048]; s32 munny; };
+extern W93Gold D_0032bb30;
+extern u8 D_0032bae0;
+extern u8 D_0032e020[];
+s32 func_001a8b68(s32);
+u32 YS__SAVERAM_BATTLE__get_partram(void*, s32);
+u32 YS__PARTY__GetByPart(s32);
+void YS__LEVELUP__Check(s32, u32, u32);
+void func_00188bb0(u32, s32);
+// Adds munny (capped at 9,999,999) and refreshes the thirteen status panels.
+void YS__LEVELUP__AddExp(s32 add);  // 0x001b70d0: definition moved into src/anon/unit_001b6a50.cpp
+
+struct W93Pl { u8 pad[2896]; s32 state; };
+s32 func_001bb7f8(void);
+void func_00179e18(W93Pl*);
+s32 YS__PLAYER__is_changing(W93Pl*);
+void func_001d0eb8(W93Pl*);
+void func_001991a8(s32, s32);
+void YS__CHANGEFORM__Dead(W93Pl*);
+s32 func_001c8b48(void);
+s32 func_001bbb50(void);  // type_is_2_or_25
+s32 func_001c8ab0(void);
+void func_001d1408(W93Pl*);
+void func_001af328(W93Pl*);
+void func_001af360(W93Pl*);
+void func_001af290(W93Pl*);
+static inline bool W93Dead(W93Pl* p) { return p->state == 12; }
+// Per-frame player state dispatch (event lock, death, field/battle transitions).
+void func_001d0d60(W93Pl* p);  // 0x001d0d60: definition moved into src/anon/unit_001d0cb8.cpp
+
+struct W93Spec { u32 f0; u32 f4; u32 kind; u32 f12; u32 f16; u32 f20; u32 f24; };
+struct W93Ef { u32 flags; u8 pad[4]; u32 f8; u8 p2[64 - 12]; u8 f64[148 - 64]; u32 f148; u32 f152; u32 f156; u32 f160; };
+void* func_001050d8(u32);
+void YS__EVENT__EVENT(W93Ef*, u32, u32);
+u32 func_0016b740(u32);
+void YS__EVENT__set_camera_target(W93Ef*, u32);
+void YS__EVENT__start(W93Ef*);
+void func_001d30f8(void*, s32, s32);
+u32 func_00185de0(void);
+extern u32 D_00350438;
+// Spawns an effect object from its spec and attaches the kind-specific resource.
+void func_001d5518(W93Spec* s, u32 a, u8 flag);  // 0x001d5518: definition moved into src/anon/unit_001d4f40.cpp
+
+struct W93Dr;
+struct W93DrVt { void* a; void* b; void (*draw)(W93Dr*); };
+struct W93Dr { W93DrVt* vt; };
+struct W93Sp { u8 pad[4]; s32 type; s32 flags; u8 p2[20 - 12]; W93Dr* dr; u8 p3[28 - 24]; u32 tex; u8 p4[40 - 32]; W93Sp* next; };
+extern u8 D_00352af0;
+extern u8 D_00352af1;
+extern W93Sp* D_00352ae0;
+void ryj__EFFECT__SortEffect(void); void func_001b81e8(void); void func_001e6688(void);
+s32 func_001dc9d0(W93Sp*); void func_001dc878(W93Sp*); s32 func_001dcc60(W93Sp*);
+void func_001e6648(void); void func_001dca70(W93Sp*); void func_001e3330(u32); s32 pppPartDraw(u32); void pppDeleteMng(u32);  // alloc_336_align_171
+void func_001e6af8(void); void func_001b8218(void);  // zero_global_byte_f
+struct W93NoTail { ~W93NoTail() {} };
+// Draws every visible sprite: direct draws batch together, textured ones flush the batch first.
+// (The empty-destructor local keeps the final call a jal, as in the original.)
+void func_001dd920(void);  // 0x001dd920: definition moved into src/anon/unit_001dd920.cpp
+
+union W93IF { s32 i; f32 f; };
+// Quicksort (descending by key), permuting the index array alongside the keys.
+void func_00205040(W93IF* idx, f32* key, s32 lo, s32 hi);  // 0x00205040: definition moved into src/anon/unit_00204dd8.cpp
+
+struct W93Ver { u32 a, b, c; };
+void* func_00105c30(void);
+W93Ver* func_00105c48(void*);  // entry12_34cae4
+u32 func_002402e0(void);
+void func_002fee78(char*, const char*, ...);
+extern char D_00371658[]; extern char D_00371668[]; extern char D_00371678[]; extern char D_00371680[];
+extern u32 D_0035ec04;
+// Formats the version/build string for the given mode.
+void func_00240118(char* buf, s32 a, s32 mode);  // 0x00240118: definition moved into src/anon/unit_0023f5b8.cpp
+
+struct W93Mdl { u8 pad[392]; s32 f392; u8 p2[408 - 396]; u32 f408; u8 p3[432 - 412]; s32 f432; };
+struct W93Six { s16 id; s16 pad; s16 val; };
+extern s32 D_0035ee2c;
+extern s32 D_0035ee18[];
+extern u32 D_003723b8[];
+union W93MdlP { W93Mdl* p; s32 i; };
+extern W93MdlP D_0035ee10;
+extern W93Six D_00372390[];
+extern u32 D_0035ee08;
+s32 func_0024f2b8(void);  // word_table_372368
+s32 func_00139d78(W93Mdl*);
+W93Mdl* Tz__MenuItem__start(s32, s32, s32, u32, u32, u32);
+void func_00138c10(W93Mdl*, s32);
+u32 func_00192048(u32);
+// Switches the displayed model slot and reloads/rebinds the model for it.
+void func_0024f070(s32 idx);  // 0x0024f070: definition moved into src/anon/unit_0024e7e8.cpp
+
+}

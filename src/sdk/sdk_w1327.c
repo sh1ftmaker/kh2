@@ -1,0 +1,75 @@
+/* Sony PS2 Runtime Library 3.0.0: libkernl (alarm/counters, DelayThread, sifcmd), libmc rpc wrappers, libpad. ee-gcc 2.9-991111 -O2 -G0. */
+typedef unsigned int u32;
+typedef unsigned char u8;
+
+typedef struct { int x0, x4; volatile unsigned int id; unsigned int flags; long start; long total; } Ctr;
+typedef struct { int x0, x4, x8, xc; int count; Ctr *free; int x18; volatile unsigned int cur; } Mgr;
+extern Mgr D_00367118;
+extern long func_0030ff08(void);
+extern void func_0030fc28(Ctr *c);
+extern void func_0030fa10(long);
+
+int func_00310330(unsigned int id);  // 0x00310330: definition moved into src/sdk/libkernl_00310048.c
+
+extern int DIntr(void);
+extern void EIntr(void);
+
+long func_00310448(unsigned int id, long val);  // 0x00310448: definition moved into src/sdk/libkernl_00310048.c
+
+typedef struct { int count, max_count, init_count, wait_threads; unsigned int attr; unsigned int option; } SemaParam;
+extern int func_00305620(SemaParam *);
+extern int func_00305630(int);
+extern int func_00305660(int);
+extern long func_00310890(int, int);
+extern int func_00310a40(long, void *, int);
+extern void func_003068d8(void);
+
+int func_00306698(int usec) asm("_Z13func_00306698i") __attribute__((section(".text._Z13func_00306698i")));
+int func_00306698(int usec);  // 0x00306698: definition moved into src/sdk/libkernl_00306698.c
+
+typedef struct { u32 a, v; } AV;
+extern AV D_003674c0[];
+extern int D_00367140;
+extern u32 D_003674b8;
+extern void func_00311358(u32, u32);
+extern u32 func_00311348(u32);
+extern void func_00311300(u32, void *, int);
+extern void func_003058a0(int);
+
+void func_00311368(void);  // 0x00311368: definition moved into src/sdk/libkernl_00311368.c
+
+typedef struct { int x[9]; void *server; int pad[6]; } RpcCD;
+typedef struct { int x0, a, b; int pad[9]; } McArg;
+extern RpcCD D_01e33480;
+extern McArg D_01e33500;
+extern char D_01e34a40[];
+extern int D_0036594c;
+extern int D_00365948;
+extern int func_00305670(int);
+extern int func_00305640(int);
+extern int sceSifCallRpc(void *, int, int, void *, int, void *, int, void (*)(void *), void *);
+extern void func_002fbba8(void *);
+
+int func_002fc9a8(int a, int b);  // 0x002fc9a8: definition moved into src/sdk/libmc.c
+
+int func_002fcf80(int a, int b);  // 0x002fcf80: definition moved into src/sdk/libmc.c
+
+extern void *memcpy(void *, const void *, int);
+typedef struct { u8 b0, b1, off, len; int x4; int pad[5]; u8 data[1]; } Pkt;
+typedef struct { int x0, x4, x8, xc, x10; u8 rest[800]; } Port;
+extern Port D_01e2fe48[];
+extern void func_002f6020(int);
+extern int func_002f62b8(int);
+extern Pkt *func_002f6378(int);
+extern void func_002f6440(u8 *, void *);
+
+int func_002f5f50(int port, void *buf);  // 0x002f5f50: definition moved into src/sdk/libpad2.c
+
+typedef struct { int x0, x4, x8, xc, x10, x14, x18, x1c, x20, x24, x28; } Pk;
+extern Pk *func_00308dc0(int);
+extern Pk *func_00309178(int, int);
+extern int isceSifSendCmd(unsigned int, Pk *, int, int, int, int);
+extern int func_00310b70(int, void (*)(void), Pk *);
+extern void func_003091c8(void);
+
+void func_00309208(Pk *r, int a);  // 0x00309208: definition moved into src/sdk/libkernl_00308f00.c

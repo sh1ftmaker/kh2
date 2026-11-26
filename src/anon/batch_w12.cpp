@@ -1,0 +1,188 @@
+#include "../common/types.h"
+
+extern "C" {
+void func_00113668(void*);
+void func_00105110(void*);
+void* func_0011ef70(void*, void*);
+void func_0011f2f0(void*);
+void func_0011ee58(void*);  // set_vtbl_347940
+void func_00106420(void*);
+void YI__IMAGE__Init(void*, void*);
+void func_002367c8(void*);  // obj_dispatch_bitfield64
+void func_0014ce20(s32);
+void func_0014ce30(s32);
+void dk__Vsync__initGameSpeed(void);
+void func_00138c10(void*, s32);
+void* func_00140df0(void);
+void func_00140f10(void*);
+void func_00140dd0(void*);
+void func_001024a8(void*);
+void* func_001050c8(void);
+void YS__OBJ__is_valid(u32);  // list_contains_ptr
+void func_0016bd60(u32, s32);
+void func_00177498(void*);
+void func_0016cc18(void*, void*, void*, void*, s32);
+s32 func_001afee8(s32, s32);
+void func_0016c2b0(void*);
+void func_001b1100(u32, void*);
+void func_00165898(void*);
+void func_001a4e30(void*);
+void func_001c8d80(void*, s32);
+void func_0014c9d8(s32);
+void func_001bbe38(s32);
+void func_0016c5b8(s32, s32);
+void func_001dc9e0(void*);
+s32 func_001e6d08(u32);
+void ryj__LAST_XEMNUS_LASER__init(void*);
+s32 func_00197920(void);
+void func_00226dc8(void);
+void func_00234670(s32, u32, s32, s32, s32);
+void func_0027d008(void*);
+void func_0027d540(void);
+void func_0027d5d8(void);
+void func_0027d810(s32);
+void func_002b6adc(s32, u32);
+void func_002b6ab8(void);
+u8 func_00325320(void*, void*);
+void func_002cff98(void*);
+void func_002ceb08(void);
+void YS__OBJ__prepare_jump_height(void*);
+void dk__Sprite__draw(void*);
+void func_0014b9a8(void*);
+void dk__SpriteMessage__drawMessage(void*);
+void func_0031ffc0(void*);
+void func_002dea80(void*);  // set_vtbl_362d20
+
+extern u8 D_00346658;
+extern u8 D_003479a8;
+extern volatile s32 D_00349e04;
+extern volatile s32 D_00349e08;
+extern s32 D_0034aa90;
+struct Rgba { u8 r, g, b, a; };
+extern Rgba D_004f3704[];
+extern s32 D_01d48c90;
+extern u8 D_0032fb68[];
+struct Slot64 { u16 used; u8 pad[62]; };
+extern Slot64 D_01d49388[];
+extern s32 D_01d49530[8];
+extern s32 D_01d49550;
+extern u8 D_00351da8;
+extern void* D_00351d98;
+extern u8 D_00351ec0;
+extern u8 D_0035de0c;
+extern u8* D_0035dcfc;
+extern s16 D_0035de14;
+extern u8 D_0035de15;
+extern s8* D_0035ec94;
+extern u32 D_0035ec88;
+extern void** D_0035f3f8;
+extern u8 D_01e2be18;
+extern u8 D_00362b68;
+extern u8* D_00361f60;
+extern u8 D_00352878;
+extern u8 D_00362c70;
+
+void SpriteImage_change(void*, void*) asm("_ZN2dk11SpriteImage6changeEPv");
+void COUNTER_alertLoop(u8*) asm("_ZN2dk7COUNTER9alertLoopEv");
+void TalkCamera_ensureTask(void*, void*) asm("_ZN2dk10TalkCamera10ensureTaskEP4TASK");
+void trap_obj_idle(u32**) asm("_ZN2YS13trap_obj_idleEP8BD_VALUE");
+void PARTY_hook(u8*, void*) asm("_ZN2YS5PARTY4hookEPNS_2VME");
+void ctarget_001b1328(u32, u32, u32, u32) asm("_Z16ctarget_001b1328jjjj");
+bool EFFECT_is_waiting(u8*) asm("_ZN3ryj6EFFECT10is_waitingEv");
+s32 JmReport_GetData(s16*) asm("_ZN2Tz8JmReport7GetDataEj");
+void ScisSpriteMessage_draw(u8*) asm("_ZN2dk17ScisSpriteMessage4drawEv");
+
+
+// Deleting destructor: reset vtable, run base dtor, free.
+void func_00114b90(void** p);  // 0x00114b90: definition moved into src/anon/unit_00114a90.cpp
+
+void func_0011f3e0(void* p);  // 0x0011f3e0: definition moved into src/anon/unit_0011c128.cpp
+
+// Deleting destructor: reset vtable, run base dtor, free.
+void func_0011f5a0(void** p);  // 0x0011f5a0: definition moved into src/anon/unit_0011c128.cpp
+
+void SpriteImage_change(void* self, void* data);  // 0x00138698: definition moved into src/anon/unit_00138480.cpp
+
+void func_0014cfc8(void);  // 0x0014cfc8: definition moved into src/anon/unit_0014c7f0.cpp
+
+void COUNTER_alertLoop(u8* self);  // 0x00150610: definition moved into src/anon/unit_0014ecb8.cpp
+
+// 00159be0: moved to src/harata/libdk/talkcamera.cpp
+
+void func_0015a810(void);  // 0x0015a810: definition moved into src/anon/unit_0015a810.cpp
+
+// Sets RGBA colour slot i.
+void func_0015cc18(s32 i, u8 r, u8 g, u8 b, u8 a);  // 0x0015cc18: definition moved into src/anon/unit_0015cb18.cpp
+
+void trap_obj_idle(u32** bd);  // 0x001723d0: definition moved into src/anon/unit_00171e58.cpp
+
+// 00177460: moved to src/yasui/libys/party.cpp
+
+// 00188398: moved to src/anon/unit_00185d10.cpp
+s32 func_00188398(u8* o, void* a, void* b, void* c);
+
+// 00198aa8: moved to src/anon/unit_00197fe0.cpp
+
+struct Range { s32 cur, max, min; };
+// Adds d to range i and clamps it to [min, max].
+s32 func_001a1910(Range* r, s32 d, s32 i);  // 0x001a1910: definition moved into src/anon/unit_0019fb70.cpp
+
+s32 func_001b0148(s32 x, s32 a, s32 v, s32 b);  // 0x001b0148: definition moved into src/anon/unit_001ada38.cpp
+
+// 001b1328: moved to src/yasui/libys/lookat.cpp
+
+void func_001b2f10(void);  // 0x001b2f10: definition moved into src/anon/unit_001b2780.cpp
+
+u8 func_001b8d60(u8* dst);  // 0x001b8d60: definition moved into src/anon/unit_001b87a0.cpp
+
+// 001c11e0: moved to src/anon/unit_001c0638.cpp
+Slot64* func_001c11e0(void);
+
+// Clears an 8-word table; the original has a 3-nop pad in the loop (asm).
+void func_001c2b70(void);  // 0x001c2b70: definition moved into src/anon/unit_001c2b58.cpp
+
+// Deleting destructor: reset vtable, run base dtor, free.
+// 0x1c7c68: moved to src/anon/unit_001c7bc8.cpp
+
+// 0x1c8710: moved to src/yasui/libys/summon.cpp
+
+bool EFFECT_is_waiting(u8* self);  // 0x001dc9f0: definition moved into src/anon/unit_001dbfd8.cpp
+
+void ryj__LAST_XEMNUS_LASER__LAST_XEMNUS_LASER(u8* p);  // 0x001e2788: definition moved into src/anon/unit_001e0cb8.cpp
+
+void func_00226e60(u8 v);  // 0x00226e60: definition moved into src/anon/unit_00224780.cpp
+
+u8* func_0022f4f0(s32 id);  // 0x0022f4f0: definition moved into src/anon/unit_0022d358.cpp
+
+void func_00232110(s16* p);  // 0x00232110: definition moved into src/anon/unit_00231500.cpp
+
+void func_002375b0(u8* o, s32 i, s32 j, s32 d);  // 0x002375b0: definition moved into src/anon/unit_00237068.cpp
+
+void func_00241568(void);  // 0x00241568: definition moved into src/anon/unit_0023f5b8.cpp
+
+void func_0027d598(void* p);  // 0x0027d598: definition moved into src/anon/unit_0027d2e8.cpp
+
+s32 JmReport_GetData(s16* self);  // 0x0028b040: definition moved into src/anon/unit_00288b00.cpp
+
+void func_0028cc40(void* a);  // 0028cc40: moved to src/anon/unit_0028c878.cpp
+
+void func_002bd188(u32 a, u32 b);  // 0x002bd188: definition moved into src/anon/unit_002bc978.cpp
+
+s32 func_002cb708(u8* p);  // 0x002cb708: definition moved into src/taito/path.cpp
+
+// Deleting destructor: reset vtable, run base dtor, free.
+void func_002ddb80(void** p);  // 0x002ddb80: definition moved into src/anon/unit_002dd650.cpp
+
+// 002e2dd8: moved to src/anon/unit_002e2d18.cpp
+
+void func_002eaaf0(void* p);  // 002eaaf0: moved to src/anon/unit_002eaa68.cpp
+
+void ScisSpriteMessage_draw(u8* self);  // 0x0031c068: definition moved into src/anon/unit_0031b9e0.cpp
+
+// Deleting destructor: reset vtable, run base dtor, free.
+void func_0031ff88(void** p);  // 0x0031ff88: definition moved into src/anon/unit_0031f2f8.cpp
+
+// Deleting destructor: reset vtable, run base dtor, free.
+void func_00325618(void** p);  // 0x00325618: definition moved into src/anon/unit_00324808.cpp
+
+}

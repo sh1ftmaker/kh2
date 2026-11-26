@@ -1,0 +1,54 @@
+#include "../common/types.h"
+
+/* w2046: built with -fno-strict-aliasing (_nsa). Uses the lq/sq copy idiom
+   and a VU0 outer-product macro (Cross), both as small inline asm. */
+namespace w2046_nsa {
+#define QCOPY(d, s) asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(d), "r"(s) : "$8", "memory")
+struct V {
+    f32 x, y, z, w;
+    V() {}
+    V(const V& o) { QCOPY(this, &o); }
+    V& operator=(const V& o) {
+        if (this != &o) QCOPY(this, &o);
+        return *this;
+    }
+} __attribute__((aligned(16)));
+
+static inline V Cross(const V& a, const V& b)
+{
+    V r;
+    asm volatile(".set noreorder\n\tlqc2 $vf1, 0(%1)\n\tlqc2 $vf2, 0(%2)\n\tvsub.wxyz $vf3, $vf0, $vf0\n\tvopmula.xyz ACC, $vf1, $vf2\n\tvopmsub.xyz $vf3, $vf2, $vf1\n\tsqc2 $vf3, 0(%0)\n\t.set reorder"
+                 : : "r"(&r), "r"(&a), "r"(&b) : "memory");
+    return r;
+}
+
+struct Mot { u8 pad[0x14]; s32 id; };
+struct Info { u8 pad[0x2b]; u8 kind; };
+struct Tgt { V v; u8 pad[0x10]; Info* info; };
+struct Self {
+    u8 pad[0x140];
+    Mot mot;                 /* 0x140 */
+    u8 pad2[0x58c - 0x158];
+    u32 flags;               /* 0x58c */
+    u8 pad3[0xb6c - 0x590];
+    s32 party;               /* 0xb6c */
+};
+
+void mo488_w2046(Mot*, s32, f32, f32) asm("_Z13func_0017f488iiff");
+void mopush_w2046(Mot*, s32, f32, f32, void*) asm("_ZN2YS6MOTION4pushEiffPFvPNS_3OBJEE");
+void ct186a90_w2046(Self*, V*, f32) asm("_Z23YS__BTLOBJ__set_hitbackjjjj");
+s32 ct19ba60_w2046(s32) asm("_Z17YS__OBJ__is_existjjjj");
+void f16ac38_w2046(s32, s32, s32, s32, s32) asm("_Z13func_0016ac38jjjjjjjj");
+
+extern "C" s32 D_0036e318;
+extern "C" s32 D_0036e31c;
+static inline __attribute__((always_inline)) s32 motIdB(Mot* m) { if (m->id == 189) return D_0036e318; return D_0036e31c; }
+
+extern "C" {
+V YS__OBJ__get_dir(Self*);
+V YS__MATH__VectorRotY(const V&, f32);
+f32 YS__DAMAGE__get_hitback(Tgt*);
+
+void func_001cf0d8(Self* self, Tgt* t);  // 0x001cf0d8: definition moved into src/anon/unit_001cf0b0.cpp
+}
+}

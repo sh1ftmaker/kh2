@@ -18,54 +18,12 @@ OUT_DIR = ROOT / "out"
 GENERATED_DIR = OUT_DIR / "generated"
 BOUNDARIES_TSV = ROOT / "layout.tsv"
 REGISTRY_TSV = ROOT / "functions.tsv"
+UNITS_TSV = ROOT / "linked_units.tsv"
 TARGET_PATH = ROOT / "kh2.elf"
 PS2_DOCKER_PREPARE = ROOT / "docker" / "ps2" / "prepare.sh"
 PS2_DOCKER_IMAGE = os.environ.get(
     "KH2_PS2_IMAGE", "kh2-local/ps2-compiler:3.2-ee-040921-objdiff"
 )
-# Native (docker-less) mode: KH2_NATIVE=1 runs the toolchain directly from
-# PS2_TOOLCHAIN (a patched extraction of docker/ps2/ee-gcc3.2-040921-full.tar.gz).
-# Command strings written for the container (/opt/ps2/gcc/...) are rewritten.
-DOCKER_TOOLCHAIN = "/opt/ps2/gcc"
-PS2_TOOLCHAIN = os.environ.get("PS2_TOOLCHAIN", DOCKER_TOOLCHAIN)
-KH2_NATIVE = os.environ.get("KH2_NATIVE", "") == "1"
-# Prefix to use when *writing* commands/scripts that will run in the toolchain env.
-TOOLCHAIN = PS2_TOOLCHAIN if KH2_NATIVE else DOCKER_TOOLCHAIN
-
-
-def native_env() -> dict[str, str]:
-    env = dict(os.environ)
-    tc = Path(PS2_TOOLCHAIN)
-    extra = [str(tc / "shim")]
-    if os.environ.get("KH2_OBJDIFF_DIR"):
-        extra.append(os.environ["KH2_OBJDIFF_DIR"])
-    env["PATH"] = os.pathsep.join(extra + [env.get("PATH", "")])
-    env["PS2_TOOLCHAIN"] = PS2_TOOLCHAIN
-    env["KH2_NATIVE"] = "1"
-    return env
-
-
-def rewrite_native(cmd: str) -> str:
-    # Container paths -> host paths: toolchain prefix and the /work bind mount.
-    cmd = cmd.replace(DOCKER_TOOLCHAIN, PS2_TOOLCHAIN)
-    return re.sub(r"(?<![\w/])/work(?=/|\b)", str(ROOT), cmd)
-
-
-def ps2_shell(cmd: str, *, capture: bool = False, cwd: "Path | None" = None) -> subprocess.CompletedProcess[str]:
-    """Run a shell command inside the PS2 toolchain environment (docker or native)."""
-    if KH2_NATIVE:
-        return subprocess.run(
-            ["bash", "-c", rewrite_native(cmd)], check=True, cwd=str(cwd or ROOT),
-            env=native_env(), capture_output=capture, text=True,
-        )
-    subprocess.run([str(PS2_DOCKER_PREPARE)], check=True)
-    full = [
-        "docker", "run", "--rm", "--platform", "linux/amd64",
-        "-u", f"{os.getuid()}:{os.getgid()}",
-        "-v", f"{ROOT}:/work", "-v", "/tmp:/tmp", "-w", "/work",
-        PS2_DOCKER_IMAGE, "bash", "-lc", cmd,
-    ]
-    return subprocess.run(full, check=True, capture_output=capture, text=True)
 
 # ELF layout constants
 MAIN_VADDR = 0x00100000
@@ -138,9 +96,9 @@ def parse_hex_addr(text: str) -> int:
 
 
 def run_ee_objdump(args: Sequence[str], *, cwd: Path = ROOT) -> subprocess.CompletedProcess[str]:
-    if KH2_NATIVE:
-        cmd = [f"{PS2_TOOLCHAIN}/bin/ee-objdump", *args]
-        return subprocess.run(cmd, check=True, capture_output=True, text=True, cwd=str(cwd), env=native_env())
+    if os.environ.get("KH2_NATIVE"):  # no Docker: the same binary inside tools/sandbox.sh
+        cmd = [str(ROOT / "tools" / "sandbox.sh"), "/opt/ps2/gcc/bin/ee-objdump", *args]
+        return subprocess.run(cmd, check=True, capture_output=True, text=True, cwd=str(cwd))
     if not PS2_DOCKER_PREPARE.exists():
         raise FileNotFoundError(f"missing PS2 prepare script: {PS2_DOCKER_PREPARE}")
     subprocess.run([str(PS2_DOCKER_PREPARE)], check=True)
@@ -159,7 +117,7 @@ def run_ee_objdump(args: Sequence[str], *, cwd: Path = ROOT) -> subprocess.Compl
         "-w",
         "/work",
         PS2_DOCKER_IMAGE,
-        f"{DOCKER_TOOLCHAIN}/bin/ee-objdump",
+        "/opt/ps2/gcc/bin/ee-objdump",
         *args,
     ]
     return subprocess.run(cmd, check=True, capture_output=True, text=True, cwd=str(cwd))
@@ -355,28 +313,43 @@ def _build_addr_source_fallback_map(
     # Fallback for auto-generated files where registry symbol resolution from source
     # names is ambiguous or unavailable. Supports both C/C++ definitions and asm labels.
     def_re = re.compile(
-        r"^\s*(?:extern\s+\"C\"\s+)?(?:[A-Za-z_][A-Za-z0-9_:<>,~*&\s]*\s+)?"
+        r"^\s*(?:[A-Za-z_][A-Za-z0-9_:<>,~*&\s]*\s+)?"
         r"func_([0-9a-fA-F]{8})\s*\([^;{}]*\)\s*"
         r"(?:const\s*)?(?:__attribute__\s*\(\([^{}]*\)\)\s*)?\{",
         re.M,
     )
     asm_re = re.compile(r"^\s*func_([0-9a-fA-F]{8})\s*:\s*(?:[#;].*)?$", re.M)
+    # A renamed asm function (tools/rename_fn.py) keeps its ".section .text.func_ADDR" line, so
+    # the section name still records the address once the func_ADDR label itself is gone.
+    asm_sec_re = re.compile(r"^\s*\.section\s+\.text\.func_([0-9a-fA-F]{8})\s*(?:,|$)", re.M)
     hits: Dict[int, List[Path]] = {}
+    sec_hits: Dict[int, List[Path]] = {}
     for p in src_files:
         text = texts[p]
         if p.suffix in {".s", ".S"}:
             for m in asm_re.finditer(text):
                 addr = int(m.group(1), 16)
                 hits.setdefault(addr, []).append(p)
+            for m in asm_sec_re.finditer(text):
+                addr = int(m.group(1), 16)
+                sec_hits.setdefault(addr, []).append(p)
         else:
             for m in def_re.finditer(text):
                 addr = int(m.group(1), 16)
                 hits.setdefault(addr, []).append(p)
+    # Section names only count for addresses that no func_ADDR label or definition claims.
+    for addr, files in sec_hits.items():
+        if addr not in hits:
+            hits[addr] = files
 
     out: Dict[int, str] = {}
     for addr, files in hits.items():
         uniq = sorted({f.relative_to(ROOT).as_posix() for f in files})
-        if len(uniq) == 1:
+        # An asm label is a definition for sure; the C regex also matches multi-line calls ending in '{'.
+        asm_only = sorted({u for u in uniq if u.endswith((".s", ".S"))})
+        if len(asm_only) == 1:
+            out[addr] = asm_only[0]
+        elif len(uniq) == 1:
             out[addr] = uniq[0]
     return out
 
@@ -506,28 +479,6 @@ def _resolve_source_for_symbol(
         candidates = [p for p in src_files if def_re.search(texts[p])]
     if not candidates:
         return None, f"no source defines '{func_name}'"
-    # A method name alone does not identify a method. `Ti::MGHachimitsuPod::
-    # set_run_effect(int)` and `Ti::MGHachimitsuPo::set_run_effect(int)` differ
-    # only by class, as do `YS::ACT::callback` and `YS::VM::callback`; matching
-    # on the bare name hands the undecompiled sibling's address to whichever TU
-    # happens to define the other one, and the build then fails demanding a
-    # symbol nobody has written. Prefer a definition under this symbol's own
-    # class, and refuse when every candidate defines the name under a different
-    # explicit class.
-    owner = qual.split("::")[-2] if len(qual.split("::")) >= 2 else ""
-    if owner:
-        own_cls = [p for p in candidates
-                   if re.search(rf"\b{re.escape(owner)}\s*::\s*{re.escape(func_name)}\s*\(", texts[p])]
-        if own_cls:
-            candidates = own_cls
-        else:
-            foreign = [p for p in candidates
-                       if re.search(rf"\b([A-Za-z_]\w*)\s*::\s*{re.escape(func_name)}\s*\(", texts[p])]
-            if foreign and len(foreign) == len(candidates):
-                shown = ", ".join(p.relative_to(ROOT).as_posix() for p in candidates[:3])
-                return None, (f"'{func_name}' is only defined under other classes "
-                              f"(not {owner}) in {shown}")
-
     exact_sig = [
         p for p in candidates if _definition_matches_symbol(texts[p], func_name, symbol)
     ]
@@ -618,6 +569,7 @@ def load_registry(path: Path = REGISTRY_TSV) -> Dict[int, RegistryEntry]:
     defs_by_name = _build_func_name_source_map(src_files, texts)
     asm_alias_sources = _build_asm_alias_source_map(src_files, texts)
 
+    alias_by_qual: Optional[Dict[str, set]] = None
     for addr, symbol in sorted(symbols_by_addr.items()):
         alias_candidates = sorted(set(asm_alias_sources.get(symbol, [])))
         if len(alias_candidates) == 1:
@@ -634,6 +586,21 @@ def load_registry(path: Path = REGISTRY_TSV) -> Dict[int, RegistryEntry]:
         if source:
             entries[addr] = RegistryEntry(addr=addr, mode="cxx", source=source, symbol=symbol)
             continue
+        if (SYM_RE.match(symbol) and not symbol.startswith("_Z")
+                and not re.search(r"[0-9a-fA-F]{8}$", symbol)):
+            # A plain name (renamed by tools/rename_fn.py) whose definition carries a mangled
+            # asm("_Z<n>name...") alias: match the alias by its unmangled name.
+            if alias_by_qual is None:
+                alias_by_qual = {}
+                for key, ps in asm_alias_sources.items():
+                    q = _symbol_to_qualified_name(key) if key.startswith("_Z") else None
+                    if q:
+                        alias_by_qual.setdefault(q, set()).update(ps)
+            qual_alias = sorted(alias_by_qual.get(symbol, ()))
+            if len(qual_alias) == 1:
+                entries[addr] = RegistryEntry(
+                    addr=addr, mode="cxx", source=qual_alias[0].relative_to(ROOT).as_posix(), symbol=symbol)
+                continue
         fallback = addr_fallback.get(addr)
         if fallback:
             entries[addr] = RegistryEntry(addr=addr, mode="cxx", source=fallback, symbol=symbol)
@@ -673,6 +640,45 @@ def load_symbol_aliases(path: Path = REGISTRY_TSV) -> List[SymbolAlias]:
     out = [SymbolAlias(name=n, addr=a) for n, a in aliases.items()]
     out.sort(key=lambda x: (x.addr, x.name))
     return out
+
+
+@dataclass(frozen=True)
+class LinkedUnit:
+    source: str
+    start: int
+    end: int
+    sections: Tuple[Tuple[str, int], ...]
+    flags: str
+
+    def contains(self, addr: int) -> bool:
+        return self.start <= addr < self.end
+
+
+def load_units(path: Path = UNITS_TSV) -> List[LinkedUnit]:
+    """Rows of linked_units.tsv: source files linked whole at their original address."""
+    units: List[LinkedUnit] = []
+    if not path.exists():
+        return units
+    for lineno, parts in _iter_registry_parts(path):
+        if parts[0] == "source":
+            continue
+        if len(parts) != 5:
+            raise ValueError(f"{path}:{lineno}: expected source, text_start, text_end, sections, flags")
+        source, start, end, sections, flags = (p.strip() for p in parts)
+        secs: List[Tuple[str, int]] = []
+        if sections != "-":
+            for item in sections.split(","):
+                name, _, addr = item.partition("@")
+                secs.append((name.strip(), parse_hex_addr(addr)))
+        unit = LinkedUnit(source, parse_hex_addr(start), parse_hex_addr(end), tuple(secs),
+                          "" if flags == "-" else flags)
+        if unit.end <= unit.start:
+            raise ValueError(f"{path}:{lineno}: empty range")
+        for other in units:
+            if unit.start < other.end and other.start < unit.end:
+                raise ValueError(f"{path}:{lineno}: overlaps {other.source}")
+        units.append(unit)
+    return units
 
 
 def src_to_obj(source: str) -> str:

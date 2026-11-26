@@ -1,0 +1,81 @@
+/* found by decomp-permuter (nightly.py) */
+extern "C" {
+
+
+typedef struct Lst29be08 Lst29be08;
+typedef struct Obj29be08 Obj29be08;
+typedef union G29be08 G29be08;
+typedef unsigned char u8;
+typedef unsigned short u16;
+typedef unsigned int u32;
+typedef unsigned long long u64;
+typedef signed char s8;
+typedef signed short s16;
+typedef signed int s32;
+typedef signed long long s64;
+typedef float f32;
+union BD_VALUE
+{
+  s32 i;
+  f32 f;
+  void *p;
+  u32 u;
+};
+typedef struct Lst29be08 Lst29be08;
+typedef struct Obj29be08 Obj29be08;
+typedef union G29be08 G29be08;
+struct Lst29be08
+{
+  u8 pad[5];
+  s8 count;
+  u8 pad2[2];
+  s16 ids[1];
+};
+struct Obj29be08
+{
+  u8 pad[420];
+  u32 f420;
+  u8 pad2[4];
+  s32 f428;
+  u8 pad3[4];
+  void *f436;
+};
+extern s32 D_0035f3d4;
+extern s32 D_0035f14c;
+extern s32 D_0035f148;
+extern s32 D_0035f210;
+union G29be08
+{
+  void *p;
+  u8 c;
+};
+extern G29be08 D_0035f200;
+extern Lst29be08 *D_0035f5ac;
+void *func_00276348(void);
+void *func_002766d0(void);
+void func_00293d80(s32 a);
+void func_0029dd00(void);
+void func_0029dd60(void);
+void Tz__Jiminy__CreateCover(void);
+void func_0028d8c0(void *w, s32 a, s32 b, s32 c, s32 d, s32 e, s32 f, s32 g);
+void func_00139620(void *w);
+void func_0028dcc0(void *a, void *b);
+void Tz__Select__SetItem(void *s, s32 a, s32 b, s32 c, s32 d, s32 e, s16 *f, s16 *g);
+Obj29be08 *func_002891b8(void *s, s32 a);
+void func_001395f8(void *o);
+void func_0029d318(void);
+void func_0029daa0(void);
+void func_00276690(s32 a);
+void func_0028af28(void *s, s32 a);
+u8 *func_00294000(s32 a);
+s32 func_002943b0(u8 *p);
+u32 func_0028af88(void *s);
+void func_0028af18(void *s, u32 a);
+void func_0028b1e8(void *s, s32 a);
+volatile unsigned short func_0029e960(void);
+void Tz__JmDic__UpdateHelpMess(void);
+void func_00287cc0(s32 a);
+void Tz__JmDic__DrawMess(void);
+void func_0029be08(void);  // 0x0029be08: definition moved into src/anon/unit_0029ba88.cpp
+
+}

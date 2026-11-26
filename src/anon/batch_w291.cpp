@@ -1,0 +1,71 @@
+#include "../common/types.h"
+struct W291S22 { u8 pad[4]; s16 a; s16 b; s16 c; };
+struct W291W22 { s32 x; };
+struct W291P28 { s32 x0; s8 a[9]; s8 b13; s8 b14; };
+struct W291T28 { u8 pad[6]; u8 f6; u8 pad7; };
+struct W291Q28 { u8 pad[8]; u64 flags; };
+struct W291C17 { u8 pad[19]; u8 b19; u8 b20; };
+struct W291B17 { u8 pad[4]; u32 f4; u8 pad8[32]; W291C17* p40; };
+struct W291D17 { u8 pad[8]; u32 f8; };
+struct W291A17 { u8 pad[12]; W291D17* p12; u8 pad16[248]; union { u32 f264; W291B17* f264p; }; u8 pad268[84]; u32 f352; u8 pad356[1060]; u32 f1416; };
+struct W291Mtx2d {
+    u32 m[16];
+    W291Mtx2d& operator=(const W291Mtx2d& o) {
+        if (this != &o)
+            asm volatile("lq $8, 0(%1)\n\tlq $9, 16(%1)\n\tlq $10, 32(%1)\n\tlq $11, 48(%1)\n\tsq $8, 0(%0)\n\tsq $9, 16(%0)\n\tsq $10, 32(%0)\n\tsq $11, 48(%0)" : : "r"(this), "r"(&o) : "$8", "$9", "$10", "$11", "memory");
+        return *this;
+    }
+} __attribute__((aligned(16)));
+struct W291K2d { u8 pad[8]; u8 b8; };
+struct W291R2d { u8 pad[3077]; u8 b3077; };
+struct W291O2d {
+    u8 pad0[160]; s32 f160; s32 f164; u8 pad168[4]; f32 f172; u8 pad176[8]; W291K2d* p184;
+    u8 pad188[8]; s32 f196; u8 pad200; u8 b201; u8 pad202[6];
+    W291Mtx2d m208; W291Mtx2d m272; W291Mtx2d m336; W291Mtx2d m400; u8 b464; u8 pad465[15]; u8 b480;
+};
+extern "C" {
+
+
+
+
+
+extern W291W22* D_0035de84;
+extern s32 D_0035de88;
+s32 sa__EVENT__checkStart(s32); s32 sa__EVENT__isJumpMode(s32); s32 func_0022c758();
+s32 ryj__PAX__start(W291W22*, s32, s32, s32, s32, s32);  // scan_list_by_half
+s32 func_001dc9d0(s32); s32 func_001dc9e0(s32); s32 func_001dc7e8(s32);
+void func_001dc840(s32); void func_001dc920(s32); void func_001dc978(s32, f32);
+void sa__EVENT__set_bin_seq_mission_effect(W291S22* s);  // 0022c590: moved to src/sasa/event_layout.cpp (linked unit)
+
+extern u8 D_0035f0b0;
+s32 func_00240ba0(); s32 func_00287cd0(); s32 func_002b4ff8(); void func_00287cc0(s32);
+s32 func_00241a48(); void func_00287bd0(s32, s32); s32 func_00287d30();
+s32 func_00240430(); void func_00240118(s32, s32, s32); void func_00241450(s32); void func_00287d20(s32);
+s32 func_00233e70(s32); s32 func_00234798(); s32 func_00234758(); void Tz__MCard__GetDirInfo(s32);
+void func_002b5108(s32, s32); void Tz__CmSLBase__SetupWarningConfirm(s32); s32 func_00241a88(s32); void func_00241a60();
+s32 func_00288040(); void func_00288018();  // global_zero_4dwords
+void func_0025b050();  // 0x0025b050: definition moved into src/anon/unit_002588e8.cpp
+
+extern W291P28* D_0035f2b4;
+extern W291T28 D_003742c8[];
+W291Q28* func_00167f18(s32); s32 func_00287cd0(); s32 func_002839f0(s32); s32 func_00283618();
+void func_00284048(); void func_00283f50(); void Tz__CmTutorial__CreateList(); void func_00287cc0(s32);
+void func_00257708(s32); void func_00283c50(); void func_00287bd0(s32, s32); void func_002937c0(s32);
+s32 YS__CACHE_BUFF__IsFlushing(); void func_00283fb0(); void Tz__CmTutorial__CreateGra(); s32 func_00283668();
+void func_00242618(s32, s32); void func_00283e48();
+void Tz__CmTutorial__Ctrl();  // 0x00283230: definition moved into src/anon/unit_00282c68.cpp
+
+s32 func_001a3a78(); void func_0018e8f0(W291B17**, s32, s32, W291B17**); s32 func_0019c090();  // obj_is_enabled
+void YS__BTLOBJ__exec_reflect_default(W291A17*, W291B17*, W291B17*, s32, f32); void func_00177a58(W291A17*);
+void func_00176680(W291A17*, W291B17*, W291B17*);
+static inline bool w291_h1(W291A17* s) { return (s->p12->f8 & 2) || (s->f352 & 0x40); }
+static inline bool w291_h2(W291A17* s) { return func_0019c090() || w291_h1(s); }
+// 00176458: moved to src/yasui/libys/party.cpp
+
+extern s32 D_0034e948;
+void func_002cf248(); void func_002cfb30(); W291R2d* func_002d1260(); void func_002d7698(W291O2d*);
+void func_002da8f0(W291R2d*, s32); void Ti__MGHachimitsuPlayer__start_special_motion(s32); void func_002d9218(W291O2d*);
+void func_002e7108(s32, f32); W291Mtx2d func_002e71a0(s32, u8, s32); void Ti__MGHachimitsu__calc_player_center_matrix(W291O2d*);
+void func_002d84a8_w(W291O2d* o) asm("_Z13func_002d84a8i");
+void func_002d84a8_w(W291O2d* o);  // 0x002d84a8: definition moved into src/anon/unit_002d6f70.cpp
+}

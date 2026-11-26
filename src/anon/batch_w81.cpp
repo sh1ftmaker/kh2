@@ -1,0 +1,410 @@
+#include "../common/types.h"
+
+// 16-byte vector; assignment copies with a 128-bit lq/sq.
+struct Vq81 {
+    f32 x, y, z, w;
+    Vq81& operator=(const Vq81& o) {
+        if (this != &o) asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(this), "r"(&o) : "$8", "memory");
+        return *this;
+    }
+} __attribute__((aligned(16)));
+// Same, but the original keeps the asm out of delay slots.
+struct Vn81 {
+    f32 x, y, z, w;
+    Vn81& operator=(const Vn81& o) {
+        if (this != &o) asm volatile(".set noreorder\n\tlq $8, 0(%1)\n\tsq $8, 0(%0)\n\t.set reorder" : : "r"(this), "r"(&o) : "$8", "memory");
+        return *this;
+    }
+} __attribute__((aligned(16)));
+static inline Vq81 vsub81(const Vq81& a, const Vq81& b) {
+    Vq81 r;
+    asm volatile("lqc2 $vf1, 0(%1)\n\tlqc2 $vf2, 0(%2)\n\tvsub.wxyz $vf1, $vf1, $vf2\n\tsqc2 $vf1, 0(%0)"
+                 : : "r"(&r), "r"(&a), "r"(&b) : "memory");
+    return r;
+}
+static inline Vn81 vsub81n(const Vn81& a, const Vn81& b) {
+    Vn81 r;
+    asm volatile(".set noreorder\n\tlqc2 $vf1, 0(%1)\n\tlqc2 $vf2, 0(%2)\n\tvsub.wxyz $vf1, $vf1, $vf2\n\tsqc2 $vf1, 0(%0)\n\t.set reorder"
+                 : : "r"(&r), "r"(&a), "r"(&b) : "memory");
+    return r;
+}
+// xyz length
+static inline f32 vlen81(const Vq81& a) {
+    f32 d;
+    asm volatile("lqc2 $vf1, 0(%1)\n\tvmul.xyz $vf1, $vf1, $vf1\n\tvaddy.x $vf1, $vf1, $vf1y\n\tvaddz.x $vf1, $vf1, $vf1z\n\tvsqrt Q, $vf1x\n\tvwaitq\n\tcfc2 $8, $vi22\n\tmtc1 $8, %0"
+                 : "=f"(d) : "r"(&a) : "$8", "memory");
+    return d;
+}
+// normalise xyz in place
+static inline void vnorm81(Vq81& v) {
+    asm volatile("lqc2 $vf1, 0(%0)\n\tvmul.xyz $vf2, $vf1, $vf1\n\tvaddy.x $vf2, $vf2, $vf2y\n\tvaddz.x $vf2, $vf2, $vf2z\n\t"
+                 "vsqrt Q, $vf2x\n\tvwaitq\n\tcfc2.ni $8, $vi22\n\tvaddq.x $vf2, $vf0, Q\n\tmtc1 $8, $f0\n\tvnop\n\t"
+                 "vdiv Q, $vf0w, $vf2x\n\tvwaitq\n\tvmulq.xyz $vf1, $vf1, Q\n\tsqc2 $vf1, 0(%0)"
+                 : : "r"(&v) : "$8", "$f0", "memory");
+}
+static inline Vq81 vscale81(const Vq81& a, f32 s) {
+    Vq81 r;
+    asm volatile("lqc2 $vf1, 0(%1)\n\tmfc1 $8, %2\n\tqmtc2 $8, $vf2\n\tvmulx.wxyz $vf1, $vf1, $vf2x\n\tsqc2 $vf1, 0(%0)"
+                 : : "r"(&r), "r"(&a), "f"(s) : "$8", "memory");
+    return r;
+}
+
+typedef s32 (*VFn81)(...);
+struct VObj81 { VFn81* vt; };
+typedef void (*VFnV81)(...);
+struct VObjV81 { VFnV81* vt; };
+struct VObj0 { void (**vt)(VObj0*); };
+// local with an empty destructor: keeps the final call a jal (no sibcall)
+struct NoTail81 { ~NoTail81() {} };
+
+// 64-byte matrix; copy-construct / assign with four 128-bit lq/sq (assignment checks self)
+struct M81 {
+    u8 b[64];
+    M81() {}
+    M81(const M81& o) {
+        asm volatile("lq $8, 0(%1)\n\tlq $9, 16(%1)\n\tlq $10, 32(%1)\n\tlq $11, 48(%1)\n\tsq $8, 0(%0)\n\tsq $9, 16(%0)\n\tsq $10, 32(%0)\n\tsq $11, 48(%0)"
+                     : : "r"(this), "r"(&o) : "$8", "$9", "$10", "$11", "memory");
+    }
+    M81& operator=(const M81& o) {
+        if (this != &o)
+            asm volatile("lq $8, 0(%1)\n\tlq $9, 16(%1)\n\tlq $10, 32(%1)\n\tlq $11, 48(%1)\n\tsq $8, 0(%0)\n\tsq $9, 16(%0)\n\tsq $10, 32(%0)\n\tsq $11, 48(%0)"
+                         : : "r"(this), "r"(&o) : "$8", "$9", "$10", "$11", "memory");
+        return *this;
+    }
+} __attribute__((aligned(16)));
+union IF81 { s32 i; f32 f; };
+
+// three 16-bit ids set from an int (keeps the 0xffff constant in a 32-bit register)
+struct Ids81 {
+    u16 a, b, c;
+    void Fill81(s32 v) { a = v; b = v; c = v; }
+};
+extern "C" {
+
+// --- 001216a8: clear bit 2 of the flag byte of every entry (both tables) whose id matches (-1 = all)
+struct Ent216 { u32 lo : 5; u32 : 1; u32 hi : 5; u32 : 21; u8 pad[28]; };
+struct Tbl216 { u8 pad[28]; s32 n; Ent216 e[1]; };
+struct Own216 { u32 a; Tbl216* t; };
+Tbl216* func_00120800(Own216*);  // obj_get_sub_ptr_by12
+void kn__ModelSKL__resetStealth(Own216* o, u8* flags, s32 id);  // 0x001216a8: definition moved into src/anon/unit_00120520.cpp
+
+// --- 0013d9e0: release the five global objects (virtual slot 4) and clear them
+extern VObj0* D_003485f8;
+extern VObj0* D_003485f4;
+extern VObj0* D_003485f0;
+extern VObj0* D_003485ec;
+extern VObj0* D_003485e8;
+void u_call0_0013d9e0(void) asm("_Z16u_call0_0013d9e0v");
+void u_call0_0013d9e0(void);  // 0x0013d9e0: definition moved into src/anon/unit_0013a8b8.cpp
+
+// --- 00146390: recursive tree walk (node test, visit items, then up to 8 children)
+struct Node146 { s16 child[8]; Vq81 v; u8 pad20[8]; s16 start, end; u8 pad[4]; };
+struct Tree146 { u32 a; Node146* nodes; u8* items; };
+s32 func_00146088(Tree146*, Vq81*);
+void func_00146100(Tree146*, u32, s16);
+void func_001461f0(Tree146*, Node146*);
+void func_00146390(Tree146* t, s32 idx, u32 arg);  // 0x00146390: definition moved into src/anon/unit_00145600.cpp
+
+// --- 0015cef0: copy three vectors into the triple-buffered globals
+extern Vq81 D_004f3760, D_004f3770, D_004f3780, D_004f3790, D_004f37a0, D_004f37b0, D_004f37c0, D_004f37d0, D_004f37e0;
+Vq81* func_00140df0(void);
+// 0015cef0: moved to src/anon/unit_0015cdb0.cpp
+
+// --- 00165a10: any eligible entity in range? (stores the offset to it)
+struct Ent165 { u32 id; u32 obj; u32 flags; };
+struct Me165 { Vn81 pos; Vn81 dir; u8 pad[16]; Vn81 tgt; u8 pad2[60]; u32 id; };
+Ent165* func_00165ef0(Ent165*);
+s32 func_00142b70(u32);  // len_sq_compare_at80
+s32 dk__OctCollFile__collisionSphere_2(u32, Me165*);
+s32 func_00165a10(Me165* m);  // 0x00165a10: definition moved into src/anon/unit_001656b8.cpp
+
+// --- 0016a4e8: deleting destructor
+extern u8 D_0034d850[];
+void YS__SHEET__Free(u32);
+void func_001b78b8(u32);  // to_105110
+void func_002cb708(u32);
+void func_00105110(u32);
+void func_001b3098(u8*);
+void func_001a9350(u8*);
+void func_001a6d68(u8*);
+void func_00187b90(u8*);
+void func_0017eb98(u8*);
+void func_001ddd88(u8*);
+void func_0016a4e8(u8* o);  // 0x0016a4e8: definition moved into src/anon/unit_00169f98.cpp
+
+// --- 001755a4: hand-written assembly in the original (frameless lq/sq memmove
+// in 128-byte blocks, forward or backward depending on overlap).
+void func_001755a4(void* d, const void* s, s32 n) {
+    asm volatile(
+        ".set noreorder\n\t"
+        "sub $2, $4, $5\n\t"
+        "beqz $2, 2f\n\t"
+        "nop\n\t"
+        "bgtz $2, 3f\n\t"
+        "nop\n"
+        "1:\n\t"
+        "lq $8, 0($5)\n\tlq $9, 16($5)\n\tlq $10, 32($5)\n\tlq $11, 48($5)\n\t"
+        "lq $12, 64($5)\n\tlq $13, 80($5)\n\tlq $14, 96($5)\n\tlq $15, 112($5)\n\t"
+        "sq $8, 0($4)\n\tsq $9, 16($4)\n\tsq $10, 32($4)\n\tsq $11, 48($4)\n\t"
+        "sq $12, 64($4)\n\tsq $13, 80($4)\n\tsq $14, 96($4)\n\tsq $15, 112($4)\n\t"
+        "addiu $6, $6, -128\n\t"
+        "addiu $4, $4, 128\n\t"
+        "bgtz $6, 1b\n\t"
+        "addiu $5, $5, 128\n"
+        "2:\n\t"
+        "jr $31\n\t"
+        "nop\n"
+        "3:\n\t"
+        "addu $4, $4, $6\n\t"
+        "addu $5, $5, $6\n"
+        "4:\n\t"
+        "lq $8, -16($5)\n\tlq $9, -32($5)\n\tlq $10, -48($5)\n\tlq $11, -64($5)\n\t"
+        "lq $12, -80($5)\n\tlq $13, -96($5)\n\tlq $14, -112($5)\n\tlq $15, -128($5)\n\t"
+        "sq $8, -16($4)\n\tsq $9, -32($4)\n\tsq $10, -48($4)\n\tsq $11, -64($4)\n\t"
+        "sq $12, -80($4)\n\tsq $13, -96($4)\n\tsq $14, -112($4)\n\tsq $15, -128($4)\n\t"
+        "addiu $6, $6, -128\n\t"
+        "addiu $4, $4, -128\n\t"
+        "bgtz $6, 4b\n\t"
+        "addiu $5, $5, -128\n\t"
+        ".set reorder"
+        : : : "$2", "$8", "$9", "$10", "$11", "$12", "$13", "$14", "$15", "memory");
+}
+
+// --- 0017a2d0: push along the flattened, reversed direction of the target
+extern u32 D_0034ece4;
+void func_00143e50(Vq81*, u16, u32);
+s32 func_0019c778(u8*, Vq81*);
+u32 func_00192048(u32);
+void func_0015b268(u32, f32);
+// 0017a2d0: moved to src/yasui/libys/player.cpp
+
+// --- 00187650
+void func_00187728(u8*, f32);
+s32 func_001a1990(u8*, s32);
+s32 YS__BTLOBJ__add_mp(u8* o, s32 n, u32 flag, u32) asm("_Z18YS__BTLOBJ__add_mpjjjj");
+// 00187650: moved to src/anon/unit_00185d10.cpp
+
+// --- 0018ed18
+struct Ent18e { u8* obj; u8 pad[12]; u8 x[32]; };
+struct List18e { s32 n; u8 pad[12]; Ent18e e[1]; };
+u8* func_00186078(u8*);
+s32 func_0019bb58(u8*);
+s32 func_0018d940(u8*, u8*);
+s32 func_0018f010(u8*);  // byte4_is_2_or_3
+u32 func_001b7998(u32, u8*);
+void func_0018e298(Ent18e*, u8*, u32);
+void YS__ATTACK_WORK_MANAGER__check(List18e* l);  // 0x0018ed18: definition moved into src/anon/unit_0018d050.cpp
+
+
+// --- 00229728: refresh the per-slot ids when the current id changes
+void func_00150260(u8*, u32, s32, u32*);
+void func_00138c10(u8*, u32);
+void func_001395a8(u8*);
+void sa__MUSICAL_SCORE__update(u8* o);  // 00229728: moved to src/sasa/musical_score.cpp (linked unit)
+
+// --- 00248828
+extern VObjV81* D_0035ed54;
+extern VObjV81* D_0035ed5c;
+extern VObjV81* D_0035ed58;
+extern u32 D_0035ed4c;
+extern u32 D_0035ed50;
+s32 func_00139d78(u32);
+s32 func_0028acc8(u32);
+void func_0028abe0(u32);
+void func_00249358(void);
+void func_0028ce38(void);
+void func_00248828(void);  // 0x00248828: definition moved into src/anon/unit_00247ff0.cpp
+
+// --- 00252c20
+extern u32 D_0035eea4;
+extern u8* D_0035ee90[];
+s32 func_00287bc0(void);
+s32 func_0023f100(u32);
+s32 func_0023f0c0(u32);
+void func_00252ce0(void);
+void Tz__ALCA__ChgMode(void);
+void Tz__ALCA__SetMess(void);
+u8* func_00167f18(u32);
+void func_00242618(u32, u32);
+void func_0023f108(u32);
+void func_00252c20(void);  // 0x00252c20: definition moved into src/anon/unit_00250fb8.cpp
+
+// --- 00257458
+extern u32 D_0035f034;
+extern u32 D_0035ef68;
+extern u32 D_0035ef64;
+extern u32 D_0035f03c;
+struct P257 { s16 x, y, z, w; };
+extern P257 D_00372a00;
+extern P257 D_00372a08;
+void func_0028d980(u32, u32, u32, u32, u32, s32, s32, s32, u32);
+void func_00139620(u32);
+void func_00257458(u32 a, s32 b);  // 0x00257458: definition moved into src/anon/unit_00254020.cpp
+
+// --- 002584c8: create the global object (inlined constructors) and set it up
+extern u8 D_00347f98[];
+extern u8 D_0035eb98[];
+extern u8* D_0035f078;
+extern u32 D_0035f074;
+extern u32 D_0035f080;
+extern u32 D_0035f084;
+u8* func_0023ee30(u32);
+void func_0031a838(u8*);
+void YI__IMAGE_FREEZE__IMAGE_FREEZE(u8*);  // obj_ctor_36eac8
+void YI__LAYOUT__LAYOUT(u8*);  // obj_ctor_36eae8
+u32 func_0023f948(u32, u32);
+u32 func_0023f908(u32, u32);
+void Tz__Layout__create(u8*, u32, u32, u32, u32, u32);
+void func_0023f0c8(u8*, s32);
+void Tz__Layout__SetImageCache(u8*);
+void func_0026dd18(u32, u32, s32);  // store_session_globals
+void Tz__Pause__PauseThread(void);  // 0x002584c8: definition moved into src/anon/unit_002584c8.cpp
+
+// --- 0025af70
+extern u8 D_00372ea0[];
+s32 func_00287cd0(void);
+s32 func_002b4fb8(void);
+s32 func_00287c10(void);
+void func_00233e70(u32);
+s32 func_00233e60(void);
+void func_00287c30(void);
+void func_00287d20(u32);
+void func_002b5188(u8*, u32);
+void func_00287cc0(u32);
+void func_00240bb0(u32);  // global_store_half2
+void func_002417a0(void);
+void func_002b4ee0(void);
+void func_00287c00(u32);
+void func_0025af70(void);  // 0x0025af70: definition moved into src/anon/unit_002588e8.cpp
+
+// --- 0026c048
+extern u32 D_0035f010;
+extern u32 D_0035f01c;
+extern u32 D_0035f024;
+extern u8* D_0035f0f4;
+s32 func_00281180(u32, s32);
+u32 func_002891b8(u32, s32);
+void func_00288ce0(u32, u32, s32, u8*, u8*);
+void Tz__Select__SetSelectMax(u32, s32);  // obj_set_field22_from_arg
+void func_0028b1e8(u32, u32);
+void func_00257708(u32);
+void func_0026c048(void);  // 0x0026c048: definition moved into src/anon/unit_0026a900.cpp
+
+// --- 0027c3e0
+extern u8* D_0035f230;
+u32 func_0028b040(u32);
+u32 func_002570a0(u32);
+void func_0027aed8(u32, s32*, s32*);
+s32 func_0027bf20(u32);
+s32 Tz__CmAbility__SelCheck(s32 id);  // 0x0027c3e0: definition moved into src/anon/unit_0027a6d8.cpp
+
+// --- 0028ab20: release every entry's id (-1) and clear the current selection
+u8* func_0028ac98(u8*, s32);  // lookup_by_index_align
+union Cnt81 { u16 v; u8 c; };
+void SelectLeave81(u8* o) asm("_ZN2Tz6Select5LeaveEz");
+void SelectLeave81(u8* o);  // 0x0028ab20: definition moved into src/anon/unit_00288b00.cpp
+
+// --- 0028b3c0
+u8* func_0023f1b0(u32);
+u32 YI__LAYOUT__SearchSequence(u8*, s16, u32);
+void func_001396b0(u8*);
+void func_0031ac78(u8*, u32);
+void dk__Sprite__update(u8*);
+void Tz__LaySeq__update(u8* o);  // 0x0028b3c0: definition moved into src/anon/unit_00288b00.cpp
+
+// --- 0028fb88: allocate the two sub-objects through the global allocator
+typedef u8* (*VFnP81)(...);
+struct VObjP81 { VFnP81* vt; };
+extern u8* D_00347f80;
+extern u8 D_00347e60[];
+void func_00239700(u8*);
+void func_0028dfe8(u8*);  // obj_ctor_36f440
+void func_00258d40(u32, u32);
+void func_0028fb88(u8** o, u32 a, u32 b, u16* c);  // 0028fb88: moved to src/anon/unit_0028f1e0.cpp
+
+// --- 002adcb0: 1 unless an entry of type 22 (matching id, if id >= 0) has its flag bit clear
+extern u8* D_0035f620;
+u8* func_001a82b0(u8*);
+u8* func_001a80c8(u16);  // table24_find_by_id
+s32 Tz__Jiminy__AreaWorld2JmWorld(u8);
+s32 Tz__JmComplete__isNaviComp(s32 id);  // 0x002adcb0: definition moved into src/anon/unit_002a99c8.cpp
+
+// --- 0018d420: destructor body: drop references, unlink from the global list
+struct Node18d { u32 vt; u32 flags; u8* a; u32 p; u8* b; u8 pad[8]; u32 h; u8 pad2[16]; u8 sub[144]; Node18d* next; };
+struct List18d { Node18d* head; Node18d* tail; };
+extern List18d D_01c60cd8;
+extern u8 D_0034ef18[];
+void func_0018e040(Node18d*);
+void func_001c0058(u32);  // clear_bit_in_array
+void func_001c0248(u8*);
+void func_0018d420(Node18d* o);  // 0x0018d420: definition moved into src/anon/unit_0018d050.cpp
+
+// --- 001cc160: spawn up to n prizes at the object's position
+extern u32 D_00352050;
+void func_001cc358(void);
+Vn81 YS__OBJ__get_target_pos(u8*);
+u8* func_001cc128(u32, Vn81*);
+void PrizeAppear81(u8* obj, s32 n) asm("_ZN2YS8PRIZE_CA6AppearEPNS_6BTLOBJEi");
+// 001cc160: moved to src/anon/unit_001cc048.cpp
+
+// --- 00200da8: rotation (radians -> 16-bit angle units) and translation into the node
+struct Tbl200 { u8 pad[12]; s32* offs; };
+struct V3_81 { f32 x, y, z; };
+extern V3_81 D_00354bd0;
+extern V3_81 D_00354bc0;
+void func_0021eb50(u8*, s32*);
+void func_00200da8(u8* o, Tbl200* t);  // 0x00200da8: definition moved into src/anon/unit_00200578.cpp
+
+// --- 002be190
+u8* func_00168b38(u32, s32, u32);  // entry_array_find_nth
+void func_002eedc0(u32, u32, f32);
+void func_002eedd8(u32, u32, f32);  // to_2eefc8_sub456
+void func_002be190(u8* o, s32 idx, u32* list, s32 n);  // 0x002be190: definition moved into src/anon/unit_002be020.cpp
+
+// --- 002d0c28
+void func_001dc818(u32);
+void func_002cf280(u8*, u32, u32);
+s32 func_002cf270(u8*, u32);
+void func_002cf2b0(u8*, u32);
+void Ti__MGObj__hibernate(u8*);
+void func_002d0c28(u8* o);  // 0x002d0c28: definition moved into src/anon/unit_002cf260.cpp
+
+// --- 002d1f88: push the inverse of the node's (orthonormal) matrix
+u8* func_00106a60(u32);  // buffer_get_by_index
+void func_002d1f88(u8* o);  // 0x002d1f88: definition moved into src/anon/unit_002cf260.cpp
+
+// --- 002e2570: copy the matrix, then fade value 260 up/down towards its limit
+extern f32 D_00349e10;
+s32 func_00197920(u8*);
+void wtarget_002e2570(u8* o, u32, u32, u32) asm("_Z16wtarget_002e2570jjjj");
+// 002e2570: moved to src/anon/unit_002e1908.cpp
+
+// --- 002f1670: progress value for the current fade state
+void func_002f1480(u8*, f32);
+void func_002f1670(u8* o);  // 0x002f1670: definition moved into src/anon/unit_002f12b0.cpp
+
+// --- 0031a1a0: assignment operator (base fields, member at 24 via its operator=, tail fields)
+struct Pr31a { u32 x, y; };
+struct Obj31a {
+    u32 vt;
+    u32 a, b, c;
+    Pr31a d;
+    u8 sub[344];
+    u32 f, g, h, i;
+    f32 j;
+    u32 k, l, m, n;
+    u8 p, q;
+};
+void func_0031a850(u8*, u8*);
+Obj31a* func_0031a1a0(Obj31a* d, Obj31a* s);  // 0x0031a1a0: definition moved into src/anon/unit_003197d0.cpp
+
+// --- 001cd2b8: restore the saved block and reset the id state
+struct Blk1cd { u64 d[8696]; } __attribute__((aligned(16)));
+extern Blk1cd D_0032bb30;
+extern Blk1cd D_01d499b0;
+struct S1cd { u8 a, b, c, pad; Ids81 q; u8 pad2[2]; u8 s1[2088]; u8 s2[16]; };
+extern S1cd D_01d5a970;
+void func_00195558(u8*);
+// 001cd2b8: moved to src/anon/unit_001cd078.cpp
+
+}

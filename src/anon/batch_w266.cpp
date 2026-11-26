@@ -1,0 +1,67 @@
+#include "../common/types.h"
+struct Bits3188 { u32 w[1]; void set(u32 i) { w[i >> 5] |= 1 << (i & 31); } };
+struct S3188 { u8 pad[0x1898]; Bits3188 bits; };
+struct R3188 { u8 b0, b1, b2, b3; u8 pad[14]; u16 id; };
+struct VH {
+    f32 x, y, z, w;
+    VH() {}
+    VH(const VH& o) { asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(this), "r"(&o) : "$8", "memory"); }
+    VH& operator=(const VH& o) { if (this != &o) asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(this), "r"(&o) : "$8", "memory"); return *this; }
+    f32 Normalize() {
+        f32 r;
+        asm volatile("lqc2 $vf1, 0(%1)\n\tvmul.xyz $vf2, $vf1, $vf1\n\tvaddy.x $vf2, $vf2, $vf2y\n\tvaddz.x $vf2, $vf2, $vf2z\n\tvsqrt Q, $vf2x\n\tvwaitq\n\tcfc2.ni $8, $vi22\n\tvaddq.x $vf2, $vf0, Q\n\tmtc1 $8, %0\n\tvnop\n\tvdiv Q, $vf0w, $vf2x\n\tvwaitq\n\tvmulq.xyz $vf1, $vf1, Q\n\tsqc2 $vf1, 0(%1)" : "=f"(r) : "r"(this) : "$8", "memory");
+        return r;
+    }
+    VH& operator*=(f32 s) {
+        asm volatile("lqc2 $vf1, 0(%0)\n\tmfc1 $8, %1\n\tqmtc2 $8, $vf2\n\tvmulx.wxyz $vf1, $vf1, $vf2x\n\tsqc2 $vf1, 0(%0)" : : "r"(this), "f"(s) : "$8", "memory");
+        return *this;
+    }
+    VH& operator+=(const VH& b) {
+        asm volatile("lqc2 $vf1, 0(%0)\n\tlqc2 $vf2, 0(%1)\n\tvadd.wxyz $vf1, $vf1, $vf2\n\tsqc2 $vf1, 0(%0)" : : "r"(this), "r"(&b) : "memory");
+        return *this;
+    }
+} __attribute__((aligned(16)));
+static inline VH operator-(const VH& a, const VH& b) {
+    VH r;
+    asm volatile("lqc2 $vf1, 0(%1)\n\tlqc2 $vf2, 0(%2)\n\tvsub.wxyz $vf1, $vf1, $vf2\n\tsqc2 $vf1, 0(%0)" : : "r"(&r), "r"(&a), "r"(&b) : "memory");
+    return r;
+}
+static inline VH operator*(const VH& a, f32 s) {
+    VH r;
+    asm volatile("lqc2 $vf1, 0(%1)\n\tmfc1 $8, %2\n\tqmtc2 $8, $vf2\n\tvmulx.wxyz $vf1, $vf1, $vf2x\n\tsqc2 $vf1, 0(%0)" : : "r"(&r), "r"(&a), "f"(s) : "$8", "memory");
+    return r;
+}
+static inline VH Lerp(const VH& a, const VH& b, f32 t) {
+    VH r;
+    asm volatile("lqc2 $vf1, 0(%1)\n\tlqc2 $vf2, 0(%2)\n\tmfc1 $8, %3\n\tqmtc2 $8, $vf3\n\tvaddw.x $vf4, $vf0, $vf0w\n\tvsub.x $vf4, $vf4, $vf3\n\tvmulax.wxyz ACC, $vf2, $vf3x\n\tvmaddx.wxyz $vf1, $vf1, $vf4x\n\tsqc2 $vf1, 0(%0)" : : "r"(&r), "r"(&a), "r"(&b), "f"(t) : "$8", "memory");
+    return r;
+}
+struct ObjH { VH pos; u8 pad[32]; VH vel; u8 pad2[8]; u8* owner; };
+union UUd098 { f32* p; s16 h; u32 u; u8 c; };
+struct P22d098 { u8 pad[4]; s16 h4; s16 h6; u8 x8[4]; u8 x12[4]; };
+extern "C" {
+extern S3188 D_0032e020;
+R3188* func_001a80c8(void*, s32);  // table24_find_by_id
+s32 YS__ITEM__WhereGet(void*, s32, s32);
+void YS__ITEM__GetBackyard(void*, s32);
+void* YS__SAVERAM_BATTLE__get_partram(void*, s32);
+void func_00188a28(void*, void*);
+void func_00188b68(void*, void*, u8);
+void func_001a39c8(void*);
+// 001a3188: moved to src/anon/unit_001a2a50.cpp
+extern f32 D_00349e10;
+VH YS__OBJ__get_target_pos(u8*);
+// 001ccc38: moved to src/anon/unit_001cc868.cpp
+void func_0022d000(u32);
+void func_0022d068(u32*);
+s32 sa__EVENT__checkStart(s32);
+s32 sa__EVENT__getEventPriority(void);  // limit_15000_or_25000
+s32 sa__EVENT__isJumpMode(s32);  // flag_query_by_index
+void func_0015c880(f32);
+u8* func_00102c18(s32, s32, void*);
+u32 func_001050c8(void);
+f32* func_001063c0(s32, u32);
+f32 func_00227c78(void*);
+void func_0014f030(void*, f32, f32, f32);  // obj_set_lerp_params
+void sa__EVENT__set_bin_black_fog(P22d098* p);  // 0022d098: moved to src/sasa/event_layout.cpp (linked unit)
+}

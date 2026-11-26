@@ -1,0 +1,109 @@
+#include "../common/types.h"
+struct V4 {
+    f32 x, y, z, w;
+    V4() {}
+    V4(const V4& o) { asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(this), "r"(&o) : "$8", "memory"); }
+    V4& operator=(const V4& o) { if (this != &o) asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(this), "r"(&o) : "$8", "memory"); return *this; }
+} __attribute__((aligned(16)));
+struct M4 { V4 r[4]; };
+struct OB { u8 pad[64]; M4 m; };
+union UOB { OB* p; f32 f; };
+struct OO { u8 pad[8]; UOB u; };
+static inline V4 operator*(const M4& m, const V4& v) {
+    V4 r;
+    asm volatile("lqc2 $vf5, 0(%2)\n\tlqc2 $vf1, 0(%1)\n\tlqc2 $vf2, 16(%1)\n\tlqc2 $vf3, 32(%1)\n\tlqc2 $vf4, 48(%1)\n\t"
+                 "vmulax.wxyz ACC, $vf1, $vf5x\n\tvmadday.wxyz ACC, $vf2, $vf5y\n\tvmaddaz.wxyz ACC, $vf3, $vf5z\n\tvmaddw.wxyz $vf5, $vf4, $vf5w\n\t"
+                 "sqc2 $vf5, 0(%0)" : : "r"(&r), "r"(&m), "r"(&v) : "memory");
+    return r;
+}
+static inline V4 Lerp(const V4& a, const V4& b, f32 t) {
+    V4 r;
+    asm volatile(".set noreorder\n\tlqc2 $vf1, 0(%1)\n\tlqc2 $vf2, 0(%2)\n\tmfc1 $8, %3\n\tqmtc2 $8, $vf3\n\tvaddw.x $vf4, $vf0, $vf0w\n\tvsub.x $vf4, $vf4, $vf3\n\tvmulax.wxyz ACC, $vf2, $vf3x\n\tvmaddx.wxyz $vf1, $vf1, $vf4x\n\tsqc2 $vf1, 0(%0)\n\t.set reorder" : : "r"(&r), "r"(&a), "r"(&b), "f"(t) : "$8", "memory");
+    return r;
+}
+struct C6490 {
+    u8 pad[16];
+    V4 a0;    // 16
+    V4 b0;    // 32
+    V4 a1;    // 48
+    V4 b1;    // 64
+    f32 f80;
+    u32 flags;
+    f32 t;
+    f32 dur;
+};
+static inline f32 Normalize(V4* v) {
+    f32 r;
+    asm volatile("lqc2 $vf1, 0(%1)\n\tvmul.xyz $vf2, $vf1, $vf1\n\tvaddy.x $vf2, $vf2, $vf2y\n\tvaddz.x $vf2, $vf2, $vf2z\n\tvsqrt Q, $vf2x\n\tvwaitq\n\tcfc2.ni $8, $vi22\n\tvaddq.x $vf2, $vf0, Q\n\tmtc1 $8, %0\n\tvnop\n\tvdiv Q, $vf0w, $vf2x\n\tvwaitq\n\tvmulq.xyz $vf1, $vf1, Q\n\tsqc2 $vf1, 0(%1)" : "=f"(r) : "r"(v) : "$8", "memory");
+    return r;
+}
+static inline void MulS(V4* v, f32 s) {
+    asm volatile("lqc2 $vf1, 0(%0)\n\tmfc1 $8, %1\n\tqmtc2 $8, $vf2\n\tvmulx.wxyz $vf1, $vf1, $vf2x\n\tsqc2 $vf1, 0(%0)" : : "r"(v), "f"(s) : "$8", "memory");
+}
+static inline V4 operator-(const V4& a, const V4& b) {
+    V4 r;
+    asm volatile(".set noreorder\n\tlqc2 $vf1, 0(%1)\n\tlqc2 $vf2, 0(%2)\n\tvsub.wxyz $vf1, $vf1, $vf2\n\tsqc2 $vf1, 0(%0)\n\t.set reorder" : : "r"(&r), "r"(&a), "r"(&b) : "memory");
+    return r;
+}
+static inline V4 operator+(const V4& a, const V4& b) {
+    V4 r;
+    asm volatile(".set noreorder\n\tlqc2 $vf1, 0(%1)\n\tlqc2 $vf2, 0(%2)\n\tvadd.wxyz $vf1, $vf1, $vf2\n\tsqc2 $vf1, 0(%0)\n\t.set reorder" : : "r"(&r), "r"(&a), "r"(&b) : "memory");
+    return r;
+}
+struct C8708 { V4 p0; u8 pad[80]; V4 p96; u8 pad2[16]; V4 p128; };
+static inline void Zero(V4* v) {
+    asm volatile(".set noreorder\n\tvsub.wxyz $vf1, $vf0, $vf0\n\tsqc2 $vf1, 0(%0)\n\t.set reorder" : : "r"(v) : "memory");
+}
+static inline f32 Length(const V4* v) {
+    f32 r;
+    asm volatile("lqc2 $vf1, 0(%1)\n\tvmul.xyz $vf1, $vf1, $vf1\n\tvaddy.x $vf1, $vf1, $vf1y\n\tvaddz.x $vf1, $vf1, $vf1z\n\tvsqrt Q, $vf1x\n\tvwaitq\n\tcfc2.ni $8, $vi22\n\tmtc1 $8, %0" : "=f"(r) : "r"(v) : "$8", "memory");
+    return r;
+}
+struct C5088 { u8 pad[16]; V4 v; u8 pad2[2840]; u8* o2872; u8 pad3[228]; V4 v3104; };
+static inline u8 IsMode2(u8* e) { return *(s32*)(e + 944) == 2; }
+extern "C" {
+void get_st(u8* a0, f32* m);  // 0x00209178: definition moved into src/anon/unit_002090c0.cpp
+
+void YS__PLAYER___OVR_exec_command_player(u8*, u8*);
+void func_0017f488(u8*, s32, f32, f32);
+void func_0017f5e0(u8*, s32, f32, f32, void*);
+void func_001d07e0(u8*);
+void func_001d0870(u8*);
+void YS__MICKEY___OVR_exec_command_player(u8* p, u8* msg);  // 0x001d0678: definition moved into src/anon/unit_001cf0b0.cpp
+extern u8 D_0035de26;
+s32 func_002283b0(void);
+s32 func_002283c8(void);
+OO* func_00227cd8(s32);
+void* func_00106a60(s32);  // buffer_get_by_index
+void kn__Camera__getPosition(void*, V4*);  // vec_copy_at80_if_diff
+void func_00107478(void*, V4*);  // vec_copy_at96_if_diff
+s32 YS__OBJ__is_valid(u8*);  // list_contains_ptr
+void kn__Camera__lookAt_2(void*, V4*, V4*);
+void func_001024a8(void*);
+void func_00232150(void* self);  // 0x00232150: definition moved into src/anon/unit_00231500.cpp
+extern f32 D_00349e10;
+void worldmap__Camera__initialize(C6490*);
+f32 sinf(f32);
+void* kn__getProjection(s32);  // buffer_get_256
+void func_00107300(void*, V4*, V4*, f32);  // copy_blocks_and_store_float
+void kn__Projection__setFOV(void*, s32, f32);
+// 002c6490: moved to src/anon/unit_002c6420.cpp (linked unit)
+V4* YS__OBJ__get_pos(u8*);  // obj_get_attach_or_alt
+extern u8* D_0034a990;
+extern f32 D_0034a994;
+extern f32 D_0034a998;
+extern f32 D_0034a99c;
+extern V4 D_0034a9a0;
+// 00158708: moved to src/harata/libdk/scopecamera.cpp
+extern u8* D_00361f60;
+s32 YS__OBJ__can_control(void);  // vtable_call_slot64_flags
+s32 func_002d5588(C5088*);
+u8* func_002d1878(u8*);
+void func_002d5088(C5088* p);  // 0x002d5088: definition moved into src/anon/unit_002d4548.cpp
+extern u32 D_0034f240;
+extern u8* D_0034e948;
+s32 YS__OBJ__is_exist(u8*);
+u8* YS__ENEMY__Each(u8*);
+s32 func_0019c8a8(u8*);
+// 00191cd8: moved to src/yasui/libys/status.cpp
+}

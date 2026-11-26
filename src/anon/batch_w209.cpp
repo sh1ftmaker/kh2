@@ -1,0 +1,61 @@
+#include "../common/types.h"
+
+// 128-bit copy (lq/sq through t0).
+#define QCOPY(d, s) asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(d), "r"(s) : "$8", "memory")
+
+// 16-byte aligned vector; assignment copies a quadword unless self-assigned.
+struct V209 {
+    f32 x, y, z, w;
+    V209() {}
+    V209(const V209& o) { QCOPY(this, &o); }
+    V209& operator=(const V209& o) {
+        if (this != &o) QCOPY(this, &o);
+        return *this;
+    }
+} __attribute__((aligned(16)));
+
+union E209 { struct { u16 a, b; } s; u32 u; u8 c; };
+
+extern "C" {
+
+// --- 0016d800
+struct VP209 { V209* p; u32 x; f32 y; };
+extern V209 func_0017d348(V209* self, u32 x, f32 y);
+// 0016d800: moved to src/anon/unit_0016d2e0.cpp
+
+// --- 001a6600
+extern f32 YS__AREADATA__GetCostRest(void);  // global_float_diff
+u32 cac209(f32 f) asm("_ZN2YS5MAGIC10CanAddCostEf");
+// 001a6600: moved to src/yasui/libys/magic.cpp
+
+// --- 001a8450
+extern u32 D_0032dedc[];
+u32 call4_209(u8* a, u32 b, u32 c, u32 d) asm("_Z16u_call4_001a8450jjjj");
+// 001a8450: moved to src/anon/unit_001a82f0.cpp
+
+// --- 001db250
+extern u8* D_0034e948;
+extern void func_0017d0e8(void* out, f32 f);
+extern void func_0019c778(void* a, void* b);
+void func_001db250(u8* a);  // 0x001db250: definition moved into src/anon/unit_001d9d00.cpp
+
+// --- 002376d8
+void func_002376d8(u8* a, s32 b);  // 0x002376d8: definition moved into src/anon/unit_00237068.cpp
+
+// --- 00242b88
+extern u8* func_001058e8(void);
+void func_00242b88(u8 a);  // 0x00242b88: definition moved into src/anon/unit_00242478.cpp
+
+// --- 00281cf0
+extern void func_00281b30(u32);
+extern u8 D_0035f298;
+extern f32 D_0035f294;
+extern u16 D_0035f280;
+void func_00281cf0(u32 a);  // 0x00281cf0: definition moved into src/anon/unit_00281cf0.cpp
+
+// --- 002cd3e0
+extern V209* YS__OBJ__get_pos(u32);  // obj_get_attach_or_alt
+extern void func_002cd428(u32, V209*);
+void func_002cd3e0(u32 a, u32 b);  // 0x002cd3e0: definition moved into src/taito/path.cpp
+
+}

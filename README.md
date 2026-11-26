@@ -1,16 +1,16 @@
 # Kingdom Hearts II Final Mix decompilation
 
-A work-in-progress, byte-matching decompilation of *Kingdom Hearts II Final
-Mix* for the PlayStation 2 (Japan, `SLPM_666.75`): C++ source that Sony's
-`ee-gcc 3.2-040921` compiles back into the exact bytes of the game's main
-executable.
+A decompilation of *Kingdom Hearts II Final Mix* for the PlayStation 2 (Japan,
+`SLPM_666.75`). The whole main executable builds from source with Sony's
+`ee-gcc 3.2-040921` and is byte-for-byte identical to the original. The work
+now is turning that source into readable C++: real names, real types, the
+original file structure, and no assembly where C++ will do.
 
 **Progress site: <https://sh1ftmaker.github.io/kh2/>**
 
 <!-- assets:start -->
 <p align="center">
-  <a href="https://sh1ftmaker.github.io/kh2/"><img alt="Structural progress" src="https://img.shields.io/endpoint?url=https%3A%2F%2Fsh1ftmaker.github.io%2Fkh2%2Fdata%2Fbadge-structural.json&style=flat-square"></a>
-  <a href="https://sh1ftmaker.github.io/kh2/"><img alt="Matched code" src="https://img.shields.io/endpoint?url=https%3A%2F%2Fsh1ftmaker.github.io%2Fkh2%2Fdata%2Fbadge-code.json&style=flat-square"></a>
+  <a href="https://sh1ftmaker.github.io/kh2/"><img alt="Decompiled to C/C++" src="https://img.shields.io/endpoint?url=https%3A%2F%2Fsh1ftmaker.github.io%2Fkh2%2Fdata%2Fbadge-code.json&style=flat-square"></a>
   <a href="https://sh1ftmaker.github.io/kh2/"><img alt="Functions matched" src="https://img.shields.io/endpoint?url=https%3A%2F%2Fsh1ftmaker.github.io%2Fkh2%2Fdata%2Fbadge-functions.json&style=flat-square"></a>
   <a href="https://sh1ftmaker.github.io/kh2/"><img alt="SLPM_666.75 rebuilt byte-identical" src="https://img.shields.io/endpoint?url=https%3A%2F%2Fsh1ftmaker.github.io%2Fkh2%2Fdata%2Fbadge-elf.json&style=flat-square"></a>
   <a href="https://github.com/sh1ftmaker/kh2/actions/workflows/pages.yml"><img alt="Pages" src="https://img.shields.io/github/actions/workflow/status/sh1ftmaker/kh2/pages.yml?branch=matching&style=flat-square&label=site"></a>
@@ -20,13 +20,13 @@ executable.
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="site/badges/progress-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="site/badges/progress-light.svg">
-  <img src="site/badges/progress-light.svg" width="100%" alt="Progress overview: 18.4 % of the code matched, with a bar for each source directory of the original tree, the SDK, and each function-size band">
+  <img src="site/badges/progress-light.svg" width="100%" alt="Progress overview: 67.8 % of the code decompiled, with a bar for each source directory of the original tree, the SDK, and each function-size band">
 </picture>
 </a>
 <!-- assets:end -->
 
 <!-- status:start -->
-Status (2026-11-26, written by `tools/site_data.py`): 6,302 of 14,618 functions, 408,648 of 2,226,245 bytes of code matched (18.4 %); structural progress 20.4 % (454,169 bytes, matched code plus partial credit for 351 structurally matched functions); 10,552 functions are written (72.9 % of the code), 54.5 % counting each by how closely it matches. By function size: under 80 B 65.0 %, 80–199 B 39.8 %, 200–999 B 4.43 %, 1 KB and more 0.32 %. Game code 6,149 / 13,806 functions (19.4 % of its bytes; Menus & Jiminy's Journal 19.1 %, Core gameplay 24.7 %, Camera, maps & HUD 28.8 %, Party members & models 14.7 %, Minigames 13.8 %, World map 22.4 %, Cutscenes & musical 27.8 %, Effects & particles 17.7 %, Smaller directories 20.4 %, Not placed yet 10.5 %); SDK & runtime 153 / 812 functions (3.58 %). 33 of 574 files in the file map have every function matched. The five overlays are not started. `make` ends in MATCHED!.
+Status (2026-11-26, written by `tools/site_data.py`): 9,401 of 11,509 functions, 1,366,776 of 2,015,044 bytes of code decompiled to C/C++ (67.8 %); all 11,509 are built from source and the executable is byte-identical, but 2,108 still use assembly or a register pin; 3,536 functions (33.0 % of the code) carry a real name. By function size: under 80 B 86.7 %, 80–199 B 83.7 %, 200–999 B 68.1 %, 1 KB and more 40.2 %. Game code 9,103 / 10,879 functions (68.5 % of its bytes; Menus & Jiminy's Journal 90.1 %, Core gameplay 69.0 %, Camera, maps & HUD 70.4 %, Party members & models 45.4 %, Minigames 43.9 %, World map 80.8 %, Cutscenes & musical 74.3 %, Effects & particles 44.0 %, Smaller directories 69.3 %, Not placed yet 52.4 %); SDK & runtime 298 / 630 functions (58.4 %). 348 of 668 files in the file map have every function matched. The five overlays are not started. `make` ends in MATCHED!.
 <!-- status:end -->
 
 This repository contains no game data. You need your own copy of the game to
@@ -34,19 +34,14 @@ build it.
 
 ## What the numbers mean
 
-- **Matched** is the headline: the function's source is linked into the
-  executable and the whole executable is byte-identical to the original. It
-  is counted in bytes of code; the function count is shown beside it because
-  thousands of tiny functions inflate it.
-- **Reviewed** is the part of the matched code with evidenced names, real
-  types and a place in its original source file. Code in `src/anon` and
-  `src/autodecomp` is matched but machine-written and not yet reviewed.
-- **Structural progress** adds partial credit (size times match percentage)
-  for functions that are written and differ from the original only in the
-  compiler's register choice or instruction order. These live in
-  `nonmatching/`, are never linked, and are not counted as matched.
-- **Written** counts every function that has compiling source at all,
-  matched or not. Most unmatched ones are machine-written first drafts.
+- **Built from source, byte-identical**: all of the main executable. This is
+  the floor, checked on every change.
+- **Decompiled to C/C++** is the headline: the share of code that is plain C
+  or C++. Functions that are still assembly files, contain inline CPU
+  assembly or pin a register are built and identical, but not counted.
+- **Named**: functions with a real name. Names come from the developers'
+  own debug symbols in the 2014 PS3 E3 build, never from a model's guess;
+  each carries a confidence tier (`notes/e3/README.md`).
 
 ## Building
 
@@ -56,14 +51,14 @@ isoinfo -i "<your iso>" -x '/SLPM_666.75;1' > SLPM_666.75
 
 tools/setup_toolchain.sh <path>/ee-gcc3.2-040921-full.tar.gz ~/ps2
 source ~/ps2/env.sh
-python3 tools/build_elf.py objects && make     # ends in MATCHED!
-python3 tools/progress_bytes.py
+make                           # ends in MATCHED!
+python3 tools/quality.py       # what the source is made of
 ```
 
-Needs x86_64 Linux with 32-bit glibc, `patchelf`, `python3` and `make`. The
-compiler archive is not distributed here.
-[docs/native-toolchain.md](docs/native-toolchain.md) has the details and the
-Docker alternative.
+Needs x86_64 Linux with 32-bit glibc, `patchelf`, `bubblewrap`, `python3` and
+`make`; the build runs in a no-network sandbox. The compiler archive is not
+distributed here. Docker works too, as upstream
+([docs/native-toolchain.md](docs/native-toolchain.md)).
 
 ## How the project works
 
@@ -75,16 +70,16 @@ Modelled on the [Four Swords Adventures decompilation](https://github.com/sh1ftm
   the compiler. Names need evidence; unproven names keep their address.
 - A reviewer that never saw the author's reasoning judges every hand-written
   submission ([docs/REVIEW_BRIEF.md](docs/REVIEW_BRIEF.md)).
-- Structure first, byte match second.
+- The build never stops being byte-identical; a rewrite that does not match
+  yet waits in `nonmatching/`.
 - The plan is [docs/PLAN.md](docs/PLAN.md); the site's roadmap is
   [docs/roadmap.yml](docs/roadmap.yml).
 
-Tools worth knowing: `tools/rig/compile_diff.py` scores one function against
-the original in about 80 ms; `tools/rig/get_context.py` gathers everything
-known about a function; `tools/rig/promote.py` lands a match and rolls back
-if the executable stops matching. [docs/rig/README.md](docs/rig/README.md)
-describes them, and [docs/codegen-3.2.md](docs/codegen-3.2.md) records what
-this compiler does.
+Tools worth knowing: `tools/quality.py` (what each function is made of),
+`tools/rename_fn.py` (rename a function everywhere, with rollback),
+`tools/gate.py` (the mechanical submission gate), `tools/rig/get_context.py`
+(everything known about one function). [docs/codegen-3.2.md](docs/codegen-3.2.md)
+records what this compiler does.
 
 ## Symbols and file layout
 
@@ -105,9 +100,16 @@ same rules as any other.
 
 ## Credits and license
 
-This project continues [GovanifY's kh2](https://github.com/GovanifY/kh2)
-("dasein"), which built the matching build system, the first 4,680 matched
-functions and the header skeletons. MIT license, see [LICENSE](LICENSE).
+- [GovanifY's kh2](https://github.com/GovanifY/kh2) ("dasein") is the origin:
+  the matching build system, the first 4,680 matched functions and the header
+  skeletons.
+- [zcroker's fork](https://github.com/zcroker/kh2) took the build to every
+  function of the main executable. This project adopted that source as its
+  base in November 2026.
+- This project adds the names from the PS3 debug build, the original file
+  map, the rules and gate, and the progress site.
+
+MIT license, see [LICENSE](LICENSE).
 
 Kingdom Hearts is a trademark of its owners. This project is not affiliated
 with or endorsed by them, and is non-commercial.

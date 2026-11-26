@@ -1,123 +1,109 @@
-# Project plan: how Kingdom Hearts II Final Mix gets decompiled
+# Project plan
 
-Adopted 2026-11-25, when the project became its own repository and took over
-the working method of the Four Swords Adventures decompilation (FSA). The
-website's path is `docs/roadmap.yml`; keep the two in step. The older
-engine-by-size roadmap is `docs/rig/ROADMAP.md` and stays as the record of
-what the model arena measured.
+Rewritten 2026-11-25, when the project adopted the `zcroker/kh2` fork's source
+as its base. The website's path is `docs/roadmap.yml`; keep the two in step.
+The plan this replaces is `docs/PLAN-2026-11-pre-adoption.md`; the August
+engine-by-size roadmap is `docs/rig/ROADMAP.md`.
 
-## Principles
+## What changed
 
-1. **The whole-ELF compare is the authority.** Everything else is a faster
-   approximation of it.
-2. **Bytes are the headline.** Function counts are shown beside them.
-3. **Structure first, byte match second.** Every function written and right
-   in shape, then the match.
-4. **No tricks, evidence for names, review before merge.** Machine-lifted
-   code is matched but unreviewed, and is labelled so everywhere.
-5. **Research before agents.** A stalled class of problem gets a written
-   model from primary sources before any worker is briefed on it.
-6. **Search finds the form; a model names and tidies it.**
-7. **Whole files, not single functions**, once the file map is applied: one
-   owner per file, the class header first.
+On 2026-11-25 a check of other efforts found that the `zcroker/kh2` fork
+builds the whole main executable from source, byte-identical. That was
+verified here in a no-network sandbox (identical output; a one-line change to
+a source breaks the build). This repository was at 18 % by its own matching.
+Continuing to match from scratch would have duplicated finished work, so the
+fork's source became the base and this project's effort moved to what that
+source lacks.
+
+GovanifY, the original author, has said (2026-11-01) that he and a friend
+have about 90 % of the bytes matched privately with ported symbols and hope
+to release in a month or two. That release may overtake parts of this plan;
+re-check before each large wave.
 
 ## Where things stand
 
-6,247 of 14,618 functions, 18.1 % of code bytes (2026-11-25). Under 80 B is
-two-thirds done; 200 B and up holds two-thirds of the code and is 3 % done.
-About 5,100 further functions have a compiling, non-matching candidate from
-the lifter, outside the repository. The August model arena found that nobody
-fails at comprehension: every unsolved residue was register colouring or
-delay-slot fill.
+All 11,509 functions build and match. Of the code bytes:
+
+| kind | share | meaning |
+|---|---|---|
+| `cpp` | 62.8 % | plain C/C++ |
+| `vu0-asm` | 5.0 % | C++ with vector-unit assembly C cannot express |
+| `inline-asm` | 15.9 % | has inline CPU assembly: not decompiled as written |
+| `asm-unit` | 10.3 % | in a file where assembly is not yet attributed per function |
+| `asm-file` | 3.9 % | plain assembly file |
+| `reg-pin` | 2.0 % | pins a variable to a register |
+
+3,536 functions (33 % of bytes) have a real name. Almost none of the source
+is reviewed: it is register-style machine output with raw offsets.
+
+## Principles
+
+1. **The build never stops matching.** Rewrites that do not match yet wait in
+   `nonmatching/`.
+2. **Decompiled, named, reviewed** are separate figures; none is inflated by
+   the others.
+3. **No new tricks; fewer old ones.**
+4. **Names come from evidence**, with a tier.
+5. **Research before agents; search before models.** The August finding
+   stands: register choice and scheduling are the compiler's, and the fork's
+   per-file flags are a lead on why.
+6. **Whole files, one owner each**, the class header first.
 
 ## Phases
 
-### K0: house in order (done 2026-11-25)
+### A0: adoption (done 2026-11-25)
 
-Standalone repository, one `matching` branch, CLAUDE.md, AGENTS.md, rules
-card, review brief, coordinator runbook, website, README status block.
+Fork source as base; native sandbox build; `tools/quality.py`; site, README
+and rules rewritten; 1,458 top-tier names applied (also offered to the fork
+as zcroker/kh2#1).
 
-### K1: the non-matching lane (done 2026-11-25)
+### A1: names
 
-`nonmatching/<addr>.cpp`, `tools/lane.py` (`import`, `score`, `exact`, `prune`), scoreboard
-`nonmatching/SCORES.tsv`. 4,305 lifter candidates imported; VU0 candidates with inline asm,
-stubs, other projects' sources and 0 % candidates stayed out. What follows is the original
-reasoning.
+- Overloads, constructors and destructors (about 130 top-tier names): choose
+  a scheme `rename_fn.py` accepts, or teach it mangled names.
+- Lower tiers (about 3,500): apply as provisional names that keep the
+  address, or promote each with a second piece of evidence (string, vtable
+  slot, call site constant). This repository's earlier registry had about
+  2,500 of these applied; `git show pre-adopt-2026-11-25:functions.tsv`.
+- The 86 conflicts between the registry and the debug build.
+- Globals (about 1,000 mapped).
 
-FSA keeps every written function compiled and reported whether or not it
-matches. Here an inexact function cannot be in the tree at all, so 5,100
-candidates sit outside it and each new attempt starts from nothing.
+### A2: classify, then clean
 
-- A directory of sources that are compiled and scored by the build but never
-  linked (`nonmatching/<area>/…`), with one scoreboard file listing address,
-  percentage and diff class for each.
-- Import the lifter's candidates (`autodecomp/out/coverage`) as the first
-  content, each headed `// FIXME(lifter): <pct> %, <class>`. Candidates with
-  VU0 inline asm stay out.
-- `promote.py` moves a function from the lane into `src/` when it is exact.
+- Attribute assembly to single functions in the `asm-unit` files (compile
+  with `-S` and read the `#APP` regions per function).
+- Sort inline assembly by what it does: 128-bit copies (the compiler
+  generates these from an aligned 128-bit type), steering (`nop`, `addiu`
+  with a register operand, `break`), real hand-written routines.
+- Rewrite, cheapest class first. Each removal must leave the build matched.
+- Per-file flags: keep the ones that look like a library's real settings
+  (`-G0`, `-fno-strict-aliasing`, `-g`), and treat pass-disabling flags as a
+  clean-up item for the unit that carries them.
+- Test those flags on the old near-misses in `pre-adopt` history: they may
+  explain the register residue this project measured in August.
 
-### K2: the structural metric (first version 2026-11-25)
+### A3: files and classes
 
-`tools/lane.py` classes each lane function `regalloc`, `scheduling`, `operands` or
-`different` from objdiff's differing rows; the first two are structurally matched and get
-size x match % in the weighted figure. Still to do: a delay-slot class, a stack-frame class
-(same code, another frame size), and a check of the classes against hand-read samples.
+- Move functions out of `src/anon` into the 588 original files
+  (`data/tu_map.tsv`), by script, verified per batch.
+- PS2-checked class headers from `data/e3` types, one owner per class.
 
-A port of FSA's `tools/structural.py` to MIPS: classify each inexact
-function's diff (register-only, scheduling or delay-slot, operands,
-missing/extra, different) and give weighted credit to the first two. The
-site and README then show weighted beside matched, as FSA's do. Until it
-exists, no weighted figure is published.
+### A4: readable source
 
-### K3: the gate (done 2026-11-25)
+Whole-file passes: members for offsets, parameters and locals for registers,
+with the gate and an adversarial review on every branch. The grinder of the
+Four Swords project is the model for running this at volume; the lanes become
+`name`, `type`, `clean`.
 
-`tools/gate.py`: the whole-ELF compare after a forced object-list rebuild;
-no drop in the total; `functions.tsv` has one symbol per address; no banned
-construct in changed files; no change to measuring tools; no decompiler
-leftovers in hand-written files; every renamed symbol's evidence grade.
-Review (docs/REVIEW_BRIEF.md) covers what a script cannot see.
+### A5: the whole game
 
-### K4: real source files
-
-The E3 debug build's compile units give 588 original source files for all
-14,618 functions (hold-out: 90 % file, 98 % directory). Move functions out
-of `src/anon` and `src/autodecomp` into those files, with a re-runnable,
-revertible script, verifying the ELF after each batch. Then PS2-corrected
-class headers, one owner each, before any wave touches the class.
-
-### K5: the compiler
-
-Before more agent waves on functions of 200 B and up:
-
-- Verify the allocator model. The priority formula comes from vanilla GCC
-  3.2.3 `global.c`; construct two sources where it predicts an s0/s1 flip and
-  check the Sony build with `-dl -dg` dumps. Write `docs/REGALLOC.md`.
-- Delay-slot fill (`reorg.c`) and `sched2` the same way.
-- Run the permuter and a flag sweep over every near-miss in the lane.
-
-### K6: the grinder
-
-FSA's grind v2, with this project's scorer: lean worker sessions (short
-system prompt, a prepared task text, a few tools), lanes `write`,
-`structure` and `match`, a judge that keeps any improvement with nothing
-worse, a reviewer session per kept change, a usage watchdog with the owner's
-weekly ceiling. Small-function files on the cheapest tier that solves them;
-larger files on stronger tiers; functions at 95 % and above go to the match
-lane, not to a writer.
-
-### K7: the bulk, then the whole game
-
-Whole-file waves in the order the file map and the callee graph suggest
-(most-called first); large functions cut into pieces by source statement;
-VU0 and MMI functions; files owning their data; the five overlays; a
-behaviour harness in PCSX2 comparing the original with our build.
+Data owned by its files beyond the linked units; the five overlays (the fork
+has partial source under `src/ovl_*`); a behaviour harness in PCSX2.
 
 ## Decisions
 
 - 2026-08-18: independent line of development; no upstream pull requests.
-- 2026-08-20: the Qwen fleet is for functions under 200 B only.
-- 2026-11-25: own repository `sh1ftmaker/kh2`, full history kept; the old
-  fork is archived as `sh1ftmaker/kh2-upstream-fork`.
-- 2026-11-25: FSA's method is the model for this project.
-- 2026-11-25: the compiler archive is no longer distributed with the
-  repository; `tools/setup_toolchain.sh` takes it from a local path.
+- 2026-11-25: own repository `sh1ftmaker/kh2`; Four Swords method as model.
+- 2026-11-25: adopt the `zcroker/kh2` source as base; contribute names back
+  (owner: "I'm not decompiling for clout").
+- 2026-11-25: the headline figure is "decompiled to C/C++", not "matched".

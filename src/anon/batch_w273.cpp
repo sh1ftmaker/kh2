@@ -1,0 +1,82 @@
+#include "../common/types.h"
+struct V4w273 {
+  f32 x, y, z, w;
+  V4w273& operator=(const V4w273& o) {
+    if (this != &o) asm volatile("lq $8,0(%1)\n\tsq $8,0(%0)" :: "r"(this), "r"(&o) : "$8", "memory");
+    return *this;
+  }
+} __attribute__((aligned(16)));
+struct Src273 { V4w273* v[4]; s32 n; };
+extern char D_0036e978[];
+extern char D_0036ed60[];
+extern char D_0036e9d0[];
+extern char D_0036e998[];
+extern char D_0036ed78[];
+extern char D_0036ed98[];
+extern u8 D_00354bf0[];
+extern s32 D_00352c38;
+#define ASSERT(c, s, l) if (!(c)) assert_fail_1e4f40(s, D_0036e9d0, l)
+struct Obj273;
+struct Obj273Vt { void* p[6]; void (*f6)(Obj273*, s32, u32, s32, s32, s32, s32); };
+struct Obj273 { Obj273Vt* vt; };
+struct Pair273 { u32 a; s32 b; };
+extern s32 D_0035f3d4;
+extern Pair273* D_0035f11c;
+extern s32 D_0035f108;
+extern s32 D_0035f100;
+struct N273 { u8 pad[36]; s32 f36; s32 f40; u32 f44; u32 f48; u8 pad2[8]; N273* next; };
+extern u32 D_0034dc9c;
+extern N273* D_0034dca0;
+extern u32 D_0034dcb0;
+extern u32 D_01c5f460[];
+extern u8 D_004fa440[];
+typedef unsigned long long u64_273 __attribute__((mode(DI)));
+struct Ent273 { s8 id; s8 w; };
+struct Tbl273 { u8 pad[4]; Ent273 e[5]; };
+extern u32 D_003638d0;
+struct SE273 { u32 w; u8 pad[28]; };
+struct Sub273 { u8 pad[28]; s32 n; SE273 e[1]; };
+struct Own273 { u8 pad[4]; Sub273* sub; };
+extern "C" {
+void func_001626e0(Src273* p, V4w273* m);  // 0x001626e0: definition moved into src/anon/unit_001614e8.cpp
+
+s32 func_002fdfc8(const char*, ...);  // device_vprintf_va
+void func_001e3898(void*, void*);
+s32* func_001e3650(void*);  // ptr_add4
+void func_001e8180(s32, void*);
+void func_001e4f00(void*);
+static inline void assert_fail_1e4f40(const char* e, const char* f, s32 l) {
+  func_002fdfc8(D_0036e978, e);  // device_vprintf_va
+  func_002fdfc8(D_0036e998, f, l);  // device_vprintf_va
+  asm volatile("break");
+}
+void func_001e4f40(void* p) asm("_Z13func_001e4f40Pv");
+void func_001e4f40(void* p);  // 0x001e4f40: definition moved into src/anon/unit_001e0cb8.cpp
+
+void func_0028d8c0(s32, s32, s32, s32, s32, s32, s32, s32);
+Obj273* func_00287dc0(void);
+void func_0023d808(Obj273*, s32);
+void func_0023e5d0(Obj273*, s32, s32);
+void func_0023e858(Obj273*, s32, f32);
+void func_0023e8b8(Obj273*, s32, f32);
+void func_0023e8d8(Obj273*, s32, f32);
+void func_0023e9c8(Obj273*, s32, s32);
+void func_0026e1e0(void);  // 0x0026e1e0: definition moved into src/anon/unit_0026c450.cpp
+
+void func_001705a8(void);
+s32 func_00170d38(s32);
+void func_001700e8(N273*, s32);
+void func_00170670(void);  // 0x00170670: definition moved into src/anon/unit_0016e8f8.cpp
+
+u64_273 func_00312db8(u64_273, u64_273);
+s32 func_001b0148(void*, s32, s32, s32);
+static inline u32 rnd273(void) {
+  D_003638d0 = D_003638d0 * 0x10dcd;
+  return D_003638d0;
+}
+s32 func_001affe0(Tbl273* t, s32 a1, s32 a2);  // 0x001affe0: definition moved into src/anon/unit_001ada38.cpp
+
+Sub273* func_00120800(Own273*);  // obj_get_sub_ptr_by12
+void func_0011efe8(Own273*, u8*);
+void func_00121218(Own273* o, u8* fl, u16* list);  // 0x00121218: definition moved into src/anon/unit_00120520.cpp
+}

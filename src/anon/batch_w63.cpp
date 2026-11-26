@@ -1,0 +1,254 @@
+#include "../common/types.h"
+
+typedef void (*VFn)(void*);
+
+extern "C" {
+void func_00167ea8(void);
+void func_00169308(void);
+void kn__GSEnv__GSEnv(void);
+void func_00149db8(void);
+void func_00102688(u32, s32, s32);
+void func_00169350(void);
+void func_00149ec0(void*);
+void func_001de910(void);
+void func_0013a958(void*);
+void func_00181ba0(void);
+void func_001053c0(void);
+s32 func_002fea18(void);
+void func_00132270(void*);  // obj_ctor_347c00
+void func_00108398(void*);  // clear_quads_set_flags
+void dk__INFO_BASE__update(void*);
+s32 func_00139538(void*);
+void func_00138c40(void*, s32, u32);
+void func_0023acd8(void*);
+void* func_0023ee30(u32);
+void func_0031a838(void*);
+void YI__IMAGE_FREEZE__IMAGE_FREEZE(void*);  // obj_ctor_36eac8
+void YI__LAYOUT__LAYOUT(void*);  // obj_ctor_36eae8
+void func_00153ea0(void*, u32, s32, u32, s32);
+void func_002fee78(char*, const char*, ...);
+void func_001447e0(void*, void*, void*);
+void func_00167658(void*, s32);
+s32 func_00141080(u32);
+s32 YS__OBJ__can_control(u32);  // vtable_call_slot64_flags
+void func_001835a0(u32, f32);
+void YS__PARTY___OVR_post_exec(u32);
+void func_0016d110(void);
+u32 YS__VM__exec(u32, s32);
+u8* func_00198bd0(u32, s32);
+void YS__SIGNAL_HOOK__exec(u8*);
+void func_002ba2e8(s32, s32);
+void func_001ac728(u32);
+void YS__CURSOR__exec(void*);
+void YS__OBJ__DetachAll(void);
+void func_001b5400(void);
+void func_00102750(u32);
+void func_0013b320(void*);
+s32 func_001d3c78(void*);
+void func_002fde18(void*, s32, s32);
+s32 func_00105c30(void);
+s32 func_00242e48(void);
+u32 func_00252110(void);
+s32 func_001a6d08(u8);
+u8* func_00256b68(s32);
+s32 func_00139d78(void*);
+s32 func_0028acc8(u32);
+void func_0028abe0(u32);
+s32 func_0028be58(u32);
+void func_0028be18(u32);
+u8* func_002859a0(void);
+void func_0028e438(void*, s32, s32, u32);
+s32 func_00287bc0(void);
+u8* func_002766d0(void);
+u8* func_002983d8(s32);
+u8* func_002891b8(u32, s32);
+u32 func_00192048(s32);
+void func_002b7fbc(s32);
+void func_002bc798(void);
+void func_002ba9c0(void);
+void func_002bc470(s32);
+void func_002bcf58(void*);
+void SE_BANK__objectDestroy(void*);
+void func_002baa60(void);
+void func_002bc608(s32);
+void func_002bbf98(void);
+void func_002be148(void*);
+void func_00170950(u32);
+void func_001b86e0(u32);  // alloc_from_pool_magic_c
+void func_00170320(s32);
+void func_0017f540(void*, s32, f32, f32);
+u32 func_002d1260(void);
+void YS__OBJ__attach(void*, u32, s32, s32);
+void func_002e7568(void*, s32, void*, f32);
+void Ti__Afp__calc_local_matrix(void*, s32);
+void func_002eb9d8(u32, u8*, s32, f32);
+
+extern u8 D_0032bad8;
+extern u8 D_0032baf0;
+extern u32 D_0032b96c;
+extern u8 D_00347c30[];
+extern u8 D_00347f98[];
+extern u8 D_0035eb98[];
+extern u8 D_0034a7a0[];
+extern char D_0036b3c0[];
+extern u32 D_0034d788[];
+extern u32 D_0034d7ac;
+extern u8 D_0034d6c0[];
+extern s32 D_004f5250;
+extern f32 D_00349e10;
+extern s16 D_0034a458[19][3];
+extern u32 D_0034f240;
+extern u8* D_01d48da0;
+extern u32 D_00351214;
+extern u32 D_0033caf0;
+extern u32 D_0033caf4;
+extern u8 D_003712d0;
+extern u8 D_00372600[];
+extern u32 D_0035f01c;
+extern u32 D_0035f04c;
+extern s8 D_0035f5a0;
+extern s16* D_0035f598;
+extern u32 D_0035f200;
+extern u8 D_01e2a410;
+extern union { u32 v; u8 c; } D_003617fc;
+extern u8 D_003637e0[];
+extern u8 D_003628f0;
+extern f32 D_01e2c044;
+
+// Frame/system reset sequence.
+// 00104e18: moved to src/common/area.cpp
+
+// Scales x by a random integer normalised to [0, 1].
+// 00106558: moved to src/anon/unit_00106490.cpp
+
+// Constructor: base ctor, vtable, four 144-byte members, cleared tail fields.
+void kn__TEXAnmWork__TEXAnmWork(u8* p);  // 0x001324b8: definition moved into src/anon/unit_00131418.cpp
+
+struct WNode { u16 h0; u16 h2; u32 w4; u32 w8; u32 tag; u64 idx : 15; u64 rest : 49; };
+struct WCtx { u8 pad[24]; WNode* cur; u32 pad28; union { WNode* top; u16 h; }; };
+void wtarget_00133ae8(u32, u32, u32, u32) asm("_Z16wtarget_00133ae8jjjj");
+// Closes the current DMA packet: stores its qword count and an end tag.
+void wtarget_00133ae8(u32 a0, u32 a1, u32, u32);  // 0x00133ae8: definition moved into src/anon/unit_00131418.cpp
+
+void func_0014fba0(void);  // 0x0014fba0: definition moved into src/anon/unit_0014ecb8.cpp
+
+void dk__GET_MUNNY__update(u8* p);  // 0x00151f40: definition moved into src/anon/unit_0014ecb8.cpp
+
+void* cam_sxfs(u32, u32) asm("_ZN2dk6Camera20singleCrossFadeStartEf");
+// Allocates and constructs a 164-byte cross-fade object.
+// 00153f08: moved to src/anon/unit_00153ea0.cpp
+
+// Formats v as decimal and maps each digit through tbl; returns digit count.
+s32 func_0015b4f8(s32* tbl, s32 v, s32* out);  // 0x0015b4f8: definition moved into src/anon/unit_0015b100.cpp
+
+typedef void (*VFn3)(void*, void*, void*);
+void func_00161770(u8* p);  // 0x00161770: definition moved into src/anon/unit_001614e8.cpp
+
+// 00167f38: moved to src/anon/unit_00167358.cpp
+
+struct E16 { u16 id; u16 pad; u32 w[3]; };
+struct H16 { u32 f0; s32 count; u32 pad[2]; E16 e[1]; };
+// Returns the n-th entry with the given id (id -1 matches any).
+E16* func_00168b38(H16* h, s32 id, s32 n);  // 0x00168b38: definition moved into src/anon/unit_00168aa0.cpp
+
+// 001789b8: moved to src/yasui/libys/player.cpp
+
+struct TGT { u32 w[5]; };
+struct TPool { TGT items[128]; s32 freel[128]; s32 count; };
+extern TPool D_01c60d50;
+TGT* tgt_dup(TGT*) asm("_ZN2YS6TARGET3dupEv");
+// Takes a slot from the free list and copies this target into it.
+TGT* tgt_dup(TGT* self);  // 0x001907e0: definition moved into src/anon/unit_001900d0.cpp
+
+struct P8 { u32 a; u32 b; };
+extern P8 D_00350338[8];
+void func_00196888(void);  // 0x00196888: definition moved into src/anon/unit_00195d00.cpp
+
+struct S36 { u32 w[9]; };
+// 00199098: moved to src/anon/unit_00198e40.cpp
+
+// 001abe80: moved to src/anon/unit_001abb28.cpp
+
+struct B4 { u8 c0; u8 c1; u8 c2; u8 b0 : 1; u8 rest : 7; };
+void func_001b6d88(B4* p, s32 a1);  // 0x001b6d88: definition moved into src/anon/unit_001b6a50.cpp
+
+static inline u8* b9next(u8* n) {
+    if (!n) return D_01d48da0;
+    return *(u8**)(n + 2228);
+}
+void func_001b92f8(void);  // 0x001b92f8: definition moved into src/anon/unit_001b87a0.cpp
+
+void func_001bdc88(u8* p);  // 0x001bdc88: definition moved into src/anon/unit_001bc568.cpp
+
+struct T64 { u32 f0; s32 count; u8 e[1][64]; };
+extern T64* D_01d5ba28;
+// Finds the first valid 64-byte entry whose id matches.
+u8* func_001d3fe0(u32 id);  // 0x001d3fe0: definition moved into src/anon/unit_001d3c08.cpp
+
+void func_001d7f80(u8* p);  // 0x001d7f80: definition moved into src/anon/unit_001d7458.cpp
+
+void func_001e6b00(u8* p);  // 0x001e6b00: definition moved into src/anon/unit_001e0cb8.cpp
+
+u32 func_00232348(void);  // 0x00232348: definition moved into src/anon/unit_00231500.cpp
+
+struct F184 { u32 b0 : 1; u32 b1 : 1; u32 rest : 30; };
+void func_00239e60(u8* p, f32 x, f32 y, f32 z);  // 0x00239e60: definition moved into src/anon/unit_00239988.cpp
+
+s32 func_00252710(void);  // 0x00252710: definition moved into src/anon/unit_00250fb8.cpp
+
+void cmitem_leave(void) asm("_ZN2Tz6CmItem13LeaveCategoryEv");
+void cmitem_leave(void);  // 0x00262208: definition moved into src/anon/unit_0025f6b8.cpp
+
+// Sets a bit in the flag array at +204 if not already set.
+void func_002865d0(u32 bit);  // 0x002865d0: definition moved into src/anon/unit_002853b8.cpp
+
+void func_0028e560(void* p, s16* a, s32 n, u32 a3);  // 0028e560: moved to src/anon/unit_0028c878.cpp
+
+void Tz__JmAlbum__UpdateMess(void);  // 0x00298e48: definition moved into src/anon/unit_002982f0.cpp
+
+void SOUND__areaInit(u8 a);  // 0x002b9f28: definition moved into src/anon/unit_002b9ab8.cpp
+
+void func_002bdac8(u8* p);  // 0x002bdac8: definition moved into src/anon/unit_002bc978.cpp
+
+void Ti__MGHachimitsuPo__combine(u8* p, u8 flag);  // 0x002dbca0: definition moved into src/anon/unit_002da040.cpp
+
+// 002ebac0: moved to src/anon/unit_002eaf38.cpp
+}
+
+struct W63Vec {
+    f32 x, y, z, w;
+    W63Vec& operator=(const W63Vec& o) {
+        if (this != &o) asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(this), "r"(&o) : "$8", "memory");
+        return *this;
+    }
+};
+static inline void vsub(W63Vec* d, const W63Vec* a, const W63Vec* b) {
+    asm volatile("lqc2 $vf1, 0(%1)\n\tlqc2 $vf2, 0(%2)\n\tvsub.xyzw $vf1, $vf1, $vf2\n\tsqc2 $vf1, 0(%0)" : : "r"(d), "r"(a), "r"(b) : "memory");
+}
+static inline void vadd(W63Vec* d, const W63Vec* a, const W63Vec* b) {
+    asm volatile("lqc2 $vf1, 0(%1)\n\tlqc2 $vf2, 0(%2)\n\tvadd.xyzw $vf1, $vf1, $vf2\n\tsqc2 $vf1, 0(%0)" : : "r"(d), "r"(a), "r"(b) : "memory");
+}
+static inline void vscale(W63Vec* d, const W63Vec* a, f32 s) {
+    asm volatile("lqc2 $vf1, 0(%1)\n\tmfc1 $8, %2\n\tqmtc2 $8, $vf2\n\tvmulx.xyzw $vf1, $vf1, $vf2x\n\tsqc2 $vf1, 0(%0)" : : "r"(d), "r"(a), "f"(s) : "$8", "memory");
+}
+// Normalises xyz in place; returns the original length.
+static inline f32 vnormalize(W63Vec* v) {
+    f32 len;
+    asm volatile("lqc2 $vf1, 0(%1)\n\tvmul.xyz $vf2, $vf1, $vf1\n\tvaddy.x $vf2, $vf2, $vf2y\n\tvaddz.x $vf2, $vf2, $vf2z\n\tvsqrt Q, $vf2x\n\tvwaitq\n\tcfc2.ni $8, $vi22\n\tvaddq.x $vf2, $vf0, Q\n\tmtc1 $8, %0\n\tvnop\n\tvdiv Q, $vf0w, $vf2x\n\tvwaitq\n\tvmulq.xyz $vf1, $vf1, Q\n\tsqc2 $vf1, 0(%1)"
+        : "=f"(len) : "r"(v) : "$8", "memory");
+    return len;
+}
+
+struct W63Body { W63Vec pos; u8 pad[32]; W63Vec vel; };
+
+extern "C" {
+// 001837c0: moved to src/anon/unit_00183088.cpp
+
+// Moves pos a fifth of the way towards vel, with gravity on y; returns pos.y < 0.
+// 001cc888: moved to src/anon/unit_001cc868.cpp
+
+struct F112 { u32 b0 : 1; u32 b1 : 2; u32 b3 : 4; u32 rest : 25; };
+struct F116 { u32 c0 : 1; u32 c1 : 1; u32 c2 : 1; u32 rest : 29; };
+// Resets state flags and clears six vectors to (0,0,0,1) with VU0 vf0.
+void func_0031b9e0(u8* p);  // 0x0031b9e0: definition moved into src/anon/unit_0031b9e0.cpp
+}

@@ -1,0 +1,61 @@
+#include "../common/types.h"
+
+struct W1962QV {
+    f32 x, y, z, w;
+    W1962QV() {}
+    W1962QV(f32 a, f32 b, f32 c, f32 d) { x = a; y = b; z = c; w = d; }
+    W1962QV& operator=(const W1962QV& o) { if (this != &o) asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(this), "r"(&o) : "$8", "memory"); return *this; }
+    W1962QV operator*(f32 s) const { W1962QV r; asm volatile("lqc2 $vf1, 0(%1)\n\tmfc1 $8, %2\n\tqmtc2 $8, $vf2\n\tvmulx.wxyz $vf1, $vf1, $vf2x\n\tsqc2 $vf1, 0(%0)" : : "r"(&r), "r"(this), "f"(s) : "$8", "memory"); return r; }
+    W1962QV& operator+=(const W1962QV& o) { asm volatile("lqc2 $vf1, 0(%0)\n\tlqc2 $vf2, 0(%1)\n\tvadd.wxyz $vf1, $vf1, $vf2\n\tsqc2 $vf1, 0(%0)" : : "r"(this), "r"(&o) : "memory"); return *this; }
+} __attribute__((aligned(16)));
+struct W1962Pt { W1962QV v0, pos, vel, acc, frc, imp; };
+struct W1962Sys { W1962Pt p[41]; };
+struct W1962QVb {
+    f32 x, y, z, w;
+    W1962QVb& operator=(const W1962QVb& o) { if (this != &o) asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(this), "r"(&o) : "$8", "memory"); return *this; }
+} __attribute__((aligned(16)));
+struct W1962OcF;
+struct W1962Tri { u32 a; W1962OcF* f; };
+struct W1962Hit { W1962Tri* t; };
+struct W1962Cnt { u32 n; };
+struct W1962Inf { u8 p[11]; u8 lv; };
+struct W1962Pl { u8 p[0x588]; u32 fl; };
+struct W1962Ob;
+typedef void (*W1962VF)(void*, W1962Ob*);
+struct W1962Hd { W1962VF* vt; };
+struct W1962Ob { u32 f0; u32 fl; u32 f8; W1962Hd* hd; W1962Pl* pl; u8 p14[0x10]; W1962Cnt* cnt; W1962Inf* inf; u8 p2c[0x84]; W1962QVb pos; };
+struct W1962Cmd { u8 op; u8 a; u8 b; u8 c; };
+struct W1962S24 { u32 w[6]; };
+struct W1962S8 { u32 a, b; };
+struct W1962Tgt;
+typedef void (*W1962TF1)(W1962Tgt*, u8);
+typedef void (*W1962TF3)(W1962Tgt*, u8, u8, u8);
+struct W1962Tgt { void** vt; s32 f4; s32 f8; };
+struct W1962Ob2 { u32 f0; u32 f4; u32 f8; W1962Cmd* cur; W1962S8 f10; W1962Tgt* tg; u32 f1c; u32 f20; W1962S24 s; u8 p3c[0x10]; f32 f4c; u8 p50[0xc]; f32 f5c; };
+extern "C" {
+// ---- func_002e5350
+void func_002e4d30(W1962Sys*);
+
+void func_002e5350(W1962Sys* s, f32 t, s32 n);  // 0x002e5350: definition moved into src/anon/unit_002e3f58.cpp
+
+// ---- func_0018ddc0
+W1962QVb oc_get_normal(u16, bool) asm("_ZN2dk6Octree9getNormalEtb");
+s32 oc_get_attr_kind(u16, bool) asm("_ZN2dk6Octree11getAttrKindEtb");
+u32* ocf_get_attr(W1962OcF*, u16) asm("_ZN2dk11OctCollFile7getAttrEt");
+W1962QVb* w1962_effect_angle(void*) asm("_ZN3ryj6EFFECT5angleEv");
+W1962QVb func_001422a0(W1962OcF*, u16);
+void* YS__EFFECT__CategoryStart(W1962Cnt*, u64, W1962QVb*, s32, s32, s32);
+W1962QVb YS__MATH__VectorToAngle(const W1962QVb&);
+void YS__HITMARK__Add(void*);
+void func_00198580(W1962Pl*, s32);
+void func_0018ddc0(W1962Ob* o, u16 id, W1962QVb* pos, W1962Hit* h);  // 0x0018ddc0: definition moved into src/anon/unit_0018d050.cpp
+
+// ---- _Z25YS__MESSAGEDRAW__set_pagejjjj
+void func_00192940(W1962Cmd*, u32, W1962S24, W1962S8*);
+s32 func_00192440(W1962Cmd*, s32);
+W1962Cmd* func_00192388(W1962Cmd*);
+s32 func_00192498(W1962Cmd*, s32);
+void func_001991a8(s32, s32);
+void wt_001aa388(W1962Ob2* o, W1962Cmd* c, u32, u32) asm("_Z25YS__MESSAGEDRAW__set_pagejjjj");
+void wt_001aa388(W1962Ob2* o, W1962Cmd* c, u32, u32);  // 0x001aa388: definition moved into src/anon/unit_001a9130.cpp
+}

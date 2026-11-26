@@ -11,7 +11,6 @@ public:
     void setNoKick();
     void after1CameraTask(TASK*);
     void multiAfter2CameraTask(TASK*);
-    int draw2Camera();
 };
 
 }  // namespace dk

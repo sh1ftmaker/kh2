@@ -1,0 +1,273 @@
+#include "../common/types.h"
+
+// 128-bit copy (lq/sq through t0).
+#define QCOPY(d, s) asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(d), "r"(s) : "$8", "memory")
+
+typedef unsigned int u128 __attribute__((mode(TI)));
+typedef void (*VFn)(void*);
+typedef void (*VFn3)(void*, void*, void*);
+
+// 16-byte aligned vector: copies are one quadword; assignment skips self-copies.
+struct Vec4 {
+    f32 x, y, z, w;
+    Vec4() {}
+    Vec4(const Vec4& o) { QCOPY(this, &o); }
+    Vec4& operator=(const Vec4& o) {
+        if (this != &o) QCOPY(this, &o);
+        return *this;
+    }
+} __attribute__((aligned(16)));
+
+// Plain 16-byte aligned vector (copied explicitly with QCOPY).
+struct Q16 { f32 x, y, z, w; } __attribute__((aligned(16)));
+
+struct Ctl0 { void* p; u32 f4; u8 f8; u8 pad[11]; u32 f20; u32 f24; u32 f28; u32 f32; u32 f36; u32 f40; };
+struct Ctl1 { u16 a; u16 b; u16 c; };
+extern Ctl0 D_0032b9e8;
+extern u8 D_0032b930[];
+extern Ctl1 D_0032ba3c;
+
+void wtarget_00103ec0(u32, u32, u32, u32) asm("_Z16wtarget_00103ec0jjjj");
+void ctarget0_001a5a48(void) asm("_Z17ctarget0_001a5a48v");
+
+// 00103ec0: static init, moved to src/common/unit_001031b0.cpp
+
+// GS GIFtag (two 64-bit words, bitfields).
+struct GifTag {
+    u64 nloop : 15; u64 eop : 1; u64 pad : 30; u64 pre : 1; u64 prim : 11; u64 flg : 2; u64 nreg : 4;
+    u64 regs0 : 4; u64 regs : 60;
+};
+struct Pkt {
+    GifTag tag;
+    u64 d0, a0, d1, a1, d2, a2, d3, a3;
+    GifTag tag2;
+};
+
+struct E8 { u32 a; f32 v; };
+struct Tbl { u32 f0; u32 f4; E8* e; };
+struct Bone { u32 f0; s16 parent; s16 f6; u64 flags; u8 pad[48]; };
+typedef Bone* (*BoneFn)(void*);
+struct KV { s32 key; u32 val; };
+struct KVList { u32 f0, f4, f8; s32 count; KV e[1]; };
+typedef void* (*AllocFn)(void*, u32, void*);
+struct S172 { u8* o; Q16* v; u32 n; f32 f; u32 flag; };
+union VP { u8* vt; f32 f; };
+struct Scaled { Vec4* v; f32 s; };
+struct Arr144 { u8* hdr; u8* arr; };
+struct Bits1536 { u32 lo : 3; u32 kind : 4; u32 hi : 25; };
+struct F8 { f32 a, b, t, d; };
+struct Flags { u16 a; u16 b; u32 f0 : 1; u32 f1 : 2; u32 f3 : 1; u32 f4 : 1; u32 f5 : 1; u32 f6 : 1; u32 f7 : 1; u32 f8 : 1; u32 f9 : 2; };
+struct List64 { u32 f0; u8* arr; s32 n; };
+struct Slot { u8 b[64]; };
+struct Ent { u8 pad[40]; u32 on : 1; };
+
+extern "C" {
+u32 func_001dc5f0(s32);
+void func_00136020(void*);
+u32 func_0013a800(void);
+void dk__SpriteImage__create(void*, s32, u32, s32);
+s32 func_00242c70(void);
+s32 func_0013a9d0(void);
+void YI__IMAGE__ClutGray(void*, f32);
+void func_002367c8(void*);  // obj_dispatch_bitfield64
+extern u8* D_00348050;
+s32 func_001991a8(s32, s32);
+void func_0013f030(void);
+void func_0013f048(void);
+extern u32 D_00348704;
+void dk__JumpEffect__in(void);
+void dk__KeyHoleJumpEffect__in(void);
+void func_0013f3d0(void);
+void func_0013f4d8(void);
+void func_001069b8(s32);  // swap_global_word
+void func_00140f78(void*, void*);
+void* func_00106a60(s32);  // buffer_get_by_index
+void* kn__getProjection(s32);  // buffer_get_256
+void kn__Camera__getPosition(void*, void*);  // vec_copy_at80_if_diff
+void func_00107478(void*, void*);  // vec_copy_at96_if_diff
+f32 func_001074b8(void*);
+f32 func_00106f30(void*, s32);
+extern u8 D_0034af38;
+extern u8 D_004f3800[];
+extern u8 D_004f37f0[];
+extern f32 D_004f3814;
+extern f32 D_004f3810;
+void* func_00102788(void*, s32, u32, void*);
+void func_001609e0(void);
+void func_00160a90(void);
+extern void* D_004f3b30;
+extern void* D_0032b91c;
+void func_00168958(void*, s32, u32);  // obj_init_name_string
+Vec4 YS__OBJ__get_target_pos(void*);
+s32 YS__BGHIT__check_line(Vec4*, Vec4*, Vec4*, s32);
+void YS__PRIZE__Appear(Vec4*, s32);
+void YS_OBJ_scatter_prize(u8*, s32) asm("_ZN2YS3OBJ13scatter_prizeEi");
+extern s8 D_004f62f0;
+extern Vec4 D_004f6300;
+void func_0016e888(void);
+void func_002fd188(void*);  // pool_alloc_block
+void func_001b6dd0(void*, void*);
+void func_0017f488(void*, u32, f32, f32);
+f32 func_002f8ad0(f32, f32);
+s32 func_00181500(s32);
+s32 func_0019c400(void*);
+void func_0016ae58(void*, f32);
+f32 func_0017ce10(f32);
+s32 YS__OBJ__can_hitback(void*);
+extern u8* D_00352130;
+extern u8 D_0032bae0[];
+extern u8 D_0032bb30[];
+u8* func_001947c0(u32, u32);
+void func_001a9110(void*);
+Ent* func_001c16f0(void*, Ent*);
+void func_001a53d0(void*, u32, Ent*);
+extern u8* D_00350790;
+extern u32 D_0034e948;
+void func_00165768(u32);
+void func_00105110(void*);
+s32 func_001bb4a0(void);
+s32 func_00198d00(s32, s32);
+extern u8* D_01d49320;
+void func_001bdab0(void*);
+void func_001bd3e0(void*, s32, u32, u32, s32, s32);
+extern void* D_003527e0;
+void func_0019c9e0(void*);
+void func_0013ddc0(s32, void*);
+void YS__FIELD_COMMAND__initialize(void*, void*, u32);
+void func_001d6ab0(void*);
+void func_001b3b70(void*, void*, s32, u32);
+s32 func_0019c8a8(void*);
+extern u8 D_00352878[];
+extern F8 D_003590f0;
+extern f32 D_00359a20[];
+double func_00313b80(f32);  // float_to_double
+void func_002fdfc8(const char*, u32, double, double, double, double);  // device_vprintf_va
+extern const char D_00370c68[];
+void YS__OBJENTRY__ReadRequest(u32, s32, s32);
+u8* func_00227d10(u32);
+u8* func_001058e8(void);
+void func_002fde18(void*, s32, s32);
+extern u8 D_0035ecd8[];
+u32 func_00288be8(s32);
+s32 func_002954e0(s32);
+s32 func_00276c18(void);
+extern u32* D_0035f5ac;
+extern u16 D_00374aa0[];
+void func_00106420(void*);
+extern void* D_0035f600;
+extern u8* D_0035f604;
+s32 func_002b8ac0(u8*);
+extern u8* D_003617ec;
+extern u8* D_003617f0;
+extern u8 D_003617f8;
+void func_00168410(u8*, u8*, u32, s32, void*, s32);
+void func_002bd838(void);
+void func_002c6280(u8*, s32, u32);
+void func_002ef8d0(u8*, u32);
+extern u32 D_0032b96c;
+f32* func_002cba88(f32*, u8*, f32, f32);
+s32 func_001c0cd8(u8*);
+void func_001dc818(u32);
+u32 func_0016ac38(u8*, s32, s32, s32, s32);
+extern u8 D_00362d20[];
+u32 func_002e64b8(s32, u32);  // list_advance_count
+void Ti__Afp__Data__calc_matrix(u32, u8*, f32);
+extern u8* D_01e2bfa0;
+
+// Clears a 3-quadword GS packet and fills in its GIFtags and A+D register ids.
+void func_00108398(Pkt* p);  // 00108398: moved to src/anon/unit_00108068.cpp
+
+f32 func_00114328(Tbl* t, s32 i, u8 a, u8 b);  // 0x00114328: definition moved into src/anon/unit_001142a0.cpp
+
+// Walks up the bone hierarchy past bones with flag bit 32 set.
+s32 func_0011f270(void* o, s32 n);  // 0x0011f270: definition moved into src/anon/unit_0011c128.cpp
+
+// Removes the entry for key (if its value is still current), then refreshes.
+// 00136200: moved to src/naka/libkn/effect_observer.cpp
+
+void func_0013b1d0(void);  // 0x0013b1d0: definition moved into src/anon/unit_0013a8b8.cpp
+
+void func_0013f0d0(void);  // 0x0013f0d0: definition moved into src/anon/unit_0013ef70.cpp
+
+// 0015cde0: moved to src/anon/unit_0015cdb0.cpp
+
+// 00160ac0: moved to src/harata/libdk/bgobj.cpp
+
+// Allocates a 76-byte object from the heap (tagged with the caller) and initialises it.
+// 00168388: moved to src/yasui/libys/file.cpp
+
+// YS::OBJ::scatter_prize(int)
+void YS_OBJ_scatter_prize(u8* self, s32 n);  // 0x0016be00: definition moved into src/anon/unit_00169f98.cpp
+
+// Scales o->v by o->s into a function-static vector (guard byte + atexit
+// registration of its destructor spelled out) and points o->v at it.
+// 0016d450: moved to src/anon/unit_0016d2e0.cpp
+
+void YS__trap_obj_flyjump(S172* s);  // 0x001722e8: definition moved into src/anon/unit_00171e58.cpp
+
+// 0017d050: moved to src/anon/unit_0017c400.cpp
+
+// 00181a18: moved to src/yasui/libys/progress.cpp
+
+// 001835a0: moved to src/anon/unit_00183088.cpp
+
+// 00186c58: moved to src/anon/unit_00185d10.cpp
+void func_00186c58(u8* o, Q16* v, f32 s);
+
+void func_00194930(void);  // 0x00194930: definition moved into src/anon/unit_00194790.cpp
+}
+
+// 001a5a48: moved to src/anon/unit_001a4db0.cpp
+
+extern "C" {
+void func_001b3098(Arr144* s);  // 0x001b3098: definition moved into src/anon/unit_001b2780.cpp
+
+// 001bb7f8: moved to src/yasui/libys/mission.cpp
+
+void func_001bd4e8(u8* o, u32* v, u32 c);  // 0x001bd4e8: definition moved into src/anon/unit_001bc568.cpp
+
+void func_001d6938(u8* o, u8* p);  // 0x001d6938: definition moved into src/anon/unit_001d68e0.cpp
+
+void func_001d7d68(u8* o, u8* a, u32 b);  // 0x001d7d68: definition moved into src/anon/unit_001d7458.cpp
+
+// Cubic interpolation between key pairs a[i], b[i] at fraction t (VU0).
+void func_00202ba0(Vec4* out, Vec4* a, Vec4* b, f32 t);  // 0x00202ba0: definition moved into src/anon/unit_002029a0.cpp
+
+union FU { u32 u; f32 f; };
+// VU0 random float: reseed/step R five times. Hand-written VU0 assembly.
+f32 func_00209fb8(void);  // 0x00209fb8: definition moved into src/anon/unit_00209d68.cpp
+
+// Rotation about Z from a 16-bit angle (4096-entry sine table).
+void func_0021ead0(f32* m, u32 ang);  // 0x0021ead0: definition moved into src/anon/unit_0021e988.cpp
+
+// Debug print of a vec4 (floats promoted through the soft-double helper).
+void func_00223608(u32 x, f32* v);  // 0x00223608: definition moved into src/anon/unit_00222aa8.cpp
+
+void func_0022f5a0(u32 a, u32 b, u32 c);  // 0x0022f5a0: definition moved into src/anon/unit_0022d358.cpp
+
+void func_00242880(void);  // 0x00242880: definition moved into src/anon/unit_00242478.cpp
+
+void func_00288c58(u8* o, s32 n);  // 0x00288c58: definition moved into src/anon/unit_00288b00.cpp
+
+void func_0029c958(void);  // 0x0029c958: definition moved into src/anon/unit_0029ba88.cpp
+
+// Is id in the zero-terminated u16 list?
+s32 func_0029ec40(u32 id);  // 0x0029ec40: definition moved into src/anon/unit_0029d008.cpp
+
+void func_002a76d8(void);  // 0x002a76d8: definition moved into src/anon/unit_002a7308.cpp
+
+void func_002bd870(void);  // 0x002bd870: definition moved into src/anon/unit_002bc978.cpp
+
+void func_002c6228(u8* o, s32 i, u32 v);  // 0x002c6228: definition moved into src/worldmap/cameramanager.cpp
+
+f32* Ti__Path__get_next_movement(f32* out, u8* p);  // 0x002cbca0: definition moved into src/taito/path.cpp
+
+void Ti__MGHachimitsuPo__set_run_effect(u8* o, s32 id);  // 0x002dc1b8: definition moved into src/anon/unit_002da040.cpp
+
+void func_002dea00(u8* o, f32 a, f32 b);  // 0x002dea00: definition moved into src/anon/unit_002de3c8.cpp
+
+void func_002e7108(List64* l, f32 x);  // 0x002e7108: definition moved into src/anon/unit_002e5f70.cpp
+
+// Next 64-byte slot after p (or the first) whose index is not in the in-use list.
+// 002e97b8: moved to src/sugi/flare.cpp
+}

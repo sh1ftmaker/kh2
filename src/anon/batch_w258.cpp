@@ -1,0 +1,76 @@
+#include "../common/types.h"
+
+struct V4w258 {
+    f32 x, y, z, w;
+    V4w258() {}
+    V4w258(f32 a, f32 b, f32 c, f32 d) { x = a; y = b; z = c; w = d; }
+    V4w258& operator=(const V4w258& o) {
+        if (this != &o) asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(this), "r"(&o) : "$8", "memory");
+        return *this;
+    }
+    V4w258 operator-(const V4w258& b) const {
+        V4w258 d;
+        asm volatile("lqc2 $vf1, 0(%1)\n\tlqc2 $vf2, 0(%2)\n\tvsub.xyzw $vf1, $vf1, $vf2\n\tsqc2 $vf1, 0(%0)" : : "r"(&d), "r"(this), "r"(&b) : "memory");
+        return d;
+    }
+    V4w258 operator*(f32 k) const {
+        V4w258 d;
+        asm volatile("lqc2 $vf1, 0(%1)\n\tmfc1 $8, %2\n\tqmtc2 $8, $vf2\n\tvmulx.xyzw $vf1, $vf1, $vf2x\n\tsqc2 $vf1, 0(%0)" : : "r"(&d), "r"(this), "f"(k) : "$8", "memory");
+        return d;
+    }
+    f32 len() const {
+        f32 r;
+        asm volatile("lqc2 $vf1, 0(%1)\n\tvmul.xyz $vf1, $vf1, $vf1\n\tvaddy.x $vf1, $vf1, $vf1y\n\tvaddz.x $vf1, $vf1, $vf1z\n\tvsqrt Q, $vf1x\n\tvwaitq\n\tcfc2.ni $8, $vi22\n\tmtc1 $8, %0" : "=f"(r) : "r"(this) : "$8");
+        return r;
+    }
+} __attribute__((aligned(16)));
+struct Seg258 { V4w258 a, b; };
+struct Rail258 { u8 p0[8]; s32 n; u8 p1[12]; f32 f18; u8 p2[12]; f32 f28; u8 p3[4]; V4w258 a0, b0, a1, b1; };
+struct Box3w258 { f32 mn[3]; f32 mx[3]; };
+
+extern "C" {
+extern u8* D_0035f20c;
+void u_call4_00139d78(u8*) asm("_Z16u_call4_00139d78jjjj");
+s32 func_00259510(s32);
+u8* u_tail4_00192048(s32) asm("_Z16u_tail4_00192048jjjj");
+void CmComm_FontIcon(s32, char*, bool) asm("_ZN2Tz6CmComm8FontIconEiPcb");
+s32 CmComm_GetIconMsgSize(void) asm("_ZN2Tz6CmComm14GetIconMsgSizeEv");
+u8* CmComm_CopyMessage(char*, u8*) asm("_ZN2Tz6CmComm11CopyMessageEPcPKN2YS7MESSAGEE");
+s32 MESSAGE_get_size(u8*) asm("_ZNK2YS7MESSAGE8get_sizeEv");
+void Tz__Jiminy__SetMainFrameLRMess(s32 a, s32 b);  // 0x00275f68: definition moved into src/anon/unit_002748a0.cpp
+void w_memset(void*, s32, u32) asm("_Z16wtarget_002fde18jjjj");
+u8* AREA_Alloc(u32) asm("_ZN4AREA5AllocEj");
+s32 ATTACK_CHECK_NewComboGroup(void) asm("_ZN2YS12ATTACK_CHECK13NewComboGroupEv");
+void func_001e0cb8(u8*, s32);
+struct O17 {
+    u8 a[160]; u8 b[160]; u8 c[3200]; u8 pad[3524 - 3520];
+    u8* x3524; u8* x3528; s32 x3532; u32 x3536; u32 x3540; u32 x3544; u32 x3548; u32 x3552;
+    u8 pad2[3568 - 3556]; s32 x3568; u8 pad3[3584 - 3572]; s32 x3584;
+};
+void ryj__LAST_XEMNUS_LASER__init(O17* p);  // 0x001e17b8: definition moved into src/anon/unit_001e0cb8.cpp
+
+extern u8 D_00361aa0[];
+extern u8* D_00361a90;
+extern u8 D_00347e60[];
+extern u8 D_00347f98[];
+extern u8 D_0035eb98[];
+void CACHE_BUFF_Free(void*) asm("_ZN2YS10CACHE_BUFF4FreeEPv");
+void SEQUENCE_dtor(u8*) asm("_ZN2YI8SEQUENCED1Ev");
+void func_0023c098(u8*);  // set_vtbl_36eae8_then_call
+void func_002369f0(u8*);  // set_vtbl_36eac8_then_call
+typedef void (*VF12)(u8*);
+void func_002c1200(u8* p);  // 0x002c1200: definition moved into src/anon/unit_002c10e0.cpp
+
+void Aabbox_init(Box3w258*) asm("_ZN2dk6Aabbox4initEv");
+void func_0016ac38(u8*, s32, s32, s32, s32);
+void YS__OBJCLSN__calc_bounding_box(void*, Box3w258*);
+V4w258* YS__OBJ__get_pos(u8*);  // obj_get_attach_or_alt
+void Ti__MGJumpGimObj__appear_prize(u8*, V4w258*);
+void wtarget_002cf280(u8*, s32, s32) asm("_Z16wtarget_002cf280jjjj");
+void func_002de3e0(u8* p);  // 0x002de3e0: definition moved into src/anon/unit_002de3c8.cpp
+
+f32 func_002ce2a0(Rail258*, s32*, f32*, u32);
+Seg258* func_002cb890(Rail258*, s32);  // hash_bucket_get
+f32 wtarget_002ce598(Rail258* p, u32 a1) asm("_Z16wtarget_002ce598jjjj");
+f32 wtarget_002ce598(Rail258* p, u32 a1);  // 0x002ce598: definition moved into src/taito/path.cpp
+}

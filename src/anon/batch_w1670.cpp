@@ -1,0 +1,58 @@
+#include "../common/types.h"
+
+struct S6_1dad990 { s32 a, b, c, d, e, f; };
+extern S6_1dad990 D_01dad990;
+struct E6_347770 { s16 key; s16 val; s16 pad; };
+extern E6_347770 D_00347770[6];
+struct E12_1c608c0 { s32 a; s32 b; f32 c; };
+extern E12_1c608c0 D_01c608c0[64];
+extern f32 D_003634e8, D_003634ec, D_003634f0, D_003634f4, D_003634f8, D_003634fc, D_00363500;
+struct F4_w1670 { f32 a, b, c, d; };
+extern F4_w1670 D_01c61ae0;
+extern F4_w1670 D_01d49520;
+struct E2c_1c6cf00 { s32 a; u8 pad[0x28]; };
+extern E2c_1c6cf00 D_01c6cf00[4];
+struct S_348638 { s32 a, b, c; s32 d[3]; };
+extern S_348638 D_00348638;
+
+static inline void bitclr_w1670(u32* p, u32 n) { u32* w = &p[n >> 5]; *w &= ~(1 << (n & 0x1f)); }
+
+extern "C" {
+void YS__PRIZEEFFECT__get(u32, void*, u32);
+void func_001991a8(u32, u32);
+u8* ys_party_get_ability_w1670(u32) asm("_ZN2YS5PARTY11get_abilityEv");
+void YS__MISSION_GAUGE__set(f32, u8*);
+void func_00134408(void);
+void func_00134428(u32, u64);
+void func_00134450(u32);
+
+void wtarget_0022d2e0(u32 a, u32 b, u32, u32) asm("_Z16wtarget_0022d2e0jjjj");
+void wtarget_0022d2e0(u32 a, u32 b, u32, u32);  // 0022d2e0: moved to src/sasa/event_layout.cpp (linked unit)
+
+s32 func_00119f08(u8* p);  // 0x00119f08: definition moved into src/anon/unit_00119bf8.cpp
+
+// 00188490: moved to src/anon/unit_00185d10.cpp
+void func_00188490(s32 a, s32 b, f32 c);
+
+// 002eaea8: moved to src/anon/unit_002eae08.cpp
+
+void wtarget_00194710(u32 a, u32 b, u32, u32) asm("_Z16wtarget_00194710jjjj");
+void wtarget_00194710(u32 a, u32 b, u32, u32);  // 0x00194710: definition moved into src/anon/unit_00193be8.cpp
+
+void wtarget_001c2ad8(u32 a, u32 b, u32, u32) asm("_Z16wtarget_001c2ad8jjjj");
+// 001c2ad8: moved to src/anon/unit_001c0638.cpp
+void wtarget_001c2ad8(u32 a, u32 b, u32, u32);
+
+void func_0019f4e8(u32* p, u32 n);  // 0x0019f4e8: definition moved into src/anon/unit_0019ee80.cpp
+
+void func_001ae788(u8* p);  // 0x001ae788: definition moved into src/anon/unit_001ada38.cpp
+
+// 001cc310: moved to src/anon/unit_001cc048.cpp
+
+void func_001b53b0(u8* o, f32 x);  // 0x001b53b0: definition moved into src/anon/unit_001b2780.cpp
+
+void func_00147e80(u8* o);  // 0x00147e80: definition moved into src/anon/unit_00147140.cpp
+
+void wtarget_0013df48(u32 a, u32 b, u32, u32) asm("_Z16wtarget_0013df48jjjj");
+void wtarget_0013df48(u32 a, u32 b, u32, u32);  // 0x0013df48: definition moved into src/anon/unit_0013a8b8.cpp
+}

@@ -1,0 +1,191 @@
+#include "../common/types.h"
+#define QCOPY269(d, s) asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(d), "r"(s) : "$8", "memory")
+struct QV269 {
+    f32 x, y, z, w;
+    QV269() {}
+    QV269(const QV269& o) { QCOPY269(this, &o); }
+    QV269& operator=(const QV269& o) { if (this != &o) QCOPY269(this, &o); return *this; }
+} __attribute__((aligned(16)));
+static inline void normalize269(QV269* v) {
+    f32 len;
+    asm volatile("lqc2 $vf1, 0(%1)\n\tvmul.xyz $vf2, $vf1, $vf1\n\tvaddy.x $vf2, $vf2, $vf2y\n\tvaddz.x $vf2, $vf2, $vf2z\n\tvsqrt Q, $vf2x\n\tvwaitq\n\tcfc2.ni $8, $vi22\n\tvaddq.x $vf2, $vf0, Q\n\tmtc1 $8, %0\n\tvnop\n\tvdiv Q, $vf0w, $vf2x\n\tvwaitq\n\tvmulq.xyz $vf1, $vf1, Q\n\tsqc2 $vf1, 0(%1)" : "=f"(len) : "r"(v) : "$8", "memory");
+}
+#define QCOPY4_269(d, s) asm volatile("lq $8, 0(%1)\n\tlq $9, 16(%1)\n\tlq $10, 32(%1)\n\tlq $11, 48(%1)\n\tsq $8, 0(%0)\n\tsq $9, 16(%0)\n\tsq $10, 32(%0)\n\tsq $11, 48(%0)" : : "r"(d), "r"(s) : "$8", "$9", "$10", "$11", "memory")
+struct RV269 {
+    f32 v[4];
+    RV269& operator*=(f32 k) {
+        asm volatile("lqc2 $vf1, 0(%0)\n\tmfc1 $8, %1\n\tqmtc2 $8, $vf2\n\tvmulx.wxyz $vf1, $vf1, $vf2x\n\tsqc2 $vf1, 0(%0)" : : "r"(this), "f"(k) : "$8", "memory");
+        return *this;
+    }
+} __attribute__((aligned(16)));
+struct M269 {
+    RV269 r[4];
+    M269() {}
+    M269& operator=(const M269& o) { if (this != &o) QCOPY4_269(this, &o); return *this; }
+} __attribute__((aligned(16)));
+union PU269 { u8* p; u16 h; u8 c; };
+typedef void (*VF269)(u8*);
+#define VCALL269(p) ((*(VF269*)(*(u8**)(p) + 20))(p))
+typedef void (*KVF269)(u8*);
+#define KVCALL269(p, off) ((*(KVF269*)(*(u8**)(p) + (off)))(p))
+#define QCOPYL269(d, s) asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(d), "r"(s) : "$8", "memory")
+struct LV269 {
+    f32 x, y, z, w;
+    LV269() {}
+    LV269(const LV269& o) { QCOPYL269(this, &o); }
+    LV269& operator=(const LV269& o) { if (this != &o) QCOPYL269(this, &o); return *this; }
+} __attribute__((aligned(16)));
+static inline LV269 operator*(const LV269& a, f32 k) {
+    LV269 r;
+    asm volatile("lqc2 $vf1, 0(%1)\n\tmfc1 $8, %2\n\tqmtc2 $8, $vf2\n\tvmulx.wxyz $vf1, $vf1, $vf2x\n\tsqc2 $vf1, 0(%0)" : : "r"(&r), "r"(&a), "f"(k) : "$8", "memory");
+    return r;
+}
+static inline LV269 operator+(const LV269& a, const LV269& b) {
+    LV269 r;
+    asm volatile("lqc2 $vf1, 0(%1)\n\tlqc2 $vf2, 0(%2)\n\tvadd.wxyz $vf1, $vf1, $vf2\n\tsqc2 $vf1, 0(%0)" : : "r"(&r), "r"(&a), "r"(&b) : "memory");
+    return r;
+}
+struct LM269 {
+    LV269 r[4];
+    LM269& operator=(const LM269& o) {
+        if (this != &o)
+            asm volatile("lq $8, 0(%1)\n\tlq $9, 16(%1)\n\tlq $10, 32(%1)\n\tlq $11, 48(%1)\n\t"
+                         "sq $8, 0(%0)\n\tsq $9, 16(%0)\n\tsq $10, 32(%0)\n\tsq $11, 48(%0)"
+                         : : "r"(this), "r"(&o) : "$8", "$9", "$10", "$11", "memory");
+        return *this;
+    }
+} __attribute__((aligned(16)));
+struct LO269 {
+    u8 pad[3088];
+    LM269 prev;   // 3088
+    LM269 cur;    // 3152
+    LV269 pts[9]; // 3216.. (pts[1] at 3232)
+};
+struct NM269 {
+    f32 m[16];
+    NM269() {}
+    NM269& operator=(const NM269& o) {
+        if (this != &o)
+            asm volatile("lq $8, 0(%1)\n\tlq $9, 16(%1)\n\tlq $10, 32(%1)\n\tlq $11, 48(%1)\n\t"
+                         "sq $8, 0(%0)\n\tsq $9, 16(%0)\n\tsq $10, 32(%0)\n\tsq $11, 48(%0)"
+                         : : "r"(this), "r"(&o) : "$8", "$9", "$10", "$11", "memory");
+        return *this;
+    }
+} __attribute__((aligned(16)));
+static inline __attribute__((always_inline)) void ncopy269(NM269* d, const NM269* s) { *d = *s; }
+struct NI269 { s32 h0; s32 frames; u8 b8; };
+struct NO269 {
+    u8 pad[100];
+    NI269* info;   // 100
+    u8 sub[8];     // 104
+    s32 f112;      // 112
+    s32 idx;       // 116
+    f32 time;      // 120
+    s32 speed;     // 124
+    u32 pad128;
+    u8 stop;       // 132
+    u8 flag;       // 133
+    u8 pad134[10];
+    NM269 mtx;     // 144
+};
+struct SF269 {
+    u8* p;
+    s32 r, w;
+    s16 flags;
+    s16 file;
+    u8* base;
+    s32 size;
+    s32 lbfsize;
+    void* cookie;
+    void* rd;
+    void* wr;
+    void* seek;
+    void* cl;
+    u8 pad48[16];
+    u8 ubuf[3];
+    u8 nbuf[1];
+    u8 pad68[8];
+    s32 blksize;
+    s32 offset;
+    u8* data;
+};
+struct SS269 { s16 dev; s16 ino; u32 mode; u8 pad[104]; };
+extern "C" {
+
+void func_0011b6a8(f32*);
+f32 sinf(f32);
+f32 cosf(f32);
+void func_0011b408(f32* m, const QV269* a);  // 0x0011b408: definition moved into src/anon/unit_0011b3f8.cpp
+void func_0011b558(f32* m, const QV269* a);  // 0x0011b558: definition moved into src/anon/unit_0011b3f8.cpp
+
+f32 func_0011bdc0(M269*, s32, s32);
+f32 func_0011be50(M269* m);  // 0x0011be50: definition moved into src/anon/unit_0011b3f8.cpp
+
+u16* YS__COMMAND_ELEM__Get(s32);
+s32 YS__COMMAND_ELEM__can_use(u16*, s32);
+s32 func_001c11e0(void);
+s32 func_00190140(u32*);
+s32 YS__OBJ__is_disable_rc(u32);
+void YS__RC_SEARCHER__set(u8*, u16*, u32*, s32, s32);
+s32 YS__RC_SEARCHER__check_set(u8* a0, s32 a1, u32* a2, s32 a3, s32 a4);  // 0x0019dbc0: definition moved into src/anon/unit_0019ba60.cpp
+
+extern PU269 D_0035f230;
+extern s32 D_0035f010;
+u8* func_002570e0(void);
+void func_0028fb28(s32, u16);
+void func_00257050(s32, s32, s32);
+s32 func_00257070(s32);
+void Tz__CmAbility__SetupTop(s32);
+u16 func_002813b8(void);
+s32 func_0027ae20(void);
+s32 func_00281100(s32);
+s32 func_0027aa78(void);
+s32 func_00281140(s32, s32);
+void func_0028fb68(s32, s32);
+void func_00279040(void);
+void Tz__CmAbility__SetupSel(void);
+void func_00277178(s32 a0, s32 a1);  // 0x00277178: definition moved into src/anon/unit_002748a0.cpp
+
+extern u8* D_0035f2c8;
+extern u8* D_0035f2cc;
+extern u8* D_0035f2d8;
+extern u8* D_0035f2dc;
+s32 func_00139d78(u8*);
+void func_00139510(u8*);
+s32 func_0028acc8(u8*);
+void func_0028abe0(u8*);
+void Tz__Ending__LeaveAll(void);  // 0x002843e8: definition moved into src/anon/unit_00284220.cpp
+
+extern u8* D_0035f5ac;
+extern u8* D_0035f5b0;
+extern u8 D_0035f5b4;
+extern s16 D_0035f5b6;
+extern u32 D_0035f5b8;
+extern u8* D_0035f5bc;
+extern s8 D_0035f5c4;
+extern u8 D_00347e60[];
+void func_00106420(void*);
+void func_0031abd8(u8*);
+void func_0031acc0(u8*);
+void func_00239870(u8*);
+void func_0031a840(u8*);
+void func_0029a8e0(void);  // 0x0029a8e0: definition moved into src/anon/unit_00299920.cpp
+
+void Ti__MGObj__set_matrix_2(LO269*, const LM269*);
+void func_002da520(LO269* a0, const LM269* a1);  // 0x002da520: definition moved into src/anon/unit_002da040.cpp
+
+extern f32 D_00349e10;
+s32 func_002e34c8(u8*);  // obj_get_field8_by_vtable
+void func_001991a8(s32, s32);
+void func_002e0fa0(NO269*, s32);
+NM269 func_002e71a0(s32, u8, s32);
+void wt269(NO269* a0, u32, u32, u32) asm("_Z16wtarget_002e1288jjjj");
+void wt269(NO269* a0, u32, u32, u32);  // 0x002e1288: definition moved into src/anon/unit_002de3c8.cpp
+
+s32 func_003050b8(u8*, s32, SS269*);
+void* mal269(u8*, u32) asm("_Z9_malloc_rjjjj");
+s32 isatty269(s32) asm("_Z13func_00305dd0xxxx");
+void func_00302dd0(void);
+s32 func_00304ec8(void*, s32, s32);
+void func_00303808(SF269* fp);  // 0x00303808: definition moved into src/newlib/libc/makebuf.c
+}

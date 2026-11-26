@@ -9,7 +9,6 @@ namespace Tz {
 class LMMU {
 public:
     static void PauseThread(TASK*);
-    void CtrlSel();
 };
 
 }  // namespace Tz

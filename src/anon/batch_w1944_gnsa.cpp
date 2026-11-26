@@ -1,0 +1,91 @@
+#include "../common/types.h"
+
+// 001ea758: morph blend of two s16 vertex shapes; -fno-strict-aliasing.
+struct W1944SV { s16 x, y, z; };
+struct W1944MorphShape { s32 count; u8 pad4[0x10]; W1944SV* verts; u8 pad18[0xc]; };
+struct W1944MorphMgr { u8 pad0[0x10]; W1944MorphShape* shapes; };
+struct W1944MorphState { f32 t; u8 pad4[8]; W1944SV* buf; };
+struct W1944MorphKeys { u32 pad0; s32 from; s32 to; };
+struct W1944MorphCtx { u8 pad0[0xc]; s32* offset; };
+struct W1944MorphOut { u8 pad0[0x90]; W1944SV* buf; };
+extern "C" {
+extern W1944MorphMgr* D_01d9e6e4;
+extern W1944MorphOut* D_01d9e6e8;
+W1944SV* func_001e7698(W1944MorphMgr*, s32);
+void func_001ea758(u8* base, W1944MorphKeys* k, W1944MorphCtx* c);  // 0x001ea758: definition moved into src/anon/unit_001e8ac8.cpp
+}
+
+// 0029de18: the first flag store goes through an int-parameter setter (keeps the two li 1 apart).
+extern "C" {
+struct W1944S43 { u8 pad[0xb8]; u32 fl; };
+extern s32 D_0035f210;
+extern s32 D_0035f3d4;
+extern s16* D_0035f5ac;
+void dk__Sprite__create(u8*, s32, s32, u8*, s32, s32);
+void func_00138c68(u8*, s32, s32);
+void func_00139620(u8*);
+s32 func_00139d78(u8*);
+void YI__IMAGE__Init(u8*, s32);
+s32 func_0023aa18(u8*);
+s32 func_0023aa38(u8*);
+s32 func_0023c4b8(s32, s32);
+s32 func_0023f1b0(s32);
+s32 func_00276638(s32);
+u8* func_002766d0();
+void func_0028dcc0(u8*, u8*);
+s32 func_00292a90(s32);
+s32 func_00293148(s32);
+s8* func_0029da68(s32);
+void func_0029dda8();
+static inline __attribute__((always_inline)) void w1944_set8(u8* p, s32 v) { *p = v; }
+void func_0029de18(void);  // 0x0029de18: definition moved into src/anon/unit_0029d008.cpp
+}
+
+// 001cb720: VU0 vector macros (lqc2/vmulx/vadd) and an lq/sq copy as asm.
+struct W1944QV {
+    f32 x, y, z, w;
+    W1944QV() {}
+    W1944QV(const W1944QV& o) { asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(this), "r"(&o) : "$8", "memory"); }
+    W1944QV& operator*=(f32 k) {
+        asm volatile(".set noreorder\n\tlqc2 $vf1, 0(%0)\n\tmfc1 $8, %1\n\tqmtc2 $8, $vf2\n\tvmulx.wxyz $vf1, $vf1, $vf2x\n\tsqc2 $vf1, 0(%0)\n\t.set reorder" : : "r"(this), "f"(k) : "$8", "memory");
+        return *this;
+    }
+    W1944QV& operator+=(const W1944QV& b) {
+        asm volatile(".set noreorder\n\tlqc2 $vf1, 0(%0)\n\tlqc2 $vf2, 0(%1)\n\tvadd.wxyz $vf1, $vf1, $vf2\n\tsqc2 $vf1, 0(%0)\n\t.set reorder" : : "r"(this), "r"(&b) : "memory");
+        return *this;
+    }
+    W1944QV operator+(const W1944QV& b) const {
+        W1944QV r;
+        asm volatile(".set noreorder\n\tlqc2 $vf1, 0(%1)\n\tlqc2 $vf2, 0(%2)\n\tvadd.wxyz $vf1, $vf1, $vf2\n\tsqc2 $vf1, 0(%0)\n\t.set reorder" : : "r"(&r), "r"(this), "r"(&b) : "memory");
+        return r;
+    }
+} __attribute__((aligned(16)));
+struct W1944CamPos { u8 pad[48]; W1944QV pos; };
+struct W1944Cam;
+struct W1944CamVt { u8 pad[160]; W1944CamPos* (*get)(W1944Cam*); };
+struct W1944Cam { W1944CamVt* vt; };
+struct W1944Fx {
+    W1944QV v;
+    u8 pad10[6];
+    s8 alpha;
+    u8 pad17[0x40 - 0x17];
+    f32 time;
+    u8 pad44[0x70 - 0x44];
+    W1944QV ofs;
+    u8 pad80[0xa0 - 0x80];
+    f32 ang;
+    f32 pada4;
+    f32 angVel;
+    f32 scale;
+};
+extern "C" {
+extern f32 D_00349e10;
+extern f32 D_00351fd8;
+W1944Cam* func_002d1260();
+s32 YS__OBJ__is_exist(W1944Cam*);
+f32 func_001cbf50(f32);
+f32 cosf(f32);
+f32 sinf(f32);
+
+s32 func_001cb720(W1944Fx* o);  // 0x001cb720: definition moved into src/anon/unit_001ca8e0.cpp
+}

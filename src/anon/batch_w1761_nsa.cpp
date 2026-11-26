@@ -1,0 +1,31 @@
+#include "../common/types.h"
+// Built with -fno-strict-aliasing (_nsa): 001fb478 and 002e9850 reload a global after stores of other types.
+
+struct W1761S1 { u8 pad[0x8c]; u8 b8c; u8 b8d; u8 p2[0x9c - 0x8e]; s32 w9c; u8 p3[8]; s32 wa8; u8 p4[0xc0 - 0xac]; u8 bc0; u8 bc1; };
+struct W1761Ev { s32 type; s32 id; s32 a[6]; };
+struct W1761Ent64 { u8 d[64]; };
+struct W1761Pool30 { W1761Ent64 e[30]; s32 idx[30]; s32 n; };
+
+extern "C" {
+void func_0021f5d8(void*);
+extern u8 D_003590b0;
+
+void func_001fb478(char* a0, s32** a1);  // 0x001fb478: definition moved into src/anon/unit_001fb350.cpp
+
+extern s32 D_0035e360;
+extern s32 D_0035e368;
+extern W1761Ev D_01dadc00[64];
+
+s32 func_00234188(s32 p0, s32 p1, s32 p2, s32 p3, s32 p4, s32 p5);  // 0x00234188: definition moved into src/anon/unit_002335e8.cpp
+
+extern W1761Pool30* D_01e2bfa0;
+extern s32 D_01e2bfa4;
+void func_002e93a0(W1761Ent64*);
+
+static inline W1761Ent64* w1761_pop(W1761Pool30* p) {
+    p->n--;
+    return &p->e[p->idx[p->n]];
+}
+
+// 002e9850: moved to src/sugi/flare.cpp
+}

@@ -2,7 +2,6 @@
 
 #include "../../common/types.h"
 
-class COMMAND_MENU;
 class OBJ;
 class PLAYER;
 class SORA;

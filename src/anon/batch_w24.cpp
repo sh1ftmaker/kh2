@@ -1,0 +1,209 @@
+#include "../common/types.h"
+
+// Batch w24: small wrappers, list searches, constructors and leaf helpers.
+
+extern "C" {
+
+// 3x3 determinant of a row-major matrix.
+f32 func_0011bd70(f32* m);  // 0x0011bd70: definition moved into src/anon/unit_0011b3f8.cpp
+
+void func_001369d0(void);
+void func_001369f0(void);
+void func_00136a50(void);
+extern s32 D_00347d20;
+extern s32 D_00347d24;
+struct S16x2 { s16 a; s16 b; };
+extern S16x2 D_003b8b20;
+extern s32 D_003b8b38;
+// 00136968: moved to src/harata/libdk/bgse.cpp
+
+// Is node `a` linked into the current manager's list (also records it as current).
+struct LNode { u32 _0; LNode* next; };
+struct LMgr { u32 _0; LNode* head; u8 _8[92]; volatile u32 cur; };
+extern LMgr* volatile D_00347f80;
+static inline s32 list_has(LNode** hp, u32 a) {
+    LNode* n = 0;
+    while ((n = !n ? *(LNode* volatile*)hp : n->next) != 0) {
+        if ((u32)n == a) return 1;
+    }
+    return 0;
+}
+u8 u_call4_00139d78(u32, u32, u32, u32) asm("_Z16u_call4_00139d78jjjj");
+u8 u_call4_00139d78(u32 a, u32, u32, u32);  // 0x00139d78: definition moved into src/anon/unit_001393c8.cpp
+
+// Apply func_00167ad0 to both 384-byte slots.
+void u_call4_00167b08(u32, u32, u32, u32) asm("_Z16u_call4_00167b08jjjj");
+void func_00167ad0(u8*, u32);
+extern u8 D_0034d3c0[];
+// 00167b08: moved to src/anon/unit_00167358.cpp
+
+void wtarget_0016d230(u32, u32, u32, u32) asm("_Z16wtarget_0016d230jjjj");
+extern u32 D_004f6288;
+extern u32 D_0032b91c;
+struct W2 { u32 a; u32 b; };
+extern W2 D_004f6290;
+// 0016d230: moved to src/anon/unit_0016c770.cpp
+
+// Fall back to the id at +56 when it lies in one of the special ranges.
+s32 func_0016ffc8(u8* p);  // 0x0016ffc8: definition moved into src/anon/unit_0016e8f8.cpp
+
+u8 func_001688b8(void);
+u8 func_002ba200(void);
+u8 func_00170c50(void);
+u8 YS__CACHE_BUFF__IsFlushing(void);  // 0x00170cd0: definition moved into src/anon/unit_0016e8f8.cpp
+
+// YS::FORMRAM::set_ability: store an ability id into the first free slot (bit 15 = equipped).
+struct FormRam { u8 _0[8]; u16 ab[24]; };
+void formram_set_ability(FormRam*, int) asm("_ZN2YS7FORMRAM11set_abilityEi");
+void formram_set_ability(FormRam* self, int id);  // 0x001891b8: definition moved into src/anon/unit_00188848.cpp
+
+void func_001bff88(void);
+void func_001c2b70(void);
+void func_00102c18(s32, s32, void (*)(void));
+void func_0018d620(void);
+extern W2 D_01c60cd8;
+extern u8 D_01c60ce0;
+void YS__ATTACK__Init(void);  // 0x0018d738: definition moved into src/anon/unit_0018d050.cpp
+
+void wtarget_00191938(s32, u32, u32, u32) asm("_Z16wtarget_00191938jjjj");
+void func_001c1130(s32);  // copy_record_block_to_table
+void func_001c11a8(s32);
+extern s32 D_01c61958;
+// 00191938: moved to src/yasui/libys/status.cpp
+
+s32 func_00197c28(u32*);
+void func_00196e88(u32*, s32, s32, f32);
+void func_00197390(u32* p);  // 0x00197390: definition moved into src/anon/unit_00195d00.cpp
+
+s32 func_00195700(void*);
+extern u8 D_0034f250;
+s32 func_0019ab30(s32* p);  // 0x0019ab30: definition moved into src/anon/unit_00199688.cpp
+
+s32 func_00181858(u32*);
+s32 func_0019d748(u32* p);  // 0x0019d748: definition moved into src/anon/unit_0019ba60.cpp
+
+void func_00239700(u32*);
+s32 func_001ab810(void);  // get_global_1c7cec0
+s32 func_001ab800(void);
+void YI__SEQUENCE__Init(u32*, s32, s32);
+// 001abb28: moved to src/anon/unit_001abb28.cpp
+
+u8* YS__SAVERAM_BATTLE__get_formram(void*, u32);
+void func_001a1cc0(u32, u32, u8);
+void YS__SHEET__Free(u32);
+extern u8 D_0032e020;
+void func_001b6ab8(u32* p);  // 0x001b6ab8: definition moved into src/anon/unit_001b6a50.cpp
+
+void u_tail0_001b87b0(void) asm("_Z16u_tail0_001b87b0v");
+void func_001b8838(s32);
+void func_001b8da0(void);
+struct B288 { u32 w[8]; u8 _20[255]; u8 flag; };
+extern B288 D_0032fb68;
+void u_tail0_001b87b0(void);  // 0x001b87b0: definition moved into src/anon/unit_001b87a0.cpp
+
+// ids 5, 10 and 13..18
+s32 YS__COMMAND_MENU__is_shortcut_menu(s32* p);  // 0x001bcf38: definition moved into src/anon/unit_001bc568.cpp
+
+struct N80 { u8 _0[80]; N80* next; };
+extern N80* D_01d49350;
+void func_001c0490(N80*);
+void func_001c0560(void);  // 0x001c0560: definition moved into src/anon/unit_001bff88.cpp
+
+void func_001c23a8(u32*, u32, s32, s32, s32, u32, u32);
+extern void* D_00351d38[];
+// 001c6e58: moved to src/anon/unit_001c6e58.cpp (linked unit)
+
+// YS::SUMMON::IsTinkExist
+u8 summon_IsTinkExist(void) asm("_ZN2YS6SUMMON11IsTinkExistEv");
+u32 func_001d6d00(s32);
+s32 func_001c8ab0(void);
+extern u8 D_0032bb30[];
+// 0x1c8b48: moved to src/yasui/libys/summon.cpp
+
+u32 func_001e3468(u32);
+s32 func_00143fc8(void*, u32);
+extern u8 D_00352b00;
+s32 func_001dccc8(u32* p, u8 flag);  // 0x001dccc8: definition moved into src/anon/unit_001dbfd8.cpp
+
+s32 func_002f1670(void*);
+void func_001024a8(u32);
+extern u8 D_01dad990;
+void func_0022cf18(u32 a);  // 0022cf18: moved to src/sasa/event_layout.cpp (linked unit)
+
+struct Bits { u32 b0 : 1; u32 m : 2; u32 rest : 29; };
+struct Blk { u32 _0; Bits f; };
+u8* func_001058e8(void);
+void func_00242a90(s32 a);  // 0x00242a90: definition moved into src/anon/unit_00242478.cpp
+
+void Tz__Selector__Init(void);
+void func_00287bd0(s32, s32);
+u32* func_00103eb0(void);
+void TASK_MANAGER__create_thread(u32, s32, s32, void (*)(void), s32);
+void func_0026dd40(void);
+void func_0026dcb8(void);  // 0x0026dcb8: definition moved into src/anon/unit_0026c450.cpp
+
+struct Ent8 { u8 _0[2]; s8 flag; u8 _3[2]; s8 lim; u8 _6[2]; };
+struct Hdr8 { s16 _0; s16 a; s16 b; u8 _6[6]; Ent8 e[1]; };
+extern Hdr8* D_0035f230;
+s32 func_0027bf20(s32 i);  // 0x0027bf20: definition moved into src/anon/unit_0027a6d8.cpp
+
+void func_0028dac8(u8*, s32);
+extern u8* D_0035f264;
+void func_00280240(void);  // 0x00280240: definition moved into src/anon/unit_0027f2b0.cpp
+
+extern u8 D_01e2a410;
+void func_002bc9a8(void*, s32, s32);  // find_entry12_set_field
+void func_002bce10(void*, s32);  // find_entry12_set_flag
+void func_002b9b78(void);  // 0x002b9b78: definition moved into src/anon/unit_002b9ab8.cpp
+
+void func_00102448(u32, s32);
+void func_002ba7c8(u32 a);  // 0x002ba7c8: definition moved into src/anon/unit_002b9ab8.cpp
+
+void func_002baa60(u8*);
+u32* func_00168b38(u32, s32, u32);  // entry_array_find_nth
+void func_002baa08(u32, u32, s32, s32);
+void func_002be568(u8* p, u32 x);  // 0x002be568: definition moved into src/anon/unit_002be020.cpp
+
+// dk::WM_TOTAL_INFO::fadeout
+void wm_total_info_fadeout(void*) asm("_ZN2dk13WM_TOTAL_INFO7fadeoutEv");
+void func_00138c10(u8*, s32);
+void wm_total_info_fadeout(void* self);  // 0x002c14a8: definition moved into src/anon/unit_002c10e0.cpp
+
+// Clear the vector at q+32, then scale p.xyzw by p.w and zero p.z.
+void func_002d5c20(f32*, u8*);
+f32* func_002d6e08(f32* p, u32, u8* q);  // 0x002d6e08: definition moved into src/anon/unit_002d62d0.cpp
+
+void func_002cfeb0(u8*, u32, s32, u32);  // obj_init_field1416_bit800
+u8 func_002e7308(u8*);
+extern void* D_00362908[];
+s32 func_002db858(u8* p, u32 a, u32 b);  // 0x002db858: definition moved into src/anon/unit_002da040.cpp
+
+void func_00195858(u8*, s32);
+void func_002ece98(u32, u8* o);  // 0x002ece98: definition moved into src/anon/unit_002ecdb0.cpp
+
+// 002ee778 menu::Mode::start: moved to src/menu/tutorial_widget.cpp
+
+struct P2 { u32 a; u32 b; };
+struct P3 { P2* p; s32 n; u32 v; };
+u32 strlen(void);  // strlen
+void __sfvwrite(u32, P3*);
+void func_00316d18(u32 a, u32 b);  // 0x00316d18: definition moved into src/newlib/libc/fputs.c
+
+struct VObj { void** vt; };
+struct Mgr20 { u8 _0[20]; VObj* o; };
+extern Mgr20* D_00347f80m asm("D_00347f80");
+extern void* D_00347e60[];
+void func_00239870(u8*);
+void func_0031a840(u8*);
+void func_0031a548(u8* p);  // 0x0031a548: definition moved into src/anon/unit_003197d0.cpp
+
+extern void* D_00348590[];
+extern void* D_00347f98[];
+void func_0031b070(u8* p);  // 0x0031b070: definition moved into src/anon/unit_003197d0.cpp
+
+extern void* D_0035eb98[];
+void func_0023c098(u8*);  // set_vtbl_36eae8_then_call
+void func_002369f0(u8*);  // set_vtbl_36eac8_then_call
+void func_0031cd90(u8* p);  // 0x0031cd90: definition moved into src/anon/unit_0031b9e0.cpp
+
+}

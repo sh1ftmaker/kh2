@@ -1,0 +1,63 @@
+#include "../common/types.h"
+extern "C" {
+extern u8 D_0035f0b0;
+extern s32 D_0035eca4;
+extern s32 D_0035f674;
+s32 func_00240ba0(void);
+s32 func_00287cd0(void);
+s32 func_002b4fb8(void);
+s32 func_002b4ff8(void);
+void func_00287c30(void);
+s32 func_00287bc0(void);
+void func_00287cc0(s32);
+s32 func_00287d30(void);
+void func_00240108(void);
+s32 func_001058e8(void);
+s32 func_001058d8(s32);
+s32 func_002421e8(s32);
+void func_002420d8(s32, s32);
+s32 func_00233e70(s32);
+s32 func_00234758(void);
+s32 func_00234798(void);
+s32 func_002347a8(void);
+s32 func_002347b8(void);
+s32 func_002347c8(void);
+s32 YI__MCARD__GetResultRead(void);
+s32 func_002347e8(void);
+s32 func_002349c8(s32, s32);
+s32 func_002348a8(s32, s32);
+s32 func_00234888(s32, s32);
+void func_00234570(s32, s32);
+void func_00241450(s32);
+void func_00287d20(s32);
+void func_00287bd0(s32, s32);
+void func_00287c00(s32);
+void func_002400f8(s32);
+void func_002b5108(s32, s32);
+void Tz__CmSLBase__SetupWarningConfirm(s32);
+s32 Tz__MCard__GetPos(void);
+void Tz__MCard__GetDirInfo(s32);
+void Tz__MCard__MakeFname(s32);
+void func_00240450(s32, s32);
+void func_00240bb0(s32);
+void func_002414c0(void);
+void Tz__MCard__UpdateLocalInfo(void);
+u32 func_00241160(void);
+void func_00241320(void);
+s32 func_00241358(void);
+void func_00241528(void);
+void func_00241568(s32);
+void func_002415a0(s32, s32, s32);
+void func_00241608(s32, s32, s32);
+s32 func_00241670(s32);
+s32 func_00241a48(void);
+void func_00241a70(void);
+s32 func_002420d0(s32);
+void func_00242110(s32);
+s32 Tz__McSys__isEnableDataKH2(s32);
+void func_002421c0(s32);
+s32 func_0028b8d0(s32);
+s32 func_0028b8d8(s32);
+
+void func_0025c3c0(void);  // 0x0025c3c0: definition moved into src/anon/unit_002588e8.cpp
+}

@@ -1,0 +1,50 @@
+#include "../common/types.h"
+
+struct V4_df040 {
+    f32 x, y, z, w;
+    V4_df040() {}
+    V4_df040(f32 a, f32 b, f32 c, f32 d) : x(a), y(b), z(c), w(d) {}
+    V4_df040(const V4_df040& o) { asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(this), "r"(&o) : "$8", "memory"); }
+    V4_df040& operator=(const V4_df040& o) { asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(this), "r"(&o) : "$8", "memory"); return *this; }
+} __attribute__((aligned(16)));
+
+struct E_25158 { u8 d[16]; ~E_25158() {} } __attribute__((aligned(16)));
+struct H_25158 { E_25158 a[4]; };
+
+extern "C" {
+
+extern u8 D_0032f054;
+struct JS_198040 { u8 pad[0x26]; u16 h[7]; };
+JS_198040* func_001a8b28(void);
+// 00198040: moved to src/anon/unit_00197fe0.cpp
+
+/* heap block free + coalesce with free neighbours */
+struct Blk_225fa0 { Blk_225fa0* next; Blk_225fa0* prev; u8 used; u8 pad[3]; s32 size; };
+void func_00225fa0(void* a0, void* p);  // 0x00225fa0: definition moved into src/anon/unit_00224780.cpp
+
+void func_0016aef0(u8*, V4_df040*);
+V4_df040* YS__OBJ__get_pos(u8*);
+void func_0016ace0(u8*, V4_df040*);
+void func_002deda8(u8*, u8*);
+void Ti__ACTION_PO_JUMP__control(u8* a0, u8* a1);  // 0x002df040: definition moved into src/anon/unit_002de3c8.cpp
+
+/* libgcc fp-bit unpack_d (double) */
+struct Fpn_3147a0 { s32 cls; u32 sign; s32 normal_exp; s32 pad; u64 ll; };
+void func_003147a0(u64* src, Fpn_3147a0* dst);  // 0x003147a0: definition moved into src/libgcc/_unpack_df.c
+
+extern u32 D_00361d00;
+extern u32 D_0034e8b8;
+extern u32 D_0034ee08;
+void func_00319f88(void*);
+void YS__OBJ_ATTACK__clear(void*);
+void func_001c0248(void*);
+void func_00319fb0(void*);
+void AREA_Free_25158(void*) asm("_ZN4AREA4FreeEPv");
+void func_00325158(u8* p);  // 0x00325158: definition moved into src/anon/unit_00324808.cpp
+
+f32 func_0017d130(f32);
+void func_0017c400(u8*, s32);
+struct J_17c430 { u8 pad[0xd0]; f32 d0, d4, d8, dc; };
+// 0017c430: moved to src/anon/unit_0017c400.cpp
+
+}

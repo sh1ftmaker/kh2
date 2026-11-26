@@ -1,0 +1,233 @@
+#include "../common/types.h"
+
+// 128-bit copy (lq/sq) when the two addresses differ.
+static inline void qcopy(void* d, const void* s) {
+    if (d != s) {
+        asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(d), "r"(s) : "$8", "memory");
+    }
+}
+
+// 16-byte vector copied with lq/sq.
+struct W26Quad {
+    u8 v[16] __attribute__((aligned(16)));
+    W26Quad(const W26Quad& o) {
+        asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(this), "r"(&o) : "$8", "memory");
+    }
+};
+struct W26Head {
+    u64 a, b, c, d;
+    W26Head(const W26Head& o) {
+        u64 x0 = o.a, x1 = o.b, x2 = o.c, x3 = o.d;
+        a = x0; b = x1; c = x2; d = x3;
+    }
+};
+struct W26Blk {
+    W26Head h;
+    W26Quad q[2];
+    f32 f;
+    W26Blk(const W26Blk& o) : h(o.h), q(o.q), f(o.f) {}
+};
+inline void* operator new(unsigned int, void* p) { return p; }
+
+extern "C" {
+void* func_0010cce0(void*);
+s32 obj_is_culling(void*) asm("_ZN2YS3OBJ10is_cullingEv");
+void* func_00124748(void*, s32);  // list_nth_node_rel
+void loadImage(u32) asm("_ZN2dk9loadImageEj");
+void TaskYield(...) asm("_ZN2Tz9TaskYieldEz");
+void SignalCall(void) asm("_ZN2Tz8DbgSMenu10SignalCallEv");
+void jumpEffectIn_task(void*) asm("_ZN2dk14StopJumpEffect17jumpEffectIn_taskEP4TASK");
+void* YS__OBJ__Each(void*) asm("_Z13YS__OBJ__Eachjjjj");
+void* obj_get_serial(void*) asm("_ZN2YS3OBJ10get_serialEv");
+void YS__OBJ__is_exist(void*) asm("_Z17YS__OBJ__is_existjjjj");
+void party_use_mp(void*) asm("_ZN2YS5PARTY6use_mpEv");
+void* func_001cd7a8(void*);
+void target_set_obj(void*, void*, s32) asm("_ZN2YS6TARGET7set_objEPNS_3OBJEi");
+void cache_free(void*) asm("_ZN2YS10CACHE_BUFF4FreeEPv");
+void func_00192028(s32);
+void func_00198dc0(void*);
+void func_0019aec0(void*, u8);
+s32 YS__PLAYER__is_changing(void*);
+void* sheet_ctor(void*) asm("_ZN2YS5SHEETC1Ev");
+void* func_001db5a8(void*);
+void func_001a0ee0(void*, void*);
+void func_00239700(void*);
+void* func_001ab810(void);  // get_global_1c7cec0
+void* font_get_image(void) asm("_ZN2YS4FONT8GetImageEv");
+void YI__SEQUENCE__Init(void*, void*, void*);
+s32 obj_is_attach(void*) asm("_ZN2YS3OBJ9is_attachEv");
+void* friend_get(s32) asm("_ZN2YS6FRIEND3GetEi");
+s32 obj_is_leave(void*) asm("_ZN2YS3OBJ8is_leaveEv");
+s32 func_001ca448(void*);  // type_is_16_44_161
+s32 mission_is_exec(void) asm("_ZN2YS7MISSION6IsExecEv");
+s32 mission_get_count(s32) asm("_ZN2YS7MISSION8GetCountEi");
+void func_00177dc8(void*, void*, s32, void*, void*);
+void YS__FIELD_COMMAND__set_minigame(void*, void*, s32);
+s32 func_001d7f10(s32);
+u8 sceVu0CopyVector(void*, void*);  // memcpy16
+u8* minigame_get_score(s32) asm("_ZN2YS8MINIGAME8GetScoreEi");
+s32 jiminy_is_full_open(void) asm("_ZN2Tz6Jiminy10isFullOpenEv");
+s32 select_get_current(void*) asm("_ZN2Tz6Select10GetCurrentEv");
+s32 menuflag_check(s32) asm("_ZN2YS8MENUFLAG5CheckEi");
+void func_001a6c90(s32);  // set_bit_in_array_b
+bool u_call4_00139d78(void*) asm("_Z16u_call4_00139d78jjjj");
+bool select_is_created(...) asm("_ZN2Tz6Select9isCreatedEz");
+s32 seq_get_loop_mode(void*, s32) asm("_ZN2YI8SEQUENCE11GetLoopModeEi");
+u8* jm_get_sram(s32) asm("_ZN2Tz9JmNewInfo7GetSramEv");
+u8 SE3D__calcSe(void*);
+s32 func_002bbc90(void*);
+s32 func_002bbbc8(void*);
+void area_free(void*) asm("_ZN4AREA4FreeEPv");
+void YS__OBJ_ATTACK__clear(void*);  // array8_free_slots
+void func_001c0248(void*);
+u8 func_00319fb0(void*);  // big_obj_dtor
+void func_002e70b0(void*);
+void LoadDataFree(...) asm("_ZN2Tz12LoadDataFreeEz");
+u8 func_002cea28(void*);
+void func_002d0ea8(void*);
+s32 func_003060f0(void);  // ee_intr_disabled
+void EIntr(void);  // ee_intr_get_enable
+void func_0031cd50(void*);
+void ctrl_sel(void) asm("_ZN2Tz4LMMU7CtrlSelEv");
+void sceVu0MulMatrix(u32, u32, u32, u32) asm("_Z15sceVu0MulMatrixjjjj");
+
+extern u8 D_0032b950[];
+struct Pair { u32 a, b; };
+extern Pair D_0034dca0;
+extern Pair D_0034dcb8;
+extern u8 D_01c60d10[];
+extern void* D_0034e948;
+extern void* D_01c61970[];
+extern u8 D_01c61b48[];
+extern void* D_01d49320;
+extern u8 D_003524b8[];
+extern u8 D_0036e3a8[];
+extern u8* D_003528f8;
+extern u8 D_00354bc0[];
+extern u8 D_00354be0[];
+extern u32 D_0035e370;
+extern u32 D_01dae420[3];
+extern void (*D_01dae41c)(u32);
+extern u32 D_0035e36c;
+extern void* D_0035ee34;
+extern u8 D_00372438[];
+extern void* D_0035f250;
+extern void* D_0035f258;
+extern void* D_0035f254;
+extern u8 D_0035f580;
+extern u8 D_0035f581;
+extern void* D_0035f57c;
+extern u8 D_00361980[];
+extern u8 D_003637e0[];
+extern u8 D_0034ee08[];
+extern u8 D_003625a8[];
+extern u8 D_003625e0[];
+extern s32 D_003660a8;
+extern s32 D_003660ac;
+extern u8 D_00347e40[];
+extern u8* D_00347f80;
+
+struct Allocator { void* (**vt)(Allocator*, u32, void*); };
+struct Obj { void (**vt)(Obj*); };
+
+// Allocates a 288-byte object from the allocator and initialises it.
+// 001024b0: moved to src/global/unit_001022c0.cpp
+
+// Counts objects that are not culled.
+s32 func_001182d0(void);  // 0x001182d0: definition moved into src/anon/unit_001182d0.cpp
+
+void kn__ModelMulti__getBoundingBox(void* a, void* b, void* c);  // 0x00123d40: definition moved into src/anon/unit_00123990.cpp
+
+void jumpEffectIn_task(void* task);  // 0x0013f450: definition moved into src/anon/unit_0013ef70.cpp
+
+void func_00140850(u8* p);  // 0x00140850: definition moved into src/anon/unit_0013fca8.cpp
+
+struct Ent28 { u8 flag; u8 id; u8 pad[26]; };
+struct EntList { u8 pad[8]; Ent28* ents; u8 pad2[8]; s32 count; };
+
+// Sets the flag of every entry with the given id.
+void func_00145c68(EntList* l, u8 id);  // 0x00145c68: definition moved into src/anon/unit_00145600.cpp
+
+// Finds the object with the given serial.
+void* func_0016b7a0(void* serial);  // 0x0016b7a0: definition moved into src/anon/unit_00169f98.cpp
+
+void func_00170ee8(s32 a, s32 b);  // 0x00170ee8: definition moved into src/anon/unit_0016e8f8.cpp
+
+void func_00171848(void** p);  // 0x00171848: definition moved into src/anon/unit_00170f58.cpp
+
+void func_00190a28(void* t, u8* o);  // 0x00190a28: definition moved into src/anon/unit_001900d0.cpp
+
+// 001922c8: moved to src/yasui/libys/message.cpp
+
+// 00198b88: moved to src/anon/unit_00198b88.cpp
+
+void func_0019ae60(u8* p);  // 0x0019ae60: definition moved into src/anon/unit_00199688.cpp
+
+s32 func_0019bf00(u8* o);  // 0x0019bf00: definition moved into src/anon/unit_0019ba60.cpp
+
+void* func_001a1018(void* a);  // 0x001a1018: definition moved into src/anon/unit_0019fb70.cpp
+
+// 001ac028: moved to src/anon/unit_001abb28.cpp
+
+// 001bbb50: moved to src/yasui/libys/mission.cpp
+
+// 001c0ce8: moved to src/anon/unit_001c0638.cpp
+s32 func_001c0ce8(u8* o);
+
+// Returns 1 if either friend has left.
+s32 func_001c9df8(void);  // 0x001c9df8: definition moved into src/yasui/libys/sacrifice.cpp
+
+s32 func_001cf560(u8* o);  // 0x001cf560: definition moved into src/anon/unit_001cf0b0.cpp
+
+s32 func_001cf998(void);  // 0x001cf998: definition moved into src/anon/unit_001cf0b0.cpp
+
+void func_001d1540(u8* o, void* a, void* b, void* c);  // 0x001d1540: definition moved into src/anon/unit_001d14e0.cpp
+
+u8* func_001d7ec8(s32 i);  // 0x001d7ec8: definition moved into src/anon/unit_001d7458.cpp
+
+struct DEnt { u8 pad[64]; void* val; u8* info; u8 pad2[24]; DEnt* next; };
+struct DList { u8 pad[12]; DEnt* head; };
+
+// Returns the value of the entry (optionally of a type) following `prev`.
+void* func_001de4b0(DList* l, s32 type, void* prev);  // 0x001de4b0: definition moved into src/anon/unit_001ddcf0.cpp
+
+u8 func_002007e0(u8* p, u8* q);  // 0x002007e0: definition moved into src/anon/unit_00200578.cpp
+
+void func_002349e8(void);  // 0x002349e8: definition moved into src/anon/unit_002335e8.cpp
+
+s32 func_0024ad50(void);  // 0x0024ad50: definition moved into src/anon/unit_00249ef0.cpp
+
+void ctrl_sel(void);  // 0x00250748: definition moved into src/anon/unit_0024fbd0.cpp
+
+bool func_0027f2b0(void);  // 0x0027f2b0: definition moved into src/anon/unit_0027f2b0.cpp
+
+s32 func_0028dd90(s32 x);  // 0028dd90: moved to src/anon/unit_0028c878.cpp
+
+u8 func_0028e6c0(u8* o, s32 i);  // 0028e6c0: moved to src/anon/unit_0028c878.cpp
+
+void func_00294550(void);  // 0x00294550: definition moved into src/anon/unit_00292e60.cpp
+
+// Sets bit i in the save-data bit array.
+void func_002aa450(u32 i);  // 0x002aa450: definition moved into src/anon/unit_002a99c8.cpp
+
+s32 func_002bbd58(u8* o);  // 0x002bbd58: definition moved into src/anon/unit_002bb8b0.cpp
+
+void func_002beea8(u8* o);  // 0x002beea8: definition moved into src/anon/unit_002bebd0.cpp
+
+u8 func_002cff98(u8* o);  // 0x002cff98: definition moved into src/anon/unit_002cf260.cpp
+
+u8 func_002d72e0(u8* o);  // 0x002d72e0: definition moved into src/anon/unit_002d6f70.cpp
+
+void func_002d96d8(u8* o);  // 0x002d96d8: definition moved into src/anon/unit_002d96d8.cpp
+
+// Hand-written VU0 routine: transforms four vectors by a 4x4 matrix.
+void sceVu0MulMatrix(u32 d, u32 m, u32 v, u32 n);  // 0x002f3d08: definition moved into src/sdk/libvu0_002f3cd8.s
+
+void __malloc_unlock(void);  // 0x002fdf30: definition moved into src/newlib/libc/mlock.c
+
+void func_0031ca20(u8* o);  // 0x0031ca20: definition moved into src/anon/unit_0031b9e0.cpp
+
+void func_0031ebb0(u8* o);  // 0x0031ebb0: definition moved into src/anon/unit_0031e268.cpp
+// Copy-constructs a block in place.
+void func_00323af8(W26Blk* d, const W26Blk* s);  // 0x00323af8: definition moved into src/anon/unit_00323978.cpp
+}

@@ -1,0 +1,61 @@
+#include "../common/types.h"
+static inline void vlerp(f32* d, f32* a, f32* b, f32 t) {
+    asm volatile("lqc2 $vf1, 0(%1)\n\tlqc2 $vf2, 0(%2)\n\tmfc1 $8, %3\n\tqmtc2 $8, $vf3\n\tvaddw.x $vf4, $vf0, $vf0w\n\tvsub.x $vf4, $vf4, $vf3\n\tvmulax.wxyz ACC, $vf2, $vf3x\n\tvmaddx.wxyz $vf1, $vf1, $vf4x\n\tsqc2 $vf1, 0(%0)" : : "r"(d), "r"(a), "r"(b), "f"(t) : "$8", "memory");
+}
+static inline void vnorm(f32* v) {
+    f32 len;
+    asm volatile("lqc2 $vf1, 0(%1)\n\tvmul.xyz $vf2, $vf1, $vf1\n\tvaddy.x $vf2, $vf2, $vf2y\n\tvaddz.x $vf2, $vf2, $vf2z\n\tvsqrt Q, $vf2x\n\tvwaitq\n\tcfc2.ni $8, $vi22\n\tvaddq.x $vf2, $vf0, Q\n\tmtc1 $8, %0\n\tvnop\n\tvdiv Q, $vf0w, $vf2x\n\tvwaitq\n\tvmulq.xyz $vf1, $vf1, Q\n\t.set noreorder\n\tsqc2 $vf1, 0(%1)\n\t.set reorder" : "=f"(len) : "r"(v) : "$8", "memory");
+}
+static inline void vouter(f32* d, f32* a, f32* b) {
+    asm volatile("lqc2 $vf1, 0(%1)\n\tlqc2 $vf2, 0(%2)\n\tvsub.wxyz $vf3, $vf0, $vf0\n\tvopmula.xyz ACC, $vf1, $vf2\n\tvopmsub.xyz $vf3, $vf2, $vf1\n\tsqc2 $vf3, 0(%0)" : : "r"(d), "r"(a), "r"(b) : "memory");
+}
+struct Vq285 {
+    f32 x, y, z, w;
+    Vq285& operator=(const Vq285& o) {
+        if (this != &o) asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(this), "r"(&o) : "$8", "memory");
+        return *this;
+    }
+} __attribute__((aligned(16)));
+static inline Vq285 lerp285(const Vq285& a, const Vq285& b, f32 t) {
+    Vq285 r;
+    asm volatile("lqc2 $vf1, 0(%1)\n\tlqc2 $vf2, 0(%2)\n\tmfc1 $8, %3\n\tqmtc2 $8, $vf3\n\tvaddw.x $vf4, $vf0, $vf0w\n\tvsub.x $vf4, $vf4, $vf3\n\tvmulax.wxyz ACC, $vf2, $vf3x\n\tvmaddx.wxyz $vf1, $vf1, $vf4x\n\tsqc2 $vf1, 0(%0)" : : "r"(&r), "r"(&a), "r"(&b), "f"(t) : "$8", "memory");
+    return r;
+}
+struct Loc285 { f32 a, b, c; s32 d; Vq285 v; };
+struct Obj285 { Vq285 v0, v10, v20, v30, v40; s32 f50; f32 f54; };
+struct TzObj285 { void (**vt)(TzObj285*); };
+extern "C" {
+void func_001256c0(f32 (*d)[4], f32 (*a)[4], f32 (*b)[4], f32 t);  // 0x001256c0: definition moved into src/anon/unit_00123990.cpp
+
+void YS__TARGET__make_collision(void*, Loc285*);
+Vq285* YS__OBJ__get_pos(s32);  // obj_get_attach_or_alt
+void func_001a7610(Vq285*, Vq285*, s32, f32, f32);
+void func_0016bd60(s32, s32);
+void worldmap__Warp__start(Obj285* o, s32 id, void* p);  // 0x2c6eb8: moved to src/anon/unit_002c6eb8.cpp
+
+
+
+extern TzObj285* D_0035f100;
+extern void* D_0035f10c;
+extern void* D_0035f110;
+extern u8 D_003738d8[];
+s32 func_00287cd0(void);
+s32 func_00287db0(void);
+s32 func_00139d78(void*);
+void func_0028ce38(void);
+void func_0026ebc0(void);
+s32 func_0028acc8(void*);
+s32 func_0028d008(s32);
+void Tz__MenuCursor__Create(s32, s32, s32, void*, s32, s32);
+s32 func_002891d0(void*);
+void Tz__MenuCursor__SetParent(s32, s32);  // record408_set_and_refresh
+s32 func_0028d6e8(void*);
+void Tz__LightCur__Create(void*, s32, s32, s32, void*, void*, s32);
+void func_0028d660(void*, s32);  // record_set_value_refresh
+s32 func_00287bc0(void);
+void Title__BootMcChk__SelDraw(void*, s32);
+void func_0028cdb8(s32);  // record408_alloc_init
+void func_0028d5d0(void*);
+void PauseTaskUpdate_impl(void) asm("_ZN2Tz15PauseTaskUpdateEv");
+void PauseTaskUpdate_impl(void);  // 0x0026e940: definition moved into src/anon/unit_0026c450.cpp
+}

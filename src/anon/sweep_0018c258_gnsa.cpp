@@ -1,0 +1,28 @@
+#include "../common/types.h"
+struct QW18c { f32 x, y, z, w;
+    QW18c() {}
+    QW18c(const QW18c& o) { asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(this), "r"(&o) : "$8", "memory"); }
+    QW18c& operator=(const QW18c& o) { if (this != &o) asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(this), "r"(&o) : "$8", "memory"); return *this; }
+} __attribute__((aligned(16)));
+static inline QW18c operator-(const QW18c& a, const QW18c& b) {
+    QW18c r;
+    asm volatile("lqc2 $vf1, 0(%1)\n\tlqc2 $vf2, 0(%2)\n\tvsub.wxyz $vf1, $vf1, $vf2\n\tsqc2 $vf1, 0(%0)" : : "r"(&r), "r"(&a), "r"(&b) : "memory");
+    return r;
+}
+static inline f32 Normalize18c(QW18c* v) {
+    f32 r;
+    asm volatile("lqc2 $vf1, 0(%1)\n\tvmul.xyz $vf2, $vf1, $vf1\n\tvaddy.x $vf2, $vf2, $vf2y\n\tvaddz.x $vf2, $vf2, $vf2z\n\tvsqrt Q, $vf2x\n\tvwaitq\n\tcfc2.ni $8, $vi22\n\tvaddq.x $vf2, $vf0, Q\n\tmtc1 $8, %0\n\tvnop\n\tvdiv Q, $vf0w, $vf2x\n\tvwaitq\n\tvmulq.xyz $vf1, $vf1, Q\n\tsqc2 $vf1, 0(%1)"
+                 : "=f"(r) : "r"(v) : "$8", "memory");
+    return r;
+}
+struct Obj18c {
+    u8 p0[2624]; s32 kind; s32 mode; s32 p2632; Obj18c* tgt; QW18c v2640; u8 p1[2688 - 2656]; QW18c v2688;
+};
+extern "C" {
+void YS__OBJ__get_dir(QW18c*, Obj18c*);
+QW18c* YS__OBJ__get_pos(Obj18c*);
+s32 func_0018c458(s32*);
+s32 ctarget_0019ba60_18c(Obj18c*) asm("_Z17YS__OBJ__is_existjjjj");
+extern Obj18c* D_0034e948;
+QW18c YS__NPC__get_rtn_action_dir(Obj18c* o);  // 0x0018c258: definition moved into src/yasui/libys/npc.cpp
+}

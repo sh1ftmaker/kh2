@@ -1,0 +1,62 @@
+#include "../common/types.h"
+
+struct W261A { int pad; };
+typedef int (W261A::*W261Pmf)();
+struct W261E { W261Pmf f; } __attribute__((aligned(8)));
+struct W261R { u32 pfn; int d; } __attribute__((aligned(8)));
+extern W261E D_00345ad0[];
+typedef int (*W261Fn)(void*);
+
+struct W261En { u8 id; u8 lv; u8 kind; u8 pad[33]; u16 req; u8 pad2[18]; };
+struct W261Tb { u32 x; s32 n; W261En e[1]; };
+extern W261Tb* D_01c6cb28;
+extern u8 D_0032bae0;
+union W261U { u32 v; u8 c; };
+struct W261Ent { W261U a; W261U b; W261U c; };
+struct W261Ring { W261U idx; u32 pad; W261Ent e[8]; };
+struct W261Src { u16 h0; u16 id; u8 pad[6]; u16 flag; };
+struct W261Inf { u8 pad[8]; u16 a; u16 b; u8 pad2[8]; u16 c; };
+extern W261Ring D_01c6cba0;
+extern void* D_0034e948;
+extern u32 D_0032dedc[];
+union W261Vf { u32 (*f)(void*); u8 c; };
+struct W261Act {
+    W261Vf* vt; u8 pad4[24]; f32 f28; u8 pad32[8]; f32 f40; f32 f44; u8 b48; u8 b49; u8 pad50[22];
+    u32 f72; f32 f76; u32 f80;
+};
+extern f32 D_00375d40;
+extern u8 D_00362bf8[];
+extern "C" {
+int func_0010cc80(void*);
+int func_001b58a8(void);
+int func_00112720(void*);  // check_2924_lt14
+
+int func_0010d188(W261A* p);  // 0x0010d188: definition moved into src/anon/unit_0010ce78.cpp
+
+s32 func_001a3570(u32);
+static inline W261En* W261Find(s32 id) {
+    W261Tb* t = D_01c6cb28;
+    W261En* e = t->e;
+    for (s32 i = 0; i < t->n; i++, e++) {
+        if (e->id == id) return e;
+    }
+    return 0;
+}
+// 001a6658: moved to src/yasui/libys/magic.cpp
+
+W261Inf* func_001a80c8(u32);  // table24_find_by_id
+u32 func_00192048(u32);
+u32 func_0016a070(void*);
+s32 YS__ITEM__WhereGet(u32, u32, u32);
+void YS__ITEM__Get(u32, s32, u32);
+u32 YS__TREASURE__TABLE___get(W261Src* s) asm("_Z25YS__TREASURE__TABLE___getjjjj");
+// 001a82f0: moved to src/anon/unit_001a82f0.cpp
+
+void func_002de698(u32);
+void func_0017f488(u8*, u32, f32, f32);
+s32 func_002ddbb8(u32);  // get_bit0_of_field2808
+void* func_0016b740(s32);
+void func_002e7568(void*, s32, void*, f32);
+void func_002dfe38(W261Act* o, u8* a1, u32 a2, u32 a3, f32 f);  // 0x002dfe38: definition moved into src/anon/unit_002de3c8.cpp
+
+}

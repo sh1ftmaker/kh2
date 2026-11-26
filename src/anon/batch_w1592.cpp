@@ -1,0 +1,81 @@
+#include "../common/types.h"
+
+struct Q1592 { u8 v[16] __attribute__((aligned(16))); Q1592() {} ~Q1592() {} };
+struct B1592 { u64 a, b, c, d; Q1592 q[2]; f32 f; B1592() {} };
+
+extern "C" {
+union U1592W { u32 w; u8 c; };
+union U1592H { u16 h; u8 c; };
+struct S1592 { u8 p0[4]; s16 n; u8 p6[8]; s16 e; u8 p10[6]; s16 m; u8 p18[0x10]; U1592W* a; U1592H* b; U1592H* c; };
+
+void func_00288ce0(S1592* s, u32 x, s32 i, u16* p, u16* q);  // 0x00288ce0: definition moved into src/anon/unit_00288b00.cpp
+
+void* func_00167f18(s32);
+void func_00323af8(B1592*, void*);
+s32 func_00288040(void);
+u64* func_00288008(void);
+
+s32 func_0028b258(u32 m);  // 0x0028b258: definition moved into src/anon/unit_00288b00.cpp
+
+struct E1592b { u16 id; u16 p[3]; };
+struct T1592b { s8 n; u8 pad[0x4f]; E1592b e[1]; };
+extern T1592b* D_0035f5d4;
+void Tz__JmDiagram__GetCharaIdx(void);
+s32 Tz__JmNewInfo__isCharaNew(u16);
+s32 func_002a9f50(u16);
+
+s32 Tz__JmDiagram__GetNewInfo(void);  // 0x002a1b18: definition moved into src/anon/unit_002a0908.cpp
+
+s32 func_002538f8(void*);
+s32 func_00253928(void*);
+s32 func_00253918(void);
+s32 Tz__CMData__BackRead(void*, s32);
+void func_00102448(void*, s32);
+
+s32 Tz__CmComm__DataLoadWait(void* a, void* t);  // 0x002593b8: definition moved into src/anon/unit_002588e8.cpp
+
+
+s32 func_00287bc0(void);
+u32 func_00257070(s32);
+s32 Tz__CmNewFlg__isStatNew(s32);
+void func_002865d0(s32);
+
+void Tz__CmStat__UpdateTopNew(void);  // 0x00266b58: definition moved into src/anon/unit_00265580.cpp
+
+
+struct O1592 { u8 p[0x188]; s32 v; };
+struct S1592b { u8 p0[0x28]; O1592** a; s16 (*b)[4]; s16 (*c)[4]; };
+void func_00138c10(O1592*, s32);
+
+void func_00289038(S1592b* s, s32 i, u8 sel, u8 f1, s32 x, u8 f2, s32 y);  // 0x00289038: definition moved into src/anon/unit_00288b00.cpp
+
+
+extern s8 D_0035f0b5;
+s32 func_00257130(void);
+void func_00282240(s32, s32, s32);
+void Tz__ItemInfo__SortItemInfo(s32);
+
+void func_002634d8(s32 a);  // 0x002634d8: definition moved into src/anon/unit_002632d0.cpp
+
+}
+
+// ---- 002a4d48: frees two owned buffers (array delete of 436-byte polymorphic elements)
+namespace n002a4d48 {
+struct Heap { void (**vt)(Heap*, void*); };
+struct HeapHolder { u8 pad[20]; Heap* heap; };
+extern "C" HeapHolder* D_00347f80;
+struct El {
+    virtual void v0();
+    virtual void v1();
+    virtual void v2();
+    virtual ~El();
+    u8 pad[432];
+    static void operator delete[](void* p) { D_00347f80->heap->vt[1](D_00347f80->heap, p); }
+};
+extern "C" {
+extern void* D_0035f5ec;
+extern El* D_0035f5f0;
+void func_00106420(void*);
+void func_002a4d48(void);  // 0x002a4d48: definition moved into src/anon/unit_002a40c8.cpp
+}
+}

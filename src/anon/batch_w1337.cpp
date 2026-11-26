@@ -1,0 +1,85 @@
+#include "../common/types.h"
+// VU0 vector/matrix helpers (inline asm: the original uses the VU0 macro library).
+#define QCOPY1337(d, s) asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(d), "r"(s) : "$8", "memory")
+#define QCOPY4_1337(d, s) asm volatile("lq $8, 0(%1)\n\tlq $9, 16(%1)\n\tlq $10, 32(%1)\n\tlq $11, 48(%1)\n\tsq $8, 0(%0)\n\tsq $9, 16(%0)\n\tsq $10, 32(%0)\n\tsq $11, 48(%0)" : : "r"(d), "r"(s) : "$8", "$9", "$10", "$11", "memory")
+struct QV1337 {
+    f32 x, y, z, w;
+    QV1337() {}
+    QV1337(const QV1337& o) { QCOPY1337(this, &o); }
+    QV1337& operator=(const QV1337& o) { if (this != &o) QCOPY1337(this, &o); return *this; }
+} __attribute__((aligned(16)));
+struct QM1337 {
+    QV1337 r[4];
+    QM1337() {}
+    QM1337(const QM1337& o) { QCOPY4_1337(this, &o); }
+    QV1337 operator*(const QV1337& v) const {
+        QV1337 o;
+        asm volatile("lqc2 $vf5, 0(%2)\n\tlqc2 $vf1, 0(%1)\n\tlqc2 $vf2, 16(%1)\n\tlqc2 $vf3, 32(%1)\n\tlqc2 $vf4, 48(%1)\n\tvmulax.wxyz ACC, $vf1, $vf5x\n\tvmadday.wxyz ACC, $vf2, $vf5y\n\tvmaddaz.wxyz ACC, $vf3, $vf5z\n\tvmaddw.wxyz $vf5, $vf4, $vf5w\n\tsqc2 $vf5, 0(%0)" : : "r"(&o), "r"(this), "r"(&v) : "memory");
+        return o;
+    }
+    void invOrtho() {
+        asm volatile("lq $8, 0(%0)\n\tlq $9, 16(%0)\n\tlq $10, 32(%0)\n\tqmfc2 $11, $vf0\n\tlqc2 $vf4, 48(%0)\n\t"
+            "pextlw $12, $9, $8\n\tpextuw $13, $9, $8\n\tpextlw $14, $11, $10\n\tpextuw $15, $11, $10\n\t"
+            "pcpyld $8, $14, $12\n\tpcpyud $9, $12, $14\n\tpcpyld $10, $15, $13\n\t"
+            "qmtc2 $8, $vf1\n\tqmtc2 $9, $vf2\n\tqmtc2 $10, $vf3\n\t"
+            "vmulax.xyz ACC, $vf1, $vf4x\n\tvmadday.xyz ACC, $vf2, $vf4y\n\tvmaddz.xyz $vf4, $vf3, $vf4z\n\tvsub.xyz $vf4, $vf0, $vf4\n\t"
+            "sq $8, 0(%0)\n\tsq $9, 16(%0)\n\tsq $10, 32(%0)\n\tsqc2 $vf4, 48(%0)" : : "r"(this) : "$8", "$9", "$10", "$11", "$12", "$13", "$14", "$15", "memory");
+    }
+} __attribute__((aligned(16)));
+struct Seg1337 {
+    QV1337 p0, p1;
+    void set(const QV1337& a, const QV1337& b) { p0 = a; p1 = b; p1.w = 1.0f; p0.w = 1.0f; }
+};
+struct Hit1337 { u8 pad[16]; };
+struct CollInfo1337 { u8 pad[0x12]; u8 enable : 1; u8 : 7; u8 pad13[0x15]; u8 height28; };
+struct Obj1337 {
+    u32 pad0;
+    union { struct { u32 b0 : 1, b1 : 1, b2 : 1, b3 : 1, b4 : 1, b5 : 3, b8 : 1, : 23; }; u32 flags; };
+    u8 pad8[0x20];
+    CollInfo1337* coll;
+    bool isB3() { if (flags & 8) return true; return false; }
+    bool isB4() { if (flags & 0x10) return true; return false; }
+    bool isB1() { if (flags & 2) return true; return false; }
+    bool isBusy() { return isB3() || isB4(); }
+};
+extern "C" {
+
+
+struct BoxVec1337 {
+    f32 x, y, z, w;
+    };
+struct Box1337 { f32 v[6]; };
+struct ObjData1337 { s32 w[6]; };
+struct Model1337 { void** vtbl; };
+static inline void BoxVecSet1337(BoxVec1337* v, f32 x, f32 y, f32 z, f32 w) { v->x = x; v->y = y; v->z = z; v->w = w; }
+typedef void (*GetBoundsFn1337)(Model1337*, BoxVec1337*, BoxVec1337*);
+
+s32 JmInfo_GetCharaData(u32) asm("_ZN2Tz6JmInfo12GetCharaDataEj");
+s32 func_0016f6f8(s32);
+void YS__OBJDATA__clear(ObjData1337*);
+void func_001a92d8(ObjData1337*, s32, s32);
+Model1337* ObjData_get_knm(ObjData1337*) asm("_ZN2YS7OBJDATA7get_knmEv");
+void ObjData_free(ObjData1337*) asm("_ZN2YS7OBJDATA4freeEv");
+void Aabbox_ctor(Box1337*, const BoxVec1337*, const BoxVec1337*) asm("_ZN2dk6AabboxC1ERKN2kn7FVectorES4_");
+
+Box1337* func_002d0718(Box1337* out, s32* chara);  // 0x002d0718: definition moved into src/anon/unit_002cf260.cpp
+
+
+extern u8* D_00361f60;
+void BtlObj_pre_exec(void*) asm("_ZN2YS6BTLOBJ13_OVR_pre_execEv");
+s32 Obj_is_attach(void*) asm("_ZN2YS3OBJ9is_attachEv");
+void Obj_set_pos(void*, const QV1337*) asm("_ZN2YS3OBJ7set_posERKN2kn7FVectorE");
+QV1337* YS__OBJ__get_pos(void*);
+QM1337* func_002d1f10(u8*);
+QM1337* func_002d1f00(u8*);
+void YS__OBJ__set_wish_dir(void*, QV1337*);
+
+void func_002d5f48(u8* self);  // 0x002d5f48: definition moved into src/anon/unit_002d4548.cpp
+
+
+s32 dk__Octree__intersectLine(Seg1337*, Hit1337*, u16*, s32*, s32);
+void func_0018ddc0(Obj1337*, u16, Hit1337*, s32*);
+
+s32 func_0018dc28(Obj1337* self, const QV1337* from, const QV1337* to);  // 0x0018dc28: definition moved into src/anon/unit_0018d050.cpp
+
+}

@@ -1,0 +1,51 @@
+#include "../common/types.h"
+
+struct O25;
+struct O25V { u8 pad[20]; void (*f)(O25*); };
+struct O25 { O25V* vt; u8 pad[384]; s32 id; };
+struct V2a { u8 pad[4]; void (*f)(void*); };
+
+extern "C" {
+u32 func_00287bc0(void);
+u32 func_0028b040(u32);
+void func_002b6338(u32, u32, u32, u32);
+u32 Tz__CMenuHelp__Create_2(u32, u32);
+u32 func_00263a58(u32, u32);
+u32 func_00263d28(void);
+extern u32 D_0035f64c;
+extern u32 D_0035f6c4;
+extern u16 D_00372f40[];
+
+u32 func_0025d560(void);  // 0x0025d560: definition moved into src/anon/unit_002588e8.cpp
+
+u32 func_002424a0(void);
+void func_0028e560(s32, u16*, s32, s32);
+extern u16 D_0035f090;
+extern u16 D_0035f094;
+
+void Tz__CmComm__SetDrawMunnies(s32 a) asm("_Z12func_00258df0i");
+void Tz__CmComm__SetDrawMunnies(s32 a);  // 0x00258df0: definition moved into src/anon/unit_002588e8.cpp
+
+s32 func_00139d78(O25*);
+void func_00138c10(O25*, s32);
+void func_0028d8c0(O25*, s32, s32, s32, s32, s32, s32, s32);
+extern O25* D_0035f07c;
+extern s32 D_0035f078;
+
+void Tz__Pause__CreateBg(s32 a);  // 0x002588e8: definition moved into src/anon/unit_002588e8.cpp
+
+void func_00106420(void*);
+void func_0031acc0(u8*);
+void func_0031abd8(u8*);
+void func_00239870(u8*);
+extern u8 D_00347e60;
+extern u8 D_00347f98;
+extern void* D_0035f5d4;
+extern u8* D_0035f5d8;
+extern V2a** D_0035f5dc;
+extern u8 D_0035f5e0;
+extern u8 D_0035f5e1;
+
+// Frees the three globals and clears two flags; the middle object's destructor is inlined.
+void Tz__JmDiagram__Exit(void);  // 0x002a06b8: definition moved into src/anon/unit_0029f938.cpp
+}

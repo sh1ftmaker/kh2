@@ -4,7 +4,7 @@
 write_all(summary, roadmap) writes:
   site/badges/progress-light.svg, progress-dark.svg   the overview card in the README
   site/data/badge-code.json, badge-functions.json, badge-elf.json
-  site/data/badge-structural.json                     only when structural progress is measured
+  site/data/badge-structural.json                     only when built from source is measured
   README.md, CLAUDE.md   the text between <!-- status:start --> and <!-- status:end -->, and
                          the badges and overview card between <!-- assets:start --> and
                          <!-- assets:end --> (a file or marker that is missing is skipped)
@@ -66,13 +66,13 @@ def card(summary, theme):
     head = 118
     H = head + 34 + row * len(rows) + 46 + row * len(bins) + pad
     o = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}" role="img" '
-         f'aria-label="Kingdom Hearts II Final Mix decompilation: {pct(t["code_matched"], t["code"])} of the code matched">',
+         f'aria-label="Kingdom Hearts II Final Mix decompilation: {pct(t["code_matched"], t["code"])} of the code decompiled">',
          f'<rect width="{W}" height="{H}" rx="14" fill="{c["bg"]}" stroke="{c["line"]}"/>',
          '<g font-family="ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif">']
     o.append(f'<text x="{pad}" y="38" font-size="13" font-weight="600" letter-spacing="1.6" fill="{c["ink3"]}">'
              f'KINGDOM HEARTS II FINAL MIX · PLAYSTATION 2 · SLPM_666.75</text>')
     big = pct(weighted, t["code"]) if weighted is not None else pct(t["code_matched"], t["code"])
-    label = "structural progress" if weighted is not None else "of the code matched"
+    label = "built from source" if weighted is not None else "of the code decompiled"
     o.append(f'<text x="{pad}" y="84" font-size="40" font-weight="700" fill="{c["ink"]}">{big}</text>')
     sub = (f'{label} · {num(t["code_matched"])} of {num(t["code"])} bytes matched · '
            f'{num(t["fns_matched"])} of {num(t["fns"])} functions')
@@ -124,13 +124,12 @@ def status_text(summary):
     game = next(r for r in summary["regions"] if r["id"] == "game")
     sdk = summary["libraries"]
     s = (f"Status ({day}, written by `tools/site_data.py`): {num(t['fns_matched'])} of {num(t['fns'])} functions, "
-         f"{num(t['code_matched'])} of {num(t['code'])} bytes of code matched ({pct(t['code_matched'], t['code'])})")
-    if t.get("code_weighted") is not None:
-        s += (f"; structural progress {pct(t['code_weighted'], t['code'])} ({num(t['code_weighted'])} bytes, matched code "
-              f"plus partial credit for {num(t['fns_structural'] - t['fns_matched'])} structurally matched functions)")
-    if t.get("fns_written") is not None:
-        s += (f"; {num(t['fns_written'])} functions are written ({pct(t['code_written'], t['code'])} of the code), "
-              f"{pct(t['code_weighted_all'], t['code'])} counting each by how closely it matches")
+         f"{num(t['code_matched'])} of {num(t['code'])} bytes of code decompiled to C/C++ ({pct(t['code_matched'], t['code'])})")
+    if t.get("fns_built") is not None:
+        s += (f"; all {num(t['fns_built'])} are built from source and the executable is byte-identical, but "
+              f"{num(t['fns_built'] - t['fns_matched'])} still use assembly or a register pin")
+    if t.get("fns_named") is not None:
+        s += (f"; {num(t['fns_named'])} functions ({pct(t['code_named'], t['code'])} of the code) carry a real name")
     s += ". By function size: " + ", ".join(f"{b['label']} {pct(b['cm'], b['c'])}" for b in summary["bins"]) + ". "
     s += (f"Game code {num(game['fm'])} / {num(game['f'])} functions ({pct(game['cm'], game['c'])} of its bytes; "
           + ", ".join(f"{l['n']} {pct(l['cm'], l['c'])}" for l in game["libs"]) + "); "
@@ -167,12 +166,12 @@ def assets_markdown(summary):
                 f'&style=flat-square"></a>')
     rows = []
     if t.get("code_weighted") is not None:
-        rows.append(shield("Structural progress", "badge-structural"))
-    rows += [shield("Matched code", "badge-code"), shield("Functions matched", "badge-functions"),
+        rows.append(shield("Built from source", "badge-structural"))
+    rows += [shield("Decompiled to C/C++", "badge-code"), shield("Functions matched", "badge-functions"),
              shield("SLPM_666.75 rebuilt byte-identical", "badge-elf"),
              f'  <a href="{REPO}/actions/workflows/pages.yml"><img alt="Pages" src="https://img.shields.io/github/actions/'
              f'workflow/status/sh1ftmaker/kh2/pages.yml?branch=matching&style=flat-square&label=site"></a>']
-    alt = (f"Progress overview: {pct(t['code_matched'], t['code'])} of the code matched, with a bar for each "
+    alt = (f"Progress overview: {pct(t['code_matched'], t['code'])} of the code decompiled, with a bar for each "
            "source directory of the original tree, the SDK, and each function-size band")
     return ('<p align="center">\n' + "\n".join(rows) + '\n</p>\n\n'
             f'<a href="{SITE}">\n<picture>\n'
@@ -194,7 +193,7 @@ def write_all(summary, roadmap=None):
     for theme in THEMES:
         (BADGES / f"progress-{theme}.svg").write_text(card(summary, theme))
     out = {
-        "badge-code.json": badge("matched code", pct(t["code_matched"], t["code"]), "3aae5c"),
+        "badge-code.json": badge("decompiled code", pct(t["code_matched"], t["code"]), "3aae5c"),
         "badge-functions.json": badge("functions", f"{num(t['fns_matched'])} / {num(t['fns'])}", "ef5b52"),
         "badge-elf.json": badge(summary.get("target", "ELF"),
                                 {True: "byte-identical", False: "MISMATCH", None: "not verified"}[t.get("elf_ok")],
@@ -202,7 +201,7 @@ def write_all(summary, roadmap=None):
     }
     stale = DATA / "badge-structural.json"
     if t.get("code_weighted") is not None:
-        out["badge-structural.json"] = badge("structural progress", pct(t["code_weighted"], t["code"]), "d29a2e")
+        out["badge-structural.json"] = badge("built from source", pct(t["code_weighted"], t["code"]), "d29a2e")
     elif stale.exists():
         stale.unlink()
     for name, b in out.items():

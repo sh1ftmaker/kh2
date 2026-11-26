@@ -1,0 +1,191 @@
+#include "../common/types.h"
+
+// Batch w15: small wrappers, destructors, list searches and leaf helpers.
+
+struct Q16 { u32 w[4]; } __attribute__((aligned(16)));
+
+extern "C" {
+
+struct Node38 { u32 key; u8 _4[52]; Node38* next; };
+struct List8 { u32 _0; u32 _4; Node38* head; };
+// 00102a38: moved to src/global/unit_001022c0.cpp
+
+extern u8 D_00346b08;
+void func_00113668(void*);
+void func_00105110(void*);
+void func_00114f38(void** self);  // 0x00114f38: definition moved into src/anon/unit_00114a90.cpp
+
+void func_0011b6a8_impl(void* dst) asm("_Z13func_0011b6a8Pv");
+extern Q16 D_003478f0[4];
+void func_0011b6a8_impl(void* dst);  // 0x0011b6a8: definition moved into src/anon/unit_0011b3f8.cpp
+
+extern u8 D_00347bd8;
+void func_00124c08(void*);  // set_vtbl_347b88
+void func_00106420(void*);
+void func_00131770(void** self);  // 0x00131770: definition moved into src/anon/unit_00131418.cpp
+
+struct Chunk { s16 type; u16 _2; u32 _4; u32 offs[1]; };
+void* func_00132068(Chunk* c, int i);  // 0x00132068: definition moved into src/anon/unit_00131418.cpp
+
+int obj_is_exist_00139768(void*) asm("_Z13func_00139768jjjjjjjj");
+void func_001394c0(void*);
+void func_00102750(u32);
+extern u32* D_00347f80;
+void func_001394d8(void* p);  // 0x001394d8: definition moved into src/anon/unit_001393c8.cpp
+
+int func_00141970(void*, u32);  // vtable_get12
+void func_001450e8(void*, int, u32);
+void func_00142900(u8* p, u32 a, u32 b);  // 0x00142900: definition moved into src/anon/unit_00141458.cpp
+
+int func_00139d78(void*);
+void dk__TIMER__close(void*);
+void func_0014f830(void* p);  // 0x0014f830: definition moved into src/anon/unit_0014ecb8.cpp
+
+void dk__Sprite__create(u8*, u32, u32, u32, u32, u32);
+// 00158050: moved to src/anon/unit_00158050.cpp
+
+void func_00144450(void*);
+void func_001616d8(void*);
+void func_001614e8(u8* p, u32 v);  // 0x001614e8: definition moved into src/anon/unit_001614e8.cpp
+
+void func_001666a0(void*);  // zero_fields_0_4_6_8
+void func_00166930(u8* p);  // 0x00166930: definition moved into src/anon/unit_001664c0.cpp
+
+void* func_001dc670(u32);
+// 0016e500: moved to src/anon/unit_0016d2e0.cpp
+
+// 00180dc0: moved to src/anon/unit_00180408.cpp
+
+struct Node2c { u32 _0; u32 _4; u32 flags; u8 _c[32]; Node2c* next; };
+// 00180ef0: moved to src/anon/unit_00180408.cpp
+
+void set_flag_impl(void* self, int) asm("_ZN2YS13TEST_PROGRESS8set_flagEi");
+void func_00181178(u32);
+extern u8 D_0032bb30[];
+// 00181a90: moved to src/yasui/libys/progress.cpp
+
+u32 func_001b58f0(u32, u32, u32, u32);
+void func_0018fee8(u32* p);  // 0x0018fee8: definition moved into src/anon/unit_0018f140.cpp
+
+struct Pair12 { u32 a; u32 b; u32 c; };
+Pair12* func_0019f5d8(Pair12* e, u32 a, u32 b);  // 0x0019f5d8: definition moved into src/anon/unit_0019ee80.cpp
+
+void func_0016bd60(void*, u32);
+// 001a2a18: moved to src/anon/unit_001a28f8.cpp
+
+void* func_001a3a78(void*);
+void ryj__PAX__start(void*, u32, u32, u32, u32, void*);  // scan_list_by_half
+void YS__LEVELUP__ShowEffect(void* p);  // 0x001b7428: definition moved into src/anon/unit_001b6a50.cpp
+
+extern u32 D_003511bc;
+extern u8 D_003511c2;
+extern u32 D_003511b8;
+extern u32 D_01d48cb8;
+void func_001b8258(void);  // 0x001b8258: definition moved into src/anon/unit_001b6a50.cpp
+
+int func_001bb4a0(void);
+u8* func_001bbcb0(void);
+// 001bbec0: moved to src/yasui/libys/mission.cpp
+
+void func_001c6fa8(u8*, u32, u32, u32, u32);
+void func_001ca988(u8* p, u32 a1, u32 a2, u32 a3, u32 a4, u32 x);  // 0x001ca988: definition moved into src/anon/unit_001ca8e0.cpp
+
+// Destructor: reset vtable, clear the global instance pointer, destroy base, free.
+extern u8 D_00352060;
+extern void* D_00352050;
+void func_001a4e30(void*);
+// 001cc0e8: moved to src/anon/unit_001cc048.cpp
+
+u8 func_002fd248(u32, void*, u32, u32, void*);
+extern u8* D_01d5ba00;
+extern u8 D_00321688;
+u8 func_001d22a8(u32 a);  // 0x001d22a8: definition moved into src/anon/unit_001d14e0.cpp
+
+extern u8* D_01d5ba70;
+extern u8 D_003217a0;
+u8 func_001d5b78(u32 a, u32 b);  // 0x001d5b78: definition moved into src/anon/unit_001d4f40.cpp
+
+void wtarget_impl(u32, u32, u32, u32) asm("_Z16wtarget_001e0348jjjj");
+struct W2 { u32 a; u32 b; };
+extern W2 D_01d9e348;
+void wtarget_impl(u32 a, u32 b, u32, u32);  // 0x001e0348: definition moved into src/anon/unit_001deb58.cpp
+
+void ryj__LAST_XEMNUS_LASER__setup(void*);
+void func_001e1ce0(u8* p);  // 0x001e1ce0: definition moved into src/anon/unit_001e0cb8.cpp
+
+void sceGsSyncPath(u32, u32);
+u8 func_002f3918(u32, void*);
+extern u32 D_003591c8;
+extern u8 D_00359910;
+u8 func_0020f150(void);  // 0x0020f150: definition moved into src/anon/unit_0020f118.cpp
+
+void func_00234460(u32, u32, u32, u32, u32, u32);
+void func_002346f0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4);  // 0x002346f0: definition moved into src/anon/unit_002335e8.cpp
+
+struct Ent20 { u32 _0; u32 b; u32 _8; u32 c; u32 _10; };
+struct Tbl { u32 _0; u32 _4; Ent20* ents; u32* idx; };
+void func_002374c8(Tbl* t, int i, int j, u32 v);  // 0x002374c8: definition moved into src/anon/unit_00237068.cpp
+
+extern u32 D_0035eb88;
+extern u32 D_0035eb8c;
+extern u8 D_0035eb84;
+void func_0023edb0(u32 x);  // 0x0023edb0: definition moved into src/anon/unit_0023e5d0.cpp
+
+void strlen(u32);  // strlen
+void func_002346a0(s32, u32, u32);
+extern u32 D_0035ec88;
+extern s8* D_0035ec94;
+void func_00241528(void);  // 0x00241528: definition moved into src/anon/unit_0023f5b8.cpp
+
+extern u32 D_0035ee80;
+extern u32 D_0035ee5c;
+u8 func_00139d78_u8(u32) asm("func_00139d78");
+u8 func_0028acc8(u32);
+int func_002519d0(void);  // 0x002519d0: definition moved into src/anon/unit_00250fb8.cpp
+
+typedef void (*VFn)(void*);
+void func_002878c8(void*);
+u8 func_0023f848(void*);
+u8 func_00287760(u8* p);  // 0x00287760: definition moved into src/anon/unit_00286d28.cpp
+
+extern u16 D_0035f470[3];
+void func_0028f4a0(u16* src);  // 0028f4a0: moved to src/anon/unit_0028f1e0.cpp
+
+void SetMsgId_impl(void* self, int id, int) asm("_ZN2Tz7SelHist8SetMsgIdEii");
+u32 get_msg_00192048(int) asm("_Z16u_tail4_00192048jjjj");
+void set_msg_0028fb68(void*, u32) asm("_ZN2Tz7SelHist6SetMsgEiPKN2YS7MESSAGEE");
+// 0028fb28: moved to src/anon/unit_0028f1e0.cpp
+
+u32 func_002c1b48(void*);
+u32 func_001c2b58(u32);
+void func_002c1b60(void*, u32);
+void func_002c1c50(void* p);  // 0x002c1c50: definition moved into src/anon/unit_002c10e0.cpp
+
+extern u8 D_003621a0;
+void func_002e7328(void*);  // to_2e7458
+u8 func_002d2a08(void*);
+u8 func_002d47a8(void** self);  // 0x002d47a8: definition moved into src/anon/unit_002d4548.cpp
+
+void func_0016a9a0(void*);  // to_16a950
+void Ti__MGHachimitsuPod__set_run_effect(void*, s32);
+void func_002db7d0(u8* p);  // 0x002db7d0: definition moved into src/anon/unit_002da040.cpp
+
+void func_002e9fe0(u32, u32, void*);
+void func_002e8038(u32* p);  // 0x002e8038: definition moved into src/anon/unit_002e7b10.cpp
+
+u8 YS__OBJ__can_lockon(void*);
+u8 func_002e9c58(u8* a, u8* b);  // 002e9c58: moved to src/anon/unit_002e9a00.cpp
+
+extern u8 D_00367860;
+void func_003167f8(void*);  // set_vtbl_367910
+u8 func_00106420_u8(void*) asm("func_00106420");
+u8 func_00315678(void** self);  // 0x00315678: definition moved into src/libsupc++/tinfo.cpp
+
+extern u8 D_003512e8;
+void func_0016a358(void*);
+void func_003207c8(void** self);  // 0x003207c8: definition moved into src/anon/unit_00320528.cpp
+
+struct Ent8 { u16 id; u16 _2; u32 _4; };
+Ent8* func_00320c18(u8* p, u32 id);  // 0x00320c18: definition moved into src/anon/unit_00320528.cpp
+
+}

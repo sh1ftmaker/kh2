@@ -1,0 +1,97 @@
+#include "../common/types.h"
+#define QCOPY142(d, s) asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(d), "r"(s) : "$8", "memory")
+struct QV142 {
+    f32 x, y, z, w;
+    QV142() {}
+    QV142(const QV142& o) { QCOPY142(this, &o); }
+    QV142& operator=(const QV142& o) {
+        if (this != &o) QCOPY142(this, &o);
+        return *this;
+    }
+} __attribute__((aligned(16)));
+struct Seg142 {
+    QV142 a, b;
+    Seg142(const QV142& p, const QV142& q) { a = p; b = q; }
+};
+static inline f32 clamp142(f32 v, f32 lo, f32 hi) { if (v < lo) return lo; if (hi < v) return hi; return v; }
+
+extern "C" {
+
+struct Fog15c { u8 r, g, b, a; f32 near, far, fmin, fmax; };
+struct Cfg15c { u8 pad[0x44]; Fog15c fog; };
+extern Cfg15c D_004f3700;
+extern Cfg15c D_004f36a8;
+extern Cfg15c D_004f3650;
+void func_0015cbb8(s32, s32, s32, s32);
+void func_0015c4b8(void);
+void func_0015cc18(s32, s32, s32, s32, s32);
+s32 func_0015cc80(Fog15c*);  // test_float12_zero_and_bits
+void func_0010a8a8(f32, f32);  // store_global_float_pair
+void func_0010a828(f32, f32);
+void func_0010a7d8(u8, u8, u8);  // store_triple_bytes
+void func_001dd1e8(u8, u8);
+void func_001dd1b0(f32, f32);  // to_1e7018
+void func_001dd1c8(u8, u8, u8);  // to_1e7030_masked
+
+void func_0015c500(void);  // 0x0015c500: definition moved into src/anon/unit_0015bab8.cpp
+
+
+struct G2ad { u8 pad[320]; u32 bits[4]; };
+extern s32 D_0035f628;
+extern s32 D_0035f620;
+extern s32 D_0035f62c;
+u8* func_001058e8(void);
+s32 Tz__JmSynthe__isEnableRecipe(void);
+s32 Tz__JmSynthe__isEnableMaterial(void);
+
+static inline s32 tb2ad(u32* base, u32 n) { return base[n >> 5] & (1 << (n & 31)); }
+static inline void sb2ad(u32* base, u32 n) { u32 m = 1 << (n & 31); u32* p = base + (n >> 5); *p |= m; }
+static inline s32 cnt2ad(u8* s, s32 off, s32 n)
+{
+    s32 c = 0;
+    s32 j;
+    for (j = 0; j < n; j++) if (tb2ad((u32*)(s + off), j)) c++;
+    return c;
+}
+
+void Tz__JmComplete__CheckSynthesis(void);  // 0x002add90: definition moved into src/anon/unit_002a99c8.cpp
+
+extern s32 D_0035f650;
+s32 func_00289380(s32);
+s32 func_00287cd0(void);
+s32 func_0028acc8(s32);
+s32 func_00289310(s32);
+void func_00287f90(s32);
+void func_0028abe0(s32);
+void func_00287c30(void);
+void func_0025d560(void);
+s32 func_0028ae28(s32, s32);
+void func_0028ab20(s32);
+void func_00287cc0(s32);
+s32 func_00287df0(s32, s32, s32, s32, s32);
+s32 func_00242848(s32);
+void func_0028aa40(s32);
+void func_00287c00(s32);
+void func_0025ccc0(void);
+void func_00287bd0(s32, s32);
+
+void Tz__CmSave__CtrlWMapConfirm(void);  // 0x0025caf0: definition moved into src/anon/unit_002588e8.cpp
+
+struct K231 { u8 b[16]; };
+struct H231 { u8 pad[6]; struct { u16 start, count; } ch[8]; u8 pad2[40 - 38]; K231 keys[1]; };
+extern u8 D_0035de90[8][32];
+f32 func_00230f10(K231*, s32, void*, f32);
+
+void sa__EVENT__calcValue_enc(f32* out, H231* h, f32 t);  // 0x002311c0: definition moved into src/anon/unit_002302c0.cpp
+
+struct Obj142 {
+    u8 pad[20]; f32 rad; u8 pad2[48 - 24]; QV142 pos; u8 pad3[104 - 64]; f32 f104; f32 h;
+    u64 lo : 3; u64 kind : 4; u64 mid : 26; u64 miss : 1; u64 hi : 30;
+};
+f32 fabsf(f32);  // fabsf
+void func_00141c18(void*, s32, s32, s32, s32);
+s32 func_00141ff0(void*, Seg142*, QV142*, s16*, s32);
+void func_001419f8(void*, u16, Obj142*, QV142);
+
+s32 func_001424c0(void* self, Obj142* o);  // 0x001424c0: definition moved into src/anon/unit_00141458.cpp
+}

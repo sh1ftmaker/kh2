@@ -1,0 +1,333 @@
+#include "../common/types.h"
+
+// 128-bit copy (lq/sq through t0).
+#define QCOPY(d, s) asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(d), "r"(s) : "$8", "memory")
+
+// A local of this type keeps gcc from turning the final call into a sibling call.
+struct NoTail { ~NoTail() {} };
+
+// Word accessed through a union: gcc treats it as aliasing everything, which
+// reproduces the reloads / ordering the original shows at these sites.
+union Word { f32 f; u32 u; };
+
+// 16-byte aligned vector; assignment copies a quadword unless self-assigned.
+struct Vec4 {
+    f32 x, y, z, w;
+    Vec4& operator=(const Vec4& o) {
+        if (this != &o) QCOPY(this, &o);
+        return *this;
+    }
+} __attribute__((aligned(16)));
+
+extern "C" {
+
+// --- 00100228
+// crt0 helper: zero [v0, v1) (bytes up to 16-byte alignment, then quadwords,
+// then the tail). Hand-written assembly: register inputs v0/v1, sq loop.
+void func_00100228(void);  // 0x00100228: definition moved into src/anon/unit_00100228.cpp
+
+// --- 00105550
+// setjmp: saves gp/sp/fp/ra/s0-s7 (128-bit) and f20-f31. Hand-written assembly.
+int func_00105550(void* jb);  // 0x00105550: definition moved into src/anon/unit_00105550.cpp
+
+// --- 0010ab08
+extern u8 D_00341060[];
+extern u8 D_00341270[];
+extern u8 D_00341480[];
+void func_001342c8(void*, int, u32);
+void func_0010ab08(int n);  // 0010ab08: moved to src/anon/unit_0010a918.cpp
+
+// --- 0014ba20
+// Constructor: base ctor, vtable, then two GS register packets.
+extern u64 D_0036b0d8;
+extern void* D_00349da8[];
+void dk__RectBase__createPacket(u8*);
+void func_0014ba20(u8* p);  // 0x0014ba20: definition moved into src/anon/unit_0014b838.cpp
+
+// --- 001576e8
+u32 func_00155d58(u8*, int);  // table_word_indexed_by_3
+void func_00138c10(u8*, u32);
+void func_00154408(u8*, u32);
+// 001576e8: moved to src/anon/unit_00157688.cpp
+
+// --- 0015a768
+extern f32 D_004f3604;
+extern u8 D_0034aa70[];
+void func_00190128(void*);
+void func_0015a768(int a, int b) asm("_Z13func_0015a768ii");
+// 0015a768: static initialiser, now made by gcc in src/harata/libdk/targetcamera.cpp
+
+// --- 00166880
+void func_001666f0(u8*, u16, u32, u16, u16);  // obj_store_masked
+void func_00166880(u8* p, u8 c, u16 a, u32 b, u16 d, u16 e, s16 x, s16 y);  // 0x00166880: definition moved into src/anon/unit_001664c0.cpp
+
+// --- 001675b0
+void func_00167638(f32, f32, f32);
+void func_00167b98(void);
+void func_00167c30(void);
+void func_00167618(void);
+extern u32 D_0032b91c;
+void func_00102788(u32, u32, u32, void (*)(void));
+// 001675b0: moved to src/anon/unit_00167358.cpp
+
+// --- 00167c30
+struct S167a { u8 pad[68]; void* p; u8 pad2[24]; };
+struct S167b { u8 pad[384]; };
+extern S167a D_0034d6c0[];
+extern S167b D_0034d3c0[];
+extern s32 D_004f5250;
+extern u32 D_0034d780;
+void func_00167f38(int);
+// 00167c30: moved to src/anon/unit_00167358.cpp
+
+// --- 0016f970
+extern u32 D_0034dc98;
+extern u32 D_01c5f460[];
+u32 func_00106178(void*, int);
+extern u8 D_004f6440[];
+void func_0016f970(void);  // 0x0016f970: definition moved into src/anon/unit_0016e8f8.cpp
+
+// --- 00173348
+// Lazily registers the cleanup of a static vector, fills it and hands it out.
+extern s8 D_01c5f4d0;
+extern Vec4 D_01c5f4e0;
+void func_00175538(void);
+void func_002fd188(void (*)(void));  // pool_alloc_block
+Vec4 func_00143e50(u16, int);
+void func_00173348(void* p);  // 0x00173348: definition moved into src/anon/unit_00171e58.cpp
+
+// --- 00188670
+struct S188 { u32 a; u32 b; u32 c; };
+extern S188 D_01c608c0[];
+extern u32 D_01c60bc0;
+extern u32 D_00351214;
+void func_00188550(void);
+// 00188670: moved to src/anon/unit_00188550.cpp
+void func_00188670(void);
+
+// --- 00196b88
+extern u8 D_00350378;
+extern u8 D_00350379;
+extern u32 D_01c61b40;
+u32 func_00198d20(int);
+void func_00196b88(void);  // 0x00196b88: definition moved into src/anon/unit_00195d00.cpp
+
+// --- 00196e98
+int func_00227118(u32);
+void func_001d30f8(u8*, int, int);
+void YS__EVENT__set_camera_target(u8* p, int x);  // 0x00196e98: definition moved into src/anon/unit_00195d00.cpp
+
+// --- 001a67e0
+// Walks the list up to n (result unused), then destroys and frees n.
+struct Node1a6 { u8 pad[12]; Node1a6* next; };
+extern Node1a6* D_01c6cb20;
+void func_001a5d48(Node1a6*);
+void func_00105110(void*);
+// 001a67e0: moved to src/yasui/libys/magic.cpp
+
+// --- 001aea00
+// Constructor: base ctor, vtable, flags and a sub-object's defaults.
+extern void* D_00350ce0[];
+void func_00185b00(u8*);
+void func_001aea00(u8* p);  // 0x001aea00: definition moved into src/anon/unit_001ada38.cpp
+
+// --- 001afe70
+u8* func_001aff90(u32, u32, u32);
+int func_001affe0(u8*, u32, u32);
+int func_001afe70(u32 a, u32 b, u32 c, u32* out);  // 0x001afe70: definition moved into src/anon/unit_001ada38.cpp
+
+// --- 001d1fa8
+// Constructor: base part (vtable 0x3525c8), then derived vtable 0x3525e8.
+extern void* D_003525c8[];
+extern void* D_003525e8[];
+void func_00320400(u8*);
+void func_001d1678(u8*, int);  // obj_init_28bytes
+void func_001d19e8(u8*, int);
+void func_001d16e8(u8*, int, int);
+void func_001d1fa8(u8* p);  // 0x001d1fa8: definition moved into src/anon/unit_001d14e0.cpp
+
+// --- 001d5ec0
+// Replaces the first entry of p[0..n) whose low 15 bits equal table[a-1][b-1]
+// with table[a-1][b] (keeping bit 15).
+struct Row1d5 { u16 v[5]; };
+extern Row1d5 D_0036e5a0[];
+u16 func_001d5ec0(u16* p, int n, int a, int b);  // 0x001d5ec0: definition moved into src/anon/unit_001d4f40.cpp
+
+// --- 001d6e60
+struct S1d6 { u32 a; u32 n; };
+extern S1d6* D_01d5ba98;
+void func_001d6da8(u16*);
+int func_001d6e60(void);  // 0x001d6e60: definition moved into src/anon/unit_001d68e0.cpp
+
+// --- 001db5a8
+struct S1db { u32 a; u32 n; u8 data[1]; };
+extern S1db* D_01d5baac;
+extern char D_00321b28[];
+int func_002fd248(int, void*, u32, int, const char*);
+void func_001db5a8(int id);  // 0x001db5a8: definition moved into src/anon/unit_001d9d00.cpp
+
+// --- 00200638
+extern u8* D_01d9e6e8;
+extern u8 D_01d9e730[];
+extern u8 D_01d9e8c0[];
+void sceVu0MulMatrix(u8*, u8*, u8*);
+void func_00200638(u8* a, u32 unused, u8* c);  // 0x00200638: definition moved into src/anon/unit_00200578.cpp
+
+// --- 00222800
+// VU0: d.xy = ftoi4(s.xy), d.zw = ftoi0(s.zw); if s.xy falls outside
+// [0, 4096) (clip flags), d.w is replaced by 0x8000.
+void func_00222800(void* d, void* s);  // 0x00222800: definition moved into src/anon/unit_00222548.cpp
+
+// --- 0022e188
+// Builds prefix + s + suffix in a static buffer.
+extern char D_01dadac0[];
+extern char D_003711e8[];
+extern char D_003711f8[];
+void func_002feee8(char*, const char*);
+void strlen(char*);  // strlen
+char* func_0022e188(const char* s);  // 0x0022e188: definition moved into src/anon/unit_0022d358.cpp
+
+// --- 00239eb8
+// Sets the scale x and flags whether the scale differs from (1, 1, 1).
+struct S239 {
+    u8 pad[184];
+    u32 b0 : 1;
+    u32 scaled : 1;
+    u8 pad2[308 - 188];
+    f32 x, y, z;
+};
+void func_00239eb8(S239* p, f32 v);  // 0x00239eb8: definition moved into src/anon/unit_00239988.cpp
+
+// --- 0023fcd0
+// Pops the top entry of a stack and makes its first word current.
+struct S23f { u32 a; u32 b; };
+extern u32 D_0035ebe8;
+extern s32 D_0035ebec;
+extern S23f* D_0035ebf0;
+void memcpy(u32, u32, u32);
+void func_0023fcd0(u32 x);  // 0x0023fcd0: definition moved into src/anon/unit_0023f5b8.cpp
+
+// --- 00240a08
+struct S240 { u32 a; u32 b; u32 c; };
+extern S240* D_0035ec90;
+u32 func_002409b8(S240*);
+u32 func_00105870(void);
+int func_00240a08(S240* p);  // 0x00240a08: definition moved into src/anon/unit_0023f5b8.cpp
+
+// --- 00267320
+extern u32 D_0035f010;
+extern u32* D_0035f0e4;
+u32 func_002811b0(u32, int);
+u32 func_001a1728(u32, int);
+void func_00267320(void);  // 0x00267320: definition moved into src/anon/unit_00265580.cpp
+
+// --- 00272a00
+u8* func_00257770(void);
+u32 func_00257140(int);
+u16* func_00273180(int, int);  // state_dispatch_2_3
+u32 func_00192048(u16);
+void func_00272a00(void);  // 0x00272a00: definition moved into src/anon/unit_00271e08.cpp
+
+// --- 00276438
+extern u32 D_0035f200;
+int func_002892f8(u32);
+int func_0028acc8(u32);
+void func_00288e88(u32);
+void func_00276438(void);  // 0x00276438: definition moved into src/anon/unit_002748a0.cpp
+
+// --- 00288fd8
+// Fills the 4 entries of row i of both tables (second one with w, or v if w is 0).
+struct S288 { u8 pad[44]; u16* volatile a; u16* volatile b; };
+void func_00288fd8(S288* p, int i, int v, int w);  // 0x00288fd8: definition moved into src/anon/unit_00288b00.cpp
+
+// --- 0028ae28
+struct S28a { u8 pad[40]; u8** items; };
+void func_00139d78(u8*);
+s16* func_0028ac98(S28a*, int);  // lookup_by_index_align
+int IsSeqDone_impl(S28a* p, int i) asm("_ZN2Tz6Select9IsSeqDoneEz");
+int IsSeqDone_impl(S28a* p, int i);  // 0x0028ae28: definition moved into src/anon/unit_00288b00.cpp
+
+// --- 0028eb88
+struct I28e { u8 pad[368]; Word x, y; u8 pad2[4]; };
+struct S28e { u8 pad[56]; I28e* items; };
+void func_00139d78_28e(S28e*, int) asm("func_00139d78");
+void func_0028eb88(S28e* p, int i, f32 a, f32 b);  // 0028eb88: moved to src/anon/unit_0028c878.cpp
+
+// --- 002b5768
+struct VObj { void** vt; u8 pad[432]; VObj* f436; };
+extern VObj* D_0035f680[4];
+int func_00139d78_2b5(VObj*) asm("func_00139d78");
+void LeaveListItemImpl_impl(void) asm("_ZN2Tz8CmSLBase17LeaveListItemImplEv");
+void LeaveListItemImpl_impl(void);  // 0x002b5768: definition moved into src/anon/unit_002b3ac8.cpp
+
+// --- 002bc518
+struct Node2bc { u8 pad[28]; Node2bc* next; u8 pad2[17]; u8 kind; };
+extern Node2bc* D_01e2aa80;
+void func_002bbf68(Node2bc*, int);
+static inline Node2bc* next2bc(Node2bc* n) {
+    if (!n) return D_01e2aa80;
+    return n->next;
+}
+void func_002bc518(void);  // 0x002bc518: definition moved into src/anon/unit_002bb8b0.cpp
+
+// --- 002bd7d8
+extern u32 D_003617ec;
+extern u32 D_003617f0;
+extern u32 D_003617f4;
+extern u8 D_003617f8;
+void func_002b8a70(u32);
+void func_00102670(u32, u32);  // to_1025f8
+void func_002bd7d8(void);  // 0x002bd7d8: definition moved into src/anon/unit_002bc978.cpp
+
+// --- 002cf8c0
+union U2cf { u32 w; u16 h[2]; };
+struct S2cf { u32 a; u32 b; u32 c; u32 d; U2cf* e; u32 f; u32 pad[3]; u32 g; };
+extern S2cf* D_00361fa4;
+void func_002cf280(u32*, int, int);
+S2cf* func_002cf8c0(int idx, u32 a, u32 b, U2cf* c);  // 0x002cf8c0: definition moved into src/anon/unit_002cf260.cpp
+
+// --- 002d4a30
+void func_0016aef0(u8*, f32*);
+void func_002d4a30(u8* p, Vec4* v);  // 0x002d4a30: definition moved into src/anon/unit_002d4548.cpp
+
+// --- 002f0b60
+struct S2f0 { u8 pad[16]; Vec4 a; Vec4 b; };
+void func_00110618(S2f0*);
+Vec4* func_0010fa28(S2f0*);  // ptr_add3072
+Vec4* kn__Friend__getInertia(S2f0*);
+// 002f0b60: moved to src/naka/libkn/trapfunctions.cpp
+
+// --- 00304de8
+// newlib __sread: read through the reentrant hook, track the offset.
+struct File304 { u8 pad[12]; u16 flags; s16 file; u8 pad2[80 - 16]; s32 offset; u32 data; };
+long _read_r(u32, int, void*, int);
+int __sread(File304* fp, void* buf, int n);  // 0x00304de8: definition moved into src/newlib/libc/stdio.c
+
+// --- 00302c28
+// newlib std(): initialise a standard stream.
+int func_00304e48(void*, void*, int);
+int func_00304ec8(void*, int, int);
+int func_00304f30(void*);
+struct File302 {
+    u8* p; int r; int w;
+    short flags; short file;
+    u8* base; int size; int lbfsize;
+    void* cookie;
+    int (*rd)(File304*, void*, int);
+    int (*wr)(void*, void*, int);
+    int (*sk)(void*, int, int);
+    int (*cl)(void*);
+    u8 pad[84 - 48];
+    void* data;
+};
+void func_00302c28(File302* f, int flags, int file, void* data);  // 0x00302c28: definition moved into src/newlib/libc/findfp.c
+
+// --- 0031bf50
+// Constructor: two vtables (multiple inheritance), a member and a member array[7].
+struct VT31b { u32 a[4]; };
+extern VT31b D_0034a618;
+extern VT31b D_00347e60;
+void func_00239700(u8*);
+void func_0031bf50(u8* p);  // 0x0031bf50: definition moved into src/anon/unit_0031b9e0.cpp
+
+}  // extern "C"

@@ -1,0 +1,374 @@
+#include "../common/types.h"
+
+// 16-byte vector; assignment copies with a 128-bit lq/sq.
+struct Vq {
+    f32 x, y, z, w;
+    Vq& operator=(const Vq& o) {
+        if (this != &o) asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(this), "r"(&o) : "$8", "memory");
+        return *this;
+    }
+} __attribute__((aligned(16)));
+
+// 16-byte vector whose copy constructor is a 128-bit lq/sq (used for by-value passing).
+struct Vc {
+    f32 x, y, z, w;
+    Vc() {}
+    Vc(const Vc& o) { asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(this), "r"(&o) : "$8", "memory"); }
+} __attribute__((aligned(16)));
+
+// Same as Vq but with a user default constructor (changes how temporaries are laid out).
+struct Vk {
+    f32 x, y, z, w;
+    Vk() {}
+    Vk& operator=(const Vk& o) {
+        if (this != &o) asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(this), "r"(&o) : "$8", "memory");
+        return *this;
+    }
+} __attribute__((aligned(16)));
+
+// 4x4 matrix; assignment copies four quadwords.
+struct Mq {
+    Vq r[4];
+    Mq& operator=(const Mq& o) {
+        if (this != &o) asm volatile("lq $8, 0(%1)\n\tlq $9, 16(%1)\n\tlq $10, 32(%1)\n\tlq $11, 48(%1)\n\tsq $8, 0(%0)\n\tsq $9, 16(%0)\n\tsq $10, 32(%0)\n\tsq $11, 48(%0)" : : "r"(this), "r"(&o) : "$8", "$9", "$10", "$11", "memory");
+        return *this;
+    }
+} __attribute__((aligned(16)));
+
+// 4x4 matrix whose copy constructor is four lq/sq (no self check).
+struct Mc {
+    Vq r[4];
+    Mc() {}
+    Mc(const Mc& o) { asm volatile("lq $8, 0(%1)\n\tlq $9, 16(%1)\n\tlq $10, 32(%1)\n\tlq $11, 48(%1)\n\tsq $8, 0(%0)\n\tsq $9, 16(%0)\n\tsq $10, 32(%0)\n\tsq $11, 48(%0)" : : "r"(this), "r"(&o) : "$8", "$9", "$10", "$11", "memory"); }
+} __attribute__((aligned(16)));
+
+extern "C" {
+
+u8 u_call4_00139d78(void*) asm("_Z16u_call4_00139d78jjjj");
+void func_00139510(void*);
+
+// --- 0010c9f8
+// Sets a direction vector from a yaw (degrees, relative to the current one) and resets motion.
+f32 sinf(f32);
+f32 cosf(f32);
+void func_001b2210(u8*, Vc, f32, f32);
+void func_0017f488(u8*, s32, f32, f32);
+void func_0010c9f8(u8* p, f32 a, f32 b, f32 c, f32 d, f32 e);  // 0x0010c9f8: definition moved into src/anon/unit_0010b978.cpp
+
+// --- 001215b8
+// Flags (|= 4) every entry of both tables whose id field matches (or all when id == -1).
+u8* func_00120800(u8*);  // obj_get_sub_ptr_by12
+void kn__ModelSKL__setStealth(u8* p, u8* flags, s32 id);  // 0x001215b8: definition moved into src/anon/unit_00120520.cpp
+
+// --- 00131810
+// Copies the current frame's matrices into the destination's matrix buffer.
+void func_00127cf8(u32);
+s32 func_001317a8(u8*, f32);
+void func_00131810(u8* p, u8* q, u32, u32, u32 x, f32 t);  // 0x00131810: definition moved into src/anon/unit_00131418.cpp
+
+// --- 00132f98
+// Walks a list and collects (counts) the active entries with the given id/owner.
+s32 func_00132338(u8*);  // get_field8
+u8* func_00132c68(u8*);
+u8* func_00132350(u8*);
+s32 func_00132f98(u8* p, u32 id, u8** out, u32, u8* owner);  // 0x00132f98: definition moved into src/anon/unit_00131418.cpp
+
+// --- 001506e0
+void func_001396b0(void*);
+void func_0031a260(void*, s32);
+struct Ent506 { void (**vt)(Ent506*); u8 pad[392]; u32 a; u32 b; u8 pad2[4]; };
+struct Own506 { void (**vt)(Own506*); u8 pad[44]; u8 sub[792]; Ent506 e[13]; };
+void func_001506e0(Own506* p);  // 0x001506e0: definition moved into src/anon/unit_0014ecb8.cpp
+
+// --- 001515b0
+void func_001515b0(u8* p);  // 0x001515b0: definition moved into src/anon/unit_0014ecb8.cpp
+
+// --- 001525b8
+extern char D_0034a678[];
+extern char D_0034a698[];
+u32 func_00152598(u8*, u32, u32, char*);
+void func_00152508(u8*, u32, u32, u32, u32);
+void func_001525b8(u8* p, s32 mode, u32 a, u32 b, u32 c, u32 d, u32 e, u32 f);  // 0x001525b8: definition moved into src/anon/unit_0014ecb8.cpp
+
+// --- 00154de8
+f32 func_0017ce10(f32);
+void func_0013edd0(u8*, f32);
+void func_0014b1e0(u8*, s16, s16);
+void func_0014b208(u8*, u16, u16);
+extern f32 D_0034a838;
+// 00154de8: moved to src/anon/unit_00153ea0.cpp
+void func_00154de8(u8* p, f32 t);
+
+// --- 00177ab8
+// Picks the matching special-state handler for the party member; clears a flag on success.
+u8* func_00177860(u8*);
+void func_00177a78(u8*);
+void func_00177a38(u8*);
+void func_00177a28(u8*);  // set_bytes_2820_2821
+// 00177ab8: moved to src/yasui/libys/party.cpp
+
+// --- 00184f90
+// Replaces the lock-on effect with one for the new target.
+void func_002cb708(u8*);
+void func_00105110(u8*);
+u8* func_0019b380(u8*, u32);
+u8* YS__UNIT__GetPathByID(u32);
+u32 YS__OBJ__get_pos(u8*);  // obj_get_attach_or_alt
+u8* func_002cd018(u8*, u8*, u32, f32);
+// 00184f90: moved to src/anon/unit_00183088.cpp
+
+// --- 001a1840
+// Mirrors this object's colour/params into its two linked records.
+union UF91 { f32 f; u32 u; };
+extern u32 D_01c6cabc;
+void wtarget_001a1840(u8* p, u32, u32, u32) asm("_Z16wtarget_001a1840jjjj");
+void wtarget_001a1840(u8* p, u32, u32, u32);  // 0x001a1840: definition moved into src/anon/unit_0019fb70.cpp
+
+// --- 001a76c8
+// Tests a vertical segment through the point; on no hit, copies the point out.
+struct Seg91 { Vk a, b; };
+u32 func_00143a48(Seg91*);
+// 001a76c8: moved to src/yasui/libys/bg.cpp
+
+// --- 001be060
+struct E1be { s32 type; };
+u32 func_001bc9e8(E1be*);
+u32 func_001d48e8(u8*, u32, E1be*);
+void func_001be410(u8*);
+u32 func_001bdcd0(u8*);
+void func_001be4b0(u8*);
+void func_001bd618(u8*, s32);
+void func_001be060(u8* p);  // 0x001be060: definition moved into src/anon/unit_001bc568.cpp
+
+// --- 001cc9c8
+// Calls func_001ccac0 for every active entry within `r` (XZ distance) of the object.
+u8* func_001c16f0(u8*, u8*);
+void func_001ccac0(u8*, u8*);
+extern u8* D_00352050;
+// 001cc9c8: moved to src/anon/unit_001cc868.cpp
+
+// --- 001d50b8
+struct B36 { u32 w[9]; };
+u32 func_001bbb08(void);
+u32* func_001ba158(void);
+void func_00199098(B36*, s32);
+u32 func_001d50b8(u8* p, B36* out);  // 0x001d50b8: definition moved into src/anon/unit_001d4f40.cpp
+
+// --- 001d62b0
+// Percentage roll: chance from a level table (or 100), using the game's LCG.
+u32 func_001c99b0(s32);
+struct R8 { u8 a; u8 b; u8 pad[2]; s32 v; };
+R8* func_001d5b78(s32, s32);
+u8* func_00177860(u8*);
+s32 func_001bbcc0(void);
+u64 func_00312db8(u64, u64);
+extern u32 D_003638d0;
+u32 YS__ANTI_FORM__IsAnti(u8* who, u8* st);  // 0x001d62b0: definition moved into src/anon/unit_001d4f40.cpp
+
+// --- 001d7538
+extern u32 D_003527e4;
+f32 func_00191b70(void);
+s32 func_001a5bd0(u8*, s32, f32);
+void func_001d7638(u8*, s32);
+s32 YS__MISSION__GetComboCounter(s32);
+void YS__PRIZE_COLOSSEUM__AppearTable(u8* p, u8* q);  // 0x001d7538: definition moved into src/anon/unit_001d7458.cpp
+
+// --- 001e1070
+u8* func_001050d8(u32);
+void YS__ATTACK__ATTACK_2(u8*, u32, u32, u32, u32, s32, s32);
+UF91* func_0018da18(u8*, u8*, u32, u32);
+void func_0018ca10(UF91*);  // alloc_from_pool_magic
+void func_0018f028(u8*);
+extern u8* D_00352bd0;
+// Unused 16-byte local with trivial ctor/dtor: reserves the frame slot and blocks the tail call.
+struct NT16 { u32 x[4]; NT16() {} ~NT16() {} };
+void ryj__LASER__strike(u32, u8* a);  // 0x001e1070: definition moved into src/anon/unit_001e0cb8.cpp
+
+// --- 001ead10
+// Scales the work matrix rows by the bone's scale and copies its translation.
+union GP91 { u8* p; f32 f; };
+extern GP91 D_01d9e6e8;
+void func_0021ed18(u8*, u8*);
+static inline void vscl91(u8* m, u32 s) {
+    asm volatile("qmtc2 %1, $vf9\n\tlqc2 $vf10, 0(%0)\n\tvmulx.xyz $vf10, $vf10, $vf9x\n\tsqc2 $vf10, 0(%0)" : : "r"(m), "r"(s) : "memory");
+}
+void func_001ead10(u8* base, u32, u8* a2);  // 0x001ead10: definition moved into src/anon/unit_001e8ac8.cpp
+
+// --- 001f6778
+extern u32 D_01d9eab4;
+extern u32 D_01d9ea9c;
+extern u8* D_01d9e6e0;
+extern u8 D_001f6648[];
+struct A1f { u8 pad[4]; s16 h; u8 pad2[6]; u8 b12; u8 b13:8; u8 b14; u8 pad3; s32 w16; u32 pad4; s32 w24; };
+struct S1f { u8 pad[2]; u8 cnt:8; };
+void func_0021ee48(u8*, A1f*, u8*, S1f*, s32, u32, u32);
+void func_001f6778(u8* base, A1f* a1, u8* a2);  // 0x001f6778: definition moved into src/anon/unit_001f6298.cpp
+
+// --- 001fb790
+// Sets the RGBA bytes of a node from 0..255 inputs scaled by the global colour.
+extern f32 D_00354be0[];
+void sceVu0CopyVector(u8*, f32*);  // memcpy16
+void func_001fb6c8(u8*, u32, u32);
+void func_001fb790(u8* base, u8* c, u8* a2);  // 0x001fb790: definition moved into src/anon/unit_001fb350.cpp
+
+// --- 001fcd70
+extern u8 D_01dad890[];
+extern u8 D_01dad8d0[];
+extern u8 D_01d9e840[];
+extern u8 D_01d9e8c0[];
+void sceVu0MulMatrix(u8*, u8*, u8*);
+void sceVu0ScaleVector(u8*, u8*, f32);  // vec_scale_by_f12
+void sceVu0ApplyMatrix(u8*, u8*, u8*);
+void func_001fcd70(void);  // 0x001fcd70: definition moved into src/anon/unit_001fcd70.cpp
+
+// --- 0024a270
+s32 func_00287bc0(void);
+void Tz__MenuBase__SaveMode(void);  // copy_globals_3words
+u32 func_00287db0(void);
+u32 func_0028acc8(u32);
+void func_001039f8(void);
+void func_0024a348(void);
+void func_0024a4d0(void);
+extern u32 D_0035ed70;
+extern u32 D_0035ed74;
+extern u8* D_0035ed78;
+extern u8* D_0035ed7c;
+extern u8* D_0035ed80;
+u32 func_0024a270(void);  // 0x0024a270: definition moved into src/anon/unit_00249ef0.cpp
+
+// --- 00262588  Tz::CmItem::LeaveStock
+u8* cmtop_list_buffer(void) asm("_ZN2Tz5CmTop13GetListBufferEv");
+void LeaveStock(void*) asm("_ZN2Tz6CmItem10LeaveStockEv");
+void LeaveStock(void*);  // 0x00262588: definition moved into src/anon/unit_0025f6b8.cpp
+
+// --- 00272468
+u8* cmtop_list_buffer2(void) asm("_ZN2Tz5CmTop13GetListBufferEv");
+u32 cmtop_select_pos(s32) asm("_ZN2Tz5CmTop12GetSelectPosEi");
+s32 Tz__CmCustom__CurPos2CustomType(u32);
+struct T6 { u16 a, b; s16 c; };
+extern T6 D_00373a30[];
+void func_00138c10(u8*, s32);
+u32 func_0028be58(u32);
+void func_0028bd60(u32);
+extern u32 D_0035f04c;
+void Tz__CmCustom__SetLoopList(void);  // 0x00272468: definition moved into src/anon/unit_00271e08.cpp
+
+// --- 0027b5d0
+extern u32 D_0035f010;
+u16* func_0026b850(void);
+void func_0027aed8(u32, s32*, s32*);
+u32 func_00281140(u32, s32);
+u32 func_00192048(u32);
+extern s16* D_0035f230;
+u32 func_0027b5d0(void);  // 0x0027b5d0: definition moved into src/anon/unit_0027a6d8.cpp
+
+// --- 00290198
+extern u8* D_00347f80;
+extern u8 D_00347e60[];
+void func_00239700(u8*);
+void func_0028dfe8(u8*);  // obj_ctor_36f440
+void func_00258d58(u32, u32, u32);
+typedef u8* (*AllocFn91)(u8*, u32, u32);
+void func_00290198(u8* self, u32 a, u32 b, u32 c, u16* arr);  // 00290198: moved to src/anon/unit_0028f1e0.cpp
+
+// --- 00292f18
+struct E16 { u32 a; u32 b; u32 c; u32 d; };
+union GE91 { E16* p; u32 u; };
+union GU91 { u32 v; u8 c; };
+union GS91 { s32 v; u8 c; };
+extern u32* D_0035f4dc;
+extern GE91 D_0035f4d4;
+extern GU91 D_0035f4c8;
+extern GS91 D_0035f4c0;
+extern u8 D_0035f4e2;
+extern char D_00374578[];
+extern u8 D_00292e60[];
+void func_002fee78(char*, char*, ...);
+void YS__FILE__ReadBack(char*, u32, u8*, E16*);
+u32 func_00292f18(void);  // 0x00292f18: definition moved into src/anon/unit_00292e60.cpp
+
+// --- 0029ad40
+// Returns early as soon as any of the menu's sprites is still alive.
+extern u8* D_0035f5b0;
+struct NoTail91 { ~NoTail91() {} };
+void func_0029ad40(void);  // 0x0029ad40: definition moved into src/anon/unit_00299920.cpp
+
+// --- 002a17e8
+// Shows the help text for the highlighted entry (or clears it when nothing is selected).
+extern u8* D_0035f5d8;
+extern u8* D_0035f5d4;
+u8* func_002a1bc0(u16);
+u32 Tz__JmWorldSel__GetId2WorldName(s32, s32);
+void func_00192e50(u32, u8*, s32, u32);
+void func_002595e8(u8*, u32);
+void Tz__JmDiagram__SetCharaName(void);  // 0x002a17e8: definition moved into src/anon/unit_002a0908.cpp
+
+// --- 002ab540
+static inline bool tbit91(u32* a, u32 i) { return (a[i >> 5] & (1 << (i & 31))) != 0; }
+extern u8* D_0035f610;
+u8* func_001a82b0(u8*);
+s32 Tz__Jiminy__AreaWorld2JmWorld(u8);
+u32 Tz__JmNewInfo__isTreasureNew(s32 who);  // 0x002ab540: definition moved into src/anon/unit_002a99c8.cpp
+
+// --- 002ac800
+u8* func_002a9d68(void);
+u8* func_001d9e30(u8*);  // record_range_check_or_first
+u32 func_002ac800(s32 who);  // 0x002ac800: definition moved into src/anon/unit_002a99c8.cpp
+
+// --- 002ba630
+extern u8 D_01e2a410[];
+void func_002bcc60(u8*, u32, u32, s32*, s32*);
+u32 func_002bccd8(u8*, u32, u32, u32, s32*, s32*);
+void func_002baf48(s32, s32, u32, u32, u32, u32);
+void func_002bce10(u8*, s32);  // find_entry12_set_flag
+s32 func_002ba630(u32 a, u32 b, u32 c, u32 d);  // 0x002ba630: definition moved into src/anon/unit_002b9ab8.cpp
+
+// --- 002ba6f0
+s32 func_002ba6f0(u32 a, u32 b, u32 c, u32 d, u32 e, s32* out);  // 0x002ba6f0: definition moved into src/anon/unit_002b9ab8.cpp
+
+// --- 002f86f0
+// ceilf (newlib, no denormals).
+typedef union { f32 value; u32 word; } ieee_float_shape_type91;
+f32 ceil91(f32 x) asm("_Z13func_002f86f0f");
+f32 ceil91(f32 x);  // 0x002f86f0: definition moved into src/newlib/libm/sf_ceil.c
+
+// --- 003141e8
+// libgcc fp-bit.c _fpdiv_parts (double).
+enum fpc91 { C_SNAN, C_QNAN, C_ZERO, C_NUM, C_INF };
+struct fpn91 { fpc91 cls; u32 sign; s32 normal_exp; u32 pad; u64 frac; };
+extern fpn91 D_00378498;
+static inline int fisnan91(fpn91* x) { return x->cls == C_SNAN || x->cls == C_QNAN; }
+static inline int fisinf91(fpn91* x) { return x->cls == C_INF; }
+static inline int fiszero91(fpn91* x) { return x->cls == C_ZERO; }
+fpn91* func_003141e8(fpn91* a, fpn91* b);  // 0x003141e8: definition moved into src/libgcc/_div_df.c
+
+// --- 001422a0
+// Fetches a vertex position (w = 1), transforms it by the object's matrix and normalizes it.
+Vq* func_001422a0(Vq* out, u8* obj, u16 idx);  // 0x001422a0: definition moved into src/anon/unit_00141458.cpp
+
+// --- 001a7790
+struct Ob64 { u8 b[64]; } __attribute__((aligned(16)));
+u8* kn__getProjection(s32);  // buffer_get_256
+Mc* func_00106ad0(u8*);
+u8* func_00106a60(s32);  // buffer_get_by_index
+void func_00146680(Ob64*, Mc*);  // copy_quad4_if_diff
+u32 func_00146730(Ob64*, u8*);
+static inline void mmul91(Mc* r, Mc* a, Mc* b) {
+    asm volatile("lqc2 $vf1, 0(%1)\n\tlqc2 $vf2, 16(%1)\n\tlqc2 $vf3, 32(%1)\n\tlqc2 $vf4, 48(%1)\n\t"
+                 "lqc2 $vf5, 0(%2)\n\tlqc2 $vf6, 16(%2)\n\tlqc2 $vf7, 32(%2)\n\tlqc2 $vf8, 48(%2)\n\t"
+                 "vmulax.xyzw ACC, $vf1, $vf5x\n\tvmadday.xyzw ACC, $vf2, $vf5y\n\tvmaddaz.xyzw ACC, $vf3, $vf5z\n\tvmaddw.xyzw $vf5, $vf4, $vf5w\n\t"
+                 "vmulax.xyzw ACC, $vf1, $vf6x\n\tvmadday.xyzw ACC, $vf2, $vf6y\n\tvmaddaz.xyzw ACC, $vf3, $vf6z\n\tvmaddw.xyzw $vf6, $vf4, $vf6w\n\t"
+                 "vmulax.xyzw ACC, $vf1, $vf7x\n\tvmadday.xyzw ACC, $vf2, $vf7y\n\tvmaddaz.xyzw ACC, $vf3, $vf7z\n\tvmaddw.xyzw $vf7, $vf4, $vf7w\n\t"
+                 "vmulax.xyzw ACC, $vf1, $vf8x\n\tvmadday.xyzw ACC, $vf2, $vf8y\n\tvmaddaz.xyzw ACC, $vf3, $vf8z\n\tvmaddw.xyzw $vf8, $vf4, $vf8w\n\t"
+                 "sqc2 $vf5, 0(%0)\n\tsqc2 $vf6, 16(%0)\n\tsqc2 $vf7, 32(%0)\n\tsqc2 $vf8, 48(%0)"
+                 : : "r"(r), "r"(a), "r"(b) : "memory");
+}
+// 001a7790: moved to src/yasui/libys/bg.cpp
+
+// --- 002e3318
+// Collects the values of all items with `key` in the block tagged (c0, c1), up to max.
+struct It8 { u16 key; u16 pad; u32 val; };
+struct Hd8 { u8 c0; u8 c1; u16 n:16; It8 it[1]; };
+// 002e3318: moved to src/anon/unit_002e2f08.cpp
+
+}

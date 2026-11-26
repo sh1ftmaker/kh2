@@ -1,0 +1,39 @@
+#include "../common/types.h"
+
+struct W1835Vec { f32 x, y, z, w; } __attribute__((aligned(16)));
+struct W1835Spark { W1835Vec pos; f32 lo; f32 val; f32 ang; s32 zero; s32 n; };
+
+struct W1835VObj;
+struct W1835VTbl { u8 pad[0x20]; void (*release)(W1835VObj*); };
+struct W1835VObj { W1835VTbl* vt; };
+struct W1835Slot { W1835VObj* p; s16 b; s16 a; };
+struct W1835Req { u8 pad[4]; s16 id; s16 a; s16 b; s16 mode; };
+
+extern "C" {
+extern u32 D_003638d0;
+extern s32 D_003509a0;
+extern W1835Slot D_01dad9c0[32];
+s32 sa__EVENT__checkStart(s16);
+s32 sa__EVENT__isJumpMode(s16);
+W1835VObj* func_001050d8(s32);
+void func_001ac8b0(W1835VObj*, s16);
+void func_001ac7c8(W1835VObj*, W1835VObj*);
+
+/* lq/sq 128-bit copy: no C equivalent with this register. */
+static inline void W1835Copy(W1835Vec* d, const W1835Vec* s)
+{
+    asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(d), "r"(s) : "$8", "memory");
+}
+static inline f32 W1835Rnd()
+{
+    D_003638d0 *= 0x10dcd;
+    return (f32)D_003638d0 * 2.3283064365386963e-10f;
+}
+static inline f32 W1835RandF(f32 r) __attribute__((always_inline));
+static inline f32 W1835RandF(f32 r) { return W1835Rnd() * r; }
+
+// 001a7a48: moved to src/yasui/libys/bg.cpp
+
+void func_0022d880(W1835Req* a);  // 0x0022d880: definition moved into src/anon/unit_0022d358.cpp
+
+}

@@ -1,0 +1,197 @@
+#include "../common/types.h"
+
+typedef void (*VFn)(void*);
+
+extern "C" {
+u32 kn__Friend__getFlag(void*);  // get_field2940
+void func_00112730(void*, u32);
+void* func_00124748(void*, s32);  // list_nth_node_rel
+void* func_0016e920(void*, void*);
+void func_0016f6a0(void*, void*);
+void func_0016adc8(void*, void*);
+void func_001ad990(void*, f32, f32, f32);
+void func_001b1bb8(void*, u32, u32, u32, s32, f32);
+void* func_00180698(void);
+void func_0016cc18(void*, void*, void*, void*, s32);
+void func_001a1840(void*);
+void YS__SHEET__load(void*, s32);
+void YS__BTLOBJ__add_mp(void*, void*);
+void func_001a1990(void*, void*, u8);
+void* func_0016bff0(void*);
+void func_001956d0(void*, void*);
+void func_001b7f88(void);
+void func_001bdc18(void*);
+void func_001bd5b0(void*, u32, s32);
+void func_0016a9a0(void*);  // to_16a950
+void func_001c1428(void*);
+void func_001dba98(void*);
+void func_0016b5b8(void*);
+u8* func_001ba158(void);
+void YS__RECOV__Exec(s32);
+void func_001dc9e0(void*);
+void func_001e6cf8(void*);
+s32 func_001e2c78(void*);
+void* func_0022c4b8(void);
+void func_00170518(void*, s32, s32);
+void func_00234400(void*, s32, void*, void*, void*, void*);
+void func_0023fbc8(void);
+void func_00288648(void);
+s16* func_00253330(s32);
+void func_00103500(s32);
+void func_001037b8(void);
+void* func_0014aba8(void);
+void func_0014aa58(void*, s32, s32);
+void func_00287cc0(s32);
+void func_0026b470(void);
+void Tz__CmEquip__SortEquip(void);
+void func_0026b5a0(s32);
+void* func_002537c8(s32);
+void* func_0023fa08(void*, void*);
+s32 func_00287bc0(void);
+void func_00276c50(s32, s32);
+u8* func_001d56c8(void);
+void func_002b8824(void*, void*, s32, void*, void*);
+void* func_001050d8(s32);
+void func_002e20d8(void*, void*);
+void Ts__FLARE__set_pos(void*, void*);
+s32 func_002ef7b8(void);
+void func_001b8228(void);
+void func_001b8258(void);
+void YS__OBJ__prepare_jump_height(void*);
+void func_0016bd60(void*, s32);
+void func_00106420(void*);
+
+extern s32 D_00349df4;
+extern u8 D_00349e00;
+extern s32 D_00349df8;
+extern s32 D_00349dfc;
+extern struct { u8 a, b, c, d; } D_004f3700;
+extern u8 D_0034fa78;
+extern struct { u32 a, b; } D_01d48c80;
+extern s32 D_003511b8;
+extern u8 D_003511c1;
+extern u16 D_0032f218;
+extern void** D_01d9e340;
+extern struct { u32 a, b, c; } D_0035db00;
+extern s32 D_0035ebe0;
+extern s32 D_0035ebec;
+extern u8 D_0035f3a8;
+extern s32 D_003617f0;
+extern void* D_003617ec;
+extern u32 D_0033cae8[];
+extern u8 D_00348d58;
+extern u8 D_00348698;
+
+void Peterpan_acceptNotifyPlayerTarget(void*) asm("_ZN2kn8Peterpan24acceptNotifyPlayerTargetEv");
+void Timer_setCountDown(u32) asm("_ZN2dk5Timer12setCountDownEj");
+void trap_obj_leave_force(void*) asm("_ZN2YS20trap_obj_leave_forceEP8BD_VALUE");
+void SHEET_reload(void*) asm("_ZN2YS5SHEET6reloadEv");
+void FIELDOBJ_mark_history(void*) asm("_ZN2YS8FIELDOBJ12mark_historyEv");
+void wtarget_001b26e0(u32, u32, u32, u32) asm("_Z16wtarget_001b26e0jjjj");
+void MASSOBJ_OVR_exec(void*) asm("_ZN2YS7MASSOBJ9_OVR_execEv");
+void EFFECT_color(void*) asm("_ZN3ryj6EFFECT5colorEv");
+bool EFFECT_is_loop(void*) asm("_ZN3ryj6EFFECT7is_loopEv");
+void wtarget_00228420(u32, u32, u32, u32) asm("_Z16wtarget_00228420jjjj");
+void CampMenu_StartBasic(s32) asm("_ZN2Tz8CampMenu10StartBasicEi");
+void* CMData_GetPtr(s32) asm("_ZN2Tz6CMData6GetPtrEi");
+
+void Peterpan_acceptNotifyPlayerTarget(void* s);  // 0x0011a430: definition moved into src/anon/unit_0011a260.cpp
+
+void* kn__ModelMulti__getHrcNum(void* a);  // 0x00123dd0: definition moved into src/anon/unit_00123990.cpp
+
+// 00135ff0: moved to src/naka/libkn/effect_observer.cpp
+
+void Timer_setCountDown(u32 n);  // 0x0014c940: definition moved into src/anon/unit_0014c7f0.cpp
+
+void func_0015cbb8(u8 a, u8 b, u8 c, u8 d);  // 0x0015cbb8: definition moved into src/anon/unit_0015cb18.cpp
+
+void func_0016eb18(void* a, void* b);  // 0x0016eb18: definition moved into src/anon/unit_0016e8f8.cpp
+
+void func_00171480(u8* p);  // 0x00171480: definition moved into src/anon/unit_00170f58.cpp
+
+void trap_obj_leave_force(void* v);  // 0x00171e58: definition moved into src/anon/unit_00171e58.cpp
+
+void func_00174728(u8* p);  // 0x00174728: definition moved into src/anon/unit_00171e58.cpp
+
+void func_00174af8(u8* p);  // 0x00174af8: definition moved into src/anon/unit_00171e58.cpp
+
+// 00180770: moved to src/anon/unit_00180408.cpp
+
+void func_0018ef68(u8* p, void* a, void* b);  // 0x0018ef68: definition moved into src/anon/unit_0018d050.cpp
+
+void func_0018f218(u8* p);  // 0x0018f218: definition moved into src/anon/unit_0018f140.cpp
+
+void SHEET_reload(void* s);  // 0x001a1460: definition moved into src/anon/unit_0019fb70.cpp
+
+void YS__SHEET__add_mp(u8* p, void* a, u8 b);  // 0x001a1a20: definition moved into src/anon/unit_0019fb70.cpp
+
+// 001a6c38: moved to src/anon/unit_001a6a10.cpp
+
+// 001b26e0: moved to src/anon/unit_001b1d20.cpp
+
+s32 func_001b81e8(void);  // 0x001b81e8: definition moved into src/anon/unit_001b6a50.cpp
+
+s32 func_001bdd20(u8* p);  // 0x001bdd20: definition moved into src/anon/unit_001bc568.cpp
+
+void YS__FIELD_COMMAND__reset_special_command(u8* p);  // 0x001befa8: definition moved into src/anon/unit_001bc568.cpp
+
+// 001c2578: moved to src/anon/unit_001c0638.cpp
+void MASSOBJ_OVR_exec(void* o);
+
+// 001ce458: moved to src/anon/unit_001cd660.cpp
+void func_001ce458(u8* p);
+
+void YS__HE_COLOSSEUM__Start(void);  // 0x001d7940: definition moved into src/anon/unit_001d7458.cpp
+
+void EFFECT_color(void* e);  // 0x001dc670: definition moved into src/anon/unit_001dbfd8.cpp
+
+bool EFFECT_is_loop(void* e);  // 0x001dc7e8: definition moved into src/anon/unit_001dbfd8.cpp
+
+void* func_001e0128(void* a);  // 0x001e0128: definition moved into src/anon/unit_001deb58.cpp
+
+// Normalize the 2D vector at s (xy) into d.
+void func_00222868(void* d, void* s);  // 0x00222868: definition moved into src/anon/unit_00222548.cpp
+
+void wtarget_00228420(u32 a, u32 b, u32, u32);  // 0x00228420: definition moved into src/anon/unit_00224780.cpp
+
+void func_0022c508(void);  // 0022c508: moved to src/sasa/event_layout.cpp (linked unit)
+
+void func_002346c0(void* a, void* b, void* c, void* d, void* e);  // 0x002346c0: definition moved into src/anon/unit_002335e8.cpp
+
+void func_0023fb00(s32 a);  // 0x0023fb00: definition moved into src/anon/unit_0023f5b8.cpp
+
+void CampMenu_StartBasic(s32);  // 0x00253538: definition moved into src/anon/unit_002530c8.cpp
+
+void func_0025ccc0(void);  // 0x0025ccc0: definition moved into src/anon/unit_002588e8.cpp
+
+void func_0026b448(void);  // 0x0026b448: definition moved into src/anon/unit_0026a900.cpp
+
+void* CMData_GetPtr(s32);  // 0x002806c8: definition moved into src/anon/unit_0027f2b0.cpp
+
+void Tz__Select__SetPageMode(u8* p, u8 on);  // 0x0028b218: definition moved into src/anon/unit_00288b00.cpp
+
+void func_00299260(void);  // 0x00299260: definition moved into src/anon/unit_002982f0.cpp
+
+bool Tz__JmMiniGame__isPlay(void);  // 0x002a8920: definition moved into src/anon/unit_002a8748.cpp
+
+void func_002bd730(s32 a, void* b, void* c, void* d);  // 0x002bd730: definition moved into src/anon/unit_002bc978.cpp
+
+// 002e1f40: moved to src/anon/unit_002e1908.cpp
+
+// 002e8c28: moved to src/anon/unit_002e8b50.cpp
+
+// 002ef7c8: moved to src/anon/unit_002ef6b0.cpp
+
+// 002f05d8: moved to src/anon/unit_002efd68.cpp
+
+bool func_002f1ae0(u32 n);  // 0x002f1ae0: definition moved into src/anon/unit_002f1a68.cpp
+
+// Store a 4x4 identity matrix at m (rows written last-to-first).
+void sceVu0UnitMatrix(void* m);  // 0x002f4000: definition moved into src/sdk/libvu0_002f3cd8.s
+
+// 64-byte (4 quadword) copy.
+void func_0031bae0(void* d, void* s);  // 0x0031bae0: definition moved into src/anon/unit_0031b9e0.cpp
+
+void func_0031e0b8(u8* p);  // 0x0031e0b8: definition moved into src/anon/unit_0031b9e0.cpp
+
+}

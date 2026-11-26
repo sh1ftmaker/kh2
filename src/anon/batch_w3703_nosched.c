@@ -1,0 +1,84 @@
+// Built with -O2 -fno-schedule-insns (_nosched).
+#include "../common/types.h"
+
+typedef unsigned int u128 __attribute__((mode(TI)));
+typedef struct Pk20e { u8 pad[16]; u64 tag; u64 regs; union { u128 q; struct { u8 b[8]; u64 reg; } s; } m; u128 col; u128 v64; u128 v80; } Pk20e;
+typedef struct Cnt20e { u32 x0; u32 x4; u32 x8; u32 xc; u32 x10; u32 x14; u32 x18; } Cnt20e;
+extern u64 D_00370780;
+extern u128 D_00370790;
+extern u128 D_003707a0;
+extern Cnt20e D_01da8cd0;
+void func_0020e800(void*, s32, s32, s32);
+
+// 0x0020e8b0: definition moved into src/anon/unit_0020e8b0.c
+u8* func_0020e8b0(Pk20e* p, u32 rgba, u8 a, u8 b);
+typedef f32 FVEC208[4] __attribute__((aligned(16)));
+typedef f32 FMTX208[4][4] __attribute__((aligned(16)));
+typedef struct Obj208 { u8 pad0[0x26]; u8 mode; u8 pad27[0xde]; u8 useMatrix; } Obj208;
+typedef struct Xform208 { FMTX208 m; u8 pad40[8]; s32 rot[3]; u8 pad54[0x18]; f32 scale[3]; } Xform208;
+extern FMTX208 D_01d9e730;
+extern FMTX208 D_01d9e840;
+extern FMTX208 D_01d9e880;
+extern FMTX208 D_01d9e8c0;
+extern u8* D_01d9e6e8;
+void sceVu0ApplyMatrix(f32* out, f32 (*m)[4], f32* in);       // sceVu0ApplyMatrix
+void sceVu0MulMatrix(f32 (*out)[4], f32 (*a)[4], f32 (*b)[4]); // sceVu0MulMatrix
+void sceVu0ScaleVector(f32* out, f32* in, f32 s);           // sceVu0ScaleVector
+void sceVu0CopyVector(f32* out, f32* in);                  // sceVu0CopyVector
+void sceVu0CopyMatrix(f32 (*out)[4], f32 (*in)[4]);         // sceVu0CopyMatrix
+void sceVu0UnitMatrix(f32 (*m)[4]);                        // sceVu0UnitMatrix
+void sceVu0RotMatrix(f32 (*out)[4], f32 (*in)[4], f32* rot); // sceVu0RotMatrix
+
+
+// Builds an object's local matrix (copy or unit + translation, optional rotation from 16-bit angles, per-axis scale),
+// then places it with the view, the parent bone or the billboard matrix and optionally saves it.
+// Register pins on call arguments only reproduce the original's argument-move order (no asm instructions).
+void func_00208a30(f32 (*view)[4], f32 (*m)[4], Obj208* o, Xform208* x, f32 (*parent)[4], f32 (*save)[4], u8 doSave) {
+    FVEC208 v;
+    FMTX208 tmp;
+    FMTX208 rot;
+    FVEC208 r;
+    s32 i;
+    struct { f32 (*p)[4]; u32 pad; } vw;
+    u8 um = o->useMatrix;
+    vw.p = view;
+    if (um) {
+        sceVu0CopyMatrix(m, x->m);
+    } else {
+        register f32 (*a0)[4] asm("$4") = m;
+        f32* m3 = m[3];
+        sceVu0UnitMatrix(a0);
+        sceVu0CopyVector(m3, x->m[3]);
+    }
+    if (*(u64*)x->rot != 0 || x->rot[2] != 0) {
+        for (i = 0; i < 3; i++) r[i] = x->rot[i] * 3.1415927f * 3.0517578125e-05f;
+        sceVu0UnitMatrix(rot);
+        { register f32 (*q4)[4] asm("$4") = rot; register f32* q6 asm("$6") = r; register f32 (*q5)[4] asm("$5") = rot;
+        sceVu0RotMatrix(q4, q5, q6); }
+        sceVu0MulMatrix(m, m, rot);
+    }
+    for (i = 0; i < 3; i++) sceVu0ScaleVector(m[i], m[i], x->scale[i]);
+    switch (o->mode) {
+    default:
+        if (parent == 0) {
+            sceVu0CopyVector(v, m[3]);
+            sceVu0MulMatrix(m, D_01d9e840, m);
+            sceVu0ApplyMatrix(m[3], vw.p, v);
+        } else {
+            { register f32 (*w5)[4] asm("$5") = parent; register f32 (*w4)[4] asm("$4") = tmp; register f32 (*w6)[4] asm("$6") = (f32 (*)[4])(D_01d9e6e8 + 16);
+            sceVu0MulMatrix(w4, w5, w6); }
+            sceVu0MulMatrix(tmp, D_01d9e730, tmp);
+            sceVu0CopyVector(v, m[3]);
+            sceVu0MulMatrix(m, D_01d9e840, m);
+            sceVu0ApplyMatrix(m[3], tmp, v);
+        }
+        break;
+    case 1: case 3: case 5: case 7: case 9:
+        sceVu0ApplyMatrix(v, vw.p, m[3]);
+        sceVu0MulMatrix(m, D_01d9e880, m);
+        sceVu0CopyVector(m[3], v);
+        break;
+    }
+    if (doSave) sceVu0CopyMatrix(save, m);
+    sceVu0MulMatrix(m, D_01d9e8c0, m);
+}

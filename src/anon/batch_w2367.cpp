@@ -1,0 +1,51 @@
+/* Third-party code notice: this file contains functions rebuilt to match the GNU Compiler
+ * Collection's runtime libraries (libgcc / libsupc++, GCC 3.2) that the game links.
+ * Copyright (C) Free Software Foundation, Inc. That code is licensed under the GNU General
+ * Public License, version 2 or later, with the GCC runtime library exception. It is not
+ * covered by this project's MIT License. */
+#include "../common/types.h"
+
+// libsupc++ exception object (unwind-cxx.h, GCC 3.2) and per-thread globals.
+struct W2367UnwindException { u32 w[8]; } __attribute__((aligned(16)));
+struct W2367CxaException {
+    void* exceptionType;
+    void (*exceptionDestructor)(void*);
+    void (*unexpectedHandler)();
+    void (*terminateHandler)();
+    W2367CxaException* nextException;
+    int handlerCount;
+    int handlerSwitchValue;
+    const u8* actionRecord;
+    const u8* languageSpecificData;
+    void* catchTemp;
+    void* adjustedPtr;
+    W2367UnwindException unwindHeader;
+};
+struct W2367CxaEhGlobals {
+    W2367CxaException* caughtExceptions;
+    unsigned int uncaughtExceptions;
+};
+
+struct W2367Entry { u32 a; u8 id; u8 pad[15]; };
+struct W2367Table { s32 n; u8 pad[60]; W2367Entry e[1]; };
+struct W2367Vec3 { f32 x, y, z; };
+
+extern "C" {
+s32 func_001094e0(s32, s32);
+void func_00133c60(s32, s32, s32, s32, s32);
+s32 func_00109788(s32 a, s32 b);  // 00109788: moved to src/anon/unit_00109788.cpp
+
+// Next entry after p (or the first one) whose id matches; id 22 matches any entry.
+W2367Entry* func_0018a100(W2367Table* t, s32 id, W2367Entry* p);  // 0x0018a100: definition moved into src/anon/unit_00189d38.cpp
+
+// Yaw that faces from a towards b, written as (0, yaw, 0).
+f32 f_atan2f(f32, f32);
+f32 FixRadian_w2367(f32) asm("_ZN2YS4MATH9FixRadianEf");
+void func_00230260(W2367Vec3* a, W2367Vec3* b, W2367Vec3* out);  // 0x00230260: definition moved into src/anon/unit_0022d358.cpp
+
+// libsupc++ __cxa_end_catch (eh_catch.cc, GCC 3.2).
+W2367CxaEhGlobals* __cxa_get_globals_fast(void);              // __cxa_get_globals_fast
+void func_00319190(W2367UnwindException*);           // _Unwind_DeleteException
+void func_002fd160(void) __attribute__((noreturn));  // std::terminate
+void __cxa_end_catch(void);  // 0x00316750: definition moved into src/libsupc++/eh_catch.cpp
+}

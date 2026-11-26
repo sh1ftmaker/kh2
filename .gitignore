@@ -12,3 +12,9 @@ objdiff.json
 
 # compiler archive: supply your own (tools/setup_toolchain.sh)
 /docker/ps2/*.tar.gz
+
+# downloaded compilers (tools/setup_toolchain.sh)
+/tools/compilers/
+# crash dumps
+core
+*.o

@@ -1,0 +1,49 @@
+#include "../common/types.h"
+extern "C" {
+u8* func_00257770(void);
+s32 func_00287bc0(void);
+s32 func_002570a0(s32);
+s32 func_00269508(s32);
+s32 func_00139d78(u8*);
+void func_00138c10(u8*, s32);
+s32 func_0028be58(u32);
+void func_0028bd60(u32);
+struct E6 { s16 a; s16 b; s16 c; };
+extern E6 D_00373798[];
+extern E6 D_003737c8[];
+extern u32 D_0035f04c;
+static inline void set_0026a060(u8* q, s32 v) {
+    if (func_00139d78(q) && *(s32*)(q + 0x184) != v) func_00138c10(q, v);
+}
+void Tz__CmEquip__SetLoopList(void);  // 0x0026a060: definition moved into src/anon/unit_00269a60.cpp
+s32 func_00287cd0(void);
+s32 func_002576d0(void);
+void func_002575a8(void);
+void func_00287c30(void);
+void func_00287cc0(s32);
+s32 func_00257610(s32);
+void func_00287c90(s32);
+s32 func_00289380(u32);
+s32 func_00289310(u32);
+s32 func_00287df0(s32, s32, s32, s32, s32);
+s32 func_00242848(s32);
+void func_00273818(void);
+void func_00271ee8(void);
+void func_00257530(s32);
+void func_00287c00(s32);
+extern u32 D_0035f024;
+extern u8 D_0035f128;
+extern u8 D_0035f130;
+void Tz__CmCustom__CtrlAutoConfirm(void);  // 0x0026ff78: definition moved into src/anon/unit_0026f0a0.cpp
+s32 func_00276348(void);
+void func_0028d8c0(u8*, s32, u32, u32, u32, s32, s32, s32);
+void func_00139620(u8*);
+void func_0028dcc0(u8*, s32);
+extern u32 D_0035f148;
+extern u32 D_0035f14c;
+extern u32 D_0035f210;
+extern s8* D_0035f1fc;
+extern u8* D_0035f21c;
+extern u16 D_00373d40[];
+void Tz__Jiminy__CreateCover(void);  // 0x00276e78: definition moved into src/anon/unit_002748a0.cpp
+}

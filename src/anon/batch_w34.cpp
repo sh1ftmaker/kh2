@@ -1,0 +1,270 @@
+#include "../common/types.h"
+
+struct Vec4 { f32 x, y, z, w; } __attribute__((aligned(16)));
+struct Words6 { u32 w[6]; };
+
+void u_tail0_0014d008(void) asm("_Z16u_tail0_0014d008v");
+void f17f488(s32, s32, f32, f32) asm("_Z13func_0017f488iiff");
+void MISSION_Activate2d(void*) asm("_ZN2YS7MISSION10Activate2dEv");
+void EFFECT_kill(void*) asm("_ZN3ryj6EFFECT4killEv");
+u32 wtarget_002342f0(u32, u32, u32, u32) asm("_Z16wtarget_002342f0jjjj");
+void Layout_setNum(void*, s32, s32) asm("_ZN2Tz6Layout6setNumEii");
+void Ti__MG_EHSidecar__PlayPath(u32, u32, u32, u32) asm("_Z26Ti__MG_EHSidecar__PlayPathjjjj");
+
+extern "C" {
+s32 func_00103b38(s32);
+s32 func_0010cc80(void*);
+void func_0014cfc8(void);
+void func_0014c908(void);
+void sceGsSyncVCallback(void*);
+void func_0014d308(void);
+void func_0014cf18(void);
+void func_0014cf88(void);
+void func_00102788(u32, u32, u32, void*);
+u8 func_00242ce8(void*);
+void func_00160e50(u32);
+void func_0015c2a0(u32, u64);
+void func_0011c4e8(u32, void*, u32, u32, u32, u32, f32);
+void func_0011c4b0(u32, void*);
+f32 YS__MATH__VectorAngle(Vec4*, Vec4*);  // vec3_dot_clamped
+void func_002fee78(char*, const char*, void*);
+s32 func_0016a070(void*);
+void YS__MOTION__clear_queue(s32);  // obj_walk_children
+void func_0017f268(s32, s32, f32, f32);
+void func_001802d8(u32, u32, u32, u32, u32, u32);
+void* YS__ENEMY__Each(void*);
+void func_001b7df0(u32, u32);
+u8* func_0016e920(u32);
+
+extern s32 D_0032ba20;
+extern s32 D_003a6a50;
+extern u32 D_0032b91c;
+extern u64 D_0034a970[];
+extern u64 D_0034af30;
+extern u32 D_0034af28;
+extern char D_004f63b0[];
+extern const char D_0036c440[];
+
+// Selects the current id; falls back to a saved slot when the id is unknown.
+// 00103500: moved to src/common/unit_001031b0.cpp
+
+s32 func_0010f600(u8* p);  // 0x0010f600: definition moved into src/anon/unit_0010f338.cpp
+
+// 00158548: moved to src/harata/libdk/cameraconfig.cpp
+
+void func_0015c450(u32 n);  // 0x0015c450: definition moved into src/anon/unit_0015bab8.cpp
+
+void func_00161598(u8* p);  // 0x00161598: definition moved into src/anon/unit_001614e8.cpp
+
+// 0016d920: moved to src/anon/unit_0016d2e0.cpp
+
+// Formats the model path "obj/%s.mdlx" for an entry into buf (or a shared buffer).
+char* func_0016f470(u8* e, char* buf);  // 0x0016f470: definition moved into src/anon/unit_0016e8f8.cpp
+
+static inline s32 inRange(s32 v) {
+    if (v == 0) return 0;
+    if (v < 7) return 1;
+    return 0;
+}
+
+// 0017a538: moved to src/yasui/libys/player.cpp
+
+// 00180c88: moved to src/anon/unit_00180408.cpp
+
+// 00185e78: moved to src/anon/unit_00185d10.cpp
+void func_00185e78(u32 a);
+
+s32 func_001997c0(u32* p);  // 0x001997c0: definition moved into src/anon/unit_00199688.cpp
+
+void func_001a2618(u8* p, s32 n);  // 0x001a2618: definition moved into src/anon/unit_0019fb70.cpp
+
+void func_00192800(u32, u32, Words6*);  // to_192528
+s32 func_001c9db0(u32);
+void func_001ac378(void*, u32, u32, u32, u32, u32, u32);
+void func_001aa668(void*, void*);
+u32 func_001b1400(u32);
+void func_001682b8(u32, u32);
+s32 func_001b5cb8(u8*);
+void func_001b8450(void*, u32, u32);
+s32 func_001bb4a0(void);
+void func_001c11a8(u32);
+void func_00177dc8(void*, u32, u32, u32, u32);
+void func_001d56f0(void*);  // zero_three_words
+void func_001d16f8(void*);
+void func_0014f688(u32, u32, u32, u32, u32);
+void YS__MISSION_TIMER__start(void*, u32);
+void func_001e2c00(u32);
+void pppDeleteMng(u32);  // alloc_336_align_171
+void func_001e6000(void*);  // obj_dec_timer
+
+extern void* D_00350bf0[];
+extern u8* D_01d48cb0;
+extern u8* D_01d49320;
+extern void* D_003521e0[];
+
+struct Slot20 { u8 b[20]; };
+struct SlotPool {
+    Slot20 slot[8];
+    s32 free[8];
+    s32 nfree;
+};
+extern SlotPool D_01d48cc8;
+
+struct Pair72 {
+    u32 a;
+    s32 id;
+    u8 pad[32];
+    u8 x[16];
+    u8 y[16];
+};
+extern Pair72 D_00354bf0[];
+
+
+// 00192818: moved to src/yasui/libys/message.cpp
+
+s32 func_001a8c78(u8* p, s32 n);  // 0x001a8c78: definition moved into src/anon/unit_001a8618.cpp
+
+// 001ac858: moved to src/anon/unit_001abb28.cpp
+
+// 001b1448: moved to src/yasui/libys/databuff.cpp
+
+void* YS__LIMIT__GetPax(void);  // 0x001b5a10: definition moved into src/anon/unit_001b2780.cpp
+
+// Takes a slot from the free list and initialises it.
+// 001b8680: moved to src/anon/unit_001b82d8.cpp
+
+void func_001ced10(u8* p, u32 a, u32 b, u32 c);  // 0x001ced10: definition moved into src/anon/unit_001ce6e8.cpp
+
+void func_001d18c0(u8* p);  // 0x001d18c0: definition moved into src/anon/unit_001d14e0.cpp
+
+void func_001e60b0(void);  // 0x001e60b0: definition moved into src/anon/unit_001e0cb8.cpp
+
+void sceVu0UnitMatrix(void*);  // vu_store_w_splat
+s32 func_00139d78(void*);
+void func_0023f0c8(void*, s32);
+u8* func_001058e8(void);
+s32 Tz__TRTE__GetSeqInfo(void);
+void func_002839f0(s32);  // entry416_by_masked_index
+void* func_002be908(void*);
+void func_002c1dc0(void);
+s32 func_00190140(void*);
+void worldmap__LockOnCamera__getEyeAt(void*, void*, void*);
+void worldmap__Camera__update(void*);
+void* func_001050d8(u32);
+void Ti__MGJump__MGJump(void*, u32, u32);
+void func_002ceb08(void);
+void Ti__Path__reset_leave_way(u32, u8*, u32);
+void func_002eb6f8(u8*, s32);
+void func_001c1748(void*, u32, u32, u32);  // obj_init_from_src
+void func_00190128(void*);
+void func_00103748(void);
+void func_00170c00(u32);
+void func_00103bb0(s32);
+s32 func_00105c30(void);
+void func_00239870(void*);
+void YS__OBJ_ATTACK__clear(void*);  // array8_free_slots
+void func_001c0248(void*);
+void func_00319fb0(void*);  // big_obj_dtor
+void func_00105110(void*);
+
+extern u8* D_01d9e6e0;
+extern s32 D_0035e360;
+extern s32 D_0035e368;
+struct Event32 {
+    u32 type;
+    u32 id;
+    u32 a, b, c, d;
+    u32 pad[2];
+};
+extern Event32 D_01dadc00[];
+extern u8 D_00371eb8[];
+struct Entry6 { u8 b[6]; };
+extern Entry6 D_00371ea8[];
+extern s16* D_0035f230;
+extern u8* D_0035f2b8;
+extern u8* D_01e2aa80;
+extern u8* D_00361f60;
+extern u32 D_003638c4;
+extern u8 D_003638c0;
+extern u8 D_003638c8;
+extern void* D_003485b0[];
+extern void* D_00347e60[];
+extern void* D_00347f98[];
+extern void** D_00347f80;
+extern void* D_0034ee08[];
+
+// Returns a random float in [0,1) from the VU0 random unit (hand-written VU0 macro code).
+f32 func_00207260(void);  // 0x00207260: definition moved into src/anon/unit_00206be8.cpp
+
+void func_0021f5d8(u8* p);  // 0x0021f5d8: definition moved into src/anon/unit_0021e988.cpp
+
+struct BitWord {
+    u32 lo : 7;
+    u32 flag : 1;
+    u32 hi : 24;
+};
+
+void func_00242d10(u8 on);  // 0x00242d10: definition moved into src/anon/unit_00242478.cpp
+
+void* func_0024b1a0(s32 n);  // 0x0024b1a0: definition moved into src/anon/unit_00249ef0.cpp
+
+// Counts set bits 0-5 and 7 of the flag word.
+s32 func_0027ae20(void);  // 0x0027ae20: definition moved into src/anon/unit_0027a6d8.cpp
+
+// Keeps the final call from becoming a sibling call.
+struct NoTail {
+    ~NoTail() {}
+};
+
+void func_00283618(void);  // 0x00283618: definition moved into src/anon/unit_00282c68.cpp
+
+static inline u8* nextNode(u8* p) {
+    if (p == 0) return D_01e2aa80;
+    return *(u8**)(p + 28);
+}
+
+s32 func_002bc7a8(u32 k);  // 0x002bc7a8: definition moved into src/anon/unit_002bb8b0.cpp
+
+typedef void (*VFn)(void*);
+struct EvSub {
+    u8 pad[20];
+    s32 cur;
+};
+
+void func_002be9b0(void);  // 0x002be9b0: definition moved into src/anon/unit_002be020.cpp
+
+s32 func_002c0470(u8* p);  // 0x002c0470: definition moved into src/anon/unit_002bebd0.cpp
+
+void func_002dc278(u32 a, u32 b);  // 0x002dc278: definition moved into src/anon/unit_002da040.cpp
+
+// 002e3c28: moved to src/anon/unit_002e2f08.cpp
+
+// 002eb9d8: moved to src/anon/unit_002eaf38.cpp
+
+void func_002ed508(u8* p, u8* q, u32 c, u32 d, u32 e);  // 0x002ed508: definition moved into src/anon/unit_002ecdb0.cpp
+
+// 002ef708: moved to src/anon/unit_002ef6b0.cpp
+
+// Region code: 'US', 'JP' or 'EU'.
+// 002efbb8: moved to src/anon/unit_002efbb8.cpp
+
+void func_0031afa8(void** p);  // 0x0031afa8: definition moved into src/anon/unit_003197d0.cpp
+
+void func_0031d978(void** p);  // 0x0031d978: definition moved into src/anon/unit_0031b9e0.cpp
+
+void func_00324b08(void** p);  // 0x00324b08: definition moved into src/anon/unit_00324808.cpp
+}
+
+void u_tail0_0014d008(void);  // 0x0014d008: definition moved into src/anon/unit_0014c7f0.cpp
+
+// 0017f488: moved to src/yasui/libys/motion.cpp
+
+// 001bbac0: moved to src/yasui/libys/mission.cpp
+
+void EFFECT_kill(void* e);  // 0x001dc920: definition moved into src/anon/unit_001dbfd8.cpp
+
+u32 wtarget_002342f0(u32 a, u32 b, u32 c, u32 d);  // 0x002342f0: definition moved into src/anon/unit_002335e8.cpp
+
+void Layout_setNum(void* l, s32 n, s32 m);  // 0x0023f070: definition moved into src/anon/unit_0023e5d0.cpp
+
+// 002e2d88: moved to src/anon/unit_002e2d18.cpp

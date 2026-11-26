@@ -1,0 +1,233 @@
+#include "../common/types.h"
+typedef unsigned int u128 __attribute__((mode(TI)));
+
+extern "C" {
+
+void LoadDataFree(...) asm("_ZN2Tz12LoadDataFreeEz");
+u8 u_call4_00139d78(void*) asm("_Z16u_call4_00139d78jjjj");
+void change_action(void*, s32) asm("_ZN2YS3OBJ13change_actionENS_6ACTION2IDE");
+void vm_call(u32, s32, void*, s32) asm("_ZN2YS2VM4callEiP8BD_VALUEi");
+void vm_callback(u32, s32, void*, s32, void*) asm("_ZN2YS2VM8callbackEiP8BD_VALUEiPS0_");
+u32 vm_start(void*, void*) asm("_ZN2YS2VM5StartEPvPNS_3OBJE");
+void btlobj_pre_exec(void*) asm("_ZN2YS6BTLOBJ13_OVR_pre_execEv");
+void collision_make(void*, s32, f32, f32) asm("_ZN2YS9COLLISION4makeEiff");
+s32 has_ansem_entry(u32) asm("_ZN2Tz6JmInfo13HasAnsemEntryEj");
+u8* item_each(void*) asm("_ZN2YS10ITEM_TABLE4EachEPKS0_");
+void command_menu_clear(void*) asm("_ZN2YS12COMMAND_MENU5clearEv");
+void mission_add_count(s32, s32) asm("_ZN2YS7MISSION8AddCountEii");
+u128* effect_color(void*) asm("_ZN3ryj6EFFECT5colorEv");
+void wtarget_00239bf8(void*, s32) asm("_Z16wtarget_00239bf8jjjj");
+void menu_help_leave(void) asm("_ZN2Tz9CMenuHelp5LeaveEv");
+void wtarget_002b7078(void) asm("_Z16wtarget_002b7078jjjj");
+u8* oarashi_config(void*) asm("_ZN2Ti9MGOarashi6configEv");
+f32 acos_2f8aa0(f32) asm("_ZN3Axa15InnerProductXYZERKNS_8FVECTOR4ES2_");
+void lay_file_build_data(void*, void*) asm("_ZN2Tz16LayFileBuildDataEPvj");
+void select_begin_leave(void*) asm("_ZN2Tz6Select10BeginLeaveEz");
+void select_set_flag(void*, s32) asm("_ZN2Tz6Select7SetFlagEz");
+
+// 00105af8: select a mode and its parameters from a table
+extern u32 D_0033cafc;
+extern u32 D_0033caf0;
+extern u32 D_0033caf4;
+extern u32 D_0033cb00[];
+// 00105af8: moved to src/common/region.cpp
+
+// 00109360: switch to entry `id`, issuing its command pair if both are set
+struct Pair109 { u32 a; u32 b; };
+extern s32 D_00340eac;
+extern Pair109 D_003a8ea0[];
+void func_00133c78(u32, u32, u32, u32, u32);
+void func_00109360(u32 a0, s32 id);  // 00109360: moved to src/anon/unit_001085a8.cpp
+
+// 0010fea0: common value of three slots, or 0
+s32 func_00112720(void*);  // check_2924_lt14
+s32 func_0010fea0(u8* p);  // 0x0010fea0: definition moved into src/anon/unit_0010fea0.cpp
+
+// 001538d8: flag every entry whose id matches
+extern u8* D_0034a790;
+extern s32 D_0034a77c;
+extern u8* D_0034a778;
+void func_001538d8(u8 id);  // 0x001538d8: definition moved into src/anon/unit_00153678.cpp
+
+// 0015def8: allocate (heap vcall with caller address), construct and init the singleton
+extern void* D_0034b244;
+extern void** D_0034b278;
+void func_0031dd50(void*);
+// 0015def8: moved to src/anon/unit_0015d828.cpp
+
+// 00168958: init a layout node and push it onto the global list
+struct L168 { L168* next; u32 f4; u8 lay[40]; u32 f48; u8 pad[16]; u32 f68; u16 pad72; u16 f74; };
+struct List168 { L168* head; L168* tail; };
+extern List168 D_0034d840;
+void strlen(void*);  // strlen
+// 00168958: moved to src/yasui/libys/file.cpp
+
+// 0016a158: start a script VM for this object and run its entry
+void func_0016a158(u8* self, void* code);  // 0x0016a158: definition moved into src/anon/unit_00169f98.cpp
+
+// 00170e80: free space between the last allocated block and the next reserved one
+struct Node170 { u8 pad[40]; s32 type; s32 size; s32 addr; u8 pad2[8]; Node170* next; };
+extern s32 D_0034dc9c;
+extern Node170* D_0034dca0;
+extern u8 D_004fa440[];
+s32 func_00170e80(void);  // 0x00170e80: definition moved into src/anon/unit_0016e8f8.cpp
+
+// 001739b8: static 16-byte value, copied from the object's data
+extern s8 D_01c5f510;
+extern u128 D_01c5f520;
+extern u8 D_00175548[];
+void func_002fd188(void*);  // pool_alloc_block
+void func_001739b8(u128** out);  // 0x001739b8: definition moved into src/anon/unit_00171e58.cpp
+
+// 0017d160: moved to src/anon/unit_0017c400.cpp
+
+// 00185c48: count down a timer, then run the base pre-exec
+s32 func_00188758(void*);
+extern f32 D_00349e10;
+// 00185c48: moved to src/anon/unit_001855e0.cpp
+
+// 0018a1b8: next entry after `e` whose bit is in `mask`
+struct E20 { u32 a; u8 bit; u8 pad[15]; };
+E20* func_0018a1b8(u8* p, u32 mask, E20* e);  // 0x0018a1b8: definition moved into src/anon/unit_00189d38.cpp
+
+// 00198970
+extern u8* D_0034e948;
+void YS__STDOBJ__reset_special_command(u8* p, u32, u32, u32) asm("_Z33YS__STDOBJ__reset_special_commandjjjj");
+// 00198970: moved to src/anon/unit_00197fe0.cpp
+
+// 001a3958: first item of a kind that has an Ansem entry; mark it
+void func_001a34e0(u32, s32);
+// 001a3958: moved to src/anon/unit_001a2a50.cpp
+
+// 001a8cd0: slot (0-3) holding the given element, or -1
+s32 func_001a8bf8(u32, s32);  // get_bits5_at
+s32 func_001a8cd0(u32 a0, u32 a1);  // 0x001a8cd0: definition moved into src/anon/unit_001a8618.cpp
+
+// 001ad020: append an entry at a 4.4 fixed-point position
+struct E344 { u8 pad[328]; s32 x; s32 y; u8 pad2[8]; };
+// 001ad020: moved to src/anon/unit_001abb28.cpp
+
+// 001be940
+s32 YS__OBJ__can_control(u32);  // vtable_call_slot64_flags
+void func_001d6da8(void*);
+void YS__COMMAND_MENU__make(void*, void*);
+void func_001be940(u8* p);  // 0x001be940: definition moved into src/anon/unit_001bc568.cpp
+
+// 001c35a0: for each of 5 groups, record the highest level whose flag is set
+extern u8 D_0036dde8[5][5];
+void func_001c35a0(u32* bits);  // 0x001c35a0: definition moved into src/anon/unit_001c2b58.cpp
+
+// 001dca70
+void func_001e7070(u32, u32);
+void func_001e7088(u32, u32);
+void func_001dca70(u8* p);  // 0x001dca70: definition moved into src/anon/unit_001dbfd8.cpp
+
+// 001dcb98: set an effect's colour from 8-bit RGBA (128 = 1.0)
+void func_001dcb98(void* fx, u8* rgba);  // 0x001dcb98: definition moved into src/anon/unit_001dbfd8.cpp
+
+// 001dee10: release the attached object
+struct NoTail { ~NoTail() {} };
+struct E16 { u8 d[16]; ~E16() {} } __attribute__((aligned(16)));
+struct Odee { u8 pad[32]; E16 e[2]; static void operator delete(void* p) asm("func_001e0158"); };
+void func_001e01b8(void*);
+void func_001dee10(u8* p);  // 0x001dee10: definition moved into src/anon/unit_001deb58.cpp
+
+// 001e65d0
+extern u8 D_00354698[];
+extern u32 D_00354648;
+extern u32 D_003591c8;
+extern u8 D_00354650[];
+void func_001e5990(void*);
+void func_001e5610(u32);
+void func_001e5898(u32);
+void sceGsSyncPath(u32, u32);
+void FlushCache(s32);
+void func_002f3918(u32, void*);
+void func_001e65d0(void);  // 0x001e65d0: definition moved into src/anon/unit_001e0cb8.cpp
+
+// 002252b0
+extern s32 D_01dad910[2];
+s32 func_00225540(void);  // get_global_byte_36de29
+void func_00136b78(s32, s32);  // entry16_set_field8
+void func_002252b0(void);  // 0x002252b0: definition moved into src/anon/unit_00224780.cpp
+
+// 00242418: CRC32 update over a buffer
+extern u32* D_0035ecc0;
+extern u32 D_0035ecc4;
+u32 func_00242418(u8* p, s32 n);  // 00242418: moved to src/tozawa/crc.cpp (linked unit)
+
+// 00247bb0: update the four active entries
+extern u8* D_0035ed34;
+void func_00247bb0(void);  // 0x00247bb0: definition moved into src/anon/unit_00242478.cpp
+
+// 00263cc0
+extern u8* D_0035f0dc;
+extern u8* D_0035f0c0;
+u8 func_00263cc0(void);  // 0x00263cc0: definition moved into src/anon/unit_002632d0.cpp
+
+// 00264328: index of `id` in the 128-entry table, or -1
+u8* func_00263ea8(void);  // get_global_36f1d0
+s32 func_00264328(u32 id);  // 0x00264328: definition moved into src/anon/unit_002640a8.cpp
+
+// 0028cf28
+extern u8* D_0035f3fc;
+void Tz__MenuCursor__SetParent(s32 i, s32 v);  // 0028cf28: moved to src/anon/unit_0028c878.cpp
+
+// 0028d008: entry i is active and not masked
+extern s32 D_0035f410;
+u8 func_0028d008(s32 i);  // 0028d008: moved to src/anon/unit_0028c878.cpp
+
+// 002930d8: drop the first element of a global list
+union Count293 { s16 n; u32 w; };
+union List293 { u32* p; u32 w; };
+extern Count293 D_0035f4e0;
+extern List293 D_0035f4dc;
+void func_002930d8(void);  // 0x002930d8: definition moved into src/anon/unit_00292e60.cpp
+
+// 00296b08
+extern u8 D_0035f590;
+extern u8 D_0035f591;
+void func_002969e0(void);
+void Tz__JmReport__CreateGra(s32);
+void func_00296b08(void);  // 0x00296b08: definition moved into src/anon/unit_00295d28.cpp
+
+// 002ba220
+s32 func_002b7010(u32, u32, u32, u32, u32, u32);
+s32 func_002ba220(u32 a, u32 b, u32 c, u32 d, u32 e, u32 f);  // 0x002ba220: definition moved into src/anon/unit_002b9ab8.cpp
+
+// 002bf978: run the handler for every flagged object
+u8* func_002be908(void*);
+void worldmap__Symbol__appearEpisode(void*);
+void func_002bf978(void);  // 0x002bf978: definition moved into src/anon/unit_002bebd0.cpp
+
+// 002c1860
+void worldmap__Warp__exec(void*);
+static inline bool positive(f32 x) { return 0.0f < x; }
+void func_002c1860(u32, u8* obj);  // 0x002c1860: definition moved into src/anon/unit_002c10e0.cpp
+
+// 002d6d10
+extern void* D_00361f60;
+void func_002d2740(void*, void*, u32, f32, f32);
+void* Ti__ACTION_PO_OARASHI_TORNADO_S__calc_movement(void* ret, u32, u32 a2);  // 0x002d6d10: definition moved into src/anon/unit_002d62d0.cpp
+
+// 002dd448: add score (10/5/1 per rank) to the mission counter
+struct Score3 { s32 v[3]; };
+extern Score3 D_00375dc8;
+void func_002dd448(u8* p, s32 mul, s32 idx);  // 0x002dd448: definition moved into src/anon/unit_002da040.cpp
+
+// 002e95a0: set size and build the collision shape
+double func_00313b80(f32);  // float_to_double
+s32 func_003142e0(double, double);  // double_compare
+struct C2e { u8 pad[16]; u8 col[36]; f32 x; f32 y; };
+// 002e95a0: moved to src/sugi/flare.cpp
+
+// 002ec9d0
+void YS__OBJ__prepare_jump(void*, void*);
+void func_002eb6f8(void*, s32, f32);
+// 002ec9d0: moved to src/anon/unit_002ec5f8.cpp
+
+// 00321728: cache lookup; on miss reuse the entry with the lowest age
+struct E4 { u8 a; u8 age; u16 key; };
+E4* func_00321728(E4* e, u32 a, u32 k);  // 0x00321728: definition moved into src/anon/unit_00321728.cpp
+
+}

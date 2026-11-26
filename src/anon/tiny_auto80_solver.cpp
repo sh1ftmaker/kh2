@@ -11,9 +11,9 @@ u32 func_00102688(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00102730(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00102750(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00102788(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_00102818(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 TASK_MANAGER__create_thread(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001029e8(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_00102a38(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 func_00102a38(u32, u32, u32, u32, u32, u32, u32, u32);  // list_contains_id
 u32 func_00102b58(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00102c18(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00102c48(u32, u32, u32, u32, u32, u32, u32, u32);
@@ -40,10 +40,10 @@ u32 func_00106178(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001063c0(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001063f0(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00106420(u32, u32, u32, u32, u32, u32, u32, u32);
-void func_001069b8(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_00106a60(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_00107478(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_00108398(u32, u32, u32, u32, u32, u32, u32, u32);
+void func_001069b8(u32, u32, u32, u32, u32, u32, u32, u32);  // swap_global_word
+u32 func_00106a60(u32, u32, u32, u32, u32, u32, u32, u32);  // buffer_get_by_index
+u32 func_00107478(u32, u32, u32, u32, u32, u32, u32, u32);  // vec_copy_at96_if_diff
+u32 func_00108398(u32, u32, u32, u32, u32, u32, u32, u32);  // clear_quads_set_flags
 u32 func_00108698(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001091c8(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00109280(u32, u32, u32, u32, u32, u32, u32, u32);
@@ -55,7 +55,7 @@ u32 func_00111040(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001124e8(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00112570(u32);
 u32 func_00112730(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_00112740(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 kn__Friend__getFlag(u32, u32, u32, u32, u32, u32, u32, u32);  // get_field2940
 u32 func_00112760(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00112ab8(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00112c58(u32, u32, u32, u32, u32, u32, u32, u32);
@@ -64,13 +64,13 @@ u32 func_00113450(u32, u32, u32, u32, u32, u32, u32, u32);
 void func_00113628(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00113668(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00113990(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_00113fb0(u32, u32, u32, u32, u32, u32, u32, u32) asm("_ZN2kn17FriendPersonality16execScriptActionEPNS_12FriendActionEPN2YS6TARGETEPPvb");
+u32 func_00113fb0(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00114438(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00117808(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00117aa8(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00118d10(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_00119830(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_00119e60(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 kn__Stitch__shotEffect(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 kn__Genie__changeForm(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00119f48(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0011a408(u32);
 u32 func_0011a918(u32, u32, u32, u32, u32, u32, u32, u32);
@@ -81,18 +81,18 @@ u32 func_0011cdf0(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0011d440(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0011e350(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0011e450(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_0011eb08(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_0011ee58(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 kn__ModelObj__setDefaultTexanm(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 func_0011ee58(u32, u32, u32, u32, u32, u32, u32, u32);  // set_vtbl_347940
 u32 func_0011ee98(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0011ef20(u32, u32, u32);
-u32 func_0011f7a8(u32, u32, u32, u32, u32, u32, u32, u32) asm("_ZN2kn7ModelBG10drawCommonEPNS_16ProjectionCameraEPNS_9DrawParamEPcPNS_13AnimationWorkEbPNS_7FMatrixE");
-u32 func_00124748(u32, u32, u32, u32, u32, u32, u32, u32);
-void func_00124bb8(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_00124c08(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 kn__ModelBG__drawCommon(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 func_00124748(u32, u32, u32, u32, u32, u32, u32, u32);  // list_nth_node_rel
+void func_00124bb8(u32, u32, u32, u32, u32, u32, u32, u32);  // obj_ctor_347b88
+u32 func_00124c08(u32, u32, u32, u32, u32, u32, u32, u32);  // set_vtbl_347b88
 u32 func_001320f0(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00132208(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_00132270(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_001322f0(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 func_00132270(u32, u32, u32, u32, u32, u32, u32, u32);  // obj_ctor_347c00
+u32 func_001322f0(u32, u32, u32, u32, u32, u32, u32, u32);  // set_vtbl_347c00
 u32 func_00133630(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001336d8(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001336e8(u32, u32, u32, u32, u32, u32, u32, u32);
@@ -100,16 +100,16 @@ u32 func_001336f8(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00133718(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00133720(u32);
 u32 func_001337a0(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_00133848(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_00133898(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 func_00133848(u32, u32, u32, u32, u32, u32, u32, u32);  // entry16_init_flag16
+u32 func_00133898(u32, u32, u32, u32, u32, u32, u32, u32);  // entry16_init_flag96
 u32 func_001338e8(u32, u32, u32, u32, u32, u32, u32, u32);
 void func_00133ac8(u32, u64, u64, u32, u32, u32, u32, u32);
 u32 func_00133b78(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00133b88(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_00133bb8(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 func_00133bb8(u32, u32, u32, u32, u32, u32, u32, u32);  // forward_sub24_to_133848
 u32 func_00133c00(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00133c18(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_00133c60(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 func_00133c60(u32, u32, u32, u32, u32, u32, u32, u32);  // forward_sub24_to_133980
 u32 func_00133c78(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00133f20(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00134258(u32, u32, u32, u32, u32, u32, u32, u32);
@@ -133,11 +133,11 @@ u32 func_00138190(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001382b8(u32, u32, u32, u32, u32, u32, u32, u32);
 void func_00138480(u32, u32, u32, u32, u32, u32, u32, u32);
 void func_001384a0(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_00138988(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 dk__Sprite__draw(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00138c10(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00138d48(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_00138de0(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_001390f0(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 dk__SpriteMessage__drawMessage(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 dk__Sprite3D__update(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001391c8(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001394c0(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00139510(u32, u32, u32, u32, u32, u32, u32, u32);
@@ -156,14 +156,14 @@ u32 func_00139ab0(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00139b28(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00139ba0(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00139d78(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_0013a218(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_0013a4c8(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_0013a600(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 dk__Obj2D__destroyLoopExec(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 dk__Field2DD__readCommand(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 dk__Field2DD__read(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0013a6d0(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0013a9e8(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0013b128(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0013b1a0(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_0013b1d0(u32, u32, u32, u32, u32, u32, u32, u32) asm("_ZN2dk12COMMAND_DRAW6createEPN2YS14PLAYER_COMMANDE");
+u32 func_0013b1d0(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0013b258(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0013b508(void);
 u32 func_0013b570(u32, u32, u32, u32, u32, u32, u32, u32);
@@ -180,12 +180,12 @@ u32 func_0013dce8(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0013dd18(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0013dd28(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0013e8c0(u32);
-u32 func_0013e940(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 dk__Ft4Base__createPacket(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0013efe8(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0013f030(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0013f048(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0013f558(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_0013f9e0(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 dk__ObjCamera__collision_2(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00140db0(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00140dd0(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00140df0(u32, u32, u32, u32, u32, u32, u32, u32);
@@ -193,7 +193,7 @@ u32 func_00140e30(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00140f10(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00140f20(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00141778(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_00141970(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 func_00141970(u32, u32, u32, u32, u32, u32, u32, u32);  // vtable_get12
 u32 func_00142278(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00142900(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001431e8(u32, u32, u32, u32, u32, u32, u32, u32);
@@ -205,20 +205,20 @@ u32 func_00149370(u32, u32);
 u32 func_001493b8(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001493e8(u32, u32);
 u32 func_00149428(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_0014a248(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 func_0014a248(u32, u32, u32, u32, u32, u32, u32, u32);  // zero_global_byte_b
 u32 func_0014a4b0(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0014a4c0(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_0014a988(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 func_0014a988(u32, u32, u32, u32, u32, u32, u32, u32);  // clear_fields_244_260
 u32 func_0014a9a0(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0014aa58(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0014aa80(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0014aba8(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_0014abb8(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_0014abc8(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 func_0014abb8(u32, u32, u32, u32, u32, u32, u32, u32);  // get_data_359840
+u32 func_0014abc8(u32, u32, u32, u32, u32, u32, u32, u32);  // get_data_359950
 u32 func_0014ace8(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0014acf8(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0014ae10(u32, u32, u32, u32, u32, u32, u32, u32);
-void func_0014b150(u32, u32, u32, u32, u32, u32, u32, u32);
+void func_0014b150(u32, u32, u32, u32, u32, u32, u32, u32);  // obj_init_fields_14b150
 u32 func_0014b208(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0014b248(u32, u32, u32, u32, u32, u32, u32, u32);
 void func_0014b5e8(u32, u32, u32, u32, u32, u32, u32, u32);
@@ -229,7 +229,7 @@ void func_0014c9d8(u32, u32, u32, u32, u32, u32, u32, u32);
 void func_0014c9f0(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0014ce20(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0014ce30(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_0014ce60(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 dk__Vsync__initGameSpeed(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0014cf80(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0014d060(u32, u32, u32, u32, u32, u32, u32, u32);
 void func_0014d2e8(u32, u32, u32, u32, u32, u32, u32, u32);
@@ -237,35 +237,35 @@ u32 func_0014d358(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0014d8d0(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0014de30(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0014dec0(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_0014df98(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 func_0014df98(u32, u32, u32, u32, u32, u32, u32, u32);  // zero_global_byte
 u32 func_0014e088(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0014e098(u32);
 u32 func_0014e0d8(void);
 u32 func_0014e5f0(u32);
-u32 func_0014e648(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 func_0014e648(u32, u32, u32, u32, u32, u32, u32, u32);  // ptr_add752
 u32 func_0014e658(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_0014f030(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 func_0014f030(u32, u32, u32, u32, u32, u32, u32, u32);  // obj_set_lerp_params
 u32 func_0014f8d0(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_00150be8(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 dk__TIMER__init(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00150dc0(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_00151d48(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 dk__GET_MUNNY__initNumber(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00152508(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_00153468(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 dk__LEVELUP_INFO__openSummon(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00153540(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_00153d70(u32, u32, u32, u32, u32, u32, u32, u32) asm("_ZN2dk6Layout6createEPvi");
+u32 func_00153d70(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00154408(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00154450(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_00154ee8(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_00155f40(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 func_00154ee8(u32, u32, u32, u32, u32, u32, u32, u32);  // field24_state_code
+u32 dk__GAUGE_PLAYER__getDriveLoopSqNum(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00156408(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001581f8(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0015b7f8(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0015bab8(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_0015ce90(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 func_0015ce90(u32, u32, u32, u32, u32, u32, u32, u32);  // zero_global_byte_g
 u32 func_00160268(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001616d8(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00165898(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_001666a0(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 func_001666a0(u32, u32, u32, u32, u32, u32, u32, u32);  // zero_fields_0_4_6_8
 void func_001666d0(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001669e0(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00167658(u32, u32, u32, u32, u32, u32, u32, u32);
@@ -273,23 +273,23 @@ u32 func_001678f0(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00167cd0(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00167d68(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00167e00(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_00167e28(u32, u32, u32, u32, u32, u32, u32, u32) asm("_ZN2YS7SOFTPAD6EnableEv");
+u32 func_00167e28(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00167f18(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00167f38(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_00168388(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 YS__FILE__ReadBack(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00168548(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001688c8(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_00168b38(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 func_00168b38(u32, u32, u32, u32, u32, u32, u32, u32);  // entry_array_find_nth
 u32 func_0016a020(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0016a070(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0016a080(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0016a2e0(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0016a358(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_0016a9a0(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 func_0016a9a0(u32, u32, u32, u32, u32, u32, u32, u32);  // to_16a950
 u32 func_0016ac38(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0016ac80(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0016b5b8(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_0016b668(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 YS__OBJ___OVR_leave(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0016b740(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0016b7a0(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0016b800(u32, u32, u32, u32, u32, u32, u32, u32);
@@ -303,24 +303,24 @@ u32 func_0016c5a0(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0016c5b8(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0016c640(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0016cb88(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_0016cba0(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 YS__VM__call_pc(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0016cfa0(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0016e920(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_0016ed50(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 YS__OBJENTRY__ReadRequest(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0016f6a0(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_0016fa98(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 func_0016fa98(u32, u32, u32, u32, u32, u32, u32, u32);  // set_table_word
 u32 func_00170320(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_00170400(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 YS__CACHE_BUFF__ReadRequestSub(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00170518(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00170888(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001708f8(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00170950(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_00170b30(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 func_00170b30(u32, u32, u32, u32, u32, u32, u32, u32);  // alloc_align128
 void func_00170c00(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001758b0(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00175af8(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001762c0(u32, u32);
-u32 func_001762f8(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 YS__PARTY___OVR_exec_damage(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00176ec8(u32);
 u32 func_00177460(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00177498(u32, u32, u32, u32, u32, u32, u32, u32);
@@ -329,16 +329,16 @@ u32 func_00177dc8(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001780d8(u32);
 u32 func_00178100(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001781a8(u32);
-u32 func_00178280(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 YS__PLAYER___OVR_leave_req(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00179dd0(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00179f10(u32);
 u32 func_0017a718(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0017aab8(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_0017c430(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_0017dbb8(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_0017dcc0(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 YS__OBJ__prepare_jump_height(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 YS__FRIEND___OVR_initialize(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 YS__FRIEND__exec_stun(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0017e668(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_0017ec98(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 YS__MOTION__id_to_num(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0017edf0(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0017ee68(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00180408(u32, u32, u32, u32, u32, u32, u32, u32);
@@ -347,20 +347,20 @@ u32 func_00180ce0(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00181178(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00182780(u32, u32, u32, u32, u32, u32, u32, u32);
 void func_00182838(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_00182f28(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 func_00182f28(u32, u32, u32, u32, u32, u32, u32, u32);  // store_global_35ed04
 u32 func_001852b8(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00185ed8(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001860b0(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_00187850(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 YS__BTLOBJ___OVR__dead(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00187a18(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_00188340(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 YS__ACT__callback(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00188948(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_00188958(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 YS__PARTRAM__set_item_max(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00188b68(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_00188fe0(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 YS__SAVERAM_BATTLE__get_partram(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00189028(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001891b8(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_00189200(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 YS__SAVERAM_BATTLE__get_formram(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00189f20(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0018a008(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0018ac80(u32, u32, u32, u32, u32, u32, u32, u32);
@@ -376,7 +376,7 @@ u32 func_00190920(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001913b8(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00191f78(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00192048(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_001921d8(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 YS__MESSAGE__GetFilename(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001922c8(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00192b30(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00192c40(u32, u32);
@@ -396,43 +396,43 @@ u32 func_00197be8(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00197c90(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00197cc0(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001980d0(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_00198450(u32, u32, u32, u32, u32, u32, u32, u32) asm("_ZN2YS6STDOBJ15_OVR_initializeEv");
+u32 YS__STDOBJ___OVR_initialize(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00198630(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00198828(u32, u32);
-u32 func_00198970(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 YS__STDOBJ__reset_special_command(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001991a8(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0019b260(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_0019ba60(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_0019c218(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 YS__OBJ__is_exist(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 YS__OBJ__can_decide(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0019c400(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0019c4e8(u32, u32, u32, u32, u32, u32, u32, u32);
 extern "C" u32 func_0019c898(u32, u32, u32, u32, u32, u32, u32, u32) asm("_ZN2YS3OBJ8IsKinokoEi");
 u32 func_0019ca20(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_0019cc20(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_0019d4f8(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 YS__LOCKON__release(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 YS__RECOM__init(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0019d548(u32, u32, u32, u32, u32, u32, u32, u32);
 void func_0019ec88(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0019ed48(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0019f2a8(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_0019f9a8(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 YS__OBJ_ATTACK__clear(u32, u32, u32, u32, u32, u32, u32, u32);  // array8_free_slots
 u32 func_0019fb48(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001a0798(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001a0e78(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001a0ee0(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_001a11e0(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 YS__SHEET__load(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001a15d0(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_001a17c8(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 YS__SHEET__Free(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001a1840(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_001a1910(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 func_001a1910(u32, u32, u32, u32, u32, u32, u32, u32);  // entry12_add_clamped
 u32 func_001a1a50(u32, u32, u32, u32, u32, u32, u32, u32);
-void func_001a1c70(u32, u32, u32, u32, u32, u32, u32, u32);
+void YS__SHEET__max_drive(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001a2438(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_001a2478(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 func_001a2478(u32, u32, u32, u32, u32, u32, u32, u32);  // count_div4_compare
 u32 func_001a3168(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_001a3188(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 YS__ITEM__Get(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001a35f8(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001a36e0(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_001a3888(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 func_001a3888(u32, u32, u32, u32, u32, u32, u32, u32);  // id_in_range_5_7_131
 u32 func_001a3a78(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001a3c88(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001a4550(u32, u32, u32, u32, u32, u32, u32, u32);
@@ -442,46 +442,46 @@ u32 func_001a4db0(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001a4df0(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001a4e30(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001a52a8(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_001a55a8(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 YS__PRIZE__Appear(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001a5880(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001a5e38(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001a6598(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001a6a20(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001a6d08(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001a7588(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_001a80c8(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 func_001a80c8(u32, u32, u32, u32, u32, u32, u32, u32);  // table24_find_by_id
 u32 func_001a8258(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_001a82f0(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 YS__TREASURE__TABLE___get(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001a8418(void);
 u32 func_001a84b0(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_001a8510(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_001a8b28(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 func_001a8510(u32, u32, u32, u32, u32, u32, u32, u32);  // mod8_of_difference
+u32 func_001a8b28(u32, u32, u32, u32, u32, u32, u32, u32);  // get_data_1c7cc10
 u32 func_001a8b38(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001a8b68(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_001a8f10(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 func_001a8f10(u32, u32, u32, u32, u32, u32, u32, u32);  // arg_map_0_1_2
 u32 func_001a9110(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001a9218(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001a9350(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001a9780(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001ab598(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001ab800(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_001ab810(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 func_001ab810(u32, u32, u32, u32, u32, u32, u32, u32);  // get_global_1c7cec0
 u32 func_001ac310(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001ac5b8(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_001acd78(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 YS__WINDOW_BASE__page_end(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001acdc0(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001ad280(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001ad330(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_001ada38(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 YS__RECOV__Exec(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001adf00(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001ae0a0(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_001aedf8(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 YS__GAMEOVER__GAMEOVER(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001af7c0(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001afaf0(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001afee8(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001b0188(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001b0330(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_001b1448(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 YS__DATABUFF__Read(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001b1be0(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001b1d20(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001b1e80(u32, u32, u32, u32, u32, u32, u32, u32);
@@ -490,29 +490,29 @@ u32 func_001b3b70(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001b58f0(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001b6298(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001b6bd8(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_001b6d70(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 func_001b6d70(u32, u32, u32, u32, u32, u32, u32, u32);  // table_entry_ptr_b
 u32 func_001b77a8(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001b77d0(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001b7f88(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001b83d0(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_001b83f0(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_001b8e88(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 func_001b83f0(u32, u32, u32, u32, u32, u32, u32, u32);  // to_2fd248_block8
+u32 YS__COMMAND_ELEM__Get(u32, u32, u32, u32, u32, u32, u32, u32);
 void func_001b9c28(u32, u32, u32, u32, u32, u32, u32, u32);
 void func_001b9c58(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_001b9db0(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_001ba028(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 YS__OBJ__LeaveAll(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 YS__OBJ__is_valid(u32, u32, u32, u32, u32, u32, u32, u32);  // list_contains_ptr
 u32 func_001ba158(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001ba598(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001ba740(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001badd8(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001bb468(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001bb4a0(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_001bb890(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 YS__MISSION__PostEnd(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001bbe38(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001bbe78(u32, u32, u32, u32, u32, u32, u32, u32);
 extern "C" void func_001bc688(u32, u32, u32, u32, u32, u32, u32, u32) asm("_ZN2YS12COMMAND_SLOT5clearEv");
 u32 func_001bc778(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_001bc990(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 YS__COMMAND_MENU__make(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001bd2d0(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001bd570(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001bd5b0(u32, u32, u32, u32, u32, u32, u32, u32);
@@ -520,27 +520,27 @@ u32 func_001bd668(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001bd918(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001bdab0(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001bdc18(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_001bded8(u32, u32, u32, u32, u32, u32, u32, u32) asm("_ZN2YS13FIELD_COMMAND9init_areaEv");
+u32 YS__FIELD_COMMAND__init_area(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001be4e0(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001bf100(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001c0248(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001c0c80(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001c0cd8(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_001c0d38(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_001c10f8(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_001c1130(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 YS__OBJ__attach(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 func_001c10f8(u32, u32, u32, u32, u32, u32, u32, u32);  // request_pool_block64
+u32 func_001c1130(u32, u32, u32, u32, u32, u32, u32, u32);  // copy_record_block_to_table
 u32 func_001c11a8(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001c1428(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001c14e0(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_001c1748(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_001c1b08(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 func_001c1748(u32, u32, u32, u32, u32, u32, u32, u32);  // obj_init_from_src
+u32 YS__BTLOBJ__tornado(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001c2b58(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001c2d48(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001c6e58(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001c6fa8(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001c70e8(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001c7900(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_001c79a0(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 YS__PRIZEEFFECT__get(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001c8cc0(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001c8cd8(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001c8d80(u32, u32, u32, u32, u32, u32, u32, u32);
@@ -549,13 +549,13 @@ u32 func_001c9770(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001ce378(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001d01e0(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001d14a0(u32, u32, u32, u32, u32, u32, u32, u32);
-void func_001d1678(u32, u32, u32, u32, u32, u32, u32, u32);
+void func_001d1678(u32, u32, u32, u32, u32, u32, u32, u32);  // obj_init_28bytes
 u32 func_001d16f8(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_001d1b60(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_001d1ed0(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 YS__MISSION_COUNT__set(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 YS__MISSION_GAUGE__destroy(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001d20a8(u32, u32, u32, u32, u32, u32, u32, u32);
 void func_001d2110(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_001d2180(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 YS__COMBOCOUNTER__reset(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001d2210(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001d2298(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001d2690(u32, u32, u32, u32, u32, u32, u32, u32);
@@ -567,12 +567,12 @@ u32 func_001d3390(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001d3f80(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001d44d8(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001d4550(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_001d4808(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 func_001d4808(u32, u32, u32, u32, u32, u32, u32, u32);  // is_halfword42_zero
 u32 func_001d48b0(u32, u32, u32, u32, u32, u32, u32, u32);
 void func_001d4bb8(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001d4f40(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001d56c8(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_001d59b0(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 YS__LINK_FLAG__Check(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001d5a38(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001d5a48(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001d5af8(u32, u32, u32, u32, u32, u32, u32, u32);
@@ -583,8 +583,8 @@ u32 func_001d6a28(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001d6a80(u32);
 u32 func_001d6ab0(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001d7cd0(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_001d8190(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_001d8fa8(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 YS__MISSION__init_mission2d(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 YS__MISSION__WarningGauge(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001d96c0(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001d9d48(u32, u32, u32, u32, u32, u32, u32, u32);
 void func_001d9e78(u32, u32, u32, u32, u32, u32, u32, u32);
@@ -598,20 +598,20 @@ u32 func_001dc9e0(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001dcdb8(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001dced0(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001ddd10(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_001dde40(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_001de168(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 ryj__PAX__ensure(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 ryj__PAX__start(u32, u32, u32, u32, u32, u32, u32, u32);  // scan_list_by_half
 u32 func_001de450(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001de690(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001de750(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_001de808(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 ryj__PAX__TaskStart(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001e02f8(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_001e0cc8(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_001e17b8(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_001e1988(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 func_001e0cc8(u32, u32, u32, u32, u32, u32, u32, u32);  // entry64_by_field32
+u32 ryj__LAST_XEMNUS_LASER__init(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 ryj__LAST_XEMNUS_LASER__setup(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001e26b8(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001e2c78(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_001e2c80(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_001e3650(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 pppLoopEnd(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 func_001e3650(u32, u32, u32, u32, u32, u32, u32, u32);  // ptr_add4
 u32 func_001e3660(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001e4248(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_001e4320(u32, u32, u32, u32, u32, u32, u32, u32);
@@ -649,22 +649,22 @@ u32 func_00227d10(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00228918(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00228bd8(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00229d40(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_0022ac60(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 sa__MUSICAL_INPUT__updateGauge(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0022c4b8(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00234590(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00234670(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_002346a0(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_002361d0(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_002362b0(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_002367c8(u32, u32, u32, u32, u32, u32, u32, u32) asm("_ZN2YI5IMAGE13InitLoadImageEv");
-u32 func_002369f0(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 YI__IMAGE__Init(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 func_002367c8(u32, u32, u32, u32, u32, u32, u32, u32);  // obj_dispatch_bitfield64
+u32 func_002369f0(u32, u32, u32, u32, u32, u32, u32, u32);  // set_vtbl_36eac8_then_call
 u32 func_00236c38(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00236cc0(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00237238(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_00239700(u32, u32, u32, u32, u32, u32, u32, u32) asm("_ZN2YI8SEQUENCEC1Ev");
-u32 func_00239848(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 func_00239700(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 func_00239848(u32, u32, u32, u32, u32, u32, u32, u32);  // set_vtbl_36eb28_then_call
 u32 func_00239870(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_00239988(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 YI__SEQUENCE__Init(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00239bf8(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00239c38(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00239d30(u32, u32, u32, u32, u32, u32, u32, u32);
@@ -673,14 +673,14 @@ u32 func_0023aa18(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0023aa38(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0023aa98(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0023acd8(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_0023ade0(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_0023c098(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 YI__SEQUENCE__Draw(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 func_0023c098(u32, u32, u32, u32, u32, u32, u32, u32);  // set_vtbl_36eae8_then_call
 u32 func_0023c300(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0023c4b8(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0023c598(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0023c728(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_0023cc18(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_0023cde8(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 YI__LAYOUT__Draw(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 YI__VIBRATION__Create(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0023d2b0(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0023d410(void);
 u32 func_0023d820(u32, u32, u32, u32, u32, u32, u32, u32);
@@ -699,13 +699,13 @@ u32 func_0023fb58(u32, u32, u32, u32, u32, u32, u32, u32);
 void func_0023fb90(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0023fbc8(void);
 u32 func_0023fc08(void);
-u32 func_00240360(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 Tz__MCard__MakeFname(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00240be0(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00240c08(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00242088(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_002423a0(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_00242408(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_00242418(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 func_00242408(u32, u32, u32, u32, u32, u32, u32, u32);  // set_global_crc_m1
+u32 func_00242418(u32, u32, u32, u32, u32, u32, u32, u32);  // crc_byte_update
 u32 func_00242560(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00242880(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00242b58(u32, u32, u32, u32, u32, u32, u32, u32) asm("_ZN2Tz6Config12isCameraAutoEv");
@@ -717,7 +717,7 @@ u32 func_00243190(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_002431c0(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00246868(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00252110(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_00253180(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 Tz__CampMenu__Start(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00253330(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00253638(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_002537c8(u32, u32, u32, u32, u32, u32, u32, u32);
@@ -728,7 +728,7 @@ u32 func_002571e0(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00257388(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00257708(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00257770(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_00257fa8(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 func_00257fa8(u32, u32, u32, u32, u32, u32, u32, u32);  // nth_set_bit_index
 u32 func_00258af0(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00258b00(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00258d40(u32, u32, u32, u32, u32, u32, u32, u32);
@@ -736,16 +736,16 @@ void func_00258d58(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00259460(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_002595b8(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_002595e8(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_002632d0(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 Tz__CmItem__isSoraOnly(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00263a58(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_00263a90(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 Tz__CMenuHelp__Create_2(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0026b470(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_0026b508(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 Tz__CmEquip__SortEquip(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0026b5a0(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0026bc10(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0026ceb0(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0026d808(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_0026d968(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 Tz__Selector__Init(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00274e50(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00274ea0(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00274f50(void);
@@ -756,31 +756,31 @@ u32 func_002766b0(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_002766d0(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00276c18(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00276c50(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_00276c88(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 Tz__Jiminy__CreateHelp(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0027d008(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0027d540(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0027d5d8(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0027d810(u32, u32, u32, u32, u32, u32, u32, u32);
 extern "C" u32 func_002800d0(u32, u32, u32, u32, u32, u32, u32, u32) asm("_ZN2Tz9GumiPause12UpdateAdviceEv");
-u32 func_00280148(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 Tz__GumiPause__CreateAdvice(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00280ef8(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00281008(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00281238(u32, u32, u32, u32, u32, u32, u32, u32);
 void func_002817b8(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00281f40(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_00281f48(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 func_00281f48(u32, u32, u32, u32, u32, u32, u32, u32);  // memset_1920
 u32 func_00281f70(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00281f90(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_002833f8(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 Tz__CmTutorial__CreateList(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00283900(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00283d00(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00283f50(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_002875e8(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 Tz__Mg2DTron__Mg2DTron(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00287760(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_002878c8(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00287bc0(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00287bd0(u32, u32);
-u32 func_00287c20(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 func_00287c20(u32, u32, u32, u32, u32, u32, u32, u32);  // clear_global_flag_return_m1
 void func_00287c78(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00287cc0(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00287dc0(u32, u32, u32, u32, u32, u32, u32, u32);
@@ -800,7 +800,7 @@ u32 func_0028ca78(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0028d188(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0028da70(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0028dac8(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_0028dbf8(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 Tz__MenuUtil__GetLaySeq(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0028f4d8(u32, u32, u32, u32, u32, u32, u32, u32);
 void func_0028fb68(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_002908f0(u32, u32, u32, u32, u32, u32, u32, u32);
@@ -818,13 +818,13 @@ u32 func_00293db8(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00293eb0(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00294000(u32, u32, u32, u32, u32, u32, u32, u32);
 extern "C" u32 func_002941a8(...) asm("_ZN2Tz6JmInfo11isWorldOpenEPKNS_15JmWorldDataInfoE");
-u32 func_00295158(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_002953c8(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_0029a5f0(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 Tz__JmWorldSel__GetCur2Idx(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 Tz__JmWorldSel__GetId2Info(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 Tz__JmCollection__Cur2SelNum(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0029e430(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_002ac678(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_002b23e0(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_002b4b00(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 Tz__JmPuzzle__GetImageInfo(u32, u32, u32, u32, u32, u32, u32, u32);  // list_entry_by_index_checked
+u32 OvlShop__ItemShop__SetupConfirm(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_002b6ab8(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_002b6adc(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_002b6c04(u32, u32, u32, u32, u32, u32, u32, u32);
@@ -850,21 +850,21 @@ u32 func_002baa60(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_002baf38(u32, u32, u32, u32, u32, u32, u32, u32);
 void func_002bb0c8(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_002bb0e0(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_002bb100(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_002bb180(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 func_002bb100(u32, u32, u32, u32, u32, u32, u32, u32);  // next_global_id
+u32 func_002bb180(u32, u32, u32, u32, u32, u32, u32, u32);  // obj_init_with_temp_blocks
 u32 func_002bc470(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_002bc608(u32, u32, u32, u32, u32, u32, u32, u32);
 extern "C" u32 func_002bc798(u32, u32, u32, u32, u32, u32, u32, u32) asm("_ZN5SOUND10SE3DEnableEv");
 u32 func_002bce40(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_002bce50(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 SE_BANK__clearField(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_002bd2a8(u32);
 u32 func_002bd760(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_002bd7d8(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_002be770(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_002bea00(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_002bf650(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 worldmap__Manager__readPackEnable(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 worldmap__Symbol__setState(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_002c1b48(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_002c1b60(u32, u32, u32, u32, u32, u32, u32, u32) asm("_ZN8worldmap4Gumi8setStateEPKN2YS6COURSEE");
+u32 func_002c1b60(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_002c23d8(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_002c5508(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_002c6190(u32, u32, u32, u32, u32, u32, u32, u32);
@@ -877,27 +877,27 @@ u32 func_002cf268(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_002cf280(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_002cf2d0(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_002cf3f8(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_002cfeb0(u32);
+u32 func_002cfeb0(u32);  // obj_init_field1416_bit800
 u32 func_002cff50(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_002cff98(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_002d00a0(u32);
 u32 func_002d0ea8(u32, u32, u32, u32);
 u32 func_002d0f38(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_002d1550(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 Ti__MGOarashi__MGOarashi(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_002d1f40(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_002d2948(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_002d2a08(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_002db4b0(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_002db530(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_002db610(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_002dc4e0(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 Ti__MGHachimitsuPod__set_run_effect(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 Ti__MGJump__MGJump(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_002dc7e8(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_002dea80(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_002e0d28(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 func_002dea80(u32, u32, u32, u32, u32, u32, u32, u32);  // set_vtbl_362d20
+u32 Ti__MG_ALEscape__MG_ALEscape(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_002e20d8(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_002e4a90(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 func_002e4a90(u32, u32, u32, u32, u32, u32, u32, u32);  // in_even_range
 u32 func_002e7308(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_002e7328(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 func_002e7328(u32, u32, u32, u32, u32, u32, u32, u32);  // to_2e7458
 u32 func_002e7670(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_002e7688(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_002e76b0(u32, u32, u32, u32, u32, u32, u32, u32);
@@ -905,13 +905,13 @@ u32 func_002e76c8(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_002e77a8(u32);
 void func_002e98b0(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_002e9a00(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_002e9b58(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 Ts__TARGET_SEARCHER__add(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_002e9cb8(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_002e9fa8(u32, u32, u32, u32, u32, u32, u32, u32);
 void func_002e9fb8(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_002ed300(u32, u32, u32, u32, u32, u32, u32, u32);
-void func_002edf28(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_002ee840(u32, u32, u32, u32, u32, u32, u32, u32);
+void func_002edf28(u32, u32, u32, u32, u32, u32, u32, u32);  // obj_ctor_3637e0
+u32 func_002ee840(u32, u32, u32, u32, u32, u32, u32, u32);  // get_data_1e2c088
 u32 func_002eec58(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_002eefa8(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_002ef618(u32, u32, u32, u32, u32, u32, u32, u32);
@@ -922,24 +922,24 @@ u32 func_002ef988(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_002efa98(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_002efb08(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_002f17e0(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_002f25a0(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_002f2be0(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 sceGsSyncPath(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 sceGsExecLoadImage(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_002f3490(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_002f35e8(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_002f3918(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_002f3f88(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 sceVu0CopyVector(u32, u32, u32, u32, u32, u32, u32, u32);  // memcpy16
 u32 func_002f71b0(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_002f79c8(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_002f7e60(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_002fbd38(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_002fd248(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_002fdd68(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 memcpy(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_002fde18(u32, u32, u32, u32, u32, u32, u32, u32);
-void func_002fea00(u32, u32, u32, u32, u32, u32, u32, u32);
+void srand(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_002fee78(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_002ff2e8(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_002ff3fc(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_002ffbb0(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 strlen(u32, u32, u32, u32, u32, u32, u32, u32);  // strlen
+u32 strtol(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_003037b0(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00305240(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00305260(u32, u32, u32, u32, u32, u32, u32, u32);
@@ -952,12 +952,12 @@ u32 func_00305660(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_003058a0(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00305a30(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00305a40(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_003061d0(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 DisableDmac(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00306e80(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00306f30(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00308650(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_00308780(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_003088f8(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 isceSifSendCmd(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0030a278(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0030e548(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0030f290(u32, u32, u32, u32, u32, u32, u32, u32);
@@ -965,16 +965,16 @@ u32 func_0030f3a8(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0030f468(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0030f620(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_003114f0(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_003155e8(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 func_003155e8(u32, u32, u32, u32, u32, u32, u32, u32);  // set_vtbl_367878
 u32 func_00315768(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_003167f8(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 func_003167f8(u32, u32, u32, u32, u32, u32, u32, u32);  // set_vtbl_367910
 u32 func_00316c68(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_00316d08(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_00319a60(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_00319fb0(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 func_00316d08(u32, u32, u32, u32, u32, u32, u32, u32);  // get_global_365c48
+u32 func_00319a60(u32, u32, u32, u32, u32, u32, u32, u32);  // clear_fixed_blocks
+u32 func_00319fb0(u32, u32, u32, u32, u32, u32, u32, u32);  // big_obj_dtor
 u32 func_0031a840(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0031acc0(u32, u32, u32, u32, u32, u32, u32, u32);
-u32 func_0031baa8(u32, u32, u32, u32, u32, u32, u32, u32);
+u32 func_0031baa8(u32, u32, u32, u32, u32, u32, u32, u32);  // set_vtbl_3486a8_b
 u32 func_0031cd50(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0031fe00(u32, u32, u32, u32, u32, u32, u32, u32);
 u32 func_0031fec0(u32, u32, u32, u32, u32, u32, u32, u32);
@@ -1308,26 +1308,12 @@ u32 duplicate_unplaced_00102c48(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r5 = r14;
     r6 = r13;
     r7 = r12;
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00102818)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))TASK_MANAGER__create_thread)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-void func_00102e18(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32* p = (u32*)&D_0032b9a0;
-    u32 hi = (u32)&D_00102dc0;
-    u32 lo = (u32)&D_00102d10;
-    p[8] = lo;
-    p[9] = hi;
-}
+// 00102e18: moved to src/common/title.cpp
 
-u32 func_00102e40(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 flags = D_0032b9d8;
-    flags |= 1;
-    flags &= (u32)-5;
-    flags &= (u32)-9;
-    flags &= (u32)-17;
-    D_0032b9d8 = flags;
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_002fde18)((u32)&D_0032b9d0, 0, 8, a3, a4, a5, a6, a7);
-}
+// 00102e40: moved to src/common/title.cpp
 
 u32 duplicate_unplaced_00102ed8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r14, r15;
@@ -1351,7 +1337,7 @@ u32 duplicate_unplaced_00102f38(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r5 = r14;
     r6 = r13;
     r7 = r12;
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00102818)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))TASK_MANAGER__create_thread)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
 u32 duplicate_unplaced_001031b0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
@@ -1389,24 +1375,12 @@ u32 duplicate_unplaced_00103b78(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r5 = r14;
     r6 = r13;
     r7 = r12;
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00102818)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))TASK_MANAGER__create_thread)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-void func_00104080(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32* p = (u32*)&D_0032ba48;
-    u32 hi = (u32)func_00104018;
-    u32 lo = (u32)&D_00103f68;
-    p[8] = lo;
-    p[9] = hi;
-}
+// 00104080: moved to src/common/gumibattle.cpp
 
-void func_00104560(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32* p = (u32*)&D_0032ba90;
-    u32 hi = (u32)&D_001044f0;
-    u32 lo = (u32)&D_001043e8;
-    p[8] = lo;
-    p[9] = hi;
-}
+// 00104560: moved to src/common/gumimenu.cpp
 
 u32 duplicate_unplaced_001045b8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r12, r13, r14, r15;
@@ -1419,7 +1393,7 @@ u32 duplicate_unplaced_001045b8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r5 = r14;
     r6 = r13;
     r7 = r12;
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00102818)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))TASK_MANAGER__create_thread)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
 u32 duplicate_unplaced_00104da0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
@@ -1434,15 +1408,10 @@ u32 duplicate_unplaced_00104da0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r5 = (u32)((s32)0u + (1));
     r6 = (u32)((s32)0u + (5000));
     r8 = (u32)((s32)0u + (8192));
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00102818)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))TASK_MANAGER__create_thread)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-u32 func_00105110(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 base = 0x0033u << 16;
-    u32 obj = *(u32*)((u32)base + (s32)-17636);
-    void (**vt)() = *(void (***)())obj;
-    ((void (*)(u32, u32, u32, u32, u32, u32, u32, u32))vt[1])(obj, a0, a2, a3, a4, a5, a6, a7);
-}
+// 00105110: moved to src/common/area.cpp
 
 u32 duplicate_unplaced_00105370(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15, r16, r17;
@@ -1486,34 +1455,11 @@ void duplicate_unplaced_001056e8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5,
     *(volatile u32*)((u32)r13 + (s32)(0)) = r4;
 }
 
-u32 func_00105728(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r14, r15;
-    r15 = (u32)&D_0032bb28;
-    r14 = *(volatile u32*)((u32)r15 + (s32)(0));
-    r15 = (u32)&D_003a7b60;
-    r14 = (u32)(r14 << 2);    r14 = (u32)(r14 + r15);
-    r2 = *(volatile u32*)((u32)r14 + (s32)(0));
-    return r2;
-}
+// 00105728: moved to src/anon/unit_001056e8.cpp
 
-u32 func_00105c48(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r14, r15;
-    r14 = (u32)((s32)0u + (12));
-    r4 = (u32)(r4 * r14);
-    r15 = (u32)&D_0033cb20;
-    r15 = (u32)((s32)r15 + (-12));
-    r4 = (u32)(r4 + r15);
-    r2 = r4;
-    return r2;
-}
+// 00105c48: moved to src/common/region.cpp
 
-void func_00105d50(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32* p = (u32*)&D_0033cb80;
-    u32 hi = (u32)&D_00105d08;
-    u32 lo = (u32)&D_00105c68;
-    p[8] = lo;
-    p[9] = hi;
-}
+// 00105d50: moved to src/common/shop.cpp
 
 u32 duplicate_unplaced_00105da8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r12, r13, r14, r15;
@@ -1526,7 +1472,7 @@ u32 duplicate_unplaced_00105da8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r5 = r14;
     r6 = r13;
     r7 = r12;
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00102818)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))TASK_MANAGER__create_thread)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
 u32 duplicate_unplaced_00105f98(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
@@ -1559,7 +1505,7 @@ u32 duplicate_unplaced_001060e0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
 
 u32 duplicate_unplaced_00106490(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7;
-    return ((u32(*)())func_002fea00)();
+    return ((u32(*)())srand)();
 }
 
 void duplicate_unplaced_001069b8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
@@ -1673,7 +1619,7 @@ void duplicate_unplaced_0010b550(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5,
 u32 duplicate_unplaced_0010c7f0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r14, r15, r16;
     r16 = r4;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0017dbb8)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__FRIEND___OVR_initialize)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = *(volatile u32*)((u32)r16 + (s32)(2912));
     r14 = *(volatile u32*)((u32)r4 + (s32)(0));
     r15 = *(volatile u32*)((u32)r14 + (s32)(20));
@@ -1715,12 +1661,7 @@ void duplicate_unplaced_0010ef28(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5,
     *(volatile u32*)((u32)r4 + (s32)(3156)) = r5;
 }
 
-u32 func_00112570(u32 a0) {
-    u32 s1 = a0;
-    u32 s0 = ((u32(*)(u32))func_001058e8)(a0) + 9456;
-    u32 v0 = ((u32(*)(u32))func_0016a070)(s1);
-    return ((u32(*)(u32, u32))func_00188fe0)(s0, v0) + 244;
-}
+u32 func_00112570(u32 a0);  // 0x00112570: definition moved into src/anon/unit_001117d8.cpp
 
 u32 duplicate_unplaced_001125b8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2;
@@ -1729,25 +1670,9 @@ u32 duplicate_unplaced_001125b8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return r2;
 }
 
-void func_00113628(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r15;
-    r15 = (u32)&D_00345cf8;
-    *(volatile u32*)(r4 + 4) = r5;
-    *(u32*)(r4 + 8) = r6;
-    *(u32*)(r4 + 0) = r15;
-    *(u32*)(r4 + 12) = 0u;
-    *(u32*)(r4 + 16) = 0u;
-}
+void func_00113628(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x00113628: definition moved into src/anon/unit_00113628.cpp
 
-void func_00113648(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r15;
-    r15 = (u32)&D_00345cf8;
-    *(volatile u32*)(r4 + 4) = r5;
-    *(u32*)(r4 + 8) = r6;
-    *(u32*)(r4 + 0) = r15;
-    *(u32*)(r4 + 12) = 0u;
-    *(u32*)(r4 + 16) = 0u;
-}
+void func_00113648(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x00113648: definition moved into src/anon/unit_00113628.cpp
 
 u32 duplicate_unplaced_00113688(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r15;
@@ -1756,29 +1681,9 @@ u32 duplicate_unplaced_00113688(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00105110)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-u32 func_00114770(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r16 = a0;
-    u32 r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00113628)(a0, a1, a2, a3, a4, a5, a6, a7);
-    u32 r15 = (u32)&D_00345f10;
-    u32 r14 = (u32)&D_00340000;
-    *(volatile u32*)(r16 + 16) = r15;
-    r14 = (u32)&D_003461e8;
-    *(volatile u32*)r16 = r14;
-    *(volatile u32*)(r16 + 12) = 20;
-    return r2;
-}
+u32 func_00114770(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x00114770: definition moved into src/anon/unit_001142a0.cpp
 
-u32 func_001147b8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r16 = a0;
-    u32 r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00113628)(a0, a1, a2, a3, a4, a5, a6, a7);
-    u32 r15 = (u32)&D_00345f10;
-    u32 r14 = (u32)&D_00340000;
-    *(volatile u32*)(r16 + 16) = r15;
-    r14 = (u32)&D_003461e8;
-    *(volatile u32*)r16 = r14;
-    *(volatile u32*)(r16 + 12) = 20;
-    return r2;
-}
+u32 func_001147b8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x001147b8: definition moved into src/anon/unit_001142a0.cpp
 
 u32 duplicate_unplaced_00114800(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15;
@@ -1806,17 +1711,7 @@ u32 duplicate_unplaced_00114850(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00105110)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-u32 func_001148d0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r16 = a0;
-    u32 r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00113628)(a0, a1, a2, a3, a4, a5, a6, a7);
-    u32 r15 = (u32)&D_00346220;
-    u32 r14 = (u32)&D_00340000;
-    *(volatile u32*)(r16 + 16) = r15;
-    r14 = (u32)&D_003464b0;
-    *(volatile u32*)r16 = r14;
-    *(volatile u32*)(r16 + 12) = 18;
-    return r2;
-}
+u32 func_001148d0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x001148d0: definition moved into src/anon/unit_001142a0.cpp
 
 u32 duplicate_unplaced_00114918(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15;
@@ -1844,29 +1739,9 @@ u32 duplicate_unplaced_00114968(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00105110)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-u32 func_00114ab0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r16 = a0;
-    u32 r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00113628)(a0, a1, a2, a3, a4, a5, a6, a7);
-    u32 r15 = (u32)&D_003464e8;
-    u32 r14 = (u32)&D_00340000;
-    *(volatile u32*)(r16 + 16) = r15;
-    r14 = (u32)&D_00346658;
-    *(volatile u32*)r16 = r14;
-    *(volatile u32*)(r16 + 12) = 10;
-    return r2;
-}
+u32 kn__Aladdin__Aladdin(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x00114ab0: definition moved into src/anon/unit_00114a90.cpp
 
-u32 func_00114af8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r16 = a0;
-    u32 r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00113628)(a0, a1, a2, a3, a4, a5, a6, a7);
-    u32 r15 = (u32)&D_003464e8;
-    u32 r14 = (u32)&D_00340000;
-    *(volatile u32*)(r16 + 16) = r15;
-    r14 = (u32)&D_00346658;
-    *(volatile u32*)r16 = r14;
-    *(volatile u32*)(r16 + 12) = 10;
-    return r2;
-}
+u32 func_00114af8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x00114af8: definition moved into src/anon/unit_00114a90.cpp
 
 u32 duplicate_unplaced_00114b40(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15;
@@ -1894,29 +1769,9 @@ u32 duplicate_unplaced_00114b90(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00105110)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-u32 func_00114be8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r16 = a0;
-    u32 r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00113628)(a0, a1, a2, a3, a4, a5, a6, a7);
-    u32 r15 = (u32)&D_00346690;
-    u32 r14 = (u32)&D_00340000;
-    *(volatile u32*)(r16 + 16) = r15;
-    r14 = (u32)&D_003467b8;
-    *(volatile u32*)r16 = r14;
-    *(volatile u32*)(r16 + 12) = 8;
-    return r2;
-}
+u32 func_00114be8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x00114be8: definition moved into src/anon/unit_00114a90.cpp
 
-u32 func_00114c30(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r16 = a0;
-    u32 r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00113628)(a0, a1, a2, a3, a4, a5, a6, a7);
-    u32 r15 = (u32)&D_00346690;
-    u32 r14 = (u32)&D_00340000;
-    *(volatile u32*)(r16 + 16) = r15;
-    r14 = (u32)&D_003467b8;
-    *(volatile u32*)r16 = r14;
-    *(volatile u32*)(r16 + 12) = 8;
-    return r2;
-}
+u32 func_00114c30(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x00114c30: definition moved into src/anon/unit_00114a90.cpp
 
 u32 duplicate_unplaced_00114c78(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15;
@@ -1944,17 +1799,7 @@ u32 duplicate_unplaced_00114cc8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00105110)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-u32 func_00114d48(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r16 = a0;
-    u32 r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00113628)(a0, a1, a2, a3, a4, a5, a6, a7);
-    u32 r15 = (u32)&D_003467f0;
-    u32 r14 = (u32)&D_00340000;
-    *(volatile u32*)(r16 + 16) = r15;
-    r14 = (u32)&D_00346960;
-    *(volatile u32*)r16 = r14;
-    *(volatile u32*)(r16 + 12) = 10;
-    return r2;
-}
+u32 func_00114d48(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x00114d48: definition moved into src/anon/unit_00114a90.cpp
 
 u32 duplicate_unplaced_00114d90(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15;
@@ -1982,37 +1827,11 @@ u32 duplicate_unplaced_00114de0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00105110)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-u32 func_00114e38(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2;
-    r8 = (u32)(r8 & 0x00ffu);
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00113fb0)(r4, r5, r6, r7, r8, r9, r10, r11);
-    if (r2) return r2;
-    return r2;
-}
+u32 func_00114e38(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x00114e38: definition moved into src/anon/unit_00114a90.cpp
 
-u32 func_00114e58(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r16 = a0;
-    u32 r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00113628)(a0, a1, a2, a3, a4, a5, a6, a7);
-    u32 r15 = (u32)&D_00346998;
-    u32 r14 = (u32)&D_00340000;
-    *(volatile u32*)(r16 + 16) = r15;
-    r14 = (u32)&D_00346b08;
-    *(volatile u32*)r16 = r14;
-    *(volatile u32*)(r16 + 12) = 10;
-    return r2;
-}
+u32 func_00114e58(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x00114e58: definition moved into src/anon/unit_00114a90.cpp
 
-u32 func_00114ea0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r16 = a0;
-    u32 r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00113628)(a0, a1, a2, a3, a4, a5, a6, a7);
-    u32 r15 = (u32)&D_00346998;
-    u32 r14 = (u32)&D_00340000;
-    *(volatile u32*)(r16 + 16) = r15;
-    r14 = (u32)&D_00346b08;
-    *(volatile u32*)r16 = r14;
-    *(volatile u32*)(r16 + 12) = 10;
-    return r2;
-}
+u32 func_00114ea0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x00114ea0: definition moved into src/anon/unit_00114a90.cpp
 
 u32 duplicate_unplaced_00114ee8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15;
@@ -2040,37 +1859,11 @@ u32 duplicate_unplaced_00114f38(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00105110)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-u32 func_00114f90(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2;
-    r8 = (u32)(r8 & 0x00ffu);
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00113fb0)(r4, r5, r6, r7, r8, r9, r10, r11);
-    if (r2) return r2;
-    return r2;
-}
+u32 func_00114f90(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x00114f90: definition moved into src/anon/unit_00114a90.cpp
 
-u32 func_00114fb0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r16 = a0;
-    u32 r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00113628)(a0, a1, a2, a3, a4, a5, a6, a7);
-    u32 r15 = (u32)&D_00346b40;
-    u32 r14 = (u32)&D_00340000;
-    *(volatile u32*)(r16 + 16) = r15;
-    r14 = (u32)&D_00346cd8;
-    *(volatile u32*)r16 = r14;
-    *(volatile u32*)(r16 + 12) = 11;
-    return r2;
-}
+u32 kn__Simba__Simba(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x00114fb0: definition moved into src/anon/unit_00114a90.cpp
 
-u32 func_00114ff8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r16 = a0;
-    u32 r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00113628)(a0, a1, a2, a3, a4, a5, a6, a7);
-    u32 r15 = (u32)&D_00346b40;
-    u32 r14 = (u32)&D_00340000;
-    *(volatile u32*)(r16 + 16) = r15;
-    r14 = (u32)&D_00346cd8;
-    *(volatile u32*)r16 = r14;
-    *(volatile u32*)(r16 + 12) = 11;
-    return r2;
-}
+u32 func_00114ff8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x00114ff8: definition moved into src/anon/unit_00114a90.cpp
 
 u32 duplicate_unplaced_00115040(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15;
@@ -2098,45 +1891,13 @@ u32 duplicate_unplaced_00115090(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00105110)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-u32 func_001150e8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2;
-    r8 = (u32)(r8 & 0x00ffu);
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00113fb0)(r4, r5, r6, r7, r8, r9, r10, r11);
-    if (r2) return r2;
-    return r2;
-}
+u32 func_001150e8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x001150e8: definition moved into src/anon/unit_00114a90.cpp
 
-u32 func_00115108(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2;
-    r8 = (u32)(r8 & 0x00ffu);
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00113fb0)(r4, r5, r6, r7, r8, r9, r10, r11);
-    if (r2) return r2;
-    return r2;
-}
+u32 func_00115108(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x00115108: definition moved into src/anon/unit_00114a90.cpp
 
-u32 func_001151b0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r16 = a0;
-    u32 r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00113628)(a0, a1, a2, a3, a4, a5, a6, a7);
-    u32 r15 = (u32)&D_00346d10;
-    u32 r14 = (u32)&D_00340000;
-    *(volatile u32*)(r16 + 16) = r15;
-    r14 = (u32)&D_00346e80;
-    *(volatile u32*)r16 = r14;
-    *(volatile u32*)(r16 + 12) = 10;
-    return r2;
-}
+u32 func_001151b0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x001151b0: definition moved into src/anon/unit_00114a90.cpp
 
-u32 func_001151f8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r16 = a0;
-    u32 r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00113628)(a0, a1, a2, a3, a4, a5, a6, a7);
-    u32 r15 = (u32)&D_00346d10;
-    u32 r14 = (u32)&D_00340000;
-    *(volatile u32*)(r16 + 16) = r15;
-    r14 = (u32)&D_00346e80;
-    *(volatile u32*)r16 = r14;
-    *(volatile u32*)(r16 + 12) = 10;
-    return r2;
-}
+u32 func_001151f8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x001151f8: definition moved into src/anon/unit_00114a90.cpp
 
 u32 duplicate_unplaced_00115240(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15;
@@ -2164,37 +1925,11 @@ u32 duplicate_unplaced_00115290(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00105110)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-u32 func_001152e8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2;
-    r8 = (u32)(r8 & 0x00ffu);
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00113fb0)(r4, r5, r6, r7, r8, r9, r10, r11);
-    if (r2) return r2;
-    return r2;
-}
+u32 func_001152e8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x001152e8: definition moved into src/anon/unit_00114a90.cpp
 
-u32 func_00115308(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r16 = a0;
-    u32 r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00113628)(a0, a1, a2, a3, a4, a5, a6, a7);
-    u32 r15 = (u32)&D_00346eb8;
-    u32 r14 = (u32)&D_00340000;
-    *(volatile u32*)(r16 + 16) = r15;
-    r14 = (u32)&D_00347050;
-    *(volatile u32*)r16 = r14;
-    *(volatile u32*)(r16 + 12) = 11;
-    return r2;
-}
+u32 func_00115308(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x00115308: definition moved into src/anon/unit_00114a90.cpp
 
-u32 func_00115350(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r16 = a0;
-    u32 r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00113628)(a0, a1, a2, a3, a4, a5, a6, a7);
-    u32 r15 = (u32)&D_00346eb8;
-    u32 r14 = (u32)&D_00340000;
-    *(volatile u32*)(r16 + 16) = r15;
-    r14 = (u32)&D_00347050;
-    *(volatile u32*)r16 = r14;
-    *(volatile u32*)(r16 + 12) = 11;
-    return r2;
-}
+u32 func_00115350(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x00115350: definition moved into src/anon/unit_00114a90.cpp
 
 u32 duplicate_unplaced_00115398(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15;
@@ -2222,45 +1957,13 @@ u32 duplicate_unplaced_001153e8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00105110)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-u32 func_00115440(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2;
-    r8 = (u32)(r8 & 0x00ffu);
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00113fb0)(r4, r5, r6, r7, r8, r9, r10, r11);
-    if (r2) return r2;
-    return r2;
-}
+u32 func_00115440(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x00115440: definition moved into src/anon/unit_00114a90.cpp
 
-u32 func_00115460(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2;
-    r8 = (u32)(r8 & 0x00ffu);
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00113fb0)(r4, r5, r6, r7, r8, r9, r10, r11);
-    if (r2) return r2;
-    return r2;
-}
+u32 func_00115460(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x00115460: definition moved into src/anon/unit_00114a90.cpp
 
-u32 func_00115480(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r16 = a0;
-    u32 r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00113628)(a0, a1, a2, a3, a4, a5, a6, a7);
-    u32 r15 = (u32)&D_00347088;
-    u32 r14 = (u32)&D_00340000;
-    *(volatile u32*)(r16 + 16) = r15;
-    r14 = (u32)&D_00347220;
-    *(volatile u32*)r16 = r14;
-    *(volatile u32*)(r16 + 12) = 11;
-    return r2;
-}
+u32 func_00115480(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x00115480: definition moved into src/anon/unit_00114a90.cpp
 
-u32 func_001154c8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r16 = a0;
-    u32 r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00113628)(a0, a1, a2, a3, a4, a5, a6, a7);
-    u32 r15 = (u32)&D_00347088;
-    u32 r14 = (u32)&D_00340000;
-    *(volatile u32*)(r16 + 16) = r15;
-    r14 = (u32)&D_00347220;
-    *(volatile u32*)r16 = r14;
-    *(volatile u32*)(r16 + 12) = 11;
-    return r2;
-}
+u32 func_001154c8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x001154c8: definition moved into src/anon/unit_00114a90.cpp
 
 u32 duplicate_unplaced_00115510(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15;
@@ -2288,37 +1991,11 @@ u32 duplicate_unplaced_00115560(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00105110)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-u32 func_001155b8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2;
-    r8 = (u32)(r8 & 0x00ffu);
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00113fb0)(r4, r5, r6, r7, r8, r9, r10, r11);
-    if (r2) return r2;
-    return r2;
-}
+u32 func_001155b8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x001155b8: definition moved into src/anon/unit_00114a90.cpp
 
-u32 func_001155d8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r16 = a0;
-    u32 r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00113628)(a0, a1, a2, a3, a4, a5, a6, a7);
-    u32 r15 = (u32)&D_00347258;
-    u32 r14 = (u32)&D_00340000;
-    *(volatile u32*)(r16 + 16) = r15;
-    r14 = (u32)&D_003473c8;
-    *(volatile u32*)r16 = r14;
-    *(volatile u32*)(r16 + 12) = 10;
-    return r2;
-}
+u32 func_001155d8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x001155d8: definition moved into src/anon/unit_00114a90.cpp
 
-u32 func_00115620(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r16 = a0;
-    u32 r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00113628)(a0, a1, a2, a3, a4, a5, a6, a7);
-    u32 r15 = (u32)&D_00347258;
-    u32 r14 = (u32)&D_00340000;
-    *(volatile u32*)(r16 + 16) = r15;
-    r14 = (u32)&D_003473c8;
-    *(volatile u32*)r16 = r14;
-    *(volatile u32*)(r16 + 12) = 10;
-    return r2;
-}
+u32 func_00115620(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x00115620: definition moved into src/anon/unit_00114a90.cpp
 
 u32 duplicate_unplaced_00115668(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15;
@@ -2346,17 +2023,7 @@ u32 duplicate_unplaced_001156b8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00105110)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-u32 func_00115738(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r16 = a0;
-    u32 r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00113628)(a0, a1, a2, a3, a4, a5, a6, a7);
-    u32 r15 = (u32)&D_00347400;
-    u32 r14 = (u32)&D_00340000;
-    *(volatile u32*)(r16 + 16) = r15;
-    r14 = (u32)&D_00347550;
-    *(volatile u32*)r16 = r14;
-    *(volatile u32*)(r16 + 12) = 9;
-    return r2;
-}
+u32 func_00115738(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x00115738: definition moved into src/anon/unit_00114a90.cpp
 
 u32 duplicate_unplaced_00115780(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15;
@@ -2384,25 +2051,9 @@ u32 duplicate_unplaced_001157d0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00105110)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-u32 func_00115828(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2;
-    r8 = (u32)(r8 & 0x00ffu);
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00113990)(r4, r5, r6, r7, r8, r9, r10, r11);
-    if (r2) return r2;
-    return r2;
-}
+u32 func_00115828(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x00115828: definition moved into src/anon/unit_00114a90.cpp
 
-u32 func_00119c40(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r16 = a0;
-    u32 r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00113628)(a0, a1, a2, a3, a4, a5, a6, a7);
-    u32 r15 = (u32)&D_00347728;
-    u32 r14 = (u32)&D_00340000;
-    *(volatile u32*)(r16 + 16) = r15;
-    r14 = (u32)&D_003477a0;
-    *(volatile u32*)r16 = r14;
-    *(volatile u32*)(r16 + 12) = 2;
-    return r2;
-}
+u32 func_00119c40(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x00119c40: definition moved into src/anon/unit_00119bf8.cpp
 
 u32 duplicate_unplaced_00119c88(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r16;
@@ -2410,7 +2061,7 @@ u32 duplicate_unplaced_00119c88(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001c8cd8)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = r16;
     r5 = r2;
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00119e60)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))kn__Genie__changeForm)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
 u32 duplicate_unplaced_00119ce0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
@@ -2431,17 +2082,7 @@ u32 duplicate_unplaced_00119d08(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00105110)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-u32 func_0011a2a8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r16 = a0;
-    u32 r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00113628)(a0, a1, a2, a3, a4, a5, a6, a7);
-    u32 r15 = (u32)&D_003477d8;
-    u32 r14 = (u32)&D_00340000;
-    *(volatile u32*)(r16 + 16) = r15;
-    r14 = (u32)&D_00347808;
-    *(volatile u32*)r16 = r14;
-    *(volatile u32*)(r16 + 12) = 1;
-    return r2;
-}
+u32 func_0011a2a8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x0011a2a8: definition moved into src/anon/unit_0011a260.cpp
 
 u32 duplicate_unplaced_0011a2f0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15;
@@ -2469,20 +2110,13 @@ u32 duplicate_unplaced_0011a340(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00105110)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-u32 func_0011a408(u32 a0) {
-    u32 v0 = ((u32(*)(u32))func_00112740)(*(u32*)(a0 + 4));
-    u32 ret = ((u32(*)(u32))func_00119f48)(v0);
-    if (ret != 0) {
-        return ret;
-    }
-    return ret;
-}
+u32 func_0011a408(u32 a0);  // 0x0011a408: definition moved into src/anon/unit_0011a260.cpp
 
 u32 duplicate_unplaced_0011a430(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r16;
     r16 = r4;
     r4 = *(volatile u32*)((u32)r4 + (s32)(4));
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00112740)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))kn__Friend__getFlag)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = *(volatile u32*)((u32)r16 + (s32)(4));
     r5 = (u32)(r2 | 0x0200u);
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00112730)(r4, r5, r6, r7, r8, r9, r10, r11);
@@ -2532,16 +2166,7 @@ u32 duplicate_unplaced_0011a510(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00105110)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-u32 func_0011a6b0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 s0 = a0;
-    u32 r = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00113628)(a0, a1, a2, a3, a4, a5, a6, a7);
-    *(u32*)(s0 + 48) = 0;
-    *(volatile u32*)s0 = (u32)&D_003478b0;
-    *(u32*)(s0 + 32) = 0;
-    *(u32*)(s0 + 12) = 1;
-    *(volatile u32*)(s0 + 16) = (u32)&D_00347880;
-    return r;
-}
+u32 kn__ChickenLittle__ChickenLittle(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x0011a6b0: definition moved into src/anon/unit_0011a660.cpp
 
 void duplicate_unplaced_0011c210(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r14, r15;
@@ -2639,13 +2264,7 @@ u32 duplicate_unplaced_0011eef8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0011ee98)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-u32 func_0011ef20(u32 a0, u32 a1, u32 a2) {
-    u32 s0 = a1;
-    u32 s1 = a2;
-    ((u32(*)(u32))func_0011c3b0)(a2);
-    void (**vt)() = *(void (***)())s0;
-    ((void (*)(u32, u32))vt[1])(s0, s1);
-}
+u32 func_0011ef20(u32 a0, u32 a1, u32 a2);  // 0x0011ef20: definition moved into src/anon/unit_0011c128.cpp
 
 u32 duplicate_unplaced_0011f238(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15, r16;
@@ -2698,18 +2317,7 @@ u32 duplicate_unplaced_0011f6c0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)())func_0011ef20)();
 }
 
-u32 func_00120550(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2;
-    r6 = r7;
-    r7 = r8;
-    r9 = (u32)(r9 & 0x00ffu);
-    r8 = 0u;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0011f7a8)(r4, r5, r6, r7, r8, r9, r10, r11);
-    if (r2 != 0) {
-        return r2;
-    }
-    return r2;
-}
+u32 kn__ModelBG__drawOnShadow(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x00120550: definition moved into src/anon/unit_00120520.cpp
 
 u32 duplicate_unplaced_00120778(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15;
@@ -2811,16 +2419,7 @@ u32 duplicate_unplaced_00124100(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return r2;
 }
 
-void func_00124bb8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r15;
-    r15 = (u32)&D_00347b88;
-    *(u32*)(r4 + 4) = r5;
-    *(u32*)(r4 + 20) = 0u;
-    *(volatile u32*)(r4 + 0) = r15;
-    *(volatile u32*)(r4 + 8) = 0u;
-    *(volatile u32*)(r4 + 12) = 0u;
-    *(volatile u32*)(r4 + 16) = 0u;
-}
+void func_00124bb8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x00124bb8: definition moved into src/anon/unit_00123990.cpp
 
 u32 duplicate_unplaced_00127da0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r13, r14;
@@ -2939,40 +2538,11 @@ u32 duplicate_unplaced_00132590(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00106420)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-u32 func_00132c98(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r14, r15;
-    r15 = *(volatile u32*)((u32)r4 + (s32)(624));
-    r14 = (u32)((s32)0u + (144));
-    r15 = (u32)(r15 * r14);
-    r4 = (u32)(r4 + r15);
-    r4 = (u32)((s32)r4 + (48));
-    r2 = r4;
-    return r2;
-}
+u32 func_00132c98(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x00132c98: definition moved into src/anon/unit_00131418.cpp
 
-u32 func_00133158(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 s0 = a0;
-    u32 ret = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00132270)(a0, a1, a2, a3, a4, a5, a6, a7);
-    u32 vt = (u32)&D_00347c60;
-    *(u32*)(s0 + 40) = 0;
-    u32 two = 2;
-    *(u32*)(s0 + 36) = 0;
-    *(u32*)(s0 + 8) = two;
-    *(u32*)s0 = vt;
-    return ret;
-}
+u32 func_00133158(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x00133158: definition moved into src/anon/unit_00131418.cpp
 
-u32 func_00133198(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 s0 = a0;
-    u32 ret = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00132270)(a0, a1, a2, a3, a4, a5, a6, a7);
-    u32 vt = (u32)&D_00347c60;
-    *(u32*)(s0 + 40) = 0;
-    u32 two = 2;
-    *(u32*)(s0 + 36) = 0;
-    *(u32*)(s0 + 8) = two;
-    *(u32*)s0 = vt;
-    return ret;
-}
+u32 func_00133198(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x00133198: definition moved into src/anon/unit_00131418.cpp
 
 u32 duplicate_unplaced_001331d8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15;
@@ -3011,12 +2581,7 @@ u32 duplicate_unplaced_00133718(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return r2;
 }
 
-u32 func_00133720(u32 a0) {
-    u32 s1 = a0;
-    u32 s0 = ((u32(*)(u32))func_00133718)(a0);
-    u32 v0 = ((u32(*)(u32))func_001336f8)(s1);
-    return (s0 - v0) + *(u32*)(s1 + 20);
-}
+u32 func_00133720(u32 a0);  // 0x00133720: definition moved into src/anon/unit_00131418.cpp
 
 u32 duplicate_unplaced_00133768(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15, r16;
@@ -3028,60 +2593,13 @@ u32 duplicate_unplaced_00133768(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return r2;
 }
 
-u32 func_001337a0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    volatile u32* pp = (volatile u32*)a0;
-    u32 x = 0x50000000u | a2;
-    *(volatile u8*)(*pp + 2) = 0;
-    *(volatile u32*)(*pp + 8) = a3;
-    *(volatile u32*)(*pp + 12) = x;
-    *(volatile u8*)(*pp + 3) = 48;
-    *(volatile u32*)(*pp + 4) = a1;
-    *(volatile u16*)*pp = (u16)a2;
-    *pp = *pp + 16;
-    return a1;
-}
+u32 func_001337a0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x001337a0: definition moved into src/anon/unit_00131418.cpp
 
-u32 func_00133848(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    volatile u32* pp = (volatile u32*)a0;
-    *(volatile u8*)(*pp + 2) = 0;
-    *(volatile u32*)(*pp + 8) = a2;
-    *(volatile u32*)(*pp + 12) = a3;
-    *(volatile u8*)(*pp + 3) = 16;
-    *(volatile u32*)(*pp + 4) = 0;
-    *(volatile u16*)*pp = (u16)a1;
-    u32 p = *pp;
-    u32 q = p + (a1 << 4) + 16;
-    *pp = q;
-    return p + 16;
-}
+u32 func_00133848(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x00133848: definition moved into src/anon/unit_00131418.cpp
 
-u32 func_00133898(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    volatile u32* pp = (volatile u32*)a0;
-    *(volatile u8*)(*pp + 2) = 0;
-    *(volatile u32*)(*pp + 8) = a2;
-    *(volatile u32*)(*pp + 12) = a3;
-    *(volatile u8*)(*pp + 3) = 96;
-    *(volatile u32*)(*pp + 4) = 0;
-    *(volatile u16*)*pp = (u16)a1;
-    u32 p = *pp;
-    u32 q = p + (a1 << 4) + 16;
-    *pp = q;
-    return p + 16;
-}
+u32 func_00133898(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x00133898: definition moved into src/anon/unit_00131418.cpp
 
-u32 func_001338e8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    volatile u32* pp = (volatile u32*)a0;
-    *(volatile u8*)(*pp + 2) = 0;
-    *(volatile u32*)(*pp + 8) = a2;
-    *(volatile u32*)(*pp + 12) = a3;
-    *(volatile u8*)(*pp + 3) = 112;
-    *(volatile u32*)(*pp + 4) = 0;
-    *(volatile u16*)*pp = (u16)a1;
-    u32 p = *pp;
-    u32 q = p + (a1 << 4) + 16;
-    *pp = q;
-    return p + 16;
-}
+u32 func_001338e8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x001338e8: definition moved into src/anon/unit_00131418.cpp
 
 u32 duplicate_unplaced_00133938(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r13, r14, r15;
@@ -3150,15 +2668,7 @@ u32 duplicate_unplaced_001339d0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return r2;
 }
 
-void func_00133ac8(u32 a0, u64 a1, u64 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r14, r15;
-    r15 = *(volatile u32*)((u32)r4 + (s32)(24));
-    r14 = r15;
-    r15 = (u32)((s32)r15 + (16));
-    *(volatile u32*)((u32)r4 + (s32)(24)) = r15;
-    *(volatile u64*)((u32)r14 + (s32)(8)) = a1;
-    *(volatile u64*)((u32)r14 + (s32)(0)) = a2;
-}
+void func_00133ac8(u32 a0, u64 a1, u64 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x00133ac8: definition moved into src/anon/unit_00131418.cpp
 
 u32 duplicate_unplaced_00133b88(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7;
@@ -3236,45 +2746,13 @@ u32 duplicate_unplaced_00134320(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00133bb8)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-u32 func_00134348(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r15;
-    r15 = r4;
-    r6 = r5;
-    r4 = (u32)&D_00347c88;
-    r5 = r15;    r7 = 0u;
-    r8 = 0u;
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00133c00)(r4, r5, r6, r7, r8, r9, r10, r11);
-}
+u32 func_00134348(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x00134348: definition moved into src/anon/unit_00133cf0.cpp
 
-u32 func_00134378(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r15;
-    r15 = r4;
-    r6 = r5;
-    r4 = (u32)&D_00347c88;
-    r5 = r15;    r7 = 0u;
-    r8 = 0u;
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00133c18)(r4, r5, r6, r7, r8, r9, r10, r11);
-}
+u32 func_00134378(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x00134378: definition moved into src/anon/unit_00133cf0.cpp
 
-u32 func_001343a8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r15;
-    r15 = r4;
-    r6 = r5;
-    r4 = (u32)&D_00347c88;
-    r5 = r15;    r7 = 0u;
-    r8 = 0u;
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00133c60)(r4, r5, r6, r7, r8, r9, r10, r11);
-}
+u32 func_001343a8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x001343a8: definition moved into src/anon/unit_00133cf0.cpp
 
-u32 func_001343d8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r15;
-    r15 = r4;
-    r6 = r5;
-    r4 = (u32)&D_00347c88;
-    r5 = r15;    r7 = 0u;
-    r8 = 0u;
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00133c78)(r4, r5, r6, r7, r8, r9, r10, r11);
-}
+u32 func_001343d8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x001343d8: definition moved into src/anon/unit_00133cf0.cpp
 
 u32 duplicate_unplaced_00134428(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r15;
@@ -3317,14 +2795,7 @@ u32 duplicate_unplaced_001344b8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00133bb8)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-u32 func_00135878(u32 a0) {
-    u32 s1 = a0;
-    u32 s0 = ((u32(*)(u32))func_001050d8)(144);
-    u32 v0 = ((u32(*)(u32))func_00135900)(s0);
-    *(u32*)(s0 + 4) = s1;
-    *(u32*)s1 = s0;
-    return v0;
-}
+// 00135878: moved to src/naka/libkn/obj_observer.cpp
 
 u32 duplicate_unplaced_001358c0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r14, r15, r16;
@@ -3387,25 +2858,9 @@ u32 duplicate_unplaced_00135e10(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return r2;
 }
 
-u32 func_00135e50(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r16 = a0;
-    *(volatile u32*)a0 = (u32)&D_00347d18;
-    u32 r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00135ff0)(a0, a1, a2, a3, a4, a5, a6, a7);
-    u32 base = 0x00340000u;
-    u32 old = *(volatile u32*)(base + 32008);
-    *(volatile u32*)(r16 + 8) = old;
-    *(volatile u32*)(base + 32008) = r16;
-    return r2;
-}
+// 00135e50: moved to src/naka/libkn/effect_observer.cpp
 
-u32 func_00136778(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15;
-    r15 = (u32)((s32)0u + (1000));
-    r4 = (u32)(r4 * r15);
-    r4 = (u32)(r4 + r5);
-    r2 = r4;
-    return r2;
-}
+// 00136778: moved to src/harata/libdk/bgse.cpp
 
 u32 duplicate_unplaced_00136790(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15, r16;
@@ -3441,25 +2896,9 @@ u32 duplicate_unplaced_00136968(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00136a50)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-void func_001369d0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r14, r15;
-    r15 = (u32)&D_003b8b20;
-    r14 = (u32)((s32)0u + (-1));    *(volatile u16*)((u32)r15 + (s32)(4)) = (u16)r14;
-    *(volatile u16*)((u32)r15 + (s32)(10)) = (u16)r14;
-    *(volatile u16*)((u32)r15 + (s32)(8)) = (u16)r14;
-    *(volatile u16*)((u32)r15 + (s32)(6)) = (u16)r14;
-}
+// 001369d0: moved to src/harata/libdk/bgse.cpp
 
-void func_001369f0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r14, r15;
-    r15 = (u32)&D_003b8b20;
-    r14 = (u32)((s32)0u + (-1));    *(volatile u16*)((u32)r15 + (s32)(12)) = (u16)r14;
-    *(volatile u16*)((u32)r15 + (s32)(22)) = (u16)r14;
-    *(volatile u16*)((u32)r15 + (s32)(20)) = (u16)r14;
-    *(volatile u16*)((u32)r15 + (s32)(18)) = (u16)r14;
-    *(volatile u16*)((u32)r15 + (s32)(16)) = (u16)r14;
-    *(volatile u16*)((u32)r15 + (s32)(14)) = (u16)r14;
-}
+// 001369f0: moved to src/harata/libdk/bgse.cpp
 
 void duplicate_unplaced_00136a98(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r14, r15;
@@ -3555,16 +2994,7 @@ void duplicate_unplaced_00138480(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5,
     *(volatile u32*)((u32)r13 + (s32)(32264)) = r14;
 }
 
-void func_001384a0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r13, r14, r15;
-    r13 = (u32)(0x0034u << 16);
-    r15 = (u32)((s32)0u + (1));
-    r14 = *(volatile u32*)((u32)r13 + (s32)(32264));
-    r15 = (u32)(r15 << r4);
-    r15 = (u32)(~(0u | r15));
-    r14 = (u32)(r14 & r15);
-    *(volatile u32*)((u32)r13 + (s32)(32264)) = r14;
-}
+void func_001384a0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x001384a0: definition moved into src/anon/unit_00138480.cpp
 
 u32 duplicate_unplaced_001385c0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r15;
@@ -3588,7 +3018,7 @@ u32 duplicate_unplaced_00138650(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r16 = (u32)((s32)r16 + (32));
     r5 = r17;
     r4 = r16;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_002362b0)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YI__IMAGE__Init)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = r16;
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_002367c8)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
@@ -3597,7 +3027,7 @@ u32 duplicate_unplaced_00138698(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r16;
     r16 = (u32)((s32)r4 + (32));
     r4 = r16;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_002362b0)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YI__IMAGE__Init)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = r16;
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_002367c8)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
@@ -3607,7 +3037,7 @@ u32 duplicate_unplaced_001387f8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r16 = r4;
     r17 = r7;
     r4 = (u32)((s32)r4 + (24));
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00239988)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YI__SEQUENCE__Init)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = r16;
     r5 = r17;
     r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00138c10)(r4, r5, r6, r7, r8, r9, r10, r11);
@@ -3629,9 +3059,9 @@ u32 duplicate_unplaced_00138c10(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
 u32 duplicate_unplaced_001390c0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r16;
     r16 = r4;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00138988)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))dk__Sprite__draw)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = r16;
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00138de0)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))dk__SpriteMessage__drawMessage)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
 u32 duplicate_unplaced_001394d8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
@@ -3646,16 +3076,7 @@ u32 duplicate_unplaced_001394d8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00102750)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-void func_00139dc0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 stride = 112;
-    u32 base = (u32)&D_00347ea0;
-    a0 *= stride;
-    a0 += base;
-    u32 gp = 0x00340000u;
-    *(u32*)(gp + 32640) = a0;
-    *(u32*)(a0 + 96) = 0;
-    *(u32*)(a0 + 100) = 0;
-}
+void func_00139dc0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x00139dc0: definition moved into src/anon/unit_001393c8.cpp
 
 void duplicate_unplaced_0013a200(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r13, r14, r15;
@@ -3697,31 +3118,11 @@ u32 duplicate_unplaced_0013b320(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return r2;
 }
 
-u32 func_0013b508(void) {
-    ((u32(*)(u32))func_001398d0)(2);
-    ((u32(*)(u32))func_001398d0)(1);
-    ((u32(*)(u32))func_00139a38)(2);
-    return ((u32(*)(u32))func_00139a38)(1);
-}
+u32 func_0013b508(void);  // 0x0013b508: definition moved into src/anon/unit_0013a8b8.cpp
 
-u32 func_0013b538(void) {
-    ((u32(*)())func_0013b570)();
-    ((u32(*)(u32))func_001397d8)(1);
-    ((u32(*)(u32))func_001397d8)(2);
-    ((u32(*)())func_0013a218)();
-    return ((u32(*)())func_0013b5a8)();
-}
+u32 dk__COMMAND_DRAW__leaveAll(void);  // 0x0013b538: definition moved into src/anon/unit_0013a8b8.cpp
 
-u32 func_0013b808(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32* table = (u32*)&D_004573c0;
-    u32 off4 = a1 << 2;
-    u32 off8 = a1 << 3;
-    u32 base = *(u32*)((u32)table + off4);
-    u32 p = off8 + a1;
-    p += a0;
-    p += base;
-    return *(u8*)(p + 168);
-}
+u32 func_0013b808(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x0013b808: definition moved into src/anon/unit_0013a8b8.cpp
 
 u32 duplicate_unplaced_0013d750(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15, r16, r17;
@@ -3755,16 +3156,7 @@ u32 duplicate_unplaced_0013dad0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return r2;
 }
 
-u32 func_0013db60(void) {
-    ((u32(*)(u32))func_001398d0)(3);
-    ((u32(*)(u32))func_00139b28)(3);
-    ((u32(*)(u32))func_001398d0)(4);
-    ((u32(*)(u32))func_00139b28)(4);
-    ((u32(*)(u32))func_001398d0)(5);
-    ((u32(*)(u32))func_00139b28)(5);
-    ((u32(*)(u32))func_001398d0)(6);
-    return ((u32(*)(u32))func_00139b28)(6);
-}
+u32 func_0013db60(void);  // 0x0013db60: definition moved into src/anon/unit_0013a8b8.cpp
 
 void func_0013dc78(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r14, r15;
@@ -3782,33 +3174,9 @@ void func_0013dc78(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a
     *(volatile u32*)((u32)r4 + (s32)(0)) = r14;
 }
 
-void func_0013dcb0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    a1 <<= 2;
-    u32 idx = a2 >> 5;
-    a0 += a1;
-    idx <<= 2;
-    a0 += 12;
-    a2 &= 31;
-    a0 += idx;
-    u32 mask = 1;
-    u32 val = *(u32*)a0;
-    mask <<= a2;
-    mask = ~mask;
-    val &= mask;
-    *(u32*)a0 = val;
-}
+void func_0013dcb0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x0013dcb0: definition moved into src/anon/unit_0013a8b8.cpp
 
-u32 func_0013dd48(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15;
-    r15 = r4;
-    r6 = r5;
-    r4 = (u32)&D_00348638;
-    r5 = r15;    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0013dce8)(r4, r5, r6, r7, r8, r9, r10, r11);
-    if (r2 != 0) {
-        return r2;
-    }
-    return r2;
-}
+u32 func_0013dd48(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x0013dd48: definition moved into src/anon/unit_0013a8b8.cpp
 
 u32 duplicate_unplaced_0013dd78(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r15;
@@ -3844,15 +3212,7 @@ u32 duplicate_unplaced_0013dde8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0013dc58)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-u32 func_0013e8c0(u32 a0) {
-    u32 s0 = a0;
-    ((u32(*)(u32))func_0014b150)(a0);
-    *(u32*)(s0 + 272) = 0;
-    *(u32*)(s0 + 276) = 0;
-    *(u32*)s0 = (u32)&D_003486f0;
-    *(u32*)(s0 + 280) = 0;
-    return ((u32(*)(u32))func_0013e940)(s0);
-}
+u32 func_0013e8c0(u32 a0);  // 0x0013e8c0: definition moved into src/anon/unit_0013dfb8.cpp
 
 u32 duplicate_unplaced_0013e900(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15, r16;
@@ -3865,7 +3225,7 @@ u32 duplicate_unplaced_0013e900(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     *(volatile u32*)((u32)r16 + (s32)(0)) = r15;
     r4 = r16;
     *(volatile u32*)((u32)r16 + (s32)(280)) = 0u;
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0013e940)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))dk__Ft4Base__createPacket)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
 void func_0013ee18(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
@@ -3969,18 +3329,10 @@ u32 duplicate_unplaced_0013f4d8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r5 = (u32)((s32)0u + (1));
     r6 = (u32)(r6 | 0x93e0u);
     r8 = (u32)((s32)0u + (4096));
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00102818)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))TASK_MANAGER__create_thread)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-u32 func_0013fca8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    a1 = a0;
-    a2 = a0 + 96;
-    a3 = 1;
-    a0 = a0 + 112;
-    a1 = a1 + 128;
-    a4 = 0;
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0013f9e0)(a0, a1, a2, a3, a4, a5, a6, a7);
-}
+u32 func_0013fca8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x0013fca8: definition moved into src/anon/unit_0013fca8.cpp
 
 u32 duplicate_unplaced_00140ce8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2;
@@ -3998,14 +3350,7 @@ u32 duplicate_unplaced_00140ce8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00102788)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-void func_00141c18(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 v3 = a3 & 0xffu;
-    *(u32*)(a0 + 64) = a1;
-    u32 v4 = a4 & 0xffu;
-    *(u32*)(a0 + 68) = a2;
-    *(u8*)(a0 + 208) = (u8)v3;
-    *(u8*)(a0 + 211) = (u8)v4;
-}
+void func_00141c18(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x00141c18: definition moved into src/anon/unit_00141458.cpp
 
 u32 duplicate_unplaced_00142900(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r16, r17;
@@ -4034,16 +3379,7 @@ u32 duplicate_unplaced_00143248(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)())func_001431e8)();
 }
 
-void func_001432f0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 base = 0x0035u << 16;
-    u32 p = *(u32*)((u32)base + (s32)-30696);
-    a0 &= 0xff;
-    a1 &= 0xff;
-    a2 &= 0xff;
-    *(u8*)(p + 84) = a0;
-    *(u8*)(p + 85) = a1;
-    *(u8*)(p + 86) = a2;
-}
+void func_001432f0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x001432f0: definition moved into src/anon/unit_00142c90.cpp
 
 u32 duplicate_unplaced_00143448(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15;
@@ -4123,25 +3459,9 @@ void duplicate_unplaced_00147c78(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5,
     *(volatile u8*)((u32)r5 + (s32)(14)) = (u8)r12;
 }
 
-u32 func_00147ed0(void) {
-    ((u32(*)())func_00134408)();
-    u64 a1 = 115;
-    a1 <<= 40;
-    ((u32(*)(u32, u64))func_00134428)(24, a1 | 0x7000u);
-    return ((u32(*)(u32))func_00134450)(1);
-}
+u32 func_00147ed0(void);  // 0x00147ed0: definition moved into src/anon/unit_00147140.cpp
 
-void func_00148a08(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 idx = *(u16*)(a1 + 284);
-    idx <<= 3;
-    a0 += idx;
-    u32 v = *(u32*)(a0 + 17252);
-    v |= 1;
-    *(u32*)(a0 + 17252) = v;
-    u32 w = *(volatile u32*)(a1 + 248);
-    w |= 2;
-    *(volatile u32*)(a1 + 248) = w;
-}
+void func_00148a08(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x00148a08: definition moved into src/anon/unit_00147140.cpp
 
 u32 duplicate_unplaced_00149350(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7;
@@ -4149,20 +3469,9 @@ u32 duplicate_unplaced_00149350(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00149370)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-u32 func_00149370(u32 a0, u32 a1) {
-    u32 s0 = a1;
-    u32 v0 = ((u32(*)(u32, u32))func_00105140)(a0, 0);
-    u32 a2 = *(u32*)((u32)&D_00340000 - 13580);
-    ((u32(*)(u32, u32, u32, u32))func_002fee78)(s0, (u32)&D_0036afb8, a2, v0);
-    return ((u32(*)(u32))func_002ff3fc)(s0);
-}
+// 00149370: moved to src/harata/libdk/mapfile.cpp
 
-u32 func_001493e8(u32 a0, u32 a1) {
-    u32 s1 = a0;
-    u32 s0 = a1;
-    ((u32(*)(u32))func_002ff3fc)(a1);
-    return ((u32(*)(u32, u32))func_002ff2e8)(s1, s0);
-}
+// 001493e8: moved to src/harata/libdk/mapfile.cpp
 
 u32 duplicate_unplaced_00149428(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7;
@@ -4187,9 +3496,9 @@ u32 duplicate_unplaced_00149be8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
 u32 duplicate_unplaced_00149c08(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r16;
     r16 = (u32)(0x0035u << 16);
-    r2 = ((u32(*)())func_0013a600)();
+    r2 = ((u32(*)())dk__Field2DD__read)();
     r16 = (u32)((s32)r16 + (-29336));
-    r2 = ((u32(*)())func_0013a4c8)();
+    r2 = ((u32(*)())dk__Field2DD__readCommand)();
     r4 = r16;
     r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001493b8)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = r16;
@@ -4212,7 +3521,7 @@ u32 duplicate_unplaced_0014a138(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r5 = 0u;
     r6 = (u32)(r6 | 0x93e0u);
     r8 = (u32)((s32)0u + (4096));
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00102818)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))TASK_MANAGER__create_thread)(r4, r5, r6, r7, r8, r9, r10, r11);
     r16 = (u32)(r16 & 0x00ffu);
     *(volatile u8*)((u32)r2 + (s32)(4)) = (u8)r16;
     return r2;
@@ -4231,7 +3540,7 @@ u32 duplicate_unplaced_0014a188(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r2 = ((u32(*)())func_0014ae10)();
     r4 = (u32)((s32)0u + (1));
     r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0013a9e8)(r4, r5, r6, r7, r8, r9, r10, r11);
-    return ((u32(*)())func_002bea00)();
+    return ((u32(*)())worldmap__Manager__readPackEnable)();
 }
 
 u32 duplicate_unplaced_0014a470(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
@@ -4256,15 +3565,7 @@ u32 duplicate_unplaced_0014a768(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0014b248)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-u32 func_0014a788(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r15;
-    r15 = (u32)(r4 << 1);
-    r6 = (u32)(r5 << 1);
-    r15 = (u32)(r15 & 0xfffeu);
-    r4 = (u32)&D_00349270;
-    r6 = (u32)(r6 & 0xfffeu);    r5 = r15;
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0014b208)(r4, r5, r6, r7, r8, r9, r10, r11);
-}
+u32 func_0014a788(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0014a788: moved to src/anon/unit_00149fa8.cpp
 
 u32 duplicate_unplaced_0014a950(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15, r16;
@@ -4315,22 +3616,7 @@ u32 duplicate_unplaced_0014ad20(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00102788)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-void func_0014b150(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    Obj_0014b150* s = (Obj_0014b150*)a0;
-    s->h8 = 0;
-    s->h10 = 0;
-    s->p = (u32)&D_00348698;
-    s->h4 = 512;
-    s8 n = -128;
-    u16 k = 416;
-    u32 one = 1;
-    s->b16 = n;
-    s->h6 = k;
-    s->w12 = one;
-    s->b17 = n;
-    s->b18 = n;
-    s->b19 = n;
-}
+// 0014b150: moved to src/anon/unit_0014b150.cpp
 
 void duplicate_unplaced_0014b220(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7;
@@ -4397,16 +3683,7 @@ void duplicate_unplaced_0014bb00(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5,
     *(volatile u16*)((u32)r4 + (s32)(324)) = (u16)r7;
 }
 
-void func_0014c8e0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32* r15 = (u32*)&D_00349de8;
-    u32* r14 = (u32*)&D_00349df8;
-    *r15 = 0;
-    *r14 = 0;
-    r15 = (u32*)&D_00349dec;
-    r14 = (u32*)&D_00349dfc;
-    *r15 = 0;
-    *r14 = 0;
-}
+void func_0014c8e0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x0014c8e0: definition moved into src/anon/unit_0014c7f0.cpp
 
 u32 duplicate_unplaced_0014c908(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15;
@@ -4529,7 +3806,7 @@ u32 duplicate_unplaced_0014cfc8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0014ce20)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = (u32)((s32)0u + (1));
     r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0014ce30)(r4, r5, r6, r7, r8, r9, r10, r11);
-    r2 = ((u32(*)())func_0014ce60)();
+    r2 = ((u32(*)())dk__Vsync__initGameSpeed)();
     r15 = (u32)(0x0035u << 16);
     *(volatile u32*)((u32)r15 + (s32)(-25084)) = 0u;
     r14 = (u32)(0x0035u << 16);
@@ -4537,28 +3814,9 @@ u32 duplicate_unplaced_0014cfc8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return r2;
 }
 
-void func_0014d2e8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r14, r15;
-    r14 = (u32)((s32)0u + (88));
-    r4 = (u32)(r4 * r14);
-    r15 = (u32)&D_00349e48;
-    r4 = (u32)(r4 + r15);
-    *(volatile u32*)((u32)r4 + (s32)(84)) = 0u;
-    *(volatile u32*)((u32)r4 + (s32)(80)) = 0u;
-}
+// 0014d2e8: moved to src/anon/unit_0014d298.cpp
 
-u32 func_0014d308(void) {
-    u32 s0 = (u32)&D_00349e28;
-    u32 v0 = ((u32(*)())func_00305510)();
-    ((u32(*)(u32, u32))func_003054b0)(v0, 30);
-    *(u32*)(s0 + 24) = ((u32(*)(u32))func_00305620)(s0);
-    ((u32(*)(u32))func_0014d2e8)(0);
-    u32 ret = ((u32(*)(u32))func_0014d2e8)(1);
-    if (ret != 0) {
-        return ret;
-    }
-    return ret;
-}
+// 0014d308: moved to src/anon/unit_0014d298.cpp
 
 u32 duplicate_unplaced_0014d8d0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15, r16;
@@ -4567,7 +3825,7 @@ u32 duplicate_unplaced_0014d8d0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_003058a0)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = 0u;
     r5 = 0u;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_002f25a0)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))sceGsSyncPath)(r4, r5, r6, r7, r8, r9, r10, r11);
     r5 = r16;
     r15 = (u32)(0x0035u << 16);
     r4 = *(volatile u32*)((u32)r15 + (s32)(-24840));
@@ -4579,7 +3837,7 @@ u32 duplicate_unplaced_0014d910(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r5 = 0u;
     r16 = r4;
     r4 = 0u;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_002f25a0)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))sceGsSyncPath)(r4, r5, r6, r7, r8, r9, r10, r11);
     r5 = r16;
     r15 = (u32)(0x0035u << 16);
     r4 = *(volatile u32*)((u32)r15 + (s32)(-24840));
@@ -4636,22 +3894,11 @@ void duplicate_unplaced_0014dd60(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5,
     *(volatile u8*)((u32)r4 + (s32)(471)) = (u8)r6;
 }
 
-u32 func_0014e098(u32 a0) {
-    u32 s0 = a0;
-    u32 v0 = ((u32(*)(u32))func_0014e648)((u32)&D_00349f00);
-    return ((u32(*)(u32, u32, u32))func_0014de30)(v0, (u32)&D_00457580, s0);
-}
+// 0014e098: moved to src/anon/unit_0014d680.cpp
 
-u32 func_0014e0d8(void) {
-    u32 v0 = ((u32(*)(u32))func_0014e648)((u32)&D_00349f00);
-    return ((u32(*)(u32, u32))func_0014dec0)(v0, (u32)&D_00457580);
-}
+// 0014e0d8: moved to src/anon/unit_0014d680.cpp
 
-u32 func_0014e5f0(u32 a0) {
-    u32 s0 = a0;
-    ((u32(*)(u32))func_001669e0)(a0 + 736);
-    return ((u32(*)(u32))func_0014d8d0)(s0);
-}
+// 0014e5f0: moved to src/harata/libdk/fpscamera.cpp
 
 u32 duplicate_unplaced_0014ec20(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2;
@@ -4716,16 +3963,7 @@ u32 duplicate_unplaced_0014f688(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00150dc0)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-void func_0014fdd0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 x = *(volatile u32*)(a0 + 24);
-    u32 y = *(volatile u32*)(a0 + 28);
-    u32 idx = x << 1;
-    idx += x;
-    idx += y;
-    idx <<= 1;
-    u32 base = (u32)&D_0034a458;
-    *(volatile u16*)(idx + base) = 0;
-}
+void dk__INFO_BASE__destroy(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x0014fdd0: definition moved into src/anon/unit_0014ecb8.cpp
 
 u32 duplicate_unplaced_00150578(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r16;
@@ -4785,7 +4023,7 @@ u32 duplicate_unplaced_001514e8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r5 = (u32)((s32)0u + (9));
     r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00138c10)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = r16;
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00150be8)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))dk__TIMER__init)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
 u32 duplicate_unplaced_00151b40(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
@@ -4811,7 +4049,7 @@ u32 duplicate_unplaced_001520c0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     *(volatile u32*)((u32)r16 + (s32)(2892)) = r15;
     r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00138c10)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = r16;
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00151d48)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))dk__GET_MUNNY__initNumber)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
 u32 duplicate_unplaced_00152ab8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
@@ -4908,17 +4146,8 @@ u32 duplicate_unplaced_00155528(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00138c10)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-u32 func_00155d58(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r14, r15;
-    r14 = *(volatile u32*)((u32)r4 + (s32)(24));
-    r15 = (u32)(r5 << 1);
-    r15 = (u32)(r15 + r5);
-    r15 = (u32)(r15 + r14);
-    r14 = (u32)&D_0034a878;
-    r15 = (u32)(r15 << 2);    r15 = (u32)(r15 + r14);
-    r2 = *(volatile u32*)((u32)r15 + (s32)(0));
-    return r2;
-}
+// 00155d58: moved to src/anon/unit_00153ea0.cpp
+u32 func_00155d58(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);
 
 u32 duplicate_unplaced_001565a8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7;
@@ -4929,7 +4158,7 @@ u32 duplicate_unplaced_001565a8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
 u32 duplicate_unplaced_00157068(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r16;
     r16 = r4;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00155f40)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))dk__GAUGE_PLAYER__getDriveLoopSqNum)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = (u32)((s32)r16 + (11648));
     r5 = r2;
     r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00138c10)(r4, r5, r6, r7, r8, r9, r10, r11);
@@ -5127,13 +4356,7 @@ void duplicate_unplaced_0015cb18(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5,
     *(volatile u8*)((u32)r7 + (s32)(0)) = (u8)r15;
 }
 
-void func_0015cb48(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u8* p = (u8*)&D_004f3700;
-    *(u8*)a0 = p[0];
-    *(u8*)a1 = p[1];
-    *(u8*)a2 = p[2];
-    *(u8*)a3 = p[3];
-}
+void func_0015cb48(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x0015cb48: definition moved into src/anon/unit_0015cb18.cpp
 
 void duplicate_unplaced_0015cb78(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r13, r14, r15;
@@ -5299,25 +4522,9 @@ u32 duplicate_unplaced_001665d8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return r2;
 }
 
-void func_001666d0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    a1 &= 0xffff;
-    *(u32*)a0 = a2;
-    a3 &= 0xffff;
-    *(u16*)(a0 + 8) = a1;
-    a4 &= 0xffff;
-    *(u16*)(a0 + 4) = a3;
-    *(u16*)(a0 + 6) = a4;
-}
+void func_001666d0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x001666d0: definition moved into src/anon/unit_001664c0.cpp
 
-void func_001666f0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    a1 &= 0xffff;
-    *(u32*)a0 = a2;
-    a3 &= 0xffff;
-    *(u16*)(a0 + 8) = a1;
-    a4 &= 0xffff;
-    *(u16*)(a0 + 4) = a3;
-    *(u16*)(a0 + 6) = a4;
-}
+void func_001666f0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x001666f0: definition moved into src/anon/unit_001664c0.cpp
 
 u32 duplicate_unplaced_001668f8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15, r16;
@@ -5353,13 +4560,7 @@ void duplicate_unplaced_00166c80(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5,
     *(volatile u16*)((u32)r14 + (s32)(-14218)) = (u16)r5;
 }
 
-u32 func_00166cc8(u32 a0) {
-    u32 v = 0;
-    if (a0 != 0) {
-        v = ((u32(*)(u32))func_001a2478)(*(u32*)(a0 + 1164));
-    }
-    return v;
-}
+u32 func_00166cc8(u32 a0);  // 0x00166cc8: definition moved into src/anon/unit_001664c0.cpp
 
 void duplicate_unplaced_001671e8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r12, r13, r14, r15;
@@ -5386,15 +4587,7 @@ u32 duplicate_unplaced_00167b60(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return r2;
 }
 
-u32 func_00167bf0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r14, r15;
-    r14 = (u32)((s32)0u + (384));
-    r4 = (u32)(r4 * r14);
-    r15 = (u32)&D_0034d3c0;
-    r4 = (u32)(r4 + r15);
-    r2 = r4;
-    return r2;
-}
+// 00167bf0: moved to src/anon/unit_00167358.cpp
 
 u32 duplicate_unplaced_00167e28(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r14, r15, r16;
@@ -5444,15 +4637,7 @@ u32 duplicate_unplaced_00167ee0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return r2;
 }
 
-u32 func_00167f18(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r14, r15;
-    r14 = (u32)((s32)0u + (96));
-    r4 = (u32)(r4 * r14);
-    r15 = (u32)&D_0034d6c0;
-    r4 = (u32)(r4 + r15);
-    r2 = r4;
-    return r2;
-}
+// 00167f18: moved to src/anon/unit_00167358.cpp
 
 u32 duplicate_unplaced_00167fc8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r12, r13, r14, r15;
@@ -5493,11 +4678,7 @@ u32 duplicate_unplaced_001682b8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return r2;
 }
 
-u32 func_001682f0(u32 a0, u32 a1, u32 a2, u32 a3) {
-    u32 s0 = ((u32(*)(u32, u32, u32, u32))func_001ae0a0)(a0, a1, a2, a3 & 0xffffu);
-    ((u32(*)(u32))func_003058a0)(0);
-    return s0;
-}
+// 001682f0: moved to src/yasui/libys/file.cpp
 
 u32 duplicate_unplaced_00169148(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r16;
@@ -5553,14 +4734,7 @@ u32 duplicate_unplaced_0016bd10(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return r2;
 }
 
-u32 func_0016bd60(u32 a0, u32 a1) {
-    u32 s0 = a0;
-    u32 s1 = a1;
-    u32 obj = *(u32*)(a0 + 12);
-    void (**vt)() = *(void (***)())obj;
-    ((void (*)(u32, u32))vt[1])(obj, s0);
-    return ((u32(*)(u32, u32))func_0016bd10)(s0, s1);
-}
+u32 func_0016bd60(u32 a0, u32 a1);  // 0x0016bd60: definition moved into src/anon/unit_00169f98.cpp
 
 u32 duplicate_unplaced_0016c028(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15, r16;
@@ -5583,12 +4757,7 @@ void duplicate_unplaced_0016c750(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5,
     *(volatile u32*)((u32)r13 + (s32)(25232)) = 0u;
 }
 
-u32 func_0016c7d8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 base = 0x004fu << 16;
-    u32 obj = *(u32*)((u32)base + (s32)25224);
-    void (**vt)() = *(void (***)())obj;
-    ((void (*)(u32, u32, u32, u32, u32, u32, u32, u32))vt[1])(obj, a0, a2, a3, a4, a5, a6, a7);
-}
+// 0016c7d8: moved to src/anon/unit_0016c770.cpp
 
 u32 duplicate_unplaced_0016cbc8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r16, r17, r18;
@@ -5600,7 +4769,7 @@ u32 duplicate_unplaced_0016cbc8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r6 = r17;
     r7 = r18;
     r5 = r2;
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0016cba0)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__VM__call_pc)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
 u32 duplicate_unplaced_0016ded8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
@@ -5624,7 +4793,7 @@ u32 duplicate_unplaced_0016e130(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r16 = r4;
     r5 = *(volatile u32*)((u32)r4 + (s32)(0));
     r4 = (u32)&D_0032e020;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00189200)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__SAVERAM_BATTLE__get_formram)(r4, r5, r6, r7, r8, r9, r10, r11);
     r5 = *(volatile u32*)((u32)r16 + (s32)(4));
     r4 = r2;
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001891b8)(r4, r5, r6, r7, r8, r9, r10, r11);
@@ -5635,7 +4804,7 @@ u32 duplicate_unplaced_0016e688(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r15 = *(volatile u32*)((u32)r4 + (s32)(0));
     r5 = *(volatile u32*)((u32)r4 + (s32)(4));
     r4 = r15;
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00188958)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__PARTRAM__set_item_max)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
 u32 duplicate_unplaced_0016e718(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
@@ -5648,18 +4817,13 @@ u32 duplicate_unplaced_0016e718(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00188b68)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-u32 func_0016e800(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 s0 = a0;
-    u32 v0 = func_001a3188(*(u32*)a0, *(u32*)(s0 + 4), 0, a3, a4, a5, a6, a7);
-    *(u32*)s0 = v0;
-    return v0;
-}
+// 0016e800: moved to src/anon/unit_0016d2e0.cpp
 
 u32 duplicate_unplaced_0016e8f8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15;
     r15 = (u32)(0x0035u << 16);
     r4 = *(volatile u32*)((u32)r15 + (s32)(-9176));
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001b1448)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__DATABUFF__Read)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = r2;
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001d3390)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
@@ -5725,7 +4889,7 @@ u32 duplicate_unplaced_00170530(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r14, r15, r16;
     r16 = r6;
     r6 = r7;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00170400)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__CACHE_BUFF__ReadRequestSub)(r4, r5, r6, r7, r8, r9, r10, r11);
     *(volatile u16*)((u32)r2 + (s32)(56)) = (u16)r16;
     r15 = (u32)((s32)0u + (-1));
     r14 = (u32)((s32)0u + (1));
@@ -5734,14 +4898,7 @@ u32 duplicate_unplaced_00170530(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return r2;
 }
 
-void func_00170c00(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 idx = *(volatile u32*)&D_0034dca8;
-    u32* values = (u32*)&D_01c5c440;
-    u32 sum = *(volatile u32*)&D_0034dc9c;
-    u32 value = values[idx];
-    *(volatile u32*)&D_0034dca8 = idx + 1;
-    *(volatile u32*)&D_0034dc9c = sum + value;
-}
+void func_00170c00(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x00170c00: definition moved into src/anon/unit_0016e8f8.cpp
 
 u32 duplicate_unplaced_00171348(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r14, r15;
@@ -5892,37 +5049,18 @@ u32 duplicate_unplaced_001723d0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r16 = r4;
     r15 = *(volatile u32*)((u32)r4 + (s32)(0));
     r4 = *(volatile u32*)((u32)r15 + (s32)(4));
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001ba028)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__OBJ__is_valid)(r4, r5, r6, r7, r8, r9, r10, r11);
     r15 = *(volatile u32*)((u32)r16 + (s32)(0));
     r5 = 0u;
     r4 = *(volatile u32*)((u32)r15 + (s32)(4));
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0016bd60)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-u32 func_00172648(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 s0 = a0;
-    u32 vtable = *(u32*)a0;
-    u32 v0 = func_0016ac80(*(u32*)(vtable + 4), *(u32*)(a0 + 4), *(u32*)(s0 + 8), *(u32*)(s0 + 12), *(u32*)(s0 + 16), a5, a6, a7);
-    *(u32*)s0 = v0;
-    return v0;
-}
+u32 func_00172648(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x00172648: definition moved into src/anon/unit_00171e58.cpp
 
-u32 func_00172688(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 s0 = a0;
-    u32 vtable = *(u32*)a0;
-    u32 v0 = func_0016ac38(*(u32*)(vtable + 4), *(u32*)(a0 + 4), *(u32*)(s0 + 8), *(u32*)(s0 + 12), 0, a5, a6, a7);
-    *(u32*)s0 = v0;
-    return v0;
-}
+u32 func_00172688(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x00172688: definition moved into src/anon/unit_00171e58.cpp
 
-u32 func_001726c8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 s0 = a0;
-    u32 p = *(u32*)(a0 + 8);
-    u32 vtable = *(u32*)a0;
-    u32 v0 = func_0016ac38(*(u32*)(vtable + 4), *(u32*)(s0 + 4), *(u32*)(s0 + 12), *(u32*)(s0 + 16), *(u32*)(p + 4), a5, a6, a7);
-    *(u32*)s0 = v0;
-    return v0;
-}
+u32 func_001726c8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x001726c8: definition moved into src/anon/unit_00171e58.cpp
 
 u32 duplicate_unplaced_001729d8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15, r16;
@@ -5986,7 +5124,7 @@ u32 duplicate_unplaced_00172e48(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r16 = r4;
     r15 = *(volatile u32*)((u32)r4 + (s32)(0));
     r4 = *(volatile u32*)((u32)r15 + (s32)(4));
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0019ba60)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__OBJ__is_exist)(r4, r5, r6, r7, r8, r9, r10, r11);
     r15 = *(volatile u32*)((u32)r16 + (s32)(0));
     r14 = *(volatile u32*)((u32)r15 + (s32)(4));
     r13 = *(volatile u32*)((u32)r14 + (s32)(2760));
@@ -6084,7 +5222,7 @@ u32 duplicate_unplaced_00174858(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r8 = *(volatile u32*)((u32)r16 + (s32)(16));
     r4 = *(volatile u32*)((u32)r4 + (s32)(0));
     r9 = *(volatile u32*)((u32)r15 + (s32)(4));
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001de168)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))ryj__PAX__start)(r4, r5, r6, r7, r8, r9, r10, r11);
     *(volatile u32*)((u32)r16 + (s32)(0)) = r2;
     return r2;
 }
@@ -6181,13 +5319,7 @@ u32 duplicate_unplaced_001754d0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001382b8)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-u32 func_001762c0(u32 a0, u32 a1) {
-    u32 s0 = a1;
-    u32 v0 = ((u32(*)(u32))func_0016a080)(a0);
-    s0 <<= 1;
-    v0 = ((u32(*)(u32))func_001c2d48)(v0);
-    return (u32)(s32)*(s16*)(s0 + v0 + 4);
-}
+// 001762c0: moved to src/yasui/libys/party.cpp
 
 u32 duplicate_unplaced_00176d68(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r16, r17;
@@ -6203,12 +5335,7 @@ u32 duplicate_unplaced_00176d68(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00198630)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-u32 func_00176ec8(u32 a0) {
-    u32 s0 = a0;
-    void (**vt)() = *(void (***)())a0;
-    ((void (*)(u32, u32, u32))vt[21])(a0, 2, 0);
-    return ((u32(*)(u32))func_00187850)(s0);
-}
+// 00176ec8: moved to src/yasui/libys/party.cpp
 
 u32 duplicate_unplaced_00177460(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r16, r17;
@@ -6245,20 +5372,9 @@ u32 duplicate_unplaced_00177638(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00194108)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-u32 func_001780d8(u32 a0) {
-    u32 s0 = a0;
-    ((u32(*)(u32))func_001758b0)(a0);
-    return ((u32(*)(u32))func_0017a718)(s0);
-}
+// 001780d8: moved to src/yasui/libys/player.cpp
 
-u32 func_001781a8(u32 a0) {
-    u32 s0 = a0;
-    ((u32(*)(u32))func_00178100)(a0);
-    ((u32(*)(u32))func_00182f28)(s0);
-    u32 tex = (u32)&D_01c5f530;
-    *(u32*)(s0 + 2876) = tex;
-    return ((u32(*)(u32, u32))func_001d6938)(tex, s0);
-}
+// 001781a8: moved to src/yasui/libys/player.cpp
 
 u32 duplicate_unplaced_001781e8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r16;
@@ -6288,14 +5404,7 @@ u32 duplicate_unplaced_00179e18(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00176ec8)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-u32 func_00179f10(u32 a0) {
-    u32 s0 = a0;
-    *(u32*)(a0 + 2040) &= (u32)-5;
-    ((u32(*)(u32))func_001852b8)(a0);
-    u32 v0 = ((u32(*)(u32, u32))func_0016bd60)(s0, 0);
-    *(u32*)(*(u32*)(s0 + 2884) + 2528) = s0;
-    return v0;
-}
+// 00179f10: moved to src/yasui/libys/player.cpp
 
 u32 duplicate_unplaced_00179f58(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r16;
@@ -6329,7 +5438,7 @@ u32 duplicate_unplaced_0017a1c8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r15 = *(volatile u32*)((u32)r4 + (s32)(268));
     r15 = (u32)(r15 & r14);
     *(volatile u32*)((u32)r4 + (s32)(268)) = r15;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001762f8)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__PARTY___OVR_exec_damage)(r4, r5, r6, r7, r8, r9, r10, r11);
     r5 = r16;
     r4 = 0u;
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00112ab8)(r4, r5, r6, r7, r8, r9, r10, r11);
@@ -6348,7 +5457,7 @@ u32 duplicate_unplaced_0017a938(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r16;
     r4 = r5;
     r16 = r5;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0017c430)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__OBJ__prepare_jump_height)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = r16;
     r5 = (u32)((s32)0u + (1));
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0016bd60)(r4, r5, r6, r7, r8, r9, r10, r11);
@@ -6371,7 +5480,7 @@ void duplicate_unplaced_0017c400(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5,
 u32 duplicate_unplaced_0017dc98(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r16;
     r16 = r4;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0017dcc0)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__FRIEND__exec_stun)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = r16;
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00175af8)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
@@ -6413,7 +5522,7 @@ u32 duplicate_unplaced_0017ebc8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
 u32 duplicate_unplaced_001805a8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r16;
     r16 = r4;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0017ec98)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__MOTION__id_to_num)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = r16;
     r5 = r2;
     r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0017edf0)(r4, r5, r6, r7, r8, r9, r10, r11);
@@ -6473,13 +5582,7 @@ u32 duplicate_unplaced_00181a90(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return r2;
 }
 
-u32 func_00182780(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 base = 0x0035u << 16;
-    u32 idx = *(volatile u32*)((s32)base - 4864);
-    u32 ret = (u32)&D_01c60588 + idx * 12;
-    *(volatile u32*)((s32)base - 4864) = idx + 1;
-    return ret;
-}
+// 00182780 YS::UNIT::operator new: moved to src/anon/unit_00182780.cpp
 
 void duplicate_unplaced_00182838(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r15;
@@ -6547,7 +5650,7 @@ u32 duplicate_unplaced_00186948(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r5 = *(volatile u32*)((u32)r16 + (s32)(28));
     r4 = r17;
     r6 = r2;
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001c1b08)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__BTLOBJ__tornado)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
 u32 duplicate_unplaced_001883f8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
@@ -6561,7 +5664,7 @@ u32 duplicate_unplaced_001883f8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r7 = (u32)((s32)0u + (2));
     *(volatile u32*)((u32)r14 + (s32)(3016)) = r13;
     *(volatile u32*)((u32)r15 + (s32)(4)) = r12;
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00188340)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__ACT__callback)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
 u32 duplicate_unplaced_00188430(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
@@ -6576,54 +5679,27 @@ u32 duplicate_unplaced_00188430(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     *(volatile u32*)((u32)r15 + (s32)(4)) = r5;
     *(volatile u32*)((u32)r15 + (s32)(8)) = r12;
     r5 = (u32)((s32)0u + (7));
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00188340)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__ACT__callback)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-void func_00188c10(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r13, r14, r15;
-    r13 = (u32)&D_0032bb30;
-    r14 = (u32)((s32)0u + (41));    r15 = (u32)(*(u16*)((u32)r13 + (s32)(16362)));
-    if (r15 == 0u) r15 = r14;
-    *(volatile u16*)((u32)r4 + (s32)(0)) = (u16)r15;
-    *(volatile u16*)((u32)r13 + (s32)(16362)) = (u16)0u;
-}
+void func_00188c10(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x00188c10: definition moved into src/anon/unit_00188848.cpp
 
 u32 duplicate_unplaced_00189028(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r16, r17;
     r16 = r6;
     r17 = r7;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00188fe0)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__SAVERAM_BATTLE__get_partram)(r4, r5, r6, r7, r8, r9, r10, r11);
     r5 = r16;
     r6 = r17;
     r4 = r2;
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00188948)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-u32 func_001892b8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7;
-    r6 = r5;
-    r5 = (u32)&D_001892d8;
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00189f20)(r4, r5, r6, r7, r8, r9, r10, r11);
-}
+u32 func_001892b8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x001892b8: definition moved into src/anon/unit_00188848.cpp
 
-u32 func_00189d18(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7;
-    r6 = r5;
-    r5 = (u32)&D_00189740;
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0018a008)(r4, r5, r6, r7, r8, r9, r10, r11);
-}
+u32 func_00189d18(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x00189d18: definition moved into src/anon/unit_00188848.cpp
 
-void func_0018aca8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 idx = a1 >> 5;
-    a0 += 2820;
-    idx <<= 2;
-    a1 &= 31;
-    a0 += idx;
-    u32 val = *(u32*)a0;
-    u32 mask = 1u << a1;
-    val |= mask;
-    *(u32*)a0 = val;
-}
+void func_0018aca8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x0018aca8: definition moved into src/yasui/libys/npc.cpp
 
 u32 duplicate_unplaced_0018c8b8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r13, r14, r15;
@@ -6798,27 +5874,9 @@ void duplicate_unplaced_00190840(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5,
     *(volatile u32*)((u32)r14 + (s32)(2560)) = r4;
 }
 
-u32 func_00190878(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r16, r17, r18;
-    r16 = r4;
-    r17 = r6;
-    r18 = r5;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00190128)(r4, r5, r6, r7, r8, r9, r10, r11);
-    *(u32*)((u32)r16 + (s32)(0)) = r18;
-    *(volatile u32*)((u32)r16 + (s32)(4)) = r17;
-    return r2;
-}
+u32 func_00190878(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x00190878: definition moved into src/anon/unit_001900d0.cpp
 
-u32 func_001908c0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r16, r17, r18;
-    r16 = r4;
-    r17 = r6;
-    r18 = r5;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00190128)(r4, r5, r6, r7, r8, r9, r10, r11);
-    *(u32*)((u32)r16 + (s32)(8)) = r18;
-    *(volatile u32*)((u32)r16 + (s32)(0)) = r17;
-    return r2;
-}
+u32 func_001908c0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x001908c0: definition moved into src/anon/unit_001900d0.cpp
 
 u32 duplicate_unplaced_00190908(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7;
@@ -6826,18 +5884,12 @@ u32 duplicate_unplaced_00190908(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001908c0)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-void func_00192028(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r15;
-    r15 = (u32)&D_01c61970;
-    r4 = (u32)(r4 << 3);    r4 = (u32)(r4 + r15);
-    *(volatile u32*)((u32)r4 + (s32)(4)) = 0u;
-    *(volatile u32*)((u32)r4 + (s32)(0)) = 0u;
-}
+// 00192028: moved to src/yasui/libys/message.cpp
 
 u32 duplicate_unplaced_00192260(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r16;
     r16 = r5;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001921d8)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__MESSAGE__GetFilename)(r4, r5, r6, r7, r8, r9, r10, r11);
     r5 = r16;
     r4 = r2;
     r6 = 0u;
@@ -6847,7 +5899,7 @@ u32 duplicate_unplaced_00192260(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
 u32 duplicate_unplaced_00192290(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r16;
     r16 = r5;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001921d8)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__MESSAGE__GetFilename)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = r2;
     r5 = (u32)((s32)0u + (-1));
     r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001708f8)(r4, r5, r6, r7, r8, r9, r10, r11);
@@ -6869,13 +5921,7 @@ u32 duplicate_unplaced_00192498(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return r2;
 }
 
-u32 func_00192c40(u32 a0, u32 a1) {
-    u32 s0 = a1;
-    u32 s2 = a0;
-    u32 s1 = ((u32(*)(u32))func_00192b30)(a0);
-    ((u32(*)(u32, u32, u32))func_002fdd68)(s0, s2, s1);
-    return s1;
-}
+// 00192c40: moved to src/yasui/libys/message.cpp
 
 u32 duplicate_unplaced_00192c90(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r16;
@@ -6962,14 +6008,14 @@ u32 duplicate_unplaced_00195f88(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r4 = *(volatile u32*)((u32)r4 + (s32)(2548));
     r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001dc878)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = r16;
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0016b668)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__OBJ___OVR_leave)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
 u32 duplicate_unplaced_00196170(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15;
     r15 = (u32)(0x0035u << 16);
     r4 = *(volatile u32*)((u32)r15 + (s32)(816));
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001b1448)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__DATABUFF__Read)(r4, r5, r6, r7, r8, r9, r10, r11);
     r15 = (u32)(0x01c6u << 16);
     *(volatile u32*)((u32)r15 + (s32)(6912)) = r2;
     return r2;
@@ -6979,7 +6025,7 @@ u32 duplicate_unplaced_00196300(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15;
     r15 = (u32)(0x0035u << 16);
     r4 = *(volatile u32*)((u32)r15 + (s32)(820));
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001b1448)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__DATABUFF__Read)(r4, r5, r6, r7, r8, r9, r10, r11);
     r15 = (u32)(0x01c6u << 16);
     *(volatile u32*)((u32)r15 + (s32)(6916)) = r2;
     return r2;
@@ -6999,44 +6045,19 @@ void duplicate_unplaced_001963c8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5,
     *(volatile u32*)((u32)r13 + (s32)(0)) = r14;
 }
 
-void func_001963f8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 idx = a0 >> 5;
-    u32 base = (u32)&D_0032da20;
-    idx <<= 2;
-    idx += base;
-    a0 &= 31;
-    u32 mask = 1;
-    u32 val = *(volatile u32*)idx;
-    mask <<= a0;
-    mask = ~mask;
-    val &= mask;
-    *(volatile u32*)idx = val;
-}
+void func_001963f8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x001963f8: definition moved into src/anon/unit_00195d00.cpp
 
-void func_00196670(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r15;
-    r15 = (u32)&D_0032bb30;
-    r4 = (u32)(r4 << 2);    r4 = (u32)(r4 + r15);
-    r15 = (u32)((s32)r4 + (7904));
-    *(volatile u16*)((u32)r15 + (s32)(24)) = (u16)r5;
-    r4 = (u32)((s32)r4 + (7906));
-    *(volatile u16*)((u32)r4 + (s32)(24)) = (u16)r6;
-}
+void func_00196670(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x00196670: definition moved into src/anon/unit_00195d00.cpp
 
-void func_00196698(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r15;
-    r15 = (u32)&D_0032bb30;
-    r4 = (u32)(r4 << 2);    r4 = (u32)(r4 + r15);
-    *(volatile u16*)((u32)r4 + (s32)(7928)) = (u16)0u;
-}
+void func_00196698(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x00196698: definition moved into src/anon/unit_00195d00.cpp
 
 u32 duplicate_unplaced_00197738(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2;
     r4 = (u32)((s32)0u + (2000));
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001b9db0)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__OBJ__LeaveAll)(r4, r5, r6, r7, r8, r9, r10, r11);
     r2 = ((u32(*)())func_00197c90)();
     r4 = (u32)((s32)0u + (11));
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001ada38)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__RECOV__Exec)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
 u32 duplicate_unplaced_00197760(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
@@ -7065,18 +6086,9 @@ u32 duplicate_unplaced_001979d8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return r2;
 }
 
-u32 func_00197d18(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7;
-    r6 = (u32)&D_00197cf0;
-    r4 = (u32)((s32)0u + (1));
-    r5 = (u32)((s32)0u + (15000));    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00102c18)(r4, r5, r6, r7, r8, r9, r10, r11);
-}
+u32 func_00197d18(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x00197d18: definition moved into src/anon/unit_00195d00.cpp
 
-u32 func_00198828(u32 a0, u32 a1) {
-    u32 s0 = a1;
-    u32 v0 = ((u32(*)(u32, u32, u32))func_00168b38)(*(u32*)(a0 + 1968), 46, 0);
-    return ((u32(*)(u32, u32))func_00153d70)(*(u32*)(v0 + 8), s0);
-}
+// 00198828: moved to src/anon/unit_00197fe0.cpp
 
 void duplicate_unplaced_00198e70(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r14, r15;
@@ -7112,13 +6124,7 @@ void duplicate_unplaced_00198ea8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5,
     *(volatile u16*)((u32)r4 + (s32)(32)) = (u16)r15;
 }
 
-u32 func_00199970(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 base = 0x0035u << 16;
-    u32 idx = *(u32*)(base + 1088);
-    u32 ret = (u32)&D_01c62198 + idx * 56;
-    *(u32*)(base + 1088) = idx + 1;
-    return ret;
-}
+u32 func_00199970(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x00199970: definition moved into src/anon/unit_00199688.cpp
 
 u32 duplicate_unplaced_0019af98(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15, r16;
@@ -7198,7 +6204,7 @@ u32 duplicate_unplaced_0019c920(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
 u32 duplicate_unplaced_0019c970(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r14, r15, r16;
     r16 = r4;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0019cc20)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__LOCKON__release)(r4, r5, r6, r7, r8, r9, r10, r11);
     r14 = (u32)(0x0035u << 16);
     r15 = *(volatile u32*)((u32)r14 + (s32)(1092));
     r16 = (u32)(r15 ^ r16);
@@ -7210,7 +6216,7 @@ u32 duplicate_unplaced_0019c970(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
 u32 duplicate_unplaced_0019c9a8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r14, r15, r16;
     r16 = r4;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0019cc20)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__LOCKON__release)(r4, r5, r6, r7, r8, r9, r10, r11);
     r14 = (u32)(0x0035u << 16);
     r15 = *(volatile u32*)((u32)r14 + (s32)(1092));
     r16 = (u32)(r15 ^ r16);
@@ -7224,7 +6230,7 @@ u32 duplicate_unplaced_0019d720(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r16 = r4;
     r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0019d548)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = r16;
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0019d4f8)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__RECOM__init)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
 u32 duplicate_unplaced_0019da20(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
@@ -7257,33 +6263,9 @@ u32 duplicate_unplaced_0019ec20(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00102c18)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-void func_0019ec88(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    Init_0019ec88* p = (Init_0019ec88*)a0;
-    u32 one = 1;
-    u32 sev = 112;
-    p->a = 0;
-    p->b = 0;
-    p->c = sev;
-    p->d = one;
-    p->e = one;
-    p->f = 0;
-    p->g = one;
-}
+void func_0019ec88(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x0019ec88: definition moved into src/anon/unit_0019ea10.cpp
 
-void func_0019ee80(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r14, r15;
-    r15 = (u32)&D_0032de28;
-    r14 = (u32)(r5 >> 5);    r4 = (u32)(r4 << 3);
-    r4 = (u32)(r4 + r15);
-    r14 = (u32)(r14 << 2);
-    r4 = (u32)(r4 + r14);
-    r5 = (u32)(r5 & 0x001fu);
-    r14 = *(volatile u32*)((u32)r4 + (s32)(0));
-    r15 = (u32)((s32)0u + (1));
-    r15 = (u32)(r15 << (r5 & 31));
-    r14 = (u32)(r14 | r15);
-    *(volatile u32*)((u32)r4 + (s32)(0)) = r14;
-}
+void func_0019ee80(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x0019ee80: definition moved into src/anon/unit_0019ee80.cpp
 
 void func_0019ef70(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r15;
@@ -7351,7 +6333,7 @@ u32 duplicate_unplaced_001a04f8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r4 = *(volatile u32*)((u32)r4 + (s32)(0));
     r5 = *(volatile u32*)((u32)r15 + (s32)(4));
     r4 = ((u32)0u < (u32)r4);
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001d8fa8)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__MISSION__WarningGauge)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
 u32 duplicate_unplaced_001a0678(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
@@ -7411,7 +6393,7 @@ u32 duplicate_unplaced_001a1460(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001a1840)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = r16;
     r5 = 0u;
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001a11e0)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__SHEET__load)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
 void duplicate_unplaced_001a1c70(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
@@ -7424,22 +6406,13 @@ void duplicate_unplaced_001a1c70(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5,
     *(volatile u32*)((u32)r4 + (s32)(436)) = 0u;
 }
 
-u32 func_001a2478(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    s32 value = *(s32*)(a0 + 4);
-    s32 limit = *(s32*)a0;
-    s32 adjusted = value + 3;
-    if (value < 0) {
-        value = adjusted;
-    }
-    value >>= 2;
-    return !(value < limit);
-}
+u32 func_001a2478(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x001a2478: definition moved into src/anon/unit_0019fb70.cpp
 
 u32 duplicate_unplaced_001a3868(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2;
     r2 = ((u32(*)())func_001a80c8)();
     r4 = (u32)(*(volatile u16*)((u32)r2 + (s32)(16)));
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001b8e88)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__COMMAND_ELEM__Get)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
 u32 duplicate_unplaced_001a3a50(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
@@ -7457,7 +6430,7 @@ u32 duplicate_unplaced_001a3b08(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r4 = r16;
     r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001de450)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = r16;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001dde40)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))ryj__PAX__ensure)(r4, r5, r6, r7, r8, r9, r10, r11);
     r15 = (u32)(0x01c7u << 16);
     r4 = *(volatile u32*)((u32)r15 + (s32)(-13572));
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00170950)(r4, r5, r6, r7, r8, r9, r10, r11);
@@ -7496,7 +6469,7 @@ u32 duplicate_unplaced_001a5380(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r4 = r6;
     r18 = r5;
     r6 = 0u;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001c79a0)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__PRIZEEFFECT__get)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = r17;
     r5 = r18;
     r6 = r16;
@@ -7510,7 +6483,7 @@ u32 duplicate_unplaced_001a53d0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r4 = r6;
     r18 = r5;
     r6 = (u32)((s32)0u + (1));
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001c79a0)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__PRIZEEFFECT__get)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = r17;
     r5 = r18;
     r6 = r16;
@@ -7532,35 +6505,9 @@ u32 duplicate_unplaced_001a5928(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001a4df0)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-void func_001a6510(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 idx = a0 >> 5;
-    u32 base = (u32)&D_0032f274;
-    idx <<= 2;
-    idx += base;
-    a0 &= 31;
-    u32 mask = 1;
-    u32 val = *(volatile u32*)idx;
-    mask <<= a0;
-    mask = ~mask;
-    val &= mask;
-    *(volatile u32*)idx = val;
-}
+// 001a6510: moved to src/yasui/libys/magic.cpp
 
-u32 func_001a6548(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 s = a0;
-    u32 ret = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001a6598)(a0, a1, a2, a3, a4, a5, a6, a7);
-    u32 idx = s >> 5;
-    u32 base = (u32)&D_0032f274;
-    idx <<= 2;
-    s &= 31;
-    idx += base;
-    u32 val = *(volatile u32*)idx;
-    u32 mask = 1;
-    mask <<= s;
-    val |= mask;
-    *(volatile u32*)idx = val;
-    return ret;
-}
+// 001a6548: moved to src/yasui/libys/magic.cpp
 
 u32 duplicate_unplaced_001a6c38(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2;
@@ -7593,60 +6540,28 @@ u32 duplicate_unplaced_001a6c90(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r15 = (u32)(r15 << (r4 & 31));
     r14 = (u32)(r14 | r15);
     *(volatile u32*)((u32)r13 + (s32)(0)) = r14;
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001d59b0)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__LINK_FLAG__Check)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-void func_001a6cd0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 idx = a0 >> 5;
-    u32 base = (u32)&D_0032dec0;
-    idx <<= 2;
-    idx += base;
-    a0 &= 31;
-    u32 mask = 1;
-    u32 val = *(volatile u32*)idx;
-    mask <<= a0;
-    mask = ~mask;
-    val &= mask;
-    *(volatile u32*)idx = val;
-}
+// 001a6cd0: moved to src/anon/unit_001a6a10.cpp
 
-u32 func_001a6d08(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 idx = a0 >> 5;
-    u32* p = (u32*)((u32)&D_0032dec0 + (idx << 2));
-    u32 bit = a0 & 31;
-    u32 val = *p;
-    u32 mask = 1u << bit;
-    return (val & mask) != 0;
-}
+// 001a6d08: moved to src/anon/unit_001a6a10.cpp
 
 u32 duplicate_unplaced_001a74f8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r14, r15;
-    r2 = ((u32(*)())func_001b8e88)();
+    r2 = ((u32(*)())YS__COMMAND_ELEM__Get)();
     r14 = (u32)(0x01c7u << 16);
     r5 = r2;
     r15 = *(volatile u32*)((u32)r14 + (s32)(-13448));
     *(volatile u32*)((u32)r15 + (s32)(2480)) = 0u;
     r4 = *(volatile u32*)((u32)r14 + (s32)(-13448));
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0019c218)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__OBJ__can_decide)(r4, r5, r6, r7, r8, r9, r10, r11);
     return r2;
 }
 
-u32 func_001a8098(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r14, r15;
-    r14 = (u32)(0x01c7u << 16);
-    *(volatile u32*)((u32)r14 + (s32)(-13424)) = r4;
-    r14 = (u32)((s32)0u + (24));
-    r15 = *(volatile u32*)((u32)r4 + (s32)(4));
-    r15 = (u32)(r15 * r14);
-    r4 = (u32)(r4 + r15);
-    r4 = (u32)((s32)r4 + (8));
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001d2298)(r4, r5, r6, r7, r8, r9, r10, r11);
-}
+// 001a8098: moved to src/anon/unit_001a8098.cpp
 
-u32 func_001a8418(void) {
-    u32 v0 = ((u32(*)())func_001a82f0)();
-    return ((u32(*)(u32))func_001b1e80)(v0);
-}
+// 001a8418: moved to src/anon/unit_001a82f0.cpp
 
 void duplicate_unplaced_001a8498(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r14, r15;
@@ -7711,18 +6626,7 @@ u32 duplicate_unplaced_001a8548(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00138190)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-void func_001a8908(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r14, r15;
-    r14 = (u32)(0x01c7u << 16);
-    *(volatile u32*)((u32)r14 + (s32)(-13304)) = r4;
-    r15 = *(volatile u32*)((u32)r4 + (s32)(4));
-    r14 = (u32)((s32)0u + (52));
-    r15 = (u32)(r15 * r14);
-    r4 = (u32)(r4 + r15);
-    r4 = (u32)((s32)r4 + (8));
-    r15 = (u32)(0x01c7u << 16);
-    *(volatile u32*)((u32)r15 + (s32)(-13300)) = r4;
-}
+void func_001a8908(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x001a8908: definition moved into src/anon/unit_001a8618.cpp
 
 u32 duplicate_unplaced_001a8b38(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r16;
@@ -7769,27 +6673,9 @@ u32 duplicate_unplaced_001a90f0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001a8b38)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-void func_001a9140(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r15;
-    r15 = (u32)&D_0032bb30;
-    r5 = (u32)((s32)r5 + (-1));    r4 = (u32)(r4 + r15);
-    r4 = (u32)((s32)r4 + (9184));
-    *(volatile u8*)((u32)r4 + (s32)(12)) = (u8)r5;
-}
+void func_001a9140(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x001a9140: definition moved into src/anon/unit_001a9130.cpp
 
-void func_001a9190(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 idx = a0 >> 5;
-    u32 base = (u32)&D_0032df30;
-    idx <<= 2;
-    idx += base;
-    a0 &= 31;
-    u32 mask = 1;
-    u32 val = *(volatile u32*)idx;
-    mask <<= a0;
-    mask = ~mask;
-    val &= mask;
-    *(volatile u32*)idx = val;
-}
+void func_001a9190(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x001a9190: definition moved into src/anon/unit_001a9130.cpp
 
 u32 duplicate_unplaced_001a91c8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r14, r15;
@@ -7863,7 +6749,7 @@ u32 duplicate_unplaced_001aadb0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r5 = r4;
     r16 = (u32)&D_01c6cd20;
     r4 = r16;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_002362b0)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YI__IMAGE__Init)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = r16;
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_002367c8)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
@@ -7880,7 +6766,7 @@ u32 duplicate_unplaced_001abb28(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r4 = r17;
     r5 = r16;
     r6 = r2;
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00239988)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YI__SEQUENCE__Init)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
 u32 duplicate_unplaced_001abba8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
@@ -7894,7 +6780,7 @@ u32 duplicate_unplaced_001abba8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r15 = *(volatile u32*)((u32)r17 + (s32)(12));
     *(volatile u32*)((u32)r16 + (s32)(332)) = r14;
     *(volatile u32*)((u32)r16 + (s32)(328)) = r15;
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0023ade0)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YI__SEQUENCE__Draw)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
 u32 duplicate_unplaced_001abfd8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
@@ -7909,7 +6795,7 @@ u32 duplicate_unplaced_001abfd8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r4 = r17;
     r5 = r16;
     r6 = r2;
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00239988)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YI__SEQUENCE__Init)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
 u32 duplicate_unplaced_001ac028(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
@@ -7924,7 +6810,7 @@ u32 duplicate_unplaced_001ac028(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r4 = r17;
     r5 = r16;
     r6 = r2;
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00239988)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YI__SEQUENCE__Init)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
 u32 duplicate_unplaced_001ac208(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
@@ -7939,7 +6825,7 @@ u32 duplicate_unplaced_001ac208(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r4 = r17;
     r5 = r16;
     r6 = r2;
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00239988)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YI__SEQUENCE__Init)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
 u32 duplicate_unplaced_001ac258(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
@@ -7954,7 +6840,7 @@ u32 duplicate_unplaced_001ac258(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r4 = r17;
     r5 = r16;
     r6 = r2;
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00239988)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YI__SEQUENCE__Init)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
 u32 duplicate_unplaced_001ac660(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
@@ -8061,9 +6947,9 @@ u32 duplicate_unplaced_001adbc0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001a15d0)(r4, r5, r6, r7, r8, r9, r10, r11);
     r16 = r2;
     r4 = r2;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001a1c70)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__SHEET__max_drive)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = r16;
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001a17c8)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__SHEET__Free)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
 u32 duplicate_unplaced_001ae650(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
@@ -8093,7 +6979,7 @@ u32 duplicate_unplaced_001af328(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r5 = r16;
     r4 = r2;
     r6 = (u32)((s32)0u + (2));
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001aedf8)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__GAMEOVER__GAMEOVER)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
 u32 duplicate_unplaced_001af360(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
@@ -8104,7 +6990,7 @@ u32 duplicate_unplaced_001af360(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r5 = r16;
     r4 = r2;
     r6 = (u32)((s32)0u + (3));
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001aedf8)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__GAMEOVER__GAMEOVER)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
 u32 duplicate_unplaced_001af778(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
@@ -8132,12 +7018,7 @@ u32 duplicate_unplaced_001b01d8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00106420)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-void func_001b13d8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r14, r15;
-    r15 = (u32)&D_01c94100;
-    r14 = (u32)(0x0035u << 16);
-    *(volatile u32*)((u32)r14 + (s32)(3720)) = r15;
-}
+// 001b13d8: moved to src/yasui/libys/databuff.cpp
 
 u32 duplicate_unplaced_001b1bb8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r15;
@@ -8149,37 +7030,9 @@ u32 duplicate_unplaced_001b1bb8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001b1be0)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-u32 func_001b2050(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 s0 = a0;
-    u32 r = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001d7cd0)(a0, a1, a2, a3, a4, a5, a6, a7);
-    u32 vtbl = (u32)&D_00350f28;
-    u32 m1 = *(u32*)(s0 + 1416);
-    u32 m2 = *(u32*)(s0 + 2748);
-    *(u32*)s0 = vtbl;
-    m1 |= 0x8000;
-    m2 |= 4;
-    *(u32*)(s0 + 1416) = m1;
-    u32 three = 3;
-    *(u32*)(s0 + 944) = three;
-    *(u32*)(s0 + 2748) = m2;
-    return r;
-}
+// 001b2050: moved to src/anon/unit_001b1d20.cpp
 
-u32 func_001b20a0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 s0 = a0;
-    u32 r = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001d7cd0)(a0, a1, a2, a3, a4, a5, a6, a7);
-    u32 vtbl = (u32)&D_00350f28;
-    u32 m1 = *(u32*)(s0 + 1416);
-    u32 m2 = *(u32*)(s0 + 2748);
-    *(u32*)s0 = vtbl;
-    m1 |= 0x8000;
-    m2 |= 4;
-    *(u32*)(s0 + 1416) = m1;
-    u32 three = 3;
-    *(u32*)(s0 + 944) = three;
-    *(u32*)(s0 + 2748) = m2;
-    return r;
-}
+// 001b20a0: moved to src/anon/unit_001b1d20.cpp
 
 u32 duplicate_unplaced_001b2488(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r16;
@@ -8195,7 +7048,7 @@ u32 duplicate_unplaced_001b27c0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r16;
     r4 = r5;
     r16 = r5;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0017c430)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__OBJ__prepare_jump_height)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = r16;
     r5 = (u32)((s32)0u + (20));
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0016bd60)(r4, r5, r6, r7, r8, r9, r10, r11);
@@ -8205,7 +7058,7 @@ u32 duplicate_unplaced_001b2c18(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r16;
     r4 = r5;
     r16 = r5;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0017c430)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__OBJ__prepare_jump_height)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = r16;
     r5 = (u32)((s32)0u + (20));
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0016bd60)(r4, r5, r6, r7, r8, r9, r10, r11);
@@ -8221,18 +7074,7 @@ u32 duplicate_unplaced_001b2f10(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00165898)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-u32 func_001b3b70(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 s0 = a0;
-    u32 r = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00185ed8)(a0, a1, a2, a3, a4, a5, a6, a7);
-    u32 mask = *(u32*)(s0 + 1420);
-    u32 vtbl = (u32)&D_00351100;
-    *(u32*)(s0 + 2788) = 0;
-    mask |= 2;
-    *(u32*)s0 = vtbl;
-    *(u32*)(s0 + 2796) = 0;
-    *(u32*)(s0 + 1420) = mask;
-    return r;
-}
+u32 func_001b3b70(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x001b3b70: definition moved into src/anon/unit_001b2780.cpp
 
 u32 duplicate_unplaced_001b3bb8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r14, r15, r16;
@@ -8288,7 +7130,7 @@ u32 duplicate_unplaced_001b5c78(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r16 = (u32)((s32)r4 + (104));
     r4 = r16;
     r17 = *(volatile u32*)((u32)r16 + (s32)(44));
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001d2180)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__COMBOCOUNTER__reset)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = r16;
     r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001d20a8)(r4, r5, r6, r7, r8, r9, r10, r11);
     r2 = r17;
@@ -8328,7 +7170,7 @@ u32 duplicate_unplaced_001b7428(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r6 = (u32)((s32)0u + (1));
     r7 = (u32)((s32)0u + (1));
     r8 = (u32)((s32)0u + (10005));
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001de168)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))ryj__PAX__start)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
 u32 duplicate_unplaced_001b7468(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
@@ -8341,7 +7183,7 @@ u32 duplicate_unplaced_001b7468(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r6 = (u32)((s32)0u + (1));
     r7 = (u32)((s32)0u + (1));
     r8 = (u32)((s32)0u + (10005));
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001de168)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))ryj__PAX__start)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
 u32 duplicate_unplaced_001b74c8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
@@ -8367,7 +7209,7 @@ u32 duplicate_unplaced_001b7768(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r5 = *(volatile u32*)((u32)r16 + (s32)(0));
     r6 = r17;
     r4 = r2;
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00153468)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))dk__LEVELUP_INFO__openSummon)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
 u32 duplicate_unplaced_001b7ff8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
@@ -8513,7 +7355,7 @@ u32 duplicate_unplaced_001b90c8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r4 = r2;
     r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001a80c8)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = (u32)(*(volatile u16*)((u32)r2 + (s32)(16)));
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001b8e88)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__COMMAND_ELEM__Get)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
 u32 duplicate_unplaced_001b92d0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
@@ -8539,19 +7381,7 @@ void duplicate_unplaced_001b9c28(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5,
     *(volatile u32*)((u32)r13 + (s32)(0)) = r14;
 }
 
-void func_001b9c58(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 idx = a0 >> 5;
-    u32 base = (u32)&D_01d48db8;
-    idx <<= 2;
-    idx += base;
-    a0 &= 31;
-    u32 mask = 1;
-    u32 val = *(volatile u32*)idx;
-    mask <<= a0;
-    mask = ~mask;
-    val &= mask;
-    *(volatile u32*)idx = val;
-}
+void func_001b9c58(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x001b9c58: definition moved into src/anon/unit_001b9880.cpp
 
 u32 duplicate_unplaced_001ba310(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r16;
@@ -8562,17 +7392,12 @@ u32 duplicate_unplaced_001ba310(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_003204c8)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-u32 func_001ba718(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7;
-    r6 = (u32)&D_001ba6b0;
-    r4 = (u32)((s32)0u + (1));
-    r5 = (u32)((s32)0u + (19000));    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00102c18)(r4, r5, r6, r7, r8, r9, r10, r11);
-}
+// 001ba718: moved to src/yasui/libys/itemeffect.cpp
 
 u32 duplicate_unplaced_001bb858(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r16;
     r16 = r4;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001bb890)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__MISSION__PostEnd)(r4, r5, r6, r7, r8, r9, r10, r11);
     r2 = ((u32(*)())func_001bb468)();
     r5 = r16;
     r4 = (u32)((s32)0u + (15));
@@ -8581,17 +7406,7 @@ u32 duplicate_unplaced_001bb858(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
 
 extern "C" void func_001bc688(u32, u32, u32, u32, u32, u32, u32, u32) asm("_ZN2YS12COMMAND_SLOT5clearEv");
 
-u32 func_001bd570(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15;
-    r15 = (u32)((s32)0u + (36));
-    r5 = (u32)(r5 * r15);
-    r4 = (u32)(r4 + r5);
-    r4 = (u32)((s32)r4 + (2244));
-    r15 = (u32)(*(u16*)((u32)r4 + (s32)(2)));
-    if (r15 == 0u) r4 = 0u;
-    r2 = r4;
-    return r2;
-}
+u32 func_001bd570(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x001bd570: definition moved into src/anon/unit_001bc568.cpp
 
 u32 duplicate_unplaced_001bd590(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2;
@@ -8610,7 +7425,7 @@ u32 duplicate_unplaced_001bd8c8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r14 = (u32)((s32)0u + (12));
     r13 = (u32)(r13 + r15);
     r4 = (u32)(*(volatile u16*)((u32)r13 + (s32)(14)));
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001b8e88)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__COMMAND_ELEM__Get)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = r16;
     r5 = r2;
     r6 = 0u;
@@ -8666,7 +7481,7 @@ u32 duplicate_unplaced_001be900(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001bc778)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = r17;
     r5 = r16;
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001bc990)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__COMMAND_MENU__make)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
 u32 duplicate_unplaced_001befa8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
@@ -8698,7 +7513,7 @@ u32 duplicate_unplaced_001bf0c8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001bc778)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = r16;
     r5 = (u32)&D_00351248;
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001bc990)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__COMMAND_MENU__make)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
 u32 duplicate_unplaced_001bf140(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
@@ -8719,19 +7534,19 @@ u32 duplicate_unplaced_001bfbd8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r4 = (u32)((s32)0u + (952));
     r5 = (u32)((s32)0u + (-1));
     r6 = (u32)((s32)0u + (30));
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0016ed50)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__OBJENTRY__ReadRequest)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = (u32)((s32)0u + (953));
     r5 = (u32)((s32)0u + (-1));
     r6 = (u32)((s32)0u + (30));
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0016ed50)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__OBJENTRY__ReadRequest)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = (u32)((s32)0u + (954));
     r5 = (u32)((s32)0u + (-1));
     r6 = (u32)((s32)0u + (30));
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0016ed50)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__OBJENTRY__ReadRequest)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = (u32)((s32)0u + (955));
     r5 = (u32)((s32)0u + (-1));
     r6 = (u32)((s32)0u + (30));
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0016ed50)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__OBJENTRY__ReadRequest)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
 u32 duplicate_unplaced_001bfca0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
@@ -8742,19 +7557,7 @@ u32 duplicate_unplaced_001bfca0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return r2;
 }
 
-void func_001c0058(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 idx = a0 >> 5;
-    u32 base = (u32)&D_01d49328;
-    idx <<= 2;
-    idx += base;
-    a0 &= 31;
-    u32 mask = 1;
-    u32 val = *(volatile u32*)idx;
-    mask <<= a0;
-    mask = ~mask;
-    val &= mask;
-    *(volatile u32*)idx = val;
-}
+void func_001c0058(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x001c0058: definition moved into src/anon/unit_001bff88.cpp
 
 u32 duplicate_unplaced_001c0268(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r13, r14, r15;
@@ -8815,16 +7618,8 @@ u32 duplicate_unplaced_001c0c38(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return r2;
 }
 
-u32 func_001c0c80(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r14, r15;
-    r15 = (u32)((s32)0u + (12));
-    r4 = (u32)(r4 * r15);
-    r14 = (u32)(0x01d5u << 16);
-    r2 = *(volatile u32*)((u32)r14 + (s32)(-27776));
-    r2 = (u32)(r2 + r4);
-    r2 = (u32)((s32)r2 + (-12));
-    return r2;
-}
+// 001c0c80: moved to src/anon/unit_001c0638.cpp
+u32 func_001c0c80(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);
 
 u32 duplicate_unplaced_001c0ca0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15;
@@ -8843,7 +7638,7 @@ u32 duplicate_unplaced_001c1020(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r4 = r16;
     r7 = (u32)(*(volatile u16*)((u32)r16 + (s32)(1398)));
     r5 = r17;
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001c0d38)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__OBJ__attach)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
 u32 duplicate_unplaced_001c10f8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
@@ -8986,13 +7781,7 @@ u32 duplicate_unplaced_001c4170(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return r2;
 }
 
-void func_001c42a0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r14, r15;
-    r14 = (u32)(0x0035u << 16);
-    r15 = (u32)&D_01d49658;
-    *(volatile u32*)((u32)r14 + (s32)(5632)) = 0u;    *(volatile u32*)((u32)r15 + (s32)(4)) = 0u;
-    *(volatile u32*)((u32)r15 + (s32)(8)) = 0u;
-}
+void func_001c42a0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x001c42a0: definition moved into src/anon/unit_001c4120.cpp
 
 void duplicate_unplaced_001c6748(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r14, r15;
@@ -9019,12 +7808,7 @@ u32 duplicate_unplaced_001c6ee8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001c14e0)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-u32 func_001c7900(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 obj = *(u32*)(a0 + 80);
-    void (**vt)() = *(void (***)())obj;
-    ((void (*)(u32, u32, u32, u32, u32, u32, u32, u32))vt[22])(obj, a0, a2, a3, a4, a5, a6, a7);
-    return 1;
-}
+// 001c7900: moved to src/anon/unit_001c7148.cpp (linked unit)
 
 u32 duplicate_unplaced_001c7930(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2;
@@ -9104,15 +7888,7 @@ u32 duplicate_unplaced_001c8cd8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001c8cc0)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-void func_001c8d98(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r14, r15;
-    r15 = (u32)((s32)0u + (1));
-    r14 = *(volatile u32*)((u32)r4 + (s32)(0));
-    r15 = (u32)(r15 << r5);
-    r15 = (u32)(~(0u | r15));
-    r14 = (u32)(r14 & r15);
-    *(volatile u32*)((u32)r4 + (s32)(0)) = r14;
-}
+// 001c8d98 YS::MUTEX::unlock: moved to src/yasui/libys/mutex.cpp (linked unit).
 
 void duplicate_unplaced_001c8de0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r14, r15;
@@ -9128,7 +7904,7 @@ u32 duplicate_unplaced_001c90c0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r16;
     r4 = r5;
     r16 = r5;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0017c430)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__OBJ__prepare_jump_height)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = r16;
     r5 = (u32)((s32)0u + (20));
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0016bd60)(r4, r5, r6, r7, r8, r9, r10, r11);
@@ -9298,29 +8074,9 @@ u32 duplicate_unplaced_001ce458(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0016b5b8)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-u32 func_001ce880(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r16;
-    *(volatile u32*)((u32)r4 + (s32)(0)) = 0u;
-    r16 = r4;
-    *(volatile u32*)((u32)r16 + (s32)(8)) = 0u;
-    r4 = (u32)((s32)r4 + (12));
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_002875e8)(r4, r5, r6, r7, r8, r9, r10, r11);
-    *(u32*)((u32)r16 + (s32)(52)) = 0u;
-    *(volatile u32*)((u32)r16 + (s32)(56)) = 0u;
-    return r2;
-}
+u32 func_001ce880(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x001ce880: definition moved into src/anon/unit_001ce6e8.cpp
 
-u32 func_001ce8b8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r16;
-    *(volatile u32*)((u32)r4 + (s32)(0)) = 0u;
-    r16 = r4;
-    *(volatile u32*)((u32)r16 + (s32)(8)) = 0u;
-    r4 = (u32)((s32)r4 + (12));
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_002875e8)(r4, r5, r6, r7, r8, r9, r10, r11);
-    *(u32*)((u32)r16 + (s32)(52)) = 0u;
-    *(volatile u32*)((u32)r16 + (s32)(56)) = 0u;
-    return r2;
-}
+u32 func_001ce8b8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x001ce8b8: definition moved into src/anon/unit_001ce6e8.cpp
 
 u32 duplicate_unplaced_001ce8f0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2;
@@ -9345,7 +8101,7 @@ u32 duplicate_unplaced_001d0068(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r4 = r16;
     r5 = (u32)((s32)0u + (5000));
     r6 = (u32)((s32)0u + (7));
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0016ed50)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__OBJENTRY__ReadRequest)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
 u32 duplicate_unplaced_001d01e0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
@@ -9358,9 +8114,9 @@ u32 duplicate_unplaced_001d01e0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
 u32 duplicate_unplaced_001d0200(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r16;
     r16 = r4;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00198970)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__STDOBJ__reset_special_command)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = r16;
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00178280)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__PLAYER___OVR_leave_req)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
 u32 duplicate_unplaced_001d07e0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
@@ -9369,7 +8125,7 @@ u32 duplicate_unplaced_001d07e0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r4 = (u32)((s32)r4 + (2932));
     r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001d2710)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = *(volatile u32*)((u32)r16 + (s32)(2880));
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0019cc20)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__LOCKON__release)(r4, r5, r6, r7, r8, r9, r10, r11);
     r15 = *(volatile u32*)((u32)r16 + (s32)(268));
     r14 = (u32)(0x0020u << 16);
     r15 = (u32)(r15 | r14);
@@ -9387,14 +8143,7 @@ void duplicate_unplaced_001d1678(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5,
     *(volatile u32*)((u32)r4 + (s32)(24)) = 0u;
 }
 
-u32 func_001d19e8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r16;
-    r16 = r4;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001d1678)(r4, r5, r6, r7, r8, r9, r10, r11);
-    *(u32*)((u32)r16 + (s32)(48)) = 0u;
-    *(volatile u32*)((u32)r16 + (s32)(52)) = 0u;
-    return r2;
-}
+u32 func_001d19e8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x001d19e8: definition moved into src/anon/unit_001d14e0.cpp
 
 u32 duplicate_unplaced_001d1cd8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r16;
@@ -9577,13 +8326,7 @@ u32 duplicate_unplaced_001d4528(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return r2;
 }
 
-void func_001d4bb8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r14, r15;
-    r15 = (u32)&D_01d5ba58;
-    r4 = (u32)(r4 << 2);    r14 = (u32)((s32)0u + (488));
-    r4 = (u32)(r4 + r15);
-    *(volatile u16*)((u32)r4 + (s32)(0)) = (u16)r14;
-}
+void func_001d4bb8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x001d4bb8: definition moved into src/anon/unit_001d3c08.cpp
 
 u32 duplicate_unplaced_001d4dc0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r13, r14;
@@ -9599,21 +8342,7 @@ u32 duplicate_unplaced_001d4dc0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return r2;
 }
 
-u32 func_001d4e00(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 s0 = a0;
-    ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001d16f8)(a0, a1, a2, a3, a4, a5, a6, a7);
-    u32 r4 = *(u32*)(s0 + 4);
-    u32 r9 = s0 + 44;
-    u32 r5 = *(u32*)(s0 + 8);
-    u32 r10 = s0 + 24;
-    u32 r6 = *(u32*)(s0 + 32);
-    u32 r7 = 0;
-    u32 r11 = *(u32*)(s0 + 36);
-    u32 r8 = 4;
-    u32 ret = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0014f8d0)(r4, r5, r6, r7, r8, r9, r10, r11);
-    *(u32*)(s0 + 48) = ret;
-    return ret;
-}
+u32 func_001d4e00(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x001d4e00: definition moved into src/anon/unit_001d3c08.cpp
 
 u32 duplicate_unplaced_001d4ef0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15, r16, r17;
@@ -9631,14 +8360,7 @@ u32 duplicate_unplaced_001d4ef0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001d4f40)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-u32 func_001d4fa8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 offset = a1;
-    u32 stride = *(u32*)(a0 + 568);
-    u32 base = *(u32*)(a0 + 44);
-    offset *= stride;
-    base += offset;
-    return func_001d1b60(a0, base, a2, a3, a4, a5, a6, a7);
-}
+u32 func_001d4fa8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x001d4fa8: definition moved into src/anon/unit_001d4f40.cpp
 
 u32 duplicate_unplaced_001d5030(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r14, r15;
@@ -9668,7 +8390,7 @@ u32 duplicate_unplaced_001d5068(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r5 = (u32)((s32)0u + (47));
     r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00168b38)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = *(volatile u32*)((u32)r2 + (s32)(8));
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0023cde8)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YI__VIBRATION__Create)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
 u32 duplicate_unplaced_001d5668(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
@@ -9734,21 +8456,9 @@ u32 duplicate_unplaced_001d6538(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return r2;
 }
 
-u32 func_001d68f8(u32 a0) {
-    u32 s0 = a0;
-    *(u32*)(a0 + 2800) = 0;
-    *(u32*)(a0 + 2804) = 0;
-    ((u32(*)(u32))func_001d6a80)(a0);
-    u32 v0 = ((u32(*)(u32))func_001bded8)(s0);
-    *(u8*)(s0 + 2808) = 15;
-    return v0;
-}
+u32 func_001d68f8(u32 a0);  // 0x001d68f8: definition moved into src/anon/unit_001d68e0.cpp
 
-u32 func_001d6a80(u32 a0) {
-    u32 s0 = a0;
-    ((u32(*)(u32))func_0019cc20)(a0 + 2752);
-    return ((u32(*)(u32))func_001d6a28)(s0);
-}
+u32 func_001d6a80(u32 a0);  // 0x001d6a80: definition moved into src/anon/unit_001d68e0.cpp
 
 u32 duplicate_unplaced_001d7458(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r14, r15, r16;
@@ -9783,7 +8493,7 @@ u32 duplicate_unplaced_001d7940(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     *(volatile u32*)((u32)r2 + (s32)(4)) = 0u;
     *(volatile u32*)((u32)r2 + (s32)(12)) = 0u;
     *(volatile u32*)((u32)r2 + (s32)(20)) = 0u;
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001ada38)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__RECOV__Exec)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
 u32 duplicate_unplaced_001d7980(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
@@ -9799,14 +8509,7 @@ u32 duplicate_unplaced_001d7980(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return r2;
 }
 
-u32 func_001d7bd0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r16;
-    r16 = r4;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001d1678)(r4, r5, r6, r7, r8, r9, r10, r11);
-    *(u32*)((u32)r16 + (s32)(44)) = 0u;
-    *(volatile u32*)((u32)r16 + (s32)(48)) = 0u;
-    return r2;
-}
+u32 func_001d7bd0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x001d7bd0: definition moved into src/anon/unit_001d7458.cpp
 
 u32 duplicate_unplaced_001d7e00(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r16;
@@ -9816,7 +8519,7 @@ u32 duplicate_unplaced_001d7e00(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r4 = (u32)((s32)r4 + (2548));
     r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00190920)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = r16;
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00198450)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__STDOBJ___OVR_initialize)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
 u32 duplicate_unplaced_001d7f10(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
@@ -9835,26 +8538,17 @@ u32 duplicate_unplaced_001d7f10(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return r2;
 }
 
-u32 func_001d8248(u32 a0, u32 a1) {
-    u32 a2 = a0 + *(u8*)(a1 + 19) * 44 + 188;
-    return ((u32(*)(u32, u32, u32))func_001d8190)(a0, a1, a2);
-}
+u32 func_001d8248(u32 a0, u32 a1);  // 0x001d8248: definition moved into src/anon/unit_001d7458.cpp
 
-u32 func_001d8550(u32 a0, u32 a1) {
-    u32 a2 = a0 + *(u8*)(a1 + 19) * 56 + 232;
-    return ((u32(*)(u32, u32, u32))func_001d8190)(a0, a1, a2);
-}
+u32 func_001d8550(u32 a0, u32 a1);  // 0x001d8550: definition moved into src/anon/unit_001d7458.cpp
 
-u32 func_001d93f0(u32 a0, u32 a1) {
-    u32 a2 = a0 + *(u8*)(a1 + 19) * 52 + 556;
-    return ((u32(*)(u32, u32, u32))func_001d8190)(a0, a1, a2);
-}
+u32 func_001d93f0(u32 a0, u32 a1);  // 0x001d93f0: definition moved into src/anon/unit_001d7458.cpp
 
 u32 duplicate_unplaced_001d9d00(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15;
     r15 = (u32)(0x0035u << 16);
     r4 = *(volatile u32*)((u32)r15 + (s32)(10492));
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001b1448)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__DATABUFF__Read)(r4, r5, r6, r7, r8, r9, r10, r11);
     r15 = (u32)(0x01d6u << 16);
     *(volatile u32*)((u32)r15 + (s32)(-17752)) = r2;
     return r2;
@@ -9887,20 +8581,7 @@ u32 duplicate_unplaced_001d9d48(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return r2;
 }
 
-void func_001d9e78(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r14, r15;
-    r15 = (u32)&D_0032dfd0;
-    r14 = (u32)(r5 >> 5);    r4 = (u32)(r4 << 3);
-    r4 = (u32)(r4 + r15);
-    r14 = (u32)(r14 << 2);
-    r4 = (u32)(r4 + r14);
-    r5 = (u32)(r5 & 0x001fu);
-    r14 = *(volatile u32*)((u32)r4 + (s32)(0));
-    r15 = (u32)((s32)0u + (1));
-    r15 = (u32)(r15 << (r5 & 31));
-    r14 = (u32)(r14 | r15);
-    *(volatile u32*)((u32)r4 + (s32)(0)) = r14;
-}
+void func_001d9e78(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x001d9e78: definition moved into src/anon/unit_001d9d00.cpp
 
 u32 duplicate_unplaced_001d9eb0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15, r16;
@@ -10063,18 +8744,9 @@ u32 duplicate_unplaced_001dc7e8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return r2;
 }
 
-u32 func_001dc818(u32 a0) {
-    u32 s0 = a0;
-    ((u32(*)(u32))func_001dc9e0)(a0);
-    return ((u32(*)(u32))func_001e2c80)(*(u32*)(s0 + 28));
-}
+u32 func_001dc818(u32 a0);  // 0x001dc818: definition moved into src/anon/unit_001dbfd8.cpp
 
-u32 func_001dc840(u32 a0) {
-    u32 s0 = a0;
-    *(u32*)(a0 + 8) |= 1;
-    ((u32(*)(u32))func_001dc9e0)(a0);
-    return ((u32(*)(u32))func_001e2c80)(*(u32*)(s0 + 28));
-}
+u32 func_001dc840(u32 a0);  // 0x001dc840: definition moved into src/anon/unit_001dbfd8.cpp
 
 u32 duplicate_unplaced_001dc9f0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r16;
@@ -10095,7 +8767,7 @@ u32 duplicate_unplaced_001dcd88(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r5 = (u32)((s32)r5 + (-17600));
     r6 = (u32)((s32)r6 + (-12952));
     r7 = 0u;
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00168388)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__FILE__ReadBack)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
 u32 duplicate_unplaced_001dd198(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
@@ -10134,7 +8806,7 @@ u32 duplicate_unplaced_001de7d8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r14 = (u32)((s32)r15 + (-7352));
     *(volatile u32*)((u32)r15 + (s32)(-7352)) = 0u;
     *(volatile u32*)((u32)r14 + (s32)(4)) = 0u;
-    return ((u32(*)())func_001de808)();
+    return ((u32(*)())ryj__PAX__TaskStart)();
 }
 
 u32 duplicate_unplaced_001de910(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
@@ -10252,7 +8924,7 @@ u32 duplicate_unplaced_001e0f90(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
 u32 duplicate_unplaced_001e1ce0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r14, r15, r16;
     r16 = r4;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001e1988)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))ryj__LAST_XEMNUS_LASER__setup)(r4, r5, r6, r7, r8, r9, r10, r11);
     r14 = *(volatile u32*)((u32)r16 + (s32)(3532));
     r15 = (u32)((s32)0u + (1));
     *(volatile u32*)((u32)r16 + (s32)(3520)) = r15;
@@ -10272,7 +8944,7 @@ u32 duplicate_unplaced_001e2788(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     *(volatile u32*)((u32)r4 + (s32)(3536)) = 0u;
     *(volatile u32*)((u32)r4 + (s32)(3556)) = 0u;
     *(volatile u32*)((u32)r4 + (s32)(3564)) = 0u;
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001e17b8)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))ryj__LAST_XEMNUS_LASER__init)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
 u32 duplicate_unplaced_001e27c0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
@@ -10285,7 +8957,7 @@ u32 duplicate_unplaced_001e27c0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     *(volatile u32*)((u32)r4 + (s32)(3536)) = 0u;
     *(volatile u32*)((u32)r4 + (s32)(3556)) = 0u;
     *(volatile u32*)((u32)r4 + (s32)(3564)) = 0u;
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001e17b8)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))ryj__LAST_XEMNUS_LASER__init)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
 u32 duplicate_unplaced_001e4f00(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
@@ -10490,12 +9162,12 @@ u32 duplicate_unplaced_002006b0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r5 = (u32)&D_00354bc0;
     r16 = (u32)(r4 + r14);
     r4 = (u32)((s32)r16 + (160));
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_002f3f88)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))sceVu0CopyVector)(r4, r5, r6, r7, r8, r9, r10, r11);
     r16 = (u32)((s32)r16 + (176));
     r5 = (u32)(0x0035u << 16);
     r4 = r16;
     r5 = (u32)((s32)r5 + (19424));
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_002f3f88)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))sceVu0CopyVector)(r4, r5, r6, r7, r8, r9, r10, r11);
     return r2;
 }
 
@@ -10506,12 +9178,12 @@ u32 duplicate_unplaced_002007e0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r5 = (u32)&D_00354bc0;
     r16 = (u32)(r4 + r14);
     r4 = (u32)((s32)r16 + (160));
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_002f3f88)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))sceVu0CopyVector)(r4, r5, r6, r7, r8, r9, r10, r11);
     r16 = (u32)((s32)r16 + (176));
     r5 = (u32)(0x0035u << 16);
     r4 = r16;
     r5 = (u32)((s32)r5 + (19424));
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_002f3f88)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))sceVu0CopyVector)(r4, r5, r6, r7, r8, r9, r10, r11);
     return r2;
 }
 
@@ -10522,22 +9194,16 @@ u32 duplicate_unplaced_00209e80(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r5 = (u32)&D_00354bc0;
     r16 = (u32)(r4 + r14);
     r4 = (u32)((s32)r16 + (224));
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_002f3f88)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))sceVu0CopyVector)(r4, r5, r6, r7, r8, r9, r10, r11);
     r16 = (u32)((s32)r16 + (240));
     r5 = (u32)(0x0035u << 16);
     r4 = r16;
     r5 = (u32)((s32)r5 + (19424));
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_002f3f88)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))sceVu0CopyVector)(r4, r5, r6, r7, r8, r9, r10, r11);
     return r2;
 }
 
-u32 func_0020e758(void) {
-    ((u32(*)(u32, u32))func_002f25a0)(0, 0);
-    ((u32(*)(u32))func_003058a0)(0);
-    ((u32(*)(u32, u32))func_002f25a0)(0, 0);
-    ((u32(*)(u32, u32))func_002f3918)(*(u32*)((u8*)&D_00360000 - 28216), (u32)&D_01dac450);
-    return ((u32(*)(u32, u32))func_002f25a0)(0, 0);
-}
+u32 func_0020e758(void);  // 0x0020e758: definition moved into src/anon/unit_0020e758.cpp
 
 void duplicate_unplaced_0020ea48(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r14, r15;
@@ -10570,7 +9236,7 @@ u32 duplicate_unplaced_0020f118(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15;
     r4 = 0u;
     r5 = 0u;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_002f25a0)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))sceGsSyncPath)(r4, r5, r6, r7, r8, r9, r10, r11);
     r15 = (u32)(0x0036u << 16);
     r5 = (u32)(0x0036u << 16);
     r4 = *(volatile u32*)((u32)r15 + (s32)(-28216));
@@ -10583,7 +9249,7 @@ u32 duplicate_unplaced_0020f150(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15;
     r4 = 0u;
     r5 = 0u;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_002f25a0)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))sceGsSyncPath)(r4, r5, r6, r7, r8, r9, r10, r11);
     r15 = (u32)(0x0036u << 16);
     r5 = (u32)(0x0036u << 16);
     r4 = *(volatile u32*)((u32)r15 + (s32)(-28216));
@@ -10592,20 +9258,9 @@ u32 duplicate_unplaced_0020f150(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return r2;
 }
 
-void func_0021fa10(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r15;
-    r15 = (u32)&D_01d9e360;
-    *(u32*)((u32)r4 + (s32)(4)) = 0u;
-    *(u8*)((u32)r4 + (s32)(9)) = (u8)0u;
-    *(u32*)((u32)r4 + (s32)(0)) = r15;
-}
+void func_0021fa10(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x0021fa10: definition moved into src/anon/unit_0021e988.cpp
 
-void func_0021fbc0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r15;
-    r15 = (u32)&D_01d9e360;
-    *(u32*)((u32)r4 + (s32)(4)) = 0u;
-    *(u32*)((u32)r4 + (s32)(0)) = r15;
-}
+void func_0021fbc0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x0021fbc0: definition moved into src/anon/unit_0021e988.cpp
 
 u32 duplicate_unplaced_0021fe08(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7;
@@ -10614,19 +9269,9 @@ u32 duplicate_unplaced_0021fe08(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0021efa8)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-void func_0021fe28(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r15;
-    r15 = (u32)&D_01d9e360;
-    *(u32*)((u32)r4 + (s32)(4)) = 0u;
-    *(u32*)((u32)r4 + (s32)(0)) = r15;
-}
+void func_0021fe28(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x0021fe28: definition moved into src/anon/unit_0021e988.cpp
 
-void func_00220070(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r15;
-    r15 = (u32)&D_01d9e360;
-    *(u32*)((u32)r4 + (s32)(4)) = 0u;
-    *(u32*)((u32)r4 + (s32)(0)) = r15;
-}
+void func_00220070(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x00220070: definition moved into src/anon/unit_0021e988.cpp
 
 void duplicate_unplaced_00224950(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r13, r14, r15;
@@ -10687,18 +9332,7 @@ u32 duplicate_unplaced_00225e28(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)())func_001d5a38)();
 }
 
-void func_00225e70(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 mask = (u32)-64;
-    *(u32*)(a0 + 4) = a1;
-    u32 start = (a1 + 63) & mask;
-    *(u32*)a0 = a2;
-    *(u32*)(a0 + 8) = start;
-    *(u32*)start = 0;
-    *(u32*)(*(u32*)(a0 + 8) + 4) = 0;
-    *(u8*)(*(u32*)(a0 + 8) + 8) = 0;
-    u32 end = (*(u32*)(a0 + 4) + a2) & mask;
-    *(u32*)(*(u32*)(a0 + 8) + 12) = end - *(u32*)(a0 + 8);
-}
+void func_00225e70(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x00225e70: definition moved into src/anon/unit_00224780.cpp
 
 void duplicate_unplaced_00226a78(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r14, r15;
@@ -10723,12 +9357,7 @@ u32 duplicate_unplaced_00226d88(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00138480)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-u32 func_00226da8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2;
-    r4 = 0u;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001384a0)(r4, r5, r6, r7, r8, r9, r10, r11);
-    return ((u32(*)())func_0014a4c0)();
-}
+u32 func_00226da8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x00226da8: definition moved into src/anon/unit_00224780.cpp
 
 void duplicate_unplaced_00226f78(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r14, r15;
@@ -10746,25 +9375,9 @@ u32 duplicate_unplaced_00226fa8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)())func_00225298)();
 }
 
-u32 func_00227818(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 s0 = a1;
-    u32 v = func_001688c8(a0, a1, a2, a3, a4, a5, a6, a7);
-    if (v == 0) {
-        v = 2048;
-    }
-    *(u32*)(s0 + 28) = v;
-    return (v + 2047) & -2048;
-}
+u32 func_00227818(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x00227818: definition moved into src/anon/unit_00224780.cpp
 
-void func_00227930(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r15;
-    r15 = (u32)((s32)0u + (-1));
-    *(u8*)(r4 + 8) = (u8)0u;
-    *(volatile u32*)(r4 + 0) = r15;
-    *(volatile u32*)(r4 + 16) = r15;
-    *(volatile u32*)(r4 + 4) = 0u;
-    *(volatile u32*)(r4 + 28) = 0u;
-}
+void func_00227930(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x00227930: definition moved into src/anon/unit_00224780.cpp
 
 u32 duplicate_unplaced_002282d8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r14, r15;
@@ -10801,7 +9414,7 @@ u32 duplicate_unplaced_00229d68(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r16 = r4;
     r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00229d40)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = r16;
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001390f0)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))dk__Sprite3D__update)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
 u32 duplicate_unplaced_00229e28(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
@@ -10819,9 +9432,9 @@ u32 duplicate_unplaced_00229e40(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
 u32 duplicate_unplaced_0022acd0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r16;
     r16 = r4;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0022ac60)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))sa__MUSICAL_INPUT__updateGauge)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = r16;
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001390f0)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))dk__Sprite3D__update)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
 u32 duplicate_unplaced_0022b7f0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
@@ -10834,7 +9447,7 @@ u32 duplicate_unplaced_0022b7f0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r4 = r16;
     r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_002fee78)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = r16;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_002ff3fc)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))strlen)(r4, r5, r6, r7, r8, r9, r10, r11);
     r2 = r16;
     return r2;
 }
@@ -10895,7 +9508,7 @@ u32 duplicate_unplaced_0022c4b8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r4 = r16;
     r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_002fee78)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = r16;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_002ff3fc)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))strlen)(r4, r5, r6, r7, r8, r9, r10, r11);
     r2 = r16;
     return r2;
 }
@@ -10944,7 +9557,7 @@ u32 duplicate_unplaced_0022f5a0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r16 = r6;
     r5 = (u32)((s32)0u + (-1));
     r6 = (u32)((s32)0u + (30));
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0016ed50)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__OBJENTRY__ReadRequest)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = r16;
     r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00227d10)(r4, r5, r6, r7, r8, r9, r10, r11);
     r15 = (u32)((s32)0u + (1));
@@ -10962,35 +9575,11 @@ void duplicate_unplaced_00232718(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5,
     *(volatile u32*)((u32)r15 + (s32)(-8660)) = r14;
 }
 
-u32 func_00234848(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15;
-    r4 = (u32)(r4 << 2);
-    r15 = (u32)&D_01dae480;
-    r4 = (u32)(r4 + r5);    r4 = (u32)(r4 << 5);
-    r4 = (u32)(r4 + r15);
-    r2 = *(volatile u32*)((u32)r4 + (s32)(0));
-    return r2;
-}
+u32 func_00234848(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x00234848: definition moved into src/anon/unit_002335e8.cpp
 
-u32 func_00234868(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15;
-    r4 = (u32)(r4 << 2);
-    r15 = (u32)&D_01dae480;
-    r4 = (u32)(r4 + r5);    r4 = (u32)(r4 << 5);
-    r4 = (u32)(r4 + r15);
-    r2 = *(volatile u32*)((u32)r4 + (s32)(4));
-    return r2;
-}
+u32 func_00234868(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x00234868: definition moved into src/anon/unit_002335e8.cpp
 
-u32 func_00234888(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15;
-    r4 = (u32)(r4 << 2);
-    r15 = (u32)&D_01dae480;
-    r4 = (u32)(r4 + r5);    r4 = (u32)(r4 << 5);
-    r4 = (u32)(r4 + r15);
-    r2 = *(volatile u32*)((u32)r4 + (s32)(8));
-    return r2;
-}
+u32 func_00234888(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x00234888: definition moved into src/anon/unit_002335e8.cpp
 
 u32 duplicate_unplaced_00236148(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r13, r14, r15;
@@ -11005,15 +9594,7 @@ u32 duplicate_unplaced_00236148(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return r2;
 }
 
-void func_002361a0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r15;
-    r15 = (u32)&D_0035ead8;
-    *(u32*)(r4 + 408) = 0u;
-    *(u32*)(r4 + 56) = 0u;
-    *(volatile u32*)(r4 + 0) = r15;
-    *(volatile u32*)(r4 + 60) = 0u;
-    *(volatile u32*)(r4 + 404) = 0u;
-}
+void func_002361a0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x002361a0: definition moved into src/anon/unit_00236180.cpp
 
 u32 duplicate_unplaced_002367a0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2;
@@ -11030,23 +9611,14 @@ u32 duplicate_unplaced_002368b0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r16 = r4;
     r5 = *(volatile u32*)((u32)r4 + (s32)(56));
     r4 = (u32)((s32)r4 + (64));
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_002f2be0)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))sceGsExecLoadImage)(r4, r5, r6, r7, r8, r9, r10, r11);
     r5 = *(volatile u32*)((u32)r16 + (s32)(60));
     r16 = (u32)((s32)r16 + (160));
     r4 = r16;
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_002f2be0)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))sceGsExecLoadImage)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-void func_002369a0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r15;
-    r15 = (u32)&D_0035eac8;
-    *(u32*)(r4 + 20) = 0u;
-    *(u32*)(r4 + 4) = 0u;
-    *(volatile u32*)(r4 + 0) = r15;
-    *(volatile u32*)(r4 + 8) = 0u;
-    *(volatile u32*)(r4 + 12) = 0u;
-    *(volatile u32*)(r4 + 16) = 0u;
-}
+void YI__IMAGE_FREEZE__IMAGE_FREEZE(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x002369a0: definition moved into src/anon/unit_00236180.cpp
 
 u32 duplicate_unplaced_00236a18(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15, r16;
@@ -11058,14 +9630,7 @@ u32 duplicate_unplaced_00236a18(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00106420)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-u32 func_00236ca8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15;
-    r15 = (u32)((s32)0u + (416));
-    r5 = (u32)(r5 * r15);
-    r2 = *(volatile u32*)((u32)r4 + (s32)(20));
-    r2 = (u32)(r2 + r5);
-    return r2;
-}
+u32 func_00236ca8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x00236ca8: definition moved into src/anon/unit_00236180.cpp
 
 void duplicate_unplaced_00237458(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r13, r14, r15;
@@ -11220,46 +9785,17 @@ u32 duplicate_unplaced_00239cf0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return r2;
 }
 
-u32 func_00239d30(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15;
-    r15 = (u32)((s32)0u + (36));
-    r5 = (u32)(r5 * r15);
-    r15 = *(volatile u32*)((u32)r4 + (s32)(180));
-    r5 = (u32)(r5 + r15);
-    r2 = (u32)(*(u16*)((u32)r5 + (s32)(4)));
-    r2 = ((u32)r2 < 0x00000001u);
-    return r2;
-}
+u32 func_00239d30(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x00239d30: definition moved into src/anon/unit_00239988.cpp
 
-u32 func_0023aa18(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 idx = *(volatile u32*)((u32)a0 + (s32)(276));
-    u8* base = *(u8**)((u32)a0 + (s32)(180));
-    return *(u32*)(base + idx * 36 + 16);
-}
+u32 func_0023aa18(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x0023aa18: definition moved into src/anon/unit_00239988.cpp
 
-u32 func_0023aa38(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 idx = *(volatile u32*)((u32)a0 + (s32)(276));
-    u8* base = *(u8**)((u32)a0 + (s32)(180));
-    return *(u32*)(base + idx * 36 + 20);
-}
+u32 func_0023aa38(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x0023aa38: definition moved into src/anon/unit_00239988.cpp
 
-u32 func_0023aa58(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 idx = *(volatile u32*)((u32)a0 + (s32)(276));
-    u8* base = *(u8**)((u32)a0 + (s32)(180));
-    return *(u32*)(base + idx * 36 + 24);
-}
+u32 func_0023aa58(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x0023aa58: definition moved into src/anon/unit_00239988.cpp
 
-u32 func_0023aa78(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 idx = *(volatile u32*)((u32)a0 + (s32)(276));
-    u8* base = *(u8**)((u32)a0 + (s32)(180));
-    return *(u32*)(base + idx * 36 + 28);
-}
+u32 func_0023aa78(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x0023aa78: definition moved into src/anon/unit_00239988.cpp
 
-u32 func_0023aa98(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 idx = *(volatile u32*)((u32)a0 + (s32)(276));
-    u8* base = *(u8**)((u32)a0 + (s32)(180));
-    return *(u32*)(base + idx * 36 + 32);
-}
+u32 func_0023aa98(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x0023aa98: definition moved into src/anon/unit_00239988.cpp
 
 u32 duplicate_unplaced_0023c0c0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15, r16;
@@ -11287,16 +9823,7 @@ u32 duplicate_unplaced_0023c6f8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0023c598)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-u32 func_0023ca30(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 n = *(u32*)(a0 + 76);
-    u32 scale = 20;
-    u32 base = *(u32*)(a0 + 20);
-    a1 <<= 2;
-    n *= scale;
-    n += base;
-    a1 += n;
-    return *(u32*)(a1 + 8);
-}
+u32 func_0023ca30(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x0023ca30: definition moved into src/anon/unit_0023c968.cpp
 
 void duplicate_unplaced_0023cdb8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r13, r14, r15;
@@ -11362,21 +9889,9 @@ u32 duplicate_unplaced_0023d3d0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)())func_00257000)();
 }
 
-u32 func_0023d410(void) {
-    u32 v0 = ((u32(*)())func_001058e8)();
-    return ((u32(*)(u32, u32, u32))func_002fde18)(v0 + 20000, 255, 1920);
-}
+u32 func_0023d410(void);  // 0x0023d410: definition moved into src/anon/unit_0023d260.cpp
 
-u32 func_0023e660(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    a1 += a0;
-    u32 stride = 320;
-    u32 idx = *(u8*)(a1 + 2916);
-    idx *= stride;
-    a1 = a2;
-    a0 += idx;
-    a0 = *(u32*)(a0 + 1680);
-    return func_0011eb08(a0, a1, a2, a3, a4, a5, a6, a7);
-}
+u32 func_0023e660(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x0023e660: definition moved into src/anon/unit_0023e5d0.cpp
 
 void duplicate_unplaced_0023e738(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r15;
@@ -11391,48 +9906,13 @@ void duplicate_unplaced_0023e738(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5,
     *(volatile u16*)((u32)r15 + (s32)(8)) = (u16)r7;
 }
 
-void func_0023e958(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    a1 += a0;
-    u32 stride = 320;
-    u32 idx = *(u8*)(a1 + 2916);
-    idx *= stride;
-    a0 += idx;
-    a0 += 1632;
-    *(u8*)(a0 + 312) = a2;
-    *(u8*)(a0 + 313) = a3;
-    *(u8*)(a0 + 314) = a4;
-    if ((s32)a5 >= 0) {
-        *(u8*)(a0 + 315) = a5;
-    }
-}
+void func_0023e958(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x0023e958: definition moved into src/anon/unit_0023e5d0.cpp
 
-void func_0023e990(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    a1 += a0;
-    u32 stride = 320;
-    u32 idx = *(u8*)(a1 + 2916);
-    idx *= stride;
-    idx += a0;
-    idx += 1632;
-    *(u8*)(idx + 315) = a2;
-}
+void func_0023e990(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x0023e990: definition moved into src/anon/unit_0023e5d0.cpp
 
-u32 func_0023ec18(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    a1 = (u32)(a1 + a0);
-    u32 stride = 320u;
-    u32 idx = *(u8*)((u32)a1 + 2916);
-    idx = (u32)(idx * stride);
-    a0 = (u32)(a0 + idx);
-    return *(u8*)((u32)a0 + 1948);
-}
+u32 func_0023ec18(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x0023ec18: definition moved into src/anon/unit_0023e5d0.cpp
 
-void func_0023ee68(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    if (a0 != 0) {
-        u32 base = 0x0036u << 16;
-        u32 obj = *(u32*)((u32)base + (s32)-5240);
-        void (**vt)() = *(void (***)())obj;
-        ((void (*)(u32, u32, u32, u32, u32, u32, u32, u32))vt[1])(obj, a0, a2, a3, a4, a5, a6, a7);
-    }
-}
+void func_0023ee68(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x0023ee68: definition moved into src/anon/unit_0023e5d0.cpp
 
 u32 duplicate_unplaced_0023f070(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r16, r17, r18;
@@ -11549,15 +10029,7 @@ u32 duplicate_unplaced_0023fa90(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return r2;
 }
 
-u32 func_0023fad0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r16;
-    r16 = r4;
-    r4 = *(volatile u32*)((u32)r4 + (s32)(4));
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00170950)(r4, r5, r6, r7, r8, r9, r10, r11);
-    *(u32*)((u32)r16 + (s32)(4)) = 0u;
-    *(volatile u8*)((u32)r16 + (s32)(24)) = (u8)0u;
-    return r2;
-}
+u32 func_0023fad0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x0023fad0: definition moved into src/anon/unit_0023f5b8.cpp
 
 u32 duplicate_unplaced_0023fb00(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15;
@@ -11591,21 +10063,9 @@ void duplicate_unplaced_0023fb90(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5,
     }
 }
 
-u32 func_0023fbc8(void) {
-    u32 v0 = ((u32(*)(u32))func_0023fb58)(128);
-    *(u32*)((u8*)&D_00360000 - 5136) = v0;
-    v0 = ((u32(*)(u32))func_0023fb58)(256);
-    *(u32*)((u8*)&D_00360000 - 5144) = v0;
-    *(u32*)((u8*)&D_00360000 - 5148) = v0;
-    return v0;
-}
+u32 func_0023fbc8(void);  // 0x0023fbc8: definition moved into src/anon/unit_0023f5b8.cpp
 
-u32 func_0023fc08(void) {
-    ((u32(*)(u32))func_0023fb90)(*(u32*)((u8*)&D_00360000 - 5136));
-    u32 v0 = ((u32(*)(u32))func_0023fb90)(*(u32*)((u8*)&D_00360000 - 5148));
-    *(u32*)((u8*)&D_00360000 - 5144) = 0;
-    return v0;
-}
+u32 func_0023fc08(void);  // 0x0023fc08: definition moved into src/anon/unit_0023f5b8.cpp
 
 void duplicate_unplaced_0023fe28(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r14, r15;
@@ -11648,12 +10108,12 @@ u32 duplicate_unplaced_00240b48(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r6 = (u32)(0x0001u << 16);
     r4 = r2;
     r6 = (u32)(r6 | 0x0fc0u);
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_002fdd68)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))memcpy)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
 u32 duplicate_unplaced_00240e10(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r13, r14, r15;
-    r2 = ((u32(*)())func_00240360)();
+    r2 = ((u32(*)())Tz__MCard__MakeFname)();
     r15 = (u32)(0x0036u << 16);
     r13 = *(volatile u32*)((u32)r15 + (s32)(-4972));
     r14 = (u32)(0x0036u << 16);
@@ -11698,7 +10158,7 @@ u32 duplicate_unplaced_00241528(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r14, r15, r16;
     r16 = (u32)(0x0036u << 16);
     r4 = *(volatile u32*)((u32)r16 + (s32)(-4984));
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_002ff3fc)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))strlen)(r4, r5, r6, r7, r8, r9, r10, r11);
     r15 = (u32)(0x0036u << 16);
     r5 = *(volatile u32*)((u32)r16 + (s32)(-4984));
     r14 = *(volatile u32*)((u32)r15 + (s32)(-4972));
@@ -11767,13 +10227,7 @@ u32 duplicate_unplaced_002421c0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_002ef938)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-u32 func_002422b8(u32 a0) {
-    *(u32*)((u8*)&D_00360000 - 4932) = a0;
-    u32 v = ((u32(*)(u32, u32))func_001063f0)(1024, a0);
-    *(u32*)((u8*)&D_00360000 - 4928) = v;
-    ((u32(*)())func_002423a0)();
-    return ((u32(*)())func_00242408)();
-}
+u32 func_002422b8(u32 a0);  // 002422b8: moved to src/tozawa/crc.cpp (linked unit)
 
 void duplicate_unplaced_00242368(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r14, r15;
@@ -11815,26 +10269,9 @@ u32 duplicate_unplaced_002424c0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return r2;
 }
 
-u32 func_00242560(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r16;
-    r16 = r4;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001058e8)(r4, r5, r6, r7, r8, r9, r10, r11);
-    r2 = *(volatile u32*)((u32)r2 + (s32)(9280));
-    return !((u32)r2 < (u32)r16);
-}
+u32 func_00242560(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x00242560: definition moved into src/anon/unit_00242478.cpp
 
-u32 func_00242590(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15, r16;
-    r16 = r4;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00242560)(r4, r5, r6, r7, r8, r9, r10, r11);
-    r2 = ((u32(*)())func_001058e8)();
-    r15 = *(volatile u32*)((u32)r2 + (s32)(9280));
-    r15 = (u32)(r15 - r16);
-    *(volatile u32*)((u32)r2 + (s32)(9280)) = r15;
-    r2 = ((u32(*)())func_001058e8)();
-    r2 = *(volatile u32*)((u32)r2 + (s32)(9280));
-    return r2;
-}
+u32 func_00242590(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x00242590: definition moved into src/anon/unit_00242478.cpp
 
 u32 duplicate_unplaced_00242660(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7;
@@ -12070,16 +10507,7 @@ u32 duplicate_unplaced_00246968(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return r2;
 }
 
-u32 func_0024efc0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    a2 = a0 * 6;
-    u32 r14 = (u32)&D_0035ee08;
-    a1 = (u32)&D_00372380;
-    u32 tmp = *(volatile u32*)r14;
-    u32 tbl = (u32)&D_00372348;
-    a0 = tmp;
-    a2 += tbl;
-    return ((u32(*)(...))func_0028dbf8)(a0, a1, a2, a3, a4, a5, a6, a7);
-}
+u32 func_0024efc0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x0024efc0: definition moved into src/anon/unit_0024e7e8.cpp
 
 u32 duplicate_unplaced_00251e90(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r14, r15;
@@ -12091,7 +10519,7 @@ u32 duplicate_unplaced_00251e90(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r5 = (u32)(0x0037u << 16);
     r6 = (u32)(r6 + r15);
     r5 = (u32)((s32)r5 + (9736));
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0028dbf8)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))Tz__MenuUtil__GetLaySeq)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
 u32 duplicate_unplaced_00252618(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
@@ -12117,7 +10545,7 @@ u32 duplicate_unplaced_002533e0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0026d808)(r4, r5, r6, r7, r8, r9, r10, r11);
     r5 = r16;
     r4 = (u32)((s32)0u + (6));
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00253180)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))Tz__CampMenu__Start)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
 u32 duplicate_unplaced_00253480(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
@@ -12149,23 +10577,9 @@ u32 duplicate_unplaced_002538f8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return r2;
 }
 
-u32 func_00253928(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15;
-    r15 = (u32)&D_0035eee0;
-    r4 = (u32)(r4 << 4);    r4 = (u32)(r4 + r15);
-    r2 = *(volatile u32*)((u32)r4 + (s32)(4));
-    r2 = (u32)((s32)r2 >> 1);
-    r2 = (u32)(r2 & 0x0001u);
-    return r2;
-}
+u32 func_00253928(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x00253928: definition moved into src/anon/unit_002530c8.cpp
 
-u32 func_00253b00(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r14, r15;
-    r15 = (u32)(0x0036u << 16);
-    r14 = (u32)&D_01dae6c0;
-    r2 = *(volatile u32*)((u32)r15 + (s32)(-4272));    r2 = (u32)(r2 + r14);
-    return r2;
-}
+u32 func_00253b00(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x00253b00: definition moved into src/anon/unit_002530c8.cpp
 
 u32 duplicate_unplaced_00256a58(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r14, r15;
@@ -12208,13 +10622,7 @@ u32 duplicate_unplaced_00256ef0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return r2;
 }
 
-void func_00257050(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r15;
-    r15 = (u32)&D_0035ef78;
-    r4 = (u32)(r4 << 1);    r4 = (u32)(r4 + r15);
-    *(volatile u16*)((u32)r4 + (s32)(0)) = (u16)r5;
-    *(volatile u16*)((u32)r4 + (s32)(76)) = (u16)r6;
-}
+void func_00257050(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x00257050: definition moved into src/anon/unit_00254020.cpp
 
 u32 duplicate_unplaced_002570a0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r16, r17;
@@ -12338,7 +10746,7 @@ u32 duplicate_unplaced_002595e8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
 
 u32 duplicate_unplaced_0025a1d0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15;
-    r2 = ((u32(*)())func_002b4b00)();
+    r2 = ((u32(*)())OvlShop__ItemShop__SetupConfirm)();
     r15 = (u32)(0x0037u << 16);
     r4 = 0u;
     r5 = (u32)(*(volatile u16*)((u32)r15 + (s32)(12010)));
@@ -12373,7 +10781,7 @@ u32 duplicate_unplaced_0025cd40(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
 
 u32 duplicate_unplaced_0025dba8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2;
-    r2 = ((u32(*)())func_002b4b00)();
+    r2 = ((u32(*)())OvlShop__ItemShop__SetupConfirm)();
     r2 = ((u32(*)())func_00240be0)();
     r4 = 0u;
     r5 = (u32)(0u | 0x8a7fu);
@@ -12439,7 +10847,7 @@ u32 duplicate_unplaced_002631b0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
 
 u32 duplicate_unplaced_00263688(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2;
-    r2 = ((u32(*)())func_002632d0)();
+    r2 = ((u32(*)())Tz__CmItem__isSoraOnly)();
     r4 = (u32)(*(volatile u16*)((u32)r2 + (s32)(0)));
     r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001a3888)(r4, r5, r6, r7, r8, r9, r10, r11);
     return r2;
@@ -12454,7 +10862,7 @@ u32 duplicate_unplaced_00263a58(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     }
     r5 = r16;
     r4 = r2;
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00263a90)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))Tz__CMenuHelp__Create_2)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
 u32 duplicate_unplaced_00263d70(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
@@ -12466,7 +10874,7 @@ u32 duplicate_unplaced_00263d70(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r7 = (u32)((s32)r7 + (15792));
     r6 = (u32)((s32)0u + (2000));
     r8 = (u32)((s32)0u + (4096));
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00102818)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))TASK_MANAGER__create_thread)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
 u32 duplicate_unplaced_00265740(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
@@ -12542,7 +10950,7 @@ u32 duplicate_unplaced_0026aaf8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
 u32 duplicate_unplaced_0026b448(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2;
     r2 = ((u32(*)())func_0026b470)();
-    r2 = ((u32(*)())func_0026b508)();
+    r2 = ((u32(*)())Tz__CmEquip__SortEquip)();
     r4 = (u32)((s32)0u + (-1));
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0026b5a0)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
@@ -12564,7 +10972,7 @@ u32 duplicate_unplaced_0026c9c8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
 
 u32 duplicate_unplaced_0026dcb8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2;
-    r2 = ((u32(*)())func_0026d968)();
+    r2 = ((u32(*)())Tz__Selector__Init)();
     r4 = 0u;
     r5 = 0u;
     r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00287bd0)(r4, r5, r6, r7, r8, r9, r10, r11);
@@ -12575,7 +10983,7 @@ u32 duplicate_unplaced_0026dcb8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r7 = (u32)((s32)r7 + (-8896));
     r6 = (u32)((s32)0u + (2000));
     r8 = (u32)((s32)0u + (4096));
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00102818)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))TASK_MANAGER__create_thread)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
 void duplicate_unplaced_0026dd18(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
@@ -12646,10 +11054,7 @@ u32 duplicate_unplaced_00275c78(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)())func_00275dd0)();
 }
 
-u32 func_00275dd0(void) {
-    ((u32(*)(u32, u32))func_0028dac8)(*(u32*)((u8*)&D_00360000 - 3572), 49);
-    return ((u32(*)(u32, u32))func_0028dac8)(*(u32*)((u8*)&D_00360000 - 3572) + 436, 52);
-}
+u32 func_00275dd0(void);  // 0x00275dd0: definition moved into src/anon/unit_002748a0.cpp
 
 u32 duplicate_unplaced_00275ec8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15, r16, r17;
@@ -12702,7 +11107,7 @@ u32 duplicate_unplaced_00276c50(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     }
     r5 = r16;
     r4 = r2;
-    return ((u32(*)())func_00276c88)();
+    return ((u32(*)())Tz__Jiminy__CreateHelp)();
 }
 
 u32 duplicate_unplaced_00276f38(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
@@ -12801,7 +11206,7 @@ u32 duplicate_unplaced_0027ead0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
 
 u32 duplicate_unplaced_0027f9b0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2;
-    r2 = ((u32(*)())func_00280148)();
+    r2 = ((u32(*)())Tz__GumiPause__CreateAdvice)();
     r2 = ((u32(*)())func_002800d0)();
     r4 = 0u;
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00287cc0)(r4, r5, r6, r7, r8, r9, r10, r11);
@@ -12873,17 +11278,9 @@ u32 duplicate_unplaced_00281108(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0016e920)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-u32 func_00281158(u32 a0, u32 a1) {
-    a1 *= 20;
-    a1 += a0;
-    return ((u32(*)(s32))func_001b77d0)(*(s16*)(a1 + 6));
-}
+u32 func_00281158(u32 a0, u32 a1);  // 0x00281158: definition moved into src/anon/unit_0027f2b0.cpp
 
-void func_002817b8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    *(volatile u16*)((u32)&D_00360000 - 3456) = (u16)-1;
-    *(volatile u32*)((u32)&D_00360000 - 3436) = 0u;
-    *(volatile u8*)((u32)&D_00360000 - 3432) = 0u;
-}
+void func_002817b8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x002817b8: definition moved into src/anon/unit_0027f2b0.cpp
 
 void duplicate_unplaced_00281e70(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r14, r15;
@@ -12941,13 +11338,10 @@ u32 duplicate_unplaced_002831e0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     *(volatile u32*)((u32)r14 + (s32)(0)) = r17;
     r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00283d00)(r4, r5, r6, r7, r8, r9, r10, r11);
     r2 = ((u32(*)())func_00283f50)();
-    return ((u32(*)())func_002833f8)();
+    return ((u32(*)())Tz__CmTutorial__CreateList)();
 }
 
-u32 func_002835a8(void) {
-    ((u32(*)(u32, u32))func_0028dac8)(*(u32*)((u8*)&D_00360000 - 3400) + 852, 20);
-    return ((u32(*)(u32))func_00283900)(1);
-}
+u32 func_002835a8(void);  // 0x002835a8: definition moved into src/anon/unit_00282c68.cpp
 
 u32 duplicate_unplaced_00284ea8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r14, r15, r16;
@@ -13031,12 +11425,7 @@ u32 duplicate_unplaced_00287c30(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00287bd0)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-void func_00287c78(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r14, r15;
-    r14 = (u32)((s32)0u + (-1));
-    D_0035f304 = r4;
-    D_0035f308 = r14;
-}
+void func_00287c78(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x00287c78: definition moved into src/anon/unit_00286d28.cpp
 
 void duplicate_unplaced_00287d08(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r14, r15;
@@ -13130,12 +11519,7 @@ u32 duplicate_unplaced_00288c58(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return r2;
 }
 
-u32 func_00288ca8(u32 a0) {
-    u32 s0 = a0;
-    ((u32(*)(u32))func_00288c20)(*(u32*)(a0 + 40));
-    ((u32(*)(u32))func_00288c20)(*(u32*)(s0 + 44));
-    return ((u32(*)(u32))func_00288c20)(*(u32*)(s0 + 48));
-}
+u32 func_00288ca8(u32 a0);  // 0x00288ca8: definition moved into src/anon/unit_00288b00.cpp
 
 void duplicate_unplaced_0028af90(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r15;
@@ -13203,23 +11587,9 @@ u32 duplicate_unplaced_0028b830(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00106420)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-u32 func_0028b870(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r16;
-    r16 = r4;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0023f8a8)(r4, r5, r6, r7, r8, r9, r10, r11);
-    *(u32*)((u32)r16 + (s32)(28)) = 0u;
-    *(volatile u32*)((u32)r16 + (s32)(32)) = 0u;
-    return r2;
-}
+u32 func_0028b870(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x0028b870: definition moved into src/anon/unit_00288b00.cpp
 
-u32 func_0028b8a0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r16;
-    r16 = r4;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0023f8c8)(r4, r5, r6, r7, r8, r9, r10, r11);
-    *(u32*)((u32)r16 + (s32)(28)) = 0u;
-    *(volatile u32*)((u32)r16 + (s32)(32)) = 0u;
-    return r2;
-}
+u32 func_0028b8a0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x0028b8a0: definition moved into src/anon/unit_00288b00.cpp
 
 u32 duplicate_unplaced_0028c170(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r16;
@@ -13286,44 +11656,11 @@ void duplicate_unplaced_0028dfe8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5,
     *(volatile u32*)((u32)r4 + (s32)(0)) = r15;
 }
 
-u32 func_0028e4c8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r14, r15, r16, r17;
-    r16 = r5;
-    r17 = r4;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00139d78)(r4, r5, r6, r7, r8, r9, r10, r11);
-    r15 = (u32)((s32)0u + (380));
-    r16 = (u32)(r16 * r15);
-    r14 = *(volatile u32*)((u32)r17 + (s32)(56));
-    r16 = (u32)(r16 + r14);
-    r2 = *(volatile u32*)((u32)r16 + (s32)(344));
-    return r2;
-}
+u32 func_0028e4c8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0028e4c8: moved to src/anon/unit_0028c878.cpp
 
-u32 func_0028e510(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r14, r15, r16, r17, r18;
-    r16 = r5;
-    r17 = r4;
-    r18 = r6;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00139d78)(r4, r5, r6, r7, r8, r9, r10, r11);
-    r15 = (u32)((s32)0u + (380));
-    r16 = (u32)(r16 * r15);
-    r14 = *(volatile u32*)((u32)r17 + (s32)(56));
-    r16 = (u32)(r16 + r14);
-    *(volatile u32*)((u32)r16 + (s32)(348)) = r18;
-    return r2;
-}
+u32 func_0028e510(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0028e510: moved to src/anon/unit_0028c878.cpp
 
-u32 func_0028e678(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r14, r15, r16, r17;
-    r16 = r5;
-    r17 = r4;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00139d78)(r4, r5, r6, r7, r8, r9, r10, r11);
-    r15 = (u32)((s32)0u + (380));
-    r16 = (u32)(r16 * r15);
-    r14 = *(volatile u32*)((u32)r17 + (s32)(56));
-    r16 = (u32)(r16 + r14);
-    return *(u8*)((u32)r16 + (s32)(352));
-}
+u32 func_0028e678(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0028e678: moved to src/anon/unit_0028c878.cpp
 
 u32 duplicate_unplaced_0028e6c0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15, r16, r17;
@@ -13348,53 +11685,13 @@ u32 duplicate_unplaced_0028e710(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return r2;
 }
 
-u32 func_0028e748(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r14, r15, r16, r17, r18;
-    r16 = r5;
-    r17 = r4;
-    r18 = r6;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00139d78)(r4, r5, r6, r7, r8, r9, r10, r11);
-    r15 = (u32)((s32)0u + (380));
-    r16 = (u32)(r16 * r15);
-    r14 = *(volatile u32*)((u32)r17 + (s32)(56));
-    r16 = (u32)(r16 + r14);
-    *(volatile u32*)((u32)r16 + (s32)(376)) = r18;
-    return r2;
-}
+u32 func_0028e748(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0028e748: moved to src/anon/unit_0028c878.cpp
 
-u32 func_0028e798(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15, r16, r17;
-    r16 = r5;
-    r17 = r4;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00139d78)(r4, r5, r6, r7, r8, r9, r10, r11);
-    r15 = (u32)((s32)0u + (380));
-    r16 = (u32)(r16 * r15);
-    r2 = *(volatile u32*)((u32)r17 + (s32)(56));
-    r2 = (u32)(r2 + r16);
-    return r2;
-}
+u32 func_0028e798(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0028e798: moved to src/anon/unit_0028c878.cpp
 
-u32 func_0028e7d8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r16, r17, r18;
-    r16 = r4;
-    r17 = r6;
-    r18 = r5;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00139d78)(r4, r5, r6, r7, r8, r9, r10, r11);
-    *(u32*)((u32)r16 + (s32)(28)) = r18;
-    *(volatile u32*)((u32)r16 + (s32)(32)) = r17;
-    return r2;
-}
+u32 func_0028e7d8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0028e7d8: moved to src/anon/unit_0028c878.cpp
 
-u32 func_0028e870(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r16, r17, r18;
-    r16 = r4;
-    r17 = r6;
-    r18 = r5;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00139d78)(r4, r5, r6, r7, r8, r9, r10, r11);
-    *(u32*)((u32)r16 + (s32)(36)) = r18;
-    *(volatile u32*)((u32)r16 + (s32)(40)) = r17;
-    return r2;
-}
+u32 func_0028e870(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0028e870: moved to src/anon/unit_0028c878.cpp
 
 u32 duplicate_unplaced_0028eab8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r16, r17;
@@ -13422,12 +11719,7 @@ u32 duplicate_unplaced_0028fb28(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0028fb68)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-void func_0028fb68(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 stride = 884u;
-    u32 base = D_0035f480;
-    u32 p = (u32)(a0 * stride + base);
-    *(u32*)(p + 880) = a1;
-}
+void func_0028fb68(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0028fb68: moved to src/anon/unit_0028f1e0.cpp
 
 u32 duplicate_unplaced_00290870(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15, r16;
@@ -13489,7 +11781,7 @@ u32 duplicate_unplaced_002925c0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r7 = (u32)((s32)r7 + (9736));
     r6 = (u32)(r6 | 0x22e0u);
     r8 = (u32)((s32)0u + (4096));
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00102818)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))TASK_MANAGER__create_thread)(r4, r5, r6, r7, r8, r9, r10, r11);
     r15 = (u32)(0x0029u << 16);
     r15 = (u32)((s32)r15 + (9760));
     *(volatile u32*)((u32)r2 + (s32)(48)) = r15;
@@ -13580,7 +11872,7 @@ u32 duplicate_unplaced_00295228(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00294000)(r4, r5, r6, r7, r8, r9, r10, r11);
     r16 = (u32)((s32)r2 + (16));
     r4 = r17;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00295158)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))Tz__JmWorldSel__GetCur2Idx)(r4, r5, r6, r7, r8, r9, r10, r11);
     r2 = (u32)(r2 << 4);
     r2 = (u32)(r2 + r16);
     r2 = (u32)(s32)(*(volatile s8*)((u32)r2 + (s32)(0)));
@@ -13589,7 +11881,7 @@ u32 duplicate_unplaced_00295228(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
 
 u32 duplicate_unplaced_002954e0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2;
-    r2 = ((u32(*)())func_002953c8)();
+    r2 = ((u32(*)())Tz__JmWorldSel__GetId2Info)();
     r4 = r2;
     r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_002941a8)(r4, r5, r6, r7, r8, r9, r10, r11);
     return r2;
@@ -13602,7 +11894,7 @@ u32 duplicate_unplaced_002956c0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00294000)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = r17;
     r16 = (u32)((s32)r2 + (16));
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00295158)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))Tz__JmWorldSel__GetCur2Idx)(r4, r5, r6, r7, r8, r9, r10, r11);
     r2 = (u32)(r2 << 4);
     r16 = (u32)(r16 + r2);
     r4 = r16;
@@ -13621,17 +11913,7 @@ u32 duplicate_unplaced_00296fa0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return r2;
 }
 
-u32 func_002983d8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15, r16;
-    r16 = r4;
-    r4 = (u32)((s32)0u + (2));
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00294000)(r4, r5, r6, r7, r8, r9, r10, r11);
-    r15 = (u32)((s32)0u + (12));
-    r16 = (u32)(r16 * r15);
-    r2 = (u32)((s32)r2 + (16));
-    r2 = (u32)(r2 + r16);
-    return r2;
-}
+u32 func_002983d8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x002983d8: definition moved into src/anon/unit_002982f0.cpp
 
 u32 duplicate_unplaced_00299238(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2;
@@ -13652,17 +11934,7 @@ u32 duplicate_unplaced_00299260(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00276c50)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-u32 func_0029da68(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15, r16;
-    r16 = r4;
-    r4 = (u32)((s32)0u + (3));
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00294000)(r4, r5, r6, r7, r8, r9, r10, r11);
-    r15 = (u32)((s32)0u + (36));
-    r16 = (u32)(r16 * r15);
-    r2 = (u32)((s32)r2 + (16));
-    r2 = (u32)(r2 + r16);
-    return r2;
-}
+u32 func_0029da68(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x0029da68: definition moved into src/anon/unit_0029d008.cpp
 
 u32 duplicate_unplaced_0029df98(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2;
@@ -13784,17 +12056,7 @@ u32 duplicate_unplaced_002a03a0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00276c50)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-u32 func_002a1bc0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15, r16;
-    r16 = r4;
-    r4 = (u32)((s32)0u + (3));
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00294000)(r4, r5, r6, r7, r8, r9, r10, r11);
-    r15 = (u32)((s32)0u + (36));
-    r16 = (u32)(r16 * r15);
-    r2 = (u32)((s32)r2 + (16));
-    r2 = (u32)(r2 + r16);
-    return r2;
-}
+u32 func_002a1bc0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x002a1bc0: definition moved into src/anon/unit_002a0908.cpp
 
 u32 duplicate_unplaced_002a43d0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2;
@@ -13878,29 +12140,15 @@ u32 duplicate_unplaced_002a9d68(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
 
 u32 duplicate_unplaced_002b3420(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2;
-    r2 = ((u32(*)())func_002b23e0)();
+    r2 = ((u32(*)())Tz__JmPuzzle__GetImageInfo)();
     r4 = (u32)(*(volatile u8*)((u32)r2 + (s32)(2)));
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_002ac678)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
 
-void func_002b60e8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 off = ((a0 << 2) + a0 + a1) << 3;
-    u32 base = *(volatile u32*)&D_0035f660;
-    *(volatile u32*)(off + base) = a2;
-    u32 base2 = *(volatile u32*)&D_0035f660;
-    *(volatile u32*)(off + base2 + 4) = a3;
-}
+void func_002b60e8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x002b60e8: definition moved into src/anon/unit_002b60e8.cpp
 
-u32 func_002b6118(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r14, r15;
-    r14 = (u32)((s32)0u + (12));
-    r4 = (u32)(r4 * r14);
-    r15 = (u32)&D_00374d30;
-    r4 = (u32)(r4 + r15);
-    r2 = r4;
-    return r2;
-}
+u32 func_002b6118(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x002b6118: definition moved into src/anon/unit_002b60e8.cpp
 
 u32 duplicate_unplaced_002b6530(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r15;
@@ -13920,7 +12168,7 @@ u32 duplicate_unplaced_002b9e80(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r4 = r16;
     r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_002bce40)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = r16;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_002bce50)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))SE_BANK__clearField)(r4, r5, r6, r7, r8, r9, r10, r11);
     r2 = ((u32(*)())func_002b9b78)();
     r2 = ((u32(*)())func_002ba390)();
     return ((u32(*)())func_002b9ed0)();
@@ -13934,7 +12182,7 @@ u32 duplicate_unplaced_002ba0b0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r4 = r16;
     r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_002fee78)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = r16;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_002ff3fc)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))strlen)(r4, r5, r6, r7, r8, r9, r10, r11);
     r2 = r16;
     return r2;
 }
@@ -13947,7 +12195,7 @@ u32 duplicate_unplaced_002ba0f8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r4 = r16;
     r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_002fee78)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = r16;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_002ff3fc)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))strlen)(r4, r5, r6, r7, r8, r9, r10, r11);
     r2 = r16;
     return r2;
 }
@@ -14028,41 +12276,13 @@ u32 duplicate_unplaced_002ba948(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_002b70b8)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-u32 func_002ba978(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 base = (u32)&D_01e2a400;
-    u32 s0 = 0x00360000u;
-    u32 idx = *(volatile u32*)(s0 + 5856);
-    idx <<= 2;
-    u32 ptr = idx + base;
-    *(volatile u32*)ptr = a0;
-    u32 r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_002b6c04)(a0, a1, a2, a3, a4, a5, a6, a7);
-    u32 count = *(volatile u32*)(s0 + 5856);
-    count++;
-    *(volatile u32*)(s0 + 5856) = count;
-    return r2;
-}
+u32 func_002ba978(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x002ba978: definition moved into src/anon/unit_002b9ab8.cpp
 
-void func_002bb0c8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r13 = ~a0;
-    u32 r15 = 100u;
-    if (r13 == 0u) {
-        a0 = r15;
-    }
-    u32 r14 = (u32)(0x0036u << 16);
-    *(volatile u32*)((u32)r14 + (s32)(5868)) = a0;
-}
+void func_002bb0c8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x002bb0c8: definition moved into src/anon/unit_002bb070.cpp
 
-u32 func_002bb228(u32 a0, u32 a1) {
-    ((u32(*)(u32, u32, u32))func_002bb100)(a0, 1, 1);
-    ((u32(*)(u32, u32))func_002bb180)(a0, a1);
-    return ((u32(*)(u32))func_002bb0e0)(a0);
-}
+u32 func_002bb228(u32 a0, u32 a1);  // 0x002bb228: definition moved into src/anon/unit_002bb070.cpp
 
-u32 func_002bb270(u32 a0, u32 a1) {
-    ((u32(*)(u32, u32, u32))func_002bb100)(a0, 1, 3);
-    ((u32(*)(u32, u32))func_002bb180)(a0, a1);
-    return ((u32(*)(u32))func_002bb0e0)(a0);
-}
+u32 func_002bb270(u32 a0, u32 a1);  // 0x002bb270: definition moved into src/anon/unit_002bb070.cpp
 
 u32 duplicate_unplaced_002bbde0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r12, r13, r14, r15;
@@ -14120,17 +12340,12 @@ u32 duplicate_unplaced_002bd260(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r4 = r16;
     r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_002fee78)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = r16;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_002ff3fc)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))strlen)(r4, r5, r6, r7, r8, r9, r10, r11);
     r2 = r16;
     return r2;
 }
 
-u32 func_002bd2a8(u32 a0) {
-    u32 s0 = (u32)&D_01e2bbe0;
-    ((u32(*)(u32, u32, u32))func_002fee78)(s0, (u32)&D_00374fc0, a0);
-    ((u32(*)(u32))func_002ff3fc)(s0);
-    return s0;
-}
+u32 func_002bd2a8(u32 a0);  // 0x002bd2a8: definition moved into src/anon/unit_002bc978.cpp
 
 u32 duplicate_unplaced_002bd2f0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7;
@@ -14232,14 +12447,7 @@ u32 duplicate_unplaced_002be7b8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return r2;
 }
 
-u32 func_002bea60(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2;
-    r4 = (u32)((s32)0u + (6));
-    r5 = 0u;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0016fa98)(r4, r5, r6, r7, r8, r9, r10, r11);
-    r2 = ((u32(*)())func_002f17e0)();
-    return ((u32(*)())func_002c23d8)();
-}
+u32 func_002bea60(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x002bea60: definition moved into src/anon/unit_002be020.cpp
 
 u32 duplicate_unplaced_002beb90(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15, r16;
@@ -14305,7 +12513,7 @@ u32 duplicate_unplaced_002bf618(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001b6d70)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = r16;
     r5 = r2;
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_002bf650)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))worldmap__Symbol__setState)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
 u32 duplicate_unplaced_002bfaf0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
@@ -14462,45 +12670,11 @@ u32 duplicate_unplaced_002c5418(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return r2;
 }
 
-u32 func_002c54c8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15, r16;
-    r7 = r6;
-    r6 = (u32)((s32)0u + (5));
-    r8 = (u32)((s32)0u + (3));
-    r16 = r4;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_002c5508)(r4, r5, r6, r7, r8, r9, r10, r11);
-    r15 = (u32)&D_00361c40;
-    *(volatile u32*)((u32)r16 + (s32)(0)) = r15;
-    return r2;
-}
+u32 func_002c54c8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x002c54c8: definition moved into src/anon/unit_002c53c8.cpp
 
-u32 func_002c5508(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 s0 = a0;
-    u32 s1 = a4;
-    u32 ret = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001980d0)(a0, a1, a2, a3, a4, a5, a6, a7);
-    u32 flags = *(u32*)(s0 + 268);
-    u32 vt = (u32)&D_00361ca0;
-    *(u32*)(s0 + 2548) = s1;
-    flags |= 0x200;
-    *(u32*)s0 = vt;
-    *(u32*)(s0 + 268) = flags;
-    *(u32*)(s0 + 2552) = 0;
-    return ret;
-}
+u32 func_002c5508(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x002c5508: definition moved into src/anon/unit_002c53c8.cpp
 
-u32 func_002c5558(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 s0 = a0;
-    u32 s1 = a4;
-    u32 ret = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001980d0)(a0, a1, a2, a3, a4, a5, a6, a7);
-    u32 flags = *(u32*)(s0 + 268);
-    u32 vt = (u32)&D_00361ca0;
-    *(u32*)(s0 + 2548) = s1;
-    flags |= 0x200;
-    *(u32*)s0 = vt;
-    *(u32*)(s0 + 268) = flags;
-    *(u32*)(s0 + 2552) = 0;
-    return ret;
-}
+u32 func_002c5558(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x002c5558: definition moved into src/anon/unit_002c53c8.cpp
 
 void duplicate_unplaced_002c5628(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r12, r13, r14, r15;
@@ -14619,14 +12793,7 @@ u32 duplicate_unplaced_002cef58(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return r2;
 }
 
-u32 func_002cfeb0(u32 a0) {
-    u32 s0 = a0;
-    ((u32(*)(u32))func_001b3b70)(a0);
-    *(u32*)s0 = (u32)&D_00361fc8;
-    ((u32(*)(u32, u32))func_002cf268)(s0 + 2800, 0);
-    *(u32*)(s0 + 1416) |= 0x08000000u;
-    return ((u32(*)(u32))func_002cff50)(s0);
-}
+u32 func_002cfeb0(u32 a0);  // 0x002cfeb0: definition moved into src/anon/unit_002cf260.cpp
 
 u32 duplicate_unplaced_002cff00(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r14, r15, r16;
@@ -14667,7 +12834,7 @@ u32 duplicate_unplaced_002cff98(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r16 = r4;
     *(volatile u32*)((u32)r16 + (s32)(0)) = r15;
     r4 = (u32)((s32)r4 + (2568));
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0019f9a8)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__OBJ_ATTACK__clear)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = (u32)((s32)r16 + (2640));
     r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001c0248)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = r16;
@@ -14681,7 +12848,7 @@ u32 duplicate_unplaced_002cffe0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r16 = r4;
     *(volatile u32*)((u32)r16 + (s32)(0)) = r15;
     r4 = (u32)((s32)r4 + (2568));
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0019f9a8)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__OBJ_ATTACK__clear)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = (u32)((s32)r16 + (2640));
     r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001c0248)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = r16;
@@ -14695,7 +12862,7 @@ u32 duplicate_unplaced_002d0028(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r16 = r4;
     *(volatile u32*)((u32)r16 + (s32)(0)) = r15;
     r4 = (u32)((s32)r4 + (2568));
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0019f9a8)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__OBJ_ATTACK__clear)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = (u32)((s32)r16 + (2640));
     r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001c0248)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = r16;
@@ -14704,20 +12871,9 @@ u32 duplicate_unplaced_002d0028(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00105110)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-u32 func_002d00a0(u32 a0) {
-    u32 s0 = a0;
-    ((u32(*)(u32))func_00198450)(a0);
-    void (**vt)() = *(void (***)())s0;
-    ((void (*)(u32))vt[31])(s0);
-}
+u32 func_002d00a0(u32 a0);  // 0x002d00a0: definition moved into src/anon/unit_002cf260.cpp
 
-u32 func_002d0ea8(u32 a0, u32 a1, u32 a2, u32 a3) {
-    u32 s0 = a0;
-    ((u32(*)(u32, u32, u32, u32, u32))func_00177dc8)(a0, a1, 11, a2, a3);
-    *(u32*)s0 = (u32)&D_00362060;
-    *(u32*)((u8*)&D_00360000 + 8272) = s0;
-    return ((u32(*)(u32))func_00182f28)(s0);
-}
+u32 func_002d0ea8(u32 a0, u32 a1, u32 a2, u32 a3);  // 0x002d0ea8: definition moved into src/anon/unit_002cf260.cpp
 
 u32 duplicate_unplaced_002d0ef0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r14, r15, r16;
@@ -14743,7 +12899,7 @@ u32 duplicate_unplaced_002d1270(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r5 = r16;
     r6 = r17;
     r4 = r2;
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_002d1550)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))Ti__MGOarashi__MGOarashi)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
 u32 duplicate_unplaced_002d17f0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
@@ -15058,31 +13214,9 @@ u32 duplicate_unplaced_002dad40(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00105110)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-u32 func_002db4b0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r14, r15, r16;
-    r7 = r6;
-    r6 = (u32)((s32)0u + (1));
-    r16 = r4;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_002cfeb0)(r4, r5, r6, r7, r8, r9, r10, r11);
-    r15 = (u32)&D_00362738;
-    r14 = (u32)((s32)0u + (-1));
-    *(u32*)((u32)r16 + (s32)(2836)) = r14;
-    *(volatile u32*)((u32)r16 + (s32)(0)) = r15;
-    return r2;
-}
+u32 func_002db4b0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x002db4b0: definition moved into src/anon/unit_002da040.cpp
 
-u32 func_002db4f0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r14, r15, r16;
-    r7 = r6;
-    r6 = (u32)((s32)0u + (1));
-    r16 = r4;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_002cfeb0)(r4, r5, r6, r7, r8, r9, r10, r11);
-    r15 = (u32)&D_00362738;
-    r14 = (u32)((s32)0u + (-1));
-    *(u32*)((u32)r16 + (s32)(2836)) = r14;
-    *(volatile u32*)((u32)r16 + (s32)(0)) = r15;
-    return r2;
-}
+u32 func_002db4f0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x002db4f0: definition moved into src/anon/unit_002da040.cpp
 
 u32 duplicate_unplaced_002db530(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15;
@@ -15163,7 +13297,7 @@ u32 duplicate_unplaced_002db7d0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r5 = (u32)((s32)0u + (-1));
     r15 = (u32)(r15 & 0x0001u);
     if (r15 != 0u) r5 = 0u;
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_002db610)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))Ti__MGHachimitsuPod__set_run_effect)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
 u32 duplicate_unplaced_002db808(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
@@ -15246,7 +13380,7 @@ u32 duplicate_unplaced_002dc278(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r5 = r16;
     r6 = r17;
     r4 = r2;
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_002dc4e0)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))Ti__MGJump__MGJump)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
 u32 duplicate_unplaced_002dc708(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
@@ -15389,7 +13523,7 @@ u32 duplicate_unplaced_002e0bb0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001050d8)(r4, r5, r6, r7, r8, r9, r10, r11);
     r5 = r16;
     r4 = r2;
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_002e0d28)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))Ti__MG_ALEscape__MG_ALEscape)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
 u32 duplicate_unplaced_002e1f40(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
@@ -15474,13 +13608,7 @@ u32 duplicate_unplaced_002e7768(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_002e77a8)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-u32 func_002e77a8(u32 a0) {
-    u32 s0 = a0;
-    ((u32(*)(u32))func_002e7688)(a0);
-    ((u32(*)(u32))func_002e76c8)(s0 + 4);
-    ((u32(*)(u32, u32, u32))func_002fde18)(s0 + 352, 0, 32544);
-    return ((u32(*)(u32, u32, u32))func_002fde18)(s0 + 0x8080, 0, 10944);
-}
+// 002e77a8: moved to src/anon/unit_002e7658.cpp
 
 u32 duplicate_unplaced_002e7850(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2;
@@ -15494,7 +13622,7 @@ u32 duplicate_unplaced_002e7b10(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r15 = *(volatile u32*)((u32)r4 + (s32)(0));
     r5 = *(volatile u32*)((u32)r4 + (s32)(4));
     r4 = r15;
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001a55a8)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__PRIZE__Appear)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
 u32 duplicate_unplaced_002e7b48(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
@@ -15666,7 +13794,7 @@ u32 duplicate_unplaced_002e9c98(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r15 = *(volatile u32*)((u32)r5 + (s32)(0));
     r6 = *(volatile u32*)((u32)r5 + (s32)(4));
     r5 = r15;
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_002e9b58)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))Ts__TARGET_SEARCHER__add)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
 void duplicate_unplaced_002e9fb8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
@@ -15709,7 +13837,7 @@ u32 duplicate_unplaced_002eaa70(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
 u32 duplicate_unplaced_002eaaf0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r16;
     r16 = r4;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0017c430)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__OBJ__prepare_jump_height)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = r16;
     r5 = (u32)((s32)0u + (44));
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0016bd60)(r4, r5, r6, r7, r8, r9, r10, r11);
@@ -15727,7 +13855,7 @@ u32 duplicate_unplaced_002ead20(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
 u32 duplicate_unplaced_002eb4b0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15, r16;
     r16 = r4;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0017c430)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__OBJ__prepare_jump_height)(r4, r5, r6, r7, r8, r9, r10, r11);
     r15 = (u32)((s32)0u + (256));
     *(volatile u32*)((u32)r16 + (s32)(256)) = r15;
     r4 = r16;
@@ -15940,7 +14068,7 @@ u32 duplicate_unplaced_002eee68(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0011cdf0)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = 0u;
     r5 = 0u;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_002f25a0)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))sceGsSyncPath)(r4, r5, r6, r7, r8, r9, r10, r11);
     return r2;
 }
 
@@ -15950,7 +14078,7 @@ u32 duplicate_unplaced_002ef340(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r4 = (u32)((s32)r4 + (64));
     stk_p0 = (u64)r5;
     stk_p16 = (u64)r6;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0023cc18)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YI__LAYOUT__Draw)(r4, r5, r6, r7, r8, r9, r10, r11);
     r2 = ((u32(*)())func_002ef618)();
     return r2;
 }
@@ -15989,22 +14117,9 @@ u32 duplicate_unplaced_002ef708(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return r2;
 }
 
-u32 func_002ef750(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7;
-    r4 = (u32)&D_00376210;
-    r5 = (u32)&D_002ef778;
-    r6 = 0u;
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00168548)(r4, r5, r6, r7, r8, r9, r10, r11);
-}
+// 002ef750: moved to src/anon/unit_002ef6b0.cpp
 
-u32 func_002ef938(u32 a0) {
-    *(u32*)a0 = 0x5332484bu;
-    u32 s0 = a0;
-    u32 v = ((u32(*)(u32))func_002ef988)(a0);
-    *(u16*)(s0 + 4) = (u16)v;
-    *(u16*)(s0 + 6) = 1;
-    return ((u32(*)(u32, u32, u32))func_002fde18)(s0 + 16, 0, 612);
-}
+// 002ef938: moved to src/anon/unit_002ef938.cpp
 
 u32 duplicate_unplaced_002efb60(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r16;
@@ -16017,7 +14132,7 @@ u32 duplicate_unplaced_002efb60(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
 u32 duplicate_unplaced_002f05d8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r16;
     r16 = r4;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0017c430)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__OBJ__prepare_jump_height)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = r16;
     r5 = (u32)((s32)0u + (63));
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0016bd60)(r4, r5, r6, r7, r8, r9, r10, r11);
@@ -16066,7 +14181,7 @@ u32 duplicate_unplaced_002f08d8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0010c7e8)(r4, r5, r6, r7, r8, r9, r10, r11);
     r5 = *(volatile u32*)((u32)r16 + (s32)(4));
     r4 = r2;
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00119e60)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))kn__Genie__changeForm)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
 u32 duplicate_unplaced_002f09d8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
@@ -16077,7 +14192,7 @@ u32 duplicate_unplaced_002f09d8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0010c7e8)(r4, r5, r6, r7, r8, r9, r10, r11);
     r5 = *(volatile u32*)((u32)r16 + (s32)(4));
     r4 = r2;
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00119830)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))kn__Stitch__shotEffect)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
 u32 duplicate_unplaced_002f0a68(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
@@ -16190,12 +14305,7 @@ u32 duplicate_unplaced_002f1230(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0011a918)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-u32 func_002f17e0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    a1 = 950;
-    a0 = *(volatile u32*)&D_00363c20;
-    a2 = 0;
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00170518)(a0, a1, a2, a3, a4, a5, a6, a7);
-}
+u32 func_002f17e0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x002f17e0: definition moved into src/anon/unit_002f17e0.cpp
 
 u32 duplicate_unplaced_002f1808(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r14, r15;
@@ -16237,7 +14347,7 @@ u32 duplicate_unplaced_002f1a80(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r5 = (u32)((s32)r5 + (-16128));
     r6 = (u32)((s32)r6 + (6760));
     r7 = 0u;
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00168388)(r4, r5, r6, r7, r8, r9, r10, r11);
+    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__FILE__ReadBack)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
 u32 duplicate_unplaced_002f1ae0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
@@ -16316,21 +14426,13 @@ u32 duplicate_unplaced_002fd220(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2;
     r5 = 0u;
     r6 = (u32)((s32)0u + (10));
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_002ffbb0)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))strtol)(r4, r5, r6, r7, r8, r9, r10, r11);
     r2 = (u32)((u64)r2 << 32);
     r2 = (u32)((s64)(u64)r2 >> 32);
     return r2;
 }
 
-void func_002fea00(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r14, r15;
-    u64 r4w;
-    r15 = (u32)(0x0036u << 16);
-    r4w = (u64)r4 << 32;
-    r14 = *(volatile u32*)((u32)r15 + (s32)(23624));
-    r4w = r4w >> 32;
-    *(volatile u64*)((u32)r14 + (s32)(168)) = r4w;
-}
+void srand(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x002fea00: definition moved into src/newlib/libc/rand.c
 
 u32 duplicate_unplaced_002ffbe0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r13, r14, r15;
@@ -16481,7 +14583,7 @@ u32 duplicate_unplaced_00308200(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
 u32 duplicate_unplaced_00308650(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r3;
     r4 = (u32)((s32)0u + (5));
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_003061d0)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))DisableDmac)(r4, r5, r6, r7, r8, r9, r10, r11);
     r3 = (u32)(0x01e3u << 16);
     r4 = (u32)((s32)0u + (5));
     r5 = *(volatile u32*)((u32)r3 + (s32)(22484));
@@ -16549,7 +14651,7 @@ u32 duplicate_unplaced_00308f00(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r7 = *(volatile u32*)((u32)r5 + (s32)(36));
     r8 = *(volatile u32*)((u32)r5 + (s32)(40));
     r9 = *(volatile u32*)((u32)r5 + (s32)(44));
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_003088f8)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))isceSifSendCmd)(r4, r5, r6, r7, r8, r9, r10, r11);
     r3 = (u32)((s32)0u + (2048));
     if (r2 != 0u) r3 = 0u;
     r2 = r3;
@@ -16565,7 +14667,7 @@ u32 duplicate_unplaced_003091c8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r7 = 0u;
     r8 = 0u;
     r9 = 0u;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_003088f8)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))isceSifSendCmd)(r4, r5, r6, r7, r8, r9, r10, r11);
     r3 = (u32)((s32)0u + (2048));
     if (r2 != 0u) r3 = 0u;
     r2 = r3;
@@ -16615,13 +14717,7 @@ u32 duplicate_unplaced_0030df00(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return r2;
 }
 
-u32 func_0030e790(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2;
-    r8 = 0u;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0030e548)(r4, r5, r6, r7, r8, r9, r10, r11);
-    if (r2 != 0u) return r2;
-    return r2;
-}
+u32 func_0030e790(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x0030e790: definition moved into src/sdk/eeloadfile.c
 
 u32 duplicate_unplaced_0030ec28(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r3;
@@ -16829,14 +14925,7 @@ u32 duplicate_unplaced_003158c8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00106420)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-u32 func_00316818(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15;
-    r15 = (u32)&D_00367910;
-    *(volatile u32*)((u32)r4 + (s32)(0)) = r15;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00106420)(r4, r5, r6, r7, r8, r9, r10, r11);
-    if (r2) return r2;
-    return r2;
-}
+u32 func_00316818(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x00316818: definition moved into src/libsupc++/eh_exception.cpp
 
 u32 duplicate_unplaced_00316840(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15;
@@ -16865,16 +14954,7 @@ u32 duplicate_unplaced_00316890(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return r2;
 }
 
-u32 func_00316998(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15;
-    r4 = (u32)&D_01e4c7a0;
-    r5 = (u32)&D_003168d8;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00316c68)(r4, r5, r6, r7, r8, r9, r10, r11);
-    r2 = ((u32)r2 < 0x00000001u);
-    r15 = (u32)(0x0036u << 16);
-    *(volatile u32*)((u32)r15 + (s32)(31008)) = r2;
-    return r2;
-}
+u32 func_00316998(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x00316998: definition moved into src/libsupc++/eh_globals.cpp
 
 void duplicate_unplaced_003191d0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r15;
@@ -17045,11 +15125,11 @@ u32 duplicate_unplaced_0031c028(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
 u32 duplicate_unplaced_0031c068(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r16;
     r16 = r4;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00138988)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))dk__Sprite__draw)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = (u32)((s32)r16 + (448));
     r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0014b9a8)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = r16;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00138de0)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))dk__SpriteMessage__drawMessage)(r4, r5, r6, r7, r8, r9, r10, r11);
     r16 = (u32)((s32)r16 + (480));
     r4 = r16;
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0014b9a8)(r4, r5, r6, r7, r8, r9, r10, r11);
@@ -17334,7 +15414,7 @@ u32 duplicate_unplaced_0031eb68(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r16 = r4;
     *(volatile u32*)((u32)r16 + (s32)(0)) = r15;
     r4 = (u32)((s32)r4 + (2568));
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0019f9a8)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__OBJ_ATTACK__clear)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = (u32)((s32)r16 + (2640));
     r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001c0248)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = r16;
@@ -17348,7 +15428,7 @@ u32 duplicate_unplaced_0031ebb0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r16 = r4;
     *(volatile u32*)((u32)r16 + (s32)(0)) = r15;
     r4 = (u32)((s32)r4 + (2568));
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0019f9a8)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__OBJ_ATTACK__clear)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = (u32)((s32)r16 + (2640));
     r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001c0248)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = r16;
@@ -17383,7 +15463,7 @@ u32 duplicate_unplaced_0031f340(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r16 = r4;
     *(volatile u32*)((u32)r16 + (s32)(0)) = r15;
     r4 = (u32)((s32)r4 + (2568));
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0019f9a8)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__OBJ_ATTACK__clear)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = (u32)((s32)r16 + (2640));
     r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001c0248)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = r16;
@@ -17414,7 +15494,7 @@ u32 duplicate_unplaced_0031f940(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
 u32 duplicate_unplaced_0031fd78(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r14, r15, r16;
     r16 = r4;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001acd78)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__WINDOW_BASE__page_end)(r4, r5, r6, r7, r8, r9, r10, r11);
     r14 = *(volatile u32*)((u32)r16 + (s32)(0));
     r15 = *(volatile u32*)((u32)r14 + (s32)(32));
     r4 = r16;
@@ -17468,7 +15548,7 @@ u32 duplicate_unplaced_00320198(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r16 = r4;
     *(volatile u32*)((u32)r16 + (s32)(0)) = r15;
     r4 = (u32)((s32)r4 + (2568));
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0019f9a8)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__OBJ_ATTACK__clear)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = (u32)((s32)r16 + (2640));
     r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001c0248)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = r16;
@@ -17483,7 +15563,7 @@ u32 duplicate_unplaced_00320290(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r16 = r4;
     *(volatile u32*)((u32)r16 + (s32)(0)) = r15;
     r4 = (u32)((s32)r4 + (2568));
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0019f9a8)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__OBJ_ATTACK__clear)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = (u32)((s32)r16 + (2640));
     r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001c0248)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = r16;
@@ -17530,7 +15610,7 @@ u32 duplicate_unplaced_00320bc0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r16 = r4;
     *(volatile u32*)((u32)r16 + (s32)(0)) = r15;
     r4 = (u32)((s32)r4 + (2568));
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0019f9a8)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__OBJ_ATTACK__clear)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = (u32)((s32)r16 + (2640));
     r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001c0248)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = r16;
@@ -17554,7 +15634,7 @@ u32 duplicate_unplaced_00321648(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r15 = (u32)&D_00352560;
     *(volatile u32*)((u32)r4 + (s32)(0)) = r15;
     r16 = r4;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001d1ed0)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__MISSION_GAUGE__destroy)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = r16;
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00106420)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
@@ -17565,7 +15645,7 @@ u32 duplicate_unplaced_003218c8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r16 = r4;
     *(volatile u32*)((u32)r16 + (s32)(0)) = r15;
     r4 = (u32)((s32)r4 + (2568));
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0019f9a8)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__OBJ_ATTACK__clear)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = (u32)((s32)r16 + (2640));
     r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001c0248)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = r16;
@@ -17579,7 +15659,7 @@ u32 duplicate_unplaced_00321910(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r16 = r4;
     *(volatile u32*)((u32)r16 + (s32)(0)) = r15;
     r4 = (u32)((s32)r4 + (2568));
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0019f9a8)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__OBJ_ATTACK__clear)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = (u32)((s32)r16 + (2640));
     r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001c0248)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = r16;
@@ -17756,7 +15836,7 @@ u32 duplicate_unplaced_00324938(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r16 = r4;
     *(volatile u32*)((u32)r16 + (s32)(0)) = r15;
     r4 = (u32)((s32)r4 + (2568));
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0019f9a8)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__OBJ_ATTACK__clear)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = (u32)((s32)r16 + (2640));
     r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001c0248)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = r16;
@@ -17770,7 +15850,7 @@ u32 duplicate_unplaced_00324980(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r16 = r4;
     *(volatile u32*)((u32)r16 + (s32)(0)) = r15;
     r4 = (u32)((s32)r4 + (2568));
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0019f9a8)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__OBJ_ATTACK__clear)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = (u32)((s32)r16 + (2640));
     r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001c0248)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = r16;
@@ -17785,7 +15865,7 @@ u32 duplicate_unplaced_00324b08(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     r16 = r4;
     *(volatile u32*)((u32)r16 + (s32)(0)) = r15;
     r4 = (u32)((s32)r4 + (2568));
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_0019f9a8)(r4, r5, r6, r7, r8, r9, r10, r11);
+    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))YS__OBJ_ATTACK__clear)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = (u32)((s32)r16 + (2640));
     r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_001c0248)(r4, r5, r6, r7, r8, r9, r10, r11);
     r4 = r16;
@@ -17831,14 +15911,7 @@ u32 duplicate_unplaced_00325550(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
     return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00105110)(r4, r5, r6, r7, r8, r9, r10, r11);
 }
 
-u32 func_00325590(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15;
-    r15 = (u32)&D_00362cc8;
-    *(volatile u32*)((u32)r4 + (s32)(0)) = r15;
-    r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_002dea80)(r4, r5, r6, r7, r8, r9, r10, r11);
-    if (r2) return r2;
-    return r2;
-}
+u32 func_00325590(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x00325590: definition moved into src/anon/unit_00324808.cpp
 
 u32 duplicate_unplaced_003255b8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15, r16;
@@ -17916,16 +15989,4 @@ u32 duplicate_unplaced_00325b80(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, 
 extern u8 D_00348000;
 extern "C" u32 func_00239bf8(...);
 
-u32 func_0013ac60(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r15;
-    r15 = 10u;
-    r6 = (u32)(r6 * r15);
-    *(volatile u32*)((u32)r4 + (s32)(780)) = r5;
-    r4 = (u32)((s32)r4 + (436));
-    r6 = (u32)(r6 + r5);
-    r15 = (u32)&D_00348000;
-    r6 = (u32)(r6 << 2);
-    r6 = (u32)(r6 + r15);
-    r5 = *(volatile u32*)((u32)r6 + (s32)(0));
-    return ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00239bf8)(r4, r5, r6, r7, r8, r9, r10, r11);
-}
+u32 func_0013ac60(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7);  // 0x0013ac60: definition moved into src/anon/unit_0013a8b8.cpp

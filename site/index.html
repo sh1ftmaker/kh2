@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Kingdom Hearts II Final Mix decompilation</title>
-<meta name="description" content="Live progress of the Kingdom Hearts II Final Mix byte-matching decompilation (PlayStation 2, SLPM_666.75), counted in bytes of code and confirmed by a whole-ELF compare.">
+<meta name="description" content="Live progress of the Kingdom Hearts II Final Mix decompilation (PlayStation 2, SLPM_666.75), counted in bytes of code and confirmed by a whole-ELF compare.">
 <meta name="theme-color" content="#0b0d1a">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 2 28 16 16 30 4 16Z' fill='%23d29a2e'/%3E%3Cpath d='M16 2 28 16 16 16Z' fill='%23f3c969'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,8 +19,8 @@
   <div class="hero-text">
     <p class="eyebrow">PlayStation 2 &middot; SLPM_666.75 &middot; main ELF</p>
     <h1><span class="h-main">Kingdom Hearts II</span> <span class="h-sub">Final Mix decompilation</span></h1>
-    <p class="lede">A byte-matching decompilation: C++ that Sony's original ee-gcc 3.2 compiler
-      turns back into the exact bytes of the game. This page tracks every function of the main ELF.</p>
+    <p class="lede">The whole main executable builds from source with Sony's original ee-gcc 3.2 and is
+      byte-identical to the game. This page tracks how much of that source is real C++ and how much has its real names.</p>
     <div class="seal" id="seal"></div>
     <nav class="repo-links" aria-label="Project links">
       <a href="https://github.com/sh1ftmaker/kh2">Source on GitHub</a>
@@ -30,7 +30,7 @@
     <div class="nownext" id="nownext" aria-label="What's happening now and next"></div>
   </div>
   <figure class="emblem-wrap">
-    <svg id="emblem" class="emblem" viewBox="-150 -150 300 300" role="img" aria-label="Progress emblem: one gem per area of the game code and a gold one for the SDK, each filled to its share of matched code"></svg>
+    <svg id="emblem" class="emblem" viewBox="-150 -150 300 300" role="img" aria-label="Progress emblem: one gem per area of the game code and a gold one for the SDK, each filled to its share of decompiled code"></svg>
     <figcaption id="emblem-cap"></figcaption>
   </figure>
 </header>
@@ -50,7 +50,7 @@
       <svg id="map-svg" role="img" aria-label="Treemap of the decompilation by bytes of code"></svg>
       <div class="loading" id="map-loading" hidden>loading functions&hellip;</div>
     </div>
-    <p class="hint" id="map-hint">Esc or the back arrow zooms out. Dashed tiles are files with no function matched yet; a ? marks a file the file map placed on thin evidence.</p>
+    <p class="hint" id="map-hint">Esc or the back arrow zooms out. Dashed tiles are files with no function decompiled yet; a ? marks a file the file map placed on thin evidence.</p>
   </section>
 
   <section class="headline" aria-label="Headline numbers">
@@ -63,7 +63,7 @@
     <div class="panel-head">
       <div>
         <h2>By function size</h2>
-        <p class="sub">Small functions are most of the count and little of the code. The bars are bytes of matched code in each size band;
+        <p class="sub">Small functions are most of the count and little of the code. The bars are bytes of decompiled code in each size band;
           the share on the right is how much of the whole ELF's code the band holds.</p>
       </div>
     </div>
@@ -133,7 +133,7 @@
     <div class="panel-head">
       <div>
         <h2>Over time</h2>
-        <p class="sub">Matched code as a share of the whole ELF, one point per commit to <code>matching</code>: the SDK below, the game code on top.</p>
+        <p class="sub">Decompiled to C/C++ as a share of the whole ELF, one point per commit to <code>matching</code>: the SDK below, the game code on top.</p>
       </div>
     </div>
     <div id="history" class="history"></div>

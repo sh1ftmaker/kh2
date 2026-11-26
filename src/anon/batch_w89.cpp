@@ -1,0 +1,507 @@
+#include "../common/types.h"
+
+#define QCOPY(d, s) asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(d), "r"(s) : "$8", "memory")
+
+// 16-byte vector with a qword copy constructor and a self-checking assignment.
+struct QWord {
+    union { u32 v[4]; f32 f[4]; };
+    QWord() {}
+    QWord(const QWord& o) { QCOPY(this, &o); }
+    QWord& operator=(const QWord& o) {
+        if (this != &o) QCOPY(this, &o);
+        return *this;
+    }
+} __attribute__((aligned(16)));
+
+// ---- 00100aa0
+namespace n00100aa0 {
+struct EhObj { u32 pc_begin, tbase, dbase, u; u64 sorted : 1, from_array : 1, mixed : 1, encoding : 8, count : 21; };
+struct EhFde { u32 length; s32 cie; u8 pc_begin[4]; };
+extern "C" {
+u32 func_00100920(u8, EhObj*);  // classify_subtype
+u8* func_001004c0(u8, u32, u8*, u32*);
+// fde_single_encoding_compare: orders two FDEs by their decoded pc_begin.
+s32 func_00100aa0(EhObj* ob, EhFde* x, EhFde* y);  // 0x00100aa0: definition moved into src/libgcc/unwind-dw2-fde.c
+}
+}
+
+// ---- 0011c6a8
+namespace n0011c6a8 {
+typedef unsigned int u128 __attribute__((mode(TI)));
+struct Mtx { u128 q[4]; };
+extern "C" {
+extern Mtx D_00347b30;
+void func_0011d440(void);
+void func_0011b6a8(Mtx*);
+void kn__Motion__calc(u8*, u32, u32, u32, u32, u32, f32);
+// Loads the given matrix (or identity when null) into the shared work matrix, then sets up the object.
+void func_0011c6a8(u8* o, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, Mtx* m, f32 f);  // 0x0011c6a8: definition moved into src/anon/unit_0011c128.cpp
+}
+}
+
+// ---- 00130c18
+namespace n00130c18 {
+struct AnKey { f32 t; s32 v; };
+struct AnTrack { u8 pad0; u8 flag; u8 pad[6]; u16 count; u16 start; };
+struct AnData { u8 pad[80]; s32 trackOff; s32 nTracks; s32 keyOff; };
+extern "C" {
+// Samples every on/off track at time t (binary search over its keys).
+void func_00130c18(u8* o, f32 t);  // 0x00130c18: definition moved into src/anon/unit_00128480.cpp
+}
+}
+
+// ---- 00136878
+namespace n00136878 {
+struct Pos24 { s16 f0, f2, f4, f6, f8, f10; s16 r[6]; };
+extern "C" {
+extern Pos24 D_003b8b20;
+extern u32 D_003b8b38;
+extern u32 D_00347d24;
+Pos24* func_001aec40(void);  // get_global_1c9408c
+void func_00136840(void);
+u32 func_00136778(s32, s32);
+u32 func_002bc288(u32, u32);
+// Tracks the current position record; reloads when the area/map changes.
+// 00136878: moved to src/harata/libdk/bgse.cpp
+}
+}
+
+// ---- 0013d208
+namespace n0013d208 {
+struct Pair8 { u32 x, y; };
+extern "C" {
+extern Pair8 D_00348578[];
+s32 func_0013cb80(void);  // get_global_358050
+s32 func_0013cb90(void);
+u32 func_0013cb30(void);
+void dk__Sprite__create(u8*, u32, u32, s32, u32, u32);
+void func_00138c40(u8*, u32, u32);
+f32 func_0013b2a8(u8*);  // mul_float684_692
+void func_00138d48(u8*, f32, f32, f32, f32);
+void func_0013d1d0(u8*);
+void func_0013d208(u8* o);  // 0x0013d208: definition moved into src/anon/unit_0013a8b8.cpp
+}
+}
+
+// ---- 0013e0f8
+namespace n0013e0f8 {
+extern "C" {
+void func_001391c8(u8*, u32, u32);
+void func_0013ee38(u8*, u32);
+void func_0013edd0(u8*, f32);
+void func_0013ee18(u8*, u32);
+void func_0014b208(u8*, s32, s32);
+void func_0013ede0(u8*, s32, s32);
+void func_0014b5e0(u8*, u32);
+void func_0014b618(u8*, u32);
+void func_0013e0f8(u8* o, u32 a1, u32 a2, u32 a3);  // 0x0013e0f8: definition moved into src/anon/unit_0013dfb8.cpp
+}
+}
+
+// ---- 0015f8d8
+namespace n0015f8d8 {
+extern "C" {
+extern u8 D_0034c720[];
+void func_0015f9c8(u8*, u32, u32, QWord, QWord, QWord, u32, s32, u32, u32, u32);
+void func_001433c0(u8*, u32);
+// Constructor: base init with three vectors by value, then own vtable and defaults.
+// 0015f8d8: moved to src/harata/libdk/bgobj.cpp
+}
+}
+
+// ---- 00188958
+namespace n00188958 {
+struct O9 { u8 pad[18]; u8 count; u8 pad2[33]; u16 a[8]; u16 b[8]; };
+extern "C" {
+void YS__ITEM__Get(u32, u32, u32);
+// Resizes a slot list: clears new slots, releases removed ones.
+void YS__PARTRAM__set_item_max(O9* o, s32 n);  // 0x00188958: definition moved into src/anon/unit_00188848.cpp
+}
+}
+
+// ---- 00194120
+namespace n00194120 {
+extern "C" {
+void func_00194218(u8*, s32, f32);
+// Sets a 0..1 level (stored as 0..255) and applies it to the model's parts.
+void func_00194120(u8* o, f32 v);  // 0x00194120: definition moved into src/anon/unit_00193be8.cpp
+}
+}
+
+// ---- 0019aa60
+namespace n0019aa60 {
+extern "C" {
+extern u8 D_0034f250;
+s32 func_0019a9e0(u8*, u8*);
+u32 func_0016bff0(u8*);
+void func_001956e8(u8*, u32);
+s32 func_0016bf20(u8*);
+void func_0019ab80(u8*);
+void func_0019aa60(u8* o, u8* e);  // 0x0019aa60: definition moved into src/anon/unit_00199688.cpp
+}
+}
+
+// ---- 001ac108
+namespace n001ac108 {
+struct W108 { u8 on; u8 b1; u8 mode : 8; };
+extern "C" {
+extern f32 D_00350a58[4];
+void func_0023acd8(u8*);
+void YI__SEQUENCE__Draw(u8*);
+// Positions a child widget relative to (x, y) using the alignment mode.
+// 001ac108: moved to src/anon/unit_001abb28.cpp
+}
+}
+
+// ---- 001b3e88
+namespace n001b3e88 {
+extern "C" {
+s32 func_0018ca48(u8);
+void func_00198580(u8*, s32);  // check_div1000_500
+void YS__PIERROT__damage_se(u8* o, u8* e);  // 0x001b3e88: definition moved into src/anon/unit_001b2780.cpp
+}
+}
+
+// ---- 001c2eb8
+namespace n001c2eb8 {
+struct CEnt { u16 id; u8 pad[126]; };
+struct CTbl { u32 f0; s32 count; CEnt e[1]; };
+extern "C" {
+extern CTbl* D_01d4955c;
+void YS__PLAYERPARAM__apply(CEnt*);
+static inline CEnt* FindC(u32 id) {
+    CTbl* t = D_01d4955c;
+    s32 n = t->count;
+    CEnt* p = t->e;
+    for (s32 i = 0; i < n; i++, p++)
+        if (p->id == id) return p;
+    return 0;
+}
+void u_call4_001c2eb8(u32, u32, u32, u32) asm("_Z16u_call4_001c2eb8jjjj");
+// Runs YS__PLAYERPARAM__apply on every consecutive table entry with the given id.
+void u_call4_001c2eb8(u32 id, u32, u32, u32);  // 0x001c2eb8: definition moved into src/anon/unit_001c2b58.cpp
+}
+}
+
+// ---- 001d7880
+namespace n001d7880 {
+extern "C" {
+s32 func_001a6d08(u32);
+void func_001a6c90(u32);  // set_bit_in_array_b
+s32 func_00181500(u16);
+u8* YS__SAVERAM_BATTLE__get_formram(u8*, s32);
+extern u16 D_0036e628[];
+extern u8 D_0032e020;
+extern u8 D_0032f056;
+void u_tail0_001d7880(void) asm("_Z16u_tail0_001d7880v");
+// Sets flag 104 once all listed conditions are met.
+void u_tail0_001d7880(void);  // 0x001d7880: definition moved into src/anon/unit_001d7458.cpp
+}
+}
+
+// ---- 001e7be0
+namespace n001e7be0 {
+struct E7Ent { u8 pad[36]; void (*fn)(void*, void*); };
+struct E7Slot { E7Ent* e; u8 pad[12]; };
+struct E7Def { u8 pad[38]; s16 count; E7Slot slots[1]; };
+struct E7Obj { E7Def* def; void* cur; u32 f8; u16 refs; };
+struct E7Ctx { void* next; u32 f4; E7Obj* obj; };
+extern "C" {
+extern u32 D_01d9e6e4;
+void func_001e7798(u32, E7Ctx*);
+void func_001e7be0(E7Ctx* c);  // 0x001e7be0: definition moved into src/anon/unit_001e0cb8.cpp
+}
+}
+
+// ---- 00245ce8
+namespace n00245ce8 {
+struct VObj { void (**vt)(VObj*); };
+extern "C" {
+extern VObj* D_0035ed28;
+extern VObj* D_0035ed2c;
+extern VObj* D_0035ed30;
+extern void* D_0035ed20;
+extern void* D_0035ed24;
+s32 func_00139d78(void*);
+s32 func_0028acc8(void*);
+void func_0028abe0(void*);
+void func_00246f80(void);
+u32 func_00287dc0(void);
+void func_0023d820(u32);
+void func_00247bb0(void);
+void func_00245ce8(void);  // 0x00245ce8: definition moved into src/anon/unit_00242478.cpp
+}
+}
+
+// ---- 0024fd28
+namespace n0024fd28 {
+struct Tbl6 { s16 a, b, c; };
+extern "C" {
+extern void* D_0035ee3c;
+extern void* D_0035ee34;
+extern void* D_0035ee44;
+extern void* D_0035ee40;
+extern Tbl6 D_00372448[];
+s32 func_00139d78(void*);
+s32 func_0028acc8(void*);
+s32 func_002891e8(u32);
+s32 func_0023f0c0(void*);
+void func_0023f070(void*, s32, s32);
+void func_0028ab20(void*);
+void Tz__LMMU__LoopAll(void);  // 0x0024fd28: definition moved into src/anon/unit_0024fbd0.cpp
+}
+}
+
+// ---- 00252d88
+namespace n00252d88 {
+extern "C" {
+extern void* D_0035eea4;
+extern s16* D_0035ee90[3];
+s32 func_00139d78(void*);
+s32 func_0023f0c0(void*);
+s32 func_00287bc0(void);
+void func_00287bd0(s32, s32);
+void Tz__ALCA__ChgMode(void);  // 0x00252d88: definition moved into src/anon/unit_00250fb8.cpp
+}
+}
+
+// ---- 00257388
+namespace n00257388 {
+struct VObj2 { void (**vt)(VObj2*); };
+struct Pt8 { s16 x, p, y, q; };
+extern "C" {
+extern u32 D_0035f034;
+extern Pt8 D_00372a00;
+extern Pt8 D_00372a08;
+extern u32 D_0035ef68;
+extern u32 D_0035ef64;
+extern u32 D_0035f03c;
+s32 func_00139d78(void*);
+void func_0028d980(u32, u32, u32, u32, u32, s32, s32, u32, u32);
+void func_00139620(u32);
+void func_00257388(u32 a0, s32 a1);  // 0x00257388: definition moved into src/anon/unit_00254020.cpp
+}
+}
+
+// ---- 0026a9f8
+namespace n0026a9f8 {
+extern "C" {
+extern u32 D_0035f01c;
+extern u32 D_0035f0ec;
+s32 func_00287bc0(void);
+s32 Tz__Select__GetPtr2Idx(u32, u8*);  // find_index_in_array
+s32 func_0028b038(u32);
+u8* func_00281f30(u32);
+void YS__MESSAGEDRAW__MESSAGEDRAW(u8*, u32, u8*, u32, u32);
+s32 func_0023aa18(u8*);
+s32 func_0023aa38(u8*);
+u32 func_0023a918(u8*);
+void YS__MESSAGEDRAW__draw(u8*, s32, s32, u32);
+void func_0026a9f8(s32 x, s32 y, u32 a2, u32 a3, u8* o);  // 0x0026a9f8: definition moved into src/anon/unit_0026a900.cpp
+}
+}
+
+// ---- 0027f3d8
+namespace n0027f3d8 {
+struct FnHolder { u32 f0; void (*fn)(void); };
+extern "C" {
+s32 func_00287bc0(void);
+s32 func_00287db0(void);
+s32 func_0027f2b0(void);
+s32 func_00253918(void);
+FnHolder* func_001040f8(void);
+s32 func_00242a00(void);
+void func_0023d1d0(void);  // set_global_word1
+void func_0023d1e0(void);  // zero_global_d
+void func_001039f8(void);
+void func_0027f7f0(void);
+void func_0027f9d8(void);
+s32 Tz__GumiPause__Control(void);  // 0x0027f3d8: definition moved into src/anon/unit_0027f2b0.cpp
+}
+}
+
+// ---- 00283668
+namespace n00283668 {
+extern "C" {
+extern u8* D_0035f2b8;
+s32 func_00139d78(void*);
+// True when every active sub-object is in its expected state.
+s32 func_00283668(void);  // 0x00283668: definition moved into src/anon/unit_00282c68.cpp
+}
+}
+
+// ---- 002aaf40
+namespace n002aaf40 {
+struct Tbl { u8 pad[8]; s32 count; u32 pad2; };
+struct Bits148 { u8 pad[148]; u32 bits[1]; };
+struct Ent16 { u16 id; u8 pad[14]; };
+static inline bool BitTest(u32* b, u32 i) { return b[i >> 5] & (1 << (i & 31)); }
+extern "C" {
+extern Bits148* D_0035f610;
+Bits148* func_002a9d68(void);
+Tbl* func_00294000(s32);
+s32 func_002aad58(s32);
+s32 func_002aaf40(s32 id);  // 0x002aaf40: definition moved into src/anon/unit_002a99c8.cpp
+}
+}
+
+// ---- 002b3ef0
+namespace n002b3ef0 {
+struct Heap { void (**vt)(Heap*, void*); };
+struct HeapHolder { u8 pad[20]; Heap* heap; };
+extern "C" HeapHolder* D_00347f80;
+struct Elem76 {
+    virtual void v0();
+    virtual void v1();
+    virtual void v2();
+    virtual ~Elem76();
+    u8 pad[72];
+    static void operator delete[](void* p) { D_00347f80->heap->vt[1](D_00347f80->heap, p); }
+};
+struct VB { void (**vt)(VB*); };
+struct Res3 { VB* a; Elem76* arr; VB* c; };
+extern "C" {
+// Releases the three owned resources.
+void func_002b3ef0(Res3* r);  // 0x002b3ef0: definition moved into src/anon/unit_002b3ac8.cpp
+}
+}
+
+// ---- 002d2a90
+namespace n002d2a90 {
+struct VO { void (**vt)(VO*, s32, s32, VO*, s32); };
+extern "C" {
+void* func_0016abf8(VO*, s32, s32, s32);
+QWord* func_001dc5f8(void*);
+QWord YS__OBJ__get_target_pos(VO*);
+void Ti__MGOarashiGimObj__start_tornado_attack(VO* o);  // 0x002d2a90: definition moved into src/anon/unit_002d2498.cpp
+}
+}
+
+// ---- 002e66f0
+namespace n002e66f0 {
+struct KEnt { u8 pad[12]; u32 loop : 1; u32 rest : 31; u8 pad2[12]; f32 t; };
+struct KHdr { u32 f0; s32 count; u8 pad[8]; KEnt e[1]; };
+extern "C" {
+// Finds the key segment containing t: index of the left key and the blend fraction.
+void func_002e66f0(KHdr* h, s32* idx, f32* frac, f32 t);  // 0x002e66f0: definition moved into src/anon/unit_002e5f70.cpp
+}
+}
+
+// ---- 00145ab8
+namespace n00145ab8 {
+struct E880 { void (**vt)(E880*); u8 pad[876]; };
+struct Q16 { u8 d[16]; };
+struct E80 { Q16 q[5]; };
+// Local whose (empty) destructor keeps the final call from becoming a tail call.
+struct NoTail { ~NoTail() {} };
+extern "C" {
+extern u8 D_0034c6e0[];
+extern u8 D_00349dc0[];
+extern u8 D_00348d58[];
+void func_0031bab8(u8*);
+void func_0031baa8(u8*);  // set_vtbl_3486a8_b
+void func_001070e8(u8*);
+void func_00106ac8(u8*);
+// Destructor body: member arrays destroyed back to front, then members and bases.
+void func_00145ab8(u8* o);  // 0x00145ab8: definition moved into src/anon/unit_00145600.cpp
+}
+}
+
+// ---- 00163568
+namespace n00163568 {
+static inline QWord operator-(const QWord& a, const QWord& b)
+{
+    QWord r;
+    asm volatile(".set noreorder\n\tlqc2 $vf1, 0(%1)\n\tlqc2 $vf2, 0(%2)\n\tvsub.wxyz $vf1, $vf1, $vf2\n\tsqc2 $vf1, 0(%0)\n\t.set reorder"
+                 : : "r"(&r), "r"(&a), "r"(&b) : "memory");
+    return r;
+}
+static inline void Cross(QWord* r, const QWord& a, const QWord& b)
+{
+    asm volatile("lqc2 $vf1, 0(%1)\n\tlqc2 $vf2, 0(%2)\n\tvsub.wxyz $vf3, $vf0, $vf0\n\tvopmula.xyz ACC, $vf1, $vf2\n\tvopmsub.xyz $vf3, $vf2, $vf1\n\tsqc2 $vf3, 0(%0)"
+                 : : "r"(r), "r"(&a), "r"(&b) : "memory");
+}
+static inline f32 Normalize(QWord* v)
+{
+    f32 r;
+    asm volatile("lqc2 $vf1, 0(%1)\n\tvmul.xyz $vf2, $vf1, $vf1\n\tvaddy.x $vf2, $vf2, $vf2y\n\tvaddz.x $vf2, $vf2, $vf2z\n\tvsqrt Q, $vf2x\n\tvwaitq\n\tcfc2.ni $8, $vi22\n\tvaddq.x $vf2, $vf0, Q\n\tmtc1 $8, %0\n\tvnop\n\tvdiv Q, $vf0w, $vf2x\n\tvwaitq\n\tvmulq.xyz $vf1, $vf1, Q\n\tsqc2 $vf1, 0(%1)"
+                 : "=f"(r) : "r"(v) : "$8", "memory");
+    return r;
+}
+static inline f32 Dot(const QWord& a, const QWord& b)
+{
+    f32 r;
+    asm volatile("lqc2 $vf1, 0(%1)\n\tlqc2 $vf2, 0(%2)\n\tvmul.xyz $vf1, $vf1, $vf2\n\tvaddy.x $vf1, $vf1, $vf1y\n\tvaddz.x $vf1, $vf1, $vf1z\n\tqmfc2 $8, $vf1\n\tmtc1 $8, %0"
+                 : "=f"(r) : "r"(&a), "r"(&b) : "$8");
+    return r;
+}
+struct Plane { f32 x, y, z, d; };
+extern "C" {
+// Plane through three points: unit normal and signed distance.
+void func_00163568(Plane* out, const QWord& p0, const QWord& p1, const QWord& p2);  // 0x00163568: definition moved into src/anon/unit_001614e8.cpp
+}
+}
+
+// ---- 0031dc78
+namespace n0031dc78 {
+struct E256 { void (**vt)(E256*); u8 pad[252]; };
+extern "C" {
+extern u8 D_0034af08[];
+extern u8 D_00349b40[];
+extern u8 D_00347f98[];
+void func_0031bbc8(u8*);  // set_vtbl_348c08_b
+void func_0031b910(u8*);  // set_vtbl_3486a8_d
+void func_0031bb08(u8*);  // set_vtbl_3486a8
+// Destructor body: own vtable, inlined member destructor (two arrays, members, base), base vtable.
+void func_0031dc78(u8* o);  // 0x0031dc78: definition moved into src/anon/unit_0031b9e0.cpp
+}
+}
+
+// ---- 0015aba8
+namespace n0015aba8 {
+extern "C" {
+extern u8 D_0032bae0;
+void YI__IMAGE__Init(u8*);
+void func_002367c8(u8*);  // obj_dispatch_bitfield64
+s32 func_00105c30(void);
+s32 func_00241ed8(u8);
+void dk__Sprite__create(u8*, u32, u32, s32, u32, u32);
+void func_0015aba8(u8* o, u32 a1, u32 a2);  // 0x0015aba8: definition moved into src/anon/unit_0015a810.cpp
+}
+}
+
+// ---- 001cea48
+namespace n001cea48 {
+struct Cea { s32 state; u32 b0 : 1; u32 b1 : 1; u32 rest : 30; };
+extern "C" {
+void Tz__Mg2DTron__CreateSeq(u8*, u32, u32);
+void YS__LIGHTCYCLE__check_turn(Cea* o, u8* e, u64* pad);  // 0x001cea48: definition moved into src/anon/unit_001ce6e8.cpp
+}
+}
+
+// ---- 00244e28
+namespace n00244e28 {
+extern "C" {
+extern u32 D_0035ece8;
+extern s8 D_0035ed14;
+extern u8* D_0035ed04;
+s32 func_002891e8(u32);
+s32 func_00244ee8(s32);
+s32 func_00139d78(void*);
+void func_00138c10(u8*, s32);
+void func_00243230(s32, s32);
+void Tz__HEFT__UpdateNewMark(void);  // 0x00244e28: definition moved into src/anon/unit_00242478.cpp
+}
+}
+
+// ---- 002a4a00
+namespace n002a4a00 {
+struct Slot8 { u8 b0, b1; u8 pad[6]; };
+struct A4 { u8 pad[4096]; Slot8 s[1]; };
+struct A4h { u8 pad[4228]; s32 base; s32 bits; };
+extern "C" {
+extern u8* D_0035f5e4;
+s32 func_002a4990(s32);
+s32 func_002a4a00(s32 i);  // 0x002a4a00: definition moved into src/anon/unit_002a40c8.cpp
+}
+}

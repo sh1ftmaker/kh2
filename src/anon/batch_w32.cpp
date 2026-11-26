@@ -1,0 +1,172 @@
+#include "../common/types.h"
+
+// 64-byte element with an empty destructor; arrays of it get a destructor loop.
+struct Elem64 { u8 d[64] __attribute__((aligned(16))); ~Elem64() {} };
+struct Elem64b { u8 d[64]; ~Elem64b() {} };
+extern "C" void func_00106420(void*);
+struct Elem64x30 {
+    Elem64b a[30];
+    static void operator delete(void* p) { func_00106420(p); }
+};
+
+extern "C" {
+s32 func_00242d58(void);
+extern u64 D_0034a970[];
+void func_001a5e38(void);
+void func_001ba740(void);
+void func_001b24c8(void);
+void func_001bb468(void);
+void func_001922c8(s32);
+void func_001b83d0(void);
+void func_00197be8(void);
+struct Info2c { s8 pad[0x2c]; s8 limit; };
+Info2c* func_00177860(void*);
+void func_001781e8(void*);
+void func_001dc920(void*);
+void func_00175928(void*);
+extern void* D_0034e948;
+s32 YS__OBJ__is_exist(void*);
+void* func_0018ee10(void*);
+s32 func_001a15d0(s32);
+s32 func_001a1540(s32);
+void func_00239bf8(void*, s32);
+void func_001abb78(void*, s32);
+void func_001ad280(void*);
+void func_001c1130(s32);  // copy_record_block_to_table
+void func_0014c9d8(s32);
+extern u8 D_00350a70[];
+extern u8 D_00350a56;
+void func_001c6ee8(void*);
+void* func_001c16f0(void*, void*);
+void* func_00186078(void*);
+extern u32 D_0034f240;
+void func_001e7798(void*, void*);
+extern void* D_01d9e6e4;
+void func_001e2c00(void*);
+void pppDeleteMng(void*);  // alloc_336_align_171
+void func_001dc700(void*, s32);
+extern u32 D_0035dad0;
+extern u8 D_0035dade;
+extern u32 D_0035dad4;
+extern u32 D_0035dac4;
+extern u8 D_0035dadd;
+extern u32 D_0035dacc;
+extern u32 D_0035dac8;
+extern u32 D_0035dad8;
+void func_00224940(void);
+struct MaskCfg { u16 pad[14]; u16 mask; };
+extern MaskCfg* D_0035f0e4;
+struct KeyVal { s16 key, val; };
+extern KeyVal D_003741f0[];
+s32 func_00276608(s32);
+s32 func_002b2338(s32);
+extern u8* D_0035f630;
+void* func_002bbda0(void*);
+void func_002bb5a8(void*, void*);
+extern u8 D_00362428[];
+void func_002e7328(void*);  // to_2e7458
+void func_002cff98(void*);
+void func_00105110(void*);
+void func_002cfeb0(void*, void*, s32, void*);  // obj_init_field1416_bit800
+extern u8 D_003627c8[];
+void func_002cf280(void*, s32, s32);
+void func_00106420(void*);
+extern void* D_01e2bfa0;
+extern u32 D_003633c8;
+void func_001c23a8(void*, void*, s32, s32, s32, s32, void*);
+extern u8 D_00363758[];
+extern void* D_00363748;
+extern void* D_00347f98[];
+extern void* D_00347f80;
+extern u8 D_0035eb98[];
+void func_0023c098(void*);  // set_vtbl_36eae8_then_call
+void func_002369f0(void*);  // set_vtbl_36eac8_then_call
+extern u8 D_0034ee08[];
+void YS__OBJ_ATTACK__clear(void*);  // array8_free_slots
+void func_001c0248(void*);
+u8 func_00319fb0(void*);  // big_obj_dtor
+extern u8 D_003638a8[];
+extern u8 D_003637e0[];
+void func_00239870(void*);
+void func_002361d0(void*);
+
+// Picks a state from four thresholds; 1/2 force a value, the others keep the current one.
+void func_00148638(u32, u8* o, f32 x);  // 0x00148638: definition moved into src/anon/unit_00147140.cpp
+
+// 00158450: moved to src/harata/libdk/cameraconfig.cpp
+
+void AreaExit(void) asm("_ZN2YS8AreaExitEv");
+void AreaExit(void);  // 0x00169308: definition moved into src/anon/unit_00168aa0.cpp
+
+// 00177ba0: moved to src/yasui/libys/party.cpp
+
+// 00178280: moved to src/yasui/libys/player.cpp
+
+// 0017a6c8: moved to src/yasui/libys/player.cpp
+
+// Replaces every entry's key `key` with `val`.
+void func_0018ef98(s32 key, s32 val);  // 0x0018ef98: definition moved into src/anon/unit_0018d050.cpp
+
+s32 func_001a1658(s32 x);  // 0x001a1658: definition moved into src/anon/unit_0019fb70.cpp
+
+// Adds n, capping the sub-object's byte counter at 100.
+void func_001a2578(u8* p, s32 n);  // 0x001a2578: definition moved into src/anon/unit_0019fb70.cpp
+
+// 001abdf0: moved to src/anon/unit_001abb28.cpp
+
+// 001ad5f0: moved to src/anon/unit_001abb28.cpp
+
+// Drains two iterators.
+// 001ccda0: moved to src/anon/unit_001cc868.cpp
+
+bool func_001dc738(u32* p);  // 0x001dc738: definition moved into src/anon/unit_001dbfd8.cpp
+
+void func_001ea928(u8* a, u8* b);  // 0x001ea928: definition moved into src/anon/unit_001e8ac8.cpp
+
+void EFFECT_free(u8*) asm("_ZN3ryj6EFFECT4freeEv");
+void EFFECT_free(u8* e);  // 0x001dc878: definition moved into src/anon/unit_001dbfd8.cpp
+
+struct Binding { u8 pad[0x40]; void* eff; u32 pad44; u32 w48; u8 pad2[0x10]; u32 f5c; Binding* next; };
+void PAX_unbind(u8*, void*) asm("_ZN3ryj3PAX6unbindEPNS_6EFFECTE");
+void PAX_unbind(u8* pax, void* e);  // 0x001de508: definition moved into src/anon/unit_001ddcf0.cpp
+
+void u_call4_00224780(u32, u32, u32, u32) asm("_Z16u_call4_00224780jjjj");
+void u_call4_00224780(u32 a0, u32, u32, u32);  // 0x00224780: definition moved into src/anon/unit_00224780.cpp
+
+// Index of the n-th set bit among the low 10 bits of the mask, or -1.
+s32 func_002670a0(s32 n);  // 0x002670a0: definition moved into src/anon/unit_00265580.cpp
+
+// Looks up key in a -1 terminated (key, value) table; last match wins.
+s32 func_00282c68(s32 key);  // 0x00282c68: definition moved into src/anon/unit_00282c68.cpp
+
+u8* Tz__JmPuzzle__GetImageInfo(s32 i);  // 0x002b23e0: definition moved into src/anon/unit_002b1db8.cpp
+
+void func_002bc398(void* a, void* b);  // 0x002bc398: definition moved into src/anon/unit_002bb8b0.cpp
+
+void func_002d5e10(void** p);  // 0x002d5e10: definition moved into src/anon/unit_002d4548.cpp
+
+void Ti__MGHachimitsuGopher__MGHachimitsuGopher(u8* p, void* b, void* c);  // 0x002daca0: definition moved into src/anon/unit_002da040.cpp
+
+// delete[] of the 64-byte element array.
+void func_002e70b0(u8* o);  // 0x002e70b0: definition moved into src/anon/unit_002e5f70.cpp
+
+// 002e9338: moved to src/sugi/flare.cpp
+
+// Advances a byte counter and wraps it into [0, max).
+struct WrapCtr { s32 max; u8 cur; };
+void func_002e9b10(WrapCtr* s);  // 002e9b10: moved to src/anon/unit_002e9a00.cpp
+
+void func_002ed2b0(void** p, void* b, void* c);  // 0x002ed2b0: definition moved into src/anon/unit_002ecdb0.cpp
+
+// Signed LEB128 decode.
+u8* func_00314b38(u8* p, s64* out);  // 0x00314b38: definition moved into src/libsupc++/eh_personality.cpp
+
+struct VObj { void** vt; };
+void func_0031d770(void** p);  // 0x0031d770: definition moved into src/anon/unit_0031b9e0.cpp
+
+void func_00322d70(void** p);  // 0x00322d70: definition moved into src/anon/unit_00321728.cpp
+
+s32 func_00324938(void** p);  // 0x00324938: definition moved into src/anon/unit_00324808.cpp
+
+void Tz__CmTutorial__Exit(void** p);  // 0x00325b80: definition moved into src/anon/unit_00324808.cpp
+}

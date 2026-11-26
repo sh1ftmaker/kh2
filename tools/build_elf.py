@@ -11,19 +11,20 @@ from pathlib import Path
 
 from common import (
     GENERATED_DIR,
-    KH2_NATIVE,
-    PS2_TOOLCHAIN,
-    native_env,
     REGISTRY_TSV,
     ROOT,
     SLPM_PATH,
     SymbolAlias,
+    SYM_RE,
+    _symbol_to_qualified_name,
     addr_to_file_offset,
     load_boundaries,
     load_elf_image,
     load_registry,
     load_symbol_aliases,
+    load_units,
     mangle_cpp_signature,
+    parse_elf_load_segments,
     parse_hex_addr,
     read_elf_vaddr,
     resolve_symbol_name,
@@ -83,6 +84,7 @@ class TextSym:
     size: int
     name: str
     foff: int = 0
+    section: str = ""
 
 
 @dataclass(frozen=True)
@@ -90,6 +92,8 @@ class ElfSection:
     name: str
     size: int
     flags: int
+    addr: int = 0
+    offset: int = 0
 
 
 def parse_elf_function_symbols(path: Path, section_name: str | None = ".text") -> list[TextSym]:
@@ -221,7 +225,8 @@ def parse_elf_function_symbols(path: Path, section_name: str | None = ".text") -
             if rel < 0 or rel + st_size > target_size:
                 continue
             foff = target_off + rel
-            out.append(TextSym(addr=st_value, size=st_size, name=name, foff=foff))
+            out.append(TextSym(addr=st_value, size=st_size, name=name, foff=foff,
+                               section=sec_name(target_sh[0])))
     out.sort(key=lambda x: (x.addr, x.size, x.name))
     return out
 
@@ -283,13 +288,13 @@ def load_alloc_sections(path: Path) -> list[ElfSection]:
         sh = sh_at(i)
         if sh is None:
             continue
-        sh_name, _sh_type, sh_flags, _sh_addr, _sh_offset, sh_size, _sh_link, _sh_info = sh
+        sh_name, _sh_type, sh_flags, sh_addr, sh_offset, sh_size, _sh_link, _sh_info = sh
         if sh_size <= 0 or (sh_flags & 0x2) == 0:
             continue
         name = sec_name(sh_name)
         if not name:
             continue
-        out.append(ElfSection(name=name, size=sh_size, flags=sh_flags))
+        out.append(ElfSection(name=name, size=sh_size, flags=sh_flags, addr=sh_addr, offset=sh_offset))
     return out
 
 
@@ -312,6 +317,15 @@ def pick_obj_symbol(obj_syms: list[TextSym], symbol: str, addr: int) -> TextSym 
     if matches:
         matches.sort(key=lambda s: (s.addr, s.size, s.name))
         return matches[0]
+    # A function renamed from func_ADDR (tools/rename_fn.py) and defined with C++ linkage has a
+    # mangled object symbol (_Z6sceFoov) while functions.tsv holds the plain name (sceFoo):
+    # accept the one object symbol whose unmangled name is the registry name.
+    if symbol and SYM_RE.match(symbol) and not symbol.startswith("_Z"):
+        want = _symbol_to_qualified_name(symbol)
+        if want:
+            quals = [s for s in obj_syms if _symbol_to_qualified_name(s.name) == want]
+            if len({s.name for s in quals}) == 1:
+                return quals[0]
     return None
 
 
@@ -322,6 +336,7 @@ def compute_incremental_state(
     layout_state = {
         "layout_status": _path_stamp(LAYOUT_STATUS_OUT),
         "registry": _path_stamp(REGISTRY_TSV),
+        "units": _path_stamp(ROOT / "linked_units.tsv"),
     }
     cache = _load_cache()
     incremental = (
@@ -479,7 +494,7 @@ def collect_source_addr_aliases() -> list[SymbolAlias]:
         return []
 
     source_paths: list[Path] = []
-    for pattern in ("*.cpp", "*.hpp", "*.h"):
+    for pattern in ("*.cpp", "*.c", "*.hpp", "*.h"):
         source_paths.extend(src_root.rglob(pattern))
 
     for src in sorted(set(source_paths)):
@@ -532,6 +547,73 @@ def collect_source_addr_aliases() -> list[SymbolAlias]:
     return out
 
 
+NAMED_CALL_HEAD_RE = re.compile(r"\b([A-Za-z_][A-Za-z0-9_]*)\s*\(")
+NAMED_CALL_REST_RE = re.compile(r"([^{};]*)\)\s*(?:;|\{)")
+
+
+def _mangle_decl(name: str, args_raw: str) -> str | None:
+    args_raw = args_raw.strip()
+    if not args_raw or args_raw == "void":
+        sig = f"{name}()"
+    else:
+        params: list[str] = []
+        for raw in args_raw.split(","):
+            t = _normalize_param_type(raw)
+            if not t:
+                return None
+            params.append(t)
+        sig = f"{name}({','.join(params)})"
+    try:
+        return mangle_cpp_signature(sig)
+    except ValueError:
+        return None
+
+
+def collect_named_decl_aliases() -> list[SymbolAlias]:
+    """C++ declarations of functions that functions.tsv names with a plain C identifier.
+
+    A C++ file that declares `void sceFoo(int);` (no extern "C") references the mangled
+    _Z6sceFooi. For func_ADDR names FUNC_ADDR_DECL_RE supplies that alias; this does the same
+    for functions renamed from func_ADDR (tools/rename_fn.py), using the registry address.
+    """
+    named: dict[str, int] = {}
+    for alias in load_symbol_aliases(REGISTRY_TSV):
+        n = alias.name
+        if n.startswith(("_Z", "func_", "D_")) or f"{alias.addr:08x}" in n:
+            continue
+        named[n] = alias.addr
+    if not named:
+        return []
+    src_root = ROOT / "src"
+    paths: list[Path] = []
+    for pattern in ("*.cpp", "*.hpp", "*.h"):
+        paths.extend(src_root.rglob(pattern))
+    out: dict[str, int] = {}
+    for src in sorted(set(paths)):
+        text = src.read_text(errors="ignore")
+        for m in NAMED_CALL_HEAD_RE.finditer(text):
+            name = m.group(1)
+            addr = named.get(name)
+            if addr is None:
+                continue
+            rest = NAMED_CALL_REST_RE.match(text, m.end())
+            if rest is None:
+                continue
+            mangled = _mangle_decl(name, rest.group(1))
+            if mangled is None or mangled in out:
+                continue
+            out[mangled] = addr
+    return [SymbolAlias(name=n, addr=a) for n, a in sorted(out.items(), key=lambda x: (x[1], x[0]))]
+
+
+LIBGCC_ALIASES = (
+    ("__divdi3", 0x003125C0),
+    ("__udivdi3", 0x00312DB8),
+    ("__umoddi3", 0x00313498),
+    ("__muldi3", 0x00311AA0),
+)
+
+
 def write_symbols_ld(path: Path) -> int:
     by_name: dict[str, int] = {}
     for alias in load_symbol_aliases(REGISTRY_TSV):
@@ -541,12 +623,19 @@ def write_symbols_ld(path: Path) -> int:
         if prev is not None and prev != alias.addr:
             raise ValueError(f"symbol alias conflict for {alias.name}: 0x{prev:08x} vs 0x{alias.addr:08x}")
         by_name[alias.name] = alias.addr
+    for alias in collect_named_decl_aliases():
+        # PROVIDE only binds a symbol nothing defines; never override an existing alias.
+        by_name.setdefault(alias.name, alias.addr)
 
     aliases = [SymbolAlias(name=name, addr=addr) for name, addr in by_name.items()]
     aliases.sort(key=lambda x: (x.addr, x.name))
     lines = ["/* Auto-generated by tools/build_elf.py */\n"]
     for alias in aliases:
         lines.append(f"PROVIDE({alias.name} = 0x{alias.addr:08x});\n")
+    # libgcc helpers the compiler calls implicitly (u64 / u64 etc.): bind them to
+    # the game's own copies so -lgcc never links a second one.
+    for name, addr in LIBGCC_ALIASES:
+        lines.append(f"{name} = 0x{addr:08x};\n")
     path.write_text("".join(lines))
     return len(aliases)
 
@@ -554,6 +643,7 @@ def write_symbols_ld(path: Path) -> int:
 def generate_layout_outputs() -> int:
     boundaries = load_boundaries()
     registry = load_registry(REGISTRY_TSV)
+    units = load_units()
 
     GENERATED_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -561,7 +651,33 @@ def generate_layout_outputs() -> int:
     status_rows: list[str] = []
     cxx_objs_seen: set[str] = set()
 
+    # Every linked unit is compiled and linked, also one whose range holds no layout.tsv function
+    # (only never-written gap functions). Its object goes into the link order at its start address.
+    pending = sorted(units, key=lambda u: u.start)
+
+    def add_units_before(addr: int) -> None:
+        while pending and pending[0].start <= addr:
+            u = pending.pop(0)
+            if not (ROOT / u.source).exists():
+                raise FileNotFoundError(f"missing source for unit: {u.source}")
+            obj = src_to_obj(u.source)
+            if obj not in cxx_objs_seen:
+                objects.append(obj)
+                cxx_objs_seen.add(obj)
+
     for boundary in boundaries:
+        add_units_before(boundary.addr)
+        unit = next((u for u in units if u.contains(boundary.addr)), None)
+        if unit is not None:
+            # A linked unit owns every function in its range, whatever the registry says.
+            if not (ROOT / unit.source).exists():
+                raise FileNotFoundError(f"missing source for unit: {unit.source}")
+            obj = src_to_obj(unit.source)
+            if obj not in cxx_objs_seen:
+                objects.append(obj)
+                cxx_objs_seen.add(obj)
+            status_rows.append(f"{boundary.addr:08x}\tcxx\t{unit.source}\n")
+            continue
         entry = registry.get(boundary.addr)
         if entry is not None and entry.mode == "cxx":
             src = ROOT / entry.source
@@ -575,15 +691,32 @@ def generate_layout_outputs() -> int:
             status_rows.append(f"{boundary.addr:08x}\tcxx\t{entry.source}\n")
         else:
             status_rows.append(f"{boundary.addr:08x}\tasm\t\n")
+    add_units_before(0xFFFFFFFF)
 
     OBJECTS_MK_OUT.write_text(
         "# Auto-generated by tools/build_elf.py\n"
         + "ORDERED_OBJS :=\n"
         + "".join(f"ORDERED_OBJS += {obj}\n" for obj in objects)
+        # Linked units are compiled whole (functions stay in source order in one .text).
+        + "".join(unit_make_rules(u) for u in units)
     )
     LAYOUT_STATUS_OUT.write_text("addr\tmode\tsource\n" + "".join(status_rows))
     write_symbols_ld(SYMBOLS_LD_OUT)
     return 0
+
+
+def unit_make_rules(u) -> str:
+    """objects.mk lines for one linked unit. A `cc=NAME` token in the flags column picks the compiler
+    tools/compilers/NAME/bin/ee-gcc (for example cc=ee-gcc2.96 for Sony code built with ee-gcc 2.96);
+    the other tokens are compiler flags."""
+    obj = src_to_obj(u.source)
+    tokens = u.flags.split()
+    cc = [t[3:] for t in tokens if t.startswith("cc=")]
+    flags = " ".join(t for t in tokens if not t.startswith("cc="))
+    out = f"{obj}: UNIT_FLAGS := -fno-function-sections {flags}\n"
+    if cc:
+        out += f"{obj}: UNIT_CC := /work/tools/compilers/{cc[-1]}/bin/ee-gcc\n"
+    return out + f"{obj}: linked_units.tsv\n"
 
 
 def load_layout_cxx_sources() -> dict[int, str]:
@@ -637,6 +770,9 @@ def load_cxx_rows() -> tuple[dict[int, object], dict[int, str], dict[int, str], 
         if addr not in boundaries:
             continue
         by_source.setdefault(source, []).append((addr, symbol_map.get(addr, f"func_{addr:08x}")))
+    # A unit with no layout.tsv function in its range (gap functions only) is still copied by normalize.
+    for u in load_units():
+        by_source.setdefault(u.source, [])
     return boundaries, layout_sources, symbol_map, by_source
 
 
@@ -646,10 +782,31 @@ def section_patterns(sym: str) -> list[str]:
 
 def generate_link_sections() -> int:
     boundaries, _layout_sources, _symbol_map, by_source = load_cxx_rows()
+    units = load_units()
+    unit_sources = {u.source for u in units}
     obj_syms_cache: dict[Path, list[TextSym]] = {}
-    placed: list[tuple[int, str]] = []
+    placed: list[tuple[int, str, str]] = []
+
+    lines = ["/* Auto-generated by tools/build_elf.py. */\n"]
+    # Linked units: the object's whole .text at the unit start, other sections at their own address.
+    for u in units:
+        obj = src_to_obj(u.source)
+        if u.source.endswith((".s", ".S")):
+            # Whole-asm unit: a .s file keeps each function in its own ".section .text.func_ADDR"
+            # (placed in file order; ee-as also leaves 20 zero bytes in the plain .text, which is
+            # not part of the unit). The range's trailing alignment padding is zero-filled (nops),
+            # and ld refuses code longer than the range.
+            lines.append(f"  .kh2unit_{u.start:08x} 0x{u.start:08x} : {{\n"
+                         f"    KEEP({obj}(.text.*))\n    . = 0x{u.end - u.start:x};\n  }}\n")
+        else:
+            lines.append(f"  .kh2unit_{u.start:08x} 0x{u.start:08x} : {{\n    KEEP({obj}(.text))\n  }}\n")
+        for sec, addr in u.sections:
+            lines.append(f"  .kh2unit_{u.start:08x}{sec.replace('.', '_')} 0x{addr:08x} : {{\n"
+                         f"    KEEP({obj}({sec}))\n  }}\n")
 
     for source, rows in sorted(by_source.items()):
+        if source in unit_sources:
+            continue
         obj = ROOT / src_to_obj(source)
         obj_syms = obj_syms_cache.get(obj)
         if obj_syms is None:
@@ -662,36 +819,22 @@ def generate_link_sections() -> int:
             obj_sym = pick_obj_symbol(obj_syms, symbol, addr)
             if obj_sym is None:
                 continue
-            placed.append((addr, obj_sym.name))
+            placed.append((addr, obj_sym.name, obj_sym.section))
 
-    lines = ["/* Auto-generated by tools/build_elf.py. */\n"]
-    for addr, sym in placed:
+    emitted: set[str] = set()
+    for _addr, sym, _sec in placed:
+        emitted.update(section_patterns(sym))
+    for addr, sym, sec in placed:
+        patterns = section_patterns(sym)
+        # An asm function renamed by tools/rename_fn.py keeps its ".section .text.func_ADDR", so its
+        # symbol name no longer names its section: place the section it actually lives in too.
+        if sec.startswith(".text.") and sec not in emitted and f"{addr:08x}" not in sym:
+            patterns.append(sec)
+            emitted.add(sec)
         lines.append(f"  .kh2cxx_{addr:08x} 0x{addr:08x} : {{\n")
-        for pattern in section_patterns(sym):
+        for pattern in patterns:
             lines.append(f"    KEEP(*({pattern}))\n")
         lines.append("  }\n")
-    # Literal pools: a TU that declares `// minilink-rodata 0xADDR` (float literals the original
-    # keeps in .sdata/.rodata at ADDR) gets its .rodata/.sdata placed at that address so the
-    # lui/addiu/lwc1 sequences resolve to the original literal addresses.  The final image is the
-    # original binary with only function text overlaid, so the literal bytes are already there.
-    # Several TUs (functions from one original TU) pin the same pool: OVERLAY gives them all the
-    # same VMA; load addresses are parked above the image.
-    pools: dict[int, list[str]] = {}
-    for source in sorted(by_source):
-        try:
-            text = (ROOT / source).read_text(errors="ignore")
-        except OSError:
-            continue
-        m = re.search(r"//\s*minilink-rodata\s+0x([0-9a-fA-F]+)", text)
-        if m:
-            pools.setdefault(int(m.group(1), 16), []).append(src_to_obj(source))
-    lma = 0x02000000
-    for base, objs in sorted(pools.items()):
-        lines.append(f"  OVERLAY 0x{base:08x} : NOCROSSREFS AT(0x{lma:08x}) {{\n")
-        for k, obj in enumerate(objs):
-            lines.append(f"    .kh2lit_{base:08x}_{k} {{ KEEP(*{obj}(.rodata .rodata.* .sdata .sdata.*)) }}\n")
-        lines.append("  }\n")
-        lma += 0x10000
 
     CXX_SECTIONS_OUT.parent.mkdir(parents=True, exist_ok=True)
     CXX_SECTIONS_OUT.write_text("".join(lines))
@@ -741,8 +884,11 @@ def try_fast_link(linked_elf: Path, out_elf: Path, full_linked_elf: Path = FULL_
     changed_objs: list[str] = []
     placed_any = False
 
+    unit_sources = {u.source for u in load_units()}
     for source in sorted(changed_sources):
         if Path(source).suffix not in {".c", ".cc", ".cp", ".cpp", ".cxx"}:
+            return 1
+        if source in unit_sources:
             return 1
         obj = ROOT / src_to_obj(source)
         obj_syms = load_obj_text_symbols(obj)
@@ -793,20 +939,142 @@ def try_fast_link(linked_elf: Path, out_elf: Path, full_linked_elf: Path = FULL_
     script_path.write_text("".join(script_lines))
 
     cmd = [
-        f"{PS2_TOOLCHAIN}/bin/ee-ld",
+        "/opt/ps2/gcc/bin/ee-ld",
         "--no-check-sections",
         "-T",
         str(script_path.relative_to(ROOT)),
         "-o",
         str(linked_elf.relative_to(ROOT)),
         *changed_objs,
-        f"-L{PS2_TOOLCHAIN}/lib/gcc-lib/ee/3.2-ee-040921",
+        "-L/opt/ps2/gcc/lib/gcc-lib/ee/3.2-ee-040921",
         "-lgcc",
     ]
-    proc = subprocess.run(cmd, cwd=ROOT, env=native_env() if KH2_NATIVE else None)
+    proc = subprocess.run(cmd, cwd=ROOT)
     if proc.returncode != 0:
         return 1
     return normalize_final_elf(linked_elf, out_elf)
+
+
+LOCAL_DATA_PREFIXES = (".sdata", ".rodata", ".lit4", ".lit8")
+ORIG_GP = 0x0037A800  # the game's gp (main sets it); target of R_MIPS_GPREL16 immediates
+_LO16_ACCESS_SIZE = {0x20: 1, 0x24: 1, 0x28: 1, 0x21: 2, 0x25: 2, 0x29: 2,
+                     0x37: 8, 0x3F: 8, 0x1E: 16, 0x1F: 16}  # lb/lbu/sb, lh/lhu/sh, ld/sd, lq/sq; else 4
+
+
+def retarget_local_data_refs(obj: Path, sym_name: str, code: bytes, orig_code: bytes, orig_image,
+                             func_addr: int | None = None) -> bytes:
+    """Compiler-generated anonymous data (float literal pools, string literals) is linked far from
+    its original address, so its %hi/%lo pairs never match. For each HI16/LO16 pair in this function
+    that targets a section symbol of .sdata/.rodata*/.lit*, take the original's immediates when the
+    original instructions are otherwise identical AND the original address holds the same bytes.
+    Switch jump tables are words with R_MIPS_32 relocations against this function's own text
+    section: they count as the same bytes when every entry, relocated to the function's original
+    address (func_addr), equals the original table."""
+    data = obj.read_bytes()
+    u32 = lambda o: int.from_bytes(data[o : o + 4], "little")
+    shoff, shnum, shstrndx = u32(0x20), int.from_bytes(data[0x30:0x32], "little"), int.from_bytes(data[0x32:0x34], "little")
+    secs = [tuple(u32(shoff + i * 40 + k * 4) for k in range(10)) for i in range(shnum)]
+    shstr = secs[shstrndx][4]
+    sname = lambda s: data[shstr + s[0] : data.index(b"\0", shstr + s[0])].decode()
+    symtab = next(s for s in secs if s[1] == 2)
+    strtab = secs[symtab[6]][4]
+    syms = []
+    for o in range(symtab[4], symtab[4] + symtab[5], 16):
+        name = data[strtab + u32(o) : data.index(b"\0", strtab + u32(o))].decode()
+        syms.append((name, u32(o + 4), data[o + 12], int.from_bytes(data[o + 14 : o + 16], "little")))
+    func = next((s for s in syms if s[0] == sym_name and (s[2] & 0xF) == 2), None)
+    if func is None:
+        return code
+    text_off, base, n = secs[func[3]][4], func[1], min(len(code), len(orig_code))
+    w = lambda buf, x: int.from_bytes(buf[x : x + 4], "little")
+    ow = lambda x: u32(text_off + base + x)
+    sext = lambda v: v - 0x10000 if v & 0x8000 else v
+    out = bytearray(code)
+
+    def jump_table_matches(shndx: int, src: int, dst: int) -> bool:
+        # R_MIPS_32 relocs in this data section, keyed by offset -> symbol index.
+        if func_addr is None:
+            return False
+        words = {}
+        for drel in (s for s in secs if s[1] == 9 and s[7] == shndx):
+            for o in range(drel[4], drel[4] + drel[5], 8):
+                if u32(o + 4) & 0xFF == 2:  # R_MIPS_32
+                    words[u32(o)] = u32(o + 4) >> 8
+        sec_off = secs[shndx][4]
+        count = 0
+        while (src + 4 * count) in words:
+            sym = syms[words[src + 4 * count]]
+            if (sym[2] & 0xF) != 3 or sym[3] != func[3]:  # next function's table starts here
+                break
+            label = u32(sec_off + src + 4 * count) - base + func_addr
+            if read_elf_vaddr(orig_image, dst + 4 * count, 4) != label.to_bytes(4, "little"):
+                return False
+            count += 1
+        return count > 0
+
+    reginfo = next((sec for sec in secs if sname(sec) == ".reginfo"), None)
+    gp0 = u32(reginfo[4] + 20) if reginfo and reginfo[5] >= 24 else 0
+    patched_hi: dict = {}  # (r_sym, compiled lui word) -> original lui word, for retargeted pairs
+    all_hi: list = []      # every HI16 against local data: (offset, r_sym)
+    for rel in (s for s in secs if s[1] == 9 and s[7] == func[3]):  # SHT_REL for this text section
+        hi = None
+        pend: list = []  # HI16s since the last LO16 (gcc may duplicate a lui into a delay slot)
+        for o in range(rel[4], rel[4] + rel[5], 8):
+            r_off, r_type, r_sym = u32(o) - base, u32(o + 4) & 0xFF, u32(o + 4) >> 8
+            if not 0 <= r_off <= n - 4:
+                continue
+            _name, _val, info, shndx = syms[r_sym]
+            if (info & 0xF) != 3 or not sname(secs[shndx]).startswith(LOCAL_DATA_PREFIXES):
+                continue
+            if r_type == 7:  # R_MIPS_GPREL16: short literal in .sdata, addressed from gp
+                # The link uses its own _gp; take the original immediate when the original
+                # instruction is otherwise identical and gp + its offset holds the same string.
+                x = r_off
+                if not (w(orig_code, x) ^ ow(x)) & 0xFFFF0000:
+                    sec = secs[shndx]
+                    # gas stores the offset minus the object's gp0 (.reginfo ri_gp_value).
+                    src = sext(ow(x) & 0xFFFF) + gp0
+                    dst = ORIG_GP + sext(w(orig_code, x) & 0xFFFF)
+                    end = data.find(b"\0", sec[4] + src)
+                    want = data[sec[4] + src : end + 1] if 0 <= src and end >= 0 else b""
+                    if want and read_elf_vaddr(orig_image, dst, len(want)) == want:
+                        out[x : x + 4] = orig_code[x : x + 4]
+                continue
+            if r_type == 5:  # R_MIPS_HI16
+                all_hi.append((r_off, r_sym))
+                hi = (r_off, r_sym)
+                pend.append(hi)
+                continue
+            extra, pend = [x for x, xs in pend[:-1] if xs == r_sym], []
+            if r_type != 6 or hi is None or hi[1] != r_sym:  # R_MIPS_LO16 paired with the last HI16
+                continue
+            h, l = hi[0], r_off
+            if any((w(orig_code, x) ^ ow(x)) & 0xFFFF0000 for x in (h, l)):
+                continue
+            src = ((ow(h) & 0xFFFF) << 16) + sext(ow(l) & 0xFFFF)
+            dst = ((w(orig_code, h) & 0xFFFF) << 16) + sext(w(orig_code, l) & 0xFFFF)
+            size = _LO16_ACCESS_SIZE.get(ow(l) >> 26, 4)
+            sec = secs[shndx]
+            want = data[sec[4] + src : sec[4] + src + size]
+            if (len(want) != size or read_elf_vaddr(orig_image, dst, size) != want) \
+                    and not jump_table_matches(shndx, src, dst):
+                continue
+            for x in (h, l):
+                out[x : x + 4] = orig_code[x : x + 4]
+            patched_hi[(r_sym, ow(h))] = w(orig_code, h)
+            # Duplicates of this same lui (identical compiled and original instruction words
+            # apart from the immediate, and the same immediates as the paired one) get it too.
+            for x in extra:
+                if (ow(x) == ow(h)) and ((w(orig_code, x) ^ w(orig_code, h)) & 0xFFFF0000) == 0 \
+                        and (w(orig_code, x) & 0xFFFF) == (w(orig_code, h) & 0xFFFF):
+                    out[x : x + 4] = orig_code[x : x + 4]
+    # A lui that gcc duplicated into a delay slot can be attached by gas to an earlier %lo of the same
+    # literal that belongs to a different lui (other register), so the pairing above misses it.
+    # Give it the original immediate when an identical lui of the same literal was retargeted to it.
+    for x, xs in all_hi:
+        if out[x : x + 4] != orig_code[x : x + 4] and patched_hi.get((xs, ow(x))) == w(orig_code, x):
+            out[x : x + 4] = orig_code[x : x + 4]
+    return bytes(out)
 
 
 def normalize_final_elf(linked_elf: Path, out_elf: Path) -> int:
@@ -826,6 +1094,8 @@ def normalize_final_elf(linked_elf: Path, out_elf: Path) -> int:
         out_data = bytearray(SLPM_PATH.read_bytes())
 
     errors: list[str] = []
+    orig_data = SLPM_PATH.read_bytes()
+    orig_image = (orig_data, parse_elf_load_segments(orig_data))
     linked_syms: dict[str, TextSym] = {}
     if changed_sources:
         linked_image = load_elf_image(linked_elf)
@@ -837,8 +1107,35 @@ def normalize_final_elf(linked_elf: Path, out_elf: Path) -> int:
     else:
         linked_data = b""
 
+    units = {u.source: u for u in load_units()}
     for source, rows in sorted(by_source.items()):
         if source not in changed_sources:
+            continue
+        unit = units.get(source)
+        if unit is not None:
+            # Linked unit: take its whole text range exactly as the linker placed it.
+            size = unit.end - unit.start
+            sec = next((x for x in load_alloc_sections(linked_elf) if x.name == f".kh2unit_{unit.start:08x}"), None)
+            if sec is None or sec.size != size:
+                msg = (f"normalize-unit: ERROR {source}: .text is 0x{sec.size if sec else 0:x} bytes, "
+                       f"linked_units.tsv range is 0x{size:x}")
+                print(msg)
+                errors.append(msg)
+                continue
+            # Read the unit from its own section's file offset. A section earlier in the link that
+            # overflows its slot shifts the load addresses (LMA) of later sections, so a read by
+            # program-header address can land a few bytes off (pro, 2026-11-11).
+            if sec.addr == unit.start and sec.offset + size <= len(linked_data):
+                linked = linked_data[sec.offset : sec.offset + size]
+            else:
+                linked = read_elf_vaddr(linked_image, unit.start, size)
+            if linked is None or len(linked) != size:
+                msg = f"normalize-unit: ERROR {source}: no linked bytes for 0x{unit.start:08x}-0x{unit.end:08x}"
+                print(msg)
+                errors.append(msg)
+                continue
+            foff = addr_to_file_offset(unit.start)
+            out_data[foff : foff + size] = linked
             continue
         rows.sort(key=lambda t: t[0])
         obj = ROOT / src_to_obj(source)
@@ -908,6 +1205,7 @@ def normalize_final_elf(linked_elf: Path, out_elf: Path) -> int:
                 norm = compiled
 
             foff = addr_to_file_offset(addr)
+            norm = retarget_local_data_refs(obj, obj_sym.name, norm, orig_data[foff : foff + b.size], orig_image, addr)
             out_data[foff : foff + b.size] = norm
 
     if errors:

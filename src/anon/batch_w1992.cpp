@@ -1,0 +1,120 @@
+#include "../common/types.h"
+
+// ---- 00128b38 ----
+struct V4w1992 { f32 v[4]; };
+struct M4w1992 { f32 m[4][4]; };
+struct Key128b38 { u16 idx; u8 ch:4; u8 hi:4; u8 pad[3]; };
+struct Hdr128b38 { u8 pad[0x18]; s32 offM; u8 pad2[0x30 - 0x1c]; s32 off1; s32 n1; s32 off2; s32 n2; };
+struct Obj128b38 { u32 x; Hdr128b38* h; };
+struct Out128b38 { u8 pad[0x1c]; V4w1992* a; V4w1992* b; V4w1992* c; };
+
+// ---- 0016eb48 ----
+struct P16eb48 { u32 w0; u8 b4; u8 pad[0x48 - 5]; u8 b48; u8 pad2[0x4e - 0x49]; u16 h4e; u8 pad3[0x58 - 0x50]; u16 sub[4]; };
+
+// ---- 00228f18 ----
+struct AVT228f18 { void* (*alloc)(struct Alc228f18*, u32, u32); };
+struct Alc228f18 { AVT228f18* vt; };
+struct Mgr228f18 { u8 pad[20]; Alc228f18* a; };
+
+extern "C" {
+void func_001285f8(Obj128b38*, s32*, s32*);
+f32 func_00128750(Obj128b38*, Key128b38*, s32, s32, f32);
+
+P16eb48* func_0016e920(u32);
+s32 func_0016f6f8(u32);
+s32 func_0016f770(u32);
+s32 func_0016f8d0(u32);
+u32 func_0016f470(P16eb48*, s32);
+u32 func_0016f4b8(P16eb48*, s32);
+u32 func_0016f520(P16eb48*, u32, s32);
+u32 func_0016f6a0(P16eb48*, s32);
+void func_00170518(u32, s32, s32);
+void func_00170530(u32, s32, s32, s32);
+void func_0016ef58(u16, s32, u32, s32, s32);
+extern s32 D_0036c278[];
+
+extern Mgr228f18* D_00347f80;
+extern u8 D_00347f98[];
+extern u8 D_00347e60[];
+extern u8 D_0035e190[];
+extern u8 D_0035e070[];
+extern u8 D_0035e0a8[];
+extern u8 D_0035e114[];
+extern u8 D_0035e0e0[];
+void func_0031a838(void*);
+void func_00239700(void*);
+void* func_00224870();
+void* func_00224880();
+void func_002294c8(void*, s32, void*, void*);
+}
+
+static inline void* w1992_kalloc(u32 n) { Alc228f18* a = D_00347f80->a; return a->vt->alloc(a, n, 0); }
+struct B228f18 { u32 vt; u8 pad[8]; u8 m12[12]; B228f18() { vt = (u32)D_00347f98; func_0031a838(m12); } };
+struct Sub228f18 : B228f18 { u8 m24[408 - 24]; Sub228f18() { vt = (u32)D_00347e60; func_00239700(m24); } };
+struct Mid228f18 : B228f18 { Mid228f18() { vt = (u32)D_0035e190; } };
+struct Outer228f18 : Mid228f18 { Sub228f18 subs[7]; u8 tail[20];
+  void* operator new(unsigned int n) { return w1992_kalloc(n); } };
+struct B0228f18 { u32 vt; u8 pad[8]; u32 f12; u8 pad2[8]; B0228f18() { vt = (u32)D_0035e190; f12 = 0; } };
+struct Outer0228f18 : B0228f18 { Sub228f18 subs[7]; u8 tail[20];
+  void* operator new(unsigned int n) { return w1992_kalloc(n); } };
+
+static inline s32 w1992_off2(P16eb48* p) { return !(p->b48 & 1); }
+
+extern "C" {
+
+void kn__MotionPrototype0__setFcurveValue(Obj128b38* o, Out128b38* out, f32 t);  // 0x00128b38: definition moved into src/anon/unit_00128480.cpp
+
+void w1992_tail4_16eb48(u32 a0, u32 a1, u32 a2, u32 a3) asm("_Z28YS__OBJENTRY__ReadRequestSubjjjj");
+void w1992_tail4_16eb48(u32 a0, u32 a1, u32 a2, u32 a3);  // 0x0016eb48: definition moved into src/anon/unit_0016e8f8.cpp
+
+void func_00228f18();  // 00228f18: moved to src/sasa/musical_score.cpp (linked unit)
+
+}
+
+// ---- 002dbd30 ----
+// VU0 macro asm (vmulx scale, vsub zero) and lq/sq 128-bit copies: no C equivalent.
+#define W1992_QCOPY(d, s) asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(d), "r"(s) : "$8", "memory")
+#define W1992_MCOPY(d, s) asm volatile("lq $8, 0(%1)\n\tlq $9, 16(%1)\n\tlq $10, 32(%1)\n\tlq $11, 48(%1)\n\t" \
+                         "sq $8, 0(%0)\n\tsq $9, 16(%0)\n\tsq $10, 32(%0)\n\tsq $11, 48(%0)" \
+                         : : "r"(d), "r"(s) : "$8", "$9", "$10", "$11", "memory")
+struct QW2dbd30 { union { u32 v[4]; f32 f[4]; };
+  QW2dbd30() {}
+  QW2dbd30(f32 x, f32 y, f32 z, f32 w) { f[0] = x; f[1] = y; f[2] = z; f[3] = w; }
+  QW2dbd30& operator=(const QW2dbd30& o) { if (this != &o) W1992_QCOPY(this, &o); return *this; }
+} __attribute__((aligned(16)));
+struct MT2dbd30 { QW2dbd30 r[4];
+  MT2dbd30& operator=(const MT2dbd30& o) { if (this != &o) W1992_MCOPY(this, &o); return *this; }
+} __attribute__((aligned(16)));
+struct Cfg2dbd30 { u8 pad[0x28]; f32 f28; f32 f2c; u8 pad2[0x40 - 0x30]; f32 f40; };
+struct Ob2dbd30 { u8 pad[0x140]; u8 s140[0xb1c - 0x140]; u8 neg; u8 pad2[3]; MT2dbd30 m20; MT2dbd30 m60;
+  u8 pad3[0xbc0 - 0xba0]; u8 bc0; u8 pad4[15]; QW2dbd30 vd0; QW2dbd30 ve0; u8 pad5[0xbf4 - 0xbf0]; f32 bf4; };
+extern "C" {
+extern s32 D_00361f60;
+extern u32 D_0034e948;
+extern u8 D_003628e0[];
+void func_0017f540(void*, s32, f32, f32);
+void func_001c0e60(Ob2dbd30*);
+void func_0011b6a8(MT2dbd30*);
+u32 func_0016b0a0(u32);
+void func_0011b7b0(MT2dbd30*, u32);
+QW2dbd30* YS__OBJ__get_pos(Ob2dbd30*);
+Cfg2dbd30* func_002d73f0(s32);
+f32 cosf(f32);
+f32 sinf(f32);
+void func_002e7568(Ob2dbd30*, s32, void*, f32);
+void Ti__Afp__calc_local_matrix(Ob2dbd30*, s32);
+}
+static inline void w1992_scale(QW2dbd30& d, const QW2dbd30& a, f32 s) {
+    asm volatile("lqc2 $vf1, 0(%1)\n\tmfc1 $8, %2\n\tqmtc2 $8, $vf2\n\tvmulx.wxyz $vf1, $vf1, $vf2x\n\tsqc2 $vf1, 0(%0)"
+                 : : "r"(&d), "r"(&a), "f"(s) : "$8", "memory");
+}
+static inline void w1992_zero(QW2dbd30* d) { asm volatile("vsub.wxyz $vf1, $vf0, $vf0\n\tsqc2 $vf1, 0(%0)" : : "r"(d) : "memory"); }
+static inline void w1992_setdir(QW2dbd30& out, f32 a, f32 r) {
+    QW2dbd30 res;
+    QW2dbd30 v(cosf(a), sinf(a), 0.0f, 0.0f);
+    w1992_scale(res, v, r);
+    out = res;
+}
+extern "C" {
+void func_002dbd30(Ob2dbd30* self, f32 x);  // 0x002dbd30: definition moved into src/anon/unit_002da040.cpp
+}

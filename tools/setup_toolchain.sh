@@ -5,7 +5,7 @@
 #
 # The compiler archive is not in this repository. Its sha256 is
 # 12519affc1fe38130b44fc6bcea98557a95e799a46c66337bb436652a8f0b80c.
-# Needs: x86_64 Linux with 32-bit glibc (libc6:i386), patchelf, curl.
+# Needs: x86_64 Linux with 32-bit glibc (libc6:i386), patchelf, curl, bubblewrap.
 # Writes <dest>/gcc, <dest>/objdiff and <dest>/env.sh; then `source <dest>/env.sh`.
 set -euo pipefail
 
@@ -36,6 +36,17 @@ mkdir -p "$DEST/objdiff"
     "https://github.com/encounter/objdiff/releases/download/$OBJDIFF_VERSION/objdiff-cli-linux-x86_64"
   chmod +x "$DEST/objdiff/objdiff-cli"
 }
+
+# The Sony SDK libraries were built with older compilers; the build expects them in tools/compilers/.
+REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+for c in ee-gcc2.9-991111 ee-gcc2.96; do
+  if [ ! -x "$REPO/tools/compilers/$c/bin/ee-gcc" ]; then
+    mkdir -p "$REPO/tools/compilers/$c"
+    curl -sSL --fail "https://github.com/decompme/compilers/releases/download/compilers/$c.tar.xz" \
+      | tar xJ -C "$REPO/tools/compilers/$c"
+    chmod +x "$REPO/tools/compilers/$c"/bin/* || true
+  fi
+done
 
 cat > "$DEST/env.sh" <<ENV
 export KH2_NATIVE=1

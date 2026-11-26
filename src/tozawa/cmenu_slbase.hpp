@@ -9,8 +9,6 @@ class FuncDef46;
 class FuncDef47;
 class PAD;
 
-namespace dk { class SpriteMessage; }
-
 namespace Tz {
 
 class MenuBase {
@@ -85,7 +83,6 @@ public:
     static u32 GetCurrentListItem();
     static u32 LeaveListItemImpl();
     static u32 GetLeadMesId(u32);
-    static void DrawListMess(int, int, unsigned int, unsigned int, dk::SpriteMessage*);
 };
 
 }  // namespace Tz

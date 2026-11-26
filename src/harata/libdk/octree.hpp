@@ -13,7 +13,6 @@ class ObjOcc;
 class OnPolygonInfo;
 class ViewFrustum;
 class uchar;
-class ushort;
 
 namespace dk {
 

@@ -2,6 +2,7 @@
 
 #include "../common/types.h"
 
+class ...;
 class COLOR;
 class RECT;
 class TEXT;

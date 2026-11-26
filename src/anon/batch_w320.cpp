@@ -1,0 +1,299 @@
+#include "../common/types.h"
+namespace w320_b {
+struct QWord {
+    union { u32 v[4]; f32 f[4]; };
+    QWord() {}
+    QWord(const QWord& o) { asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(this), "r"(&o) : "$8", "memory"); }
+    QWord& operator=(const QWord& o) { if (this != &o) asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(this), "r"(&o) : "$8", "memory"); return *this; }
+} __attribute__((aligned(16)));
+static inline f32 Normalize(QWord* v) {
+    f32 r;
+    asm volatile("lqc2 $vf1, 0(%1)\n\tvmul.xyz $vf2, $vf1, $vf1\n\tvaddy.x $vf2, $vf2, $vf2y\n\tvaddz.x $vf2, $vf2, $vf2z\n\tvsqrt Q, $vf2x\n\tvwaitq\n\tcfc2.ni $8, $vi22\n\tvaddq.x $vf2, $vf0, Q\n\tmtc1 $8, %0\n\tvnop\n\tvdiv Q, $vf0w, $vf2x\n\tvwaitq\n\tvmulq.xyz $vf1, $vf1, Q\n\tsqc2 $vf1, 0(%1)"
+                 : "=f"(r) : "r"(v) : "$8", "memory");
+    return r;
+}
+static inline QWord Cross(QWord& a, QWord& b) {
+    QWord r;
+    asm volatile("lqc2 $vf1, 0(%1)\n\tlqc2 $vf2, 0(%2)\n\tvsub.wxyz $vf3, $vf0, $vf0\n\tvopmula.xyz ACC, $vf1, $vf2\n\tvopmsub.xyz $vf3, $vf2, $vf1\n\tsqc2 $vf3, 0(%0)" : : "r"(&r), "r"(&a), "r"(&b) : "memory");
+    return r;
+}
+static inline f32 Dot(QWord& a, QWord& b) {
+    f32 r;
+    asm volatile("lqc2 $vf1, 0(%1)\n\tlqc2 $vf2, 0(%2)\n\tvmul.xyz $vf1, $vf1, $vf2\n\tvaddy.x $vf1, $vf1, $vf1y\n\tvaddz.x $vf1, $vf1, $vf1z\n\tqmfc2 $8, $vf1\n\tmtc1 $8, %0" : "=f"(r) : "r"(&a), "r"(&b) : "$8", "memory");
+    return r;
+}
+struct Sub2884 { u32 f0; u32 f4; u32 f8; };
+struct Cfg { u8 pad[172]; f32 f172; u8 pad176[12]; f32 f188; };
+struct Ob {
+    u8 p0[16]; QWord q16; QWord q32; u8 p48[268 - 48]; u32 flags; u8 p272[320 - 272];
+    u8 sub[32]; u32 f352; u8 p356[380 - 356]; s32 f380; s32 f384; u8 p388[2884 - 388]; Sub2884* p2884;
+};
+}
+using namespace w320_b;
+extern Cfg* D_00352130;
+extern "C" {
+s32 func_001c90f0(void);  // id_in_201_204
+void func_001c9110(void*, Ob*);
+void func_0017f540(void*, s32, f32, f32);
+void func_0017f5e0(void*, s32, s32, f32, f32);
+void func_0016bd60(Ob*, s32);
+void YS__ACTION_LKDASH__control(void* x, Ob* o);  // 0x001c92a0: definition moved into src/anon/unit_001c91c8.cpp
+}
+namespace w320_c {
+struct V4r { f32 x, y, z, w; } __attribute__((aligned(16)));
+struct M4r { V4r r[4]; };
+struct Model {
+    u8 pad0[124];
+    f32 scale;
+    f32 off[3];
+    u8 pad140[3];
+    u8 noOffset;
+    u8 pad144[20];
+    f32 size;
+};
+struct DrawSrc { Model* model; u32 tex; u8 data[1]; };
+struct DrawArg { DrawSrc* src; u32 color; void* mtx; f32 len; u16 div; u8 mx; u8 my; f32* scl; };
+struct DrawReq {
+    u32 tex;
+    u32 data;
+    u8 pad8[10];
+    u16 id;
+    union { u32 color; u8 c[4]; };
+    u32 f24;
+    u16 f28;
+    u16 f30;
+    M4r* mtx;
+    u8 pad36[8];
+    u32 f44;
+    u8 pad48[16];
+};
+struct CamBlk { u8 pad[48]; f32 pos[3]; };
+}
+using namespace w320_c;
+extern "C" {
+extern Model D_01d9e360;
+extern CamBlk D_01d9e840;
+void sceVu0CopyMatrix(M4r*, Model*);
+void sceVu0UnitMatrix(M4r*);  // vu_store_w_splat
+void sceVu0ScaleVector(V4r*, V4r*, f32);  // vec_scale_by_f12
+void sceVu0MulMatrix(M4r*, void*, M4r*);
+void func_0021efc0(DrawReq*);
+void func_0021f060(DrawReq*);
+void func_0021fe40(DrawArg* a, u32 id);  // 0x0021fe40: definition moved into src/anon/unit_0021e988.cpp
+}
+extern "C" {
+extern u16* D_0035f230;
+extern u32 D_0035f01c;
+extern u32 D_0035f03c;
+extern u32 D_0035ef68;
+extern u32 D_0035ef64;
+u16* func_0026b850(void);
+s32 func_002813b8(void);
+s32 func_00257118(s32);
+void Tz__Select__SetItem(u32, s32, u32, u32, u32, s32, s32, s32);
+void Tz__Select__SetExOffset(u32, s32, s32, s32);
+u8* func_002891b8(u32, s32);
+void func_00139620(u8*);
+void func_001395f8(u8*);
+s32 func_00192048(u32);
+s32 func_0027aa78(void);
+s32 func_00277708v0(s32 start)
+{
+    s32 j = start;
+    u16* t0 = func_0026b850();
+    s32 mask = func_002813b8();
+    *D_0035f230 = mask;
+    s32 n = 0;
+    u16* tbl = t0;
+    for (s32 i = 0; i < 7; i++, tbl++) {
+        if (i == 6) continue;
+        u8 on = (mask >> i) & 1;
+        if (!on) continue;
+        n++;
+        s32 a = func_00257118(0);
+        s32 b = func_00257118(1);
+        Tz__Select__SetItem(D_0035f01c, j, D_0035ef68, D_0035ef64, D_0035f03c, -1, a, b);
+        Tz__Select__SetExOffset(D_0035f01c, j, 0, -1);
+        func_00139620(func_002891b8(D_0035f01c, j));
+        u8* nd = func_002891b8(D_0035f01c, j);
+        *(s32*)(nd + 408) = func_00192048(*tbl);
+        func_001395f8(func_002891b8(D_0035f01c, j++));
+    }
+    if (!func_0027aa78()) return n;
+    n++;
+    s32 a = func_00257118(0);
+    s32 b = func_00257118(1);
+    Tz__Select__SetItem(D_0035f01c, j, D_0035ef68, D_0035ef64, D_0035f03c, -1, a, b);
+    Tz__Select__SetExOffset(D_0035f01c, j, 0, -1);
+    func_00139620(func_002891b8(D_0035f01c, j));
+    u8* nd = func_002891b8(D_0035f01c, j);
+    *(s32*)(nd + 408) = func_00192048(0xb2ec);
+    func_001395f8(func_002891b8(D_0035f01c, j));
+    *D_0035f230 |= 0x80;
+    return n;
+}
+
+s32 func_00277708v1(s32 start)
+{
+    s32 j = start;
+    u16* t0 = func_0026b850();
+    s32 mask = func_002813b8();
+    *D_0035f230 = mask;
+    s32 n = 0;
+    u16* tbl = t0;
+    for (s32 i = 0; i < 7; i++, tbl++) {
+        if (i == 6) continue;
+        bool off = !((mask >> i) & 1);
+        if (off) continue;
+        n++;
+        s32 a = func_00257118(0);
+        s32 b = func_00257118(1);
+        Tz__Select__SetItem(D_0035f01c, j, D_0035ef68, D_0035ef64, D_0035f03c, -1, a, b);
+        Tz__Select__SetExOffset(D_0035f01c, j, 0, -1);
+        func_00139620(func_002891b8(D_0035f01c, j));
+        u8* nd = func_002891b8(D_0035f01c, j);
+        *(s32*)(nd + 408) = func_00192048(*tbl);
+        func_001395f8(func_002891b8(D_0035f01c, j++));
+    }
+    if (!func_0027aa78()) return n;
+    n++;
+    s32 a = func_00257118(0);
+    s32 b = func_00257118(1);
+    Tz__Select__SetItem(D_0035f01c, j, D_0035ef68, D_0035ef64, D_0035f03c, -1, a, b);
+    Tz__Select__SetExOffset(D_0035f01c, j, 0, -1);
+    func_00139620(func_002891b8(D_0035f01c, j));
+    u8* nd = func_002891b8(D_0035f01c, j);
+    *(s32*)(nd + 408) = func_00192048(0xb2ec);
+    func_001395f8(func_002891b8(D_0035f01c, j));
+    *D_0035f230 |= 0x80;
+    return n;
+}
+
+s32 func_00277708w0(s32 start)
+{
+    s32 j = start;
+    u16* t0 = func_0026b850();
+    s32 mask = func_002813b8();
+    *D_0035f230 = mask;
+    s32 n = 0;
+    u16* tbl = t0;
+    for (s32 i = 0; i < 7; i++, tbl++) {
+        if (i == 6) continue;
+        u8 off = ~(mask >> i) & 1;
+        if (off) continue;
+        n++;
+        s32 a = func_00257118(0);
+        s32 b = func_00257118(1);
+        Tz__Select__SetItem(D_0035f01c, j, D_0035ef68, D_0035ef64, D_0035f03c, -1, a, b);
+        Tz__Select__SetExOffset(D_0035f01c, j, 0, -1);
+        func_00139620(func_002891b8(D_0035f01c, j));
+        u8* nd = func_002891b8(D_0035f01c, j);
+        *(s32*)(nd + 408) = func_00192048(*tbl);
+        func_001395f8(func_002891b8(D_0035f01c, j++));
+    }
+    if (!func_0027aa78()) return n;
+    n++;
+    s32 a = func_00257118(0);
+    s32 b = func_00257118(1);
+    Tz__Select__SetItem(D_0035f01c, j, D_0035ef68, D_0035ef64, D_0035f03c, -1, a, b);
+    Tz__Select__SetExOffset(D_0035f01c, j, 0, -1);
+    func_00139620(func_002891b8(D_0035f01c, j));
+    u8* nd = func_002891b8(D_0035f01c, j);
+    *(s32*)(nd + 408) = func_00192048(0xb2ec);
+    func_001395f8(func_002891b8(D_0035f01c, j));
+    *D_0035f230 |= 0x80;
+    return n;
+}
+
+
+// 0x00277708: definition moved into src/anon/unit_00277708.cpp
+
+
+
+}
+struct E1e21ef0 { s32 f0; s16 h4; };
+extern "C" {
+extern u32 D_0035f01c;
+extern s32 D_0035f3d4;
+extern u32 D_0035f03c;
+extern u32 D_0035ef68;
+extern u32 D_0035ef64;
+extern u8* D_0035f050;
+extern E1e21ef0* D_01e21ef0;
+u8* func_00257770(void);
+s32 func_00287cd0(void);
+s32 func_0028acc8(u32);
+s32 func_00139d78(u8*);
+void func_00139510(u8*);
+s32 func_002891e8(u32);
+s32 func_0028b038(u32);
+E1e21ef0* func_0027d4f0(s32);
+void func_0028d8c0(u8*, s32, u32, u32, u32, s32, s32, s32);
+s32 func_0027d488(s32, s32);
+void func_0028dcc0(u8*, s32);
+s32 func_00289358(u32);
+void func_00138c10(u8*, s32);
+void func_001396b0(u8*);
+void func_0031a260(u8*, s32);
+u8* func_002891d0(u32);
+void func_0028d660(u8*, s32);  // record_set_value_refresh
+void func_0027d5d8(void);  // 0x0027d5d8: definition moved into src/anon/unit_0027d2e8.cpp
+}
+struct Heap2bd310;
+struct Heap2bd310Vt { void* (*alloc)(Heap2bd310*, u32, s32); void (*free)(Heap2bd310*, void*); };
+struct Heap2bd310 { Heap2bd310Vt* vt; };
+struct Ctx2bd310 { u32 f0; void* file; u32 f8; void* f12; Heap2bd310* heap; };
+extern "C" {
+void func_002ba298(void*);
+s32 func_001688c8(void*);
+void YS__FILE__ReadBack(void*, void*, s32, s32);
+s32 YS__CACHE_BUFF__IsFlushing(void);
+void func_00102448(Ctx2bd310*, s32);
+void func_002baf48(void*, s32, void*, s32, s32, s32);
+s32 func_002ba200(void);
+void* func_002bd2f0(void*, s32*);
+s32 func_002bd230(s32, u32);
+void SOUND__readBgmThread(Ctx2bd310* c);  // 0x002bd310: definition moved into src/anon/unit_002bc978.cpp
+
+}
+namespace w320_d {
+struct QWord {
+    union { u32 v[4]; f32 f[4]; };
+    QWord() {}
+    QWord(const QWord& o) { asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(this), "r"(&o) : "$8", "memory"); }
+    QWord& operator=(const QWord& o) { if (this != &o) asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(this), "r"(&o) : "$8", "memory"); return *this; }
+} __attribute__((aligned(16)));
+static inline f32 Normalize(QWord* v) {
+    f32 r;
+    asm volatile("lqc2 $vf1, 0(%1)\n\tvmul.xyz $vf2, $vf1, $vf1\n\tvaddy.x $vf2, $vf2, $vf2y\n\tvaddz.x $vf2, $vf2, $vf2z\n\tvsqrt Q, $vf2x\n\tvwaitq\n\tcfc2.ni $8, $vi22\n\tvaddq.x $vf2, $vf0, Q\n\tmtc1 $8, %0\n\tvnop\n\tvdiv Q, $vf0w, $vf2x\n\tvwaitq\n\tvmulq.xyz $vf1, $vf1, Q\n\tsqc2 $vf1, 0(%1)"
+                 : "=f"(r) : "r"(v) : "$8", "memory");
+    return r;
+}
+static inline QWord Cross(QWord& a, QWord& b) {
+    QWord r;
+    asm volatile("lqc2 $vf1, 0(%1)\n\tlqc2 $vf2, 0(%2)\n\tvsub.wxyz $vf3, $vf0, $vf0\n\tvopmula.xyz ACC, $vf1, $vf2\n\tvopmsub.xyz $vf3, $vf2, $vf1\n\tsqc2 $vf3, 0(%0)" : : "r"(&r), "r"(&a), "r"(&b) : "memory");
+    return r;
+}
+static inline f32 Dot(QWord& a, QWord& b) {
+    f32 r;
+    asm volatile("lqc2 $vf1, 0(%1)\n\tlqc2 $vf2, 0(%2)\n\tvmul.xyz $vf1, $vf1, $vf2\n\tvaddy.x $vf1, $vf1, $vf1y\n\tvaddz.x $vf1, $vf1, $vf1z\n\tqmfc2 $8, $vf1\n\tmtc1 $8, %0" : "=f"(r) : "r"(&a), "r"(&b) : "$8", "memory");
+    return r;
+}
+static inline void ScaleIn(QWord* v, f32 s) {
+    asm volatile("lqc2 $vf1, 0(%0)\n\tmfc1 $8, %1\n\tqmtc2 $8, $vf2\n\tvmulx.wxyz $vf1, $vf1, $vf2x\n\tsqc2 $vf1, 0(%0)" : : "r"(v), "f"(s) : "$8", "memory");
+}
+struct P300 { u8 pad[36]; f32 f36; };
+struct Ob {
+    u8 p0[16]; QWord q16; QWord q32; u8 p48[240 - 48]; f32 f240; u8 p244[272 - 244]; f32 f272; u8 p276[300 - 276]; P300* p300;
+    u8 p304[320 - 304]; u8 sub[32]; u32 f352; u8 p356[2208 - 356]; QWord q2208;
+};
+struct Ob2 { u8 pad[320]; u8 sub[32]; };
+extern "C" {
+extern Ob2* D_00351068;
+extern f32 D_00349e10;
+void YS__OBJ__get_dir(QWord*);
+s32 func_001b2b58(Ob*);
+void func_0017f540(void*, s32, f32, f32);
+void YS__ACTION_CARPET__control(void* self, Ob* o);  // 0x001b2860: definition moved into src/anon/unit_001b2780.cpp
+}
+}

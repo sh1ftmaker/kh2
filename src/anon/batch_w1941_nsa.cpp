@@ -1,0 +1,101 @@
+#include "../common/types.h"
+
+// ---- 00153678 types
+struct Al1941;
+struct AlVt1941 { void* (*alloc)(Al1941*, u32, s32); };
+struct Al1941 { AlVt1941* vt; };
+struct InHdr1941 { s32 off; u32 size; };
+struct InEnt1941 { s32 a; f32 x, y, z, w; s32 b; };
+struct OutEnt1941 { f32 x, y, z, pad; f32 w; u8 rest[44]; };
+
+// ---- 00162560 types
+struct V1941 { f32 x, y, z, w;
+    V1941() {}
+    ~V1941() {}
+    V1941& operator=(const V1941& o) {
+        if (this != &o) asm volatile("lq $8,0(%1)\n\tsq $8,0(%0)" : : "r"(this), "r"(&o) : "$8", "memory");
+        return *this;
+    }
+    V1941 operator-(const V1941& b) const {
+        V1941 r;
+        asm volatile(".set noreorder\n\tlqc2 $vf1,0(%1)\n\tlqc2 $vf2,0(%2)\n\tvsub.wxyz $vf1,$vf1,$vf2\n\tsqc2 $vf1,0(%0)\n\t.set reorder" : : "r"(&r), "r"(this), "r"(&b) : "memory");
+        return r;
+    }
+    V1941 cross(const V1941& b) const {
+        V1941 r;
+        asm volatile(".set noreorder\n\tlqc2 $vf1,0(%1)\n\tlqc2 $vf2,0(%2)\n\tvsub.wxyz $vf3,$vf0,$vf0\n\tvopmula.xyz ACC,$vf1,$vf2\n\tvopmsub.xyz $vf3,$vf2,$vf1\n\tsqc2 $vf3,0(%0)\n\t.set reorder" : : "r"(&r), "r"(this), "r"(&b) : "memory");
+        return r;
+    }
+    f32 dot(const V1941& b) const {
+        f32 r;
+        asm volatile("lqc2 $vf1,0(%1)\n\tlqc2 $vf2,0(%2)\n\tvmul.xyz $vf1,$vf1,$vf2\n\tvaddy.x $vf1,$vf1,$vf1y\n\tvaddz.x $vf1,$vf1,$vf1z\n\tqmfc2 $8,$vf1\n\tmtc1 $8,%0" : "=f"(r) : "r"(this), "r"(&b) : "$8", "memory");
+        return r;
+    }
+} __attribute__((aligned(16)));
+struct Poly1941 { V1941* v[4]; s32 n; };
+
+// ---- 0017fba0 types
+extern "C" void func_0011c138(void*);
+struct E1941 { u8 d[32]; E1941() { func_0011c138(this); } ~E1941() {} };
+struct Sub1941 { u8 pad[1184]; u8 m[464]; void* p1648; };
+struct Obj1941 {
+    u8 pad0[8]; Sub1941* sub; s32 v12; u8 pad1[16]; u32 flags32; u8 pad2[12];
+    f32 f48; f32 f52; u8 pad3[152]; s32 v208; s32 v212; u8 pad4[44]; u32 flags260;
+};
+static inline bool gt0_1941(f32 x) { return 0.0f < x; }
+
+// ---- 001cad60 types
+struct Q1941 { f32 x, y, z, w;
+    Q1941() {}
+    Q1941(const Q1941& o) { asm volatile("lq $8,0(%1)\n\tsq $8,0(%0)" : : "r"(this), "r"(&o) : "$8", "memory"); }
+} __attribute__((aligned(16)));
+static inline void qmuls1941(Q1941* d, f32 s) {
+    asm volatile("lqc2 $vf1,0(%0)\n\tmfc1 $8,%1\n\tqmtc2 $8,$vf2\n\tvmulx.wxyz $vf1,$vf1,$vf2x\n\tsqc2 $vf1,0(%0)" : : "r"(d), "f"(s) : "$8", "memory");
+}
+static inline void qadd1941(Q1941* d, const Q1941* a, const Q1941* b) {
+    asm volatile("lqc2 $vf1,0(%1)\n\tlqc2 $vf2,0(%2)\n\tvadd.wxyz $vf1,$vf1,$vf2\n\tsqc2 $vf1,0(%0)" : : "r"(d), "r"(a), "r"(b) : "memory");
+}
+struct Mot1941 { u8 pad[48]; Q1941 p; };
+struct Tgt1941;
+struct TgtVt1941 { void* f[40]; Mot1941* (*get)(Tgt1941*); };
+struct Tgt1941 { TgtVt1941* vt; };
+struct Ob1941 { Q1941 pos; u8 pad0[6]; u8 b22; u8 pad1[41]; f32 f64; u8 pad2[44]; Q1941 v112; u8 pad3[32]; f32 f160; u8 pad4[4]; f32 f168; f32 f172; };
+
+extern "C" {
+
+// --- 00153678: load a 24-byte entry table, allocate the 64-byte work entries and init each one
+extern Al1941* D_0034a78c;
+extern InEnt1941* D_0034a778;
+extern s32 D_0034a77c;
+extern OutEnt1941* D_0034a790;
+void func_001535f0(f32, f32, f32);
+void func_001535b0(OutEnt1941*, s32);
+void func_00153840(void*);
+void func_00153678(InHdr1941* h, void* p, Al1941* al);  // 0x00153678: definition moved into src/anon/unit_00153678.cpp
+
+// --- 00162560: is the point inside the polygon (every edge cross product faces away from the normal)
+extern s32 D_0034c780[];
+extern s32 D_0034c790[];
+s32 func_00162560(Poly1941* o, V1941* p, V1941* nrm);  // 0x00162560: definition moved into src/anon/unit_001614e8.cpp
+
+// --- 0017fba0: build 16 work entries and run the timed or the plain update on them
+s32 func_00180cd0(Obj1941*);
+void func_0011c4b0(void*);
+void YS__MOTION__make_ik_adjust(Obj1941*, E1941*);
+void func_00180a10(Obj1941*, E1941*);
+s32 func_001b0580(void*);
+void func_0011c6a8(f32, void*, s32, s32, s32, s32, E1941*, s32);
+void func_0011c4e8(f32, void*, s32, s32, s32, E1941*, s32);
+// 0017fba0: moved to src/yasui/libys/motion.cpp
+
+// --- 001cad60: count down the timer, then orbit around the target and set the fade byte
+extern f32 D_00349e10;
+extern f32 D_00351fd8;
+Tgt1941* func_002d1260(void);
+s32 YS__OBJ__is_exist(Tgt1941*);
+f32 func_001cbf50(f32);
+f32 cosf(f32);
+f32 sinf(f32);
+s32 func_001cad60(Ob1941* self);  // 0x001cad60: definition moved into src/anon/unit_001ca8e0.cpp
+
+}

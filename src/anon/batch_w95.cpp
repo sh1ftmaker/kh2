@@ -1,0 +1,462 @@
+#include "../common/types.h"
+struct V4 { f32 x, y, z, w; } __attribute__((aligned(16)));
+struct M4 { V4 r[4]; } __attribute__((aligned(16)));
+struct NoTail { ~NoTail() {} };
+static inline void QCOPY(void* d, const void* s) {
+    asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(d), "r"(s) : "$8", "memory");
+}
+static inline void VAssign(V4* d, V4* s) {
+    if (d != s) QCOPY(d, s);
+}
+static inline void ApplyM(V4* d, M4* m, V4* v) {
+    asm volatile("lqc2 $vf5, 0(%2)\n\tlqc2 $vf1, 0(%1)\n\tlqc2 $vf2, 16(%1)\n\tlqc2 $vf3, 32(%1)\n\tlqc2 $vf4, 48(%1)\n\tvmulax.wxyz ACC, $vf1, $vf5x\n\tvmadday.wxyz ACC, $vf2, $vf5y\n\tvmaddaz.wxyz ACC, $vf3, $vf5z\n\tvmaddw.wxyz $vf5, $vf4, $vf5w\n\tsqc2 $vf5, 0(%0)" : : "r"(d), "r"(m), "r"(v) : "memory");
+}
+static inline void ApplyTo(V4* d, M4* m, V4* v) { V4 t; ApplyM(&t, m, v); VAssign(d, &t); }
+static inline void VAddTo(V4* d, V4* a, V4* b) {
+    V4 t;
+    asm volatile("lqc2 $vf1, 0(%1)\n\tlqc2 $vf2, 0(%2)\n\tvadd.wxyz $vf1, $vf1, $vf2\n\tsqc2 $vf1, 0(%0)" : : "r"(&t), "r"(a), "r"(b) : "memory");
+    VAssign(d, &t);
+}
+struct Vq {
+    f32 x, y, z, w;
+    Vq& operator=(const Vq& s) {
+        if (this != &s) asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(this), "r"(&s) : "$8", "memory");
+        return *this;
+    }
+} __attribute__((aligned(16)));
+static inline Vq operator-(const Vq& a, const Vq& b) {
+    Vq r;
+    asm volatile(".set noreorder\n\tlqc2 $vf1, 0(%1)\n\tlqc2 $vf2, 0(%2)\n\tvsub.wxyz $vf1, $vf1, $vf2\n\tsqc2 $vf1, 0(%0)\n\t.set reorder" : : "r"(&r), "r"(&a), "r"(&b) : "memory");
+    return r;
+}
+static inline f32 Normalize(Vq& d) {
+    f32 len;
+    asm volatile(
+        "lqc2 $vf1, 0(%1)\n\t"
+        "vmul.xyz $vf2, $vf1, $vf1\n\t"
+        "vaddy.x $vf2, $vf2, $vf2y\n\t"
+        "vaddz.x $vf2, $vf2, $vf2z\n\t"
+        "vsqrt Q, $vf2x\n\t"
+        "vwaitq\n\t"
+        "cfc2.ni $8, $vi22\n\t"
+        "vaddq.x $vf2, $vf0, Q\n\t"
+        "mtc1 $8, %0\n\t"
+        "vnop\n\t"
+        "vdiv Q, $vf0w, $vf2x\n\t"
+        "vwaitq\n\t"
+        "vmulq.xyz $vf1, $vf1, Q\n\t"
+        "sqc2 $vf1, 0(%1)"
+        : "=f"(len) : "r"(&d) : "$8", "memory");
+    return len;
+}
+union FI { f32 f; s32 i; };
+
+struct Heap;
+struct HeapVt { void* (*alloc)(Heap*, u32, u32); void (*free)(Heap*, void*); };
+struct Heap { HeapVt* vt; };
+
+void dk__GET_MUNNY__create(u32, u32, u32, u32) asm("_Z21dk__GET_MUNNY__createjjjj");
+struct TaskB { u8 pad0[4]; f32 t; u8 pad8[8]; u32 mode; u8 pad20[28]; void* fn; };
+void func_00161f48_impl(u8 mode, f32 t) asm("_Z13func_00161f48i");
+struct EvInfo { u8 pad[4]; u8 kind; };
+struct HitEv { u8 pad0[32]; EvInfo* info; u8 pad36[2]; u8 type; u8 pad39; s32 power; };
+struct ActObj;
+struct ActVt { u8 pad[96]; s32 (*canHit)(ActObj*); void* slot100; void (*onHit)(ActObj*, HitEv*); };
+struct ActMask { u32 a, b, c; };
+struct ActObj { ActVt* vt; u8 pad4[2036]; u32 flags; u8 pad2044[704]; ActMask mask; };
+static inline u8 IsGuardKind(HitEv* e) { return (u32)(e->info->kind - 5) < 2; }
+struct Homing { Vq pos; void (*step)(void); u8 pad20[28]; Vq dir; f32 speed; u32 pad68; u32 target; u32* owner; };
+struct SaveBig { u64 d[0x10fc0 / 8]; } __attribute__((aligned(16)));
+struct SaveMid { u32 d[2088 / 4]; };
+typedef unsigned int u128 __attribute__((mode(TI)));
+struct Lockon { u32 target; u32 pad4[3]; Vq aim; Vq tpos; Vq dir; u32 obj; u32 objId; u32 pad72[2]; Vq opos; u32 t96; u32 t100; };
+static inline Vq operator*(const Vq& a, f32 s) {
+    Vq r;
+    asm volatile("lqc2 $vf1, 0(%1)\n\tmfc1 $8, %2\n\tqmtc2 $8, $vf2\n\tvmulx.wxyz $vf1, $vf1, $vf2x\n\tsqc2 $vf1, 0(%0)" : : "r"(&r), "r"(&a), "f"(s) : "$8", "memory");
+    return r;
+}
+#define MIN(a, b) ((a) < (b) ? (a) : (b))
+#define MAX(a, b) ((a) < (b) ? (b) : (a))
+struct XfRec { f32 x, y, z, pad; f32 rx, ry, rz, pad2; f32 s[3]; };
+struct XfCtx { u8 pad[12]; u32* offs; };
+struct XfMat { u8 pad[16]; f32 r0[4]; f32 r1[4]; f32 r2[4]; f32 r3[4]; f32 m0[4]; f32 m1[4]; f32 m2[4]; f32 m3[4]; };
+struct XfCtx2 { u8 pad[12]; u32* offs; };
+struct Osc { u32 on; f32 pos; f32 vel; f32 acc; f32 pos2; f32 vel2; f32 acc2; };
+struct OscIn { u32 id; u32 pad[2]; f32 a, b; u32 pad2; f32 c, d; };
+struct Heap2;
+struct Heap2Vt { void* (*alloc)(Heap2*, u32, u32); };
+struct Heap2 { Heap2Vt* vt; };
+struct HeapOwner { u8 pad[20]; Heap2* heap; };
+struct ItemSlot { void* vt; u8 pad4[8]; u8 a[12]; u8 b[384]; };
+struct ItemPanel { void* vt; u8 pad4[8]; u32 f12; u8 pad16[8]; ItemSlot slot[7]; };
+struct Cfg84 { u32 d[21]; };
+struct DirEnt { u8 pad0[16]; u32 size; u16 attr; u8 pad22[10]; char name[32]; };
+struct SaveRec { u32 type; u32 size; char name[32]; };
+struct SaveList { s32 n; u32 pad; SaveRec rec[1]; };
+struct SaveSel { s8 a, b; };
+struct MPartA { u8 d[408]; };
+struct MPartB { u8 d[436]; };
+struct MenuParts { MPartA a[5]; MPartB b[4]; };
+struct ColEnt { u8 pad[5]; u8 col; u8 pad6[2]; };
+struct ColSlot { s16 id; u8 pad2; s8 col; u8 pad4[4]; };
+struct ColSlot2 { u16 id; u16 pad2; s8 lock; u8 pad5[3]; };
+struct ColTab2 { u8 pad[12]; ColSlot2 s[1]; };
+struct SortEnt { u16 id; u16 x; u16 key; };
+struct SortList { union { s32 n; u16 h; }; SortEnt e[1]; };
+struct SeReq { s16 id; s16 pass; s16 arg; };
+struct TaskInfo { u32 a; u32 name; };
+struct PickCur { s8 n; s8 sel; u8 pad2[66]; s16 x; s16 y; };
+struct AnmId3 { s16 a, b, c; };
+static inline void MCOPY(M4* d, const M4* s) {
+    asm volatile("lq $8, 0(%1)\n\tlq $9, 16(%1)\n\tlq $10, 32(%1)\n\tlq $11, 48(%1)\n\tsq $8, 0(%0)\n\tsq $9, 16(%0)\n\tsq $10, 32(%0)\n\tsq $11, 48(%0)" : : "r"(d), "r"(s) : "$8", "$9", "$10", "$11", "memory");
+}
+static inline void MMul(M4* d, M4* a, M4* b) {
+    asm volatile(
+        "lqc2 $vf1, 0(%1)\n\tlqc2 $vf2, 16(%1)\n\tlqc2 $vf3, 32(%1)\n\tlqc2 $vf4, 48(%1)\n\t"
+        "lqc2 $vf5, 0(%2)\n\tlqc2 $vf6, 16(%2)\n\tlqc2 $vf7, 32(%2)\n\tlqc2 $vf8, 48(%2)\n\t"
+        "vmulax.wxyz ACC, $vf1, $vf5x\n\tvmadday.wxyz ACC, $vf2, $vf5y\n\tvmaddaz.wxyz ACC, $vf3, $vf5z\n\tvmaddw.wxyz $vf5, $vf4, $vf5w\n\t"
+        "vmulax.wxyz ACC, $vf1, $vf6x\n\tvmadday.wxyz ACC, $vf2, $vf6y\n\tvmaddaz.wxyz ACC, $vf3, $vf6z\n\tvmaddw.wxyz $vf6, $vf4, $vf6w\n\t"
+        "vmulax.wxyz ACC, $vf1, $vf7x\n\tvmadday.wxyz ACC, $vf2, $vf7y\n\tvmaddaz.wxyz ACC, $vf3, $vf7z\n\tvmaddw.wxyz $vf7, $vf4, $vf7w\n\t"
+        "vmulax.wxyz ACC, $vf1, $vf8x\n\tvmadday.wxyz ACC, $vf2, $vf8y\n\tvmaddaz.wxyz ACC, $vf3, $vf8z\n\tvmaddw.wxyz $vf8, $vf4, $vf8w\n\t"
+        "sqc2 $vf5, 0(%0)\n\tsqc2 $vf6, 16(%0)\n\tsqc2 $vf7, 32(%0)\n\tsqc2 $vf8, 48(%0)"
+        : : "r"(d), "r"(a), "r"(b) : "memory");
+}
+static inline void MMulTo(M4* d, M4* a, M4* b) {
+    M4 t;
+    MMul(&t, a, b);
+    if (d != &t) MCOPY(d, &t);
+}
+struct CamObj { u8 pad[4]; u8 drawn; u8 pad5[83]; u8 active; };
+struct MdlRef { u32 a; u8* mdl; };
+u32 Ts__SUMMON_ENEMY__Get(u32, u32, u32, u32) asm("_Z21Ts__SUMMON_ENEMY__Getjjjj");
+struct Bigint { Bigint* next; };
+struct Reent { u8 pad[72]; Bigint* p5s; };
+extern "C" {
+extern u8 D_0036ac80[];
+Heap* func_001050c8(void);
+u32 func_001688c8(void*);
+void YS__FILE__ReadBack(void*, u32, u32, u32);
+s32 YS__CACHE_BUFF__IsFlushing(void);
+void func_002bb070(u32, u32, u32, u32, u32);
+s32 func_002ba200(void);
+void func_00102448(u32, u32);
+// Load a file into a temporary 64-byte aligned buffer, process it, free.
+// 00136ba8: moved to src/harata/libdk/bgm.cpp
+
+extern f32 D_00349e10;
+extern f32 D_004573dc;
+void func_0011b6a8(M4*);
+void func_0011b720(M4*, f32);
+f32 func_0017ce80(f32, f32, f32);
+void func_0013f648(u8*);
+void func_0013f888(u8* p, V4* pos, u8 mode);  // 0x0013f888: definition moved into src/anon/unit_0013ef70.cpp
+
+// Quicksort of key[] (floats, ascending) carrying idx[] along.
+void func_001472b8(FI* idx, FI* key, s32 lo, s32 hi);  // 0x001472b8: definition moved into src/anon/unit_00147140.cpp
+
+s32 func_00152100(u32, u32);
+void func_001520c0(u32, u32);
+u32 func_0013e678(void);
+u32 func_0013a7e8(u32);
+void dk__Sprite__create(u8*, u32, u32, u32, u32, u32);
+void func_001396b0(u8*);
+void func_0031a260(u8*, u32);
+void func_00138c40(u8*, u32, u32);
+void YI__SEQUENCE__Init(u8*, u32, u32);
+void func_00239bf8(u8*, u32);
+void dk__GET_MUNNY__initNumber(u8*);
+u32 func_0023aa78(u8*);
+void func_0014fc40(u8*, u32, u32, u32, u32, u32);
+}
+void dk__GET_MUNNY__create(u32 a, u32 b, u32, u32);  // 0x00151df0: definition moved into src/anon/unit_0014ecb8.cpp
+extern "C" {
+
+extern f32 D_00349e10;
+extern f32 D_004f35a8;
+extern V4 D_0034a9b0;
+void func_0011b6a8(M4*);
+void func_0011b720(M4*, f32);
+f32 func_0017ce80(f32, f32, f32);
+// 00158c88: moved to src/harata/libdk/bookcamera.cpp
+
+// GS register setup for two draw contexts (constructor).
+extern u8 D_0034c6e0[];
+void func_0014b7f0(u8*);
+void func_0014c050(u8*);
+void func_0014b610(u8*, u64);
+void func_0014b608(u8*, u64);
+void func_0014b5e0(u8*, u64);
+void func_0014b630(u8*, u64);
+void func_0014b618(u8*, u64);
+void func_0014b5e8(u8*, u64, u64);
+void func_0014b208(u8*, u64, u64);
+void func_0014b468(u8*, u64, u64);
+void func_0014b628(u8*, u64);
+// 0015e3b8: moved to src/anon/unit_0015e070.cpp
+
+extern u8 D_0034c6c8[];
+extern u8 D_004f3820[];
+void func_0014c050(u8*);
+void func_0014b610(u8*, u64);
+void func_0014b608(u8*, u64);
+void func_0014b5e0(u8*, u64);
+void func_0014b630(u8*, u64);
+void func_0014b618(u8*, u64);
+void func_0014b220(u8*, u64, u64, u64, u64);
+void func_0014b208(u8*, u64, u64);
+void func_0014b468(u8*, u64, u64);
+void func_0014b628(u8*, u64);
+// 0015e8c8: moved to src/anon/unit_0015e070.cpp
+
+TaskB* func_00102c18(s32, s32, void (*)(void));
+struct TaskMgr { u32 pad; void* q; };
+TaskMgr* func_00102c80(void);
+void func_00102670(void*, TaskB*);  // to_1025f8
+void func_00161df0(void);
+void dk__Camera__storeImageTask(void);
+void func_00161c20(void);
+void func_00161f38(void);
+struct U8Flag { u8 v; };
+extern U8Flag D_0034c770;
+extern U8Flag D_0034c771;
+extern void* D_0034c778;
+}
+void func_00161f48_impl(u8 mode, f32 t);  // 0x00161f48: definition moved into src/anon/unit_001614e8.cpp
+extern "C" {
+
+void YS__PATTERN__Convert(u32, HitEv*, ActObj*);
+void func_00186d48(ActObj*, HitEv*);
+s32 func_0018ca48(u8);
+void func_0013de08(ActObj*);
+void func_0013de58(ActObj*);
+void func_0013dea8(ActObj*);
+void func_00186148(ActObj*, HitEv*);
+// 001762f8: moved to src/yasui/libys/party.cpp
+
+Vq func_0016be98(u32);
+void func_002bc188(u32, Vq*);
+void func_001c7700(void);
+void func_001c78e0(void);
+// 001c79a0: moved to src/anon/unit_001c7148.cpp (linked unit)
+
+extern SaveBig D_01d499b0;
+extern SaveBig D_0032bb30;
+extern SaveMid D_01d5a97c;
+extern SaveMid D_0034f250;
+extern SaveMid D_01d5b1a4;
+extern SaveMid D_0034fa78;
+void YS__RECOV__Exec(u32);
+void func_001ba138(void);  // to_2fd310_block
+void func_00242908(void);
+void func_00168fa8(void);
+// Restore the saved copies of the game-state blocks.
+// 001cd388: moved to src/anon/unit_001cd078.cpp
+
+s32 func_00190140(u32);
+Vq* YS__OBJ__get_pos(u8*);  // obj_get_attach_or_alt
+void YS__TARGET__make_collision(u32, Vq*);
+Vq YS__OBJ__get_dir(u32);
+// 001cda88: moved to src/anon/unit_001cd660.cpp
+void YS__CHOOSE_ATTACK__CHOOSE_ATTACK(Lockon* l, u32 obj, u32 tgt);
+
+extern u8 D_0032e020[];
+s32 func_001a8bf8(u32*, s32);  // get_bits5_at
+void func_001a8c60(u32*, s32, s32);  // masked_byte_store
+u32 func_001a8c10(u32*, s32);
+u8* YS__SAVERAM_BATTLE__get_partram(u8*, u32);
+void func_001d9630(u8*, u32);
+void func_001d94f8(u32 a, u32* other);  // 0x001d94f8: definition moved into src/anon/unit_001d7458.cpp
+
+extern f32 D_00349e10;
+f32 func_00184a90(u8*);
+Vq* YS__OBJ__get_pos(u8*);  // obj_get_attach_or_alt
+struct VqI { FI x, y, z, w; } __attribute__((aligned(16)));
+// Velocity for a floating object, easing its height towards the ground.
+Vq YS__ACTION_DEADSORA__calc_movement(u32, u8* o);  // 0x001d2a68: definition moved into src/anon/unit_001d2810.cpp
+
+union XfMatPtr { XfMat* p; f32 f; };
+extern XfMatPtr D_01d9e6e8;
+extern M4 D_01d9e730;
+extern M4 D_01d9e8c0;
+void sceVu0UnitMatrix(M4*);  // vu_store_w_splat
+void sceVu0MulMatrix(void*, void*, void*);
+void sceVu0ScaleVector(f32*, f32*, f32);  // vec_scale_by_f12
+void sceVu0MulVector(f32*, f32*, f32*);
+void func_00200830(u8* base, u32, XfCtx* c);  // 0x00200830: definition moved into src/anon/unit_00200578.cpp
+
+extern u32 D_01d9ea9c;
+extern u32 D_01d9eab4;
+extern u8* D_01d9e6e0;
+void func_001f0868(OscIn*, Osc*);
+f32 func_002f8b00(f32, f32);  // to_2f9a38
+void func_001f08e0(u8* base, OscIn* in, XfCtx2* c);  // 0x001f08e0: definition moved into src/anon/unit_001f0868.cpp
+
+union HeapOwnerRef { HeapOwner* p; s32 i; };
+extern HeapOwnerRef D_00347f80;
+extern u8 D_0035e190[];
+extern u8 D_00347f98[];
+extern u8 D_00347e60[];
+extern u8 D_0035e1f8[];
+s32 func_002249b8(void);  // get_global_36dac0
+void func_0031a838(u8*);
+void func_00239700(u8*);
+void func_002294c8(ItemPanel*, u32, s32*, u8*);
+void func_00229678(ItemPanel*, u32, s32);
+void sa__MUSICAL_INPUT__scorePrint(s32 n, u32 b);  // 0022ad88: moved to src/sasa/musical_input.cpp (linked unit)
+
+extern u8* D_0035ec90;
+extern char* D_0035ec00;
+extern char* D_0035ebfc;
+extern Cfg84 D_0035ec30;
+extern Cfg84 D_0032df74;
+extern u8 D_003716c0[];
+extern u8 D_003716f8[];
+extern u8 D_00371738[];
+extern u8 D_00371768[];
+extern u8 D_00371798[];
+void func_002fde18(void*, s32, u32);
+void memcpy(void*, const void*, u32);
+void Tz__MCard__MakeTitle(u8*, s32);
+s32 func_00240108(void);  // get_global_36eb68
+void func_002ff2e8(char*, const char*);
+void func_00240450(u8* p, s32 n);  // 0x00240450: definition moved into src/anon/unit_0023f5b8.cpp
+
+extern SaveSel* D_0035ec94;
+extern SaveList* D_0035ec98;
+extern DirEnt* D_0035ec9c;
+extern char D_003716e0[];
+extern char D_003716e8[];
+void Tz__MCard__MakeFname(s32);
+s32 func_002349c8(s32, u32);
+void func_002fde18(void*, s32, u32);
+s32 strcmp(const char*, const char*);  // strcmp
+void func_002ff2e8(char*, const char*);
+// Build the list of save files from the directory listing (skipping "." and "..").
+s32 Tz__MCard__UpdateLocalInfo(void);  // 0x00241008: definition moved into src/anon/unit_0023f5b8.cpp
+
+extern MenuParts* D_0035f0f4;
+extern u32 D_0035f01c;
+u8* func_00256b68(u32);
+s32 func_00139d78(void*);
+s32 func_0028acc8(u32);
+// Non-zero while any of the menu's animated parts is still busy.
+s32 Tz__CmParty__isExistList(void);  // 0x0026cda0: definition moved into src/anon/unit_0026c450.cpp
+
+extern u32 D_0035f010;
+extern u32 D_0035f01c;
+extern ColSlot* D_0035f12c;
+s32 func_00287bc0(void);
+ColEnt* func_00273180(u32, s32);  // state_dispatch_2_3
+u32 func_002570a0(u32);
+u8* func_00281180(u32, u32);
+s32 func_0028b040(u32);
+u8* func_001145b0(u32);
+void func_00273cb8(s32 sel);  // 0x00273cb8: definition moved into src/anon/unit_00271e08.cpp
+
+extern u32 D_0035f010;
+extern u32 D_0035f01c;
+extern ColTab2* D_0035f230;
+u32 func_002570a0(u32);
+s32 func_0028b040(u32);
+void Tz__CmAbility__SetEquip(u32, u32);
+s32 Tz__CmAbility__Cur2AbiltyType(void);  // check_state16_then_loop
+void func_0027aed8(u32, s32*, s32*);
+s32 func_0027c3b8(u32);
+ColEnt* func_00273180(u32, s32);  // state_dispatch_2_3
+u8* func_001145b0(u32);
+u8* func_00281180(u32, u32);
+void Tz__CmAbility__ChgEquipAbility(void);  // 0x0027c1c0: definition moved into src/anon/unit_0027a6d8.cpp
+
+u8* func_001a8110(u8*);
+// Assign each entry its table order (+1000 unless type 18), then sort by it.
+void Tz__ItemInfo__SortItemInfo(SortList* l);  // 0x00282d70: definition moved into src/anon/unit_00282c68.cpp
+
+extern u32 D_0035f318;
+extern u32 D_0035f2ec;
+extern void* D_0035f31c;
+extern u8 D_0035f314;
+extern u32 D_0035f2e8;
+extern u8 D_0035f320;
+u32 func_00103570(void);
+void func_00139e00(u32, u8);
+void func_0023edb0(u32);
+void func_00288b18(u32);
+void YI__IMAGE_CACHE__Clear(void);  // clear_64_entries_24
+void func_00287b30(void);
+void func_00287d08(void);
+void func_0023ed00(u32);
+void func_0023d4f8(void*, u32);
+void func_00287c20(void);  // clear_global_flag_return_m1
+void Tz__MenuItem__init(u32);
+void Tz__MenuBase__SavePadInit(u32);
+void func_00287910(u32 a, u32 b, u8 c);  // 0x00287910: definition moved into src/anon/unit_00286d28.cpp
+
+extern u8 D_0035f4f0;
+union SeReqRef { SeReq* p; s16 h; };
+extern SeReqRef D_0035f4e8;
+TaskInfo* func_00103eb0(void);
+s32 func_00102a38(u32, void (*)(void));  // list_contains_id
+void func_002933b8(void);
+u32* func_001a8bd0(s32);
+u32 func_001a8c10(u32*, s32);
+void func_00293350(s16, s16, s16);
+void Tz__ChgWeapon__Update(void);  // 0x00293520: definition moved into src/anon/unit_00292e60.cpp
+
+extern u32 D_0035f200;
+s32 func_00289380(u32);
+s32 func_00287cd0(void);
+void func_00296b08(void);
+s32 func_00289310(u32);
+s32 func_00276398(void);  // state_is_150
+void Tz__Jiminy__SetParentSeqNum(u32, u32);
+void func_00287c90(u32);
+u32 func_00287df0(s32, s32, u32, u32, u32);
+s32 func_00242848(u32);
+void func_00287da0(void);
+void Tz__JmReport__ControlRoxas(void);  // 0x002968d8: definition moved into src/anon/unit_00295d28.cpp
+
+extern PickCur* D_0035f5d4;
+u8* func_002766d0(void);
+s32 func_0023aa98(u8*);
+void dk__Sprite__getPosAddOffset(u8*, s32*, s32*);  // sum_fields_to_out
+// Pick the icon under the cursor.
+void Tz__JmDiagram__CalcSelIdx(void);  // 0x002a16b8: definition moved into src/anon/unit_002a0908.cpp
+
+extern u8* D_0035f634;
+extern AnmId3 D_00374cd8[];
+u32* Tz__JmPuzzle__GetImageInfo(s32);  // list_entry_by_index_checked
+s32 func_00139d78(void*);
+s32 func_001396c0(u8*);
+void func_00139570(u8*);
+void func_00138c10(u8*, s16);
+void func_0028dcc0(u8*, u8*);
+void func_002b2f28(s32 idx);  // 0x002b2f28: definition moved into src/anon/unit_002b2a18.cpp
+
+extern CamObj* D_00361f60;
+u32 kn__getProjection(u32);  // buffer_get_256
+M4* func_00106ad0(u32);
+u8* func_00106a60(u32);  // buffer_get_by_index
+void func_00146680(u8*, M4*);  // copy_quad4_if_diff
+void Ti__MiniGame__task_proc_view_info(MdlRef* r);  // 002cec88: moved to src/taito/minigame_base.cpp (linked unit)
+
+extern u32 D_003637b0[8];
+extern u32 D_003638d0;
+u8 YS__OBJENTRY__GetCacheBuffStatus(u32, u32);
+u8* func_0016e920(u32);
+s32 func_00182690(f32);
+u32 func_0016a020(u32);
+u64 func_00312db8(u64, u64);
+}
+// Pick a random member among the eligible party slots.
+u32 Ts__SUMMON_ENEMY__Get(u32 a, u32, u32, u32);  // 0x002ed8e0: definition moved into src/anon/unit_002ecdb0.cpp
+extern "C" {
+
+extern const s32 D_00377d00[3];
+Bigint* __multadd(Reent*, Bigint*, s32, s32);
+Bigint* __i2b(Reent*, s32);
+Bigint* __multiply(Reent*, Bigint*, Bigint*);
+void _Bfree(Reent*, Bigint*);  // push_entry_onto_slot_list
+// newlib mprec: __pow5mult (b * 5^k).
+Bigint* __pow5mult(Reent* ptr, Bigint* b, s32 k);  // 0x00304200: definition moved into src/newlib/libc/mprec.c
+
+}

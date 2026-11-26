@@ -1,0 +1,60 @@
+#include "../common/types.h"
+extern "C" {
+void func_0031e2b8(void*);
+struct E18cf18 { u8 a[24]; u8 m[24]; ~E18cf18() {} };
+struct G18cf18 { E18cf18 e[4]; s32 idx[4]; s32 n; };
+extern G18cf18 D_01c60bf0;
+void wtarget_0018cf18(u32 a0, u32 a1, u32 a2, u32 a3) asm("_Z16wtarget_0018cf18jjjj");
+// Static init/destroy (priority 0xffff); the empty destructor loop gets the r5900 short-loop nop padding.
+// 0018cf18: moved to src/yasui/libys/damage.cpp
+
+struct B178 { u16 id; u16 pad; u32 flags; };
+struct D178 { u32 a; B178 b; };
+struct O178 {
+    void** vt; u8 p4[0xc]; u8 v10[16]; u8 p20[0x10c - 0x20]; u32 f10c; u8 p110[0x160 - 0x110]; u32 f160;
+    u8 p164[0x7f8 - 0x164]; u32 f7f8; u8 p7fc[0xb44 - 0x7fc]; D178* b44; u32 b48;
+};
+void func_00179dd0(O178*, u16);
+void func_001991a8(s32, u16);
+void* YS__PARTY__exec_command(O178*, B178*);
+void func_001bbcf8(void*);
+void YS__PLAYER__check_message_wall(O178*);
+void YS__PARTY__exec_hook(O178*);
+static inline __attribute__((always_inline)) u32 tA(u32 x) { return x & 4; }
+static inline __attribute__((always_inline)) u32 tB(u32 x) { return x & 8; }
+static inline __attribute__((always_inline)) u32 tC(u32 x) { return x & 0x10; }
+static inline __attribute__((always_inline)) bool busyC(u32 x) { return tA(x) || tB(x) || tC(x); }
+// 001788b8: moved to src/yasui/libys/player.cpp
+
+struct V4e9 { f32 x, y, z, w; };
+struct V3e9 { f32 x, y, z; };
+struct Oe9 { u8 p0[0x80]; u8* f80; };
+struct Re9 { u32 a; s32 f4; };
+struct Ae9 { u8 p0[0xc]; s32 idx; s32 f10; };
+extern Oe9* D_01d9e6e0;
+extern u8* D_01d9e6e8;
+Re9* func_001e7a98(Oe9*, void*);
+void sceVu0ApplyMatrix(V4e9*, void*, V4e9*);
+void apea(s32 a0, Ae9* a1, s16* a2);  // 0x001e9d48: definition moved into src/anon/unit_001e8ac8.cpp
+
+struct Peb { u16 a0; u16 flags; u8 c[4]; u64 f8; u8* f10; s32 f14; u8 f18; u32 f1c; u8 pad[16]; };
+struct Teb { s32 a; s32 b; };
+struct A2eb { u8 p0[0xc]; Teb* fc; };
+struct A1eb { u32 p0; s32 f4; u8 p8[4]; u8 bc; u8 bd; };
+struct Eeb { u8* data; s32 x; };
+struct Oeb { u8 p0[0x14]; Eeb* f14; };
+extern Oeb* D_01d9e6e4;
+extern s32 D_01d9eaa4;
+s32 func_0021d048(u8*, Peb*, s32);
+void func_001ebb30(u8* a0, A1eb* a1, A2eb* a2);  // 0x001ebb30: definition moved into src/anon/unit_001e8ac8.cpp
+
+struct A23 { u32 p0; s16 s4; u8 p6[4]; u16 u10; };
+struct E23a { A23* a; void* b; s32 c; };
+struct E23b { s32 f0; s32 f4; s32 f8; u8 pc[28]; };
+struct T23 { u32 p0; s16 s4; };
+struct E23c { T23* p; u32 x; };
+extern E23a* D_0035dcec;
+extern E23b* D_0035dcfc;
+extern E23c* D_0035dce8;
+void func_002308c8(A23* a);  // 0x002308c8: definition moved into src/anon/unit_002302c0.cpp
+}

@@ -1,0 +1,381 @@
+#include "../common/types.h"
+
+extern "C" {
+f32 func_002f8a18(f32);
+f32 atanf(f32);
+
+struct Proj106 { u8 pad[64]; f32 dist; f32 fovx; f32 fovy; f32 w; f32 h; };
+
+// Sets the projection distance from a field of view (horizontal or vertical) and derives the other angle.
+// 00106de8: moved to src/naka/libkn/camera.cpp
+
+struct ImgHdr166 { u8 pad[12]; u16 dataOff; u8 pad2[5]; u8 kind; u16 w; u16 h; };
+extern u8 D_004f41d0[];
+void func_00166148(u8*, s32, s32);
+void sceGsSetDefStoreImage(void*, s32, s16, s32, s32, s32, s16, s16);
+void func_003058a0(s32);
+void sceGsSyncPath(s32, s32);
+void sceGsExecStoreImage(void*, u8*);
+
+// Uploads an image once, converting kinds 4/5 to their uploaded kinds 6/7.
+void func_001664c0(u8* p);  // 0x001664c0: definition moved into src/anon/unit_001664c0.cpp
+
+struct M174 { f32 m[4][4]; } __attribute__((aligned(16)));
+struct IV174 { f32 x, y, z; s32 w; };
+union PU174 { IV174* p; f32 f; };
+extern IV174 D_01c5f480;
+u8* kn__getProjection(s32);  // buffer_get_256
+u8* func_00106a60(s32);  // buffer_get_by_index
+void func_002f47d8(void*, void*, void*, u32);  // mat4_transform_perspective
+static inline void mulmat174(M174* d, const void* a, const void* b) {
+    asm volatile(
+        "lqc2 $vf1,0(%1)\n\tlqc2 $vf2,16(%1)\n\tlqc2 $vf3,32(%1)\n\tlqc2 $vf4,48(%1)\n\t"
+        "lqc2 $vf5,0(%2)\n\tlqc2 $vf6,16(%2)\n\tlqc2 $vf7,32(%2)\n\tlqc2 $vf8,48(%2)\n\t"
+        "vmulax.wxyz ACC,$vf1,$vf5x\n\tvmadday.wxyz ACC,$vf2,$vf5y\n\tvmaddaz.wxyz ACC,$vf3,$vf5z\n\tvmaddw.wxyz $vf5,$vf4,$vf5w\n\t"
+        "vmulax.wxyz ACC,$vf1,$vf6x\n\tvmadday.wxyz ACC,$vf2,$vf6y\n\tvmaddaz.wxyz ACC,$vf3,$vf6z\n\tvmaddw.wxyz $vf6,$vf4,$vf6w\n\t"
+        "vmulax.wxyz ACC,$vf1,$vf7x\n\tvmadday.wxyz ACC,$vf2,$vf7y\n\tvmaddaz.wxyz ACC,$vf3,$vf7z\n\tvmaddw.wxyz $vf7,$vf4,$vf7w\n\t"
+        "vmulax.wxyz ACC,$vf1,$vf8x\n\tvmadday.wxyz ACC,$vf2,$vf8y\n\tvmaddaz.wxyz ACC,$vf3,$vf8z\n\tvmaddw.wxyz $vf8,$vf4,$vf8w\n\t"
+        "sqc2 $vf5,0(%0)\n\tsqc2 $vf6,16(%0)\n\tsqc2 $vf7,32(%0)\n\tsqc2 $vf8,48(%0)"
+        : : "r"(d), "r"(a), "r"(b) : "memory");
+}
+// Projects *pv to screen space and replaces it with a pointer to the static result vector.
+void func_00174e38(PU174* pv);  // 0x00174e38: definition moved into src/anon/unit_00171e58.cpp
+struct Tmp178 { u8 pad[112]; };
+u8* func_00176fb0(u8*, s32);
+s32 func_001a0920(u8*, u8*);
+void YS__CHOOSE_ATTACK__CHOOSE_ATTACK(Tmp178*, u8*, u32);
+u8* func_001cde58(Tmp178*);
+void func_00177008(u8*, u8*, u32);
+void func_0017f488(u8*, u16, f32, f32);
+void func_0017f5e0(u8*, s32, s32, f32, f32);
+void func_001bbd58(u8*);
+void func_00178e80(void);
+extern u8* D_00351068;
+
+// 00178d28: moved to src/yasui/libys/player.cpp
+
+extern u32 D_01c60528[2];
+extern f32 D_01c60520;
+extern u32 D_0034ebc8[];
+void func_00175670(u8*, u32, s32, u32);
+u8* func_0016a070(u8*);
+u8* func_001a1540(u8*);
+u8* func_0016f6a0(u32, s32);
+void func_00176168(u8*, u8*, s32);
+
+// 0017d968: moved to src/yasui/libys/friend.cpp
+
+struct Ent180 { u8 pad[6]; u16 id; u8 pad2[10]; s16 val; };
+struct Slot180 { u8 pad[32]; };
+struct Obj180 { u8 pad[8]; u8* body; u8 pad2[248]; u32 active : 1; };
+s32 func_0019bad8(u8*);
+Ent180* func_0016bba8(u8*, s32, Ent180*);
+void func_0011c148(Slot180*, u32, u16, s32, s32, f32);
+void func_0011c210(Slot180*);
+
+// 001808c0: moved to src/anon/unit_00180408.cpp
+
+struct V185 { f32 x, y, z, w; };
+void func_001980d0(u8*, u32, s32, V185*, f32);
+void func_001a93b0(u8*, u32);
+u8* func_00185920(u32, u32, s32);
+u32 func_001708f8(u8*, s32);
+void func_0017ebe8(u8*, u32);
+void func_0017fd30(u8*, u8*);
+u32 func_001762c0(u8*, u32);
+void YS__OBJ__attach(u8*, u8*, u32, s32);
+extern u32 D_0034ed18[];
+
+// 00185468: moved to src/anon/unit_00183088.cpp
+
+static inline u32 ActFlags18d(u8* a) {
+    u32* f = (u32*)(a + 2748);
+    return (f[0] | f[1]) & ~f[2];
+}
+s32 func_0018cae0(u8*);
+
+u8* YS__DAMAGE__Alloc(u8*, u8*, u8*);
+void func_00198580(u8*, s32);  // check_div1000_500
+s32 func_001de2e0(u32*, u64);
+void YS__BTLOBJ__bind_hitmark(u8*, u32*, s32);
+
+// Applies a hit result and sets the matching reaction bit.
+u8* func_0018da18(u8* o, u8* act, u8* info);  // 0x0018da18: definition moved into src/anon/unit_0018d050.cpp
+
+s32 func_00192440(u8*, s32);  // is_byte_lt25
+u32 func_00192498(u8*, s32);  // read_u16_be
+u8* func_00192388(u8*);  // skip_control_codes
+
+// Walks the node list, forwarding type-5 nodes to the listener; stops at type 0 or 16.
+void func_001aa558(u8* o);  // 0x001aa558: definition moved into src/anon/unit_001a9130.cpp
+
+s32 func_001b5858(u8*);
+s32 func_001b5cb8(u8*);
+u8* YS__OBJ__Each(u8*);
+void func_0016cab8(u8*);
+void func_0016c7d8(u8*);
+void func_001de450(u8*);
+void func_001c9770(void);
+void func_001c9b90(void);
+void func_001d1c70(u8*);
+void YS__MISSION_GAUGE__destroy(u8*);
+void func_001b57f8(u8*);
+void func_001b5588(u32);
+extern u32 D_01d48cb0;
+
+// Shutdown: releases owned resources and hands off to the next stage.
+void func_001b5460(u8* o);  // 0x001b5460: definition moved into src/anon/unit_001b2780.cpp
+
+void sceGsSyncPath(s32, s32);
+extern u32 D_01d9e6b4;
+
+static inline s32 PathBusy1e7(void) {
+    u32 m = *(volatile u32*)0x10009000 & 0x100;
+    s32 r = m != 0;
+    if (*(volatile u32*)0x1000a000 & 0x100) r = 2;
+    if (*(volatile u32*)0x10003c00 & 0x1f000003) r = 4;
+    u32 v;
+    asm volatile("cfc2.ni %0, $vi29" : "=r"(v));
+    if (v & 0x100) r = 8;
+    return r;
+}
+
+// Kicks a GIF PATH3 transfer of the given packet once all paths are idle (skips if already sent).
+void func_001e72a8(u32 addr);  // 0x001e72a8: definition moved into src/anon/unit_001e0cb8.cpp
+
+struct E1d4 { u8 kind; u8 pad[39]; u16 id; u8 pad2[22]; };
+struct T1d4 { u32 f0; s32 n; E1d4 e[1]; };
+extern T1d4* D_01d5ba28;
+extern u32 D_00352738[4];
+void func_001d3c18(E1d4*);
+
+// Activates the first table entry matching the id (id 609 activates the four preset ids).
+void func_001d4078(u32 id);  // 0x001d4078: definition moved into src/anon/unit_001d3c08.cpp
+
+struct Ent1d4 { u8 pad[2]; u16 id; u8 cnt; u8 kind; u8 pad2[6]; };
+struct List1d4 { u8 pad[8]; s32 n; Ent1d4 e[1]; };
+void func_001bc778(void*);
+void YS__COMMAND_MENU__add(void*, u16, s32, s32);
+s32 func_001d4420(void);
+s32 func_001b58a8(void);
+s32 func_001d3f80(E1d4*);
+s32 func_001d4808(E1d4*);  // is_halfword42_zero
+s32 func_001d3c78(E1d4*);
+s32 func_001d3e40(E1d4*);
+
+void wtarget_001d42d0(List1d4*, u32, u32, u32) asm("_Z16wtarget_001d42d0jjjj");
+// Adds one list entry per active table group (first entry of each kind), marking non-special ones kind 5.
+void wtarget_001d42d0(List1d4* L, u32, u32, u32);  // 0x001d42d0: definition moved into src/anon/unit_001d3c08.cpp
+
+struct M200 { f32 m[4][4]; } __attribute__((aligned(16)));
+struct Cam200 { u8 pad[16]; M200 mat; };
+union CamP200 { Cam200* p; f32 f; u32 u; };
+extern CamP200 D_01d9e6e8;
+extern u8 D_00354bd0[];
+extern f32 D_00354bc0[4];
+void func_001e8fe0(void*, void*);
+void sceVu0InversMatrix(M200*, M200*);  // convert_vectors_to_scalar
+void sceVu0MulMatrix(void*, void*, void*);
+static inline void ScaleRow(f32* row, u32 k) {
+    asm volatile("qmtc2 %1, $vf9\n\tlqc2 $vf10, 0(%0)\n\tvmulx.xyz $vf10, $vf10, $vf9x\n\tsqc2 $vf10, 0(%0)" : : "r"(row), "r"(k) : "memory");
+}
+
+// Builds the camera matrix from rotation/translation/scale channels.
+void func_00200c50(u8* base, u8*, u8* c);  // 0x00200c50: definition moved into src/anon/unit_00200578.cpp
+
+void sa__MUSICAL_SCORE_BASE__create(u8*, s32);  // to_1391c8_arg11
+u32 func_0022b9e0(void);
+u32 func_0022b720(void);
+void dk__Sprite__create(u8*, s32, u32, u32, s32, s32);
+void func_001396b0(u8*);
+void func_0031a260(u8*, s32);
+u32 func_00224910(void);  // get_global_36dac4
+
+static inline void Settle228(u8* m) {
+    func_001396b0(m);
+    if (*(u32*)(m + 396)) {
+        *(u32*)(m + 400) = 0;
+        func_001396b0(m);
+        if (*(u32*)(m + 400)) func_0031a260(m, 0);
+    }
+}
+
+// Init: sets up the two model slots, links the second to the first and settles them.
+void func_00228ab0(u8* o);  // 00228ab0: moved to src/anon/unit_00228618.cpp (linked unit)
+
+struct O208 { u8 pad[16]; u8* items; u8* b; u8* c; s32 n; u16 f32; };
+struct A208 { u8 pad[30]; u16 max; u16 delay; };
+extern u32 D_01d9ea9c;
+extern u8* D_01d9e6e0;
+void func_00208298(O208*, A208*, u8*, u32, u8*);
+void func_00207350(O208*, A208*, u32, u8*, u8*, u8*);
+
+// Updates spawn slots: live ones tick, free ones spawn after the delay (up to max per call).
+void func_002086e0(O208* o, A208* a, u32 arg);  // 0x002086e0: definition moved into src/anon/unit_002086e0.cpp
+
+extern u8* D_0035f200;
+extern u8* D_0035f204;
+extern u8* D_0035f208;
+extern u8* D_0035f218;
+s32 func_0028acc8(u8*);
+s32 func_0028acb8(u8*);
+u8* func_002891b8(u8*, s32);
+void func_0028aa40(u8*);
+s32 func_00139d78(u8*);
+void func_00276300(void);
+void func_0028f7a0(void);
+void func_0028d5d0(u8*);
+void Tz__Jiminy__FadeOutHelp(void);
+void func_002945a0(void);
+void func_00295860(void);
+void func_00297008(void);
+void func_00297df8(void);
+void func_002995a0(void);
+void func_0029aa30(void);
+void func_0029ee30(void);
+void func_002a0780(void);
+void func_002a2148(void);
+void func_002a4df0(void);
+void func_002a6a10(void);
+void func_002a7758(void);
+void func_002a8a80(void);
+void func_002aece8(void);
+void func_00275c78(void);
+
+static inline bool Busy274(u8* m) { return *(u32*)(m + 400) || *(u32*)(m + 396); }
+
+// Per-frame update of the menu subsystems.
+void func_002748a0(void);  // 0x002748a0: definition moved into src/anon/unit_002748a0.cpp
+
+extern u32 D_0035f3d4;
+extern u32 D_0035ef68;
+extern u32 D_0035ef64;
+extern u32 D_0035f03c;
+u8* func_00257770(u32);
+s32 func_00287bc0(void);
+s32 func_0028d008(u32);
+u8* func_0028d0e0(u32);
+void func_0028d8c0(u8*, u32, u32, u32, u32, s32, s32, s32);
+void func_0028dcc0(u8*, u32);
+
+// Shows or hides the help window for an entry.
+void func_002633a8(u32 id, u8 show);  // 0x002633a8: definition moved into src/anon/unit_002632d0.cpp
+
+struct E248 { u8 pad[8]; u8 name[8]; s8 on; u8 pad2; u16 id; u8 pad3[16]; };
+extern E248 D_00371e00[];
+extern u8* D_0035ed50;
+extern u32 D_0035ed54;
+extern u32 D_0035ed60;
+void Tz__Select__SetItem(u8*, s32, s32, s32, u32, u16, E248*, u8*);
+u32 func_0023aa78(u8*);
+u32 func_0023aa98(u8*);
+void Tz__Select__SetExOffset(u8*, s32, u32, s32);
+u32 func_0028dd90(u32);  // mod10_classify_012
+u32 func_0028ddd8(u32);
+void func_001395f8(u8*);
+void Tz__Select__SetCurrent(u8*, s32, s32, s32, s32);
+void func_002b4388(u32, E248*, s32);
+
+// Builds the two-entry selection list and focuses the active entry.
+void Tz__MUMI__SetupSel(void);  // 0x002485c8: definition moved into src/anon/unit_00247ff0.cpp
+
+extern u32* D_0035f2e4;
+u32* func_002859a0(void);
+u8* func_001a80c8(s32);  // table24_find_by_id
+s32 func_00285d18(u8);
+static inline u32 Bit285(u32* a, s32 i) { return a[(u32)i >> 5] & (1 << (i & 31)); }
+// True when the id (or, for id < 0, every enabled id that qualifies) is also set in the obtained mask.
+s32 func_00285e30(s32 id);  // 0x00285e30: definition moved into src/anon/unit_002853b8.cpp
+
+struct W280 { void** vt; u8 pad[432]; };
+extern u8* D_0035f250;
+extern u8* D_0035f258;
+extern u8* D_0035f254;
+extern W280* D_0035f25c;
+s32 func_00287db0(void);
+void func_0028abe0(u8*);
+s32 func_00289310(u8*);
+s32 func_002891e8(u8*);
+void func_002890e0(u8*, s32, s32, s32, s32);
+void func_00289038(u8*, s32, s32, s32, s32, s32, s32);
+
+
+// Closes the open sub-windows and resets the list cursor.
+void Tz__GumiGameOver__Draw(void);  // 0x00280d40: definition moved into src/anon/unit_0027f2b0.cpp
+
+extern u8* D_0035f21c;
+extern u8* D_0035f20c;
+extern u32 D_0035f148;
+extern u32 D_0035f14c;
+extern u32 D_0035f210;
+s32 func_00276df8(void);
+void func_0028d980(u8*, s32, u32, u32, u32, s32, s32, s32, s32);
+void func_00138c10(u8*, s32);
+u32 func_0023aa18(u8*);
+u32 func_0023aa38(u8*);
+void func_00138c68(u8*, u32, u32);
+
+// Opens (or retargets) the info window for id; optionally fills it from the current entry.
+void Tz__Jiminy__CreateHelp(u32 id, u8 flag);  // 0x00276c88: definition moved into src/anon/unit_002748a0.cpp
+
+extern u16 D_00374cb0[][2];
+extern u32 D_00374c9c;
+extern u32 D_00374ca0;
+u8* func_002766d0(void);
+s32 func_002892f8(u8*);
+u32 func_00192048(u16);
+s32 Tz__JmNewInfo__isPuzzlePieceNew(s32);
+s32 Tz__JmNewInfo__isPuzzleInfoNew(s32);
+s32 func_002ac538(s32);
+s32 func_002ac800(s32);
+
+// Resets the item rows, then refreshes the three category rows and their availability marks.
+void Tz__JmPuzzle__UpdateTopList(void);  // 0x002b1708: definition moved into src/anon/unit_002b0950.cpp
+
+u8* func_001050d8(u32);
+void func_002bf468(u8*, u8*, u32, f32);
+void func_002c1aa0(u8*, u8*, u32, f32);
+void func_002c54c8(u8*, u8*, u32, f32);
+u8* func_002c5ed8(u8*, u32, f32);
+
+// Creates the object for the given type (type 2 is built by its own factory).
+u8* worldmap__Obj__appear(u8* d, u32 a, f32 f);  // 0x002be800: definition moved into src/anon/unit_002be020.cpp
+
+extern E248** D_0035f6cc;
+extern u8* D_0035f64c;
+extern u32 D_0035f644;
+extern u32 D_0035f640;
+extern u32 D_0035f664;
+void func_00139620(u8*);
+s32 func_00240ba0(void);
+void func_00287cc0(s32);
+
+// Builds the two-entry list from the current table and focuses the default entry.
+void OvlShop__ItemShop__SetupConfirm(void);  // 0x002b4b00: definition moved into src/anon/unit_002b3ac8.cpp
+
+}
+typedef struct { f32 x, y, z, w; } __attribute__((aligned(16))) QW2cd;
+static inline void VSub2cd(QW2cd* d, const QW2cd* a, const QW2cd* b) {
+    asm volatile("lqc2 $vf1, 0(%1)\n\tlqc2 $vf2, 0(%2)\n\tvsub.wxyz $vf1, $vf1, $vf2\n\tsqc2 $vf1, 0(%0)" : : "r"(d), "r"(a), "r"(b) : "memory");
+}
+static inline f32 VLen2cd(const QW2cd* v) {
+    f32 r;
+    asm volatile("lqc2 $vf1, 0(%1)\n\tvmul.xyz $vf1, $vf1, $vf1\n\tvaddy.x $vf1, $vf1, $vf1y\n\tvaddz.x $vf1, $vf1, $vf1z\n\tvsqrt Q, $vf1x\n\tvwaitq\n\tcfc2.ni $8, $vi22\n\tmtc1 $8, %0" : "=f"(r) : "r"(v) : "$8", "memory");
+    return r;
+}
+static inline void VScale2cd(QW2cd* d, const QW2cd* s, f32 k) {
+    asm volatile("lqc2 $vf1, 0(%1)\n\tmfc1 $8, %2\n\tqmtc2 $8, $vf2\n\tvmulx.wxyz $vf1, $vf1, $vf2x\n\tsqc2 $vf1, 0(%0)" : : "r"(d), "r"(s), "f"(k) : "$8", "memory");
+}
+static inline void VAdd2cd(QW2cd* d, const QW2cd* a, const QW2cd* b) {
+    asm volatile("lqc2 $vf1, 0(%1)\n\tlqc2 $vf2, 0(%2)\n\tvadd.wxyz $vf1, $vf1, $vf2\n\tsqc2 $vf1, 0(%0)" : : "r"(d), "r"(a), "r"(b) : "memory");
+}
+struct O2cd { u8 pad[4]; u32 f4; u32 f8; u8 pad2[12]; u32 f24; f32 f28; u8 pad3[4]; f32 range; u8 pad4[95]; u8 on; u8* target; };
+extern "C" {
+QW2cd* YS__OBJ__get_pos(u8*);  // obj_get_attach_or_alt
+void func_002cd3e0(O2cd*, u8*);
+void func_002cd428(O2cd*, QW2cd*);
+
+// Retargets the leash: places the midpoint 110 units short of the new target when it is out of range.
+void Ti__Path__reset_active_path(O2cd* o, u8* from, u8* to);  // 0x002cd290: definition moved into src/taito/path.cpp
+
+}

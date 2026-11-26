@@ -6,7 +6,6 @@
 class GAUGE_PLAYER;
 class IMAGE;
 class OBJ;
-class uchar;
 
 namespace dk {
 

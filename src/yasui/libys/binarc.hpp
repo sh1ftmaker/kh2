@@ -2,8 +2,6 @@
 
 #include "../../common/types.h"
 
-class uint;
-
 namespace YS {
 
     class BINARC {

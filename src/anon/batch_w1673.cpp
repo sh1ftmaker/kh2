@@ -1,0 +1,106 @@
+#include "../common/types.h"
+struct Node_de0a0 { u8 pad[0x60]; Node_de0a0* next; };
+struct List_de0a0 { Node_de0a0* head; Node_de0a0* tail; };
+struct Obj_de0a0 { u8 pad[8]; u8 sub[4]; List_de0a0 list; };
+struct Res_de0a0 { u8 pad[0xc]; Obj_de0a0* owner; };
+struct P_de0a0 { u8 pad[0x38]; f32 f; };
+extern "C" {
+Res_de0a0* eff_create_001dcff0(f32, void*, u16) asm("_ZN3ryj6EFFECT6CreateERNS_11EFFECT_DATAEjjjif");
+Node_de0a0* func_001de948(s32);
+void ryj__PAX__MANAGER__MANAGER_2(f32, Node_de0a0*, Res_de0a0*, u16*, P_de0a0*);
+Res_de0a0* func_001de0a0(Obj_de0a0* a0, u16* a1, s32 a2, s32 a3, s32 t0, P_de0a0* p);  // 0x001de0a0: definition moved into src/anon/unit_001ddcf0.cpp
+}
+struct S5a48b { u8 pad[4]; u8 v; };
+struct S5a48 { u8 pad[0x588]; s32 a; u32 b; u8 pad2[0xaf8-0x590]; S5a48b* p; };
+extern "C" {
+s32 YS__OBJ__is_exist(S5a48*);
+s32 func_002bfdf8();
+s32 func_002c1b48(S5a48*);
+void func_002c85c8(s32);
+void func_002c8648();
+void dk__WM_GLANDING_INFO__start(s32);
+void func_002ca0a8();
+void func_002c5a48(void* self, S5a48* o);  // 0x002c5a48: definition moved into src/anon/unit_002c53c8.cpp
+}
+struct E9b90 { u16 id; u16 sub; u8 kind; u8 pad[3]; };
+struct H9b90 { u8 pad[2]; u16 x; u8 pad2[8]; u16 n; };
+struct O9b90 { u8 pad[8]; H9b90* h; u8 pad2[0x34-0xc]; E9b90* e; };
+extern "C" {
+s32 func_00198c28(u16, s32);
+void func_00198e70(s32, u16);
+void func_00198ea8(s32, u16);
+void func_00199b90(O9b90* o);  // 0x00199b90: definition moved into src/anon/unit_00199688.cpp
+}
+struct A91658 { s32 a; s32 b; };
+struct E91658 { u8 d[20]; };
+struct B91658 { E91658 e[128]; s32 idx[128]; s32 n; };
+extern A91658 D_01c60d10[8];
+extern B91658 D_01c60d50;
+extern "C" {
+void func_00190128(E91658*);
+void wtarget_00191658(u32 a0, u32 a1, u32 a2, u32 a3) asm("_Z16wtarget_00191658jjjj");
+void wtarget_00191658(u32 a0, u32 a1, u32 a2, u32 a3);  // 0x00191658: definition moved into src/anon/unit_001900d0.cpp
+}
+struct S1f1870 { u8 pad[0x9c]; u8 a; u8 b; u8 c; };
+extern "C" {
+void func_001f1870(S1f1870* o, f32* pa, f32* pb, f32* pc, f32* pd);  // 0x001f1870: definition moved into src/anon/unit_001f0cd8.cpp
+}
+typedef unsigned int u128_t __attribute__((mode(TI)));
+union U2222b8 { u8* p; u64 v; };
+struct N2222b8 { N2222b8* next; };
+union UL2222b8 { N2222b8* p; u64 v; };
+struct C2222b8 { s32 a; N2222b8* n; u8* p; s32 d; s32 c; U2222b8* flag; u64 e; u64 f; };
+extern "C" {
+s32 func_00220da0(C2222b8*);
+void sceGsSyncPath(s32, s32);
+s32 func_002f35e8(s32);
+void func_002f3918(s32, u8*);
+void func_003058a0(s32);
+void func_002222b8(N2222b8** list, s32 a1, s32 a2, s32 a3, U2222b8* pp, u64 e, u64 f);  // 0x002222b8: definition moved into src/anon/unit_00221e28.cpp
+}
+struct O1b9880 { void** vt; u8 pad[0x104]; u32 flags; u8 pad2[0x8b4-0x10c]; O1b9880* next; };
+struct L1b9880 { O1b9880* head; O1b9880* tail; };
+extern L1b9880 D_01d48da0;
+extern L1b9880 D_01d48da8;
+extern "C" {
+void func_0016a2e0(O1b9880*);
+void func_001b9880();  // 0x001b9880: definition moved into src/anon/unit_001b9880.cpp
+}
+struct O160bd8 { void** vt; u8 pad[0x7c]; O160bd8* next; u8 pad2[0xfc]; u32 flags : 1; };
+struct L160bd8 { O160bd8* head; O160bd8* tail; };
+extern L160bd8 D_004f3b38;
+extern L160bd8 D_004f3b48;
+extern "C" {
+// 00160bd8: moved to src/harata/libdk/bgobj.cpp
+}
+struct I20c580 { u8 pad[0x20]; u16 busy; u8 pad2[0xa0 - 0x22]; };
+struct M20c580 { I20c580* items; u8* buf; s32 n; s32 pad; u16 tick; };
+struct C20c580 { s32 pad; s32 x4; u8 pad2[4]; u16 max; u16 period; };
+struct G20c580 { u8 pad[0xa8]; u64 flags; };
+extern G20c580* D_01d9e6e0;
+extern s32 D_01d9ea9c;
+extern "C" {
+void func_0020bdb0(void*, void*, void*, u8*);
+void func_0020bef8(M20c580*, C20c580*, I20c580*, s32, u8*);
+void func_0020c580(M20c580* m, C20c580* c, s32 a2);  // 0x0020c580: definition moved into src/anon/unit_0020c580.cpp
+}
+struct V20bdb0 { f32 x, y, z, w; };
+struct I20bdb0 { V20bdb0 pos; V20bdb0 q; };
+struct M20bdb0 { u8 pad[0xb8]; f32 x, y, z; u8 pad2[0xd8 - 0xc4]; f32 r0, r1; };
+extern u8 D_01d9e7b0[];
+extern "C" {
+f32 func_0020b410();
+void birth_2(M20bdb0*, I20bdb0*, u8*);
+void sceVu0ApplyMatrix(void*, void*, void*);
+void sceVu0Normalize(void*, void*);
+void func_002fde18(void*, s32, u32);
+void func_0020bdb0(void* self, void* mv, void* itv, u8* buf);  // 0x0020bdb0: definition moved into src/anon/unit_0020bdb0.cpp
+}
+struct V20a510 { f32 x, y, z, w; };
+struct I20a510 { V20a510 pos; V20a510 q; };
+struct M20a510 { u8 pad[0x7c]; f32 x, y, z; u8 pad2[0x9c - 0x88]; f32 r0, r1; };
+extern "C" {
+f32 func_00209fb8();
+void birth(M20a510*, I20a510*, u8*);
+void func_0020a510(void* self, void* mv, void* itv, u8* buf);  // 0x0020a510: definition moved into src/anon/unit_0020a510.cpp
+}

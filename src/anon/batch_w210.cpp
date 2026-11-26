@@ -1,0 +1,27 @@
+#include "../common/types.h"
+
+struct O171 { char p[0x7f8]; u32 fl; char q[0x30]; };
+struct A171 { O171* o; f32 f; };
+
+extern "C" {
+void func_001ad990(void* a, f32 b, f32 c, f32 d) asm("_Z13func_001ad990jfff");
+u32 func_002bc608(u32);
+void func_002b6f28(u32, u32, u32);
+void func_002eb9d8(u32, u32, u32, f32);
+extern u32 D_00363540;
+extern u32 D_00373970[];
+u32 u_tail4_00192048(u32) asm("_Z16u_tail4_00192048jjjj");
+u32 CopyMessage(u32, u32) asm("_ZN2Tz6CmComm11CopyMessageEPcPKN2YS7MESSAGEE");
+
+void func_00171268(A171* a);  // 0x00171268: definition moved into src/anon/unit_00170f58.cpp
+
+void func_001712b0(A171* a);  // 0x001712b0: definition moved into src/anon/unit_00170f58.cpp
+
+// 00178570: moved to src/yasui/libys/player.cpp
+
+u32 func_00271828(u32 i, u32 b);  // 0x00271828: definition moved into src/anon/unit_002713c8.cpp
+
+void func_002ba140(u32 a, u32 b, u32 c);  // 0x002ba140: definition moved into src/anon/unit_002b9ab8.cpp
+
+// 002eba30: moved to src/anon/unit_002eaf38.cpp
+}

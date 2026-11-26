@@ -1,0 +1,97 @@
+#include "../common/types.h"
+struct Obj1dc;
+struct Vt1dc { s32 (*f0)(Obj1dc*, s32, s32); };
+struct Obj1dc { Vt1dc* vt; };
+struct Pair1dc { s32 a; s32 b; };
+struct V143 {
+    f32 x, y, z, w;
+    V143() {}
+    V143& operator=(const V143& o) {
+        if (this != &o) asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(this), "r"(&o) : "$8", "memory");
+        return *this;
+    }
+} __attribute__((aligned(16)));
+static inline V143 v143_sub(const V143& a, const V143& b) {
+    V143 r;
+    asm volatile(".set noreorder\n\tlqc2 $vf1, 0(%1)\n\tlqc2 $vf2, 0(%2)\n\tvsub.wxyz $vf1, $vf1, $vf2\n\tsqc2 $vf1, 0(%0)\n\t.set reorder"
+        : : "r"(&r), "r"(&a), "r"(&b) : "memory");
+    return r;
+}
+struct O143 {
+    V143 v0;
+    V143 v10;
+    V143 v20;
+    V143 v30;
+    u8 pad40[0x22];
+    s16 h62;
+    s16 h64;
+    s16 pad66;
+    f32 f68;
+    s32 pad6c;
+    u64 flags;
+    s32 i78;
+};
+struct E1bc { u8 pad0[4]; s16 h4; u8 pad6[0x16]; u8 b1c; };
+struct T1bc { u8 pad[8]; u32 f8; };
+struct P1bc { u8 pad[0x1b1]; u8 b1b1; };
+struct B1bc { u8 pad0[0xc]; T1bc* t; u8 pad10[0x48c - 0x10]; P1bc* p; u8 pad490[0x588 - 0x490]; u32 f588; u8 pad58c[0xb50 - 0x58c]; s32 mode; };
+struct S1f5 { s16 x, y, z; };
+struct A1f5 { u8 pad[0xc]; s32 idx; s32 off10; s32 pad14; s32 off18; };
+struct M1f5 { u8 pad[0x80]; u8* tbl; };
+struct R1f5 { s32 f0; s32 f4; };
+extern "C" {
+extern Obj1dc* D_01d5bb00;
+extern s32 D_01d5bb04;
+extern s32 D_01d5bb08;
+extern Pair1dc D_00352ae0;
+extern s32 D_00352ae8;
+void func_001e6d38(u32 a0, u32 a1, u32 a2, u32 a3, u32 t0, u32 t1, u32 t2, u32 t3, u32 s0, u32 s1, u32 s2, u64 c,
+                   u64 d0, u64 d1, u64 d2, u64 d3, u64 d4, u64 d5);
+extern s32 D_00348804;
+s32 func_00165a10();
+s32 dk__OctCollFile__collisionSphere_2(s32, O143*);
+s32 dk__ObjOcc__collisionDown(O143*, f32*);
+s32 func_001424c0(s32, O143*);
+extern u8 D_00351eb8[];
+extern u8 D_00351ec0[];
+extern u32 D_0034f240;
+s32 elem_is_menu(E1bc*) asm("_ZNK2YS12COMMAND_ELEM7is_menuEv");
+s32 func_001c8db8(void*, s32);
+s32 YS__OBJ__is_exist(B1bc*);
+s32 YS__SACRIFICE__GetCommandStatus(E1bc*);
+s32 func_001bbf40(void);
+extern M1f5* D_01d9e6e0;
+extern u8* D_01d9e6e8;
+R1f5* func_001e7a98(M1f5*, u8*);
+void func_002226b8(void*, f32*);
+void sceVu0ApplyMatrix(f32*, void*, f32*);
+void sceVu0SubVector(f32*, f32*, void*);
+void sceVu0Normalize(f32*, f32*);
+struct S8 { s16 a, b, c, d; };
+union US8 { S8 s; u32 u; };
+u8 func_00263cc0(void);
+void Tz__LaySeqMess__create(void*, u32, u32, u32, u32, void*, void*, s32, s32, s32);
+u32 func_0023aa18(u32);
+u32 func_0023aa38(u32);
+void func_00138c68(void*, u32, u32);
+void func_001395f8(void*);
+void func_00138c10(void*, s32);
+extern u32 D_0035f3d4, D_0035f0bc, D_0035f0b8, D_0035f0c0;
+extern S8 D_0035f0c8;
+extern US8 D_0035f0d0_ asm("D_0035f0d0");
+#define D_0035f0d0 D_0035f0d0_.s
+union UP { u8* p; u32 u; };
+extern UP D_0035f0dc;
+#define G D_0035f0dc.p
+
+void func_001dcdb8(Obj1dc* o, s32 a, s32 b);  // 0x001dcdb8: definition moved into src/anon/unit_001dbfd8.cpp
+
+s32 dk__Octree__collisionToMap(O143* o);  // 0x00143928: definition moved into src/anon/unit_00142c90.cpp
+
+s32 func_001bc568(E1bc* e, B1bc* b);  // 0x001bc568: definition moved into src/anon/unit_001bc568.cpp
+
+void func_001f5f10(s32 id, A1f5* a, S1f5* s);  // 0x001f5f10: definition moved into src/anon/unit_001f5978.cpp
+
+void Tz__CMenuHelp__Create_2(u32 a0, u8 a1);  // 0x00263a90: definition moved into src/anon/unit_002632d0.cpp
+
+}

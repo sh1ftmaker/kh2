@@ -1,0 +1,419 @@
+#include "../common/types.h"
+
+typedef void (*VFn)(void*);
+struct VObj { VFn* vt; };
+struct NoTail { ~NoTail() {} };
+struct E64 { u8 d[64]; ~E64() {} };
+struct Arr24 { E64 e[24]; };
+
+// 16-byte vector; assignment copies with a 128-bit lq/sq.
+struct Vq {
+    f32 x, y, z, w;
+    Vq& operator=(const Vq& o) {
+        if (this != &o) asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(this), "r"(&o) : "$8", "memory");
+        return *this;
+    }
+} __attribute__((aligned(16)));
+static inline Vq VSub(const Vq& a, const Vq& b) {
+    Vq r;
+    asm volatile(".set noreorder\n\tlqc2 $vf1, 0(%1)\n\tlqc2 $vf2, 0(%2)\n\tvsub.wxyz $vf1, $vf1, $vf2\n\tsqc2 $vf1, 0(%0)\n\t.set reorder"
+                 : : "r"(&r), "r"(&a), "r"(&b) : "memory");
+    return r;
+}
+static inline Vq VScale(const Vq& v, f32 s) {
+    Vq r;
+    asm volatile("lqc2 $vf1, 0(%1)\n\tmfc1 $8, %2\n\tqmtc2 $8, $vf2\n\tvmulx.wxyz $vf1, $vf1, $vf2x\n\tsqc2 $vf1, 0(%0)"
+                 : : "r"(&r), "r"(&v), "f"(s) : "$8", "memory");
+    return r;
+}
+static inline f32 VLength(const Vq& v) {
+    f32 d;
+    asm volatile("lqc2 $vf1, 0(%1)\n\tvmul.xyz $vf1, $vf1, $vf1\n\tvaddy.x $vf1, $vf1, $vf1y\n\tvaddz.x $vf1, $vf1, $vf1z\n\tvsqrt Q, $vf1x\n\tvwaitq\n\tcfc2.ni $8, $vi22\n\tmtc1 $8, %0"
+                 : "=f"(d) : "r"(&v) : "$8", "memory");
+    return d;
+}
+
+extern "C" {
+void* func_001050d8(u32);
+void* func_001daef8(void*, void*);
+extern void* D_00352a08[];
+extern void* D_003529f0[];
+extern void* D_003529d8[];
+}
+
+// Creates the event object matching the record type.
+struct W84Ev {
+    void** vt;
+    u8 pad[108];
+    static void* operator new(unsigned int n) { return func_001050d8(n); }
+    W84Ev(u16* p) { func_001daef8(this, p); }
+};
+struct W84Ev0 : W84Ev { W84Ev0(u16* p) : W84Ev(p) { vt = D_00352a08; } };
+struct W84Ev1 : W84Ev { W84Ev1(u16* p) : W84Ev(p) { vt = D_003529f0; } };
+struct W84Ev2 : W84Ev { W84Ev2(u16* p) : W84Ev(p) { vt = D_003529d8; } };
+
+extern "C" {
+
+// Formats a 3-letter code (or three numbers) into the shared text buffer.
+extern char D_003a7b20[];
+extern char D_00369e58[];
+extern char D_00369e60[];
+extern char D_00369e70[];
+s32 func_00105140(void*, s32);
+s32 func_002fee78(char*, const char*, ...);
+s32 strlen(const char*);  // strlen
+struct Dt {
+    u8 a, b, c, pad;
+    u16 x, y, z;
+};
+// 001051b8: moved to src/common/area.cpp
+
+// Destructor: release the 24 slot objects, then the member array and base.
+extern void* D_003476f0[];
+void func_001dc920(void*);
+void func_00117910(void*, s32);  // entry64_clear_fields
+void func_0018f028(void*);
+void func_00113668(void*);
+void func_00117d18(u8* p);  // 0x00117d18: definition moved into src/anon/unit_001178b8.cpp
+
+extern s32 D_0034a7d8[];
+extern s32 D_0034a7e8[];
+u32 func_0013d7e0(void*);
+s32 func_00236490(u32);
+s32 func_002364f8(u32);
+// 00154100: moved to src/anon/unit_00153ea0.cpp
+void func_00154100(u8* p, s32* a, s32* b);
+
+void func_00158300(void*);
+void func_00157758(void*);
+void func_001577c8(void*);
+void func_001578d8(void*);
+void func_00157a00(void*);
+void func_00157ae0(void*);
+s32 func_00157100(void*);
+void func_001571c0(void*);
+s32 func_00157130(void*);
+void func_001574d8(void*);
+void func_00156d20(void*);
+s32 func_001570a0(void*);
+void func_00157068(void*);
+s32 func_001570d0(void*);
+void func_00157c88(void*);
+// 00157f08: moved to src/anon/unit_00157688.cpp
+
+// Runs every entry flagged in the 64-bit mask, then sweeps the 64 lists.
+extern u64 D_0034c710;
+extern u8 D_0034c70c;
+extern u8 D_0034c6f0[];
+void func_00143228(void);
+void func_00160de0(s32);
+void* func_001de4b0(void*, s32, void*);
+s32 func_001dc9e0(void*);
+void func_001dcc30(void*);
+// 0015f618: moved to src/harata/libdk/map_effect.cpp
+
+s32 func_001c0cd8(void*);
+void func_001c0e60(void*);
+void func_00177498(void*);
+void func_001a1840(void*);
+void func_00186020(void*);
+// 00175928: moved to src/yasui/libys/party.cpp
+
+struct Cfg {
+    u8 _0[60];
+    f32 f60;
+    u8 _64[20];
+    f32 f84;
+    u8 _88[24];
+    f32 f112;
+    u8 _116[4];
+    f32 f120;
+};
+extern Cfg* D_00352130;
+s32 YS__SHEET__is_mpdrive(void*);
+Cfg* func_00177860(void*);
+f32 func_001bbfd0(void);
+void YS__SHEET__add_drive(void*, s32);  // ring_buffer_index
+void YS__SHEET__add_drive_time(void*, f32);
+static inline bool Is12(u8* p) { return *(s32*)(p + 2896) == 12; }
+// 00179a68: moved to src/yasui/libys/player.cpp
+
+// Drops every node of the list at +396 that is no longer alive.
+struct LNode { u8 _0[44]; LNode* next; };
+struct LList {
+    LNode* head;
+    LNode* tail;
+};
+struct LOwner { u8 _0[396]; LList list; };
+static inline __attribute__((always_inline)) void LRemove(LList* l, LNode* n) {
+    LNode* prev;
+    if (n == l->head) {
+        prev = 0;
+        l->head = n->next;
+    } else {
+        for (prev = l->head; prev->next != n; prev = prev->next) {}
+        prev->next = n->next;
+    }
+    if (n == l->tail) l->tail = prev;
+    n->next = 0;
+}
+static inline __attribute__((always_inline)) LNode* LNext(LOwner* o, LNode* n) {
+    if (!n) return o->list.head;
+    return n->next;
+}
+s32 func_001dc9d0(void*);
+// 00180e28: moved to src/anon/unit_00180408.cpp
+
+u8* YS__OBJ__Each(u8*);
+s32 func_0019bb18(u8*);  // obj_is_blocked
+s32 func_00144d10(u8*, u8*);
+s32 func_002cf1f8(u8*, u8*);
+void func_001b7a18(u32, u32, u32);
+// 00183848: moved to src/anon/unit_00183088.cpp
+
+void func_001980d0(void*);
+void func_0018c420(void*);
+extern void* D_0034ee90[];
+void func_0018aba0(u8* p);  // 0x0018aba0: definition moved into src/yasui/libys/npc.cpp
+
+u8 func_001c0298(u8*, u8*, u8*);  // state_check5or6
+u8* func_0019fee8(u32, u32);
+void func_001c0410(u8*, u8*, u8*);
+static inline void SetBit(u32* bits, u32 k) {
+    u32* w = bits + (k >> 5);
+    *w |= 1 << (k & 31);
+}
+u8* YS__ATTACK_CHECK__hit(u8* a, u8* b, u8* out);  // 0x001c0320: definition moved into src/anon/unit_001bff88.cpp
+
+void func_001980d0x(void*, u32, s32, void*, f32) asm("func_001980d0");
+extern u8 D_01d49520[];
+extern void* D_00351408[];
+u32 ryj__PAX__start(void*, u32, s32, s32, s32, s32);  // scan_list_by_half
+void func_001dcc00(u32, u32);  // to_1e34e0_field28
+void* func_001050d8(u32);
+void YS__MASSEFFECT__MANAGER__MANAGER(void*, u32, u32, u32, u32);
+// 001c2490: moved to src/anon/unit_001c0638.cpp
+void YS__MASSOBJ__MASSOBJ(u8* p, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6);
+
+// Converts a radian rotation to fixed angles and applies it.
+struct V3 { f32 x, y, z; };
+extern V3 D_00354bd0;
+extern V3 D_00354bc0;
+void func_0021ebe8(void*, s32*);
+void func_00201438(u8* a, u8* c);  // 0x00201438: definition moved into src/anon/unit_00200578.cpp
+
+extern u8* D_01d9e6e8;
+extern u8 D_01d9e730[];
+extern u8 D_01d9e8c0[];
+void sceVu0UnitMatrix(void*);  // vu_store_w_splat
+void sceVu0MulMatrix(void*, void*, void*);
+void sceVu0ScaleVector(void*, void*, f32);  // vec_scale_by_f12
+void sceVu0ApplyMatrix(void*, void*, void*);
+void sceVu0CopyMatrix(void*, void*);
+void pppRyjDrawDrawMatrixWorldDttFr(u8* a, u32, u8* c);  // 0x00209ed0: definition moved into src/anon/unit_00209d68.cpp
+
+s32 func_00289310(u32);
+u32 func_002891e8(u32);
+void func_002890e0(u32, s32, s32, s32, s32);
+void func_00289038(u32, u32, s32, s32, s32, s32, s32);
+s32 func_0028d008(u32);
+u32 func_002891d0(u32);
+void Tz__MenuCursor__SetParent(u32, u32);  // record408_set_and_refresh
+s32 func_0028d6e8(u32);
+void func_0028d660(u32, u32);  // record_set_value_refresh
+extern u32 D_0035f110;
+void Title__BootMcChk__SelDraw(u32 a);  // 0x0026eae8: definition moved into src/anon/unit_0026c450.cpp
+
+// Creates the manager object and a 4-element array of 5116-byte entries.
+struct Heap20 { u8 _0[20]; VObj* a; };
+extern Heap20* D_00347f80;
+extern void* D_00347e60[];
+extern void* D_0035f244;
+extern u8* D_0035f248;
+extern u8 D_0035f24c;
+extern u8 D_0035f24d;
+extern u8 D_0035f24e;
+void func_00239700(void*);
+u32 func_00103570(void);
+u8* func_001063f0(u32, u32);
+void func_003237e0(void*);
+typedef u8* (*AllocFn)(void*, u32, u32);
+void Tz__SimpleStat__Init(void);  // 0x0027dc40: definition moved into src/anon/unit_0027d2e8.cpp
+
+u32 func_00316e00(void);  // get_367918
+s32* func_00316e10(void);  // get_data_369928
+s32 func_003060f0(void);  // ee_intr_disabled
+s32 func_00305510(void);
+void func_002fd408(void*);
+extern s32 D_01e4c7a0;
+void func_003168d8(void* p);  // 0x003168d8: definition moved into src/libsupc++/eh_globals.cpp
+
+void func_00288c58(void*, s16);
+void func_00288f48(void*, s32, s32, s32, s32);
+void func_0028af18(void*, s32);
+void func_0028b1b0(void*, s32);
+union PU { s16 (*p)[4]; s16 s; };
+struct Tbl {
+    s16 f0, f2, f4, f6_, f8_, f10_, f12_, f14;
+    s16 n, f18, f20, f22, f24, f26, f28, f30;
+    u32 f32_;
+    u8 c36, c37, c38, c39;
+    u32 f40;
+    PU a;
+    PU b;
+};
+void func_002889f0(Tbl* p, s32 n, u8 c);  // 0x002889f0: definition moved into src/anon/unit_002880b8.cpp
+
+// Tz::Select::Start
+union S16U { s16 v; s32 i; };
+struct Sel {
+    u8 _0[4];
+    S16U n;
+    u8 _8[6];
+    s16 done;
+    u8 _16[24];
+    u8** arr;
+};
+s32 func_0028acc8(Sel*);
+u8* func_0028ac98(Sel*, s32);  // lookup_by_index_align
+void func_00138c10(void*, s32);
+void sel_start(Sel* s) asm("_ZN2Tz6Select5StartEz");
+void sel_start(Sel* s);  // 0x0028aa40: definition moved into src/anon/unit_00288b00.cpp
+
+// Quaternion product o = a * b.
+struct Qt { f32 x, y, z, w; };
+void func_002e3f58(Qt*, Qt*, Qt*);
+Qt* func_002e46d0(Qt* o, Qt* a, Qt* b);  // 0x002e46d0: definition moved into src/anon/unit_002e3f58.cpp
+
+extern void* D_0034a5b0[];
+extern void* D_00347e80[];
+void func_002361a0(void*);
+void func_0031bd98(u8* p);  // 0x0031bd98: definition moved into src/anon/unit_0031b9e0.cpp
+
+// Destructor: virtual-destroy two 4-element member arrays, then members and base.
+struct E344 { VFn* vt; u8 pad[340]; };
+extern void* D_00350ab0[];
+extern void* D_00350bb0[];
+extern void* D_0034e8a8[];
+void func_00239870(void*);
+void func_00239848(void*);  // set_vtbl_36eb28_then_call
+void func_001ac5b8(void*);
+void func_0031fc78(u8* p);  // 0x0031fc78: definition moved into src/anon/unit_0031f2f8.cpp
+
+// Adds each id from the list that is not present yet and passes the mask.
+u16 func_002642a8(u16);
+struct Lst { u8 _0[10]; u16 cnt; u8 _12[4]; u16 ids[1]; };
+void func_002641c8(Lst* p, u16* list, s32 n, u16 mask);  // 0x002641c8: definition moved into src/anon/unit_002640a8.cpp
+
+struct E12 { u32 a; s8 k; u8 pad[7]; };
+u8* func_00294000(s32);
+s32 func_00294480(void*);  // record_lookup_success
+s32 func_002ae1b0(s32 a, s32 b);  // 0x002ae1b0: definition moved into src/anon/unit_002a99c8.cpp
+
+union GP { struct E16* p; u32 u; s16 h; };
+union GS { s16 v; u32 u; };
+struct E16 { u32 a, b, c, d; };
+extern s16* D_0035f4dc;
+extern s32 D_0035f4bc;
+extern s16 D_0035f4e0;
+extern GS D_0035f4d8;
+extern u8 D_0035f4e2;
+extern GP D_0035f4d4;
+void func_002fde18(void*, s32, u32);
+void func_00292998(void);  // 00292998: moved to src/anon/unit_00292998.cpp
+
+s32 YS__OBJ__is_exist(u32);
+extern s32 D_0032dfc8;
+s32 func_001a2108(u8* a, s32 v, u8* b);  // 0x001a2108: definition moved into src/anon/unit_0019fb70.cpp
+
+// Tracks a position: keeps the previous one and flags a jump longer than twice the limit.
+struct Trk { u32 _0; u32 flags; u8 _8[216]; Vq cur; Vq prev; };
+extern f32 D_00349e10;
+// 001a48c0: moved to src/anon/unit_001a3e70.cpp
+
+struct Mv { Vq v; u8 _16[8]; u32 flags; };
+s32 func_001860b0(u8*, Mv*);
+void func_0016aef0(u8*, Vq*);
+void func_0017f488(void*, s32, f32, f32);
+void func_0017f5e0(void*, s32, s32, f32, f32);
+void YS__BTLOBJ__set_hitback(u8*, Mv*, f32);
+// 00186988: moved to src/anon/unit_00185d10.cpp
+void YS__BTLOBJ__exec_damage_large(u8* p, Mv* m, f32 f);
+
+s32 func_002e9a38(u8*, u32, s32);
+u8* func_0016bba8(u32, s32, u8*);
+void func_002e9b10(u8*);
+void wt3_2e9b58(u32, u32, u32) asm("_Z24Ts__TARGET_SEARCHER__addjjjj");
+extern u32 D_0035f620;
+extern u32 D_0035f62c;
+extern u32 D_0035f628;
+void func_002acda8(void);
+void Tz__JmComplete__CheckAll(void);
+void func_002ae280(u32*, u32*);
+void func_002aceb0(void);
+u64 func_00312db8(u64, u64);
+void func_001ddd10(void*);
+void func_001ddd88(void*);
+
+// Lazily records the owner, copies the name and sets the size limit.
+struct G3 { void* a; s32 b, c; };
+extern G3 D_0035db50;
+extern u32 D_0035db18;
+extern char D_01dad918[];
+void func_002ff2e8(char*, const char*);
+void func_00224cf0(u32);
+void func_00227130(u8* p);  // 0x00227130: definition moved into src/anon/unit_00224780.cpp
+
+// Converts a degree rotation (y offset by 180) to radians and applies it.
+void func_0016b070(void*, f32*);
+void func_0016aeb8(void*, f32);
+s32 func_002283b0(void*, f32*);
+static inline void DegToRad(u8* p, f32* v) {
+    v[0] = v[0] * 0.0174532924f;
+    v[1] = (v[1] + 180.0f) * 0.0174532924f;
+    v[2] = -(v[2] * 0.0174532924f);
+    func_0016b070(p, v);
+}
+void func_0022f6b8(u8* p, f32* v);  // 0x0022f6b8: definition moved into src/anon/unit_0022d358.cpp
+
+typedef unsigned int u128 __attribute__((mode(TI)));
+union PQ { u8* p; u128 q; };
+extern PQ D_01d9e6e8u asm("D_01d9e6e8");
+extern u8 D_01d9e940[];
+void func_00200a78(u8* a, u32, u8* c);  // 0x00200a78: definition moved into src/anon/unit_00200578.cpp
+
+// Linear interpolation over a table of 96-byte keys (40 steps).
+struct K96 { f32 x; u8 _4[16]; f32 v; u8 _24[72]; };
+static inline K96* KeyAt(K96* k, s32 i) {
+    K96* r = k + i;
+    return r;
+}
+f32 func_002e51b0(K96* k, f32 t);  // 0x002e51b0: definition moved into src/anon/unit_002e3f58.cpp
+
+u8* func_00257770(void);
+u32 func_00257140(s32);
+u32 func_00192048(u16);
+s32 func_00257070(s32);
+extern u16 D_00373a88[];
+void Tz__CmCustom__UpdateItemList(void);  // 0x00272938: definition moved into src/anon/unit_00271e08.cpp
+
+
+W84Ev* YS__ZONE__Create(u16* p);  // 0x001db440: definition moved into src/anon/unit_001d9d00.cpp
+
+}
+
+// Recursively registers o (or all its children when k < 0).
+void Ts__TARGET_SEARCHER__add(u32 a0, u32 o, u32 k, u32);  // 002e9b58: moved to src/anon/unit_002e9a00.cpp
+
+// Accumulates two counters and returns their ratio as a percentage.
+s32 wtarget_002ad018(u32, u32, u32, u32);  // 0x002ad018: definition moved into src/anon/unit_002a99c8.cpp
+
+// Clears 5 slots and marks one at random (avoiding slot n when n >= 0).
+extern u32 D_003638d0;
+static inline u32 Rand() { return D_003638d0 = D_003638d0 * 69069; }
+void wtarget_001d9a18(u32 a0, u32 a1, u32, u32);  // 0x001d9a18: definition moved into src/anon/unit_001d7458.cpp
+
+extern u8 D_01c6cae0[];
+extern u32 D_01c6cb00[];
+// 001a3d70: static init of the YS::EFFECT work, moved to src/anon/unit_001a3d70.cpp
+

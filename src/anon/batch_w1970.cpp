@@ -1,0 +1,26 @@
+#include "../common/types.h"
+struct V4_w1970 { f32 x, y, z, w; } __attribute__((aligned(16)));
+struct El_w1970 { u8 p[16]; };
+struct Mgr_w1970 { u8 p[0x80]; El_w1970* arr; };
+extern Mgr_w1970* D_01d9e6e0;
+extern Mgr_w1970* D_01d9e6e0_b asm("D_01d9e6e0");
+struct Obj_w1970 { u8 p[4]; s32 owner; };
+struct X_w1970 { u8 p[4]; u8 n; u8 q[3]; s32 idx; s32 off; };
+struct Cf_w1970 { s32 o0; s32 o4; };
+struct Y_w1970 { u8 p[0xc]; Cf_w1970* c; };
+struct Sl_w1970 { void* p; u8 q[4]; f32 f; };
+extern "C" Obj_w1970* func_001e7a98(Mgr_w1970*, El_w1970*);
+extern "C" void func_002226b8(void*, void*);
+extern "C" void func_00222750(void*, V4_w1970*, V4_w1970*);
+extern "C" void sceVu0SubVector(V4_w1970*, void*, V4_w1970*);
+extern "C" void sceVu0ScaleVector(f32, V4_w1970*, V4_w1970*);
+extern "C" void sceVu0CopyVector(V4_w1970*, void*);
+static inline u8* getp_w1970(Mgr_w1970* m, s32 a, X_w1970* x) {
+    Obj_w1970* v = 0;
+    El_w1970* el = &m->arr[x->idx];
+    if (el) { v = func_001e7a98(m, el); v->owner = a; }
+    return (u8*)v + x->off + 0xa0;
+}
+extern "C" {
+void KeBornPtCmlp(s32 a, X_w1970* x, Y_w1970* y);  // 0x001f6c58: definition moved into src/anon/unit_001f6b68.cpp
+}

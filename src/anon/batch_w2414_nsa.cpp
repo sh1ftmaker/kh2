@@ -1,0 +1,108 @@
+#include "../common/types.h"
+// Built with -fno-strict-aliasing.
+extern "C" {
+struct W1621Rec20 { u32 w[5]; };
+struct W1621Msg { u16 id; u16 arg; u32 flags; W1621Rec20 rec; };
+struct W1621Obj;
+struct W1621Ent { u16 a; u16 kind; };
+typedef s32 (*W1621Fn)(...);
+typedef void (*W1621VFn)(...);
+struct W1621Obj { W1621Fn* vt; };
+s32 func_00176868(u8*, W1621Msg*);
+void YS__PARTY__exec_item(u8*, W1621Ent*, W1621Rec20*, s32);
+u8* p175c88_get_ability(u8*) asm("_ZN2YS5PARTY11get_abilityEv");
+s32 func_00177ab8(u8*, u8);
+void func_00178a50(u8*, W1621Ent*);
+void func_0017a590(u8*, u16);
+W1621Ent* p175c88_lookup(u16) asm("_Z21YS__COMMAND_ELEM__Getjjjj");
+
+static inline u32 W1621A(u8* p) { return *(u32*)(p + 0x160) & 4; }
+static inline u32 W1621B(u8* p) { return *(u32*)(p + 0x160) & 8; }
+static inline u32 W1621C(u8* p) { return *(u32*)(p + 0x160) & 0x10; }
+static inline bool W1621Any(u8* p) { return W1621A(p) || W1621B(p) || W1621C(p); }
+// 00175c88: moved to src/yasui/libys/party.cpp
+}
+
+extern "C" {
+typedef struct V2cdcd8 { f32 x, y, z, w; } __attribute__((aligned(16))) V2cdcd8;
+typedef struct Path2cdcd8 { u8 pad0[8]; s32 count; u8 pad1[12]; f32 pos; u8 pad2[132 - 28]; u8 forward; } Path2cdcd8;
+V2cdcd8* func_002cb890(Path2cdcd8*, s32);
+f32 func_002cdb60(Path2cdcd8*, f32*, V2cdcd8*, V2cdcd8*, V2cdcd8*, f32, f32);
+static inline f32 vdist(V2cdcd8* a, V2cdcd8* b)
+{
+    V2cdcd8 r;
+    f32 d;
+    asm volatile(".set noreorder\n\tlqc2 $vf1, 0(%1)\n\tlqc2 $vf2, 0(%2)\n\tvsub.wxyz $vf1, $vf1, $vf2\n\tsqc2 $vf1, 0(%0)\n\t.set reorder" : : "r"(&r), "r"(a), "r"(b) : "memory");
+    asm volatile(".set noreorder\n\tlqc2 $vf1, 0(%1)\n\tvmul.xyz $vf1, $vf1, $vf1\n\tvaddy.x $vf1, $vf1, $vf1y\n\tvaddz.x $vf1, $vf1, $vf1z\n\tvsqrt Q, $vf1x\n\tvwaitq\n\tcfc2.ni $8, $vi22\n\tmtc1 $8, %0\n\t.set reorder" : "=f"(d) : "r"(&r) : "$8");
+    return d;
+}
+f32 func_002cdcd8(Path2cdcd8* p, s32* idx, f32* t, V2cdcd8* pos, f32 maxDist);  // 0x002cdcd8: definition moved into src/taito/path.cpp
+}
+
+extern "C" {
+struct P2dff60;
+struct P2dff60Vt { void* f[15]; void (*land)(P2dff60*, void*, bool); };
+struct P2dff60 {
+    P2dff60Vt* vt;
+    u8 pad0[20];
+    f32 vx, vy, vz, f36;
+    s32 f40;
+    f32 f44;
+    u8 pad1;
+    u8 fell;
+    u8 pad2[22];
+    void* gim;
+    f32 f76;
+    s32 lane;
+    u8 f84;
+    u8 pad3[3];
+    f32 f88;
+    u8 pad4[4];
+    f32 f96;
+};
+struct H2dff60 { u8 pad[264]; u32 flags; };
+struct G2dff60 { u8 pad[128]; s32 mode; u8 pad2[0x8000 + 108 - 132]; u8 alt; };
+extern G2dff60* D_00361f60;
+extern const f32 D_00375d40;
+extern f32 D_00349e10;
+s32 func_002ddbb8(void*);
+f32 func_002dd2b0(G2dff60*);
+s32 p2dff60_reset_stage(void*) asm("_ZN2Ti12MGJumpGimObj18get_reset_stage_idEv");
+void Ti__MGJump__start_special_mode(G2dff60*, s32);
+f32 func_002de6e8(void*);
+f32 func_002dd250(G2dff60*, s32);
+f32 func_002dd280(G2dff60*, s32);
+void func_002e0870(P2dff60*, f32*, f32*, f32*);
+void func_002de3e0(void*);
+void Ti__MGJump__add_combo_count(G2dff60*, s32);
+void p2dff60_AddCount(s32, s32) asm("_ZN2YS7MISSION8AddCountEii");
+void p2dff60_ready(P2dff60*, H2dff60*) asm("_ZN2Ti12MGJumpPlayer19ready_jump_reactionEv");
+void func_002dff60(P2dff60* p, H2dff60* h);  // 0x002dff60: definition moved into src/anon/unit_002de3c8.cpp
+}
+
+extern "C" {
+struct V165ad8 {
+    f32 x, y, z, w;
+    V165ad8& operator=(const V165ad8& o) {
+        if (this != &o) asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(this), "r"(&o) : "$8", "memory");
+        return *this;
+    }
+} __attribute__((aligned(16)));
+struct Ent165ad8 { s32 id; void* body; };
+struct Hit165ad8 {
+    V165ad8 v0, v1, v2, v3, v4, v5;
+    u16 s0, s1, s2, s3;
+    f32 dist;
+    f32 f108;
+    struct { u32 b0 : 1; u32 b1 : 2; u32 b3 : 4; u32 rest : 25; } a;
+    struct { u32 c0 : 1; u32 c1 : 1; u32 c2 : 1; u32 rest : 29; } fl;
+    Ent165ad8* ent;
+    s32 owner;
+    f32 f128;
+};
+void func_0031b9e0(Hit165ad8*);
+Ent165ad8* func_00165ef0(Ent165ad8*);
+s32 func_00142b70(void*);
+s32 func_001424c0(void*, Hit165ad8*);
+s32 dk__ObjOcc__collisionDown(Hit165ad8* h, f32* minDist);  // 0x00165ad8: definition moved into src/anon/unit_001656b8.cpp
+}

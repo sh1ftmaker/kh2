@@ -1,0 +1,28 @@
+#include "../common/types.h"
+extern "C" {
+
+// ---- func_002ab818 ----
+struct W1799E { u8 a, b; u16 id; };
+struct W1799T { u8 a, b, type; };
+W1799T* func_001a80c8(u16);
+W1799E* func_001a82b0(W1799E*);
+s32 func_002a43b0(W1799E*);
+s32 func_002a9d68();
+extern s32 D_0035f610;
+
+void func_002ab818(void);  // 0x002ab818: definition moved into src/anon/unit_002a99c8.cpp
+
+// ---- func_002d94b8 ----
+s32 w1799_IsExec(void) asm("_ZN2YS5EVENT6IsExecEv");
+f32 w1799_GetRestTime(void) asm("_ZN2YS5EVENT11GetRestTimeEv");
+void w1799_texanm_start(u8* obj, s32 n) asm("_ZN2YS3OBJ12texanm_startEi");
+void w1799_change(u8* mot, s32 n, f32 a, f32 b) asm("_ZN2YS6MOTION6changeEiff");
+void w1799_ut_1c0d38(u8*, s32, s32, s32) asm("_Z15YS__OBJ__attachjjjj");
+u8* func_0016b740(s32);
+void Ti__Afp__calc_local_matrix(u8*, u8);
+extern s32 D_0034e948;
+struct W1799Obj { u8 pad[200]; u8 flag; u8 active; };
+
+s32 func_002d94b8(W1799Obj* self);  // 0x002d94b8: definition moved into src/anon/unit_002d6f70.cpp
+
+}

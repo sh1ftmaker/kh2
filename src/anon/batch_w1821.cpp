@@ -1,0 +1,41 @@
+#include "../common/types.h"
+struct W1821Vec {
+    f32 x, y, z, w;
+    W1821Vec() {}
+    W1821Vec(const W1821Vec& o) { asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(this), "r"(&o) : "$8", "memory"); }
+    W1821Vec& operator=(const W1821Vec& o) {
+        if (this != &o) asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(this), "r"(&o) : "$8", "memory");
+        return *this;
+    }
+} __attribute__((aligned(16)));
+struct W1821Obj { u8 pad[16]; W1821Vec p10; W1821Vec p20; u8 pad2[0xd0]; s32 w100; s32 w104; u8 pad3[0x40c]; s8 b514; };
+static inline f32 w1821_norm(W1821Vec* v) {
+    f32 len;
+    asm volatile(".set noreorder\n\tlqc2 $vf1, 0(%1)\n\tvmul.xyz $vf2, $vf1, $vf1\n\tvaddy.x $vf2, $vf2, $vf2y\n\tvaddz.x $vf2, $vf2, $vf2z\n\tvsqrt Q, $vf2x\n\tvwaitq\n\tcfc2.ni $8, $vi22\n\tvaddq.x $vf2, $vf0, Q\n\tmtc1 $8, %0\n\tvnop\n\tvdiv Q, $vf0w, $vf2x\n\tvwaitq\n\tvmulq.xyz $vf1, $vf1, Q\n\tsqc2 $vf1, 0(%1)\n\t.set reorder"
+        : "=f"(len) : "r"(v) : "$8", "memory");
+    return len;
+}
+extern "C" {
+
+void func_001c1130(s32);
+void func_001c11a8(s32);
+s32 func_00224860();
+s32 func_00224910();
+u32 func_002249b8();
+void func_002249c8();
+void func_002249d8();
+s32 func_002249e8();
+s32 func_00225260();
+void func_00228518();
+void func_00228590();
+extern s32 D_0035dac8;
+
+void func_002249f8(void);  // 0x002249f8: definition moved into src/anon/unit_00224780.cpp
+
+
+W1821Vec func_0017c030(W1821Obj*, s32*, u8);
+void YS__OBJ__prepare_jump(W1821Obj*, W1821Vec);
+void func_002eb778(W1821Obj*, u32, s32, f32);
+
+// 002ec850: moved to src/anon/unit_002ec5f8.cpp
+}

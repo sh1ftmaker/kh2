@@ -1,0 +1,97 @@
+#include "../common/types.h"
+extern "C" {
+struct T40 { s32 w0; s32 w4; u32 w8; u8 pad[28]; };
+struct T52 { s32 w0; s32 w4; u8 pad[38]; s16 h46; s16 h48; u8 pad2[2]; };
+extern T40* D_0035dcfc;
+extern T52* D_0035dcf4;
+extern s32 D_0035de20;
+s32 sa__EVENT__checkStart(s32);
+void ut_1c0d38(u32, u32, s32, s32) asm("_Z15YS__OBJ__attachjjjj");
+struct S { u8 pad[4]; s16 h4; u8 p6[2]; s16 h8; s16 h10; s16 h12; s16 h14; s16 h16; };
+void func_0022f018(S* s);  // 0x0022f018: definition moved into src/anon/unit_0022d358.cpp
+typedef void (*VF5)(void*);
+struct O408a { VF5* vt; u8 pad[404]; };
+struct O436a { VF5* vt; u8 pad[432]; };
+struct W5 { O408a a[5]; u8 p0[28]; O436a b[2]; O436a x; O436a c[24]; O436a d[24]; O436a e[24]; O408a f[24]; };
+extern W5* D_0035f038;
+s32 chk_139d78(void*) asm("_Z16u_call4_00139d78jjjj");
+void lv_139510(void*) asm("_ZN2dk5Obj2D5leaveEv");
+void ctarget0_00257a00(void) asm("_Z17ctarget0_00257a00v");
+void ctarget0_00257a00(void);  // 0x00257a00: definition moved into src/anon/unit_00254020.cpp
+extern s32 D_0035f3d4;
+struct T373 { u8 pad[8]; s16 t[1]; };
+extern T373 D_00373e50;
+extern u32 D_0035ef64, D_0035ef68, D_0035f03c, D_0035f01c;
+extern s8* D_0035f230;
+u8* cm_glb(void) asm("_ZN2Tz5CmTop13GetListBufferEv");
+s32 mb_gm(void) asm("_ZN2Tz8MenuBase7GetModeEv");
+s32 cm_gsp(s32) asm("_ZN2Tz5CmTop12GetSelectPosEi");
+void func_0027aed8(s32, s32*, s32*);
+s32 func_0028d008(void*);
+s32 Tz__CmAbility__Cur2AbiltyType(void);  // check_state16_then_loop
+void pz_cfo(void*, s32, s32, s32, s32, s32, s32, s32) asm("_ZN2Tz5Pause16CreateFadeObjectEz");
+void mc_as(void*, void*) asm("_ZN2Tz10MenuCursor12AttachSpriteEz");
+u8* mc_gs(void*) asm("_ZN2Tz10MenuCursor9GetSpriteEi");
+void sp_gop(u32, s32*, s32*) asm("_ZN2dk6Sprite12getOffsetPosERiS1_");
+void sp_sop(void*, s32, s32) asm("_ZN2dk6Sprite12setOffsetPosEii");
+s32 jm_gd(u32) asm("_ZN2Tz8JmReport7GetDataEj");
+void cm_csci(void*) asm("_ZN2Tz5CmTop18CreateShortCutInfoEPN2dk6SpriteE");
+void cm_lsci(void) asm("_ZN2Tz5CmTop17LeaveShortCutInfoEv");
+void Tz__CmAbility__UpdateTopSelActive(void* p, u8 flag);  // 0x0027bd40: definition moved into src/anon/unit_0027a6d8.cpp
+extern u8 D_00340ed0[3];
+extern u32 D_00340ed4;
+extern u64 D_00340ed8[];
+struct N7;
+typedef void (*CB7)(N7*, s32);
+struct N7 { u32* w0; u32 w4; u32 w8; u32 w12; N7* next; u8 pad20[4]; u32 w24; u8 b28, b29, b30, b31, b32, b33, b34; u8 pad35[5]; u64 d40; u64 d48; u8 pad56[24]; CB7 cb80; CB7 cb84; };
+s32 func_00109f58(u32, u32, u8);
+s32 func_00109ea8(u32, u32, u8);
+void kn__VU1DrawContext__setPacket(u64*, u32, u64, u64, s32, s32, u64, u64);
+s32 func_0011c8f8(u32*, u32*, s32, u32, u32, u32);
+void func_00134490(void);
+void func_00109fe8(N7* n);  // 00109fe8: moved to src/anon/unit_00109c30.cpp
+}
+
+namespace w295_a {
+#define QCOPY295(d, s) asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(d), "r"(s) : "$8", "memory")
+#define MCOPY295(d, s) asm volatile("lq $8, 0(%1)\n\tlq $9, 16(%1)\n\tlq $10, 32(%1)\n\tlq $11, 48(%1)\n\tsq $8, 0(%0)\n\tsq $9, 16(%0)\n\tsq $10, 32(%0)\n\tsq $11, 48(%0)" : : "r"(d), "r"(s) : "$8", "$9", "$10", "$11", "memory")
+struct QWord {
+    union { u32 v[4]; f32 f[4]; };
+    QWord() {}
+    QWord(const QWord& o) { QCOPY295(this, &o); }
+    QWord& operator=(const QWord& o) { if (this != &o) QCOPY295(this, &o); return *this; }
+} __attribute__((aligned(16)));
+struct QMat {
+    QWord r[4];
+    QMat() {}
+    QMat(const QMat& o) { MCOPY295(this, &o); }
+    QMat& operator=(const QMat& o) { if (this != &o) MCOPY295(this, &o); return *this; }
+} __attribute__((aligned(16)));
+static inline void ScaleIn2(QWord& d, QWord& v, f32 s) {
+    asm volatile("lqc2 $vf1, 0(%1)\n\tmfc1 $8, %2\n\tqmtc2 $8, $vf2\n\tvmulx.wxyz $vf1, $vf1, $vf2x\n\tsqc2 $vf1, 0(%0)" : : "r"(&d), "r"(&v), "f"(s) : "$8", "memory");
+}
+static inline void ScaleIn(QWord& v, f32 s) {
+    asm volatile("lqc2 $vf1, 0(%0)\n\tmfc1 $8, %1\n\tqmtc2 $8, $vf2\n\tvmulx.wxyz $vf1, $vf1, $vf2x\n\tsqc2 $vf1, 0(%0)" : : "r"(&v), "f"(s) : "$8", "memory");
+}
+static inline void MulIn(QMat& a, QMat& b) {
+    asm volatile("lqc2 $vf1, 0(%0)\n\tlqc2 $vf2, 16(%0)\n\tlqc2 $vf3, 32(%0)\n\tlqc2 $vf4, 48(%0)\n\t"
+        "lqc2 $vf5, 0(%1)\n\tlqc2 $vf6, 16(%1)\n\tlqc2 $vf7, 32(%1)\n\tlqc2 $vf8, 48(%1)\n\t"
+        "vmulax.wxyz ACC, $vf1, $vf5x\n\tvmadday.wxyz ACC, $vf2, $vf5y\n\tvmaddaz.wxyz ACC, $vf3, $vf5z\n\tvmaddw.wxyz $vf5, $vf4, $vf5w\n\t"
+        "vmulax.wxyz ACC, $vf1, $vf6x\n\tvmadday.wxyz ACC, $vf2, $vf6y\n\tvmaddaz.wxyz ACC, $vf3, $vf6z\n\tvmaddw.wxyz $vf6, $vf4, $vf6w\n\t"
+        "vmulax.wxyz ACC, $vf1, $vf7x\n\tvmadday.wxyz ACC, $vf2, $vf7y\n\tvmaddaz.wxyz ACC, $vf3, $vf7z\n\tvmaddw.wxyz $vf7, $vf4, $vf7w\n\t"
+        "vmulax.wxyz ACC, $vf1, $vf8x\n\tvmadday.wxyz ACC, $vf2, $vf8y\n\tvmaddaz.wxyz ACC, $vf3, $vf8z\n\tvmaddw.wxyz $vf8, $vf4, $vf8w\n\t"
+        "sqc2 $vf5, 0(%0)\n\tsqc2 $vf6, 16(%0)\n\tsqc2 $vf7, 32(%0)\n\tsqc2 $vf8, 48(%0)" : : "r"(&a), "r"(&b) : "memory");
+}
+struct Box { QWord mn, mx; };
+struct Src;
+typedef f32 (*SF)(Src*);
+struct Src { SF* vt; };
+struct Ob { u32 w0; Src* src; u8 p8[8]; QMat m16; u8 p80[64]; QMat m144; u8 p208[64]; QMat m272; u8 p336[20]; f32 f[6]; u8 p380[260]; QWord v640; };
+extern "C" {
+void bx_init(Box*) asm("_ZN2dk6Aabbox4initEv");
+void bx_set(Box*, f32, f32, f32, f32, f32, f32) asm("_ZN2dk6Aabbox3setEffffff");
+void func_00144b38(Box*, QMat*);
+void func_001605a0(Ob*, QMat);
+// 001606e0: moved to src/harata/libdk/bgobj.cpp
+}
+}

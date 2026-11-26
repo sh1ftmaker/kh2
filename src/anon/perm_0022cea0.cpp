@@ -1,0 +1,36 @@
+/* found by decomp-permuter (nightly.py) */
+extern "C" {
+
+
+typedef struct S4 S4;
+typedef unsigned char u8;
+typedef unsigned short u16;
+typedef unsigned int u32;
+typedef unsigned long long u64;
+typedef signed char s8;
+typedef signed short s16;
+typedef signed int s32;
+typedef signed long long s64;
+typedef float f32;
+union BD_VALUE
+{
+  s32 i;
+  f32 f;
+  void *p;
+  u32 u;
+};
+void func_001671e8(s32, s32);
+void func_00167218(void);
+s32 func_00227ca8(void *);
+s32 sa__EVENT__checkStart(s32);
+typedef struct S4
+{
+  s32 a;
+  s16 h;
+  u8 b6;
+  u8 b7;
+  u8 p8[4];
+} S4;
+void sa__EVENT__set_bin_seq_focus(S4 *p);  // 0022cea0: moved to src/sasa/event_layout.cpp (linked unit)
+
+}

@@ -1,0 +1,201 @@
+#include "../common/types.h"
+
+extern "C" {
+void func_00102730(void*);
+void* func_00124748(void*, s32);  // list_nth_node_rel
+void func_00113668(void*);
+void func_00105110(void*);
+void func_00124c08(void*);  // set_vtbl_347b88
+void func_00106420(void*);
+void func_001391c8(void*, s32, s32);
+void func_001666a0(void*);  // zero_fields_0_4_6_8
+void func_00138c10(void*, s32);
+void* func_001dc648(void*);
+void func_0014d358(void*, s32, void (*)(void), s32);
+void func_0016f9e8(void);
+void func_00140db0(void*);
+void func_00182f28(s32);  // store_global_35ed04
+void func_001d69d0(void*);
+s32 YS__MOTION__id_to_num(void*, s32);
+s32 func_0017edf0(void*, s32);
+s32 func_00180408(void*, s32);
+void* YS__SAVERAM_BATTLE__get_partram(void*, void*);
+void func_00188948(void*, void*, void*);
+void YS__LOCKON__release(void*);
+void* func_001d5af8(void*, void*, void*);
+void* func_00102c18(s32, s32, void (*)(void));
+void func_001b4340(void);
+void func_001b43e0(void);
+void func_0016cfa0(void*, s32, void*, void*, void*);
+s32 func_001bb4a0(void);
+void func_001c6fa8(void*, void*, void*, void*, void*);
+void func_001a4e30(void*);
+void func_001d2710(void*);
+void sceGsSyncPath(s32, s32);
+u8 func_002f3918(void*, void*);
+void func_00228918(void*);
+void sceGsExecLoadImage(void*, void*);
+void func_0023c300(void*);
+u8* func_001058e8(void);
+void func_002fde18(void*, s32, s32);
+void func_00242880(void);
+void func_0023d410(void);
+void func_00257000(void);
+void func_002878c8(void*);
+u8 func_0023f848(void*);
+void func_0028b8a0(void*);
+void func_0023f820(void*);
+void func_00292998(void);
+s32 func_001b6d70(u8);  // table_entry_ptr_b
+void worldmap__Symbol__setState(void*, s32);
+void func_002d2948(void*, void*, s32, void*);
+void func_002e7308(void*);
+void func_0031fec0(void*);
+
+struct ChangeFlag { u8 changed; };
+
+extern u8 D_00346960[];
+extern u8 D_00347bb0[];
+extern u8 D_01c5c460[];
+extern u32 D_0034aa70[5];
+extern ChangeFlag D_0034aa40;
+extern void* D_00350444;
+extern void* D_01d48cb0;
+extern u8* D_01d49320;
+extern void* D_00351ff0[];
+extern void* D_00351fe4;
+extern u16 D_0032fafe[];
+extern u8* D_00352ae0;
+extern void* D_003591c8;
+extern u8 D_003598e0[];
+extern u8 D_0035eb08[];
+extern void** D_0035ecbc;
+extern u8 D_0035f3a0[];
+extern u16 D_0035f4d8;
+extern void* D_0035f4d4;
+extern s32 D_0035f4bc;
+extern u8 D_003621a0[];
+extern s32 D_01e2bfa4;
+extern u8* D_01e2bfa0;
+extern u8 D_0034b268[];
+extern void** D_0034b278;
+extern u8 D_00351100[];
+
+void LOCKON_dtor(void*) asm("_ZN2YS6LOCKOND1Ev");
+void TargetCamera_change(u32*) asm("_ZN2dk12TargetCamera6changeEPN2YS6TARGETE");
+s32 MOTION_is_exist(void*, s32) asm("_ZN2YS6MOTION8is_existEi");
+void INDICATION_disable(u8*) asm("_ZN2YS10INDICATION7disableEv");
+void u_call4_001d2210(u32, u32, u32, u32) asm("_Z16u_call4_001d2210jjjj");
+void u_call4_00139d78(u32) asm("_Z16u_call4_00139d78jjjj");
+
+// Virtual call: slot 1 with (this, this) after a helper.
+// 00102750: moved to src/global/unit_001022c0.cpp
+
+// Counts the nodes of the list headed at p+8 (linked through +56).
+static inline u8* next_node(u8* p, u8* q) {
+    if (!q) return *(u8**)(p + 8);
+    return *(u8**)(q + 56);
+}
+
+// 00102a08: moved to src/global/unit_001022c0.cpp
+
+void func_00114de0(u8* p);  // 0x00114de0: definition moved into src/anon/unit_00114a90.cpp
+
+void kn__ModelMulti__calc(void* a, s32 b);  // 0x00124100: definition moved into src/anon/unit_00123990.cpp
+
+void func_00128008(u8* p);  // 0x00128008: definition moved into src/anon/unit_00127f40.cpp
+
+void dk__TREASURE_INFO__create(u8* p);  // 0x00137c50: definition moved into src/anon/unit_001374c8.cpp
+
+struct Entry20 { u8 pad[16]; u8 on; u8 id; u8 pad2[2]; };
+
+// Clears the 'on' flag of every entry whose id matches.
+void func_001418e8(u8* p, u8 id);  // 0x001418e8: definition moved into src/anon/unit_00141458.cpp
+
+// 0014dc08: moved to src/anon/unit_0014d680.cpp
+
+void dk__MISSION_GAUGE__alert(u8* p);  // 0x00151b40: definition moved into src/anon/unit_0014ecb8.cpp
+
+// Copies the new target into the camera state and flags the change.
+// 0015a6c8: moved to src/harata/libdk/targetcamera.cpp
+
+void func_001668f8(u8* p);  // 0x001668f8: definition moved into src/anon/unit_001664c0.cpp
+
+// 128-bit copy of p[1] into the quadword returned for p[0] (skipped on self-copy).
+// 0016e200: moved to src/anon/unit_0016d2e0.cpp
+
+void func_0016fa58(void);  // 0x0016fa58: definition moved into src/anon/unit_0016e8f8.cpp
+
+// 001781e8: moved to src/yasui/libys/player.cpp
+
+// 0017d930: moved to src/anon/unit_0017c400.cpp
+
+// 001805a8: moved to src/anon/unit_00180408.cpp
+
+void func_00189028(void* a, void* b, void* c, void* d);  // 0x00189028: definition moved into src/anon/unit_00188848.cpp
+
+// Destructor: clears the global current-lockon pointer if it is this one.
+void LOCKON_dtor(void* l);  // 0x0019c9a8: definition moved into src/anon/unit_0019ba60.cpp
+
+void func_001a0678(void** p);  // 0x001a0678: definition moved into src/anon/unit_0019fb70.cpp
+
+void YS__LIMIT__Init(void);  // 0x001b4300: definition moved into src/anon/unit_001b2780.cpp
+
+void func_001b58b8(void* a, void* b, void* c);  // 0x001b58b8: definition moved into src/anon/unit_001b2780.cpp
+
+struct Flags16 { u16 lo:9; u16 bit9:1; u16 hi:6; };
+
+// 001bb9f0: moved to src/yasui/libys/mission.cpp
+
+void func_001ca950(u8* p, void* a, void* b, void* c, void* d, u32 e);  // 0x001ca950: definition moved into src/anon/unit_001ca8e0.cpp
+
+void func_001cbbf8(u8* p);  // 0x001cbbf8: definition moved into src/anon/unit_001ca8e0.cpp
+
+void INDICATION_disable(u8* p);  // 0x001d07e0: definition moved into src/anon/unit_001cf0b0.cpp
+
+void u_call4_001d2210(u32 a0, u32, u32, u32);  // 0x001d2210: definition moved into src/anon/unit_001d14e0.cpp
+
+// Increments the counter, saturating at 999.
+void func_001d97c8(void);  // 0x001d97c8: definition moved into src/anon/unit_001d7458.cpp
+
+void func_001ddc08(void);  // 0x001ddc08: definition moved into src/anon/unit_001dd920.cpp
+
+s32 func_0020f118(void);  // 0x0020f118: definition moved into src/anon/unit_0020f118.cpp
+
+void func_002289c0(void** p);  // 002289c0: moved to src/anon/unit_00228618.cpp (linked unit)
+
+void func_002368b0(u8* p);  // 0x002368b0: definition moved into src/anon/unit_00236180.cpp
+
+void func_00237458(u8* p, u32 i, s32 j, s32 v);  // 0x00237458: definition moved into src/anon/unit_00237068.cpp
+
+void func_0023c0c0(u8* p);  // 0x0023c0c0: definition moved into src/anon/unit_0023bc58.cpp
+
+void func_0023d3d0(void);  // 0x0023d3d0: definition moved into src/anon/unit_0023d260.cpp
+
+void func_00242368(void* a);  // 00242368: moved to src/tozawa/crc.cpp (linked unit)
+
+s32 func_00287720(u8* p);  // 0x00287720: definition moved into src/anon/unit_00286d28.cpp
+
+void func_0028b830(u8* p);  // 0x0028b830: definition moved into src/anon/unit_00288b00.cpp
+
+void func_0028e710(u32 p, u32 a);  // 0028e710: moved to src/anon/unit_0028c878.cpp
+
+void func_00292a58(void);  // 00292a58: moved to src/anon/unit_00292998.cpp
+
+void func_002bf618(u8* p);  // 0x002bf618: definition moved into src/anon/unit_002bebd0.cpp
+
+void Ti__MGOarashiPiglet__MGOarashiPiglet(u8* p, void* a, void* b);  // 0x002d4200: definition moved into src/anon/unit_002d2498.cpp
+
+// Skips n variable-length records (64 bytes + 12 per sub-entry) after a 16-byte header.
+// 002e34d8: moved to src/anon/unit_002e2f08.cpp
+
+// Returns a 64-byte block to the pool's free list.
+// 002e98b0: moved to src/sugi/flare.cpp
+
+// Reads a 7-bit varint; returns the pointer past it.
+u8* func_00314b00(u8* p, s64* out);  // 0x00314b00: definition moved into src/libsupc++/eh_personality.cpp
+
+void func_0031e008(u8* p);  // 0x0031e008: definition moved into src/anon/unit_0031b9e0.cpp
+
+void func_00320118(u8* p);  // 0x00320118: definition moved into src/anon/unit_0031f2f8.cpp
+}

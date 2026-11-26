@@ -23,21 +23,22 @@ archive. Nothing from the disc may be committed.
 isoinfo -i "<your iso>" -x '/SLPM_666.75;1' > SLPM_666.75
 tools/setup_toolchain.sh <path>/ee-gcc3.2-040921-full.tar.gz ~/ps2
 source ~/ps2/env.sh
-python3 tools/build_elf.py objects && make        # MATCHED!
+make                                              # MATCHED!
 ```
 
-Requirements: x86_64 Linux with 32-bit glibc, `patchelf`, `python3`, `make`.
+Requirements: x86_64 Linux with 32-bit glibc, `patchelf`, `bubblewrap`, `python3`, `make`.
 A Docker path also exists (`docker/ps2`, place the archive there);
 [docs/native-toolchain.md](docs/native-toolchain.md) explains both.
 
 ## Working
 
-Pick functions with `tools/rig/list_candidates.py`, get context with
-`tools/rig/get_context.py`, score with `tools/rig/compile_diff.py`, land with
-`tools/rig/promote.py`. [docs/rig/README.md](docs/rig/README.md) describes the
-tools. Open a pull request against `matching` that states the functions
-matched before and after, the evidence for each new name, and anything that
-still differs.
+Everything already builds and matches. Useful work is cleaning up
+(`python3 tools/quality.py` and `out/generated/quality.tsv` show which
+functions still use assembly or register pins), naming
+(`notes/e3/e3_names.tsv`, applied with `tools/rename_fn.py`), typing, and
+moving functions to their original files (`data/tu_map.tsv`). Open a pull
+request against `matching` that states the `quality.py` totals before and
+after, the evidence for each new name, and anything that still resists.
 
 ## What gets a submission rejected
 

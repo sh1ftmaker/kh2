@@ -1,0 +1,205 @@
+#include "../common/types.h"
+
+extern "C" {
+
+extern u32 D_0032b9a4;
+void TASK_MANAGER__create_thread(u32, u32, u32, u32, u32);
+// 00102f38: moved to src/common/title.cpp
+
+extern u32 D_0032b91c;
+extern u8 D_0032ba28;
+void func_00102788(u32, u32, u32, void*);
+void MENU__pauseExecTask(void);
+// 001037b8: moved to src/common/unit_001031b0.cpp
+
+extern u32 D_00346e80;
+void func_00113668(void*);
+void func_00105110(void*);
+void func_00115290(void** p);  // 0x00115290: definition moved into src/anon/unit_00114a90.cpp
+
+extern u32 D_00347c60;
+void func_001322f0(void*);  // set_vtbl_347c00
+void func_00106420(void*);
+void func_00133228(void** p);  // 0x00133228: definition moved into src/anon/unit_00131418.cpp
+
+void func_00139598(void*);
+
+
+void func_0014cf80(void);
+void func_001b7f88(void);
+void func_002ef7c8(void);
+void func_0014d060(void);
+u32 func_0014e088(void);
+void func_0014e5f0(u32);
+void func_0014cf88(void);  // 0x0014cf88: definition moved into src/anon/unit_0014c7f0.cpp
+
+void forceLeaveCounter(void* c) asm("_ZN2dk11INFORMATION17forceLeaveCounterEPNS_7COUNTERE");
+u32 func_00139d78(void*);
+void func_001506e0(void*);
+void forceLeaveCounter(void* c);  // 0x0014fa08: definition moved into src/anon/unit_0014ecb8.cpp
+
+void func_00152508(void*, u32, u32, u32, u32);
+
+
+extern char D_001dda78[];
+extern u32 D_001ddb30;
+u8* func_00102c18(u32, u32, const char*);
+void dk__Camera__createEffectDestroyTask(void);  // 0x001618b8: definition moved into src/anon/unit_001614e8.cpp
+
+extern u32 D_004f5250;
+extern u32 D_004f5258[];
+extern s32 D_0034d780;
+void func_00167f38(void);
+// 00167fc8: moved to src/anon/unit_00167358.cpp
+
+u32 func_001c0cd8(void*);
+u8* YS__OBJ__get_pos(u8* p);  // 0x0016c028: definition moved into src/anon/unit_00169f98.cpp
+
+u8* YS__CACHE_BUFF__ReadRequestSub(u32, u32, u32);
+u8* func_00170530(u32 a, u32 b, s32 c, u32 d);  // 0x00170530: definition moved into src/anon/unit_0016e8f8.cpp
+
+typedef void (*VFn4)(void*, u32, u32, void*);
+// 00185a68: moved to src/anon/unit_001855e0.cpp
+
+extern void* D_01c608b8;
+u32 YS__OBJ__is_exist(void*);
+void* func_0016b0d0(void);
+void* ctarget_00185de0(u32, u32, u32, u32) asm("_Z16ctarget_00185de0jjjj");
+// 00185de0: moved to src/anon/unit_00185d10.cpp
+
+u8* YS__OBJ__Each(void*);
+// 00186078: moved to src/anon/unit_00185d10.cpp
+u8* func_00186078(u8* p);
+
+extern u32 D_01c60bc8[2];
+void YS__ACT__callback(void*, u32, void*, u32);
+// 001883f8: moved to src/anon/unit_00185d10.cpp
+void func_001883f8(u8* p, u32 a);
+
+extern void* D_0035037c;
+void func_00196e00(void*);
+// YS::EVENT::Exit: tear down the current event object, if any.
+u8 opDelete_u8(void*) asm("func_00105110");
+u8 EventExit(void) asm("_ZN2YS5EVENT4ExitEv");
+u8 EventExit(void);  // 0x00197be8: definition moved into src/anon/unit_00195d00.cpp
+
+// 001a49a0: moved to src/anon/unit_001a3e70.cpp
+
+extern s32 D_01c6cba0[2];
+// 001a8510: moved to src/anon/unit_001a82f0.cpp
+
+extern u32 D_00350c50;
+extern u8 D_01c6ced0;
+void func_0031fe00(void*, void*);
+// 001ac660: moved to src/anon/unit_001abb28.cpp
+
+void func_001b7958(s32* p, void* v);  // 0x001b7958: definition moved into src/anon/unit_001b6a50.cpp
+
+void YS__MISSION__PostEnd(s32);
+void func_001bb468(void);
+void func_001991a8(s32, s32);
+void MissionExit(s32 a) asm("_ZN2YS7MISSION4ExitEi");
+// 001bb858: moved to src/yasui/libys/mission.cpp
+
+u32 func_001bb4a0(void);
+u8* func_001bbcb0(void);
+// 001bbf40: moved to src/yasui/libys/mission.cpp
+
+u32 func_001d01e0(void);
+void func_00170320(u32);
+void YS__OBJENTRY__ReadRequest(u32, u32, u32);
+
+
+extern u8* D_01d5ba0c;
+u8 func_002fd248_u8(u32, void*, u32, u32, void*) asm("func_002fd248");
+extern u32 D_003216a8;
+// 001d30c0: moved to src/anon/unit_001d30b0.cpp
+
+extern u8* D_01d5ba98;
+
+
+extern u32 D_0032dfd0[][2];
+
+
+extern u32 D_01d9e6b4;
+extern u8 D_01d9e6b0;
+void func_001e65d0(void);
+void func_001e6630(void);
+void func_0021c9b0(void);
+void func_001e6648(void);  // 0x001e6648: definition moved into src/anon/unit_001e0cb8.cpp
+
+extern u32 D_0035dae4;
+void func_00225fa0(u32, u32);
+void func_00227930(void*);
+void func_00225690(u8* p);  // 0x00225690: definition moved into src/anon/unit_00224780.cpp
+
+// Store the vector (x, y, z, 0) into slot p[2916 + i] of the 320-byte table at p + 1664.
+void func_0023e918(u8* p, s32 i, f32 x, f32 y, f32 z);  // 0x0023e918: definition moved into src/anon/unit_0023e5d0.cpp
+
+void func_0023f628(u8* p, u32 a);  // 0x0023f628: definition moved into src/anon/unit_0023f5b8.cpp
+
+void func_00242088(void*);
+void func_002ef938(u32);
+void func_002421c0(u8* p);  // 0x002421c0: definition moved into src/anon/unit_00241fd0.cpp
+
+u8* func_001058e8(void);
+struct Pair16 { s16 a, b; };
+void func_002429c0(s32 a, s32 b);  // 0x002429c0: definition moved into src/anon/unit_00242478.cpp
+
+u8* func_00246868(s32);
+u8 func_001a6d08(s32);
+u8 Cur2SelPos(s32 i) asm("_ZN2Tz4HECO10Cur2SelPosEi");
+u8 Cur2SelPos(s32 i);  // 0x00246968: definition moved into src/anon/unit_00242478.cpp
+
+extern u32 D_0035f034;
+extern u32 D_0035f024;
+u32 func_0028acc8(u32);
+u32 IsWarningEnabled(...) asm("_ZN2Tz5CmTop16IsWarningEnabledEz");
+u32 IsWarningEnabled(...);  // 0x002576d0: definition moved into src/anon/unit_00254020.cpp
+
+
+
+typedef void (*VFn2)(void*, void*);
+extern void* D_0035f570;
+void func_00293f78(void* a);  // 0x00293f78: definition moved into src/anon/unit_00292e60.cpp
+
+u8* func_002766d0(void);
+u8 func_00139d78_u8(void*) asm("func_00139d78");
+u8 func_0029e2f8(s32 i);  // 0x0029e2f8: definition moved into src/anon/unit_0029d008.cpp
+
+u32 func_00287bc0(void);
+void func_00276c50(u32, u32);
+void func_002a03a0(void);  // 0x002a03a0: definition moved into src/anon/unit_0029f938.cpp
+
+void func_002c6380(void);
+void func_002c6190(void*);
+void func_002c6158(u32* p);  // 0x002c6158: definition moved into src/worldmap/cameramanager.cpp
+
+extern u32 D_00362428;
+void func_002cfeb0(void*, u32, u32, u32);  // obj_init_field1416_bit800
+void func_002e7308(void*);
+void func_002d5d10(u8* p, u32 a, u32 b);  // 0x002d5d10: definition moved into src/anon/unit_002d4548.cpp
+
+void YS__OBJ__prepare_jump_height(void*);
+void func_0016bd60(void*, u32);
+// 002eb4b0: moved to src/anon/unit_002eaf38.cpp
+
+u32 func_0010c7e8(u32);
+void func_00117808(u32, u32);
+void trap_empty_func(u32** p) asm("_ZN2kn15trap_empty_funcEP8BD_VALUE");
+// 002f0708: moved to src/naka/libkn/trapfunctions.cpp
+
+extern u32 D_003677e8;
+void func_00315768(void*);
+void func_00315840(void** p);  // 0x00315840: definition moved into src/libsupc++/tinfo.cpp
+
+extern u32 D_003678f8[];
+void func_003167f8(void*);  // set_vtbl_367910
+u8 func_00106420_u8(void*) asm("func_00106420");
+u8 func_00316890(void** p);  // 0x00316890: definition moved into src/libsupc++/eh_exception.cpp
+
+extern u32 D_00352560;
+void YS__MISSION_GAUGE__destroy(void*);
+void func_00321648(void** p);  // 0x00321648: definition moved into src/anon/unit_00320528.cpp
+
+}

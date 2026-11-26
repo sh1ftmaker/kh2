@@ -9,19 +9,7 @@ extern "C" u32 func_00293de8(u32);
 extern "C" void func_00293bd0(u32, u32, u32);
 extern "C" void func_002925c0();
 extern u8 D_0035f5e1 asm("D_0035f5e1");
-void LayFile::free() {
-    if (func_00292630() != 0) {
-        return;
-    }
+// 0x002a1cd8: definition moved into src/anon/unit_002a0908.cpp
 
-    func_002a1c68();
-    u32 r = func_00293de8((s8)D_0035f5d4[2]);
-    func_00293bd0(4, r, 0);
-    func_002925c0();
-    D_0035f5e1 = 1;
-}
-
-s32 LayFile::getFileAddress() const {
-    return reinterpret_cast<const FileAddressLayout*>(this)->fileAddress;
-}
+// 0x0023f900: definition moved into src/anon/unit_0023f5b8.cpp
 }  // namespace Tz

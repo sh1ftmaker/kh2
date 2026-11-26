@@ -6,34 +6,16 @@ class FVector;
 
 
 
-extern "C" f32 func_0011c050(...);
-extern "C" u32 func_002f4148(...);
+extern "C" f32 func_0011c050(...);  // float_bucket_index
+extern "C" u32 sceVu0RotMatrixX(...);
 
-u32 FMatrix::rotateX(f32 a1) {
-    u32 s0 = (u32)this;
-    if (a1 == 0.0f) return s0;
-    f32 f0 = func_0011c050();
-    ((u32 (*)(f32, u32, u32))func_002f4148)(f0, s0, s0);
-    return s0;
-}
+// 0x0011b6d8: definition moved into src/anon/unit_0011b3f8.cpp
 
-extern "C" u32 func_002f41f0(...);
-extern "C" u32 func_002f40a0(...);
+extern "C" u32 sceVu0RotMatrixY(...);
+extern "C" u32 sceVu0RotMatrixZ(...);
 
-u32 FMatrix::rotateY(f32 a1) {
-    u32 s0 = (u32)this;
-    if (a1 == 0.0f) return s0;
-    f32 f0 = func_0011c050();
-    ((u32 (*)(f32, u32, u32))func_002f41f0)(f0, s0, s0);
-    return s0;
-}
+// 0x0011b720: definition moved into src/anon/unit_0011b3f8.cpp
 
-u32 FMatrix::rotateZ(f32 a1) {
-    u32 s0 = (u32)this;
-    if (a1 == 0.0f) return s0;
-    f32 f0 = func_0011c050();
-    ((u32 (*)(f32, u32, u32))func_002f40a0)(f0, s0, s0);
-    return s0;
-}
+// 0x0011b768: definition moved into src/anon/unit_0011b3f8.cpp
 
 }  // namespace kn

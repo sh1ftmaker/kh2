@@ -1,0 +1,49 @@
+#include "../common/types.h"
+extern "C" {
+static inline bool w1595_TestBit(u32* b, u32 i) { return (b[i >> 5] & (1 << (i & 31))) != 0; }
+
+s32 func_00258048();
+s32 func_00283ab8(s32);
+s32 func_00181500(u16);
+struct W1595Rec { s32 a; u16 id; u16 b; };
+extern W1595Rec D_003742c8[];
+
+s32 func_00283b78(void);  // 0x00283b78: definition moved into src/anon/unit_00282c68.cpp
+
+void func_001039f8();
+s32 func_00139d78(void*);
+s32 func_0028acc8(void*);
+void func_0024ffe0();
+void func_00250130();
+void func_00252ba8();
+void func_00252bf0();
+void func_00252c20();
+s32 func_00287bc0();
+void Tz__MenuBase__SaveMode();
+s32 func_00287db0();
+extern void* D_0035ee34;
+extern void* D_0035ee38;
+extern void* D_0035ee3c;
+extern void* D_0035ee40;
+extern void* D_0035ee44;
+extern void* D_0035eea4;
+extern void* D_0035eea8;
+
+// The || chain with a single "return 0" keeps the result in v0 (separate returns put it in t7).
+s32 Tz__LMMU__Control(void);  // 0x0024ff08: definition moved into src/anon/unit_0024fbd0.cpp
+
+s32 func_00252ad8(void);  // 0x00252ad8: definition moved into src/anon/unit_00250fb8.cpp
+
+s32 func_00281100(s32);
+s32 func_002811b0(s32, s32);
+s32 func_001058e8();
+u16* YS__SAVERAM_BATTLE__get_partram(s32, s32);
+void func_00293500(s32, s32, u32);
+s32 func_00281480(s32, s32);
+s32 func_002815b8();
+s32 func_00281388(s32);
+u32 func_002814b0(s32);
+extern s32 D_0035f010;
+
+void func_00254568(void);  // 0x00254568: definition moved into src/anon/unit_00254020.cpp
+}

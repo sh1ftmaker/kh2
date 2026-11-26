@@ -1,0 +1,55 @@
+#include "../common/types.h"
+
+extern "C" {
+
+s32 func_00224910(void);
+void YI__SEQUENCE__SetScaleX(void* p, f32 v);
+
+static inline f32 w1781_clamp(f32 x, f32 lo, f32 hi) {
+    f32 r;
+    if (x < lo) r = lo;
+    else if (hi < x) r = hi;
+    else r = x;
+    return r;
+}
+
+void func_00228918(u8* self);  // 00228918: moved to src/anon/unit_00228618.cpp (linked unit)
+
+struct W1781VObj {
+    virtual void v0(); virtual void v1(); virtual void v2(); virtual void v3(); virtual void v4();
+    virtual void v5(); virtual void v6(); virtual void v7(); virtual void v8(); virtual void v9();
+    virtual void v10();
+};
+struct W1781Ent40 { s32 a; s32 b; W1781VObj* obj; u8 pad[28]; };
+extern W1781Ent40* D_0035dcfc;
+void YS__OBJ__is_valid(W1781VObj*);
+void sa__EVENT__clearMotionCtrlWk(s32);
+
+void func_0022d440(void);  // 0x0022d440: definition moved into src/anon/unit_0022d358.cpp
+
+// FVector-style 16-byte vector; the subtraction is a VU0 macro sequence (asm only for lqc2/vsub/sqc2)
+struct W1781Vec { f32 x, y, z, w; } __attribute__((aligned(16)));
+static inline void w1781_sub(W1781Vec* r, const W1781Vec* a, const W1781Vec* b) {
+    asm volatile(".set noreorder\n\tlqc2 $vf1, 0(%1)\n\tlqc2 $vf2, 0(%2)\n\tvsub.wxyz $vf1, $vf1, $vf2\n\tsqc2 $vf1, 0(%0)\n\t.set reorder"
+        : : "r"(r), "r"(a), "r"(b) : "memory");
+}
+struct W1781Obj {
+    u8 pad[0x30];
+    W1781Vec p30;
+    W1781Vec p40;
+    f32 time;
+    f32 dur;
+};
+void w1781_set_pos(void* obj, const W1781Vec* v) asm("_ZN2YS3OBJ7set_posERKN2kn7FVectorE");
+extern f32 D_00349e10;
+void func_0017d748(W1781Vec* out, W1781Obj* self, f32 t);
+
+void worldmap__Warp__exec(W1781Obj* self, void* obj);  // 0x2c7060: moved to src/anon/unit_002c6eb8.cpp
+
+
+struct W1781Ent616 { u8 d[616]; };
+struct W1781Mgr616 { W1781Ent616 ent[64]; s32 list[64]; s32 count; };
+
+W1781Ent616* func_0031f168(W1781Mgr616* m, W1781Ent616* p);  // 0x0031f168: definition moved into src/anon/unit_0031e268.cpp
+
+}

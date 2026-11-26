@@ -1,0 +1,53 @@
+#include "../common/types.h"
+
+/* YS__ITEM__GetBackyard */
+typedef struct W1925_It { u8 pad[2]; u8 type; u8 flags; u8 pad2[0xc]; u16 v; u16 id; } W1925_It;
+typedef struct W1925_G1 { u8 pad[0x1090]; u8 cnt[0x140]; u32 bits[1]; } W1925_G1;
+typedef struct W1925_G2s { u8 pad[8]; u16 slot[3]; } W1925_G2s;
+typedef struct W1925_G2 { u8 pad[0x36f0]; W1925_G2s s; } W1925_G2;
+extern "C" {
+extern W1925_G1 D_0032e020;
+extern W1925_G2 D_0032bb30;
+W1925_It* func_001a80c8(s32);
+void func_001a3168(s32, s32, s32);
+void func_001815d0(s32);
+void func_001a39c8(s32);
+void func_001a38b8(W1925_It*);
+void YS__PROGRESS__CheckLM(void);
+static inline bool W1925_isf(W1925_It* it) { return it->flags & 1; }
+// 001a32c8: moved to src/anon/unit_001a2a50.cpp
+}
+
+/* Tz__HBTE__Init */
+struct W1925_Al { virtual void* alloc(u32, void*); };
+inline void* operator new[](unsigned int sz, W1925_Al* a) { return a->alloc(sz, 0); }
+extern "C" {
+void func_00239700(void*);
+extern u8 D_00347e60;
+}
+struct W1925_T {
+    u32 vt; u8 p4[8]; u32 f12; u8 p16[8]; u8 sub[384];
+    W1925_T() { f12 = 0; vt = (u32)&D_00347e60; func_00239700(sub); }
+    ~W1925_T();
+};
+extern "C" {
+void func_00287b18(s32, s32);
+void* func_00288be8(s32);
+void func_002889f0(void*, s32, s32);
+void func_00288f48(void*, s32, s32, s32, s32);
+void func_002b3df8(void*);
+void func_0028d068(s32, s32);
+u8* func_00103eb0(void);
+void TASK_MANAGER__create_thread(u32, s32, s32, void*, s32);
+void func_0024b510(void);
+typedef void* (*AllocFn)(void*, u32, void*);
+extern void** D_0032ba14;
+extern u8* D_00347f80;
+extern void* D_0035eda8;
+extern void* D_0035edac;
+extern s32 D_0035edb0, D_0035edb4, D_0035edb8;
+extern W1925_T* D_0035edbc;
+extern void* D_0035edc0;
+extern u8 D_0035edc4, D_0035edc5;
+void Tz__HBTE__Init(void);  // 0x0024b210: definition moved into src/anon/unit_00249ef0.cpp
+}

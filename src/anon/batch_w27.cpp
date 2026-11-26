@@ -1,0 +1,216 @@
+#include "../common/types.h"
+
+extern "C" {
+
+// An empty-destructor local keeps a cleanup pending, which stops gcc from
+// turning the final call into a sibling call (as in the game's destructors).
+struct NoTail { ~NoTail() {} };
+
+void wtarget_00102c90(u32, u32, u32, u32) asm("_Z16wtarget_00102c90jjjj");
+void wtarget_0016c640(u32, u32, u32, u32) asm("_Z16wtarget_0016c640jjjj");
+void wtarget_001954a0(u32, u32, u32, u32) asm("_Z16wtarget_001954a0jjjj");
+void u_call0_001d3b68(void) asm("_Z16u_call0_001d3b68v");
+void u_call4_002908f0(u32, u32, u32, u32) asm("_Z16u_call4_002908f0jjjj");
+
+struct S102c90 {
+    void* vt;
+    u32 f4;
+    u8 f8;
+    u8 pad9[11];
+    u32 f20;
+    u32 f24;
+    u32 f28;
+    u32 f32;
+    u32 f36;
+    u32 f40;
+};
+extern S102c90 D_0032b968;
+extern u32 D_0032b930;
+// 00102c90: static init of the field mode object, moved to src/common/unit_00102a70.cpp
+
+struct Entry108930 { u32 mask; u32 data; };
+void* func_00108930(u8* p, s32 bit);  // 00108930: moved to src/anon/unit_001085a8.cpp
+
+
+
+f32 func_0013fd10(void*);
+void func_0013fd78(void*);
+void func_0013fec0(u8* p);  // 0x0013fec0: definition moved into src/anon/unit_0013fca8.cpp
+
+
+
+void func_0013a6d0(void);
+u8* func_00102c18(u32, u32, void*);
+void func_0014a830(void);
+void func_0014ae10(void);
+void func_0013a9e8(u32);
+void worldmap__Manager__readPackEnable(void);
+void func_0014a188(void);  // 0014a188: moved to src/anon/unit_00149fa8.cpp
+
+s32 func_00163268(f32* a, f32* b, f32* out);  // 0x00163268: definition moved into src/anon/unit_001614e8.cpp
+
+void* YS__OBJ__Each(void*);
+s32 func_0016a070(void*);
+void* func_0016b800(s32 id);  // 0x0016b800: definition moved into src/anon/unit_00169f98.cpp
+
+void func_0016c5a0(void*, u32);
+void wtarget_0016c640(u32 a, u32, u32, u32);  // 0x0016c640: definition moved into src/anon/unit_00169f98.cpp
+
+void YS__OBJ__get_dir(void*, u32);
+extern u32 D_01c5f480[4];
+void func_00171518(u32** p);  // 0x00171518: definition moved into src/anon/unit_00170f58.cpp
+
+void YS__OBJ__set_wish_dir(void*, void*);  // obj_set_float1644_from_pair
+void func_00198690(void*);
+// 00175b68: moved to src/yasui/libys/party.cpp
+
+s32 func_00195530(void*);
+s32 func_00195468(void*, u32);
+void wtarget_001954a0(u32 a, u32 b, u32, u32);  // 0x001954a0: definition moved into src/anon/unit_00194790.cpp
+
+struct Pair196618 { u8 a, b; };
+struct Tbl196618 { u16 count; Pair196618 e[1]; };
+extern Tbl196618* D_01c61b08;
+s32 func_00196618(s32 a, s32 b);  // 0x00196618: definition moved into src/anon/unit_00195d00.cpp
+
+s32 func_0019c090(void*);  // obj_is_enabled
+s32 func_0019c0f8(u8* p);  // 0x0019c0f8: definition moved into src/anon/unit_0019ba60.cpp
+
+void func_00190128(void*);
+void func_0019ca20(void*);
+extern void* D_00350444;
+void func_0019c8d0(u32* p);  // 0x0019c8d0: definition moved into src/anon/unit_0019ba60.cpp
+
+s32 func_0019d4a8(void*);
+void func_002c0688(u32, void*);
+void func_0015a638(void*, void*);
+void func_0019d438(u8* p);  // 0x0019d438: definition moved into src/anon/unit_0019ba60.cpp
+
+u8* func_001a80c8(void);  // table24_find_by_id
+s32 func_001a67b0(u32);
+// 001a3820: moved to src/anon/unit_001a2a50.cpp
+
+void func_00239700(void*);
+u32 func_001ab810(void);  // get_global_1c7cec0
+u32 func_001ab800(void);
+void YI__SEQUENCE__Init(void*, u32, u32);
+// 001ac208: moved to src/anon/unit_001abb28.cpp
+
+s32 func_001bb4a0(void);
+u8* func_001bbcb0(void);
+// 001bc130: moved to src/yasui/libys/mission.cpp
+
+void func_001dca30(u32, u32, u32);  // obj_set48_52_flag40000
+// 001c16a0: moved to src/anon/unit_001c0638.cpp
+void func_001c16a0(u32* p, u32 x);
+
+extern f32 D_00349e10;
+void YS__COMBOCOUNTER__reset(void*);
+s32 func_001d21c0(u8* p);  // 0x001d21c0: definition moved into src/anon/unit_001d14e0.cpp
+
+struct Lerp1d3000 { u8 pad[240]; f32 hiVal; f32 loVal; f32 hi; f32 lo; };
+extern Lerp1d3000* D_00352130;
+f32 func_001d3000(f32 x);  // 0x001d3000: definition moved into src/anon/unit_001d2810.cpp
+
+void func_001d3878(void*);
+void func_00105110(void*);
+extern u8* D_01d5ba20;
+// 001d3b68: moved to src/anon/unit_001d35e0.cpp
+
+s32 func_001d3f38(u8* p);  // 0x001d3f38: definition moved into src/anon/unit_001d3c08.cpp
+
+void func_00106420(void*);
+
+
+void sceVu0CopyVector(void*, void*);  // memcpy16
+extern u32 D_00354bc0;
+extern u32 D_00354be0;
+void func_00209e80(u8* a, u8* b);  // 0x00209e80: definition moved into src/anon/unit_00209d68.cpp
+
+extern u8 D_0035daec;
+extern u8 D_0035daed;
+s32 func_00225a68(void);
+s32 func_00225aa8(void);  // 0x00225aa8: definition moved into src/anon/unit_00224780.cpp
+
+
+
+struct S6 { u8 b[6]; };
+extern S6 D_00372160[];
+extern S6 D_00372178[];
+extern u32 D_0035edf4;
+void func_0024dfe0(void);
+S6* func_0024e008(s32 i);  // 0x0024e008: definition moved into src/anon/unit_0024cda8.cpp
+
+extern s16 D_003726b8[];
+s32 func_00253380(s32 x);  // 0x00253380: definition moved into src/anon/unit_002530c8.cpp
+
+u32 func_0023aa18(void*);
+u32 func_0023aa38(void*);
+void Tz__MultiSeq__setParamXYToOffset(u8* d, u8* s);  // 0028eab8: moved to src/anon/unit_0028c878.cpp
+
+void func_00290a60(void*);
+void func_00106450(void*);
+void u_call4_002908f0(u32 a, u32, u32, u32);  // 002908f0: moved to src/anon/unit_0028f1e0.cpp
+
+extern u8 D_0035f590;
+extern u8 D_0035f591;
+extern void** D_0035f58c;
+void func_00295810(void);  // 0x00295810: definition moved into src/anon/unit_00292e60.cpp
+
+u8* func_002a9d68(void);
+void func_002aab90(u32 n);  // 0x002aab90: definition moved into src/anon/unit_002a99c8.cpp
+
+void func_00185ed8(void*, u32, u32, u32);
+extern u32 D_00361810;
+void func_002be770(u8* p, u32 a, u32 b);  // 0x002be770: definition moved into src/anon/unit_002be020.cpp
+
+extern u32 D_00361a50;
+extern u8* D_0034e948;
+void func_001c11a8(u32);
+void func_00197780(void);
+void func_00197cc0(void);
+void func_00139858(u32);
+void func_002bfaf0(void);  // 0x002bfaf0: definition moved into src/anon/unit_002bebd0.cpp
+
+extern u32 D_00361f70;
+extern u32 D_00361f60;
+void func_002cf3f8(void*);
+void func_002ceaa8(u8* p);  // 002ceaa8: moved to src/taito/minigame_base.cpp (linked unit)
+
+extern u32 D_0034ee08;
+void YS__OBJ_ATTACK__clear(void*);  // array8_free_slots
+void func_001c0248(void*);
+void func_00319fb0(void*);  // big_obj_dtor
+void func_002cffe0(u8* p);  // 0x002cffe0: definition moved into src/anon/unit_002cf260.cpp
+
+extern u32 D_003625a8;
+void func_002e70b0(void*);
+void func_002cea28(void*);
+void func_002d7338(u8* p);  // 0x002d7338: definition moved into src/anon/unit_002d6f70.cpp
+
+extern u32 D_003625e0;
+void func_002d0ea8(void*);
+void func_002d9730(u8* p);  // 0x002d9730: definition moved into src/anon/unit_002d96d8.cpp
+
+void YS__NPC__get_rtn_action_dir(void*, u32);
+extern u32 D_01e2be20[4];
+// 002e37c0: moved to src/anon/unit_002e2f08.cpp
+
+// 4x4 matrix transpose (MMI): d = transpose(s).
+void sceVu0TransposeMatrix(void* d, void* s);  // 0x002f3dd8: definition moved into src/sdk/libvu0_002f3cd8.s
+
+// strstr
+char* func_002ff918(char* s, char* sub);  // 0x002ff918: definition moved into src/newlib/libc/strstr.c
+
+
+
+extern u32 D_0035eb98;
+extern u32 D_00347f98;
+void func_0023c098(void*);  // set_vtbl_36eae8_then_call
+void func_002369f0(void*);  // set_vtbl_36eac8_then_call
+void func_0023ee68(void*);
+void func_0031cdd8(u8* p);  // 0x0031cdd8: definition moved into src/anon/unit_0031b9e0.cpp
+
+void func_0031f340(u8* p);  // 0x0031f340: definition moved into src/anon/unit_0031f2f8.cpp
+
+}

@@ -1,0 +1,26 @@
+#include "../common/types.h"
+
+// 0021efc0: sprite animation frame table (header with frame count, then 8-byte frames).
+struct W2368AnimFrame { u16 a; s16 dur; s8 flags; u8 pad[3]; };
+struct W2368AnimHdr { u8 pad[6]; s16 count; u8 pad8[8]; W2368AnimFrame frm[1]; };
+struct W2368AnimState { s16 time; u8 frame; };
+struct W2368AnimObj { W2368AnimHdr** hdr; W2368AnimState* st; };
+
+// 001a38b8
+struct W2368Ent { u16 v; u16 pad; s32 f4; };
+struct W2368Info { u8 pad[4]; s16 kind; };
+struct W2368Arg { u8 pad[0x10]; u16 id; };
+
+extern "C" {
+extern u8 D_0032e020;
+W2368Ent* YS__SAVERAM_BATTLE__get_formram(void*, s32);
+W2368Info* YS__COMMAND_ELEM__Get(u16);
+u16 func_001a3958(s32);
+
+// Advances the animation clock by 0x200; on reaching the frame's duration steps to the next
+// frame, and at the end of the table either rewinds (flag 0x80) or holds the last frame.
+void func_0021efc0(W2368AnimObj* o);  // 0x0021efc0: definition moved into src/anon/unit_0021e988.cpp
+
+// Clears entry 6's field, then for item kinds 1, 4 and 5 makes sure that kind's entry has a value.
+// 001a38b8: moved to src/anon/unit_001a2a50.cpp
+}

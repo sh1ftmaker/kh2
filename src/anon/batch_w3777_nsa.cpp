@@ -1,0 +1,39 @@
+#include "../common/types.h"
+extern "C" {
+struct M2da670 { f32 m[4][4]; } __attribute__((aligned(16)));
+struct Pr2da670 { f32 x, w; };
+struct O2da670 { u8 pad[3056]; void* pot; u8 pad2[4]; Pr2da670 pos; };
+extern void* D_00361f60;
+s32 o2da670_is_attach(void*) asm("_ZN2YS3OBJ9is_attachEv");
+M2da670 func_002d8120(void*, Pr2da670*, f32);
+void func_002da520(O2da670*, const M2da670&);
+f32 func_002dbf50(void*);
+void func_002d8d40(void*, f32*, f32*);
+bool o2da670_is_separate_blow(void*) asm("_ZN2Ti14MGHachimitsuPo16is_separate_blowEv");
+f32 o2da670_get_vertical_pos(void*) asm("_ZN2Ti14MGHachimitsuPo16get_vertical_posEv");
+void func_002dc140(void*, const M2da670&);
+}
+// Clamp p into [lo, hi].
+static inline __attribute__((always_inline)) void Clamp2da670(Pr2da670& p, const f32& lo, const f32& hi)
+{
+    if (p.x < lo) p.x = lo;
+    if (hi < p.x) p.x = hi;
+}
+// Clamp a, then push b out so the two stay at least a.w + b.w apart.
+static inline __attribute__((always_inline)) void Fix2da670(Pr2da670& a, Pr2da670& b, const f32& lo, const f32& hi)
+{
+    if (a.x < lo) a.x = lo;
+    if (hi < a.x) a.x = hi;
+    f32 w = a.w + b.w;
+    if (a.x < b.x) {
+        if (b.x < a.x + w) b.x = a.x + w;
+    }
+    if (b.x < a.x) {
+        if (a.x < b.x + w) b.x = a.x - w;
+    }
+}
+// MGHachimitsuPo position update: when attached, place at its own position; otherwise clamp both
+// pieces into the [lo, hi] range, push them at least 40 + 30 apart, and build both matrices.
+extern "C" {
+void func_002da670(O2da670* o);  // 0x002da670: definition moved into src/anon/unit_002da040.cpp
+}

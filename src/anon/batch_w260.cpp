@@ -1,0 +1,72 @@
+#include "../common/types.h"
+
+struct W260B20 { union { int w[5]; u8 c; }; };
+struct W260Hdr { u16 h0; u16 h2; u8 b4; u8 b5; u8 b6, b7; W260B20* p8; };
+struct W260Ent { u8 pad[12]; W260B20 d; u8 pad2[4]; W260Hdr hdr; };
+struct W260Q { f32 x, y, z, w; } __attribute__((aligned(16)));
+struct W260Cam { u8 pad0[16]; f32 x, y, z; };
+struct W260Z { u8 pad[12]; int f12; u8 pad2[20]; u8 b36; };
+struct W260V {
+    f32 x, y, z, w;
+    W260V() {}
+    W260V(const W260V& o) { if (this != &o) asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(this), "r"(&o) : "$8", "memory"); }
+    W260V& operator=(const W260V& o) { if (this != &o) asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(this), "r"(&o) : "$8", "memory"); return *this; }
+} __attribute__((aligned(16)));
+// VU0 dot product of the xyz parts.
+static inline __attribute__((always_inline)) f32 W260Dot(const W260V& a, const W260V& b)
+{
+    f32 r;
+    asm volatile("lqc2 $vf1, 0(%1)\n\tlqc2 $vf2, 0(%2)\n\tvmul.xyz $vf1, $vf1, $vf2\n\tvaddy.x $vf1, $vf1, $vf1y\n\tvaddz.x $vf1, $vf1, $vf1z\n\tqmfc2 $8, $vf1\n\tmtc1 $8, %0" : "=f"(r) : "r"(&a), "r"(&b) : "$8", "memory");
+    return r;
+}
+// VU0 squared length of the xyz part.
+static inline __attribute__((always_inline)) f32 W260LenSq(const W260Q& a)
+{
+    f32 r;
+    asm volatile("lqc2 $vf1, 0(%1)\n\tvmul.xyz $vf1, $vf1, $vf1\n\tvaddy.x $vf1, $vf1, $vf1y\n\tvaddz.x $vf1, $vf1, $vf1z\n\tqmfc2 $8, $vf1\n\tmtc1 $8, %0" : "=f"(r) : "r"(&a) : "$8", "memory");
+    return r;
+}
+struct W260Lim { u8 pad[34]; u8 b34; s8 b35; };
+struct W260Own { u8 pad[12]; int f12; u8 pad2[24]; W260Lim* p40; };
+struct W260Tgt;
+struct W260TgtVT { void* p[3]; W260V (*f12)(W260Tgt*, int); };
+struct W260Tgt { W260TgtVT* vt; };
+struct W260Ctl { W260Own* own; };
+struct W260Col { f32 a[3]; int n; W260Q b; W260Col() : n(0) {} };
+struct W260Tg { u8* obj; };
+extern "C" int w260_is_exist(W260Tg*) asm("_ZNK2YS6TARGET8is_existEv");
+static inline __attribute__((always_inline)) bool W260Valid(W260Tg* t) { return w260_is_exist(t) && t->obj; }
+
+extern "C" {
+W260Z* w260_u_call4(int) asm("_Z21YS__COMMAND_ELEM__Getjjjj");
+int w260_is_same(void*, void*) asm("_ZNK2YS6TARGET7is_sameERKS0_");
+void func_0019d548(W260Ent*);
+void func_0019d588(W260Ent*, int);
+
+void YS__RECOM__start(W260Ent* e, W260Hdr* h);  // 0x0019d5f8: definition moved into src/anon/unit_0019ba60.cpp
+
+u8 sceVu0CopyVector(void*, void*);  // memcpy16
+void sceVu0Normalize(W260Q*, W260Q*);  // vec4_normalize
+void sceVu0OuterProduct(W260Q*, W260Q*, W260Q*);  // vec3_cross
+void w260_mtx(void*, void*, void*) asm("_Z15sceVu0MulMatrixjjjj");
+extern u8 D_00354bc0[];
+extern u8 D_00354be0[];
+extern W260Cam D_01d9e840;
+extern W260Q D_01d9e870, D_01d9e880, D_01d9e890, D_01d9e8a0, D_01d9e8b0;
+extern u8 D_01d9e8c0[], D_01d9e940[];
+
+void func_00200950(u8* p, u8* q);  // 0x00200950: definition moved into src/anon/unit_00200578.cpp
+
+f32 cosf(f32);
+W260V YS__OBJ__get_dir(int);
+W260V YS__MATH__VectorRotY(const W260V&, f32);
+
+int func_0018e698(W260Ctl* c, W260Tgt** t);  // 0x0018e698: definition moved into src/anon/unit_0018d050.cpp
+
+W260Q func_00190388(W260Tg*);  // vec4_from_arg
+int func_0016bba8(u8*, int, int);
+void YS__COLLISION__set(W260Col*, u8*, int);
+
+int func_00112f88(W260Tg* t);  // 0x00112f88: definition moved into src/anon/unit_001117d8.cpp
+
+}

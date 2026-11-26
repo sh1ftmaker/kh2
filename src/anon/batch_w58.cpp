@@ -1,0 +1,264 @@
+#include "../common/types.h"
+
+struct VObj { void** vt; };
+typedef void (*VFn)(void*);
+struct Vec4 { f32 x, y, z, w; } __attribute__((aligned(16)));
+
+// 128-bit copy.
+static inline void cpq(void* d, const void* s) {
+    asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(d), "r"(s) : "$8", "memory");
+}
+
+// An empty-destructor local keeps a cleanup pending, which stops gcc from
+// turning the final call into a sibling call.
+struct NoTail { ~NoTail() {} };
+
+extern "C" {
+
+extern u8 D_00347e60[];
+extern u8 D_00347f98[];
+void func_00239870(void*);
+s32 func_001bb4a0(void);
+
+// Dispatch on a state byte (2: virtual call on an object, 3: helper), then notify.
+u8* func_001040f8(void);
+VObj* func_001045f0(void);
+void WORLDMAP__gumiToWorldMap(void);
+u32 func_0014aba8(void);
+void func_0014aa58(u32, s32, s32);
+// 00104108: moved to src/common/gumibattle.cpp
+
+// Returns one of two 144-byte table entries indexed by the current slot.
+extern u8 D_0033cc44;
+extern s32 D_0033cc40;
+struct E144 { u8 pad[144]; };
+extern E144 D_003a7f70[];
+extern E144 D_003a8090[];
+// 00106a60: moved to src/naka/libkn/camera.cpp
+
+// Walks a chunk chain until a chunk with the given tag (or the "_KN5" end tag).
+s32 func_00132208(void*);
+u32 func_001320b0(void*);  // read_u32_be
+void* func_00132130(void*);
+void* func_00132180(void* p, u32 tag);  // 0x00132180: definition moved into src/anon/unit_00131418.cpp
+
+extern u8 D_00348590[];
+void func_00239700(void*);
+void dk__COMMAND_DRAW__COMMAND_DRAW(u8* p);  // 0x0013b088: definition moved into src/anon/unit_0013a8b8.cpp
+
+VObj* func_0016b0d0(void);
+u8* func_00167f18(s32);
+s32 func_0013c698(u8*);
+s32 func_0013c8b0(u8*);
+s32 func_0013c738(u8* p);  // 0x0013c738: definition moved into src/anon/unit_0013a8b8.cpp
+
+// Axis-aligned box (min xyz, max xyz) around a sphere (center xyz, radius at +16).
+void func_00144570(f32* box, u8* s);  // 0x00144570: definition moved into src/anon/unit_00144450.cpp
+
+// Clip-tests 8 points against the matrix m: 0 = all outside one plane,
+// 2 = partially clipped, 1 = all inside.
+s32 func_001466b0(Vec4* m, Vec4* v);  // 0x001466b0: definition moved into src/anon/unit_00145600.cpp
+
+void dk__ObjCamera__cancelSubjective(f32);
+u8* func_00140df0(void);
+void func_0014e658(u8*);
+void func_0014e6f8(u8*);
+void func_0014e8b8(u8*);
+extern u32 D_0034a3f4;
+extern u32 D_0034a3f0;
+extern f32 D_0034a3f8;
+// 0014eb48: moved to src/harata/libdk/fpscamera.cpp
+
+// Init a node and append it to the global list.
+struct Nd12 { u32 f0; void* f4; u32 f8; Nd12* next; };
+struct L12 { Nd12* head; Nd12* tail; };
+extern L12 D_004f41c0;
+extern union { u32 v; u8 c; } D_0034c7a4;
+void func_001656c0(Nd12*);
+void* func_001063c0(u32, u32);
+void func_001415e8(void*, u32, s32);
+void func_001656d0(Nd12* n, u32 a1, u32 a2);  // 0x001656d0: definition moved into src/anon/unit_001656b8.cpp
+
+// p[0] = p[0] + p[1] (vector), returned through a function-local static.
+extern s8 D_004f62b0;
+extern Vec4 D_004f62c0;
+void func_002fd188(void (*)(void));  // pool_alloc_block
+void func_0016e878(void);
+// 0016d340: moved to src/anon/unit_0016d2e0.cpp
+
+u32 ryj__PAX__start(u32, u32, u32, u32, u32, u32);  // scan_list_by_half
+void func_00174858(u32* p);  // 0x00174858: definition moved into src/anon/unit_00171e58.cpp
+
+void YS__OBJ___OVR_leave(u8*);
+// 00175a70: moved to src/yasui/libys/party.cpp
+
+extern u32* D_01c60888;
+u8* func_001a80c8(u32);  // table24_find_by_id
+// 00185890: moved to src/anon/unit_001855e0.cpp
+
+void func_00114580(u8*);
+void YS__PARTRAM__PARTRAM(u8* p);  // 0x001888c8: definition moved into src/anon/unit_00188848.cpp
+
+// Puts id v into the first free slot of a, borrowing it from b if present.
+struct S188 { u8 pad[18]; u8 n; u8 pad2[33]; u16 a[8]; u16 b[8]; };
+void func_00188a28(S188* p, u32 v);  // 0x00188a28: definition moved into src/anon/unit_00188848.cpp
+
+u32* YS__LEVELUP__Get(u32, u32);
+extern u32 D_0032f210;
+s32 func_00188bb0(u8* p, u32 a);  // 0x00188bb0: definition moved into src/anon/unit_00188848.cpp
+
+void* func_00186078(void*);
+u8* func_0016bba8(void*, s32, u8*);
+// 001a4388: moved to src/anon/unit_001a3e70.cpp
+
+// CRC-16/CCITT of a string, processed from the last character backwards.
+u32 strlen(const char*);  // strlen
+u16 func_001ae270(const char* s);  // 0x001ae270: definition moved into src/anon/unit_001ada38.cpp
+
+struct Nd20 { f32 f0; u32 f4; u32 f8; u32 f12; u32 f16; Nd20* next; };
+struct L20 { Nd20* head; Nd20* tail; };
+extern L20 D_01d48de0;
+u32 func_0016a070(u32);
+s32 func_001a3888(u32);  // id_in_range_5_7_131
+// 001ba1f8: moved to src/yasui/libys/itemeffect.cpp
+
+u32 YS__COMMAND_ELEM__Get(u16);
+void func_001bd918(u8*, u32, s32);
+void YS__PLAYER_COMMAND___decide(u8* p);  // 0x001bd8c8: definition moved into src/anon/unit_001bc568.cpp
+
+// Fills 8 angles (k * 2pi/8) into a 16-byte-stride table.
+void func_001db8f8(void*, u32, s32, s32);
+extern u8 D_00351618[];
+struct E16f { u8 pad[12]; f32 v; };
+extern E16f D_01d49590[];
+void func_001c4498(u8* p, u32 a1);  // 0x001c4498: definition moved into src/anon/unit_001c4120.cpp
+
+u32* func_001d3350(void*, s32);
+void func_001d3388(u32);
+extern u8 D_01d5ba10[];
+// 001d3390: moved to src/anon/unit_001d30b0.cpp
+
+void func_001d6a28(u8*);
+void func_0019ca20(u8*);
+void func_0013dde8(s32);
+void YS__FIELD_COMMAND__reset_special_command(u8*);
+extern u32 D_003527e0;
+void func_001d69d0(u8* p);  // 0x001d69d0: definition moved into src/anon/unit_001d68e0.cpp
+
+struct E16b { u8 pad[16]; };
+extern E16b D_0036e600[];
+extern u32 D_0036e620[];
+extern u32 D_003527e4;
+u8* func_001a5420(u32, void*, u32);
+void func_001d76c8(void);
+void YS__MISSION__AddCountForce(u32, s32);
+u8* func_001ba158(void);
+void func_001d7638(u32 a0, s32 i);  // 0x001d7638: definition moved into src/anon/unit_001d7458.cpp
+
+u8* func_001bbcb0(void);
+void YS__MISSION__WarningGauge(u8 on, s32 i);  // 0x001d8fa8: definition moved into src/anon/unit_001d7458.cpp
+
+void func_001dcfb0(void);
+void func_001dd208(s32);
+extern VObj* D_01d5bb00;
+extern u32 D_01d5bb04;
+extern u32 D_01d5bb08;
+extern u8 D_00352af0;
+void func_001dced0(void);  // 0x001dced0: definition moved into src/anon/unit_001dbfd8.cpp
+
+void func_002bc358(s32, s32);
+void func_001dee10(u8*);
+void func_001de978(u8*);
+void func_001e0058(u8* p);  // 0x001e0058: definition moved into src/anon/unit_001deb58.cpp
+
+// Frees up to three buffers from the current heap, then clears the heap.
+void func_00102670(u32, u32);  // to_1025f8
+extern u32 D_0035de3c;
+extern u32 D_0035de30;
+extern u32 D_0035de34;
+extern u32 D_0035de38;
+extern u8 D_0035de27;
+void func_00228240(void);  // 0x00228240: definition moved into src/anon/unit_00224780.cpp
+
+// Selects the first entry flagged 0x10 and copies its name; returns its index or -1.
+struct Ent40 { u32 flags; u32 pad; u8 name[32]; };
+struct Tbl40 { s32 n; s32 cur; Ent40 e[1]; };
+extern union { Tbl40* p; s32 i; } D_0035ec98;
+extern union { u32 v; u8 c; } D_0035ec88;
+void func_002ff2e8(u32, void*);
+s32 func_00241358(void);  // 0x00241358: definition moved into src/anon/unit_0023f5b8.cpp
+
+// Tz::PauseTaskIsDone
+s32 func_00287bc0(void);
+s32 func_00287db0(void);
+void func_001039f8(void);
+void func_0026e638(void*);
+void func_0026e8a0(void);
+s32 PauseTaskIsDone(void* a) asm("_ZN2Tz15PauseTaskIsDoneEz");
+s32 PauseTaskIsDone(void* a);  // 0x0026e5b8: definition moved into src/anon/unit_0026c450.cpp
+
+s32 func_0027ae20(void);
+void func_0027aed8(s32 a, s32* o1, s32* o2);  // 0x0027aed8: definition moved into src/anon/unit_0027a6d8.cpp
+
+s32 func_00168aa0(u32, u32);
+u8* func_00168b38(u32, u32, s32);  // entry_array_find_nth
+void func_00290960(u8* p, u32 a, u32 b);  // 00290960: moved to src/anon/unit_0028f1e0.cpp
+
+void func_002b7fbc(s32);
+void func_002bced8(void*);
+void SE_BANK__clearGumi(void*);
+void func_002b9b78(void);
+void func_002ba390(void);
+void func_002bc798(void);
+void func_002ba9c0(void);
+void func_002bc470(s32);
+void func_002baa60(void);
+void func_002bc608(s32);
+void func_002bbf98(void);
+extern u8 D_01e2a410[];
+void func_002b9fb0(void);  // 0x002b9fb0: definition moved into src/anon/unit_002b9ab8.cpp
+
+// Init a node with a fresh nonzero id and append it to the global list.
+struct Nd28 { u8 pad[20]; s32 id; u8 pad2[4]; Nd28* next; u8 pad3[4]; s32 f36; u16 h40 : 16; u8 pad4[2]; u16 h44 : 16; u8 pad5[2]; u8 b48; u8 b49; };
+struct L28 { Nd28* head; Nd28* tail; };
+extern L28 D_01e2aa80;
+extern s32 D_003616e8;
+void func_002bb100(Nd28* n, s32 a1, s32 a2);  // 0x002bb100: definition moved into src/anon/unit_002bb070.cpp
+
+void func_002be770(u8*);
+extern u8 D_00361b20[];
+void func_002c1a58(u8* p);  // 0x002c1a58: definition moved into src/anon/unit_002c10e0.cpp
+
+void func_002df160(u32);
+Vec4* YS__OBJ__get_pos(u32);  // obj_get_attach_or_alt
+f32 func_002df1a0(u32);
+void func_0016ace0(u32, Vec4*);
+extern f32 D_00375d40;
+void func_002deb18(u32 a0, u32 a1);  // 0x002deb18: definition moved into src/anon/unit_002de3c8.cpp
+
+s32 func_002eb3b8(u32);
+s32 func_002eb098(u32);
+void func_002eb1a0(u32);
+extern f32 D_01e2c060;
+extern f32 D_00349e10;
+// 002ecb10: moved to src/anon/unit_002ec5f8.cpp
+
+extern u32 D_00363748;
+u8* func_002ed350(u32, u32, u32, Vec4*, Vec4*);
+u8* func_002ed4b8(u32 a0, u32 a1, Vec4* a2, Vec4* a3);  // 0x002ed4b8: definition moved into src/anon/unit_002ecdb0.cpp
+
+// Destructor chain: own vtable, members, base parts, then unregister.
+struct Mgr { u8 pad[20]; VObj* f20; };
+extern u8 D_003486b0[];
+extern union { Mgr* p; u8 c; } D_00347f80;
+void func_0031b858(u8* p);  // 0x0031b858: definition moved into src/anon/unit_003197d0.cpp
+
+// Destructor: 7 344-byte members destroyed in reverse through their vtables.
+extern u8 D_0034a618[];
+void func_0031c668(u8* p);  // 0x0031c668: definition moved into src/anon/unit_0031b9e0.cpp
+
+extern u8 D_0034aad8[];
+void func_002361d0(void*);
+void func_0031d8a0(u8* p);  // 0x0031d8a0: definition moved into src/anon/unit_0031b9e0.cpp
+
+}

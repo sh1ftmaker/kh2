@@ -1,0 +1,363 @@
+#include "../common/types.h"
+
+#define QCOPY(d, s) asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(d), "r"(s) : "$8", "memory")
+struct Vec4 { f32 x, y, z, w; } __attribute__((aligned(16)));
+extern "C" {
+Vec4* YS__OBJ__get_pos(void*);  // obj_get_attach_or_alt
+f32 fabsf(f32);  // fabsf
+}
+
+// ---- 001011e0
+namespace n001011e0 {
+struct EhObj { u32 pc_begin, tbase, dbase, u; u64 sorted : 1, from_array : 1, mixed : 1, encoding : 8, count : 21; };
+struct EhFde { u32 length; s32 cie; u8 pc_begin[8]; };
+extern "C" {
+u32 func_00100920(u8, EhObj*);  // classify_subtype
+s32 func_001009a0(void*);
+u8* func_001004c0(u8, u32, u8*, u32*);
+u32 func_001003c8(u8);  // classify_arg_masked3
+// linear_search_fdes: walks an FDE list for the entry covering pc.
+EhFde* func_001011e0(EhObj* ob, EhFde* fde, u32 pc);  // 0x001011e0: definition moved into src/libgcc/unwind-dw2-fde.c
+}
+}
+
+// ---- 00110b00
+namespace n00110b00 {
+struct RayQ { Vec4 a, b, c, hit; u8 pad[48]; u64 on : 1, rest : 33, hitflag : 1, rest2 : 29; u8 pad2[24]; };
+extern "C" {
+extern u8 D_003a9250[];
+extern u8* D_00341708;
+s32 w146730(void*, u32) asm("_Z16wtarget_00146730jjjj");
+void func_00319e90(RayQ*, void*);
+void dk__Octree__collisionToMap(RayQ*);
+}
+static inline void vsub(Vec4* d, const Vec4* a, const Vec4* b) {
+    asm volatile("lqc2 $vf1, 0(%1)\n\tlqc2 $vf2, 0(%2)\n\tvsub.xyzw $vf1, $vf1, $vf2\n\tsqc2 $vf1, 0(%0)" : : "r"(d), "r"(a), "r"(b) : "memory");
+}
+static inline f32 vdot(const Vec4* a, const Vec4* b) {
+    f32 r;
+    asm volatile("lqc2 $vf1, 0(%1)\n\tlqc2 $vf2, 0(%2)\n\tvmul.xyz $vf1, $vf1, $vf2\n\tvaddy.x $vf1, $vf1, $vf1y\n\tvaddz.x $vf1, $vf1, $vf1z\n\tqmfc2 $8, $vf1\n\tmtc1 $8, %0" : "=f"(r) : "r"(a), "r"(b) : "$8");
+    return r;
+}
+static inline void QvCopy(Vec4* d, Vec4* s) { if (d != s) QCOPY(d, s); }
+extern "C" {
+// Checks whether pos is in front of / reachable from the object with a ground ray test.
+s32 func_00110b00(u8* o, Vec4* pos, u32 a2);  // 0x00110b00: definition moved into src/anon/unit_00110b00.cpp
+}
+}
+
+// ---- 0011e450
+namespace n0011e450 {
+struct Node { void** vt; };
+struct Alloc { void** vt; };
+struct Owner { u8 pad[16]; Alloc* alloc; u8 pad2[36]; Node* list; };
+typedef Node* (*AllocFn)(Alloc*, u32, u32);
+typedef void (*LoadFn)(Node*, void*);
+extern "C" {
+void* func_00132350(Node*);
+void* func_00132180(void*, u32);
+void* func_00132130(void*);
+void kn__TEXAnmWork__TEXAnmWork(Node*, void*);
+void func_00133198(Node*, void*);
+void func_00132358(Node*, Node*);
+// Builds TEXA (texture) and UVSC (uv scroll) nodes from a chunk list and appends them to the owner's list.
+void func_0011e450(Owner* o, void* c);  // 0x0011e450: definition moved into src/anon/unit_0011c128.cpp
+}
+}
+
+// ---- 00142940
+namespace n00142940 {
+struct Mtx { f32 m[16]; } __attribute__((aligned(16)));
+static inline void MtxCopy(Mtx* d, const Mtx* s) {
+    if (d != s)
+        asm volatile("lq $8, 0(%1)\n\tlq $9, 16(%1)\n\tlq $10, 32(%1)\n\tlq $11, 48(%1)\n\t"
+                     "sq $8, 0(%0)\n\tsq $9, 16(%0)\n\tsq $10, 32(%0)\n\tsq $11, 48(%0)"
+                     : : "r"(d), "r"(s) : "$8", "$9", "$10", "$11", "memory");
+}
+// In-place inverse of an affine matrix (VU0).
+static inline void MtxInverse(Mtx* m) {
+    asm volatile(
+        "lqc2 $vf1, 0(%0)\n\tlqc2 $vf2, 16(%0)\n\tlqc2 $vf3, 32(%0)\n\tlqc2 $vf4, 48(%0)\n\t"
+        "vopmula.xyz ACC, $vf2, $vf3\n\tvopmsub.xyz $vf5, $vf3, $vf2\n\t"
+        "vopmula.xyz ACC, $vf3, $vf1\n\tvopmsub.xyz $vf6, $vf1, $vf3\n\t"
+        "vopmula.xyz ACC, $vf1, $vf2\n\tvopmsub.xyz $vf7, $vf2, $vf1\n\t"
+        "vmul.xyz $vf8, $vf1, $vf5\n\tvmul.xyz $vf1, $vf4, $vf5\n\tvmul.xyz $vf2, $vf4, $vf6\n\tvmul.xyz $vf3, $vf4, $vf7\n\t"
+        "vaddy.x $vf8, $vf8, $vf8y\n\tvaddy.x $vf1, $vf1, $vf1y\n\tvaddx.y $vf2, $vf2, $vf2x\n\tvaddx.z $vf3, $vf3, $vf3x\n\t"
+        "vaddz.x $vf8, $vf8, $vf8z\n\tvaddz.x $vf4, $vf1, $vf1z\n\tvaddz.y $vf4, $vf2, $vf2z\n\tvaddy.z $vf4, $vf3, $vf3y\n\t"
+        "vdiv Q, $vf0w, $vf8x\n\t"
+        "qmfc2 $8, $vf5\n\tqmfc2 $9, $vf6\n\tqmfc2 $10, $vf7\n\tqmfc2 $11, $vf0\n\t"
+        "pextlw $12, $9, $8\n\tpextuw $13, $9, $8\n\tpextlw $14, $11, $10\n\tpextuw $15, $11, $10\n\t"
+        "pcpyld $8, $14, $12\n\tpcpyud $9, $12, $14\n\tpcpyld $10, $15, $13\n\t"
+        "qmtc2 $8, $vf1\n\tqmtc2 $9, $vf2\n\tqmtc2 $10, $vf3\n\t"
+        "vsub.xyz $vf4, $vf0, $vf4\n\tvwaitq\n\t"
+        "vmulq.xyzw $vf1, $vf1, Q\n\tvmulq.xyzw $vf2, $vf2, Q\n\tvmulq.xyzw $vf3, $vf3, Q\n\tvmulq.xyz $vf4, $vf4, Q\n\t"
+        "sqc2 $vf1, 0(%0)\n\tsqc2 $vf2, 16(%0)\n\tsqc2 $vf3, 32(%0)\n\tsqc2 $vf4, 48(%0)"
+        : : "r"(m) : "$8", "$9", "$10", "$11", "$12", "$13", "$14", "$15", "memory");
+}
+struct Xf { u8 pad[80]; Mtx world; Mtx inv; u8 pad3[1]; u8 identity; };
+extern "C" {
+// Sets the world matrix (flagging identity) and its inverse; m is inverted in place.
+void func_00142940(Xf* o, Mtx* m);  // 0x00142940: definition moved into src/anon/unit_00141458.cpp
+}
+}
+
+// ---- 00147aa8
+namespace n00147aa8 {
+struct Ob { u8 pad[56]; u32 f56; u8 pad1[4]; u8 f64[184]; u32 flags; u8 pad2[4]; u32 f256; u8 pad3[10]; u8 state[4]; };
+struct Mgr { u8 pad[3152]; s32 cnt[(21356 - 3152) / 4]; s32 idx; };
+extern "C" {
+void func_001349a8(u32, u8*, u32);
+s32 func_00147240(Mgr*, Ob*, f32);
+void func_00147ca0(Mgr*, Ob*, f32);
+void func_00147d80(Mgr*, Ob*, f32);
+void dk__OctDrawFile__drawModel(Mgr*, Ob*);
+}
+extern "C" {
+// Per-frame update of an entry: refreshes it, then queues it (bounded at 16 per slot) by state.
+void func_00147aa8(Mgr* m, Ob* o, f32 t);  // 0x00147aa8: definition moved into src/anon/unit_00147140.cpp
+}
+}
+
+// ---- 00157ae0
+namespace n00157ae0 {
+struct Cfg { u8 pad[384]; u32 f384, f388; };
+struct Wk { u8 pad[1164]; Cfg* cfg; };
+extern "C" {
+s32 YS__SHEET__is_mpdrive(Cfg*);
+f32 func_001a1e00(Cfg*);
+s32 func_00158250(u8*);
+s32 dk__GAUGE_PLAYER__getDriveLoopSqNum(u8*);
+void func_00138c10(u8*, s32);
+void func_001565a8(u8*);
+void func_00156540(u8*);
+void func_00155ab0(u8*, u32, u32);
+void func_00155b58(u8*, u32, f32);
+void func_001395a8(u8*);
+}
+extern "C" {
+// Picks one of two motion sets (by mode) and applies both blend slots.
+// 00157ae0: moved to src/anon/unit_00157688.cpp
+}
+}
+
+// ---- 00179fd0
+namespace n00179fd0 {
+extern "C" {
+u32 func_00167f18(u32);
+void* func_001050d8(u32);
+void func_002d49c0(void*, u32*, u32, u32, f32);
+void func_002d9730(void*, u32*, u32, u32, f32);
+void func_002dd700(void*, u32*, u32, u32, f32);
+void func_001d1540(void*, u32*, u32, u32, f32);
+void func_001cf698(void*, u32*, u32, u32, f32);
+void func_001ced68(void*, u32*, u32, u32, f32);
+void func_001d0980(void*, u32*, u32, u32, u32, f32);
+}
+extern "C" {
+// 00179fd0: moved to src/yasui/libys/player.cpp
+}
+}
+
+// ---- 001975a0
+namespace n001975a0 {
+struct Cfg { u16 h0; u16 b0 : 1, b1 : 1, b2 : 1, b3 : 1, b4 : 1, rest : 11; };
+struct Obj { u32 flags; u8 pad[8]; u8 sub[48]; Cfg* cfg; };
+struct St { u8 pad[244]; u8 b244; u8 pad2[7]; s32 f252; };
+extern "C" {
+extern u8 D_00350379;
+extern u8 D_0032b9dd;
+extern u32 D_0032b9e0;
+void dk__Vsync__initGameSpeed(void);
+void func_00194980(void);
+s32 func_0019f060(u8*);
+void func_0019f070(u8*, u32);
+u32 func_0014abe8(void);  // get_data_3595a0
+u32 func_0014abf8(void);  // get_data_3596b0
+void func_0014aa80(u32, u32, u32);
+void func_00170320(s32);
+void func_00197780(void);
+void func_00197cc0(void);
+s32 func_00242ea8(void);
+s32 func_00242ee8(void);
+St* func_0014aba8(void);
+u8* func_001058e8(void);
+void func_0014a138(u8);
+}
+static inline bool B4(Cfg* c) { return c->b4; }
+static inline bool B2(Cfg* c) { return c->b2; }
+static inline u8 U0(Cfg* c) { return c->b0; }
+extern "C" {
+// Per-frame field update: runs effects/sounds per config bits, then hands off control.
+void func_001975a0(Obj* o);  // 0x001975a0: definition moved into src/anon/unit_00195d00.cpp
+}
+}
+
+// ---- 002267a0
+namespace n002267a0 {
+extern "C" {
+void func_002255f0(void);
+void func_00106450(void*);
+void func_00105110(void*);
+void func_001ddd88(void*);
+void func_00170c00(void*);
+}
+struct E52 {
+    u8 a[16];
+    u8 b[36];
+    ~E52() { func_001ddd88(b); }
+    static void operator delete[](void*) asm("func_00105110");
+};
+struct E64 {
+    u8 d[64];
+    ~E64() {}
+    static void operator delete[](void*) asm("func_00105110");
+} __attribute__((aligned(16)));
+struct E112 {
+    u8 d[112];
+    ~E112() {}
+    static void operator delete[](void*) asm("func_00106450");
+} __attribute__((aligned(16)));
+extern "C" {
+extern void* D_0035dce0;
+extern void* D_0035dce4;
+extern void* D_0035dce8;
+extern void* D_0035dcec;
+extern void* D_0035dcf0;
+extern E52* D_0035dcf4;
+extern E64* D_0035dcf8;
+extern void* D_0035dcfc;
+extern E112* D_0035dd00;
+extern void* D_0035db14;
+}
+extern "C" {
+// Frees all of this module's buffers.
+void sa__EVENT__fixFree(void);  // 0x002267a0: definition moved into src/anon/unit_00224780.cpp
+}
+}
+
+// ---- 002a99c8
+namespace n002a99c8 {
+struct LRec { u16 id; u16 val; u16 pad; u16 flags; u16 h8; u16 h10; u16 h12; u16 h14; };
+struct Info { u8 type; u8 pad[3]; u32 value; };
+extern "C" {
+s32 func_00181500(u32);
+s32 func_001a6d08(u32);
+Info* func_001d56c8(u32);
+s32 func_00276c18(void);
+void dk__Clock__vCountToHMSMS(u32, s32*, s32*, s32*, s32*);
+}
+extern "C" {
+// Evaluates an entry's unlock condition: 0 = locked, 1 = available, 2 = cleared, 3 = forced.
+s32 Tz__JmQuest__GetQuestStat(LRec* r);  // 0x002a99c8: definition moved into src/anon/unit_002a99c8.cpp
+}
+}
+
+// ---- 002ba3e8
+namespace n002ba3e8 {
+extern "C" {
+extern u8 D_01e2a410[];
+s32 func_002ba620(void);
+s32 func_002bcbf0(u8*, u32, u32, s32*, s32*);
+s32 func_002bca78(u8*, u32, u32, s32*, s32*);
+s32 func_002bcb60(u8*, s32, u32, u32, s32*, s32*);
+void func_002baf48(s32, u32, u32, u32, void (*)(u32), u32);
+void func_002bce10(u8*, s32);  // find_entry12_set_flag
+}
+extern "C" {
+// Issues a request of the given kind, then registers the transfer(s) and callback on success.
+s32 func_002ba3e8(s32 cmd, u32 a, u32 b, u32 c, u32 d, s32* out, void (*cb)(u32), u32 arg);  // 0x002ba3e8: definition moved into src/anon/unit_002b9ab8.cpp
+}
+}
+
+// ---- 001d03a0
+namespace n001d03a0 {
+struct Iter { u8 d[32]; };
+struct Lv { u8 pad[433]; u8 cur; u8 max; };
+struct Cfg2 { u8 pad[212]; f32 interval; };
+struct Ch {
+    u8 pad[320]; u8 mot[844]; Lv* lv; u8 pad2[1716]; u32 f2884; u8 pad3[32]; f32 timer; f32 tick; u8 flag; u8 pad4[3]; u8 eff[4];
+};
+extern "C" {
+extern f32 D_00349e10;
+extern f32 D_0036e3bc;
+extern Cfg2* D_00352130;
+void YS__PLAYER___OVR_pre_exec(Ch*);
+s32 func_00180618(u8*);
+void YS__SHEET__add_drive(Lv*, u32);  // ring_buffer_index
+void func_0017f488(u8*, u32, f32, f32);
+void func_0017f5e0(u8*, u32, u32, f32, f32);
+void func_00190128(Iter*);
+void func_001d0558(Ch*);
+void func_001d2648(u8*, u32, f32);  // clear_fields_0_4_32
+void func_001d2690(u8*, u32, f32);
+u32 func_001d14a0(void);
+void func_00190878(Iter*, u32, u32);
+void func_001bd418(u32, u32, u32, Iter*, u32, u32);
+s32 func_00197920(void);
+void YS__INTERVAL_INFO__exec(u8*);
+}
+static inline bool IsFull(Lv* l) { return l->cur >= l->max; }
+extern "C" {
+// Character tick: counts down timers, then reports level-up or normal status for this frame.
+void func_001d03a0(Ch* o);  // 0x001d03a0: definition moved into src/anon/unit_001cf0b0.cpp
+}
+}
+
+// ---- 001678f0
+namespace n001678f0 {
+struct Pad {
+    u64 btn;
+    u8 pad[60];
+    union { struct { u8 b68, b69; } c; struct __attribute__((packed)) { u16 lo : 7, act : 2, hi : 7; } f; } __attribute__((packed)) u;
+    u8 pad2[2];
+    s32 connected;
+    s32 port;
+    s32 valid;
+    u8 info[2];
+    u8 mode;
+};
+extern "C" {
+s32 func_002f6020(s32);
+s32 func_002f5f50(s32, u8*);
+s32 func_002f5e78(s32, u8*);
+s32 func_00105c30(void);
+s32 func_00242bd0(void);
+s32 func_00242a00(void);
+u64 func_00167778(Pad*, u8*);
+void func_00167ad0(Pad*, u32);
+void func_001676b0(Pad*, u64);
+void func_00167658(Pad*, u32);
+}
+static inline bool IsJp(s32 st) { return func_00105c30() == st || func_00105c30() == 8; }
+extern "C" {
+// 001678f0: moved to src/anon/unit_00167358.cpp
+}
+}
+
+// ---- 002d5958
+namespace n002d5958 {
+struct QV { f32 x, y, z, w; } __attribute__((aligned(16)));
+struct Info64 { u8 pad[48]; QV pos; };
+extern "C" {
+extern u32 D_00361f60;
+void YS__OBJ__get_bone_matrix(u32, u32, Info64*);
+u8* YS__OBJ__Each(u8*);
+s32 func_0016a060(u8*);
+s32 func_002cf270(u8*, u32);
+s32 func_002ceef8(u32, u8*);
+QV* YS__OBJ__get_pos(u8*);  // obj_get_attach_or_alt
+}
+static inline void qcopy(QV* d, const QV* s) { asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(d), "r"(s) : "$8", "memory"); }
+static inline void vsub(QV* d, const QV* a, const QV* b) {
+    asm volatile("lqc2 $vf1, 0(%1)\n\tlqc2 $vf2, 0(%2)\n\tvsub.xyzw $vf1, $vf1, $vf2\n\tsqc2 $vf1, 0(%0)" : : "r"(d), "r"(a), "r"(b) : "memory");
+}
+static inline f32 vlen(const QV* v) {
+    f32 r;
+    asm volatile("lqc2 $vf1, 0(%1)\n\tvmul.xyz $vf1, $vf1, $vf1\n\tvaddy.x $vf1, $vf1, $vf1y\n\tvaddz.x $vf1, $vf1, $vf1z\n\tvsqrt Q, $vf1x\n\tvwaitq\n\tcfc2.ni $8, $vi22\n\tmtc1 $8, %0" : "=f"(r) : "r"(v) : "$8");
+    return r;
+}
+extern "C" {
+// Returns the nearest active actor of kind 20 that passes the area checks.
+u8* func_002d5958(u32 id);  // 0x002d5958: definition moved into src/anon/unit_002d4548.cpp
+}
+}

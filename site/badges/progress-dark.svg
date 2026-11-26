@@ -1,113 +1,101 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 612" width="880" height="612" role="img" aria-label="Kingdom Hearts II Final Mix decompilation: 18.4 % of the code matched">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 612" width="880" height="612" role="img" aria-label="Kingdom Hearts II Final Mix decompilation: 67.8 % of the code decompiled">
 <rect width="880" height="612" rx="14" fill="#0b0d1a" stroke="#2a2f55"/>
 <g font-family="ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif">
 <text x="24" y="38" font-size="13" font-weight="600" letter-spacing="1.6" fill="#7c82a8">KINGDOM HEARTS II FINAL MIX · PLAYSTATION 2 · SLPM_666.75</text>
-<text x="24" y="84" font-size="40" font-weight="700" fill="#eceefb">20.4 %</text>
-<text x="214" y="84" font-size="14" fill="#b4b9d8">structural progress · 408,648 of 2,226,245 bytes matched · 6,302 of 14,618 functions</text>
+<text x="24" y="84" font-size="40" font-weight="700" fill="#eceefb">67.8 %</text>
+<text x="214" y="84" font-size="14" fill="#b4b9d8">of the code decompiled · 1,366,776 of 2,015,044 bytes matched · 9,401 of 11,509 functions</text>
 <rect x="24" y="98" width="832" height="10" rx="5" fill="#1c2142"/>
-<rect x="24" y="98" width="169.7" height="10" rx="5" fill="#d29a2e" opacity="0.4"/>
-<rect x="24" y="98" width="152.7" height="10" rx="5" fill="#3aae5c"/>
+<rect x="24" y="98" width="564.3" height="10" rx="5" fill="#3aae5c"/>
 <text x="24" y="140" font-size="12" font-weight="600" letter-spacing="1.4" fill="#7c82a8">BY SOURCE DIRECTORY OF THE ORIGINAL TREE</text>
 <rect x="24" y="169" width="9" height="9" fill="#508ae1" transform="rotate(45 28.5 173.5)"/>
 <text x="44" y="178" font-size="13" fill="#eceefb">Menus &amp; Jiminy&#x27;s Journal</text>
 <rect x="230" y="169" width="420" height="8" rx="4" fill="#1c2142"/>
-<rect x="230" y="169" width="94.5" height="8" rx="4" fill="#508ae1" opacity="0.4"/>
-<rect x="230" y="169" width="80.3" height="8" rx="4" fill="#508ae1"/>
-<text x="664" y="178" font-size="13" font-weight="600" fill="#eceefb">19.1 %</text>
-<text x="856" y="178" font-size="12" text-anchor="end" fill="#7c82a8">1,146 / 2,358 fn · 481 KiB</text>
+<rect x="230" y="169" width="378.4" height="8" rx="4" fill="#508ae1"/>
+<text x="664" y="178" font-size="13" font-weight="600" fill="#eceefb">90.1 %</text>
+<text x="856" y="178" font-size="12" text-anchor="end" fill="#7c82a8">2,065 / 2,140 fn · 458 KiB</text>
 <rect x="24" y="195" width="9" height="9" fill="#c52607" transform="rotate(45 28.5 199.5)"/>
 <text x="44" y="204" font-size="13" fill="#eceefb">Core gameplay</text>
 <rect x="230" y="195" width="420" height="8" rx="4" fill="#1c2142"/>
-<rect x="230" y="195" width="113.3" height="8" rx="4" fill="#c52607" opacity="0.4"/>
-<rect x="230" y="195" width="103.5" height="8" rx="4" fill="#c52607"/>
-<text x="664" y="204" font-size="13" font-weight="600" fill="#eceefb">24.7 %</text>
-<text x="856" y="204" font-size="12" text-anchor="end" fill="#7c82a8">1,874 / 4,076 fn · 461 KiB</text>
+<rect x="230" y="195" width="289.6" height="8" rx="4" fill="#c52607"/>
+<text x="664" y="204" font-size="13" font-weight="600" fill="#eceefb">69.0 %</text>
+<text x="856" y="204" font-size="12" text-anchor="end" fill="#7c82a8">2,617 / 3,232 fn · 416 KiB</text>
 <rect x="24" y="221" width="9" height="9" fill="#4aa75c" transform="rotate(45 28.5 225.5)"/>
 <text x="44" y="230" font-size="13" fill="#eceefb">Camera, maps &amp; HUD</text>
 <rect x="230" y="221" width="420" height="8" rx="4" fill="#1c2142"/>
-<rect x="230" y="221" width="137.0" height="8" rx="4" fill="#4aa75c" opacity="0.4"/>
-<rect x="230" y="221" width="120.8" height="8" rx="4" fill="#4aa75c"/>
-<text x="664" y="230" font-size="13" font-weight="600" fill="#eceefb">28.8 %</text>
-<text x="856" y="230" font-size="12" text-anchor="end" fill="#7c82a8">786 / 1,433 fn · 166 KiB</text>
+<rect x="230" y="221" width="295.5" height="8" rx="4" fill="#4aa75c"/>
+<text x="664" y="230" font-size="13" font-weight="600" fill="#eceefb">70.4 %</text>
+<text x="856" y="230" font-size="12" text-anchor="end" fill="#7c82a8">958 / 1,217 fn · 155 KiB</text>
 <rect x="24" y="247" width="9" height="9" fill="#8c55b4" transform="rotate(45 28.5 251.5)"/>
 <text x="44" y="256" font-size="13" fill="#eceefb">Party members &amp; models</text>
 <rect x="230" y="247" width="420" height="8" rx="4" fill="#1c2142"/>
-<rect x="230" y="247" width="66.3" height="8" rx="4" fill="#8c55b4" opacity="0.4"/>
-<rect x="230" y="247" width="61.8" height="8" rx="4" fill="#8c55b4"/>
-<text x="664" y="256" font-size="13" font-weight="600" fill="#eceefb">14.7 %</text>
-<text x="856" y="256" font-size="12" text-anchor="end" fill="#7c82a8">359 / 897 fn · 121 KiB</text>
+<rect x="230" y="247" width="190.5" height="8" rx="4" fill="#8c55b4"/>
+<text x="664" y="256" font-size="13" font-weight="600" fill="#eceefb">45.4 %</text>
+<text x="856" y="256" font-size="12" text-anchor="end" fill="#7c82a8">477 / 605 fn · 103 KiB</text>
 <rect x="24" y="273" width="9" height="9" fill="#00a8a1" transform="rotate(45 28.5 277.5)"/>
 <text x="44" y="282" font-size="13" fill="#eceefb">Minigames</text>
 <rect x="230" y="273" width="420" height="8" rx="4" fill="#1c2142"/>
-<rect x="230" y="273" width="61.4" height="8" rx="4" fill="#00a8a1" opacity="0.4"/>
-<rect x="230" y="273" width="57.9" height="8" rx="4" fill="#00a8a1"/>
-<text x="664" y="282" font-size="13" font-weight="600" fill="#eceefb">13.8 %</text>
-<text x="856" y="282" font-size="12" text-anchor="end" fill="#7c82a8">274 / 684 fn · 104 KiB</text>
+<rect x="230" y="273" width="184.4" height="8" rx="4" fill="#00a8a1"/>
+<text x="664" y="282" font-size="13" font-weight="600" fill="#eceefb">43.9 %</text>
+<text x="856" y="282" font-size="12" text-anchor="end" fill="#7c82a8">337 / 523 fn · 92 KiB</text>
 <rect x="24" y="299" width="9" height="9" fill="#a96087" transform="rotate(45 28.5 303.5)"/>
 <text x="44" y="308" font-size="13" fill="#eceefb">World map</text>
 <rect x="230" y="299" width="420" height="8" rx="4" fill="#1c2142"/>
-<rect x="230" y="299" width="97.3" height="8" rx="4" fill="#a96087" opacity="0.4"/>
-<rect x="230" y="299" width="94.3" height="8" rx="4" fill="#a96087"/>
-<text x="664" y="308" font-size="13" font-weight="600" fill="#eceefb">22.4 %</text>
-<text x="856" y="308" font-size="12" text-anchor="end" fill="#7c82a8">175 / 403 fn · 61 KiB</text>
+<rect x="230" y="299" width="339.5" height="8" rx="4" fill="#a96087"/>
+<text x="664" y="308" font-size="13" font-weight="600" fill="#eceefb">80.8 %</text>
+<text x="856" y="308" font-size="12" text-anchor="end" fill="#7c82a8">246 / 287 fn · 49 KiB</text>
 <rect x="24" y="325" width="9" height="9" fill="#269ac2" transform="rotate(45 28.5 329.5)"/>
 <text x="44" y="334" font-size="13" fill="#eceefb">Cutscenes &amp; musical</text>
 <rect x="230" y="325" width="420" height="8" rx="4" fill="#1c2142"/>
-<rect x="230" y="325" width="129.1" height="8" rx="4" fill="#269ac2" opacity="0.4"/>
-<rect x="230" y="325" width="116.7" height="8" rx="4" fill="#269ac2"/>
-<text x="664" y="334" font-size="13" font-weight="600" fill="#eceefb">27.8 %</text>
-<text x="856" y="334" font-size="12" text-anchor="end" fill="#7c82a8">227 / 410 fn · 60 KiB</text>
+<rect x="230" y="325" width="311.9" height="8" rx="4" fill="#269ac2"/>
+<text x="664" y="334" font-size="13" font-weight="600" fill="#eceefb">74.3 %</text>
+<text x="856" y="334" font-size="12" text-anchor="end" fill="#7c82a8">309 / 356 fn · 56 KiB</text>
 <rect x="24" y="351" width="9" height="9" fill="#608c3d" transform="rotate(45 28.5 355.5)"/>
 <text x="44" y="360" font-size="13" fill="#eceefb">Effects &amp; particles</text>
 <rect x="230" y="351" width="420" height="8" rx="4" fill="#1c2142"/>
-<rect x="230" y="351" width="78.2" height="8" rx="4" fill="#608c3d" opacity="0.4"/>
-<rect x="230" y="351" width="74.2" height="8" rx="4" fill="#608c3d"/>
-<text x="664" y="360" font-size="13" font-weight="600" fill="#eceefb">17.7 %</text>
-<text x="856" y="360" font-size="12" text-anchor="end" fill="#7c82a8">167 / 345 fn · 51 KiB</text>
+<rect x="230" y="351" width="185.0" height="8" rx="4" fill="#608c3d"/>
+<text x="664" y="360" font-size="13" font-weight="600" fill="#eceefb">44.0 %</text>
+<text x="856" y="360" font-size="12" text-anchor="end" fill="#7c82a8">235 / 286 fn · 49 KiB</text>
 <rect x="24" y="377" width="9" height="9" fill="#d9773f" transform="rotate(45 28.5 381.5)"/>
 <text x="44" y="386" font-size="13" fill="#eceefb">Smaller directories</text>
 <rect x="230" y="377" width="420" height="8" rx="4" fill="#1c2142"/>
-<rect x="230" y="377" width="91.4" height="8" rx="4" fill="#d9773f" opacity="0.4"/>
-<rect x="230" y="377" width="85.5" height="8" rx="4" fill="#d9773f"/>
-<text x="664" y="386" font-size="13" font-weight="600" fill="#eceefb">20.4 %</text>
-<text x="856" y="386" font-size="12" text-anchor="end" fill="#7c82a8">528 / 1,220 fn · 138 KiB</text>
+<rect x="230" y="377" width="291.1" height="8" rx="4" fill="#d9773f"/>
+<text x="664" y="386" font-size="13" font-weight="600" fill="#eceefb">69.3 %</text>
+<text x="856" y="386" font-size="12" text-anchor="end" fill="#7c82a8">709 / 868 fn · 113 KiB</text>
 <rect x="24" y="403" width="9" height="9" fill="#8a92b8" transform="rotate(45 28.5 407.5)"/>
 <text x="44" y="412" font-size="13" fill="#eceefb">Not placed yet</text>
 <rect x="230" y="403" width="420" height="8" rx="4" fill="#1c2142"/>
-<rect x="230" y="403" width="47.9" height="8" rx="4" fill="#8a92b8" opacity="0.4"/>
-<rect x="230" y="403" width="44.2" height="8" rx="4" fill="#8a92b8"/>
-<text x="664" y="412" font-size="13" font-weight="600" fill="#eceefb">10.5 %</text>
-<text x="856" y="412" font-size="12" text-anchor="end" fill="#7c82a8">613 / 1,980 fn · 389 KiB</text>
+<rect x="230" y="403" width="220.0" height="8" rx="4" fill="#8a92b8"/>
+<text x="664" y="412" font-size="13" font-weight="600" fill="#eceefb">52.4 %</text>
+<text x="856" y="412" font-size="12" text-anchor="end" fill="#7c82a8">1,150 / 1,365 fn · 343 KiB</text>
 <rect x="24" y="429" width="9" height="9" fill="#d29a2e" transform="rotate(45 28.5 433.5)"/>
 <text x="44" y="438" font-size="13" fill="#eceefb">SDK &amp; runtime</text>
 <rect x="230" y="429" width="420" height="8" rx="4" fill="#1c2142"/>
-<rect x="230" y="429" width="17.1" height="8" rx="4" fill="#d29a2e" opacity="0.4"/>
-<rect x="230" y="429" width="15.1" height="8" rx="4" fill="#d29a2e"/>
-<text x="664" y="438" font-size="13" font-weight="600" fill="#eceefb">3.58 %</text>
-<text x="856" y="438" font-size="12" text-anchor="end" fill="#7c82a8">153 / 812 fn · 141 KiB</text>
+<rect x="230" y="429" width="245.5" height="8" rx="4" fill="#d29a2e"/>
+<text x="664" y="438" font-size="13" font-weight="600" fill="#eceefb">58.4 %</text>
+<text x="856" y="438" font-size="12" text-anchor="end" fill="#7c82a8">298 / 630 fn · 133 KiB</text>
 <text x="24" y="478" font-size="12" font-weight="600" letter-spacing="1.4" fill="#7c82a8">BY FUNCTION SIZE</text>
 <rect x="24" y="507" width="9" height="9" fill="#3d9cf0" transform="rotate(45 28.5 511.5)"/>
 <text x="44" y="516" font-size="13" fill="#eceefb">under 80 B</text>
 <rect x="230" y="507" width="420" height="8" rx="4" fill="#1c2142"/>
-<rect x="230" y="507" width="273.1" height="8" rx="4" fill="#3d9cf0"/>
-<text x="664" y="516" font-size="13" font-weight="600" fill="#eceefb">65.0 %</text>
-<text x="856" y="516" font-size="12" text-anchor="end" fill="#7c82a8">4,484 / 7,864 fn · 255 KiB</text>
+<rect x="230" y="507" width="364.2" height="8" rx="4" fill="#3d9cf0"/>
+<text x="664" y="516" font-size="13" font-weight="600" fill="#eceefb">86.7 %</text>
+<text x="856" y="516" font-size="12" text-anchor="end" fill="#7c82a8">4,572 / 5,325 fn · 207 KiB</text>
 <rect x="24" y="533" width="9" height="9" fill="#3d9cf0" transform="rotate(45 28.5 537.5)"/>
 <text x="44" y="542" font-size="13" fill="#eceefb">80–199 B</text>
 <rect x="230" y="533" width="420" height="8" rx="4" fill="#1c2142"/>
-<rect x="230" y="533" width="167.1" height="8" rx="4" fill="#3d9cf0"/>
-<text x="664" y="542" font-size="13" font-weight="600" fill="#eceefb">39.8 %</text>
-<text x="856" y="542" font-size="12" text-anchor="end" fill="#7c82a8">1,657 / 3,869 fn · 471 KiB</text>
+<rect x="230" y="533" width="351.5" height="8" rx="4" fill="#3d9cf0"/>
+<text x="664" y="542" font-size="13" font-weight="600" fill="#eceefb">83.7 %</text>
+<text x="856" y="542" font-size="12" text-anchor="end" fill="#7c82a8">2,988 / 3,545 fn · 431 KiB</text>
 <rect x="24" y="559" width="9" height="9" fill="#3d9cf0" transform="rotate(45 28.5 563.5)"/>
 <text x="44" y="568" font-size="13" fill="#eceefb">200–999 B</text>
 <rect x="230" y="559" width="420" height="8" rx="4" fill="#1c2142"/>
-<rect x="230" y="559" width="18.6" height="8" rx="4" fill="#3d9cf0"/>
-<text x="664" y="568" font-size="13" font-weight="600" fill="#eceefb">4.43 %</text>
-<text x="856" y="568" font-size="12" text-anchor="end" fill="#7c82a8">160 / 2,652 fn · 1012 KiB</text>
+<rect x="230" y="559" width="286.0" height="8" rx="4" fill="#3d9cf0"/>
+<text x="664" y="568" font-size="13" font-weight="600" fill="#eceefb">68.1 %</text>
+<text x="856" y="568" font-size="12" text-anchor="end" fill="#7c82a8">1,732 / 2,432 fn · 932 KiB</text>
 <rect x="24" y="585" width="9" height="9" fill="#3d9cf0" transform="rotate(45 28.5 589.5)"/>
 <text x="44" y="594" font-size="13" fill="#eceefb">1 KB and more</text>
 <rect x="230" y="585" width="420" height="8" rx="4" fill="#1c2142"/>
-<rect x="230" y="585" width="3.0" height="8" rx="4" fill="#3d9cf0"/>
-<text x="664" y="594" font-size="13" font-weight="600" fill="#eceefb">0.32 %</text>
-<text x="856" y="594" font-size="12" text-anchor="end" fill="#7c82a8">1 / 233 fn · 436 KiB</text>
+<rect x="230" y="585" width="168.9" height="8" rx="4" fill="#3d9cf0"/>
+<text x="664" y="594" font-size="13" font-weight="600" fill="#eceefb">40.2 %</text>
+<text x="856" y="594" font-size="12" text-anchor="end" fill="#7c82a8">109 / 207 fn · 398 KiB</text>
 </g></svg>

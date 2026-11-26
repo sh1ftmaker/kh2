@@ -38,7 +38,7 @@ const hex = (a) => "0x" + a.toString(16).toUpperCase().padStart(8, "0");
 
 // a node's colour: its game part's, else its region's
 const colOf = (n) => (n.part && PART[n.part] ? PART[n.part].color : REGION[n.region].color);
-// structural progress in bytes: matched code plus size * match % for structurally matched functions
+// built from source in bytes: decompiled code plus size * match % for built from source functions
 const wOf = (n) => Math.max(n.cm, n.wm ?? n.cm);
 const gradOf = (n) => (n.part && PART[n.part] ? `tg-p-${n.part}` : `tg-${n.region}`);
 function partGlyph(key, size = 10) {
@@ -150,8 +150,8 @@ function drawEmblem() {
     const node = g.lib ? null : byId.get(`game/game-${g.part}`);
     const r = g.lib ? { name: L.n, c: L.c, cm: L.cm, wm: L.wm } : node;
     const col = g.lib ? "#d29a2e" : PART[g.part].color;
-    // Structural progress (matched code plus size * match % for structurally matched functions):
-    // solid fill = matched code, paler fill above it = the rest of the structural share.
+    // Built from source (decompiled code plus size * match % for built from source functions):
+    // solid fill = decompiled code, paler fill above it = the rest of the structural share.
     const frac = r.c ? r.cm / r.c : 0;
     const wfrac = r.c ? Math.max(frac, (r.wm ?? r.cm) / r.c) : 0;
     const grad = defs.append("linearGradient").attr("id", `eg-${key}`).attr("x1", 0).attr("y1", 1).attr("x2", 0).attr("y2", 0);
@@ -159,7 +159,7 @@ function drawEmblem() {
     grad.append("stop").attr("offset", 1).attr("stop-color", d3.color(col).brighter(0.9));
     defs.append("clipPath").attr("id", `ec-${key}`).append("path").attr("d", rhombusPath(g.cx, g.cy, g.w, g.h));
     const grp = svg.append("g").attr("class", "gem").attr("tabindex", 0).attr("role", "button")
-      .attr("aria-label", `${r.name}: ${HAS_W ? `${pct(100 * wfrac)} structural progress, ` : ""}${pct(100 * frac)} matched code`);
+      .attr("aria-label", `${r.name}: ${HAS_W ? `${pct(100 * wfrac)} built from source, ` : ""}${pct(100 * frac)} decompiled code`);
     grp.append("path").attr("class", "gem-bg").attr("d", rhombusPath(g.cx, g.cy, g.w, g.h))
       .attr("fill", d3.color(col).copy({ opacity: 0.12 })).attr("stroke", d3.color(col).copy({ opacity: 0.7 }));
     const wfillH = rhombusFill(wfrac, g.h);
@@ -210,16 +210,13 @@ function countUp(el, to, fmt) {
 function drawStats() {
   const t = S.totals;
   const tiles = [
-    ...(t.code_weighted == null ? [] : [{ k: "Structural progress", v: ratio(t.code_weighted, t.code), fmt: (x) => x.toFixed(2), unit: "%",
-      d: `${num(t.code_weighted)} of ${num(t.code)} bytes <br>matched code plus size &times; match % of structurally matched functions`,
-      title: "Structural progress: matched code plus, for each structurally matched function (same instructions, registers or order differ), its size times its match percent (tools/structural.py).", c: "var(--gold)" }]),
-    ...(t.code_weighted_all == null ? [] : [{ k: "All functions", v: ratio(t.code_weighted_all, t.code), fmt: (x) => x.toFixed(2), unit: "%",
-      d: `${num(t.code_weighted_all)} of ${num(t.code)} bytes <br>matched code plus size &times; match % of every written function`,
-      title: "All functions: matched code plus, for every function below 100 % that has source (structurally matched or not), its size times its match percent (tools/structural.py weighted_all).", c: "var(--gold)" }]),
-    { k: "Matched code", v: ratio(t.code_matched, t.code), fmt: (x) => x.toFixed(2), unit: "%", d: `${num(t.code_matched)} of ${num(t.code)} bytes <br>fully matched functions`, c: "var(--green)" },
+    ...(t.code_built == null ? [] : [{ k: "Built from source", v: ratio(t.code_built, t.code), fmt: (x) => x.toFixed(0), unit: "%",
+      d: `${num(t.fns_built)} of ${num(t.fns)} functions <br>the executable builds from source and is byte-identical, assembly included`, c: "var(--gold)" }]),
+    { k: "Decompiled to C/C++", v: ratio(t.code_matched, t.code), fmt: (x) => x.toFixed(2), unit: "%", d: `${num(t.code_matched)} of ${num(t.code)} bytes <br>plain C or C++; no assembly files, CPU assembly or register pins`, c: "var(--green)" },
+    ...(t.fns_named == null ? [] : [{ k: "Named", v: t.fns_named, fmt: (x) => num(Math.round(x)), unit: `/ ${num(t.fns)}`, d: `${pct(ratio(t.code_named, t.code))} of the code <br>names from the developers\u2019 debug symbols`, m: ratio(t.fns_named, t.fns), c: "var(--purple, #a66bd6)" }]),
     { k: "Functions", v: t.fns_matched, fmt: (x) => num(Math.round(x)), unit: `/ ${num(t.fns)}`, d: `${pct(ratio(t.fns_matched, t.fns))} of all functions`, m: ratio(t.fns_matched, t.fns), c: "var(--red)" },
     { k: "Files complete", v: t.files_complete, fmt: (x) => num(Math.round(x)), unit: `/ ${num(t.files)}`,
-      d: `every function matched &middot; ${num(t.files_started)} files have at least one`, m: ratio(t.files_complete, t.files), c: "var(--blue)" },
+      d: `every function decompiled &middot; ${num(t.files_started)} files have at least one`, m: ratio(t.files_complete, t.files), c: "var(--blue)" },
     (() => { const big = S.bins.filter((b) => b.key === "200-999" || b.key === "ge1k"), c = big.reduce((a, b) => a + b.c, 0), cm = big.reduce((a, b) => a + b.cm, 0);
       return { k: "Functions of 200 B and more", v: ratio(cm, c), fmt: (x) => x.toFixed(2), unit: "%",
         d: `${num(cm)} of ${num(c)} bytes <br>${pct(ratio(c, t.code))} of all code is in these`, c: "var(--purple)" }; })(),
@@ -232,11 +229,11 @@ function drawStats() {
   tiles.forEach((x, i) => countUp(host.querySelector(`[data-i="${i}"]`), x.v, x.fmt));
   requestAnimationFrame(() => host.querySelectorAll(".meter i").forEach((el) => (el.style.width = `${Math.max(0.6, +el.dataset.w)}%`)));
 
-  // structurally matched functions, under the tiles
+  // built from source functions, under the tiles
   const sx = $("#structural");
   if (sx) {
     sx.innerHTML = t.fns_structural == null ? "" :
-      `<span class="sx-k">structurally matched</span> <b>${num(t.fns_structural)}</b> / ${num(t.fns)} functions &middot; ${num(t.code_structural)} bytes`
+      `<span class="sx-k">built from source, byte-identical</span> <b>${num(t.fns_structural)}</b> / ${num(t.fns)} functions &middot; ${num(t.code_structural)} bytes`
       + ` <span class="sx-d">(same instructions, register or order differences only)</span>`
       + (t.code_weighted == null ? "" : (g => ` <span class="sx-d">Game code: ${g ? pct(ratio(g.wm, g.c)) : "–"} structural, ${g ? pct(ratio(g.cm, g.c)) : "–"} matched.</span>`)(S.regions.find((r) => r.id === "game")));
   }
@@ -320,7 +317,7 @@ function drawLayer(focus) {
     .attr("fill", (d) => tileFill(d.data.node).copy({ opacity: unsplit(d.data.node) ? 0.07 : 0.16 }))
     .attr("stroke", (d) => tileFill(d.data.node).copy({ opacity: unsplit(d.data.node) ? 0.45 : 0.4 }))
     .attr("stroke-dasharray", (d) => (unsplit(d.data.node) && d.x1 - d.x0 > 10 ? "3 2" : null));
-  // structural share (size * match % of structurally matched functions): a paler liquid
+  // structural share (size * match % of built from source functions): a paler liquid
   // under the matched one, so the solid part stays fully matched functions only
   lg.filter((d) => wOf(d.data.node) > d.data.node.cm).append("rect").attr("class", "wfill")
     .attr("x", (d) => d.x0).attr("width", (d) => d.x1 - d.x0)
@@ -484,10 +481,10 @@ function tipHTML(n) {
   const col = n.region ? colOf(n) : "#d29a2e";
   const share = ratio(n.c, TOTAL);
   if (n.kind === "fn") {
-    const st = n.m === 100 ? "matched" : n.m > 0 ? `${n.m} % similar, not matched` : "not matched";
+    const st = n.m === 100 ? "decompiled to C/C++" : n.m > 0 ? "byte-identical, but still uses assembly or a register pin" : "not built";
     return `<div class="t-name">${esc(n.name)}</div><div class="t-path">${esc(n.parent.path)} &middot; ${hex(n.addr)}</div>
       <dl><dt>Size</dt><dd>${num(n.c)} bytes</dd><dt>Of the ELF</dt><dd>${pct(share)}</dd><dt>Status</dt><dd>${st}</dd>${
-        n.m !== 100 && n.wm > 0 ? `<dt>Structural</dt><dd>${pct(ratio(n.wm, n.c))} (${bytes(n.wm)}, structurally matched)</dd>` : ""}</dl>`;
+        n.m !== 100 && n.wm > 0 ? `<dt>Structural</dt><dd>${pct(ratio(n.wm, n.c))} (${bytes(n.wm)}, built, not yet clean C/C++)</dd>` : ""}</dl>`;
   }
   const rows = [
     ["Size", `${bytes(n.c)}`], ["Of the ELF", pct(share)],
@@ -574,13 +571,13 @@ function initMap() {
 function drawLegend() {
   $("#legend").innerHTML = gameGroups().map((l) => `<span>${partGlyph(l.part)} ${esc(PART[l.part].short)}</span>`).join("")
     + `<span>${glyph("sdk")} SDK</span>`
-    + `<span><i class="fillkey"></i> matched code</span>${HAS_W ? `<span><i class="wfillkey"></i> structural progress</span>` : ""}<span><i class="dashkey"></i> not started</span>`
+    + `<span><i class="fillkey"></i> decompiled code</span>${HAS_W ? `<span><i class="wfillkey"></i> built from source</span>` : ""}<span><i class="dashkey"></i> not started</span>`
     + `<span><i class="unconfkey">?</i> placement unconfirmed</span>`;
-  $("#map-sub").textContent = `Area is bytes of code. The bright fill rising in each tile is matched code${HAS_W
-    ? "; the paler band above it is structural progress (size × match % of structurally matched functions)" : ""}. `
+  $("#map-sub").textContent = `Area is bytes of code. The bright fill rising in each tile is decompiled code${HAS_W
+    ? "; the paler band above it is code that is built from source but still uses assembly or a register pin" : ""}. `
     + "The game code is coloured by area (what that part of the game does), the SDK and runtime in gold. "
     + "Tap or click to dive in: region, area, file, function.";
-  $("#emblem-cap").textContent = `One gem per area of the game code, gold in the middle for the SDK; each fills to its ${HAS_W ? "structural progress, matched code solid" : "share of matched code"}`;
+  $("#emblem-cap").textContent = `One gem per area of the game code, gold in the middle for the SDK; each fills to its ${HAS_W ? "built from source, decompiled code solid" : "share of decompiled code"}`;
 }
 
 /* ---------- overview: where the work is, the libraries, the game code ---------- */
@@ -607,7 +604,7 @@ function drawRemaining() {
     { name: L.n, col: "#d29a2e", left: L.c - L.cm, glyph: glyph("sdk") }];
   const total = segs.reduce((a, x) => a + x.left, 0);
   const game = segs.slice(0, -1).reduce((a, x) => a + x.left, 0);
-  host.innerHTML = `<div class="rw-k">Where the remaining work is <span>${bytes(total)} of code not matched yet; the game code is ${pct(ratio(game, total))} of it</span></div>
+  host.innerHTML = `<div class="rw-k">Where the remaining work is <span>${bytes(total)} of code not decompiled to C/C++ yet; the game code is ${pct(ratio(game, total))} of it</span></div>
     <div class="rw-bar" role="img" aria-label="${esc(segs.map((x) => `${x.name} ${pct(ratio(x.left, total))}`).join(", "))}">${segs.map((x) =>
       `<i style="flex:${x.left} 1 0;background:${x.col}" title="${esc(`${x.name}: ${bytes(x.left)} left (${pct(ratio(x.left, total))})`)}"></i>`).join("")}</div>
     <div class="rw-legend">${segs.map((x) => `<span>${x.glyph} ${esc(x.name)} <b>${pct(ratio(x.left, total))}</b></span>`).join("")}</div>`;
@@ -626,7 +623,7 @@ function drawLibraries() {
   }).join("");
   host.innerHTML = `<div class="lsum">
       <div class="big">${pct(ratio(HAS_W ? wOf(L) : L.cm, L.c))}</div>
-      <div class="lsum-d">${HAS_W ? `structural progress of ${bytes(L.c)} of SDK code &middot; <span class="wnote">${pct(ratio(L.cm, L.c))} matched code</span>` : `of ${bytes(L.c)} of SDK and runtime code matched`} &middot;
+      <div class="lsum-d">${HAS_W ? `built from source of ${bytes(L.c)} of SDK code &middot; <span class="wnote">${pct(ratio(L.cm, L.c))} decompiled code</span>` : `of ${bytes(L.c)} of SDK and runtime code matched`} &middot;
         ${num(L.fm)} / ${num(L.f)} functions</div>
       <div class="track big-track"><i data-w="${ratio(L.cm, L.c)}" style="background:var(--gold)"></i></div>
     </div><div class="lrows">${rows}</div>`;
@@ -669,9 +666,9 @@ function drawGameParts() {
   const parts = gameGroups();
   const gw = g.wm ?? g.cm;
   $("#game-sub").textContent = `Square's own code, grouped by what it does. The original source tree had one directory per programmer; each area here is one of those directories, named in English. `
-    + `The 2014 PS3 debug build names the files; data/tu_map.tsv places each PS2 function in one. Solid bars are matched code${HAS_W
-      ? "; the lighter extension is structural progress (size × match % of structurally matched functions)" : ""}. A ? marks files placed on thin evidence.`;
-  $("#game-sum").innerHTML = (HAS_W ? `<b>${pct(ratio(gw, g.c))}</b> structural &middot; <span class="wnote">${pct(ratio(g.cm, g.c))} matched code</span>` : `<b>${pct(ratio(g.cm, g.c))}</b> matched code`)
+    + `The 2014 PS3 debug build names the files; data/tu_map.tsv places each PS2 function in one. Solid bars are decompiled code${HAS_W
+      ? "; the lighter extension is code built from source that still uses assembly or a register pin" : ""}. A ? marks files placed on thin evidence.`;
+  $("#game-sum").innerHTML = (HAS_W ? `<b>${pct(ratio(gw, g.c))}</b> structural &middot; <span class="wnote">${pct(ratio(g.cm, g.c))} decompiled code</span>` : `<b>${pct(ratio(g.cm, g.c))}</b> decompiled code`)
     + ` &middot; ${num(g.fm)} / ${num(g.f)} functions &middot; ${bytes(g.c)}`;
   host.innerHTML = parts.map((n) => {
     const p = PART[n.part], files = n.children, m = files.filter((f) => f.s === "M").length, wm = n.wm ?? n.cm;
@@ -679,9 +676,9 @@ function drawGameParts() {
     return `<div class="part" data-id="${esc(n.id)}" role="button" tabindex="0" style="--c:${p.color}">
       <div class="p-head"><span class="p-name">${partGlyph(n.part, 12)} ${esc(p.name)}</span><span class="p-pct">${pct(ratio(wm, n.c))}</span></div>
       <div class="p-desc">${esc(p.desc)}</div>
-      <div class="p-bar" title="${HAS_W ? "solid: matched code; light: structural progress" : "matched code"}">
+      <div class="p-bar" title="${HAS_W ? "solid: decompiled code; light: built from source" : "decompiled code"}">
         <i class="w" data-w="${ratio(wm, n.c)}"></i><i class="h" data-w="${ratio(n.cm, n.c)}"></i></div>
-      <div class="p-nums">${n.wm != null ? `<span>matched code <b>${pct(ratio(n.cm, n.c))}</b></span>` : ""}<span><b>${num(n.fm)}</b> / ${num(n.f)} functions</span>
+      <div class="p-nums">${n.wm != null ? `<span>decompiled code <b>${pct(ratio(n.cm, n.c))}</b></span>` : ""}<span><b>${num(n.fm)}</b> / ${num(n.f)} functions</span>
         <span><b>${num(m)}</b> / ${num(files.length)} files complete</span><span>${bytes(n.c)} &middot; ${pct(ratio(n.c, g.c))} of the game code</span>
         ${uc ? `<span class="p-unconf" title="Files the file map placed on thin evidence (low confidence in data/tu_map.tsv)"><i class="unconfkey">?</i> ${num(uc)} unconfirmed</span>` : ""}</div>
     </div>`;
@@ -749,7 +746,7 @@ function drawHistory(hist) {
       dot.style("display", null).attr("cx", x(p.date)).attr("cy", y(p.total));
       const c = p.e.commit ? `<a href="${REPO}/commit/${p.e.commit}">${p.e.commit.slice(0, 8)}</a>` : "this commit";
       tip.classList.remove("sheet");
-      tip.innerHTML = `<div class="t-name">${pct(p.total)} of code matched</div>
+      tip.innerHTML = `<div class="t-name">${pct(p.total)} of code decompiled</div>
         <div class="t-path">${esc(p.date.toISOString().slice(0, 16).replace("T", " "))} UTC &middot; ${c}</div>
         ${p.e.subject ? `<div style="margin-bottom:6px">${esc(p.e.subject)}</div>` : ""}
         <dl>${ids.slice().reverse().map((id) => `<dt>${SERIES[id].glyph} ${esc(SERIES[id].name)}</dt><dd>${pct(p[id])} of the ELF</dd>`).join("")}
@@ -827,10 +824,10 @@ function drawMethod() {
   const t = S.totals;
   const when = new Date(S.generated);
   $("#method-body").innerHTML = `
-    <p>The headline figure is <b>matched code</b> in bytes: a function counts only when C++ source in this repository, compiled with the
+    <p>The headline figure is <b>decompiled code</b> in bytes: a function counts only when C++ source in this repository, compiled with the
       original compiler (ee-gcc 3.2-040921, <code>-O2</code>), gives exactly the original bytes. Bytes, not the function count,
       because the ${num(S.bins[0].f)} functions under 80 bytes are ${pct(ratio(S.bins[0].f, t.fns))} of the count and only
-      ${pct(ratio(S.bins[0].c, t.code))} of the code.${HAS_W ? ` <b>Structural progress</b> adds, for each function that differs only in register choice or instruction order, its size times its match percent.` : ""}</p>
+      ${pct(ratio(S.bins[0].c, t.code))} of the code.${HAS_W ? ` <b>Built from source</b> adds, for each function that differs only in register choice or instruction order, its size times its match percent.` : ""}</p>
     <p>The link is the final authority: <code>make</code> rebuilds the whole ELF, taking every matched function from source and the rest
       from the original, and compares it byte for byte with <code>${esc(S.target)}</code> (sha256 <code>${esc(S.sha256)}</code>).
       ${t.elf_ok === true ? "It matched for this snapshot." : t.elf_ok === false ? "<b>It did not match for this snapshot.</b>" : "The compare was not run for this snapshot."}</p>
@@ -840,7 +837,7 @@ function drawMethod() {
       original source paths, about half of its functions are paired with PS2 functions, and since the linker keeps a file's functions
       together, the pairs fix where each file starts and ends. ${num(t.files_unconfirmed)} of the ${num(t.files)} files are placed on thin
       evidence and marked unconfirmed (?); code with no anchor nearby is listed as not placed yet. A file is <b>complete</b> when every
-      function in it is matched. The source is not laid out in these files yet: most matched functions still sit in
+      function in it is decompiled. The source is not laid out in these files yet: most functions still sit in
       <code>src/anon</code> and <code>src/autodecomp</code> (see "Where the matched source sits").</p>
     <p>Snapshot ${esc(when.toISOString().slice(0, 16).replace("T", " "))} UTC, built on
       <a href="${REPO}/commit/${esc(S.base)}">${esc(S.base.slice(0, 8))}</a>. The data is regenerated locally with

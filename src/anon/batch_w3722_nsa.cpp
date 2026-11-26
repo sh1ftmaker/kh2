@@ -1,0 +1,75 @@
+// w3722: built with -O2 -fno-strict-aliasing (_nsa).
+#include "../common/types.h"
+struct V4fbe0 {
+    f32 x, y, z, w;
+    V4fbe0() {}
+    V4fbe0& operator=(const V4fbe0& o) {
+        if (this != &o) asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(this), "r"(&o) : "$8", "memory");
+        return *this;
+    }
+    V4fbe0(const V4fbe0& o) {
+        if (this != &o) asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(this), "r"(&o) : "$8", "memory");
+    }
+    f32 normalize() {
+        f32 len;
+        asm volatile("lqc2 $vf1, 0(%1)\n\tvmul.xyz $vf2, $vf1, $vf1\n\tvaddy.x $vf2, $vf2, $vf2y\n\tvaddz.x $vf2, $vf2, $vf2z\n\tvsqrt Q, $vf2x\n\tvwaitq\n\tcfc2.ni $8, $vi22\n\tvaddq.x $vf2, $vf0, Q\n\tmtc1 $8, %0\n\tvnop\n\tvdiv Q, $vf0w, $vf2x\n\tvwaitq\n\tvmulq.xyz $vf1, $vf1, Q\n\tsqc2 $vf1, 0(%1)" : "=f"(len) : "r"(this) : "$8", "memory");
+        return len;
+    }
+    V4fbe0 mulk(f32 s, f32 k) const {
+        V4fbe0 r;
+        asm volatile(".set noreorder\n\tlqc2 $vf1, 0(%1)\n\tmfc1 $8, %2\n\tqmtc2 $8, $vf2\n\tvmulx.wxyz $vf1, $vf1, $vf2x\n\tsqc2 $vf1, 0(%0)\n\t.set reorder" : : "r"(&r), "r"(this), "f"(s), "f"(k) : "$8", "memory");
+        return r;
+    }
+} __attribute__((aligned(16)));
+struct Prmfbe0 { u8 pad[24]; f32 a; u8 pad2[4]; f32 b; };
+struct Objfbe0 { u8 pad[32]; V4fbe0 vel; u8 pad2[244 - 48]; f32 f244; f32 f248; u8 pad3[288 - 252]; f32 f288; };
+extern "C" {
+extern Prmfbe0* D_00352130;
+extern f32 D_00349e10;
+extern f32 D_00349e10_b asm("D_00349e10");
+extern Prmfbe0* D_00352130_b asm("D_00352130");
+// Horizontal speed clamp + vertical step on o->vel; returns the scaled velocity.
+V4fbe0 func_0019fbe0(void* unused, Objfbe0* o);  // 0x0019fbe0: definition moved into src/anon/unit_0019fb70.cpp
+}
+
+extern "C" {
+struct E1993a0 { u32 f0, key, f8, f12; f32 f16; struct E1993a0* next; };
+struct P1993a0 { struct E1993a0 e[4]; s32 freeIdx[4]; s32 n; };
+struct L1993a0 { struct E1993a0* head; struct E1993a0* tail; };
+extern struct P1993a0 D_01c620c8;
+extern struct L1993a0 D_01c62140;
+static inline __attribute__((always_inline)) void rm1993a0(E1993a0* n) {
+    register E1993a0* prev asm("$11");  // pins: prev in t3, list head in t7 like the original
+    register E1993a0* h asm("$15") = D_01c62140.head;
+    if (n == h) {
+        D_01c62140.head = *(E1993a0* volatile*)&n->next;
+        prev = 0;
+    } else {
+        E1993a0* it;
+        for (it = h; it->next != n; it = it->next) ;
+        prev = it;
+        prev->next = *(E1993a0* volatile*)&n->next;
+    }
+    L1993a0* l = &D_01c62140;
+    if (__builtin_expect(n == l->tail,0)) l->tail = prev;
+    n->next = 0;
+    D_01c620c8.freeIdx[D_01c620c8.n++] = (s32)(n - D_01c620c8.e);
+}
+// Remove every node with this key from the D_01c62140 list, returning its slot to the pool free list.
+// 001993a0: moved to src/anon/unit_001991a8.cpp
+}
+
+#define QC(d, s) asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(d), "r"(s) : "$8", "memory")
+struct QVfe88 {
+    f32 x, y, z, w;
+    QVfe88() {}
+    QVfe88(const QVfe88& o) { QC(this, &o); }
+    QVfe88& operator=(const QVfe88& o) { if (this != &o) QC(this, &o); return *this; }
+} __attribute__((aligned(16)));
+extern "C" {
+QVfe88* func_001dc5f8(s32);
+f32* func_001dc670(s32);
+void func_00143860(u8*, QVfe88*);
+// Set an object's colour from a lookup (optionally converted to grey).
+void func_001dfe88(u8* o, u8 flag);  // 0x001dfe88: definition moved into src/anon/unit_001deb58.cpp
+}

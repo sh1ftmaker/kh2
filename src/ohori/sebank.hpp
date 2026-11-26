@@ -5,6 +5,5 @@
 class SE_BANK {
 public:
     void setGumiMode();
-    int clearGumi();
 };
 

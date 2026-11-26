@@ -17,19 +17,18 @@ SLPM := $(ROOT)/SLPM_666.75
 
 MAKE_JOBS ?= $(shell nproc 2>/dev/null || getconf _NPROCESSORS_ONLN 2>/dev/null || echo 1)
 KH2_PS2_IMAGE ?= kh2-local/ps2-compiler:3.2-ee-040921-objdiff
-# Native (docker-less) build: KH2_NATIVE=1 PS2_TOOLCHAIN=/path/to/extracted/gcc make
-# PS2_TOOLCHAIN must contain bin/ee-g++ etc. (with a working interpreter) and
-# a shim/ dir with as/ld symlinks to ee-as/ee-ld. See docs/native-toolchain.md.
-KH2_NATIVE ?= 0
-PS2_TOOLCHAIN ?= /opt/ps2/gcc
-export KH2_NATIVE PS2_TOOLCHAIN
-ifeq ($(KH2_NATIVE),1)
-export PATH := $(PS2_TOOLCHAIN)/shim:$(KH2_OBJDIFF_DIR):$(PATH)
-endif
 
 PS2_PREP := $(ROOT)/docker/ps2/prepare.sh
 
-CXXFLAGS := -O2 -g0 -x c++ -fno-exceptions -fno-rtti -fpermissive -ffunction-sections -I $(ROOT)/src
+CXXFLAGS := -O2 -g0 -x c++ -fno-exceptions -fno-rtti -fpermissive -ffunction-sections
+# Code the original wrote in C (partMng.c, pppPart.c, ...) goes in *.c files.
+CFLAGS := -O2 -g0 -x c -ffunction-sections
+# Sony PS2 SDK library code (src/sdk/**/*.c) was built with an older compiler: ee-gcc 2.9-991111 -O2 -G0.
+SDK_CC := /work/tools/compilers/ee-gcc2.9-991111/bin/ee-gcc
+SDK_CFLAGS := -O2 -G0 -g0 -x c -ffunction-sections
+# A linked SDK unit (src/sdk/*.c row in linked_units.tsv) gets its UNIT_FLAGS too (-fno-function-sections comes last).
+# Some Sony code was built with ee-gcc 2.96 instead: a `cc=ee-gcc2.96` token in the row's flags column sets UNIT_CC
+# (tools/compilers/ee-gcc2.96, fetched by docker/ps2/prepare.sh). See notes/linking.md.
 ASFLAGS := -G0
 VERIFY_AUTODIFF_COUNT ?= 3
 VERIFY_SMALL_DIFF_MAX ?= 32
@@ -42,6 +41,12 @@ DOCKER_RUN_PS2 = docker run --rm \
 	-w /work \
 	"$(KH2_PS2_IMAGE)"
 
+# KH2_NATIVE=1: no Docker. The same commands run in a no-network bubblewrap sandbox laid out
+# like the container (tools/sandbox.sh; toolchain from tools/setup_toolchain.sh).
+ifdef KH2_NATIVE
+PS2_PREP := true
+DOCKER_RUN_PS2 = $(ROOT)/tools/sandbox.sh
+endif
 SLPM_MISSING_MSG := error: missing $(SLPM). Put SLPM_666.75 at repo root.
 OBJDIFF_CONFIG_PATH := $(ROOT)/objdiff.json
 
@@ -77,7 +82,7 @@ $(BOUNDARIES):
 	@echo "error: missing $(BOUNDARIES)" >&2
 	@exit 1
 
-$(GEN)/objects.mk $(GEN)/layout_status.tsv $(GEN)/symbols.ld: $(BOUNDARIES) $(ROOT)/functions.tsv $(TOOLS)/build_elf.py $(TOOLS)/common.py
+$(GEN)/objects.mk $(GEN)/layout_status.tsv $(GEN)/symbols.ld: $(BOUNDARIES) $(ROOT)/functions.tsv $(ROOT)/linked_units.tsv $(TOOLS)/build_elf.py $(TOOLS)/common.py
 	@mkdir -p $(GEN)
 	@python3 $(TOOLS)/build_elf.py objects
 
@@ -92,14 +97,10 @@ $(TMP_LD): $(ROOT)/kh2.ld $(GEN)/cxx_sections.ld
 	@sed -e '/\/\* @CXX_SECTIONS@ \*\//r $(GEN)/cxx_sections.ld' \
 	     -e '/\/\* @CXX_SECTIONS@ \*\//d' $(ROOT)/kh2.ld > $@
 
-$(TARGET): $(SLPM) $(BOUNDARIES) $(GEN)/objects.mk $(GEN)/layout_status.tsv $(GEN)/symbols.ld $(ROOT)/functions.tsv $(ROOT)/kh2.ld \
+$(TARGET): $(SLPM) $(BOUNDARIES) $(ROOT)/linked_units.tsv $(GEN)/objects.mk $(GEN)/layout_status.tsv $(GEN)/symbols.ld $(ROOT)/functions.tsv $(ROOT)/kh2.ld \
            $(TOOLS)/build_elf.py $(TOOLS)/common.py $(BUILD_INPUTS_STAMP)
-ifeq ($(KH2_NATIVE),1)
-	@$(MAKE) --no-print-directory -j"$(MAKE_JOBS)" inner-all
-else
 	@$(PS2_PREP)
 	@$(DOCKER_RUN_PS2) bash -lc '/usr/bin/make -j"$(MAKE_JOBS)" inner-all'
-endif
 	@echo "Built $@"
 
 $(OBJDIFF_CONFIG_PATH): $(TARGET) $(BOUNDARIES) $(GEN)/objects.mk $(GEN)/layout_status.tsv $(GEN)/symbols.ld $(ROOT)/functions.tsv $(TOOLS)/objdiff.py $(TOOLS)/common.py
@@ -111,26 +112,94 @@ inner-all: $(GEN)/objects.mk $(ORDERED_OBJS)
 	@if ! python3 $(TOOLS)/build_elf.py fast-link --linked-elf $(FAST_LINK_ELF) --out-elf $(TARGET) --full-linked-elf $(TMP_LINK_ELF); then \
 		sed -e '/\/\* @CXX_SECTIONS@ \*\//r $(GEN)/cxx_sections.ld' \
 		    -e '/\/\* @CXX_SECTIONS@ \*\//d' $(ROOT)/kh2.ld > $(TMP_LD); \
-		$(PS2_TOOLCHAIN)/bin/ee-ld --no-check-sections -T $(TMP_LD) -T $(LINK_RSP) -o $(TMP_LINK_ELF) -L$(PS2_TOOLCHAIN)/lib/gcc-lib/ee/3.2-ee-040921 -lgcc; \
+		/opt/ps2/gcc/bin/ee-ld --no-check-sections -T $(TMP_LD) -T $(LINK_RSP) -o $(TMP_LINK_ELF) -L/opt/ps2/gcc/lib/gcc-lib/ee/3.2-ee-040921 -lgcc; \
 		python3 $(TOOLS)/build_elf.py normalize --linked-elf $(TMP_LINK_ELF) --out-elf $(TARGET); \
 	fi
 
+# UNIT_FLAGS: extra flags for linked units (linked_units.tsv), set per object in out/generated/objects.mk.
+
+# Functions the original built with debug info (-g) live in *_g.cpp. -g keeps gcc from moving
+# prologue register saves into a call's delay slot (jal; nop). Mostly src/tozawa (0x241fd0-0x2bac78).
+out/build/%_g.o: CXXFLAGS := $(subst -g0,-g,$(CXXFLAGS))
+out/build/%_g.o: CFLAGS := $(subst -g0,-g,$(CFLAGS))
+
+# libgcc's 64-bit divide helpers (__udivmoddi4 copies in _divdi3.o/_moddi3.o) were built with
+# -fnon-call-exceptions (gcc's LIB2_DIVMOD_EXCEPTION_FLAGS); that C code lives in *_nce.c.
+out/build/%_nce.o: CFLAGS := $(CFLAGS) -fnon-call-exceptions
+# Some code was built without strict aliasing (gcc then shares stack slots between differently-typed
+# temporaries). Functions that only match that way live in *_nsa.cpp / *_nsa.c.
+out/build/%_nsa.o: CXXFLAGS := $(CXXFLAGS) -fno-strict-aliasing
+out/build/%_nsa.o: CFLAGS := $(CFLAGS) -fno-strict-aliasing
+# Both -g and no strict aliasing.
+out/build/%_gnsa.o: CXXFLAGS := $(subst -g0,-g,$(CXXFLAGS)) -fno-strict-aliasing
+out/build/%_gnsa.o: CFLAGS := $(subst -g0,-g,$(CFLAGS)) -fno-strict-aliasing
+# -g, no strict aliasing and no GCSE: gcse's partial redundancy elimination would merge repeated
+# reloads of one flags word that the original keeps (001de9a8, 001dea80).
+out/build/%_gnsa_nogcse.o: CXXFLAGS := $(subst -g0,-g,$(CXXFLAGS)) -fno-strict-aliasing -fno-gcse
+out/build/%_gnsa_nogcse.o: CFLAGS := $(subst -g0,-g,$(CFLAGS)) -fno-strict-aliasing -fno-gcse
+
+# Some code was built without interblock scheduling (sched1 never hoists an instruction speculatively
+# above a branch into another block). Functions that only match that way live in *_nsi.cpp.
+out/build/%_nsi.o: CXXFLAGS := $(CXXFLAGS) -fno-sched-interblock
+out/build/%_nsi.o: CFLAGS := $(CFLAGS) -fno-sched-interblock
+
+# Some code was built without loop strength reduction (loop.c then does not unroll small
+# constructor loops, e.g. static-init array ctors). Those functions live in *_nsr.cpp / *_nsr.c.
+out/build/%_nsr.o: CXXFLAGS := $(CXXFLAGS) -fno-strength-reduce
+out/build/%_nsr.o: CFLAGS := $(CFLAGS) -fno-strength-reduce
+# Some code was built without the first scheduling pass (sched1). Those functions live in
+# *_nosched.cpp / *_nosched.c (e.g. the three copies of the atan2 helper).
+out/build/%_nosched.o: CXXFLAGS := $(CXXFLAGS) -fno-schedule-insns
+out/build/%_nosched.o: CFLAGS := $(CFLAGS) -fno-schedule-insns
+# GCC's libsupc++ was built with exception support; code whose catch landing pads survive
+# (eh_terminate.cc __terminate) lives in *_eh.cpp. Its unwind tables are discarded in kh2.ld.
+out/build/%_eh.o: CXXFLAGS := $(subst -fno-exceptions,-fexceptions,$(CXXFLAGS))
+# Some code was built with -fmove-all-movables (loop.c hoists every loop-invariant constant, even
+# ones it judges not worth it). Functions that only match that way live in *_mam.cpp / *_mam.c.
+out/build/%_mam.o: CXXFLAGS := $(CXXFLAGS) -fmove-all-movables
+out/build/%_mam.o: CFLAGS := $(CFLAGS) -fmove-all-movables
+# Some code was built without -fcse-follow-jumps. Those functions live in *_ncfj.cpp / *_ncfj.c.
+out/build/%_ncfj.o: CXXFLAGS := $(CXXFLAGS) -fno-cse-follow-jumps
+out/build/%_ncfj.o: CFLAGS := $(CFLAGS) -fno-cse-follow-jumps
+# Some code was built with -falign-jumps=1 (no nop padding before jump-only labels, e.g. 001bc2a8).
+# Those functions live in *_aj1.cpp / *_aj1.c.
+out/build/%_aj1.o: CXXFLAGS := $(CXXFLAGS) -falign-jumps=1
+out/build/%_aj1.o: CFLAGS := $(CFLAGS) -falign-jumps=1
+# Both no strict aliasing and -fmove-all-movables (00141c38, 0020ab48). Those live in *_nsamam.cpp / *_nsamam.c.
+out/build/%_nsamam.o: CXXFLAGS := $(CXXFLAGS) -fno-strict-aliasing -fmove-all-movables
+out/build/%_nsamam.o: CFLAGS := $(CFLAGS) -fno-strict-aliasing -fmove-all-movables
+# The same with -g (002793b0: -g keeps the first jal delay slot a nop). Those live in *_gnsamam.cpp / *_gnsamam.c.
+out/build/%_gnsamam.o: CXXFLAGS := $(subst -g0,-g,$(CXXFLAGS)) -fno-strict-aliasing -fmove-all-movables
+out/build/%_gnsamam.o: CFLAGS := $(subst -g0,-g,$(CFLAGS)) -fno-strict-aliasing -fmove-all-movables
+
+# Functions the original built without optimisation (fp/s8 frame) live in *_O0.cpp.
+out/build/%_O0.o: CXXFLAGS := $(subst -O2,-O0,$(CXXFLAGS))
+out/build/%_O0.o: CFLAGS := $(subst -O2,-O0,$(CFLAGS))
+
 out/build/%.o: %.cpp
 	@mkdir -p $(dir $@)
-	@$(PS2_TOOLCHAIN)/bin/ee-g++ $(CXXFLAGS) -c -o $@ $<
+	@/opt/ps2/gcc/bin/ee-g++ $(CXXFLAGS) $(UNIT_FLAGS) -c -o $@ $<
+
+out/build/src/sdk/%.o: src/sdk/%.c
+	@mkdir -p $(dir $@)
+	@$(or $(UNIT_CC),$(SDK_CC)) $(SDK_CFLAGS) $(UNIT_FLAGS) -c -o $@ $<
+
+out/build/%.o: %.c
+	@mkdir -p $(dir $@)
+	@/opt/ps2/gcc/bin/ee-gcc $(CFLAGS) $(UNIT_FLAGS) -c -o $@ $<
 
 out/build/%.o: %.s
 	@mkdir -p $(dir $@)
-	@$(PS2_TOOLCHAIN)/bin/ee-as $(ASFLAGS) -o $@ $<
+	@/opt/ps2/gcc/bin/ee-as $(ASFLAGS) -o $@ $<
 
 out/build/%.o: %.S
 	@mkdir -p $(dir $@)
-	@$(PS2_TOOLCHAIN)/bin/ee-as $(ASFLAGS) -o $@ $<
+	@/opt/ps2/gcc/bin/ee-as $(ASFLAGS) -o $@ $<
 
 out/generated/asm/%.o: out/generated/asm/%.s
 	@mkdir -p $(dir $@)
-	@$(PS2_TOOLCHAIN)/bin/ee-as $(ASFLAGS) -o $@ $<
-	@$(PS2_TOOLCHAIN)/bin/ee-objcopy -R .text -R .data -R .bss $@
+	@/opt/ps2/gcc/bin/ee-as $(ASFLAGS) -o $@ $<
+	@/opt/ps2/gcc/bin/ee-objcopy -R .text -R .data -R .bss $@
 
 .PRECIOUS: out/build/%.o out/generated/asm/%.o $(OBJDIFF_CONFIG_PATH)
 

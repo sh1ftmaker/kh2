@@ -1,0 +1,28 @@
+#include "../common/types.h"
+// batch w1772: built with -fno-strict-aliasing (see Makefile *_nsa rule).
+typedef unsigned int u128 __attribute__((mode(TI)));
+inline void* operator new(unsigned int, void* p) { return p; }
+struct V3_w1772 { s32 a, b, c; V3_w1772() : a(0), b(0), c(0) {} };
+struct F4_w1772 { f32 x, y, z, w; F4_w1772() { x = w = z = y = 0.0f; } };
+extern "C" {
+void func_001980d0(u8*, u32, u32, u32);
+void func_00190128(u8*);
+void YS__OBJ_ATTACK__OBJ_ATTACK(u8*, u8*);
+extern u8 D_0034ee08;
+void sceGsSyncPath(s32, s32);
+void FlushCache(s32);
+void func_002f3918(s32, void*);
+extern s32 D_003591c8;
+extern u64 D_01da8c40[];
+
+// 00185ed8: moved to src/anon/unit_00185d10.cpp
+void func_00185ed8(u8* p, u32 a1, u32 a2, u32 a3);
+
+// Byte-identical twin of func_00185ed8 (a second class with the same ctor).
+// 00185f70: moved to src/anon/unit_00185d10.cpp
+void YS__BTLOBJ__BTLOBJ(u8* p, u32 a1, u32 a2, u32 a3);
+
+// GIF packet: 128-bit tag, GIFtag (NLOOP=1, EOP, NREG=2, REGS=A+D,A+D), two A+D pairs.
+struct Pkt_w1772 { u128 tag; u64 a; u64 b; u64 c[4]; };
+void func_0020e0a0(void);  // 0x0020e0a0: definition moved into src/anon/unit_0020dde8.cpp
+}

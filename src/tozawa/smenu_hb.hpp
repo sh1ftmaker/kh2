@@ -9,7 +9,6 @@ namespace Tz {
 class HBTE {
 public:
     static void PauseThread(TASK*);
-    u32 SetupSel();
 };
 
 }  // namespace Tz

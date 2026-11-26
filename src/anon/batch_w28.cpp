@@ -1,0 +1,206 @@
+#include "../common/types.h"
+
+struct Q16 { u32 w[4]; } __attribute__((aligned(16)));
+#define QCOPY(d, s) asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(d), "r"(s) : "$8", "memory")
+
+extern "C" {
+void wtarget_00103080(u32, u32, u32, u32) asm("_Z16wtarget_00103080jjjj");
+u8* wtarget_001337f0(u32, u32, u32, u32) asm("_Z16wtarget_001337f0jjjj");
+void wtarget_00167658(u32, u64, u32, u32) asm("_Z16wtarget_00167658jjjj");
+u32 YS__MISSION__GetMaxComboCounter(u32, u32, u32, u32) asm("_Z31YS__MISSION__GetMaxComboCounterjjjj");
+u32 cache_buff_alloc(const char*, s32) asm("_ZN2YS10CACHE_BUFF5AllocEPKci");
+
+void func_001398d0(u32);
+void func_001397d8(u32);
+void func_0014b5e8(u32, u32, u64);
+void func_001666d0(void*, u16, u32, u16, u16);
+Q16* YS__OBJ__get_pos(u32);  // obj_get_attach_or_alt
+u8* func_001ce328(u16);
+u8* func_00170240(const char*, s32);
+void func_00170e58(void);
+void func_001850a0(Q16*, u32);
+void func_0013ddc0(s32, void*);
+void func_001758b0(void*);
+void func_00196698(u32);
+s32 func_00196388(u8, u8);
+void func_001963f8(s32);
+u32 func_0019bad8(void*);
+void func_00190128(void*);
+void func_0019ca20(void*);
+void func_0019ec88(void*);
+void func_0019ed48(void*);
+void func_0019ec68(void);
+void func_00102c18(u32, u32, void (*)(void));
+void func_00239700(void*);
+u32 func_001ab810(void);  // get_global_1c7cec0
+u32 func_001ab800(void);
+void YI__SEQUENCE__Init(void*, u32, u32);
+void* YS__OBJ__Each(void*);
+u32 func_001c0cd8(void*);
+void func_001c0e60(void*);
+void func_001d7cd0(void*);
+void func_002fee78(void*, const char*, u32, void*);
+void YS__OBJENTRY__ReadRequest(u32, s32, u32);
+u32 func_001bb4a0(void);
+u8* func_001bbcb0(void);
+u32 func_00321cb0(void*, void*);
+void ryj__PAX__ensure(void*);
+u32 func_0022b688(u32);
+void func_001391a8(u32, Q16*);  // vec_copy_at416_if_diff
+void func_002251c8(u32);
+u32 func_001058e8(void);
+void memcpy(u32, u32, u32);
+void func_0028d188(void*);
+u32 func_001a80c8(u32);  // table24_find_by_id
+u8* YS__ITEM_TABLE__get_param(u32);
+u8* func_002a9d68(void);
+void func_00185ed8(void*, u32, u32, u32);
+void func_001c11a8(u32);
+void func_00197780(void);
+void func_00197cc0(void);
+void func_00139858(u32);
+void func_002e70b0(void*);
+void func_00106420(void*);
+u8 func_002cea28(void*);
+void func_0016c2b0(Q16*, u32);
+s32 func_002ffd00(void*, u32, u32);  // fprintf_stream_va
+void func_0023c098(void*);  // set_vtbl_36eae8_then_call
+void func_002369f0(void*);  // set_vtbl_36eac8_then_call
+void func_0023ee68(void*);
+void YS__OBJ_ATTACK__clear(void*);  // array8_free_slots
+void func_001c0248(void*);
+void func_00319fb0(void*);  // big_obj_dtor
+void func_00105110(void*);
+
+struct S32b9a0 { void* vt; u32 f4; u8 f8; u8 pad[11]; u32 f14; u32 f18; u32 f1c; u32 f20; u32 f24; u32 f28; };
+extern S32b9a0 D_0032b9a0;
+extern u8 D_0032b930[];
+struct G347 { u8 pad[0x20]; u32 f20; u8 p2[0xc]; u32 f30; u32 f34; u8 p3[0x29c0 - 0x38]; u32 f29c0; u32 f29c4; u32 f29c8; };
+union G347Ptr { G347* p; u32 w; };
+extern G347Ptr D_00347d64;
+extern void* D_00350444;
+extern u8 D_00350448[];
+extern u8* D_01c61b08;
+extern Q16 D_01c5f480;
+extern Q16 D_01e2be20;
+extern u8 D_00351468[];
+extern u8 D_01d5ba30[];
+extern char D_0036e448[];
+extern u32 D_0033caf0;
+extern u8 D_01d9e348[];
+extern u32 D_0035ec90;
+extern u16 D_0035ef70;
+extern u8 D_00347e60[];
+extern u8 D_0035f420[];
+extern u8 D_0035f5a8;
+extern u8 D_0035f5a9;
+extern u8* D_0035f5a4;
+extern u8 D_00361810[];
+extern u32 D_00361a50;
+extern u8* D_0034e948;
+extern u8* D_00361f60;
+extern u8 D_00362dc8[];
+extern u32 D_00365c48;
+extern u8 D_0035eb98[];
+extern u8 D_00347f98[];
+extern u8 D_0034ee08[];
+
+// Initialise a fixed descriptor when called with (1, 0xffff).
+// 00103080: static initialiser, now made by gcc in src/common/title.cpp
+
+// Append a packet header of n quadwords to a packet cursor; returns its payload.
+struct Pk { u16 h0; u8 b2; u8 b3; u32 f4; u32 f8; u32 fc; };
+union PkCursor { Pk* p; u32 w; u16 h; };
+u8* wtarget_001337f0(u32 a, u32 n, u32 c, u32);  // 0x001337f0: definition moved into src/anon/unit_00131418.cpp
+
+void dk__TREASURE_INFO__off(void);  // 0x00138140: definition moved into src/anon/unit_001374c8.cpp
+
+// 0014b468: moved to src/anon/unit_0014b150.cpp
+
+// 0014db78: moved to src/anon/unit_0014d680.cpp
+
+// Clamp p[0] towards p[2] in the direction of p[1]; returns 0 once clamped.
+u32 func_0014f068(f32* p);  // 0x0014f068: definition moved into src/anon/unit_0014ecb8.cpp
+
+// 00167658: moved to src/anon/unit_00167358.cpp
+
+Q16* func_0016c508(Q16* out, u8* o);  // 0x0016c508: definition moved into src/anon/unit_00169f98.cpp
+
+static inline bool cache_header_full(u8* h) { return *(s32*)(h + 0x28) >= 10000; }
+u32 cache_buff_alloc(const char* name, s32 n);  // 0x001708f8: definition moved into src/anon/unit_0016e8f8.cpp
+
+void func_00171418(u8** p);  // 0x00171418: definition moved into src/anon/unit_00170f58.cpp
+
+void func_00172890(u8** p);  // 0x00172890: definition moved into src/anon/unit_00171e58.cpp
+
+// 0017dbb8: moved to src/yasui/libys/friend.cpp
+
+void func_00196710(u32 i);  // 0x00196710: definition moved into src/anon/unit_00195d00.cpp
+
+// Find the entry with the given id (any entry when id < 0) in a variable-size list.
+u8* func_0019b328(u8* p, s32 id);  // 0x0019b328: definition moved into src/anon/unit_00199688.cpp
+
+u32 YS__OBJ__can_hitback(u8* p);  // 0x0019c838: definition moved into src/anon/unit_0019ba60.cpp
+
+void func_0019c920(u8* p);  // 0x0019c920: definition moved into src/anon/unit_0019ba60.cpp
+
+void YS__BLUR__Init(void);  // 0x0019ec20: definition moved into src/anon/unit_0019ea10.cpp
+
+// 001ac258: moved to src/anon/unit_001abb28.cpp
+
+// 001c1060: moved to src/anon/unit_001c0638.cpp
+void YS__OBJ__DetachAll(void);
+
+void func_001c2c98(u8* p);  // 0x001c2c98: definition moved into src/anon/unit_001c2b58.cpp
+
+u8* func_001d3f98(u8* p);  // 0x001d3f98: definition moved into src/anon/unit_001d3c08.cpp
+
+void func_001d6e08(u8* p);  // 0x001d6e08: definition moved into src/anon/unit_001d68e0.cpp
+
+struct E64 { u8 pad[0x26c]; u32 on : 1; u32 : 31; };
+static inline bool entry_on(u32 o) { return ((E64*)(func_001bbcb0() + o))->on; }
+u32 YS__MISSION__GetMaxComboCounter(u32 i, u32, u32, u32);  // 0x001d9148: definition moved into src/anon/unit_001d7458.cpp
+
+// ryj::PAX::~PAX() (D1), called by the static destructors of PAX members.
+void func_001ddd88(void* p) asm("_ZN3ryj3PAXD1Ev");
+void func_001ddd88(void* p);  // 0x001ddd88: definition moved into src/anon/unit_001ddcf0.cpp
+
+u32 sa__MUSICAL_INPUT__ExcellentPrint(Q16* v);  // 0022ae98: moved to src/sasa/musical_input.cpp (linked unit)
+
+void func_00240b48(u32 a);  // 0x00240b48: definition moved into src/anon/unit_0023f5b8.cpp
+
+// Index of the n-th set bit (of 8) in the mask, or -1.
+s32 func_00257fa8(s32 n);  // 0x00257fa8: definition moved into src/anon/unit_00254020.cpp
+
+void func_0028d0f8(u8* p);  // 0028d0f8: moved to src/anon/unit_0028c878.cpp
+
+void func_002908a8(u8* p);  // 002908a8: moved to src/anon/unit_0028f1e0.cpp
+
+u8* func_002924d0(u8* p, u32 a);  // 002924d0: moved to src/anon/unit_00290f78.cpp
+
+void func_00299550(void);  // 0x00299550: definition moved into src/anon/unit_002982f0.cpp
+
+// Set bit n in a bitset at +0x94 (stores only when it changes).
+void func_002aae30(u32 n);  // 0x002aae30: definition moved into src/anon/unit_002a99c8.cpp
+
+void func_002be7b8(u8* p, u32 a, u32 b);  // 0x002be7b8: definition moved into src/anon/unit_002be020.cpp
+
+void func_002bfb40(void);  // 0x002bfb40: definition moved into src/anon/unit_002bebd0.cpp
+
+u32 func_002cebc8(u32 a);  // 002cebc8: moved to src/taito/minigame_base.cpp (linked unit)
+
+u8 func_002e0e70(u8* p);  // 0x002e0e70: definition moved into src/anon/unit_002de3c8.cpp
+
+// 002e3840: moved to src/anon/unit_002e2f08.cpp
+
+// d = ftoi4(project(m * v)); with f set, zw are converted with ftoi0 instead.
+void func_002f47d8(void* d, void* m, void* v, u32 f);  // 0x002f47d8: definition moved into src/sdk/libvu0_002f45f0.s
+
+// vsprintf-style: format into buf through a string FILE.
+struct StrFile { u8* p; u32 r; u32 w; u16 flags; u16 file; u8* base; u32 size; u32 pad[15]; u32 data; u32 pad2[2]; };
+s32 func_00301550(u8* buf, u32 fmt, u32 ap);  // 0x00301550: definition moved into src/newlib/libc/vsprintf.c
+
+void func_0031ce70(u8* p);  // 0x0031ce70: definition moved into src/anon/unit_0031b9e0.cpp
+
+void func_00320198(u8* p);  // 0x00320198: definition moved into src/anon/unit_0031f2f8.cpp
+}

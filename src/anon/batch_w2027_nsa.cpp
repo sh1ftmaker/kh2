@@ -1,0 +1,36 @@
+#include "../common/types.h"
+
+struct W2027Obj {
+    virtual void m0();
+    virtual void m1();
+    virtual void m2();
+    virtual void m3();
+    virtual void m4();
+};
+struct W2027Owner { u8 pad[0x24]; W2027Obj* obj; };
+struct W2027Pair { s32 x, y; };
+struct W2027Tag { u16 a; u8 b; };
+
+struct W2027Node { u8 pad[0x9c]; W2027Node* next; };
+struct W2027List {
+    W2027Node* head;
+    W2027Node* nx(W2027Node* n) { return !n ? head : n->next; }
+};
+
+extern "C" {
+
+/* The two by-value struct parameters are unused, but gcc stores BLKmode
+   parameters to their stack slots (sd a1,0 / sw a2,16). */
+void func_002bef78(W2027Owner* p, W2027Pair v, W2027Tag w);  // 0x002bef78: definition moved into src/anon/unit_002bebd0.cpp
+
+/* Linked-list search: returns 1 when t is in the list at p+0x94. */
+// 0017fdc0: moved to src/yasui/libys/motion.cpp
+
+/* func_00253b30 is a (char*, const char*) copy. Declaring it as the strcpy
+   builtin gives the original argument order (a0 set before a1). */
+char* strcpy(char*, const char*) asm("func_00253b30");
+char* func_002b64c8(void);
+void func_00170518(char*, s32, s32);
+void Tz__JmSynthe__ReadMixData(void);  // 0x002a7588: definition moved into src/anon/unit_002a7308.cpp
+
+}

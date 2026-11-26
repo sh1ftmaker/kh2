@@ -8,7 +8,6 @@ class FMatrix;
 class FVector;
 class Line;
 class ObjOcc;
-class ushort;
 
 namespace dk {
 

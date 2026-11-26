@@ -1,0 +1,14 @@
+#include "../common/types.h"
+struct S2 { u16 a; u16 id; };
+struct B { u8 pad[6]; u16 h; u8 pad2[4]; s32 v; };
+struct A { u8 pad[0xb44]; B* b; };
+extern "C" {
+void func_00178bf0(A*, S2*);
+void YS__PLAYER__move_stop(A*);
+void func_00179648(A*, s32);
+void func_001991a8(u32, s32);
+void func_001a6e88(s32, A*, void*);
+void func_001a70a0(s32, A*, void*);
+void func_001a8778(s32, A*);
+// 00178ae8: moved to src/yasui/libys/player.cpp
+}

@@ -1,0 +1,303 @@
+#include "../common/types.h"
+
+typedef unsigned int u128 __attribute__((mode(TI)));
+
+struct Vec16 { f32 x, y, z, w; } __attribute__((aligned(16)));
+struct NoTail { ~NoTail() {} };
+
+// delete[]-free object with a 2-element 16-byte-aligned member array (empty dtors)
+struct W41Inner { u32 w[4]; ~W41Inner() {} } __attribute__((aligned(16)));
+struct W41Outer { u8 pad[32]; W41Inner arr[2]; ~W41Outer() {} };
+void operator delete(void*) asm("func_001e0158");
+
+extern "C" {
+
+// ---- externs ----
+s32 func_00103b38(u32);
+void func_00102080(void*);
+extern u32 D_0032b984;
+extern u8 D_0033cb80[];
+extern u8 D_0033cbb0;
+extern u32 D_0033cbac;
+
+u8* func_001058e8(void);
+u8 func_00105f98(void);
+struct W41VObj { void (**vt)(W41VObj*); };
+W41VObj* func_00102c80(void);
+
+u64* func_00133ba0(u32, u32, u32);  // forward_sub24_to_1337f0
+f32 func_002f8ad0(f32, f32);
+
+struct W41Node { u32 f0; W41Node* next; u32 f8, fc; u32 key; };
+struct W41List { u32 f0; W41Node* head; };
+extern W41List* D_00347f80_list asm("D_00347f80");
+void func_00139708(W41Node*);
+
+struct W41Sema { u8 pad[24]; s32 sema; u8 pad2[60]; };
+extern s32 D_00349e40;
+extern W41Sema D_00349e7c[2];
+void func_00305660(s32);
+void func_00305690(s32, void*);
+void func_00305640(s32);
+
+struct W41S20 { u32 w[5]; };
+extern W41S20 D_0034a9f0;
+void dk__ObjCamera__cancelSubjective(f32);
+u8* func_00140df0(void);
+
+struct W41Ent16 { u16 id; u16 pad; s32 val; u32 x, y; };
+struct W41Tbl { u32 f0; s32 n; u32 f8, fc; W41Ent16 e[1]; };
+
+extern char D_004f63d8[];
+extern char D_0036c450[];
+extern u32 D_0033caf0;
+void func_002fee78(char*, const char*, ...);
+
+extern s8 D_01c5f4f0;
+extern u128 D_01c5f500;
+void func_00175540(void);
+void func_002fd188(void (*)(void));  // pool_alloc_block
+
+struct W41VObj2 { void** vt; };
+extern W41VObj2* D_00361f60_obj asm("D_00361f60");
+extern u32 D_00361f60;
+u32 func_002cebb0(void);  // get_global_361f60
+
+s32 func_00180cd0(u8*);
+s32 func_001805a8(u8*, u32);
+void func_0017f488(u8*, u32, f32, f32);
+void func_00169f98(u8*);
+
+struct W41E12 { u8 b[12]; };
+extern s32 D_0034ed00;
+extern W41E12 D_01c60588[];
+void func_001828b8(W41E12*);
+void func_001827a8(W41E12*);
+
+void func_00198dc0(u8*);
+extern u8 D_01c61b48[];
+
+}
+
+// Walks every node of the global list and processes the ones whose key matches.
+static inline W41Node* w41NextNode(W41List* l, W41Node* n) { if (n == 0) return l->head; return n->next; }
+
+extern "C" {
+
+// 00105de0: moved to src/common/shop.cpp
+
+struct W41S10 { u8 a, b, c; u16 d, e, f; };
+static inline void w41InitS10(W41S10* s, u16 v) { s->a = v; s->b = v; s->c = v; s->d = v; s->e = v; s->f = v; }
+// 00105fc8: moved to src/common/world.cpp
+
+// GIF tag (NLOOP=1, EOP, NREG=1, REGS=A+D) followed by one A+D pair (TEXFLUSH).
+struct W41GifTag { u64 nloop:15; u64 eop:1; u64 pad:30; u64 pre:1; u64 prim:11; u64 flg:2; u64 nreg:4; u64 r0:4; u64 rr:60; u64 data; u64 addr; };
+void func_00109690(u32 a);  // 00109690: moved to src/anon/unit_001085a8.cpp
+
+// soft-double helpers linked in the game image (float->double, double !=)
+double func_00313b80(f32);  // float_to_double
+s32 func_003142e0(double, double);  // double_compare
+void func_001168c0(u8* p);  // 0x001168c0: definition moved into src/anon/unit_00114a90.cpp
+
+void func_00139b28(u32 key);  // 0x00139b28: definition moved into src/anon/unit_001393c8.cpp
+
+// 0014d478: moved to src/anon/unit_0014d298.cpp
+
+// 00159130: moved to src/harata/libdk/lightcyclecamera.cpp
+
+W41Ent16* func_00168b88(W41Tbl* t, s32 id, s32 val, s32 k);  // 0x00168b88: definition moved into src/anon/unit_00168aa0.cpp
+
+struct W41SP { u8 pad[72]; u8 flag; };
+char* func_0016f4b8(W41SP* p, char* buf);  // 0x0016f4b8: definition moved into src/anon/unit_0016e8f8.cpp
+
+void func_00173918(u8** p);  // 0x00173918: definition moved into src/anon/unit_00171e58.cpp
+
+// 001786e0: moved to src/yasui/libys/player.cpp
+
+}
+
+// 00182d80: moved to src/anon/unit_00182780.cpp
+
+extern "C" {
+
+// 00198450: moved to src/anon/unit_00197fe0.cpp
+
+}
+
+// 00199120: moved to src/anon/unit_00198e40.cpp
+
+extern "C" {
+
+struct W41S19 { u32 f0; s32 id; u32 res; };
+void func_0019d548(W41S19*);
+u32 func_0013e610(u32);
+extern u32 D_0036d3b8[];
+void func_0019d588(W41S19* p, s32 id);  // 0x0019d588: definition moved into src/anon/unit_0019ba60.cpp
+
+struct W41BF { u32 lo:3; u32 mode:4; };
+void func_001b3b70(u8*, u32, u32, u32);
+extern void* D_00350910[];
+// 001a6bc8: moved to src/anon/unit_001a6a10.cpp
+
+struct W41Rect { u32 f0, x, y; u8 pad[0x50]; u32 w, h, mode; };
+void func_001acdc0(W41Rect*, u32, u32, u32, u32, u32);
+// 001acf38: moved to src/anon/unit_001abb28.cpp
+
+void func_001bd370(u8*);  // clear_4words_plus2240
+void func_001bc720(u8*);
+void func_001bd3a0(u8*);
+void func_001bdf68(u8*);
+void YS__FIELD_COMMAND__InitShortcut(void);
+void func_001d6da8(u8*);
+void YS__FIELD_COMMAND__init_area(u8* p);  // 0x001bded8: definition moved into src/anon/unit_001bc568.cpp
+
+}
+
+// YS::MISSION::WarningComboCounter
+struct W41VO { void** vt; u32 f4, f8; u32 flags; };
+extern "C" {
+u32 func_001bb4a0(void);
+u8* func_001bbcb0(void);
+void WarningComboCounter(s32 i) asm("_ZN2YS7MISSION19WarningComboCounterEi");
+void WarningComboCounter(s32 i);  // 0x001d9320: definition moved into src/anon/unit_001d7458.cpp
+
+u32 func_001dba18(u32, u32, u32);
+u32 func_001050d8(u32);
+void func_001db950(u32, u32, u32, u32);
+static inline u32 w41Create(u32 a, u32 b, u32 c) {
+    u32 p = func_001050d8(2560);
+    func_001db950(p, a, b, c);
+    return p;
+}
+u32 func_001db9a8(u32 a, u32 b, u32 c);  // 0x001db9a8: definition moved into src/anon/unit_001d9d00.cpp
+
+extern u32 D_0034e948;
+u32 YS__OBJ__is_exist(u32);
+u128* YS__OBJ__get_pos(u32);  // obj_get_attach_or_alt
+extern u128 D_01d5bab0;
+extern f32 D_00352ad0;
+extern f32 D_00349e10;
+// 001dbcd0: moved to src/anon/unit_001dbbe0.cpp
+
+void func_001e01b8(void*);
+struct W41Own { u8 pad[0x58]; W41Outer* obj; u32 flags; };
+void func_001ded98(W41Own* p);  // 0x001ded98: definition moved into src/anon/unit_001deb58.cpp
+
+s32* func_001e3650(u32);  // ptr_add4
+void func_001e3898(u32 a, s32 d);  // 0x001e3898: definition moved into src/anon/unit_001e0cb8.cpp
+
+void func_002fdfc8(const char*, ...);  // device_vprintf_va
+extern char D_00370bd8[];
+extern char D_00370bf8[];
+extern char D_00370c10[];
+void func_00223448(u32 a, u32 b, u32 c, u32 d);  // 0x00223448: definition moved into src/anon/unit_00222aa8.cpp
+
+u32 func_0022b9e0(u8*, u32, u32);
+void dk__Sprite__create(u8*, u32, u32, u32, u32, u32);
+void sa__MUSICAL_TARGET__start(u8* p, u32 a, u32 b);  // 0022b558: moved to src/sasa/musical_target.cpp (linked unit)
+
+u32 func_002416d8(u32, u32, u32);
+void func_002346f0(s32, u32, u32, u32, u32);
+extern s8* D_0035ec94;
+extern u32 D_0035ec88;
+extern u32 D_0035ec90;
+void func_00241608(u32 a, u32 b, u32 c);  // 0x00241608: definition moved into src/anon/unit_0023f5b8.cpp
+
+struct W41VO2 { void** vt; };
+extern u8* D_0035ed04;
+u32 func_00139d78(u8*);
+void func_00244db8(void);  // 0x00244db8: definition moved into src/anon/unit_00242478.cpp
+
+struct W41KV { s16 key, val; };
+extern W41KV D_00372c30[];
+s32 func_00259510(s32 k);  // 0x00259510: definition moved into src/anon/unit_002588e8.cpp
+
+u32 func_00257770(void);
+s32 func_00287bc0(void);
+void func_0028dac8(u32, u32);
+s32 func_0028acc8(u32);
+s32 func_0028acb8(u32);
+void func_0028aa40(u32);
+extern u32 D_0035f01c;
+void Tz__CmAbility__FadeOutSelList(void);  // 0x0027a108: definition moved into src/anon/unit_0027a108.cpp
+
+struct W41VA { u32 (**vt)(W41VA*, u32, u32); };
+struct W41SysA { u8 pad[0x14]; W41VA* alloc; };
+extern W41SysA* D_00347f80_sys asm("D_00347f80");
+void func_0028dfe8(u32);  // obj_ctor_36f440
+void func_0028b9b0(u32* p);  // 0x0028b9b0: definition moved into src/anon/unit_00288b00.cpp
+
+}
+
+// Tz::MenuCursor::DeleteAll
+extern "C" {
+void DeleteAll(...) asm("_ZN2Tz10MenuCursor9DeleteAllEz");
+extern s32 D_0035f404;
+extern u32 D_0035f410;
+void func_0028cdb8(s32);  // record408_alloc_init
+// 0028ce38: moved to src/anon/unit_0028c878.cpp
+
+u8* func_00103eb0(void);
+u32* TASK_MANAGER__create_thread(u32, u32, u32, void (*)(void), u32);
+void func_002933b8(void);
+void func_00293350(u32 a, u32 b, u32 c);  // 0x00293350: definition moved into src/anon/unit_00292e60.cpp
+
+}
+
+extern "C" {
+void func_002b691c(u32);
+void func_002bbde0(void);
+void func_002bacc0(void);
+void func_002b9ad0(void);
+void SOUND__initCommonSe(void);
+void func_002bd538(void);
+void func_00102788(u32, u32, u32, void (*)(void));
+void func_002b9c60(void);
+extern u32 D_0032b91c;
+}
+void wtarget_002b9bd0(u32, u32, u32, u32);  // 0x002b9bd0: definition moved into src/anon/unit_002b9ab8.cpp
+
+extern "C" {
+
+void func_0017f5e0(u8*, u32, u32, f32, f32);
+void worldmap__ActionWarp__start(u32, u8* p);  // 0x002c17d8: definition moved into src/anon/unit_002c10e0.cpp
+
+struct W41S24 { u32 w[6]; };
+u32 func_002cec08(u32, W41S24*);
+bool func_002ceef8(u32, u8* p);  // 002ceef8: moved to src/taito/minigame_base.cpp (linked unit)
+
+extern void* D_00362060[];
+extern void* D_0034e8b8[];
+extern void* D_0034ee08[];
+extern void* D_00362050;
+void func_00182f28(u32);  // store_global_35ed04
+void func_00319f88(u8*);
+void YS__OBJ_ATTACK__clear(u8*);  // array8_free_slots
+void func_001c0248(u8*);
+void func_00319fb0(u8*);  // big_obj_dtor
+void func_002d0fb0(u8* p);  // 0x002d0fb0: definition moved into src/anon/unit_002cf260.cpp
+
+u8* func_002dc7c8(u8*);
+f32 func_002dceb0(u8* p);  // 0x002dceb0: definition moved into src/anon/unit_002da040.cpp
+
+f32 func_002e4af0(u8*);
+void func_002dd2d8(u8* p, f32* a, f32* b);  // 0x002dd2d8: definition moved into src/anon/unit_002da040.cpp
+
+extern void* D_00347e80[];
+extern void* D_00347f98[];
+struct W41VS { void (**vt)(W41VS*, u8*); };
+struct W41SysS { u8 pad[0x14]; W41VS* s; };
+extern void* D_00347f80;
+void func_002361d0(u8*);
+void func_0031ab78(u8* p);  // 0x0031ab78: definition moved into src/anon/unit_003197d0.cpp
+
+extern void* D_00347e60[];
+extern void* D_0034a440[];
+void func_0031a838(u8*);
+void func_00239700(u8*);
+void func_0014b920(u8*);
+void func_0031be70(u8* p);  // 0x0031be70: definition moved into src/anon/unit_0031b9e0.cpp
+
+void func_0031e208(u32, u8* p, u32* flags, u32 v, u8* src);  // 0x0031e208: definition moved into src/anon/unit_0031b9e0.cpp
+
+}

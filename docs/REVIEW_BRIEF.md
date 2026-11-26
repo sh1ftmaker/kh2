@@ -11,11 +11,11 @@ You do not fix anything and you do not commit. You produce a verdict.
 
 1. **Measurements are real.** In the branch's worktree, with the main
    checkout's tools (never the branch's own copies) and the toolchain
-   `env.sh` sourced: `python3 <repo>/tools/build_elf.py objects && make` ends
-   in `MATCHED!`; `python3 <repo>/tools/progress_bytes.py` is not below
-   `matching`'s; each claimed function scores `exact: true` in
-   `python3 <repo>/tools/rig/compile_diff.py <addr> --src <its source>`, and
-   a one-token change to it does not.
+   `env.sh` sourced: `make` ends in `MATCHED!`; `python3
+   <repo>/tools/gate.py --worker` prints `gate: ok`; `python3
+   <repo>/tools/quality.py` shows what the author claims and no kind got
+   worse. A claimed clean-up is real only if the assembly, pin or flag is
+   gone, not moved into a helper or a macro.
 2. **Nothing measuring was touched.** `git diff matching...<branch> --stat`
    shows only the author's sources, headers used only by them, and
    `functions.tsv` placeholder replacements. Anything else is a finding.

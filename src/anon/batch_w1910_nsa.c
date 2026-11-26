@@ -1,0 +1,46 @@
+#include "../common/types.h"
+struct Bf { u32 b0 : 1; u32 rest : 15; } __attribute__((packed,aligned(2)));
+typedef struct Bf Bf;
+struct Fl { u8 pad[486]; Bf h486; };
+extern void* D_0035f200;
+extern void* D_0035f214;
+s32 func_00289380(void*);
+s32 func_00287cd0(void);
+s32 func_00287bc0(void);
+struct Fl* func_002a9d68(void);
+s32 func_00287c10(void);
+s32 func_00276368(void);
+s32 func_0028acc8(void*);
+s32 func_00276888(void);
+void func_00287f90(s32);
+void func_002aecf0(s32);
+void func_00287c30(void);
+void func_0028af18(void*, s32);
+void func_00276690(s32);
+s32 func_00276358(void);
+void Tz__Jiminy__SetParentSeqNum(s32, s32);
+void func_002aed60(void);
+void func_002afaf0(void);
+s32 func_00289310(void*);
+s32 func_00276398(void);
+void func_00275b60(void);
+void func_00287c90(s32);
+s32 func_00287df0(s32, s32, s32, void*, s32);
+void func_002b3b78(void);
+s32 func_00242848(s32);
+s32 func_0028b038(void*);
+void Tz__ScrollBar__SetPos(void*, s32);
+void func_002aece8(void);
+void Tz__Jiminy__FadeOutHelp(void);
+s32 func_00276608(s32);
+s32 func_002b2338(s32);
+void Tz__JmPuzzle__RequestGraLoad(s32);
+void func_00287c00(s32);
+void func_00287cc0(s32);
+s32 func_00288040(void);
+void func_00288018(void);
+s32 func_002891e8(void*);
+void func_002765e8(s32, s32, s32);
+void func_00287da0(void);
+
+void Tz__JmPuzzle__CtrlTutorial(void);  // 0x002b05f8: definition moved into src/anon/unit_002b05f8.c

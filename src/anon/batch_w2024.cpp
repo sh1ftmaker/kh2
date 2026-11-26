@@ -1,0 +1,61 @@
+#include "../common/types.h"
+
+struct W2024a_Hdr { u8 pad[0x10]; s32 off10; s32 off14; s32 off18; };
+struct W2024a_Ent { u8 pad[0x24]; s32 idx; u8 pad2[0x18]; };
+struct W2024a_Obj { s32 f0; u8* ents; };
+struct W2024a_Bb { u8 pad[0x20]; u64 bitblt; };
+struct W2024a_Tx { u8 pad[0x70]; u64 tex0; };
+extern s32 D_003a99f0[];
+struct W2024b_Vec {
+    f32 x, y, z, w;
+    W2024b_Vec() {}
+    W2024b_Vec(const W2024b_Vec& o) { asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(this), "r"(&o) : "$8", "memory"); }
+    W2024b_Vec& operator=(const W2024b_Vec& o) {
+        if (this != &o) asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(this), "r"(&o) : "$8", "memory");
+        return *this;
+    }
+} __attribute__((aligned(16)));
+struct W2024b_Mtx { W2024b_Vec m[4]; };
+struct W2024b_Obj;
+struct W2024b_Cam;
+static inline void W2024b_vouter(W2024b_Vec& d, const W2024b_Vec& a, const W2024b_Vec& b, W2024b_Vec* r) {
+    asm volatile(".set noreorder\n\tlqc2 $vf1, 0(%1)\n\tlqc2 $vf2, 0(%2)\n\tvsub.wxyz $vf3, $vf0, $vf0\n\tvopmula.xyz ACC, $vf1, $vf2\n\tvopmsub.xyz $vf3, $vf2, $vf1\n\tsqc2 $vf3, 0(%0)\n\t.set reorder"
+        : : "r"(r), "r"(&a), "r"(&b) : "memory");
+    d = *r;
+}
+static inline f32 W2024b_vnorm(W2024b_Vec& v) {
+    f32 len;
+    asm volatile("lqc2 $vf1, 0(%1)\n\tvmul.xyz $vf2, $vf1, $vf1\n\tvaddy.x $vf2, $vf2, $vf2y\n\tvaddz.x $vf2, $vf2, $vf2z\n\tvsqrt Q, $vf2x\n\tvwaitq\n\tcfc2.ni $8, $vi22\n\tvaddq.x $vf2, $vf0, Q\n\tmtc1 $8, %0\n\tvnop\n\tvdiv Q, $vf0w, $vf2x\n\tvwaitq\n\tvmulq.xyz $vf1, $vf1, Q\n\tsqc2 $vf1, 0(%1)"
+        : "=f"(len) : "r"(&v) : "$8", "memory");
+    return len;
+}
+s32 W2024b_mg_be_ready(void*) asm("_ZN2Ti8MiniGame8be_readyEv");
+s32 W2024b_cam_matrix(W2024b_Cam*) asm("_ZN2Ti11MG_ALEscape13camera_matrixEv");
+void W2024b_obj_set_pos(W2024b_Obj*, const W2024b_Vec*) asm("_ZN2YS3OBJ7set_posERKN2kn7FVectorE");
+void W2024b_obj_set_pos_trans(W2024b_Obj*, const W2024b_Vec*) asm("_ZN2YS3OBJ13set_pos_transERKN2kn7FVectorE");
+void W2024b_obj_set_rot(W2024b_Obj*, const W2024b_Vec*) asm("_Z16wtarget_0016b070jjjj");
+extern W2024b_Cam* D_00361f60;
+extern void* D_0034e948;
+extern "C" {
+void func_00109788(void*, void*);
+void func_00109708(void*);
+s32 func_00132018(W2024a_Hdr*);
+s32 func_00132f98(void*, s32, s32*, s32, s32);
+s32 func_00132d90(s32, s32);
+s32 func_00132c98(s32);
+s32 func_00132cd0(s32);
+s32 func_00132d00(s32);
+s32 func_00132d30(s32);
+s32 func_00132d60(s32);
+void func_001097e8(s32, s32, s32, s32, s32, s32, s32, s32, s32);
+void func_00133c60(void*, void*, s32, s32, s32);
+void func_001094e0(void*, s32);
+void kn__ModelSKL__setTexture(W2024a_Obj* o, void* ctx, s32 n, void* a3, W2024a_Hdr* h);  // 0x001217a0: definition moved into src/anon/unit_00120520.cpp
+
+W2024b_Vec* YS__OBJ__get_pos(void*);
+void func_002e10d0(W2024b_Mtx*, W2024b_Cam*);
+void func_002e1140(W2024b_Mtx*, W2024b_Cam*);
+void func_0011b6a8(void*);
+void func_002d08b8(W2024b_Vec*, const W2024b_Mtx*);
+// 002e1d28: moved to src/anon/unit_002e1908.cpp
+}

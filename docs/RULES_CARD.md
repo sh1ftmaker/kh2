@@ -6,10 +6,12 @@ owner's: leave them and mention them in your report.
 
 ## Top three
 
-1. Score with `compile_diff.py`, land with `promote.py`, and nothing else
-   decides what matched.
-2. No tricks, no guessed names (below).
-3. Four flat attempts or a register-only diff: park it and move on.
+1. The build ends in `MATCHED!` after every commit. Nothing else decides
+   whether a change is acceptable.
+2. No new tricks, no guessed names (below). Removing assembly, pins and
+   offset access is the work.
+3. A rewrite that will not match after four tries goes to `nonmatching/` with
+   a note on what differs. Move on.
 
 ## Setup
 
@@ -17,34 +19,26 @@ owner's: leave them and mention them in your report.
   the repository's identity, each message ending with
   `Co-Authored-By: <your model> <noreply@…>`. Never commit to `matching`,
   push, rebase, merge, or run a bare `git stash`.
-- `source` the toolchain `env.sh` in every shell. Without it every compile
-  fails and looks like a 0 % result.
+- `source` the toolchain `env.sh` in every shell.
 - Never commit game data: `SLPM_666.75`, `kh2.elf`, `out/`, `build/`, the
-  compiler archive, disc images or dumps.
+  compilers, disc images or dumps.
 - One build per worktree at a time; anything long-lived goes under `sbg`.
 
 ## Commands
 
 ```sh
-python3 tools/build_elf.py objects && make           # once at the start: MATCHED!
-python3 tools/progress_bytes.py | head -2            # baseline: write it in your report
-python3 tools/rig/get_context.py <addr>              # everything known about one function
-python3 tools/rig/compile_diff.py <addr> --src f.cpp # every attempt: compile, mini-link, diff
-python3 tools/rig/permuter.py <addr> --src f.cpp     # a near-miss of 85 % or more
-python3 tools/rig/promote.py <addr> --src f.cpp --dest src/<area>/<tu>.cpp
-python3 tools/rig/park.py <addr> …                   # give-up record
-python3 tools/lane.py score <addr>                   # re-score a file in nonmatching/
-python3 tools/gate.py --worker                       # before your last commit: must print `gate: ok`
+make                                          # MATCHED! (about 20 s; first build longer)
+python3 tools/quality.py                      # totals: write them in your report
+grep <addr> out/generated/quality.tsv         # one function's kind and source file
+python3 tools/rig/get_context.py <addr>       # disassembly, PS3 name and prototype, class layouts
+python3 tools/rename_fn.py --check NAMES.tsv  # dry-run a rename (addr, new_name, evidence)
+python3 tools/gate.py --worker                # before your last commit: gate: ok
 ```
 
-A function that will not match goes to `nonmatching/<addr>.cpp` (replace the
-machine draft if yours scores higher), headed
-`// FIXME(lane): not matching; origin: hand` and a line saying what differs.
-Start from the draft already there when its score is high; rewrite it with
-real names and types rather than polishing decompiler output.
-
-Always pass absolute `--src` paths. `compile_diff` rejects, unscored, any
-candidate with an asm statement, `naked`, a register pin or `.incbin`.
+A linked unit (`linked_units.tsv`, `notes/linking.md`) is one source file
+built whole with its own flags; its functions must stay in address order.
+`tools/rig/compile_diff.py` and `promote.py` have not been re-checked against
+this build: do not rely on them until the coordinator says so.
 
 ## Reading a diff (the short list; the rest is docs/codegen-3.2.md)
 
@@ -92,33 +86,35 @@ FIXME.
 
 Evidence or a placeholder.
 
-- Evidence is the E3 map at grade `seed` or `high` (`get_context` prints
-  `symbol_origin`), a string in the binary, or a vtable slot.
+- Evidence is the PS3 debug build at tier `seed`, `high`, `sim-high` or
+  `sim-vt-high` (`notes/e3/e3_names.tsv`), a string in the binary, or a
+  vtable slot. `notes/function_names.tsv` holds a model's descriptions: use
+  them to understand, never as names.
 - Unknown: `func_XXXXXXXX`, `D_XXXXXXXX`.
 - Provisional descriptive names keep the address: `MenuCursor_0012ab40`.
   They stay freely renameable.
-- `functions.tsv`: one symbol per address. Replace a placeholder; never
-  append; never rename a real name. Rename the defining source in the same
-  commit.
+- `functions.tsv`: one symbol per address, changed only with
+  `tools/rename_fn.py`. Never rename a real name.
 - Class members and layouts start from `data/e3` but every offset is checked
   against the PS2 code: the HD build shifted many classes. Structs carry
   `/* 0xNN */` offsets and a size comment.
 
 ## What you may change
 
-Your functions' source file and headers only it uses; `functions.tsv`
-placeholder replacements for your addresses. Anything shared (a class header
-others include, another file, tools) is a **SHARED-EDIT**: do not make it;
-list offset, width, type, the function that shows it and the name evidence
-in your report.
+The source files of your task and headers only they use; `functions.tsv`
+through `tools/rename_fn.py`; a `linked_units.tsv` row only to *remove* a
+flag your rewrite makes unnecessary. Anything shared (a class header others
+include, another file, tools) is a **SHARED-EDIT**: do not make it; list
+offset, width, type, the function that shows it and the name evidence in
+your report.
 
 ## Finish and report
 
-`make` prints `MATCHED!` after `build_elf.py objects`; the total is not
-below your baseline; `git status` is clean; commit. Report in 300 words or
-fewer: functions before and after, each parked function with its diff class,
-SHARED-EDITS, new names with evidence, notes for the next agent, and any
-tool fault you hit.
+`make` prints `MATCHED!`; `quality.py` shows no kind worse than your
+baseline; `gate.py --worker` prints `gate: ok`; `git status` is clean;
+commit. Report in 300 words or fewer: totals before and after, what you
+cleaned, named or typed, what resisted and why, SHARED-EDITS, new names with
+evidence, and any tool fault you hit.
 
 ## Reviewers
 

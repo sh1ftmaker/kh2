@@ -1,0 +1,124 @@
+#include "../common/types.h"
+
+namespace w277_a {
+#define QCOPY(d, s) asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(d), "r"(s) : "$8", "memory")
+struct QWord {
+    union { u32 v[4]; f32 f[4]; };
+    QWord() {}
+    QWord(const QWord& o) { QCOPY(this, &o); }
+    QWord& operator=(const QWord& o) {
+        if (this != &o) QCOPY(this, &o);
+        return *this;
+    }
+} __attribute__((aligned(16)));
+static inline QWord Scale(const QWord& a, f32 s)
+{
+    QWord r;
+    asm volatile(".set noreorder\n\tlqc2 $vf1, 0(%1)\n\tmfc1 $8, %2\n\tqmtc2 $8, $vf2\n\tvmulx.wxyz $vf1, $vf1, $vf2x\n\tsqc2 $vf1, 0(%0)\n\t.set reorder"
+                 : : "r"(&r), "r"(&a), "f"(s) : "$8", "memory");
+    return r;
+}
+static inline void Zero(QWord* v)
+{
+    asm volatile(".set noreorder\n\tvsub.wxyz $vf1, $vf0, $vf0\n\tsqc2 $vf1, 0(%0)\n\t.set reorder" : : "r"(v) : "memory");
+}
+static inline f32 Normalize(QWord* v)
+{
+    f32 r;
+    asm volatile("lqc2 $vf1, 0(%1)\n\tvmul.xyz $vf2, $vf1, $vf1\n\tvaddy.x $vf2, $vf2, $vf2y\n\tvaddz.x $vf2, $vf2, $vf2z\n\tvsqrt Q, $vf2x\n\tvwaitq\n\tcfc2.ni $8, $vi22\n\tvaddq.x $vf2, $vf0, Q\n\tmtc1 $8, %0\n\tvnop\n\tvdiv Q, $vf0w, $vf2x\n\tvwaitq\n\tvmulq.xyz $vf1, $vf1, Q\n\tsqc2 $vf1, 0(%1)"
+                 : "=f"(r) : "r"(v) : "$8", "memory");
+    return r;
+}
+extern "C" {
+struct Mv {
+    u8 pad0[16];
+    QWord dir;      // 16
+    QWord v2;       // 32
+    u8 pad1[320 - 48];
+    u8 sub[32];     // 320
+    u32 flags160;   // 352
+    u8 pad2[2040 - 356];
+    u32 flags7f8;   // 2040
+};
+struct G1f34 { f32 a, b; };
+extern G1f34* D_00351f34;
+s32 func_001ca448(Mv*);  // type_is_16_44_161
+void YS__ACTION_LIGHTCYCLE__CheckCrash(Mv*);
+void func_0017f540(u8*, s32, f32, f32);
+void func_001c9ee8(void* self, Mv* m);  // 0x001c9ee8: definition moved into src/anon/unit_001c9ea0.cpp
+}
+
+static inline QWord Sub(const QWord& a, const QWord& b)
+{
+    QWord r;
+    asm volatile(".set noreorder\n\tlqc2 $vf1, 0(%1)\n\tlqc2 $vf2, 0(%2)\n\tvsub.wxyz $vf1, $vf1, $vf2\n\tsqc2 $vf1, 0(%0)\n\t.set reorder"
+                 : : "r"(&r), "r"(&a), "r"(&b) : "memory");
+    return r;
+}
+static inline void ScaleTo(QWord* d, const QWord* a, f32 s)
+{
+    asm volatile(".set noreorder\n\tlqc2 $vf1, 0(%1)\n\tmfc1 $8, %2\n\tqmtc2 $8, $vf2\n\tvmulx.wxyz $vf1, $vf1, $vf2x\n\tsqc2 $vf1, 0(%0)\n\t.set reorder"
+                 : : "r"(d), "r"(a), "f"(s) : "$8", "memory");
+}
+extern "C" {
+extern s32 D_01d498b0;
+extern QWord D_00352a60;
+extern QWord D_01d49870;
+void func_001dbb38(void);
+s32 func_00197920(void);
+s32 func_001c5f78(void);
+void* YS__OBJ__Each(void*);
+s32 func_0016a020(void*);
+s32 func_001dbe78(void*, QWord*);
+struct Ob { QWord pos; u8 pad[72]; s32 x58; };
+s32 func_001c5f90(Ob* o);  // 0x001c5f90: definition moved into src/anon/unit_001c5b90.cpp
+}
+
+extern "C" {
+QWord func_002cd770(void* p, const QWord* lo, const QWord* hi, f32 t);
+void func_002cd518(void* p, f32* d, void* q, QWord* a, QWord* b);
+f32 func_002cdb60(void* p, f32* out, void* q, const QWord* lo, const QWord* hi, f32 t0, f32 t1);  // 0x002cdb60: definition moved into src/taito/path.cpp
+}
+
+}
+
+namespace w277_b {
+struct Mtx { f32 m[4][4]; } __attribute__((aligned(16)));
+static inline void CopyMtx(Mtx* d, const Mtx* s)
+{
+    asm volatile("lq $8, 0(%1)\n\tlq $9, 16(%1)\n\tlq $10, 32(%1)\n\tlq $11, 48(%1)\n\tsq $8, 0(%0)\n\tsq $9, 16(%0)\n\tsq $10, 32(%0)\n\tsq $11, 48(%0)"
+                 : : "r"(d), "r"(s) : "$8", "$9", "$10", "$11", "memory");
+}
+static inline void ScaleRow(f32* r, f32 s)
+{
+    asm volatile("lqc2 $vf1, 0(%0)\n\tmfc1 $8, %1\n\tqmtc2 $8, $vf2\n\tvmulx.wxyz $vf1, $vf1, $vf2x\n\tsqc2 $vf1, 0(%0)"
+                 : : "r"(r), "f"(s) : "$8", "memory");
+}
+extern "C" {
+struct Cam { s32 x0; s32 type; u8 pad[136]; f32 a; f32 b4; f32 c; };
+struct Obj { s32 x0; Cam* cam; };
+struct Arg { u8 pad[24]; Obj* owner; };
+union UF { f32 f; u8 c; };
+extern UF D_00347b70;
+void func_00127cf8(void*);
+void func_00128480(Obj*, Arg*);
+void kn__MotionPrototype0__setFcurveValue(Obj*, Arg*, f32);
+void func_00130c18(Obj*, f32);
+void func_0012d728(Obj*, Arg*, Mtx*, void*, void*);
+void func_00129c38(Obj*, Arg*, Mtx*, void*, void*);
+void func_00130d28(Obj* o, Arg* a, const Mtx* mtx, void* p3, void* p4, f32 t);  // 0x00130d28: definition moved into src/anon/unit_00130d18.cpp
+}
+
+}
+
+namespace w277_c {
+extern "C" {
+extern u32 D_003638d0;
+void func_001ccaa0(void);
+static inline u32 rnd(void) { return D_003638d0 *= 0x10dcd; }
+static inline f32 frnd(void) { return (f32)rnd() * 2.3283064365386963e-10f; }
+static inline f32 rng(f32 a, f32 b) { return b + frnd() * a; }
+struct V4 { f32 x, y, z, w; };
+// 001ccac0: moved to src/anon/unit_001cc868.cpp
+}
+}

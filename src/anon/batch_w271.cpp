@@ -1,0 +1,110 @@
+#include "../common/types.h"
+#define QCOPY(d, s) asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(d), "r"(s) : "$8", "memory")
+struct V4_w271 {
+    f32 x, y, z, w;
+    V4_w271() {}
+    V4_w271(const V4_w271& o) { QCOPY(this, &o); }
+} __attribute__((aligned(16)));
+struct VT_w271 { void* f[32]; };
+struct Obj_w271 { VT_w271* vt; };
+extern u32 D_0034e948;
+extern "C" {
+u32 YS__OBJ__is_exist(u32);
+u32 func_0019c090(u32);  // obj_is_enabled
+u32 func_0019c5d0(Obj_w271*);
+f32 func_001849d8(u32);
+u32 c5d0f(Obj_w271*, f32) asm("func_0019c5d0");
+V4_w271* YS__OBJ__get_pos(u32);  // obj_get_attach_or_alt
+f32 func_0016afe0(u32);
+void func_0016aeb8(Obj_w271*, f32);
+void func_0016ace0(Obj_w271*, V4_w271*);
+void func_0016ad68(Obj_w271*, u32);
+void func_0016ac38(Obj_w271*, s32, s32, s32, s32);
+void YS__ACTION_CARPETOBJ__control(u32 self, Obj_w271* o);  // 0x001b2db8: definition moved into src/anon/unit_001b2780.cpp
+}
+struct M_w271 { f32 m[12]; f32 t[4]; } __attribute__((aligned(16)));
+extern "C" {
+union Cam_w271 { u8* p; f32 f; };
+extern Cam_w271 D_01d9e6e8;
+extern u8 D_00354bd0[];
+extern f32 D_00354bc0[3];
+void func_0021ebe8(void*, void*);
+void func_0021edb0(void*, void*);
+void sceVu0InversMatrix(M_w271*, M_w271*);  // convert_vectors_to_scalar
+void sceVu0MulMatrix(void*, void*, void*);
+}
+static inline void ScaleRow_w271(void* row, f32 s) {
+    asm volatile("qmtc2 %1, $vf9\n\tlqc2 $vf10, 0(%0)\n\tvmulx.xyz $vf10, $vf10, $vf9x\n\tsqc2 $vf10, 0(%0)" : : "r"(row), "r"(s) : "memory");
+}
+#define BODY_W271(ROT) \
+    s32* off = *(s32**)(x + 12); \
+    M_w271 m; \
+    u8* mtx = o + off[3] + 160; \
+    f32* scl = (f32*)(o + off[2] + 160); \
+    f32* pos = (f32*)(o + off[0] + 160); \
+    ROT(D_01d9e6e8.p + 16, o + off[1] + 160); \
+    *(f32*)(D_01d9e6e8.p + 64) = pos[0]; \
+    *(f32*)(D_01d9e6e8.p + 68) = pos[1]; \
+    *(f32*)(D_01d9e6e8.p + 72) = pos[2]; \
+    ROT(&m, D_00354bd0); \
+    m.t[0] = D_00354bc0[0]; \
+    m.t[1] = D_00354bc0[1]; \
+    m.t[2] = D_00354bc0[2]; \
+    sceVu0InversMatrix(&m, &m); \
+    sceVu0MulMatrix(D_01d9e6e8.p + 16, D_01d9e6e8.p + 16, mtx); \
+    sceVu0MulMatrix(D_01d9e6e8.p + 16, &m, D_01d9e6e8.p + 16); \
+    ScaleRow_w271(D_01d9e6e8.p + 16, scl[0]); \
+    ScaleRow_w271(D_01d9e6e8.p + 32, scl[1]); \
+    ScaleRow_w271(D_01d9e6e8.p + 48, scl[2]);
+extern "C" {
+void func_002012e0(u8* o, u32 a1, u8* x);  // 0x002012e0: definition moved into src/anon/unit_00200578.cpp
+void func_00201740(u8* o, u32 a1, u8* x);  // 0x00201740: definition moved into src/anon/unit_00200578.cpp
+}
+struct E_w271 { u8 a[8]; u8 b[8]; s8 c; u8 pad; u16 h; u8 rest[16]; };
+extern "C" {
+extern void* D_0035edac;
+extern u32 D_0035edb0;
+extern void* D_0035edc0;
+extern E_w271 D_003720a0[];
+void Tz__Select__SetItem(void*, s32, s32, s32, u32, u32, E_w271*, void*);
+u8* func_002891b8(void*, s32);
+u32 func_0023aa78(void*);
+u32 func_0023aa98(void*);
+void Tz__Select__SetExOffset(void*, s32, u32, s32);
+u32 func_0028dd90(u32);  // mod10_classify_012
+u32 func_0028ddd8(u32);
+void func_001395f8(u8*);
+void Tz__Select__SetCurrent(void*, s32, s32, s32, s32);
+void func_002b4388(void*, E_w271*, s32);
+void Tz__HBTE__SetupSel(void);  // 0x0024ba58: definition moved into src/anon/unit_0024ba58.cpp
+}
+#ifndef QCOPY
+#define QCOPY(d, s) asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(d), "r"(s) : "$8", "memory")
+#endif
+struct QW_w271 {
+    f32 x, y, z, w;
+    QW_w271() {}
+    QW_w271(const QW_w271& o) { QCOPY(this, &o); }
+    QW_w271& operator=(const QW_w271& o) { if (this != &o) QCOPY(this, &o); return *this; }
+    ~QW_w271() {}
+} __attribute__((aligned(16)));
+static inline QW_w271 operator-(const QW_w271& a, const QW_w271& b)
+{
+    QW_w271 r;
+    asm volatile(".set noreorder\n\tlqc2 $vf1, 0(%1)\n\tlqc2 $vf2, 0(%2)\n\tvsub.wxyz $vf1, $vf1, $vf2\n\tsqc2 $vf1, 0(%0)\n\t.set reorder"
+                 : : "r"(&r), "r"(&a), "r"(&b) : "memory");
+    return r;
+}
+static inline QW_w271 Cross_w271(const QW_w271& a, const QW_w271& b)
+{
+    QW_w271 r;
+    asm volatile("lqc2 $vf1, 0(%1)\n\tlqc2 $vf2, 0(%2)\n\tvsub.wxyz $vf3, $vf0, $vf0\n\tvopmula.xyz ACC, $vf1, $vf2\n\tvopmsub.xyz $vf3, $vf2, $vf1\n\tsqc2 $vf3, 0(%0)"
+                 : : "r"(&r), "r"(&a), "r"(&b) : "memory");
+    return r;
+}
+struct Poly_w271 { QW_w271* v[4]; s32 n; };
+extern "C" {
+extern s32 D_0034c780[];
+extern s32 D_0034c790[];
+s32 func_00162408(Poly_w271* o, QW_w271* pt);  // 0x00162408: definition moved into src/anon/unit_001614e8.cpp
+}

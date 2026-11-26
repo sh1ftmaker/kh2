@@ -1,0 +1,75 @@
+#include "../common/types.h"
+#define CBQCOPY(d, s) asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(d), "r"(s) : "$8", "memory")
+struct CbV {
+    f32 x, y, z, w;
+    CbV() {}
+    CbV& operator=(const CbV& o) { if (this != &o) CBQCOPY(this, &o); return *this; }
+    CbV operator-(const CbV& b) const {
+        CbV r;
+        asm volatile("lqc2 $vf1, 0(%1)\n\tlqc2 $vf2, 0(%2)\n\tvsub.wxyz $vf1, $vf1, $vf2\n\tsqc2 $vf1, 0(%0)" : : "r"(&r), "r"(this), "r"(&b) : "memory");
+        return r;
+    }
+    f32 length() const {
+        f32 len;
+        asm volatile("lqc2 $vf1, 0(%1)\n\tvmul.xyz $vf1, $vf1, $vf1\n\tvaddy.x $vf1, $vf1, $vf1y\n\tvaddz.x $vf1, $vf1, $vf1z\n\tvsqrt Q, $vf1x\n\tvwaitq\n\tcfc2.ni $8, $vi22\n\tmtc1 $8, %0" : "=f"(len) : "r"(this) : "$8", "memory");
+        return len;
+    }
+} __attribute__((aligned(16)));
+struct CbObj;
+typedef CbV (*CbVFn)(CbObj*);
+struct CbObj { CbVFn* vt; };
+struct CbRange { u8 pad[12]; s16 lo; s16 hi; };
+struct CbSelf { u8 pad0[0x14]; u32 f14; u8 pad18[4]; CbObj* f1c; CbRange* f20; u8 pad24[2]; u8 f26; u8 f27; };
+struct CbPrm { u8 pad[44]; f32 f2c; f32 f30; f32 f34; };
+extern "C" {
+
+// 0018cb30
+extern CbPrm* D_00352130;
+extern u32 D_003638d0;
+s32 func_0018ca48(u8);
+CbV* YS__OBJ__get_pos(u32);
+void func_0018cd28(CbSelf*, f32*, f32*);
+// 0018cb30: moved to src/yasui/libys/damage.cpp
+
+// 0019dd10
+struct TgtD { u8 pad[32]; };
+extern s32 D_0034f240;
+void func_00190128(void*);
+void dd_set_obj(TgtD*, u32, s32) asm("_ZN2YS6TARGET7set_objEPNS_3OBJEi");
+s32 YS__OBJ__is_disable_rc(u8*);
+s32 YS__RC_SEARCHER__check_set(u8* a0, s32 a1, void* a2, s32 a3, s32 a4);
+u8* dd_get_override(void*, s32) asm("_ZN2YS14PLAYER_COMMAND12get_overrideEi");
+s32 dd_is_exec(void) asm("_ZN2YS5LIMIT6IsExecEv");
+u8* func_0016bc20(void* a, s32 b, s32 id);
+void YS__COLLISION__set(u8*, u8*, u8*);
+void YS__RC_SEARCHER__check_all_obj(u8*);
+void YS__RC_SEARCHER__check_magic(u8*);
+s32 dd_is_exist(u8*) asm("_ZN2YS12COMMAND_SLOT8is_existEv");
+s32 dd_is_pinch(u32) asm("_ZNK2YS5SHEET8is_pinchEv");
+s32 YS__RC_SEARCHER__check_auto_summon(u8*, u8*);
+s32 func_0019e6e8(u8*, u8*);
+void func_0019ead0(u8*, u8*);
+struct Sub140 { u8 pad[32]; u32 flags; u8 pad2[216]; u32 obj; };
+void YS__RC_SEARCHER__exec(u8* self);  // 0x0019dd10: definition moved into src/anon/unit_0019ba60.cpp
+
+// 001f7180, 001f7660
+struct F7Gs { u8 pad[16]; u8* ent; u8 pad2[148]; u64 st; };
+struct F7Idx { s32 f0; s32 f4; s32 f8; };
+struct F7Ctx { u8 pad[12]; F7Idx* idx; };
+struct F7Mot { f32 x, vx, ax; };
+struct F7Req { s32 id; s32 tex; f32 dx, dvx, dax; s32 sx; s32 sy; u8 frame; u8 f29; };
+struct F7Tex { u8 pad[16]; u32 bits; u8 pad2[16]; };
+extern s32 D_01d9ea9c;
+extern F7Gs* D_01d9e6e0;
+extern F7Gs* D_01d9e6e4;
+extern u8* D_01d9eaa4;
+union F7IdU { s32 v; u8 c; };
+union F7TagU { u64 v; u8 c; };
+union F7PkU { u8* p; u8 c; };
+void sceGsSetDefLoadImage(u8* p, u32 a, s32 b, u32 c, s32 d, s32 e, s32 f, s32 g);
+void func_00222aa8(s32 a, s32 b, u8* p, f32 x);
+void func_0020e7a8(u8* p, s32 a, s32 b, s32 c);
+void func_00222d40(s32 tex, u8* pos, u32 frame, s32 y, s32 z, s32 a, s32 b);
+void func_001f7180(u8* o, F7Req* r, F7Ctx* c);  // 0x001f7180: definition moved into src/anon/unit_001f7010.cpp
+void func_001f7660(u8* o, F7Req* r, F7Ctx* c);  // 0x001f7660: definition moved into src/anon/unit_001f7010.cpp
+}

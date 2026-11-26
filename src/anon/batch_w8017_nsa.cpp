@@ -1,0 +1,33 @@
+#include "../common/types.h"
+struct QW {
+    f32 x, y, z, w;
+    QW() {}
+    QW(const QW& o) { asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(this), "r"(&o) : "$8", "memory"); }
+    QW& operator=(const QW& o) {
+        if (this != &o) asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(this), "r"(&o) : "$8", "memory");
+        return *this;
+    }
+} __attribute__((aligned(16)));
+static inline QW vscale(const QW& a, f32 k) {
+    QW r;
+    asm volatile(".set noreorder\n\tlqc2 $vf1, 0(%1)\n\tmfc1 $8, %2\n\tqmtc2 $8, $vf2\n\tvmulx.wxyz $vf1, $vf1, $vf2x\n\tsqc2 $vf1, 0(%0)\n\t.set reorder" : : "r"(&r), "r"(&a), "f"(k) : "$8", "memory");
+    return r;
+}
+struct Act { u8 p0[0x40]; QW vel; u8 p50; u8 p51[3]; void (*fn)(Act*); };
+extern "C" {
+s32 func_001c5f78(Act*, QW*);
+s32 func_001db5a8(s32);
+void func_001b4198(s32, s32, Act*);
+void func_001890a8(void*, s32);
+void addcount_w8017(s32, s32) asm("_ZN2YS7MISSION8AddCountEii");
+void func_001c6850(Act*);
+extern u8 D_0032e020[];
+extern s32 D_0034e948;
+extern s32 D_00351670;
+extern s32 D_00351674;
+extern s32 D_0036df78[];
+extern s32 D_01d498b0;
+
+
+void YS__CROWD_M_EX760___Blow(Act* a, QW* v);  // 0x001c6900: definition moved into src/anon/unit_001c5b90.cpp
+}

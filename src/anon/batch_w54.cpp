@@ -1,0 +1,307 @@
+#include "../common/types.h"
+
+typedef unsigned int u128 __attribute__((mode(TI)));
+
+// 128-bit value with a self-checking lq/sq copy
+struct Q16 {
+    u128 v;
+    Q16& operator=(const Q16& o) {
+        if (this != &o)
+            asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(this), "r"(&o) : "$8", "memory");
+        return *this;
+    }
+};
+struct Q16Pair {
+    Q16 v[2];
+};
+
+// VU0 helpers
+static inline void vu0_sub(Q16& r, const Q16& a, const Q16& b) {
+    asm volatile("lqc2 $vf1, 0(%1)\n\tlqc2 $vf2, 0(%2)\n\tvsub.xyzw $vf1, $vf1, $vf2\n\tsqc2 $vf1, 0(%0)"
+                 : : "r"(&r), "r"(&a), "r"(&b) : "memory");
+}
+static inline void vu0_add(Q16& r, const Q16& a, const Q16& b) {
+    asm volatile("lqc2 $vf1, 0(%1)\n\tlqc2 $vf2, 0(%2)\n\tvadd.xyzw $vf1, $vf1, $vf2\n\tsqc2 $vf1, 0(%0)"
+                 : : "r"(&r), "r"(&a), "r"(&b) : "memory");
+}
+static inline void vu0_scale(Q16& v, f32 s) {
+    asm volatile("lqc2 $vf1, 0(%0)\n\tmfc1 $8, %1\n\tqmtc2 $8, $vf2\n\tvmulx.xyzw $vf1, $vf1, $vf2x\n\tsqc2 $vf1, 0(%0)"
+                 : : "r"(&v), "f"(s) : "$8", "memory");
+}
+// noreorder: the original keeps the following branch delay slot empty
+static inline void vu0_scaled(Q16& r, const Q16& v, f32 s) {
+    asm volatile(".set noreorder\n\tlqc2 $vf1, 0(%1)\n\tmfc1 $8, %2\n\tqmtc2 $8, $vf2\n\t"
+                 "vmulx.xyzw $vf1, $vf1, $vf2x\n\tsqc2 $vf1, 0(%0)\n\t.set reorder"
+                 : : "r"(&r), "r"(&v), "f"(s) : "$8", "memory");
+}
+// normalize xyz in place, returns the length
+static inline f32 vu0_normalize(Q16& v) {
+    f32 len;
+    asm volatile("lqc2 $vf1, 0(%1)\n\tvmul.xyz $vf2, $vf1, $vf1\n\tvaddy.x $vf2, $vf2, $vf2y\n\t"
+                 "vaddz.x $vf2, $vf2, $vf2z\n\tvsqrt Q, $vf2x\n\tvwaitq\n\tcfc2.ni $8, $vi22\n\t"
+                 "vaddq.x $vf2, $vf0, Q\n\tmtc1 $8, %0\n\tvnop\n\tvdiv Q, $vf0w, $vf2x\n\tvwaitq\n\t"
+                 "vmulq.xyz $vf1, $vf1, Q\n\tsqc2 $vf1, 0(%1)"
+                 : "=f"(len) : "r"(&v) : "$8", "memory");
+    return len;
+}
+// same, but the original leaves the jr ra delay slot empty
+static inline f32 vu0_normalize_nr(Q16& v) {
+    f32 len;
+    asm volatile(".set noreorder\n\tlqc2 $vf1, 0(%1)\n\tvmul.xyz $vf2, $vf1, $vf1\n\tvaddy.x $vf2, $vf2, $vf2y\n\t"
+                 "vaddz.x $vf2, $vf2, $vf2z\n\tvsqrt Q, $vf2x\n\tvwaitq\n\tcfc2.ni $8, $vi22\n\t"
+                 "vaddq.x $vf2, $vf0, Q\n\tmtc1 $8, %0\n\tvnop\n\tvdiv Q, $vf0w, $vf2x\n\tvwaitq\n\t"
+                 "vmulq.xyz $vf1, $vf1, Q\n\tsqc2 $vf1, 0(%1)\n\t.set reorder"
+                 : "=f"(len) : "r"(&v) : "$8", "memory");
+    return len;
+}
+
+// unions with a char member: the original was built without strict aliasing
+union U32c {
+    u32 v;
+    u8 c;
+};
+union S32c {
+    s32 v;
+    u8 c;
+};
+union S16c {
+    s16 v;
+    u8 c;
+};
+
+extern "C" {
+
+void func_00103ea0(s32);  // set_hook_ptr
+extern void (*D_0032ba34)(void);
+extern s32 D_0032ba04;
+// run the registered hook if any, otherwise set the state to 3
+// 001039f8: moved to src/common/unit_001031b0.cpp
+
+struct Link64 {
+    s16 a;
+    u16 b;
+    s16 c;
+    u16 d;
+    u8 pad[56];
+};
+// rebuild the link fields of a 64-byte record table
+void func_0011ed90(Link64* p, s32 n);  // 0x0011ed90: definition moved into src/anon/unit_0011c128.cpp
+
+typedef s32 (*VFn124)(void*, s32, s32, s32, s32, s32, u8, s32);
+void* func_00124748(void*, s32);  // list_nth_node_rel
+s32 kn__ModelMulti__drawSilhouette(void* a0, s32 a1, s32 a2, s32 a3, s32 t0, s32 t1, u8 t2, s32 t3);  // 0x00124618: definition moved into src/anon/unit_00123990.cpp
+
+struct Snd132 {
+    u8 pad[2];
+    u16 a;
+    u16 b;
+};
+struct Obj132 {
+    u8 pad[20];
+    U32c flags;
+    u8 pad2[632 - 24];
+    Snd132* cur;
+    Snd132* last;
+    f32 len;
+    u32 pos;
+};
+u32 func_00106520(u32, u32);
+void func_00132720(Obj132* p, Snd132* s);  // 0x00132720: definition moved into src/anon/unit_00131418.cpp
+
+s32 dk__Octree__intersectLineCamera(Q16Pair*, Q16*, void*, s32*);
+void func_00140480(Q16* p);  // 0x00140480: definition moved into src/anon/unit_0013fca8.cpp
+
+void func_001391c8(void*, s32, s32);
+s32 func_0014fbf8(void*);
+extern S16c D_0034a458[][3];
+void func_0014fc40(u8* p, s32 a1, s32 a2, s32 a3, s32 t0, s32 t1);  // 0x0014fc40: definition moved into src/anon/unit_0014ecb8.cpp
+
+void func_00159ce0(void*, Q16*);
+// out = from + (to - from) * t
+// 00159d30: moved to src/harata/libdk/targetcamera.cpp
+
+void func_0015b7c0(void*, s32);
+void func_0015c068(void*, s32);
+void func_001664c0(u32);
+void func_0015bbc8(u8* p, s32 a1);  // 0x0015bbc8: definition moved into src/anon/unit_0015bab8.cpp
+
+s32 func_00177860(void);
+s32 func_001c3618(s32, s32);
+f32* func_001ce300(s32);  // to_1ce2a0_index_minus1
+f32 func_0016c460(u8* p, S32c* out);  // 0x0016c460: definition moved into src/anon/unit_00169f98.cpp
+
+void* func_0014aba8(void);
+void func_0014aa58(void*, s32, s32);
+// 0016df28: moved to src/anon/unit_0016d2e0.cpp
+
+s32 func_001a35f8(u32, s32);
+void func_00194070(void*, u8);
+extern u16 D_0036c4e8[3];
+extern u8 D_0036c4f0[];
+// 0017a718: moved to src/yasui/libys/player.cpp
+
+f32 func_0017ce10(f32);
+// 0017ce80: moved to src/anon/unit_0017c400.cpp
+
+f32 func_001db510(void*);
+s32 func_0018c490(u8* p);  // 0x0018c490: definition moved into src/yasui/libys/npc.cpp
+
+struct Pair8 {
+    u32 a;
+    void* p;
+};
+extern Pair8 D_00350338[8];
+void func_0016cce8(void*, void*, s32, s32, s32);
+void func_00196aa0(void* a0, s32 a1, s32 a2);  // 0x00196aa0: definition moved into src/anon/unit_00195d00.cpp
+
+void YS__PRIZEEFFECT__get(void*, void*, s32);
+void func_001a52a8(void*, void*, void*);
+// 001a5380: moved to src/anon/unit_001a4db0.cpp
+
+void func_00177998(void*);
+void func_0016cbc8(void*, s32, s32, s32);
+// 001a6440: moved to src/yasui/libys/magic.cpp
+
+s32 func_001a8f10(void*);  // arg_map_0_1_2
+s32 func_001a8bf8(void*, s32);  // get_bits5_at
+void func_001a8c60(void*, s32, s32);  // masked_byte_store
+// move the entry matching a1 into slot 3, swapping with whatever was there
+void func_001a8f68(void* a0, void* a1);  // 0x001a8f68: definition moved into src/anon/unit_001a8618.cpp
+
+void func_001ac970(void*, s32, s32, s32, s32, s32, s32, s32);
+extern u8 D_00350af0[];
+// 001ad1d0: moved to src/anon/unit_001abb28.cpp
+
+// 001b08e8: moved to src/yasui/libys/lookat.cpp
+
+void func_001c0ae0(void*);
+void func_001c0ca0(s32);
+extern u8 D_01d49368[];
+extern void* D_00351338;
+extern s32 D_01d4937c;
+extern u8 D_0032bae0;
+// 001c0a00: moved to src/anon/unit_001c0638.cpp
+void func_001c0a00(s32 a);
+
+extern void* D_003520c0;
+extern u8 D_0036e278[][16];
+u8* func_001a5420(void*, void*, void*);
+// 001ccf18: moved to src/anon/unit_001cc868.cpp
+
+s32 func_001db9a8(void*, s32, s32);
+void* func_001050d8(u32);
+void func_001ce3e8(void*, s32, void*, void*, f32);
+// 001ce488: moved to src/anon/unit_001cd660.cpp
+void* func_001ce488(void* a0, void* a1, f32 f);
+
+void sceVu0UnitMatrix(f32*);  // vu_store_w_splat
+void sceVu0MulMatrix(void*, f32*, void*);
+extern u8* D_01d9e6e0;
+extern u8* D_01d9e6e8;
+// scale matrix built from two clamped factors
+void func_001eb030(void* a0, f32* s);  // 0x001eb030: definition moved into src/anon/unit_001e8ac8.cpp
+
+// VU0 random float in [0,1) (R register); one or two samples
+f32 func_001ee5d8(u8 two);  // 0x001ee5d8: definition moved into src/anon/unit_001ec098.cpp
+
+struct Obj232 {
+    u8 pad[20];
+    u32 id;
+    u8 pad2[24];
+    char name[16];
+};
+Obj232* func_00227a60(void*, s32);
+char* func_00232498(void*);
+char* func_002ff2e8(char*, const char*);
+u32 func_00227870(char*, void*, void*);
+void func_00226030(void);
+void YS__FILE__ReadBack(char*, u32, void*, void*);
+void sa__EVENT__audio_read_set(void* a0, void* a1);  // 0x00232510: definition moved into src/anon/unit_00231500.cpp
+
+s32 func_0024dfe0(void);
+s32 func_00139d78(void*);
+struct Obj408 {
+    void** vtbl;
+    u8 pad[404];
+};
+extern Obj408* D_0035ede8;
+void func_0024e530(void);  // 0x0024e530: definition moved into src/anon/unit_0024cda8.cpp
+
+extern u8* D_0035ee18[5];
+void func_00138c10(void*, s32);
+void func_0024eac0(void);  // 0x0024eac0: definition moved into src/anon/unit_0024e7e8.cpp
+
+u8* Tz__CmItem__isSoraOnly(void);
+s32 func_002635d8(void);  // 0x002635d8: definition moved into src/anon/unit_002632d0.cpp
+
+extern u8* D_0035f480;
+void func_00139510(void*);
+s32 func_0028d6e8(void*);
+// Tz::JmStory::LeaveAllPost(...)
+void JmStory_LeaveAllPost(s32 i) asm("_ZN2Tz7JmStory12LeaveAllPostEz");
+// 0028f7e8: moved to src/anon/unit_0028f1e0.cpp
+
+struct Bits2aa {
+    u8 pad[148];
+    u32 bits[6];
+};
+extern Bits2aa* D_0035f610;
+static inline s32 bit_test(u32* b, u32 i) {
+    return (b[i >> 5] & (1 << (i & 31))) != 0;
+}
+// test flag n; n < 0 tests whether any of the 192 flags is set
+s32 func_002aacd8(s32 n);  // 0x002aacd8: definition moved into src/anon/unit_002a99c8.cpp
+
+void func_002cf2b0(void*, s32);
+void func_0017f488(void*, s32, f32, f32);
+struct Flags108 {
+    u32 b0 : 1;
+    u32 b1 : 1;
+    u32 b2 : 5;
+    u32 b7 : 1;
+    u32 b8 : 2;
+    u32 b10 : 1;
+    u32 rest : 21;
+};
+void func_002d0d88(u8* p);  // 0x002d0d88: definition moved into src/anon/unit_002cf260.cpp
+
+struct Vec4f {
+    f32 x, y, z, w;
+};
+void func_002d00a0(void*);
+s32 func_00181500(s32);
+void func_0016bd60(void*, s32);
+void func_0016b070(void*, void*);
+void Ti__Afp__calc_local_matrix(void*, s32);
+extern u8 D_003628f0[];
+void Ti__MGHachimitsuPo___OVR_initialize(u8* p);  // 0x002dba40: definition moved into src/anon/unit_002da040.cpp
+
+// wrap an angle into [-pi, pi]
+f32 func_002de968(f32 a);  // 0x002de968: definition moved into src/anon/unit_002de3c8.cpp
+
+struct Glob363 {
+    u8 pad[16];
+    f32 a, b;
+};
+extern Glob363 D_00363630;
+void func_002ed1d8(u8* p, Q16* v, f32 a, f32 b);  // 0x002ed1d8: definition moved into src/anon/unit_002ecdb0.cpp
+
+extern u8 D_01e2c080[];
+extern u8 D_00363808[];
+extern u8 D_003637e0[];
+void func_00325840(void*, void*);
+void func_00106420(void*);
+// destructor: unregister from the list at D_01e2c080, then the base destructor
+void func_002ee448(void** p);  // 0x002ee448: definition moved into src/anon/unit_002ecdb0.cpp
+
+void* func_00102788(void*, void*, void*, void*);
+void func_002ef928(void);
+// 002ef8d0: moved to src/anon/unit_002ef8d0.cpp
+
+s32 func_003060f0(void);  // ee_intr_disabled
+s32 DIntr(void);
+extern s32 D_003660a8;
+extern s32 D_003660ac;
+void __malloc_lock(void);  // 0x002fded8: definition moved into src/newlib/libc/mlock.c
+
+}

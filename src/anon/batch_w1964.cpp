@@ -1,0 +1,57 @@
+#include "../common/types.h"
+
+extern "C" {
+struct E2 {
+    f32 x, y, z;
+    union { f32 w; u8 flag; };
+    E2() {}
+    E2(const E2& o) { asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(this), "r"(&o) : "$8", "memory"); }
+    E2& operator=(const E2& o) {
+        if (this != &o) asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(this), "r"(&o) : "$8", "memory");
+        return *this;
+    }
+} __attribute__((aligned(16)));
+struct M2 { f32 m[4][4]; } __attribute__((aligned(16)));
+struct C2 { u8 pad[16]; M2 mtx; };
+C2* func_00106a60(s32);
+
+static inline __attribute__((always_inline)) void apply(E2* d, const M2* m, const E2* s) {
+    asm volatile(".set noreorder\n\tlqc2 $vf5, 0(%2)\n\tlqc2 $vf1, 0(%1)\n\tlqc2 $vf2, 16(%1)\n\tlqc2 $vf3, 32(%1)\n\tlqc2 $vf4, 48(%1)\n\tvmulax.xyz ACC, $vf1, $vf5x\n\tvmadday.xyz ACC, $vf2, $vf5y\n\tvmaddaz.xyz ACC, $vf3, $vf5z\n\tvmaddw.xyz $vf5, $vf4, $vf0w\n\tvmove.w $vf5, $vf0\n\tsqc2 $vf5, 0(%0)\n\t.set reorder"
+        : : "r"(d), "r"(m), "r"(s) : "memory");
+}
+
+void wtarget_001e2450(u32 a0, u32 a1, u32 a2, u32 a3) asm("_Z16wtarget_001e2450jjjj");
+void wtarget_001e2450(u32 a0, u32 a1, u32 a2, u32 a3);  // 0x001e2450: definition moved into src/anon/unit_001e0cb8.cpp
+}
+
+extern "C" {
+struct V5 { f32 x, y, z, w; V5() {} ~V5() {} } __attribute__((aligned(16)));
+struct P5 { f32 x, y, z, d; } __attribute__((aligned(16)));
+struct X5 { u8 b[32]; } __attribute__((aligned(16)));
+struct G5 { u8 p[28]; u16 start, end; };
+struct I5 { u8 p[12]; u16 start, end; u8 flag; u8 q[3]; };
+struct T5 { u8 p[10]; u16 idx; u8 q[4]; };
+struct O5 {
+    s32 f0;
+    G5* grp;    // 4
+    I5* item;   // 8
+    T5* tri;    // c
+    s32 f10, f14;
+    P5* pl;     // 18
+    s32 f1c;
+    s32 n;      // 20
+};
+void func_00141988(O5*, T5*, X5*);
+void func_001626e0(X5*, V5*);
+s32 func_001466b0(void*, V5*);
+void func_00146ab0(u8*, P5*, V5*);
+
+static inline __attribute__((always_inline)) f32 dot(const P5* a, const P5* b) {
+    f32 r;
+    asm volatile(".set noreorder\n\tlqc2 $vf1, 0(%1)\n\tlqc2 $vf2, 0(%2)\n\tvmul.xyz $vf1, $vf1, $vf2\n\tvaddy.x $vf1, $vf1, $vf1y\n\tvaddz.x $vf1, $vf1, $vf1z\n\tqmfc2 $8, $vf1\n\tmtc1 $8, %0\n\t.set reorder"
+        : "=f"(r) : "r"(a), "r"(b) : "$8", "memory");
+    return r;
+}
+
+void func_00165f70(O5* o, P5* p, u8* out, s32* cnt, void* a4);  // 0x00165f70: definition moved into src/anon/unit_00165f70.cpp
+}

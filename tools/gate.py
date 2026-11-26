@@ -10,8 +10,8 @@ Prints one line per finding and ends with `gate: ok` or `gate: FAILED (n)`.
 Review (docs/REVIEW_BRIEF.md) covers what a script cannot see.
 
 Checks:
-  build       tools/build_elf.py objects, then make, ends in MATCHED!
-  progress    matched functions and bytes are not below the base's
+  build       make ends in MATCHED!
+  progress    every function is still built from source; decompiled and named counts are not below the base's
   registry    functions.tsv: well-formed, one symbol per address, one address per symbol
   banned      no asm statement, register pin, naked or .incbin in changed sources; in hand-written
               ones also no #pragma, goto or volatile
@@ -93,35 +93,39 @@ def registry(text):
 
 
 def check_build():
-    r = subprocess.run([sys.executable, "tools/build_elf.py", "objects"], cwd=ROOT, capture_output=True, text=True)
-    if r.returncode:
-        return fail("build", "tools/build_elf.py objects failed: " + (r.stderr or r.stdout).strip()[-300:])
     r = subprocess.run(["make"], cwd=ROOT, capture_output=True, text=True)
     if r.returncode or "MATCHED!" not in r.stdout:
         fail("build", "make did not end in MATCHED!: " + (r.stdout + r.stderr).strip()[-400:])
 
 
 def check_progress(mb):
+    """Everything stays built from source, and the decompiled share does not drop."""
+    import quality
     status = ROOT / "out/generated/layout_status.tsv"
     if not status.exists():
         return fail("progress", "no out/generated/layout_status.tsv (build first)")
     with status.open() as fh:
-        rows = list(csv.DictReader(fh, delimiter="\t"))
-    sizes = {}
-    with (ROOT / "layout.tsv").open() as fh:
-        for r in csv.DictReader((ln for ln in fh if not ln.startswith("#")), delimiter="\t"):
-            sizes[r["addr"].lower()] = int(r["size"])
-    fns = sum(1 for r in rows if r["mode"].strip() == "cxx")
-    code = sum(sizes.get(r["addr"].lower(), 0) for r in rows if r["mode"].strip() == "cxx")
+        not_built = [r["addr"] for r in csv.DictReader(fh, delimiter="\t") if r["mode"].strip() != "cxx"]
+    if not_built:
+        fail("progress", f"{len(not_built)} functions are no longer built from source, e.g. {not_built[0]}")
+    rows = quality.load()
+    fns = sum(1 for r in rows if r["kind"] in quality.CLEAN)
+    code = sum(r["size"] for r in rows if r["kind"] in quality.CLEAN)
+    named = sum(1 for r in rows if r["named"])
     try:
         base = json.loads(git("show", f"{mb}:site/data/summary.json"))["totals"]
     except (json.JSONDecodeError, KeyError):
         return print("progress: base has no site/data/summary.json; not compared")
+    if "kinds" not in base:
+        return print(f"progress: {fns} fns / {code} B decompiled, {named} named (base predates the quality figures)")
     if fns < base["fns_matched"] or code < base["code_matched"]:
-        fail("progress", f"matched {fns} fns / {code} B is below the base's "
+        fail("progress", f"decompiled {fns} fns / {code} B is below the base's "
                          f"{base['fns_matched']} fns / {base['code_matched']} B")
+    elif named < base.get("fns_named", 0):
+        fail("progress", f"{named} named functions is below the base's {base['fns_named']}")
     else:
-        print(f"progress: {fns} fns / {code} B matched (base {base['fns_matched']} / {base['code_matched']})")
+        print(f"progress: {fns} fns / {code} B decompiled, {named} named "
+              f"(base {base['fns_matched']} / {base['code_matched']}, {base.get('fns_named', 0)} named)")
 
 
 def check_registry(mb):

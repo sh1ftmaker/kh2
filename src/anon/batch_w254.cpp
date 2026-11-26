@@ -1,0 +1,153 @@
+#include "../common/types.h"
+
+extern "C" {
+extern s32 D_0034e948;
+s32 YS__OBJ__is_exist(s32);
+void* func_001a8bd0(s32);
+s32 func_001a8bf8(void*, s32);  // get_bits5_at
+u8* func_001a8b28(void);  // get_data_1c7cc10
+u8* func_0017e4f8(u16, s32, f32, f32, f32);
+void func_001ad990(u8*, f32, f32, f32);
+
+s32 func_00289380(void*);
+s32 func_00289310(void*);
+s32 func_002891e8(void*);
+void func_002cac40(s32);
+u8* func_001c3f58(s32);
+void func_002c3da0(u8*);
+void func_002c8648(void);
+struct W254S10 { s16 h[5]; };
+
+u8* YS__OBJ__Each(u8*);
+s32 func_0016a040(u8*);
+s32 func_0016a060(u8*);
+
+struct W254File {
+    u8* p;          /* 0 */
+    s32 r;          /* 4 */
+    s32 w;          /* 8 */
+    s16 flags;      /* 12 */
+    s16 file;       /* 14 */
+    u8* base;       /* 16 */
+    s32 size;       /* 20 */
+    s32 lbfsize;    /* 24 */
+    void* cookie;   /* 28 */
+    s32 (*read)(void*, u8*, s32);   /* 32 */
+    s32 (*write)(void*, u8*, s32);  /* 36 */
+    u8 pad[84 - 40];
+    u8* data;       /* 84 */
+};
+extern u8* D_00365c48;
+s32 func_00303698(u8*, s32 (*)(W254File*));
+void func_00302e10(u8*);
+
+s32 func_001069e8(void);
+void func_0015cff0(void);
+f32 func_0017ce10(f32);
+u8* func_00106a60(s32);  // buffer_get_by_index
+void dk__ObjCamera__collision_2(u8*, u8*, u8*, u8, s32);
+void func_0015d058(u8*, u8*);
+void func_0015d208(f32*, f32*);
+void func_00107300(u8*, u8*, u8*, f32);  // copy_blocks_and_store_float
+u8* kn__getProjection(s32);  // buffer_get_256
+void kn__Projection__setFOV(u8*, u8*, f32);
+
+// Member lookup: find slot of id a0 in party (1..2), spawn its object, start its fade unless flagged.
+u8* func_001c9c78(s32 a0);  // 0x001c9c78: definition moved into src/yasui/libys/sacrifice.cpp
+
+// Landing-menu cursor update: switch on select result; confirm copies 10-byte entry then exits.
+void func_002c3c90(u8* a0);  // 0x002c3c90: definition moved into src/anon/unit_002c3c90.cpp
+
+// Walk all objects; type 16 with sub-type 20/21/22/25/26/27 get virtual slot 10 called.
+void func_002d0a78(void);  // 0x002d0a78: definition moved into src/anon/unit_002cf260.cpp
+
+// newlib fflush(fp): NULL flushes all via _fwalk; otherwise write out the buffer.
+s32 fflush(W254File* fp);  // 0x00302b18: definition moved into src/newlib/libc/fflush.c
+
+// Camera-mode-1 update: fix radian, optional helper calls, then apply to camera.
+// 0015d2e8: moved to src/anon/unit_0015cdb0.cpp
+struct W254PE { s32 key; u8 pad[16]; };
+struct W254Pool { W254PE e[128]; s32 idx[128]; s32 count; };
+extern W254Pool D_01c60d50;
+u8* func_00186078(u8*);
+
+static inline __attribute__((always_inline)) W254PE* w254_next(W254PE* prev) {
+    W254PE* cur = D_01c60d50.e;
+    if (prev) cur = prev + 1;
+    while (cur < &D_01c60d50.e[128]) {
+        s32 i = cur - D_01c60d50.e;
+        s32 j;
+        for (j = 0; j < D_01c60d50.count; j++) {
+            if (D_01c60d50.idx[j] == i) {
+                cur++;
+                break;
+            }
+        }
+        if (j == D_01c60d50.count) return cur;
+    }
+    return 0;
+}
+
+// Retarget key a0 -> a1 on every live object and on every pool entry not listed as free.
+void func_00190570(s32 a0, s32 a1);  // 0x00190570: definition moved into src/anon/unit_001900d0.cpp
+}
+
+namespace w254_mtx {
+struct Mtx { f32 m[16]; } __attribute__((aligned(16)));
+static inline void MtxCopy(Mtx* d, const Mtx* s) {
+    if (d != s)
+        asm volatile("lq $8, 0(%1)\n\tlq $9, 16(%1)\n\tlq $10, 32(%1)\n\tlq $11, 48(%1)\n\t"
+                     "sq $8, 0(%0)\n\tsq $9, 16(%0)\n\tsq $10, 32(%0)\n\tsq $11, 48(%0)"
+                     : : "r"(d), "r"(s) : "$8", "$9", "$10", "$11", "memory");
+}
+// In-place inverse of an orthonormal affine matrix: transpose rotation, negate rotated translation (VU0).
+static inline void MtxInverseOrtho(Mtx* m) {
+    asm volatile(
+        "lq $8, 0(%0)\n\tlq $9, 16(%0)\n\tlq $10, 32(%0)\n\tqmfc2 $11, $vf0\n\tlqc2 $vf4, 48(%0)\n\t"
+        "pextlw $12, $9, $8\n\tpextuw $13, $9, $8\n\tpextlw $14, $11, $10\n\tpextuw $15, $11, $10\n\t"
+        "pcpyld $8, $14, $12\n\tpcpyud $9, $12, $14\n\tpcpyld $10, $15, $13\n\t"
+        "qmtc2 $8, $vf1\n\tqmtc2 $9, $vf2\n\tqmtc2 $10, $vf3\n\t"
+        "vmulax.xyz ACC, $vf1, $vf4x\n\tvmadday.xyz ACC, $vf2, $vf4y\n\tvmaddz.xyz $vf4, $vf3, $vf4z\n\t"
+        "vsub.xyz $vf4, $vf0, $vf4\n\t"
+        "sq $8, 0(%0)\n\tsq $9, 16(%0)\n\tsq $10, 32(%0)\n\tsqc2 $vf4, 48(%0)"
+        : : "r"(m) : "$8", "$9", "$10", "$11", "$12", "$13", "$14", "$15", "memory");
+}
+extern "C" {
+extern f32 D_00362d70;
+u8* kn__getProjection(s32);  // buffer_get_256
+void kn__Projection__setFOV(u8*, s32, f32);
+void kn__Projection__calcMatrix(u8*);
+u8* func_00106a60(s32);  // buffer_get_by_index
+void func_002e71a0(Mtx*, u32, u8, s32);
+
+void Ti__MG_ALEscape__task_update_camera(u8* a0, u32, u32, u32) asm("_Z35Ti__MG_ALEscape__task_update_camerajjjj");
+// Set camera FOV from degrees, rebuild projection, then store the inverse of a fresh view matrix.
+void Ti__MG_ALEscape__task_update_camera(u8* a0, u32, u32, u32);  // 0x002e1178: definition moved into src/anon/unit_002de3c8.cpp
+}
+}
+
+namespace w254_v2 {
+struct Vec {
+    f32 x, y, z, w;
+    Vec& operator=(const Vec& s) {
+        if (this != &s)
+            asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(this), "r"(&s) : "$8", "memory");
+        return *this;
+    }
+} __attribute__((aligned(16)));
+static inline void VecScale(Vec* a, f32 k) {
+    asm volatile("lqc2 $vf1, 0(%0)\n\tmfc1 $8, %1\n\tqmtc2 $8, $vf2\n\tvmulx.wxyz $vf1, $vf1, $vf2x\n\tsqc2 $vf1, 0(%0)" : : "r"(a), "f"(k) : "$8", "memory");
+}
+extern "C" {
+extern u16 D_0036c970[];
+s32 func_001860b0(void);
+void func_0016aef0(u8*, Vec*);
+s32 func_0017f4e0(u8*, u16);
+void func_0017f488(u8*, u16, f32, f32);
+void func_0017f5e0(u8*, u32, s32, f32, f32);
+
+// Optionally negate a direction, apply it, then pick motion 15/14 (flip if unavailable) and play it.
+// 00186590: moved to src/anon/unit_00185d10.cpp
+void YS__BTLOBJ___exec_damage_small_air(u8* a0, Vec* a1, u32 a2);
+}
+}

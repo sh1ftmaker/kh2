@@ -2,8 +2,6 @@
 
 #include "../common/types.h"
 
-class ushort;
-
 namespace Tz {
 
 class ShopTbl;

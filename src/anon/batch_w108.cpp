@@ -1,0 +1,284 @@
+#include "../common/types.h"
+extern "C" {
+extern s32 D_003a6a50;
+extern u8 D_0032ba30;
+extern u8 D_0032ba28;
+extern s32 D_0032b984;
+extern s32 D_0032ba20;
+extern u8 D_0032ba1c;
+extern s32 D_0032ba64;
+void func_00103a40(void);
+s32 func_001033d8(s32);
+void Tz__CampMenu__Exit(s32);
+void func_00242fc8(s32);
+void func_00103748(void);
+s32 func_00103c90(void);  // get_hook_ptr
+void func_00103ca0(void);
+void Tz__CampMenu__Start(s32, s32);
+void func_00243020(s32);
+void func_0014c9f0(s32);
+void func_00167ee0(void);
+void func_001384a0(s32);
+void func_00104108(void);
+
+// Per-frame update: dispatches the pending map/scene id and runs post-frame hooks.
+// 001031d0: moved to src/common/unit_001031b0.cpp
+}
+struct Vec4f {
+    f32 x, y, z, w;
+};
+extern Vec4f D_01e2bf10;
+extern Vec4f D_01e2bf20;
+extern Vec4f D_01e2bf30;
+extern Vec4f D_01e2bf40;
+extern Vec4f D_01e2bf50;
+extern Vec4f D_01e2bf60;
+extern f32 D_01e2bf70;
+extern f32 D_01e2bf74;
+extern f32 D_01e2bf78;
+extern f32 D_01e2bf7c;
+
+static inline void SetVec(Vec4f* v, f32 x, f32 y, f32 z, f32 w)
+{
+    v->x = x;
+    v->y = y;
+    v->z = z;
+    v->w = w;
+}
+
+// 002e7870: static initialiser, now made by gcc in src/anon/unit_002e7658.cpp
+
+extern "C" {
+struct Msg24a { u8 data[36]; };
+struct Ent24a { u16 f0; u16 f2; s16 id; };
+extern u32 D_0035ed80;
+extern u32 D_0035ed90;
+extern Msg24a D_00371ee8[];
+extern Msg24a D_00371f30;
+extern Msg24a D_00371f58[];
+s32 func_00289310(void*);
+s32 func_002891e8(void*);
+void func_002890e0(void*, s32, s32, s32, s32);
+void func_00289038(void*, s32, s32, s32, s32, s32, s32);
+Ent24a* func_0024b1a0(s32);
+void func_0023f070(u32, s32, s32);
+void func_0024b0e8(void);
+s32 func_0028d008(void*);
+s32 func_002891d0(void*);
+void Tz__MenuCursor__SetParent(void*, s32);  // record408_set_and_refresh
+s32 Tz__TRTE__GetSeqInfo(void);
+void func_002b4388(u32, void*, s32);
+s32 func_001a6d08(s32);
+void func_00139858(s32);
+void func_001398d0(s32);
+
+void func_0024a948(void* obj, s32 quiet, void* target);  // 0x0024a948: definition moved into src/anon/unit_00249ef0.cpp
+}
+
+extern "C" {
+struct Info2cf {
+    s32 id;
+    f32 x, y, z;
+};
+struct Ref2cf {
+    u8 pad[16];
+    u16* data;
+};
+struct Params2cf {
+    s32 f0;
+    u32 f4;
+    u32 f8;
+    Info2cf* info;
+    u32 f16;
+    s32 f20;
+    union { Ref2cf* ref0; u32 ref0u; };
+    union { Ref2cf* ref1; u32 ref1u; };
+};
+struct Ctx2cf {
+    u8 pad[92];
+    u32 f92;
+};
+extern Ctx2cf* D_00361f60;
+extern s32 D_00361fa8;
+u8* YS__OBJ__Each(u8*);
+s32 func_0016a020(u8*);
+s32 func_0019c768(u8*);
+s32 func_002cf270(u8*, s32);
+u8* func_00199938(Info2cf*, s32);
+void func_002cff50(u8*);
+u32 func_002e3260(u32, s32, u16);
+void func_0016ace0(u8*, f32*);
+void func_002d0d88(u8*);
+
+static inline void SetPos2cf(f32* v, f32 x, f32 y, f32 z)
+{
+    v[0] = x;
+    v[1] = y;
+    v[2] = z;
+    v[3] = 0.0f;
+}
+
+// Finds a reusable spawned object matching p->info (or creates one) and places it.
+u8* func_002cf4a8(Params2cf* p);  // 0x002cf4a8: definition moved into src/anon/unit_002cf260.cpp
+}
+
+extern "C" {
+extern u32 D_0035ef64;
+extern u32 D_0035ef68;
+extern u32 D_0035f03c;
+extern s32 D_0035f3d4;
+extern u32 D_0035f01c;
+extern s16 D_003737e8[];
+u8* func_00257770(void);
+s32 func_00139d78(void*);
+s32 func_00287bc0(void);
+s32 func_0028d008(void*);
+void func_00139510(void*);
+void func_00256c40(void);
+s32 func_002570a0(s32);
+s32 func_00269508(s32);
+void func_0028d8c0(u8*, s32, u32, u32, u32, s32, s32, s32);
+void func_0028dcc0(u8*, u8*);
+u8* func_0028d0e0(void*);
+void func_00138c78(u32, s32*, s32*);
+void func_00138c68(u8*, s32, s32);
+s32 func_0028b040(u32);
+void func_00256bb0(u8*);
+
+void Tz__CmEquip__UpdateTopSelActive(void* target, u8 follow);  // 0x0026a3b8: definition moved into src/anon/unit_00269a60.cpp
+}
+
+extern "C" {
+struct Task276;
+struct Task276Vt {
+    void* pad[5];
+    void (*update)(Task276*);
+};
+struct Task276 {
+    Task276Vt* vt;
+    u8 body[404];
+};
+struct Big276 {
+    u8 a[408];
+    u8 b[408];
+    u8 c[408];
+    u8 d[408];
+    u8 e[436];
+    u8 f[436];
+    u8 g[436];
+    u8 h[436];
+    u8 i[436];
+    u8 pad[436];
+    Task276 tasks0[32];
+    Task276 tasks1[32];
+};
+extern Big276* D_0035f21c;
+s32 func_00139d78(void*);
+void func_00139510(void*);
+void func_00276a18(void);
+void func_00276b10(void);
+
+void Tz__Jiminy__LeaveSeqTbl(void);  // 0x002766e0: definition moved into src/anon/unit_002748a0.cpp
+}
+
+extern "C" {
+struct List2a6 {
+    s8 count;
+    u8 pad[5];
+    s8 items[1];
+};
+extern List2a6* D_0035f5ec;
+s32 func_00276620(s32);
+s32 func_00276638(s32);
+s32 func_002a6368(s32);
+s32 func_002944d0(s32);
+void func_002765e8(s32, s32, s32);
+void func_002a65d0(void);
+
+// Moves the list cursor to the next/previous selectable entry (wrapping) and scrolls the 10-row window.
+void func_002a6088(s32 dir);  // 0x002a6088: definition moved into src/anon/unit_002a5a90.cpp
+}
+
+extern "C" {
+struct Heap251;
+struct Heap251Vt {
+    u8* (*alloc)(Heap251*, s32, s32);
+};
+struct Heap251 {
+    Heap251Vt* vt;
+};
+struct Sys251 {
+    u8 pad[20];
+    Heap251* heap;
+};
+extern u8 D_00347f98[];
+extern u8 D_0035eb98[];
+extern u8 D_0035ebb8[];
+extern u8* D_0035ee60;
+extern u8* D_0035ee64;
+extern u32 D_0035ee58;
+extern Sys251* D_00347f80;
+extern u8 D_00372608;
+extern u8 D_00372630;
+u8* func_0023ee30(s32);
+void func_0031a838(u8*);
+void YI__IMAGE_FREEZE__IMAGE_FREEZE(u8*);  // obj_ctor_36eac8
+void YI__LAYOUT__LAYOUT(u8*);  // obj_ctor_36eae8
+void Tz__MenuUtil__CreateLay(u8*, s32, s32, s32, s32, s32, s32, s32, s32);
+void Tz__Layout__SetImageCache(u8*);
+s32 func_00252098(s32);
+void func_00288ce0(u32, s32, s32, s32, s32);
+void Tz__LayMsg__create(u8*, s32, u8*, void*, void*, s32, s32, s32);
+void func_0023f6c0(u8*, s32);
+void func_00252180(void);
+s32 func_00252428(void);
+void func_00252320(void);
+void func_00252208(void);
+s32 func_00252148(s32);
+void Tz__Select__SetCurrent(u32, s32, s32, s32, s32);
+s32 func_00252110(s32);
+void Tz__CANA__SetNewFlag(s32);
+void func_00287bd0(s32, s32);
+void func_00287cc0(s32);
+
+void Tz__CANA__Setup(void);  // 0x00251148: definition moved into src/anon/unit_00250fb8.cpp
+}
+
+extern "C" {
+extern u8 D_00350e48[];
+extern u8 D_003525c8[];
+extern u8 D_00352560[];
+extern u8 D_00351eb8;
+void func_001ddd10(u8*);
+void func_001d1fa8(u8*);  // obj_ctor_3525c8
+void func_00320400(u8*);
+void func_001d1678(u8*, s32);  // obj_init_28bytes
+s32 func_001b5cb8(u8*);
+s32 func_001d3f38(u32);  // type_is_282_344_484
+void func_0016bd60(u8*, s32);
+u8* func_0017e668(u32);
+void func_001b4d70(u8*, f32);
+void YS__LIMIT__setup(u8*);
+s32 func_001b5858(u8*);
+void func_001b4d10(u8*);
+void func_001c8d80(void*, s32);
+u8* func_001b1928(s32);
+
+struct Sub72 {
+    u8* vt;
+    u32 f4;
+    s32 f8;
+    u32 f12;
+    u32 f16;
+    u32 f20;
+};
+struct Sub168 {
+    u8* vt;
+    u32 f4;
+    u32 f8;
+    u8 f12[36];
+    u32 f48;
+};
+// Constructor-style init: sets up the sub-objects and spawns up to three child entities from data[1..3].
+void YS__LIMIT__LIMIT(u8* self, u8* data, u8* owner, f32 scale);  // 0x001b47d8: definition moved into src/anon/unit_001b2780.cpp
+}

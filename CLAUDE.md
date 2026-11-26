@@ -14,107 +14,112 @@ coordinates reads `docs/COORDINATOR.md` and `docs/PLAN.md`.
 ## Build (Linux)
 
 ```sh
-source <toolchain>/env.sh              # written by tools/setup_toolchain.sh
-python3 tools/build_elf.py objects     # regenerate the object list (see below)
+tools/setup_toolchain.sh <path>/ee-gcc3.2-040921-full.tar.gz ~/ps2   # once
+source ~/ps2/env.sh                    # KH2_NATIVE=1, PS2_TOOLCHAIN, KH2_OBJDIFF_DIR
 make                                   # compile, link, byte-compare: must end in MATCHED!
-python3 tools/progress_bytes.py        # totals
-python3 tools/lane.py score            # re-score the non-matching lane (about 10 s)
+python3 tools/quality.py               # what the source is made of, and how much is named
 ```
 
 `SLPM_666.75` (sha256 `d869ce4b…bc87`) sits at the repository root, extracted
 from your own disc (`isoinfo -i <iso> -x '/SLPM_666.75;1'`). It is ignored by
 git; never commit it or anything derived from it.
 
-`make` compares the whole ELF with the original. That comparison is the final
-authority. Two things make it lie, and both have cost real work before:
+With `KH2_NATIVE=1` the build runs in a no-network bubblewrap sandbox laid out
+like the project's Docker container (`tools/sandbox.sh`: the repository at
+`/work`, the compiler at `/opt/ps2/gcc`). Without it, `make` uses Docker as
+upstream does. The Sony SDK libraries need two older compilers, which
+`setup_toolchain.sh` fetches into `tools/compilers/`.
 
-- **A stale object list.** `make` alone can print `MATCHED!` without having
-  compiled a new source. Run `python3 tools/build_elf.py objects` first
-  whenever sources or `functions.tsv` changed.
-- **An unsourced shell.** ee-g++ finds `as` and `ld` through `PATH`. Without
-  the toolchain's `env.sh` every compile fails with `Assembler: unknown option
-  -g0`, and a tool that swallows the error reports 0 %. Only the toolchain's
-  `shim/` directory goes on `PATH`; its `bin/` ships an ancient 32-bit `make`.
+`make` compares the whole ELF with the original. That comparison is the final
+authority. After changing sources or `functions.tsv`, a failed compile makes
+`make` stop; a stale `kh2.elf` from an earlier run can still be lying around,
+so read `make`'s last line, not `cmp` alone.
+
+## Where the source comes from
+
+The whole main executable builds from source and is byte-identical. The first
+4,680 functions and the build system are GovanifY's; the rest of the matching
+was done in the `zcroker/kh2` fork (machine-written with Claude Code), which
+this project adopted as its base on 2026-11-25. This project adds the names
+from the PS3 debug build, the file map, the rules, the gate and the site. The
+earlier independent matching work of this repository is in history (tag
+`pre-adopt-2026-11-25`).
 
 ## Measuring progress
 
-The headline is **matched bytes of code** (`tools/progress_bytes.py`). The
-function count is given beside it, never alone: before the small functions
-were done it overstated progress more than three times. objdiff's
-`matched_code_percent` is 100 % by construction here, because unwritten code
-is the original's bytes; never quote it.
+Every function is built from source, so "matched" no longer separates done
+from not done. Four figures, kept apart in every report
+(`tools/quality.py`, `tools/site_data.py`):
 
-Three grades, kept apart in every report:
+1. **Built from source, byte-identical**: all of it. Not progress any more;
+   it must simply never drop.
+2. **Decompiled to C/C++**: the headline. A function counts when it is plain
+   C or C++ (`cpp`), or C++ with vector-unit assembly that this compiler
+   cannot express in C (`vu0-asm`). It does not count while it is an assembly
+   file (`asm-file`), has inline CPU assembly (`inline-asm`) or a register pin
+   (`reg-pin`), or sits in a file where assembly has not been attributed to
+   single functions yet (`asm-unit`).
+3. **Named**: `functions.tsv` gives it a real name, not an address
+   placeholder.
+4. **Reviewed**: named, typed with real members, in its original source file,
+   and through review. Almost nothing is yet; most source is register-style
+   machine output.
 
-1. **Matched**: the function's source is linked into the ELF and the ELF is
-   byte-identical. This is the only figure called progress.
-2. **Reviewed**: matched, and it has passed review: evidenced names, real
-   types, in the source file that owned it. Functions in `src/anon` and
-   `src/autodecomp` are matched but not reviewed.
-3. **Structural**: written, in the non-matching lane, and differing from the
-   original only in register choice or instruction order (`tools/lane.py`
-   classes `regalloc` and `scheduling`). Shown as a separate weighted figure:
-   matched bytes plus size x match % of those functions. A further figure
-   counts every written function the same way. Neither is called matched.
-
-In public text (README, site, commit summaries) say "matched" or
-"byte-matched". Do not write "honest".
+In public text say "decompiled", "byte-identical" and "named". Do not write
+"honest".
 
 <!-- status:start -->
-Status (2026-11-26, written by `tools/site_data.py`): 6,302 of 14,618 functions, 408,648 of 2,226,245 bytes of code matched (18.4 %); structural progress 20.4 % (454,169 bytes, matched code plus partial credit for 351 structurally matched functions); 10,552 functions are written (72.9 % of the code), 54.5 % counting each by how closely it matches. By function size: under 80 B 65.0 %, 80–199 B 39.8 %, 200–999 B 4.43 %, 1 KB and more 0.32 %. Game code 6,149 / 13,806 functions (19.4 % of its bytes; Menus & Jiminy's Journal 19.1 %, Core gameplay 24.7 %, Camera, maps & HUD 28.8 %, Party members & models 14.7 %, Minigames 13.8 %, World map 22.4 %, Cutscenes & musical 27.8 %, Effects & particles 17.7 %, Smaller directories 20.4 %, Not placed yet 10.5 %); SDK & runtime 153 / 812 functions (3.58 %). 33 of 574 files in the file map have every function matched. The five overlays are not started. `make` ends in MATCHED!.
+Status (2026-11-26, written by `tools/site_data.py`): 9,401 of 11,509 functions, 1,366,776 of 2,015,044 bytes of code decompiled to C/C++ (67.8 %); all 11,509 are built from source and the executable is byte-identical, but 2,108 still use assembly or a register pin; 3,536 functions (33.0 % of the code) carry a real name. By function size: under 80 B 86.7 %, 80–199 B 83.7 %, 200–999 B 68.1 %, 1 KB and more 40.2 %. Game code 9,103 / 10,879 functions (68.5 % of its bytes; Menus & Jiminy's Journal 90.1 %, Core gameplay 69.0 %, Camera, maps & HUD 70.4 %, Party members & models 45.4 %, Minigames 43.9 %, World map 80.8 %, Cutscenes & musical 74.3 %, Effects & particles 44.0 %, Smaller directories 69.3 %, Not placed yet 52.4 %); SDK & runtime 298 / 630 functions (58.4 %). 348 of 668 files in the file map have every function matched. The five overlays are not started. `make` ends in MATCHED!.
 <!-- status:end -->
 
 ## Layout
 
 | Path | What |
 |---|---|
-| `functions.tsv` | The symbol registry: one symbol per address. Authoritative for the name a definition must produce |
-| `layout.tsv` | Every function's address and size. Generated (`tools/gen_layout.py`); never edit by hand |
-| `src/<area>/` | Sources by original developer library (`tozawa`, `yasui`, `ys`, `tz`, `kn`, …), as the E3 debug build names them |
-| `src/anon/` | Matched functions with no home yet, many generated upstream. Unreviewed |
-| `src/autodecomp/` | One file per address, written by the machine lifter. Matched, unreviewed, placeholder names, raw offset access |
-| `nonmatching/` | The non-matching lane: one written-but-not-matching function per file, scored by `tools/lane.py` into `SCORES.tsv`, never linked. Machine-written and unreviewed unless its header says otherwise. `legacy/` is an old upstream dump, not scored |
-| `wip/` | Not built. Old experiments; do not add to it |
-| `data/e3/` | Names, prototypes and class layouts recovered from the E3 2014 PS3 debug build, and the PS3-to-PS2 function map with its confidence grades |
-| `docs/codegen-3.2.md` | What ee-gcc 3.2 does: the idiom catalogue. Read before matching anything |
-| `docs/rig/` | The matching rig's own documents (tools/rig) |
-| `tools/rig/` | `compile_diff.py` (the scorer), `get_context.py`, `promote.py`, `park.py`, `permuter.py`, `sweep.py` |
+| `functions.tsv` | The symbol registry: one symbol per address. Authoritative for the name a definition must produce. Rename with `tools/rename_fn.py`, never by hand |
+| `layout.tsv` | The build's function table (11,509 rows). `data/layout_full.tsv` is a fuller table (14,618 function starts) from this project's earlier analysis; the extra ones are small functions inside linked units |
+| `linked_units.tsv` | Whole source files compiled as one object and linked at their original address, with their data and per-file compiler flags (`notes/linking.md`) |
+| `src/<area>/` | Sources by original developer directory (`tozawa`, `yasui`, `harata`, `naka`, …) |
+| `src/anon/` | Source with no home yet: `unit_<addr>.cpp` linked units and older batches. Machine-written |
+| `src/sdk/`, `src/newlib/`, `src/libgcc/`, `src/libsupc++/` | Sony SDK, C library and compiler runtime code |
+| `nonmatching/` | The non-matching lane (`tools/lane.py`). Empty of scored files now that everything builds; use it for clean rewrites that do not match yet. `legacy/` is an old upstream dump |
+| `data/e3/`, `notes/e3/` | Names, prototypes and class layouts from the E3 2014 PS3 debug build, the PS3-to-PS2 map with confidence tiers, and what has been applied |
+| `data/tu_map.tsv` | The original source file of every function, from the PS3 build's compile units |
+| `notes/` | The fork's notes: linking, unit boundaries, machine-suggested names (`function_names.tsv`: descriptions by a model, not evidence) |
+| `docs/codegen-3.2.md` | What ee-gcc 3.2 does: the idiom catalogue |
+| `tools/rig/` | This project's matching rig. `get_context.py` works on this base; `compile_diff.py`, `promote.py` and the lane scorer have not been re-checked against the new build and must be before use |
 | `site/` | The progress website; `site/data` is generated by `tools/site_data.py` |
 
-Compiler: `ee-gcc 3.2-040921`, `-O2 -g0 -fno-exceptions -fno-rtti
--fpermissive -ffunction-sections`, GCC 3 Itanium C++ ABI. No other known
-project uses this exact compiler, so `docs/codegen-3.2.md` is the only
-reference; add to it whenever a residue teaches something.
+Compiler: `ee-gcc 3.2-040921`, base flags `-O2 -g0 -fno-exceptions -fno-rtti
+-fpermissive -ffunction-sections`; linked units add their own (`-G0`,
+`-fno-strict-aliasing`, `-g` are common and plausibly original; flags that
+only disable an optimisation pass are steering and are on the clean-up list).
 
-## Rules for matching work
+## Rules
 
-1. **A function counts only when the whole ELF still matches.** `promote.py`
-   lands a candidate and rolls everything back if `make verify` fails. Never
-   hand-edit around it.
-2. **One symbol per address.** Replace a placeholder in `functions.tsv`; do
-   not append a second name. A source that defines the function under the old
-   name is renamed in the same commit, or the function silently drops out of
-   the build.
-3. **No tricks.** No inline asm statements, no `register … asm("$sN")`, no
-   `naked`, no `.incbin`, no byte arrays, no statements that exist only to
-   steer registers or scheduling. `asm("symbol")` labels on *declarations*
-   are the binding mechanism and are allowed. A function that matches only
-   through a trick stays unmatched with a `// FIXME:` saying what differs.
-4. **Names need evidence.** The E3 map grades each name (`seed`, `high`,
-   `med`, `low`); `seed` and `high` may be used as real names. Anything else
-   is provisional and keeps its address: `MenuCursor_0012ab40`. Unknown
-   functions are `func_XXXXXXXX`, unknown data `D_XXXXXXXX`. A wrong name is
-   worse than a placeholder.
+1. **The ELF stays byte-identical.** Every change ends in `MATCHED!`. A
+   rewrite that does not match yet goes to `nonmatching/`, not into `src/`.
+2. **One symbol per address**, changed only with `tools/rename_fn.py`, which
+   renames the registry and every source together and reverts if any function
+   would resolve differently.
+3. **No new tricks, and fewer old ones.** No new assembly statements, register
+   pins, `naked`, `.incbin`, byte arrays, per-file flags, or statements that
+   exist only to steer the compiler. The adopted source has many; removing
+   one is progress, adding one is a rejection. `asm("symbol")` labels and
+   file-scope `asm("a = b")` aliases are linkage, not code.
+4. **Names need evidence.** Evidence is the PS3 debug build at tier `seed`,
+   `high`, `sim-high` or `sim-vt-high`, a string in the binary, or a vtable
+   slot. Lower tiers are provisional and keep the address
+   (`MenuCursor__DeleteAll_0012ab40`). A model's description of what a
+   function does is not a name. A wrong name is worse than a placeholder.
 5. **The PS3 layouts are not the PS2 layouts.** The HD build added members
    (`m_Xoffset16x9` shifts 98 UI classes by 4; `YS::OBJ` and others differ
-   more). Take a class from `data/e3` as a starting point and check every
-   offset against the PS2 code.
-6. **Structure first.** For functions that will not match in one pass, get the
-   fields, types, calls, constants and control flow right and stop. Judge a
-   miss by its class, not its percentage. Park register-only residues
-   (`tools/rig/park.py`); they are a search problem, not a writing problem.
-7. **Measurement is not yours to change.** No edits to `tools/`, `Makefile`,
-   `layout.tsv`, `objdiff.json` or the site data in a matching branch.
+   more). Check every offset against the PS2 code.
+6. **Readability is the work now.** Real members instead of offsets, real
+   parameters and locals instead of `r4`/`a0`, the original file, one
+   reviewed class header per class.
+7. **Measurement is not yours to change** in a work branch: `tools/`,
+   `Makefile`, `layout.tsv`, `linked_units.tsv` flags, site data.
 
 ## Working habits
 
@@ -124,8 +129,8 @@ reference; add to it whenever a residue teaches something.
   agents.
 - Mechanical search finds the form; a model names and tidies it. Do not spend
   model tokens on register puzzles a permuter can run.
-- After any batch run, `python3 tools/rig/sweep.py` (exact but unpromoted
-  work) and `git status` must be clean before the yield is believed.
+- After any batch run `git status` must be clean and `python3 tools/gate.py`
+  must print `gate: ok` before the result is believed.
 - Long-lived processes go under `sbg`; stop them when done.
 - Commits are authored with the repository's identity and end with a
   `Co-Authored-By:` line naming the model that did the work.
@@ -133,6 +138,6 @@ reference; add to it whenever a residue teaches something.
 
 ## Credits
 
-This project continues GovanifY's `kh2` ("dasein"), MIT-licensed; the build
-system, the first 4,680 matched functions and the E3 header skeletons are
-his. See `LICENSE`.
+GovanifY's `kh2` ("dasein") is the origin: the build system, the first 4,680
+matched functions and the header skeletons. The `zcroker/kh2` fork brought the
+build to all 11,509 functions. Both are MIT-licensed; see `LICENSE`.
