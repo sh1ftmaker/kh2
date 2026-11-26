@@ -49,6 +49,25 @@ python3 tools/rig/get_context.py <addr>             # the original function's di
 - Functions in a file are independent, but a file counts only when
   `try_unit.py` says `same` for the whole file.
 
+## What worked in the first round (15 of 52)
+
+- **Stores through `volatile` casts**: a struct with real member types, the
+  stores written in another order. The scheduler sorts stores to one base by
+  itself, and the assembler fills a jump's delay slot by itself, so the source
+  order that matches is often the plain ascending one, or the reverse.
+  `tools/detrick.py --kinds order` already tried every order of adjacent
+  volatile stores; what is left needs the struct, a different base pointer, or
+  a value held in a local (`f32 z = 0.0f;` stored four times).
+- **Pins**: keep the argument alive to the call that really takes it (a method
+  called with its `this`), give a second group of calls its own base variable,
+  declare the pointer before the value computed from it.
+- **Barriers**: early returns instead of one folded condition; a real loop in
+  place of labels.
+- **Did not yield, do not spend attempts**: optimiser switches (`flags`),
+  hand-written vector routines, reads of `$gp`, hardware registers at
+  `0x1000xxxx` (those are really volatile), an address written as a constant
+  where a symbol would add a relocation.
+
 ## Report (plain prose, no praise)
 
 For every listed function: `removed` or `kept`, and one line on what worked or
