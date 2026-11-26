@@ -5,7 +5,7 @@
 // p is pinned to t4 for the first store pointer.
 void func_001b80d8(void*);
 extern u64 D_0036d708;
-typedef union UPv { u64* volatile p; u32 u; u8 c; } UPv;
+typedef union UPv { u64* p; u32 u; u8 c; } UPv;
 typedef struct Pu { u32* p0; u32 n; u8 pad[0x40 - 8]; u8 sub[12]; UPv pk; } Pu;
 void func_001aa980(Pu* a) {
  if ((*a->p0 ^ 4) == 0) {

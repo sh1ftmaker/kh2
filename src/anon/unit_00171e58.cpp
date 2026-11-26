@@ -347,7 +347,7 @@ void YS__OBJ__is_valid(u32) asm("YS__OBJ__is_valid");
 void func_0016bd60(u32, s32) asm("func_0016bd60");
 void trap_obj_idle(u32**) asm("_ZN2YS13trap_obj_idleEP8BD_VALUE");
 void trap_obj_idle(u32** bd) {
-    YS__OBJ__is_valid((*bd)[1]);                      
+    YS__OBJ__is_valid((*bd)[1]);
     func_0016bd60((*bd)[1], 0);
 }
 }  // namespace n001723d0
@@ -974,7 +974,7 @@ void func_00173120(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a
 void func_00173120(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 s0 = a0;
     f32 f0 = func_001826f8(a0, a1, a2, a3, a4, a5, a6, a7);
-    *(volatile f32*)((u32)s0 + (s32)(0)) = f0;
+    *(f32*)((u32)s0 + (s32)(0)) = f0;
 }
 }  // namespace n00173120
 
@@ -1093,7 +1093,7 @@ void func_00173348(void* p) asm("func_00173348");
 void func_00173348(void* p) {
     if (!D_01c5f4d0) {
         D_01c5f4d0 = 1;
-        func_002fd188(func_00175538);                     
+        func_002fd188(func_00175538);
     }
     D_01c5f4e0 = func_00143e50(*(u16*)p, 0);
     *(Vec4**)p = &D_01c5f4e0;
@@ -1106,9 +1106,9 @@ u32 func_001a7610(u32, u32, u32, f32, f32) asm("_Z13func_001a7610jjjff");
 u32 func_001733b8(u32 a0) asm("_Z13func_001733b8j");
 u32 func_001733b8(u32 a0) {
     u32 s0 = a0;
-    volatile u32* p = (volatile u32*)(u32)a0;
+    volatile u32* p = (u32*)(u32)a0;
     u32 a1 = p[1];
-    volatile float* pf = (volatile float*)(u32)s0;
+    volatile float* pf = (float*)(u32)s0;
     float f0 = pf[2];
     u32 v0 = func_001a7610(*(u32*)((u32)a0 + (s32)(0)), a1, (u32)(4u), f0, 0.0f);
     *(u32*)((u32)s0 + (s32)(0)) = v0;
@@ -1150,25 +1150,25 @@ u32 func_00173450(u32 a0) {
 
     *(u32*)(v0 + 4) = 1;
 
-    volatile u32* vp = (volatile u32*)s0;
+    u32* vp = (u32*)s0;
     f32 f0;
 
     {
         u32 t6 = vp[0];
         f0 = *(f32*)(t6 + 0);
-        *(volatile f32*)(v0 + 8) = f0;
+        *(f32*)(v0 + 8) = f0;
     }
 
     {
         u32 t7 = vp[0];
         f0 = *(f32*)(t7 + 4);
-        *(volatile f32*)(v0 + 12) = f0;
+        *(f32*)(v0 + 12) = f0;
     }
 
     {
         u32 t7 = vp[0];
         f0 = *(f32*)(t7 + 8);
-        *(volatile f32*)(v0 + 16) = f0;
+        *(f32*)(v0 + 16) = f0;
     }
 
     return v0;
@@ -1358,10 +1358,10 @@ void func_00175540(void) asm("func_00175540");
 void func_002fd188(void (*)(void)) asm("func_002fd188");
 void func_00173918(u8** p) asm("func_00173918");
 void func_00173918(u8** p) {
-                                                 
+
     if (!D_01c5f4f0) {
         D_01c5f4f0 = 1;
-        func_002fd188(func_00175540);                     
+        func_002fd188(func_00175540);
     }
     u8* s = *(u8**)(p[0] + 4) + 2144;
     if ((u128*)s != &D_01c5f500)
@@ -1398,7 +1398,7 @@ void func_001739b8(u128** out)
 {
     if (!D_01c5f510) {
         D_01c5f510 = 1;
-        func_002fd188(D_00175548);                     
+        func_002fd188(D_00175548);
     }
     u128* src = (u128*)(*(u8**)((u8*)*out + 4) + 2128);
     u128* dst = &D_01c5f520;
@@ -1497,10 +1497,10 @@ u32 YS__OBJ__turn_to_dir(...) asm("YS__OBJ__turn_to_dir");
 void func_00173c38(u32 a0) asm("_Z13func_00173c38j");
 void func_00173c38(u32 a0) {
     u32 s0 = a0;
-    volatile u32* p = (volatile u32*)(u32)a0;
+    volatile u32* p = (u32*)(u32)a0;
     u32 t7 = p[0];
     u32 a1 = p[1];
-    volatile f32* pf = (volatile f32*)(u32)s0;
+    volatile f32* pf = (f32*)(u32)s0;
     f32 f12 = pf[2];
     u32 v0 = ((u32(*)(u32, u32, f32))YS__OBJ__turn_to_dir)(*(u32*)((u32)t7 + (s32)(4)), a1, f12);
     *(u32*)((u32)s0 + (s32)(0)) = v0;
@@ -1653,7 +1653,7 @@ extern U173 D_01c5f480 asm("D_01c5f480");
 f32 func_00184a90(void*) asm("func_00184a90");
 void YS__trap_obj_step_pos(u32* p) asm("YS__trap_obj_step_pos");
 void YS__trap_obj_step_pos(u32* p) {
-    U173* v = (U173*)YS__OBJ__get_pos(*(void**)(p[0] + 4));                          
+    U173* v = (U173*)YS__OBJ__get_pos(*(void**)(p[0] + 4));
     U173* d = &D_01c5f480;
     if (v != d) QCOPY(d, v);
     d->f[1] = func_00184a90(*(void**)(p[0] + 4));
@@ -1683,7 +1683,7 @@ void func_00173ff8(u32 a0) asm("_Z13func_00173ff8j");
 void func_00173ff8(u32 a0) {
     f32 f12 = *(f32*)((u32)a0 + (s32)(0));
     u32 s0 = a0;
-    f32 f0 = func_0017d130(f12);                       
+    f32 f0 = func_0017d130(f12);
     *(f32*)((u32)s0 + (s32)(0)) = f0;
 }
 }  // namespace n00173ff8
@@ -1728,7 +1728,7 @@ u32 func_001740b8(u32 a0, u32 a1, u32 a2, u32 a3) {
     r4 = *(volatile u32*)((u32)r4 + (s32)(0));
     r2 = ((u32(*)(u32,u32,u32,u32))func_00198c28)(r4, r5, r6, r7);
     r15 = (u32)((s32)0u + (1));
-    *(volatile u8*)((u32)r2 + (s32)(48)) = (u8)r15;
+    *(u8*)((u32)r2 + (s32)(48)) = (u8)r15;
     return r2;
 }
 }  // namespace n001740b8
@@ -1789,7 +1789,7 @@ void func_00174168(Args00174168* p) {
     Obj00174168* o = p->o;
     u32 a = p->a;
     u32 m = o->m;
-    func_00183768(m, a, p->f);                           
+    func_00183768(m, a, p->f);
 }
 }  // namespace n00174168
 
@@ -2004,7 +2004,7 @@ void func_00174558(u32 a0) asm("_Z13func_00174558j");
 void func_00174558(u32 a0) {
     u32 s0 = a0;
     kn::FVector tmp;
-    func_00190388((u32)&tmp, *(u32*)((u32)a0 + (s32)(0)));                  
+    func_00190388((u32)&tmp, *(u32*)((u32)a0 + (s32)(0)));
     u32 t7 = (u32)&D_01c5f480;
     kn::FVector* dst = (kn::FVector*)(u32)t7;
     *dst = tmp;
@@ -2170,7 +2170,7 @@ namespace n00174858 {
 u32 ryj__PAX__start(u32, u32, u32, u32, u32, u32) asm("ryj__PAX__start");
 void func_00174858(u32* p) asm("func_00174858");
 void func_00174858(u32* p) {
-    p[0] = ryj__PAX__start(p[0], p[1], p[3], 1, p[4], ((u32*)p[2])[1]);                      
+    p[0] = ryj__PAX__start(p[0], p[1], p[3], 1, p[4], ((u32*)p[2])[1]);
 }
 }  // namespace n00174858
 
@@ -2423,7 +2423,7 @@ u32 func_00106a60(s32) asm("func_00106a60");
 void func_00107478(u32, void*) asm("func_00107478");
 void trap_camera_at(void**) asm("_ZN2YS14trap_camera_atEP8BD_VALUE");
 void trap_camera_at(void** v) {
-    func_00107478(func_00106a60(1), D_01c5f480);                          
+    func_00107478(func_00106a60(1), D_01c5f480);
     *v = D_01c5f480;
 }
 }  // namespace n00174d98
@@ -2478,10 +2478,10 @@ void func_00174e38(PU174* pv) asm("func_00174e38");
 void func_00174e38(PU174* pv) {
     M174 m;
     s32 o[4];
-    u8* a = kn__getProjection(1);                   
-    u8* b = func_00106a60(1);                        
+    u8* a = kn__getProjection(1);
+    u8* b = func_00106a60(1);
     mulmat174(&m, a, b ? b + 16 : 0);
-    func_002f47d8(o, &m, pv->p, 0);                               
+    func_002f47d8(o, &m, pv->p, 0);
     D_01c5f480.x = (f32)((o[0] >> 4) - 2048);
     D_01c5f480.y = (f32)((o[1] >> 4) - 2048);
     D_01c5f480.z = (f32)(o[2] >> 4);

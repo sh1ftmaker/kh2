@@ -52,7 +52,7 @@ void MG_EHSidecar::MoveToBeforePoint() {
 extern "C" void func_002e2d50(void) {
     u8* m = D_00361f60;
     if (m != 0) {
-        asm volatile("");
+
         ceb08_noarg();
     }
     func_002e2660(m);

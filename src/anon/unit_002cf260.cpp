@@ -342,7 +342,7 @@ void YS__UNIT__InitMinigame(void) asm("YS__UNIT__InitMinigame");
 // 0x002c2168: definition moved into src/anon/unit_002c1e80.cpp
 
 extern s32 D_00361fa0 asm("D_00361fa0");
-extern u8* volatile D_00361fa4 asm("D_00361fa4");
+extern u8* D_00361fa4 asm("D_00361fa4");
 /*TARGET 002cf938*/
 void Ti__MGObj__reset_all_members(u8 on) asm("Ti__MGObj__reset_all_members");
 void Ti__MGObj__reset_all_members(u8 on) {  // count_entries_masked
@@ -1108,11 +1108,11 @@ u32 Ti__MGObj___OVR_leave_req(u32 a0) asm("_Z25Ti__MGObj___OVR_leave_reqj");
 u32 Ti__MGObj___OVR_leave_req(u32 a0) {
     u32 r4 = a0, r2, r15, r16;
     r16 = r4;
-    r15 = *(volatile u32*)((u32)r4 + (s32)(2828));
+    r15 = *(u32*)((u32)r4 + (s32)(2828));
     r4 = r15;
     if (r15 != 0u) {
         r2 = ((u32(*)(u32))func_001dc818)(r4);
-        *(volatile u32*)((u32)r16 + (s32)(2828)) = 0u;
+        *(u32*)((u32)r16 + (s32)(2828)) = 0u;
     }
     r4 = r16;
     return ((u32(*)(u32))func_00186020)(r4);

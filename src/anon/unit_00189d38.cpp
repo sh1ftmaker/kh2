@@ -197,11 +197,11 @@ E20* func_0018a1b8(u8* p, u32 mask, E20* e)
 namespace n0018a218 {
 u32 func_0018a218(u32 a0, u32 a1) asm("_Z13func_0018a218jj");
 u32 func_0018a218(u32 a0, u32 a1) {
-    register u32 t7 asm("$15") = *(u32*)((u32)a0 + (s32)(0));
+    u32 t7 = *(u32*)((u32)a0 + (s32)(0));
     if ((s32)t7 <= 0) {
         return 0u;
     }
-    register u32 t5 asm("$13");
+    u32 t5;
     u32 p = (u32)((s32)a0 + (68));
     t5 = t7;
     u32 v0 = 0u;
@@ -281,7 +281,7 @@ s32 func_0018a318(u8* a0, u8* a1) {
     W253Vec d;
     d = vsub((f32*)(a1 + 16), (f32*)(a0 + 16));
     f32 dy;
-    dy = fabsf(d.y);          
+    dy = fabsf(d.y);
     f32 r1 = *(f32*)(a1 + 8);
     f32 r0 = *(f32*)(a0 + 8);
     if (r0 + r1 <= dy) return 0;
@@ -319,7 +319,7 @@ s32 func_0018a420(B32* a, B32* b)
     V4 t, d;
     asm volatile(".set noreorder\n\tlqc2 $vf1, 0(%0)\n\tlqc2 $vf2, 0(%1)\n\tvsub.wxyz $vf1, $vf1, $vf2\n\tsqc2 $vf1, 0(%2)\n\t.set reorder" : : "r"(&b->pos), "r"(&a->pos), "r"(&d) : "memory");
     VCopyChk(&t, &d);
-    f32 dy = fabsf(t.y);          
+    f32 dy = fabsf(t.y);
     if (a->c + b->c <= dy) return 0;
     f32 r = a->y + b->y;
     *(u32*)&t.y = 0;
@@ -373,7 +373,7 @@ u8 func_0018a318(Shape18a*, Shape18a*) asm("func_0018a318");
 u8 func_0018a420(Shape18a*, Shape18a*) asm("func_0018a420");
 u8 func_0018a4d8(Shape18a*, Shape18a*) asm("func_0018a4d8");
 s32 func_0018a550(Shape18a* a, Shape18a* b) asm("func_0018a550");
-s32 func_0018a550(Shape18a* a, Shape18a* b) {                         
+s32 func_0018a550(Shape18a* a, Shape18a* b) {
     switch (a->type) {
     case 0:
         switch (b->type) {
@@ -558,7 +558,7 @@ static inline void w270_vscale(W270V* d, const W270V* a, f32 s) {
 }
 struct W270Sh { s32 type; f32 a; f32 b; u32 pad; W270V pos; };
 f32 func_0018a970(W270Sh* s, const W270V* q) asm("func_0018a970");
-f32 func_0018a970(W270Sh* s, const W270V* q) {                     
+f32 func_0018a970(W270Sh* s, const W270V* q) {
     f32 r = 0.0f;
     W270V d;
     W270V u;

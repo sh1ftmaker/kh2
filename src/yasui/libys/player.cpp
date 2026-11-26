@@ -2283,7 +2283,7 @@ void func_0017a798() {
     if (YS__OBJ__is_exist(*(volatile u32*)((u32)&D_0034e948 + (s32)(0))) == 0u) {
         return;
     }
-    func_0017a718(*(volatile u32*)((u32)&D_0034e948 + (s32)(0)));
+    func_0017a718(*(u32*)((u32)&D_0034e948 + (s32)(0)));
 }
 }  // namespace q63
 

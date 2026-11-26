@@ -134,7 +134,7 @@ static inline __attribute__((always_inline)) void watch_remove(WATCH* n) {
         prev->next = *(WATCH* volatile*)&n->next;
     }
     WATCH_LIST* l = &s_list;
-    if (__builtin_expect(n == l->tail, 0)) l->tail = prev;
+    if ((n == l->tail)) l->tail = prev;
     n->next = 0;
     s_pool.free[s_pool.n++] = (s32)(n - s_pool.e);
 }

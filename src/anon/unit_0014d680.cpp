@@ -355,7 +355,7 @@ void func_0014dd60(u32 a0, u32 a1, u32 a2, u32 a3) {  // store_3bytes_470
     a3 &= 0xff;
     asm volatile("" : "+r"(a1), "+r"(a2), "+r"(a3));
     *(volatile u8 *)(a0 + 470) = a1;
-    *(volatile u8 *)(a0 + 472) = a3;
+    *(u8 *)(a0 + 472) = a3;
     *(volatile u8 *)(a0 + 471) = a2;
 }
 }  // namespace n0014dd60

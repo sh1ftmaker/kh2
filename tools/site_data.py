@@ -195,7 +195,12 @@ def verify_elf():
         r = subprocess.run(["make"], cwd=ROOT, capture_output=True, text=True, env=env, timeout=1800)
     except (OSError, subprocess.TimeoutExpired):
         return None
-    return r.returncode == 0 and "MATCHED!" in r.stdout
+    ok = r.returncode == 0 and "MATCHED!" in r.stdout
+    if ok:                                       # refresh what tools/quality.py reads
+        a = subprocess.run([sys.executable, str(ROOT / "tools/attribute.py")], cwd=ROOT, capture_output=True, text=True)
+        if a.returncode:
+            raise SystemExit("tools/attribute.py failed: " + (a.stdout + a.stderr)[-300:])
+    return ok
 
 
 def build():
@@ -213,7 +218,7 @@ def build():
     names = registry_names()
     # What each built function is made of (tools/quality.py). Every row is built from source and
     # the ELF is byte-identical; "matched" on the site means decompiled to C/C++ (kinds cpp and
-    # vu0-asm). The rest is built too but still uses assembly or a register pin.
+    # game-asm). The rest is built too but still leans on assembly or a compiler trick.
     import quality
     qual = {int(q["addr"], 16): q for q in quality.load()}
     structural = {}
@@ -369,7 +374,7 @@ def write(fns, subject, elf_ok):
         totals["code_named"] = sum(f["size"] for f in fns if f["named"])
         totals["kinds"] = {k: {"fns": sum(1 for f in fns if f["kind"] == k),
                                "code": sum(f["size"] for f in fns if f["kind"] == k)}
-                           for k in ("cpp", "vu0-asm", "reg-pin", "inline-asm", "asm-unit", "asm-file")}
+                           for k in __import__("quality").KINDS}
     if sum(r["c"] for r in regions) != code:
         raise SystemExit("regions do not add up to the function table")
 

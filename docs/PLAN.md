@@ -26,12 +26,18 @@ All 11,509 functions build and match. Of the code bytes:
 
 | kind | share | meaning |
 |---|---|---|
-| `cpp` | 62.8 % | plain C/C++ |
-| `vu0-asm` | 5.0 % | C++ with vector-unit assembly C cannot express |
-| `inline-asm` | 15.9 % | has inline CPU assembly: not decompiled as written |
-| `asm-unit` | 10.3 % | in a file where assembly is not yet attributed per function |
+| `cpp` | 67.4 % | plain C/C++ |
+| `game-asm` | 16.0 % | C++ whose only assembly is what the original had too (vector unit, 128-bit copies, traps) |
+| `cpu-asm` | 4.6 % | ordinary CPU instructions in assembly statements |
 | `asm-file` | 3.9 % | plain assembly file |
-| `reg-pin` | 2.0 % | pins a variable to a register |
+| `reg-pin` | 3.0 % | pins a variable to a register |
+| `barrier` | 2.6 % | empty assembly statement that steers the optimiser |
+| `flags` | 1.5 % | code depends on an optimiser switch set for its file only |
+| `volatile` | 1.0 % | memory reached through `volatile` casts |
+
+(2026-11-26, after `tools/detrick.py` took out every construct whose removal
+left the object unchanged. Counted the same way, the adopted source stood at
+82.3 % decompiled; it is 83.4 % now.)
 
 3,536 functions (33 % of bytes) have a real name. Almost none of the source
 is reviewed: it is register-style machine output with raw offsets.
@@ -70,11 +76,9 @@ as zcroker/kh2#1).
 
 ### A2: classify, then clean
 
-- Attribute assembly to single functions in the `asm-unit` files (compile
-  with `-S` and read the `#APP` regions per function).
-- Sort inline assembly by what it does: 128-bit copies (the compiler
-  generates these from an aligned 128-bit type), steering (`nop`, `addiu`
-  with a register operand, `break`), real hand-written routines.
+- Done: assembly and tricks are attributed per function from the compiler's
+  output (`tools/attribute.py`), and the removable ones are gone
+  (`tools/detrick.py`).
 - Rewrite, cheapest class first. Each removal must leave the build matched.
 - Per-file flags: keep the ones that look like a library's real settings
   (`-G0`, `-fno-strict-aliasing`, `-g`), and treat pass-disabling flags as a

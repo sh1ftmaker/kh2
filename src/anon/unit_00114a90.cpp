@@ -82,7 +82,7 @@ u32 kn__Aladdin__Aladdin(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6,
     u32 r14 = (u32)&D_00340000;
     *(volatile u32*)(r16 + 16) = r15;
     r14 = (u32)&D_00346658;
-    *(volatile u32*)r16 = r14;
+    *(u32*)r16 = r14;
     *(volatile u32*)(r16 + 12) = 10;
     return r2;
 }
@@ -103,7 +103,7 @@ u32 func_00114af8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7
     u32 r14 = (u32)&D_00340000;
     *(volatile u32*)(r16 + 16) = r15;
     r14 = (u32)&D_00346658;
-    *(volatile u32*)r16 = r14;
+    *(u32*)r16 = r14;
     *(volatile u32*)(r16 + 12) = 10;
     return r2;
 }
@@ -188,7 +188,7 @@ u32 func_00114be8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7
     u32 r14 = (u32)&D_00340000;
     *(volatile u32*)(r16 + 16) = r15;
     r14 = (u32)&D_003467b8;
-    *(volatile u32*)r16 = r14;
+    *(u32*)r16 = r14;
     *(volatile u32*)(r16 + 12) = 8;
     return r2;
 }
@@ -209,7 +209,7 @@ u32 func_00114c30(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7
     u32 r14 = (u32)&D_00340000;
     *(volatile u32*)(r16 + 16) = r15;
     r14 = (u32)&D_003467b8;
-    *(volatile u32*)r16 = r14;
+    *(u32*)r16 = r14;
     *(volatile u32*)(r16 + 12) = 8;
     return r2;
 }
@@ -279,7 +279,7 @@ u32 func_00114d00(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7
     u32 r14 = (u32)&D_00340000;
     *(volatile u32*)(r16 + 16) = r15;
     r14 = (u32)&D_00346960;
-    *(volatile u32*)r16 = r14;
+    *(u32*)r16 = r14;
     *(volatile u32*)(r16 + 12) = 10;
     return r2;
 }
@@ -300,7 +300,7 @@ u32 func_00114d48(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7
     u32 r14 = (u32)&D_00340000;
     *(volatile u32*)(r16 + 16) = r15;
     r14 = (u32)&D_00346960;
-    *(volatile u32*)r16 = r14;
+    *(u32*)r16 = r14;
     *(volatile u32*)(r16 + 12) = 10;
     return r2;
 }
@@ -400,7 +400,7 @@ u32 func_00114e58(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7
     u32 r14 = (u32)&D_00340000;
     *(volatile u32*)(r16 + 16) = r15;
     r14 = (u32)&D_00346b08;
-    *(volatile u32*)r16 = r14;
+    *(u32*)r16 = r14;
     *(volatile u32*)(r16 + 12) = 10;
     return r2;
 }
@@ -421,7 +421,7 @@ u32 func_00114ea0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7
     u32 r14 = (u32)&D_00340000;
     *(volatile u32*)(r16 + 16) = r15;
     r14 = (u32)&D_00346b08;
-    *(volatile u32*)r16 = r14;
+    *(u32*)r16 = r14;
     *(volatile u32*)(r16 + 12) = 10;
     return r2;
 }
@@ -518,7 +518,7 @@ u32 kn__Simba__Simba(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32
     u32 r14 = (u32)&D_00340000;
     *(volatile u32*)(r16 + 16) = r15;
     r14 = (u32)&D_00346cd8;
-    *(volatile u32*)r16 = r14;
+    *(u32*)r16 = r14;
     *(volatile u32*)(r16 + 12) = 11;
     return r2;
 }
@@ -539,7 +539,7 @@ u32 func_00114ff8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7
     u32 r14 = (u32)&D_00340000;
     *(volatile u32*)(r16 + 16) = r15;
     r14 = (u32)&D_00346cd8;
-    *(volatile u32*)r16 = r14;
+    *(u32*)r16 = r14;
     *(volatile u32*)(r16 + 12) = 11;
     return r2;
 }
@@ -676,7 +676,7 @@ u32 func_001151b0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7
     u32 r14 = (u32)&D_00340000;
     *(volatile u32*)(r16 + 16) = r15;
     r14 = (u32)&D_00346e80;
-    *(volatile u32*)r16 = r14;
+    *(u32*)r16 = r14;
     *(volatile u32*)(r16 + 12) = 10;
     return r2;
 }
@@ -697,7 +697,7 @@ u32 func_001151f8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7
     u32 r14 = (u32)&D_00340000;
     *(volatile u32*)(r16 + 16) = r15;
     r14 = (u32)&D_00346e80;
-    *(volatile u32*)r16 = r14;
+    *(u32*)r16 = r14;
     *(volatile u32*)(r16 + 12) = 10;
     return r2;
 }
@@ -794,7 +794,7 @@ u32 func_00115308(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7
     u32 r14 = (u32)&D_00340000;
     *(volatile u32*)(r16 + 16) = r15;
     r14 = (u32)&D_00347050;
-    *(volatile u32*)r16 = r14;
+    *(u32*)r16 = r14;
     *(volatile u32*)(r16 + 12) = 11;
     return r2;
 }
@@ -815,7 +815,7 @@ u32 func_00115350(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7
     u32 r14 = (u32)&D_00340000;
     *(volatile u32*)(r16 + 16) = r15;
     r14 = (u32)&D_00347050;
-    *(volatile u32*)r16 = r14;
+    *(u32*)r16 = r14;
     *(volatile u32*)(r16 + 12) = 11;
     return r2;
 }
@@ -926,7 +926,7 @@ u32 func_00115480(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7
     u32 r14 = (u32)&D_00340000;
     *(volatile u32*)(r16 + 16) = r15;
     r14 = (u32)&D_00347220;
-    *(volatile u32*)r16 = r14;
+    *(u32*)r16 = r14;
     *(volatile u32*)(r16 + 12) = 11;
     return r2;
 }
@@ -947,7 +947,7 @@ u32 func_001154c8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7
     u32 r14 = (u32)&D_00340000;
     *(volatile u32*)(r16 + 16) = r15;
     r14 = (u32)&D_00347220;
-    *(volatile u32*)r16 = r14;
+    *(u32*)r16 = r14;
     *(volatile u32*)(r16 + 12) = 11;
     return r2;
 }
@@ -1046,7 +1046,7 @@ u32 func_001155d8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7
     u32 r14 = (u32)&D_00340000;
     *(volatile u32*)(r16 + 16) = r15;
     r14 = (u32)&D_003473c8;
-    *(volatile u32*)r16 = r14;
+    *(u32*)r16 = r14;
     *(volatile u32*)(r16 + 12) = 10;
     return r2;
 }
@@ -1067,7 +1067,7 @@ u32 func_00115620(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7
     u32 r14 = (u32)&D_00340000;
     *(volatile u32*)(r16 + 16) = r15;
     r14 = (u32)&D_003473c8;
-    *(volatile u32*)r16 = r14;
+    *(u32*)r16 = r14;
     *(volatile u32*)(r16 + 12) = 10;
     return r2;
 }
@@ -1134,7 +1134,7 @@ u32 func_001156f0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7
     u32 r14 = (u32)&D_00340000;
     *(volatile u32*)(r16 + 16) = r15;
     r14 = (u32)&D_00347550;
-    *(volatile u32*)r16 = r14;
+    *(u32*)r16 = r14;
     *(volatile u32*)(r16 + 12) = 9;
     return r2;
 }
@@ -1155,7 +1155,7 @@ u32 func_00115738(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7
     u32 r14 = (u32)&D_00340000;
     *(volatile u32*)(r16 + 16) = r15;
     r14 = (u32)&D_00347550;
-    *(volatile u32*)r16 = r14;
+    *(u32*)r16 = r14;
     *(volatile u32*)(r16 + 12) = 9;
     return r2;
 }
@@ -2082,7 +2082,7 @@ void kn__Stitch__pre_exec(E116Obj* o)
             if (o->slots[i].flags & 0x10) {
                 o->slots[i].flags |= 3;
                 register E116Vec* qp asm("$16");
-                register s32 one asm("$4") = 1;
+                s32 one = 1;
                 asm volatile("" : "+r"(one));
                 qp = &o->slots[i].pos;
                 asm("" : "+r"(qp));

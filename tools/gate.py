@@ -116,8 +116,8 @@ def check_progress(mb):
         base = json.loads(git("show", f"{mb}:site/data/summary.json"))["totals"]
     except (json.JSONDecodeError, KeyError):
         return print("progress: base has no site/data/summary.json; not compared")
-    if "kinds" not in base:
-        return print(f"progress: {fns} fns / {code} B decompiled, {named} named (base predates the quality figures)")
+    if set(base.get("kinds", ())) != set(quality.KINDS):
+        return print(f"progress: {fns} fns / {code} B decompiled, {named} named (base counted different kinds)")
     if fns < base["fns_matched"] or code < base["code_matched"]:
         fail("progress", f"decompiled {fns} fns / {code} B is below the base's "
                          f"{base['fns_matched']} fns / {base['code_matched']} B")
@@ -148,27 +148,35 @@ def check_registry(mb):
             fail("names", f"{addr}: real name {sym} was {'removed' if new is None else 'renamed to ' + new}")
 
 
-def check_sources(files):
+def source_findings(path, text):
     import compile_diff as cd
+    code = re.sub(r"//[^\n]*|/\*.*?\*/", "", text, flags=re.S)
+    out = [("banned", what, "") for what in cd.banned_constructs(code)]
+    if not path.startswith(MACHINE_DIRS):
+        out += [("banned", what, "") for rx, what in EXTRA_BANNED if rx.search(code)]
+        plain = re.sub(r"\bvolatile\s+", "", code)          # the same cast with or without it
+        for rx, what in LEFTOVERS:
+            m = rx.search(plain)
+            if m:
+                out.append(("leftovers", what, f" `{m.group(0)[:40]}`"))
+    return out
+
+
+def check_sources(files, mb):
+    """A changed source may not gain a kind of banned construct or leftover it did not have
+    at the base (the adopted source is full of them; taking them out is the work)."""
     for st, path in files:
         if st == "D" or not path.endswith(SOURCE_EXT) or path.startswith("nonmatching/legacy/"):
             continue
         p = ROOT / path
         if not p.exists():
             continue
-        text = p.read_text(errors="ignore")
-        code = re.sub(r"//[^\n]*|/\*.*?\*/", "", text, flags=re.S)
-        for what in cd.banned_constructs(code):
-            fail("banned", f"{path}: {what}")
-        if path.startswith(MACHINE_DIRS):
-            continue
-        for rx, what in EXTRA_BANNED:
-            if rx.search(code):
-                fail("banned", f"{path}: {what}")
-        for rx, what in LEFTOVERS:
-            m = rx.search(code)
-            if m:
-                fail("leftovers", f"{path}: {what} `{m.group(0)[:40]}`")
+        had = set()
+        if st != "A":
+            had = {(c, w) for c, w, _ in source_findings(path, git("show", f"{mb}:{path}"))}
+        for check, what, extra in source_findings(path, p.read_text(errors="ignore")):
+            if (check, what) not in had:
+                fail(check, f"{path}: {what}{extra}")
 
 
 def check_lane():
@@ -217,7 +225,7 @@ def main():
     if not findings:
         check_progress(mb)
     check_registry(mb)
-    check_sources(files)
+    check_sources(files, mb)
     check_lane()
     check_data()
     if args.worker:

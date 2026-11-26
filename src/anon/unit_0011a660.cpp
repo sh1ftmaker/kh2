@@ -112,10 +112,10 @@ u32 func_0011a7a0(u32 a0) {
     u32 vt = (u32)&D_003478b0;
     ((u32*)(u32)a0)[0] = vt;
     u32 s0 = a0;
-    u32 t6 = *(volatile u32*)((u32)a0 + (s32)(48));
+    u32 t6 = *(u32*)((u32)a0 + (s32)(48));
     if (t6 != 0u) {
         dk__LockOn__end(t6);
-        *(volatile u32*)((u32)s0 + (s32)(48)) = 0u;
+        *(u32*)((u32)s0 + (s32)(48)) = 0u;
     }
     func_00113668(s0);
     return func_00105110(s0);
@@ -167,7 +167,7 @@ struct Q134668 {
         if (this != &o) QCOPY134668(this, &o);
         return *this;
     }
-                                      
+
     void Zero() { asm volatile("vsub.wxyz $vf1, $vf0, $vf0\n\tsqc2 $vf1, 0(%0)" : : "r"(this) : "memory"); }
 } __attribute__((aligned(16)));
 u8* func_00106a60(s32) asm("func_00106a60");
@@ -266,7 +266,7 @@ void func_0011a938(W1680Self2* self, W1680Tgt* out, f32 fx, f32 fy) {
     f32 sz = W1680_getScreenZ(kn__getProjection(0));
     W1680Cam* c = func_00106a60(0);
     W1680Mtx m(c ? c->m : *(W1680Mtx*)0);
-                                                                                      
+
     register u32 s0_busy asm("$16");
     asm volatile("" : "=r"(s0_busy));
     W1680Tgt it;
@@ -440,7 +440,7 @@ void func_0011b038(s32 a) asm("func_0011b038");
 void func_0011b038(s32 a) {
     s32 h = func_00111e38(0);
     func_0011ac10(a);
-    u8* p = func_00106a60(1);                        
+    u8* p = func_00106a60(1);
     f32 v[4];
     f32 x = *(f32*)(p + 24);
     f32 z = *(f32*)(p + 56);

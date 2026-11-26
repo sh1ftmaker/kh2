@@ -1,25 +1,24 @@
 #!/usr/bin/env python3
 """quality.py: what each built function is made of.
 
-Every function in layout.tsv is built from source and the ELF is byte-identical;
-this tool says how much of that source is C/C++ a programmer could have written.
-Writes out/generated/quality.tsv (addr, size, source, kind, named) and prints totals.
+Every function in layout.tsv is built from source and the ELF is byte-identical; this tool
+says how much of that source is C/C++ a programmer could have written. It reads
+out/generated/attribution.tsv (tools/attribute.py: the source lines and the assembly
+statements that end up in each function, taken from the compiler's own output), writes
+out/generated/quality.tsv (addr, size, source, kind, named, notes) and prints totals.
 
-kind:
-  cpp        C or C++ with no assembly and no register pin
-  asm-file   the function comes from a .s file (not decompiled)
-  vu0-asm    its body has assembly statements, all of them vector-unit (COP2/VU0) or
-             128-bit load/store instructions that C cannot express on this compiler;
-             original PS2 code wrote these the same way, so they count as decompiled
-  inline-asm its body contains other assembly instructions (not decompiled as written)
-  reg-pin    its body pins a variable to a register (register T x asm("$n"))
-  asm-unit   it sits in a C/C++ file that has assembly code or pins which could not be
-             attributed to single functions (counted as not clean until someone looks)
+kind, worst first; a function gets the worst that applies:
+  asm-file   it comes from a .s file (not decompiled; Sony's own assembly included)
+  cpu-asm    assembly statements with ordinary processor instructions C could have produced
+  volatile   memory reached through volatile casts: machine code transcribed load by load
+  reg-pin    a variable pinned to a machine register (register T x asm("$16"))
+  barrier    an empty assembly statement, there only to steer the optimiser
+  flags      its code depends on an optimiser switch the rest of the game does not use
+  game-asm   assembly the original programmers wrote too: vector-unit (VU0) maths, 128-bit
+             vector copies, assertion traps, interrupt switches. Counts as decompiled.
+  cpp        C or C++ with none of the above
 
-named: 1 when functions.tsv gives the address a real name (not an address placeholder).
-
-File-scope `asm("a = b")` aliases and `asm("symbol")` labels on declarations are linkage,
-not code, and do not count.
+"Decompiled" is cpp plus game-asm. named: 1 when functions.tsv gives a real name.
 """
 import csv
 import re
@@ -32,102 +31,45 @@ STATUS = ROOT / "out/generated/layout_status.tsv"
 OUT = ROOT / "out/generated/quality.tsv"
 PLACEHOLDER = re.compile(r"^(?:func_|FUN_|D_|sub_)[0-9a-fA-F]{6,8}(?:\(.*\))?$|"
                          r"^_Z\d+(?:func|wtarget|ctarget|u_call\d|u_tail\d|trap)_?[0-9a-f]{8}")
-ASM_STMT = re.compile(r"\b(?:__asm__|asm)\s*(?:__volatile__|volatile)?\s*\(")
-PIN = re.compile(r"\bregister\b[^;{}]*\basm\s*\(\s*\"\$")
-ANCHOR = re.compile(r"/\*\s*TARGET\s+([0-9a-f]{8})\s*\*/|\bnamespace\s+n([0-9a-f]{8})\b|^//\s*(?:0x)?([0-9a-f]{8})\b", re.M)
-VU0_LINE = re.compile(r"^\s*(?:\.set\s+\w+|(?:lqc2|sqc2|qmfc2|qmtc2|cfc2|ctc2|vcallms|vcallmsr|bc2[ft]l?|v[a-z0-9]+(?:\.[xyzw]+)?)\b[^\n]*)?\s*;?\s*$")
-ALIAS_LINE = re.compile(r"^\s*(?:[\w.$]+\s*=\s*[\w.$]+|\.(?:globl|global|weak|set|type|size|equ)\b[^\n]*)?\s*;?\s*$")
+ATTR = ROOT / "out/generated/attribution.tsv"
+KINDS = ("cpp", "game-asm", "flags", "barrier", "reg-pin", "volatile", "cpu-asm", "asm-file")
+CLEAN = ("cpp", "game-asm")
+RANK = {k: i for i, k in enumerate(KINDS)}
+BARRIER = re.compile(r"(?:\b__asm__|\basm)\s*(?:volatile|__volatile__)?\s*\(\s*\"\"")
+PIN = re.compile(r"\bregister\b[^;{}]*\b(?:asm|__asm__)\s*\(\s*\"\$")
+VOLATILE = re.compile(r"\bvolatile\b(?!\s*\()")
+GAME_ASM = {"vu0", "qcopy", "mmi", "trap", "kernel"}
+SUFFIX_FLAGS = re.compile(r"_(?:nosched|nsi|nsr|mam|ncfj|aj1|nsamam|gnsamam|gnsa_nogcse)\.(?:c|cpp)$")
 
 
-def strip_comments_keep_anchors(text):
-    """Blank out comments (keeping length and newlines) except the anchor comments."""
-    def repl(m):
-        s = m.group(0)
-        if ANCHOR.fullmatch(s.strip()) or re.match(r"//\s*(?:0x)?[0-9a-f]{8}\b", s) or "TARGET" in s:
-            return s
-        return re.sub(r"[^\n]", " ", s)
-    return re.sub(r"//[^\n]*|/\*.*?\*/", repl, text, flags=re.S)
+def expand(spec):
+    out = set()
+    for part in filter(None, spec.split(",")):
+        a, _, b = part.partition("-")
+        out.update(range(int(a), int(b or a) + 1))
+    return out
 
 
-def asm_strings(code, pos):
-    """The concatenated string literals of the asm( ... ) starting at pos, and its end."""
-    depth, i, out = 0, code.index("(", pos), []
-    while i < len(code):
-        c = code[i]
-        if c == '"':
-            j = i + 1
-            while j < len(code) and code[j] != '"':
-                j += 2 if code[j] == "\\" else 1
-            if depth == 1:
-                out.append(code[i + 1:j])
-            i = j
-        elif c == "(":
-            depth += 1
-        elif c == ")":
-            depth -= 1
-            if depth == 0:
-                break
-        elif c == ":" and depth == 1:
-            break                                   # operands follow; the template is complete
-        i += 1
-    return "".join(out).replace("\\n", "\n").replace("\\t", " "), i
-
-
-def code_asm_positions(code):
-    """Positions of asm statements that hold instructions (not labels, not aliases), and of pins."""
-    hits = []
-    for m in PIN.finditer(code):
-        hits.append((m.start(), "reg-pin"))
-    for m in ASM_STMT.finditer(code):
-        line_start = code.rfind("\n", 0, m.start()) + 1
-        before = code[line_start:m.start()].rstrip()
-        if not before:                              # asm( on its own line: look at what precedes
-            before = code[:line_start].rstrip()[-80:]
-        if re.search(r"\bregister\b[^;{}]*$", before):
-            continue                                # the pin regex has it
-        if re.search(r"(?:[\w\]]|\))\s*$", before) and not re.search(r"\b(?:if|while|for|switch|return|else|do)\s*$|[;{}]\s*$", before):
-            continue                                # asm("symbol") label on a declaration
-        text, _ = asm_strings(code, m.start())
-        if all(ALIAS_LINE.match(ln) for ln in text.split("\n")):
-            continue                                # symbol alias / directive only
-        vu0 = all(VU0_LINE.match(ln) for ln in text.split("\n"))
-        hits.append((m.start(), "vu0-asm" if vu0 else "inline-asm"))
-    return sorted(hits)
-
-
-RANK = {"cpp": 0, "vu0-asm": 1, "reg-pin": 2, "inline-asm": 3}
-CLEAN = ("cpp", "vu0-asm")
-
-
-def classify_file(path, addrs):
-    """addr -> kind for the functions of one C/C++ source."""
-    text = (ROOT / path).read_text(errors="ignore")
-    code = strip_comments_keep_anchors(text)
-    hits = code_asm_positions(code)
-    if not hits:
-        return {a: "cpp" for a in addrs}
-    anchors = []
-    for m in ANCHOR.finditer(code):
-        a = int(next(g for g in m.groups() if g), 16)
-        if a in addrs and (not anchors or anchors[-1][1] != a):
-            anchors.append((m.start(), a))
-    seen = {a for _, a in anchors}
-    if not anchors or len(seen) < len(addrs) * 0.9:
-        return {a: "asm-unit" for a in addrs}       # cannot tell functions apart in this file
-    kinds = {a: "cpp" for a in addrs}
-    starts = [p for p, _ in anchors]
-    import bisect
-    for pos, kind in hits:
-        i = bisect.bisect_right(starts, pos) - 1
-        if i < 0:
-            continue                                # before the first function: file-scope helper
-        a = anchors[i][1]
-        if RANK[kind] > RANK[kinds[a]]:
-            kinds[a] = kind
-    for a in addrs:
-        if a not in seen:
-            kinds[a] = "asm-unit"
-    return kinds
+def classify_function(src_lines, row, suffix_flags):
+    """(kind, notes) for one attributed function."""
+    asm = Counter()
+    for item in row["asm"].split():
+        k, _, n = item.partition(":")
+        asm[k] += int(n)
+    nums = expand(row["lines"]) | expand(row["body"])
+    text = "\n".join(src_lines[n - 1] for n in sorted(nums) if 0 < n <= len(src_lines))
+    found = Counter()
+    found["cpu-asm"] = asm["cpu"] + asm["nop"]
+    found["volatile"] = len(VOLATILE.findall(text))
+    found["reg-pin"] = len(PIN.findall(text))
+    found["barrier"] = len(BARRIER.findall(text))
+    found["flags"] = asm["steered"] + int(suffix_flags)
+    found["game-asm"] = sum(asm[k] for k in GAME_ASM)
+    kind = max((k for k in found if found[k]), key=RANK.get, default="cpp")
+    notes = " ".join(f"{k}:{found[k]}" for k in KINDS if found[k])
+    if re.search(r"\bgoto\b", text):
+        notes = (notes + " goto").strip()
+    return kind, notes
 
 
 def load():
@@ -152,20 +94,33 @@ def load():
         rows = list(csv.DictReader(fh, delimiter="\t"))
     for r in rows:
         by_file[r["source"]].add(int(r["addr"], 16))
-    kind = {}
+    if not ATTR.exists():
+        sys.exit("run tools/attribute.py first (no out/generated/attribution.tsv)")
+    attr = {}
+    with ATTR.open() as fh:
+        for r in csv.DictReader(fh, delimiter="\t"):
+            attr[int(r["addr"], 16)] = r
+    kind, notes, texts = {}, {}, {}
     for path, addrs in by_file.items():
         if path.endswith((".s", ".S")):
             kind.update({a: "asm-file" for a in addrs})
-        elif not path or not (ROOT / path).exists():
-            kind.update({a: "asm-unit" for a in addrs})
-        else:
-            kind.update(classify_file(path, addrs))
+            continue
+        if path not in texts:
+            f = ROOT / path
+            texts[path] = f.read_text(errors="ignore").split("\n") if f.exists() else []
+        st = bool(SUFFIX_FLAGS.search(path))
+        for a in addrs:
+            if a in attr:
+                kind[a], notes[a] = classify_function(texts[path], attr[a], st)
+            else:
+                kind[a], notes[a] = "cpu-asm", "unattributed"
     out = []
     for r in rows:
         a = int(r["addr"], 16)
         nm = names.get(a, "")
         out.append({"addr": f"{a:08x}", "size": sizes.get(a, 0), "source": r["source"], "kind": kind[a],
-                    "named": int(bool(nm) and not PLACEHOLDER.search(nm)), "name": nm})
+                    "named": int(bool(nm) and not PLACEHOLDER.search(nm)), "name": nm,
+                    "notes": notes.get(a, "")})
     return out
 
 
@@ -173,7 +128,7 @@ def main():
     rows = load()
     OUT.parent.mkdir(parents=True, exist_ok=True)
     with OUT.open("w", newline="") as fh:
-        w = csv.DictWriter(fh, ["addr", "size", "source", "kind", "named"], delimiter="\t",
+        w = csv.DictWriter(fh, ["addr", "size", "source", "kind", "named", "notes"], delimiter="\t",
                            extrasaction="ignore", lineterminator="\n")
         w.writeheader()
         w.writerows(rows)
@@ -183,9 +138,11 @@ def main():
         b[r["kind"]] += r["size"]
     tot_n, tot_b = len(rows), sum(r["size"] for r in rows)
     print(f"{tot_n} functions, {tot_b:,} bytes, all built from source")
-    for k in ("cpp", "vu0-asm", "reg-pin", "inline-asm", "asm-unit", "asm-file"):
+    for k in KINDS:
         if n[k]:
             print(f"  {k:<11}{n[k]:>6} fns {b[k]:>10,} B  {100 * b[k] / tot_b:5.1f} %")
+    dn, db = sum(n[k] for k in CLEAN), sum(b[k] for k in CLEAN)
+    print(f"  decompiled {dn:>6} fns {db:>10,} B  {100 * db / tot_b:5.1f} %")
     named = [r for r in rows if r["named"]]
     print(f"  named      {len(named):>6} fns {sum(r['size'] for r in named):>10,} B  "
           f"{100 * sum(r['size'] for r in named) / tot_b:5.1f} %")

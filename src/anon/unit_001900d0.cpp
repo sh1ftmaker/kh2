@@ -153,14 +153,14 @@ void YS__TARGET__make_collision(u8* a0, u8* a1)
     } else if (YS__OBJ__is_exist(*(u32*)a0)) {
         u32 v = func_00190208(a0, 1);
         if (v) YS__COLLISION__set(a1, *(u32*)a0, v);
-        else *(Vec82*)(a1 + 16) = *YS__OBJ__get_pos(*(u32*)a0);                          
+        else *(Vec82*)(a1 + 16) = *YS__OBJ__get_pos(*(u32*)a0);
     } else {
-                                          
+
         asm volatile("sqc2 $vf0, 0(%0)" : : "r"(a1 + 16) : "memory");
     }
     {
-                                                                                            
-                                                                                         
+
+
         const f32* k;
         asm("" : "=r"(k) : "0"(&D_0036cd18));
         *(f32*)(a1 + 28) = *k;
@@ -179,7 +179,7 @@ struct Vec4c {
 struct Buf190 { u32 a, b, c, d; Vec4c v; };
 void YS__TARGET__make_collision(u32, Buf190*) asm("YS__TARGET__make_collision");
 Vec4c func_00190388(u32 a) asm("func_00190388");
-Vec4c func_00190388(u32 a) {                  
+Vec4c func_00190388(u32 a) {
     Buf190 t;
     t.d = 0;
     YS__TARGET__make_collision(a, &t);
@@ -225,7 +225,7 @@ void func_001903d0(void** p, u8* out) {
         if (v) func_0018a818b(out, p[0], v);
         else YS__TARGET__make_collision(p, out);
     } else {
-                             
+
         asm volatile("sqc2 $vf0, 0(%0)" : : "r"(out + 16) : "memory");
     }
     *(f32*)(out + 28) = 1.0f;
@@ -405,16 +405,16 @@ namespace n00190840 {
 extern u8 D_01c60d50 asm("D_01c60d50");
 void YS_TARGET_free(u32 a0) asm("_ZN2YS6TARGET4freeEv");
 void YS_TARGET_free(u32 a0) {
-    register u32 base asm("$12") = (u32)&D_01c60d50;
+    u32 base = (u32)&D_01c60d50;
     register u32 magic asm("$13") = 0xcccccccd;
     a0 -= base;
-    asm volatile("" : "+r"(a0), "+r"(base));
-    register u32 count asm("$15") = *(u32 *)(base + 3072);
-    asm volatile("" : "+r"(count), "+r"(a0));
+
+    u32 count = *(u32 *)(base + 3072);
+
     a0 = (s32)a0 >> 2;
     a0 *= magic;
     asm volatile("" : "+r"(a0), "+r"(count));
-    register u32 off asm("$14") = count << 2;
+    u32 off = count << 2;
     count += 1;
     off += base;
     *(u32 *)(base + 3072) = count;
@@ -434,7 +434,7 @@ u32 func_00190878(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7
     r18 = r5;
     r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00190128)(r4, r5, r6, r7, r8, r9, r10, r11);
     *(u32*)((u32)r16 + (s32)(0)) = r18;
-    *(volatile u32*)((u32)r16 + (s32)(4)) = r17;
+    *(u32*)((u32)r16 + (s32)(4)) = r17;
     return r2;
 }
 }  // namespace n00190878
@@ -451,7 +451,7 @@ u32 func_001908c0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7
     r18 = r5;
     r2 = ((u32(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00190128)(r4, r5, r6, r7, r8, r9, r10, r11);
     *(u32*)((u32)r16 + (s32)(8)) = r18;
-    *(volatile u32*)((u32)r16 + (s32)(0)) = r17;
+    *(u32*)((u32)r16 + (s32)(0)) = r17;
     return r2;
 }
 }  // namespace n001908c0

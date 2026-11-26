@@ -54,11 +54,17 @@ from not done. Four figures, kept apart in every report
 1. **Built from source, byte-identical**: all of it. Not progress any more;
    it must simply never drop.
 2. **Decompiled to C/C++**: the headline. A function counts when it is plain
-   C or C++ (`cpp`), or C++ with vector-unit assembly that this compiler
-   cannot express in C (`vu0-asm`). It does not count while it is an assembly
-   file (`asm-file`), has inline CPU assembly (`inline-asm`) or a register pin
-   (`reg-pin`), or sits in a file where assembly has not been attributed to
-   single functions yet (`asm-unit`).
+   C or C++ (`cpp`), or C++ whose only assembly is the kind the original
+   programmers wrote too: vector-unit maths, 128-bit vector copies, assertion
+   traps, interrupt switches (`game-asm`). It does not count while it is an
+   assembly file (`asm-file`), has ordinary CPU instructions in assembly
+   statements (`cpu-asm`), reaches memory through `volatile` casts
+   (`volatile`), pins a variable to a register (`reg-pin`), has an empty
+   assembly statement (`barrier`), or needs an optimiser switch the rest of
+   the game does not use (`flags`). `tools/attribute.py` reads this from the
+   compiler's own output per function; run it after `make`, before
+   `tools/quality.py`. `tools/detrick.py` removes the constructs that turn out
+   not to be needed.
 3. **Named**: `functions.tsv` gives it a real name, not an address
    placeholder.
 4. **Reviewed**: named, typed with real members, in its original source file,
@@ -69,7 +75,7 @@ In public text say "decompiled", "byte-identical" and "named". Do not write
 "honest".
 
 <!-- status:start -->
-Status (2026-11-26, written by `tools/site_data.py`): 9,401 of 11,509 functions, 1,366,776 of 2,015,044 bytes of code decompiled to C/C++ (67.8 %); all 11,509 are built from source and the executable is byte-identical, but 2,108 still use assembly or a register pin; 3,536 functions (33.0 % of the code) carry a real name. By function size: under 80 B 86.7 %, 80–199 B 83.7 %, 200–999 B 68.1 %, 1 KB and more 40.2 %. Game code 9,103 / 10,879 functions (68.5 % of its bytes; Menus & Jiminy's Journal 90.1 %, Core gameplay 69.0 %, Camera, maps & HUD 70.4 %, Party members & models 45.4 %, Minigames 43.9 %, World map 80.8 %, Cutscenes & musical 74.3 %, Effects & particles 44.0 %, Smaller directories 69.3 %, Not placed yet 52.4 %); SDK & runtime 298 / 630 functions (58.4 %). 348 of 668 files in the file map have every function matched. The five overlays are not started. `make` ends in MATCHED!.
+Status (2026-11-26, written by `tools/site_data.py`): 10,851 of 11,509 functions, 1,680,672 of 2,015,044 bytes of code decompiled to C/C++ (83.4 %); all 11,509 are built from source and the executable is byte-identical, but 658 still use assembly or a register pin; 3,536 functions (33.0 % of the code) carry a real name. By function size: under 80 B 96.5 %, 80–199 B 96.4 %, 200–999 B 87.5 %, 1 KB and more 52.9 %. Game code 10,411 / 10,879 functions (83.9 % of its bytes; Menus & Jiminy's Journal 84.2 %, Core gameplay 91.5 %, Camera, maps & HUD 92.2 %, Party members & models 75.1 %, Minigames 92.3 %, World map 79.2 %, Cutscenes & musical 95.0 %, Effects & particles 71.3 %, Smaller directories 87.1 %, Not placed yet 70.3 %); SDK & runtime 440 / 630 functions (76.9 %). 447 of 668 files in the file map have every function matched. The five overlays are not started. `make` ends in MATCHED!.
 <!-- status:end -->
 
 ## Layout

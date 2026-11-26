@@ -212,7 +212,7 @@ function drawStats() {
   const tiles = [
     ...(t.code_built == null ? [] : [{ k: "Built from source", v: ratio(t.code_built, t.code), fmt: (x) => x.toFixed(0), unit: "%",
       d: `${num(t.fns_built)} of ${num(t.fns)} functions <br>the executable builds from source and is byte-identical, assembly included`, c: "var(--gold)" }]),
-    { k: "Decompiled to C/C++", v: ratio(t.code_matched, t.code), fmt: (x) => x.toFixed(2), unit: "%", d: `${num(t.code_matched)} of ${num(t.code)} bytes <br>plain C or C++; no assembly files, CPU assembly or register pins`, c: "var(--green)" },
+    { k: "Decompiled to C/C++", v: ratio(t.code_matched, t.code), fmt: (x) => x.toFixed(2), unit: "%", d: `${num(t.code_matched)} of ${num(t.code)} bytes <br>C or C++ with no borrowed assembly, register pins or other compiler tricks`, c: "var(--green)" },
     ...(t.fns_named == null ? [] : [{ k: "Named", v: t.fns_named, fmt: (x) => num(Math.round(x)), unit: `/ ${num(t.fns)}`, d: `${pct(ratio(t.code_named, t.code))} of the code <br>names from the developers\u2019 debug symbols`, m: ratio(t.fns_named, t.fns), c: "var(--purple, #a66bd6)" }]),
     { k: "Functions", v: t.fns_matched, fmt: (x) => num(Math.round(x)), unit: `/ ${num(t.fns)}`, d: `${pct(ratio(t.fns_matched, t.fns))} of all functions`, m: ratio(t.fns_matched, t.fns), c: "var(--red)" },
     { k: "Files complete", v: t.files_complete, fmt: (x) => num(Math.round(x)), unit: `/ ${num(t.files)}`,
@@ -481,7 +481,7 @@ function tipHTML(n) {
   const col = n.region ? colOf(n) : "#d29a2e";
   const share = ratio(n.c, TOTAL);
   if (n.kind === "fn") {
-    const st = n.m === 100 ? "decompiled to C/C++" : n.m > 0 ? "byte-identical, but still uses assembly or a register pin" : "not built";
+    const st = n.m === 100 ? "decompiled to C/C++" : n.m > 0 ? "byte-identical, but still leans on assembly or a compiler trick" : "not built";
     return `<div class="t-name">${esc(n.name)}</div><div class="t-path">${esc(n.parent.path)} &middot; ${hex(n.addr)}</div>
       <dl><dt>Size</dt><dd>${num(n.c)} bytes</dd><dt>Of the ELF</dt><dd>${pct(share)}</dd><dt>Status</dt><dd>${st}</dd>${
         n.m !== 100 && n.wm > 0 ? `<dt>Structural</dt><dd>${pct(ratio(n.wm, n.c))} (${bytes(n.wm)}, built, not yet clean C/C++)</dd>` : ""}</dl>`;
@@ -574,7 +574,7 @@ function drawLegend() {
     + `<span><i class="fillkey"></i> decompiled code</span>${HAS_W ? `<span><i class="wfillkey"></i> built from source</span>` : ""}<span><i class="dashkey"></i> not started</span>`
     + `<span><i class="unconfkey">?</i> placement unconfirmed</span>`;
   $("#map-sub").textContent = `Area is bytes of code. The bright fill rising in each tile is decompiled code${HAS_W
-    ? "; the paler band above it is code that is built from source but still uses assembly or a register pin" : ""}. `
+    ? "; the paler band above it is code that is built from source but still leans on assembly or a compiler trick" : ""}. `
     + "The game code is coloured by area (what that part of the game does), the SDK and runtime in gold. "
     + "Tap or click to dive in: region, area, file, function.";
   $("#emblem-cap").textContent = `One gem per area of the game code, gold in the middle for the SDK; each fills to its ${HAS_W ? "built from source, decompiled code solid" : "share of decompiled code"}`;
@@ -667,7 +667,7 @@ function drawGameParts() {
   const gw = g.wm ?? g.cm;
   $("#game-sub").textContent = `Square's own code, grouped by what it does. The original source tree had one directory per programmer; each area here is one of those directories, named in English. `
     + `The 2014 PS3 debug build names the files; data/tu_map.tsv places each PS2 function in one. Solid bars are decompiled code${HAS_W
-      ? "; the lighter extension is code built from source that still uses assembly or a register pin" : ""}. A ? marks files placed on thin evidence.`;
+      ? "; the lighter extension is code built from source that still leans on assembly or a compiler trick" : ""}. A ? marks files placed on thin evidence.`;
   $("#game-sum").innerHTML = (HAS_W ? `<b>${pct(ratio(gw, g.c))}</b> structural &middot; <span class="wnote">${pct(ratio(g.cm, g.c))} decompiled code</span>` : `<b>${pct(ratio(g.cm, g.c))}</b> decompiled code`)
     + ` &middot; ${num(g.fm)} / ${num(g.f)} functions &middot; ${bytes(g.c)}`;
   host.innerHTML = parts.map((n) => {

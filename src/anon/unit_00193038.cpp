@@ -10,7 +10,7 @@ struct Rgba193038 {
     u8 r, g, b, a;
     Rgba193038 operator*(Rgba193038 t) const
     {
-                                                                                      
+
         Rgba193038 c;
         asm("lbu $13,%4\n\t"
             "la $14,%4\n\t"
@@ -97,9 +97,9 @@ void func_00193038(O193038* o)
     }
     f32 k = func_00194690(o);
     {
-                                                                                    
-        register s32 a asm("$15");
-        register O193038* arg asm("$4");
+
+        s32 a;
+        O193038* arg;
         asm("lbu $15,%6\n\t"
             "lbu $13,%8\n\t"
             "move $4,%5\n\t"
@@ -175,7 +175,7 @@ struct V193330 {
 } __attribute__((aligned(16)));
 struct M193330 {
     V193330 r[4];
-                                
+
     V193330 operator*(const V193330& v) const
     {
         V193330 o;

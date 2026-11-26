@@ -1,6 +1,6 @@
 // YS script traps, first part of the file 0x170f58-0x175590 (object/actor traps of the VM trap
 // table at 0x34dd00). The file is linked as two units: unit_00170f58.cpp (up to and including the
-// gap trap 0x171e00, whose flags word is volatile for the reload after the call) and unit_00171e58.cpp.
+// gap trap 0x171e00, whose flags word is for the reload after the call) and unit_00171e58.cpp.
 // Each function keeps the declarations of the source it was matched in (one namespace per
 // function); functions marked "gap" were never written before and come from the trap table.
 #include "../common/types.h"
@@ -48,7 +48,7 @@ void func_00170f98(u32* p) {
         D_01c5f4a0.z = z;
         D_01c5f4a0.w = 1.0f;
         D_01c5f490 = 1;
-        func_002fd188(func_00175528);                     
+        func_002fd188(func_00175528);
     }
     *p = func_0016f000(*p, &D_01c5f4a0, 3.14159274f);
 }
@@ -279,7 +279,7 @@ Q16* YS__OBJ__get_pos(u32) asm("YS__OBJ__get_pos");
 extern Q16 D_01c5f480 asm("D_01c5f480");
 void func_00171418(u8** p) asm("func_00171418");
 void func_00171418(u8** p) {
-    Q16* v = YS__OBJ__get_pos(*(u32*)(*p + 4));                          
+    Q16* v = YS__OBJ__get_pos(*(u32*)(*p + 4));
     if (v != &D_01c5f480) QCOPY(&D_01c5f480, v);
     *p = (u8*)&D_01c5f480;
 }
@@ -551,7 +551,7 @@ struct BdObjFloat { ObjRef* ref; f32 value; };
 void func_0016aeb8(void* obj, f32 v) asm("func_0016aeb8");
 void func_00171910(BdObjFloat* a) asm("func_00171910");
 void func_00171910(BdObjFloat* a) {
-    func_0016aeb8(a->ref->obj, a->value);                     
+    func_0016aeb8(a->ref->obj, a->value);
 }
 }  // namespace n00171910
 
@@ -563,7 +563,7 @@ void func_00171930(u8** p) asm("func_00171930");
 void func_00171930(u8** p) {
     Vec4 v;
     asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(&v), "r"(p[1]) : "$8", "memory");
-    YS__OBJ__set_wish_dir(*(void**)(p[0] + 4), &v);                                
+    YS__OBJ__set_wish_dir(*(void**)(p[0] + 4), &v);
 }
 }  // namespace n00171930
 
@@ -578,7 +578,7 @@ namespace n00171978 {
 u32 func_00198580(u32, u32) asm("func_00198580");
 u32 trap_obj_get_weight(u32 a0, u32 a1, u32 a2, u32 a3) asm("_ZN2YS19trap_obj_get_weightEP8BD_VALUE");
 u32 trap_obj_get_weight(u32 a0, u32 a1, u32 a2, u32 a3) {
-    return func_00198580(*(u32*)(*(u32*)(a0 + 0u) + 4u), *(u32*)(a0 + 4u));                      
+    return func_00198580(*(u32*)(*(u32*)(a0 + 0u) + 4u), *(u32*)(a0 + 4u));
 }
 }  // namespace n00171978
 

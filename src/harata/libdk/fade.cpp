@@ -45,9 +45,9 @@ extern "C" void func_0014a950(void** p) {
 extern "C" void func_0014a988(void* v) {
     u8* p = (u8*)v;
     *(volatile u32*)(p + 260) = 0;
-    *(volatile u32*)(p + 248) = 0;
+    *(u32*)(p + 248) = 0;
     *(volatile u8*)(p + 244) = 0;
-    *(volatile u32*)(p + 252) = 0;
+    *(u32*)(p + 252) = 0;
     *(volatile u32*)(p + 256) = 0;
 }
 

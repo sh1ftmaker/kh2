@@ -98,7 +98,7 @@ V4fbe0 func_0019fbe0(void* unused, Objfbe0* o) {
     r.y = 0;
     f32 B, C, D;
     register f32 L asm("$f3") = r.normalize();
-    register f32 K asm("$f3") = L; asm("" : "+f"(K));                                                                   
+    register f32 K asm("$f3") = L; asm("" : "+f"(K));
     f32 P = D_00352130->a;
     f32 A = L * P;
     f32 M = o->f244;
@@ -171,7 +171,7 @@ static inline f32 w1545_vnorm(W1545V4* v) {
 #define W1545_VSCALE "lqc2 $vf1, 0(%1)\n\tmfc1 $8, %2\n\tqmtc2 $8, $vf2\n\tvmulx.xyzw $vf1, $vf1, $vf2x\n\tsqc2 $vf1, 0(%0)"
 void func_0016bd60(u8*, s32) asm("func_0016bd60");
 void func_0019fdc0(u8* self, W1545V4* v, f32 s) asm("func_0019fdc0");
-void func_0019fdc0(u8* self, W1545V4* v, f32 s) {                     
+void func_0019fdc0(u8* self, W1545V4* v, f32 s) {
     f32 w = v->w;
     w1545_vnorm(v);
     W1545V4* d = (W1545V4*)(self + 32);
@@ -904,14 +904,14 @@ struct W1834H4 { s16 a, b, c, d; };
 struct W1834P2 { s32 n, m; };
 struct W1834Grp { s32 a[8]; u8 pad[0x78 - 0x20]; };
 struct W1834Big {
-    W1834E12 e[32];                 
-    s32 f180, f184;                 
-    W1834H4 h188, h190;             
-    W1834P2 p198, p1a0;             
-    u8 c1a8[7];                     
+    W1834E12 e[32];
+    s32 f180, f184;
+    W1834H4 h188, h190;
+    W1834P2 p198, p1a0;
+    u8 c1a8[7];
     u8 b1af, b1b0, b1b1, b1b2;
-    s32 w1b4[6];                    
-    W1834Grp grp;                   
+    s32 w1b4[6];
+    W1834Grp grp;
     s32 f244, f248;
     u8 b24c; u8 pad24d[3];
     s32 f250, f254, f258, f25c, f260, f264;
@@ -946,14 +946,14 @@ struct W1834H4 { s16 a, b, c, d; };
 struct W1834P2 { s32 n, m; };
 struct W1834Grp { s32 a[8]; u8 pad[0x78 - 0x20]; };
 struct W1834Big {
-    W1834E12 e[32];                 
-    s32 f180, f184;                 
-    W1834H4 h188, h190;             
-    W1834P2 p198, p1a0;             
-    u8 c1a8[7];                     
+    W1834E12 e[32];
+    s32 f180, f184;
+    W1834H4 h188, h190;
+    W1834P2 p198, p1a0;
+    u8 c1a8[7];
     u8 b1af, b1b0, b1b1, b1b2;
-    s32 w1b4[6];                    
-    W1834Grp grp;                   
+    s32 w1b4[6];
+    W1834Grp grp;
     s32 f244, f248;
     u8 b24c; u8 pad24d[3];
     s32 f250, f254, f258, f25c, f260, f264;
@@ -1107,66 +1107,66 @@ namespace n001a11e0 {
 struct W1635SheetData;
 struct W1635Obj;
 struct W1635Gauge {
-    s32 cur;                    
-    s32 max;                    
-    s32 x8;                     
+    s32 cur;
+    s32 max;
+    s32 x8;
 };
 struct W1635FormInfo {
     u8 pad0[4];
-    u8 str, mag, def;                 
+    u8 str, mag, def;
 };
 struct W1635Drive {
     u8 pad0[0x1038];
-    u8 c[4];                        
-    f32 f0, f1;                     
+    u8 c[4];
+    f32 f0, f1;
 };
 union W1635Int { s32 v; f32 f; };
 struct W1635Sheet {
-    W1635Gauge g[1];                                                                   
+    W1635Gauge g[1];
     u8 pad0c[0x180 - 0xc];
-    s32 x180;                      
-    s32 x184;                      
-    u16 stat[4];                   
-    u16 stat2[4];                  
-    s32 lo;                                           
-    s32 hi;                                           
-    s32 x1a0;                      
-    s32 x1a4;                      
-    u8 rate[7];                                               
+    s32 x180;
+    s32 x184;
+    u16 stat[4];
+    u16 stat2[4];
+    s32 lo;
+    s32 hi;
+    s32 x1a0;
+    s32 x1a4;
+    u8 rate[7];
     u8 pad1af;
-    u8 c[4];                       
-    f32 f1b4, f1b8;                
-    f32 f1bc, f1c0;                
+    u8 c[4];
+    f32 f1b4, f1b8;
+    f32 f1bc, f1c0;
     u8 pad1c4[0x1cc - 0x1c4];
-    u8 sub[0x1fc - 0x1cc];         
-    u8 b1fc;                       
+    u8 sub[0x1fc - 0x1cc];
+    u8 b1fc;
     u8 pad1fd[0x240 - 0x1fd];
-    f32 f240;                      
-    W1635SheetData* data;          
-    u16* extra;                    
+    f32 f240;
+    W1635SheetData* data;
+    u16* extra;
     u8 pad24c[0x254 - 0x24c];
-    s32 form;                      
+    s32 form;
     u8 pad258[0x25c - 0x258];
-    W1635Obj* owner;               
-    W1635Drive* drive;             
+    W1635Obj* owner;
+    W1635Drive* drive;
 };
 struct W1635SheetData {
-    u16 ability[2];               
-    u8 b4, b5, b6, b7;            
-    u8 b8, b9, b10, b11;          
-    u8 b12, b13, b14, b15;        
-    u8 n10, n11;                  
+    u16 ability[2];
+    u8 b4, b5, b6, b7;
+    u8 b8, b9, b10, b11;
+    u8 b12, b13, b14, b15;
+    u8 n10, n11;
     u8 pad12[2];
-    u16 list10[8];                
-    u16 list11[8];                
+    u16 list10[8];
+    u16 list11[8];
 };
 struct W1635Obj {
     u8 pad0[0x48c];
-    W1635Sheet* sheet;             
+    W1635Sheet* sheet;
     u8 pad490[0x588 - 0x490];
-    u32 flags;                     
+    u32 flags;
     u8 pad58c[0xb50 - 0x58c];
-    s32 xb50;                      
+    s32 xb50;
 };
 W1635FormInfo* YS__LEVELUP__Get(s32, u8) asm("YS__LEVELUP__Get");
 s32 func_001b73e8(W1635FormInfo*, s32) asm("func_001b73e8");
@@ -1306,7 +1306,7 @@ namespace n001a1658 {
 s32 func_001a15d0(s32) asm("func_001a15d0");
 s32 func_001a1540(s32) asm("func_001a1540");
 s32 func_001a1658(s32 x) asm("func_001a1658");
-s32 func_001a1658(s32 x) {                          
+s32 func_001a1658(s32 x) {
     switch (x) {
     case 0: return 0;
     case 1: case 14: return func_001a15d0(x);
@@ -1404,7 +1404,7 @@ void wtarget_001a1840(u8* p, u32, u32, u32) {
 namespace n001a1910 {
 struct Range { s32 cur, max, min; };
 s32 func_001a1910(Range* r, s32 d, s32 i) asm("func_001a1910");
-s32 func_001a1910(Range* r, s32 d, s32 i) {                        
+s32 func_001a1910(Range* r, s32 d, s32 i) {
     Range* e = &r[i];
     s32 v = e->cur + d;
     return e->cur = v < e->min ? e->min : (e->max < v ? e->max : v);
@@ -1493,7 +1493,7 @@ void func_001a1a50(u32 a0, u32 a1) {
 // ---- 001a1aa0 from src/anon/batch_w53.cpp
 namespace n001a1aa0 {
 void YS__SHEET__add_drive(u8* p, s32 d) asm("YS__SHEET__add_drive");
-void YS__SHEET__add_drive(u8* p, s32 d) {                      
+void YS__SHEET__add_drive(u8* p, s32 d) {
     s32 v = p[432] + d;
     if (d >= 0) {
         while (v >= 100) {
@@ -1671,91 +1671,91 @@ namespace n001a1e20 {
 struct W1635SheetData;
 struct W1635Obj;
 struct W1635Gauge {
-    s32 cur;                    
-    s32 max;                    
-    s32 x8;                     
+    s32 cur;
+    s32 max;
+    s32 x8;
 };
 struct W1635Drive {
     u8 pad0[0x1038];
-    u8 c[4];                        
-    f32 f0, f1;                     
+    u8 c[4];
+    f32 f0, f1;
 };
 struct W1635Sheet {
-    W1635Gauge g[1];                                                                   
+    W1635Gauge g[1];
     u8 pad0c[0x180 - 0xc];
-    s32 x180;                      
-    s32 x184;                      
-    u16 stat[4];                   
-    u16 stat2[4];                  
-    s32 lo;                                           
-    s32 hi;                                           
-    s32 x1a0;                      
-    s32 x1a4;                      
-    u8 rate[7];                                               
+    s32 x180;
+    s32 x184;
+    u16 stat[4];
+    u16 stat2[4];
+    s32 lo;
+    s32 hi;
+    s32 x1a0;
+    s32 x1a4;
+    u8 rate[7];
     u8 pad1af;
-    u8 c[4];                       
-    f32 f1b4, f1b8;                
-    f32 f1bc, f1c0;                
+    u8 c[4];
+    f32 f1b4, f1b8;
+    f32 f1bc, f1c0;
     u8 pad1c4[0x1cc - 0x1c4];
-    u8 sub[0x1fc - 0x1cc];         
-    u8 b1fc;                       
+    u8 sub[0x1fc - 0x1cc];
+    u8 b1fc;
     u8 pad1fd[0x240 - 0x1fd];
-    f32 f240;                      
-    W1635SheetData* data;          
-    u16* extra;                    
+    f32 f240;
+    W1635SheetData* data;
+    u16* extra;
     u8 pad24c[0x254 - 0x24c];
-    s32 form;                      
+    s32 form;
     u8 pad258[0x25c - 0x258];
-    W1635Obj* owner;               
-    W1635Drive* drive;             
+    W1635Obj* owner;
+    W1635Drive* drive;
 };
 struct W1635SheetData {
-    u16 ability[2];               
-    u8 b4, b5, b6, b7;            
-    u8 b8, b9, b10, b11;          
-    u8 b12, b13, b14, b15;        
-    u8 n10, n11;                  
+    u16 ability[2];
+    u8 b4, b5, b6, b7;
+    u8 b8, b9, b10, b11;
+    u8 b12, b13, b14, b15;
+    u8 n10, n11;
     u8 pad12[2];
-    u16 list10[8];                
-    u16 list11[8];                
+    u16 list10[8];
+    u16 list11[8];
 };
 struct W1635Obj {
     u8 pad0[0x48c];
-    W1635Sheet* sheet;             
+    W1635Sheet* sheet;
     u8 pad490[0x588 - 0x490];
-    u32 flags;                     
+    u32 flags;
     u8 pad58c[0xb50 - 0x58c];
-    s32 xb50;                      
+    s32 xb50;
 };
 struct W1635Attack {
     u8 pad0[8];
-    s32 x8;                      
-    W1635Obj* obj;               
+    s32 x8;
+    W1635Obj* obj;
 };
 struct W1635AttackData {
     u8 pad0[4];
-    u8 type;                     
-    u8 kind;                     
-    u16 power;                   
+    u8 type;
+    u8 kind;
+    u16 power;
     u8 pad8;
-    u8 elem;                     
+    u8 elem;
 };
 struct W1635Default {
     u8 pad0[2];
-    u16 v;                       
+    u16 v;
     u8 pad4[2];
-    u16 lo;                      
-    u16 hi;                      
+    u16 lo;
+    u16 hi;
 };
 struct W1635Info {
     u8 pad0[0x52];
-    u16 bonus;                    
+    u16 bonus;
 };
 struct W1635Param {
     u8 pad0[0x94];
-    f32 f94;                      
+    f32 f94;
     u8 pad98[0x178 - 0x98];
-    s32 x178;                      
+    s32 x178;
 };
 extern W1635Param* D_00352130 asm("D_00352130");
 W1635Info* func_00177860(W1635Obj*) asm("func_00177860");
@@ -1933,7 +1933,7 @@ void func_001a2438(u32 a0, u32 a1, s32 a2) {
 namespace n001a2478 {
 u32 func_001a2478(u32, u32, u32, u32, u32, u32, u32, u32) asm("_Z13func_001a2478jjjjjjjj");
 u32 func_001a2478(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) asm("_Z13func_001a2478jjjjjjjj");
-u32 func_001a2478(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {                       
+u32 func_001a2478(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     s32 value = *(s32*)(a0 + 4);
     s32 limit = *(s32*)a0;
     s32 adjusted = value + 3;
@@ -2060,7 +2060,7 @@ namespace n001a2758 {
 u32 func_001a2758(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) asm("_Z13func_001a2758jjjjjjjj");
 u32 func_001a2758(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r14, r15;
-    r14 = *(volatile u32*)((u32)r4 + (s32)(580));
+    r14 = *(u32*)((u32)r4 + (s32)(580));
     r2 = 0u;
     if (r14 != 0u) {
         r15 = (u32)(*(u8*)((u32)r14 + (s32)(9)));
@@ -2076,7 +2076,7 @@ namespace n001a2778 {
 u32 func_001a2778(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) asm("_Z13func_001a2778jjjjjjjj");
 u32 func_001a2778(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r14, r15;
-    r14 = *(volatile u32*)((u32)r4 + (s32)(580));
+    r14 = *(u32*)((u32)r4 + (s32)(580));
     r2 = 0u;
     if (r14 != 0u) {
         r15 = (u32)(*(u8*)((u32)r14 + (s32)(10)));
@@ -2092,7 +2092,7 @@ namespace n001a2798 {
 u32 func_001a2798(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) asm("_Z13func_001a2798jjjjjjjj");
 u32 func_001a2798(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r14, r15;
-    r14 = *(volatile u32*)((u32)r4 + (s32)(580));
+    r14 = *(u32*)((u32)r4 + (s32)(580));
     r2 = 0u;
     if (r14 != 0u) {
         r15 = (u32)(*(u8*)((u32)r14 + (s32)(11)));
@@ -2108,7 +2108,7 @@ namespace n001a27b8 {
 u32 func_001a27b8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) asm("_Z13func_001a27b8jjjjjjjj");
 u32 func_001a27b8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r14, r15;
-    r14 = *(volatile u32*)((u32)r4 + (s32)(580));
+    r14 = *(u32*)((u32)r4 + (s32)(580));
     r2 = 0u;
     if (r14 != 0u) {
         r15 = (u32)(*(u8*)((u32)r14 + (s32)(8)));
@@ -2124,7 +2124,7 @@ namespace n001a27d8 {
 u32 func_001a27d8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) asm("_Z13func_001a27d8jjjjjjjj");
 u32 func_001a27d8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r2, r15;
-    r15 = *(volatile u32*)((u32)r4 + (s32)(580));
+    r15 = *(u32*)((u32)r4 + (s32)(580));
     r2 = 0u;
     if (r15 != 0u) {
         r2 = (u32)(*(u8*)((u32)r15 + (s32)(15)));

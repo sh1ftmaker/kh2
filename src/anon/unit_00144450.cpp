@@ -22,9 +22,9 @@ void Aabbox_init(Box* b) asm("_ZN2dk6Aabbox4initEv");
 void Aabbox_init(Box* b) {
     f32 z = 0.0f;
     *(volatile f32*)&b->v[0] = z;
-    *(volatile f32*)&b->v[5] = z;
+    *(f32*)&b->v[5] = z;
     *(volatile f32*)&b->v[4] = z;
-    *(volatile f32*)&b->v[3] = z;
+    *(f32*)&b->v[3] = z;
     *(volatile f32*)&b->v[2] = z;
     *(volatile f32*)&b->v[1] = z;
 }
@@ -411,9 +411,9 @@ void func_00144e30(u32 a0, u32 a1, u32 a2, u32 a3) asm("_Z13func_00144e30jjjj");
 void func_00144e30(u32 a0, u32 a1, u32 a2, u32 a3) {  // zero_6_halfwords
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3;
     *(volatile u16*)((u32)r4 + (s32)(0)) = (u16)0u;
-    *(volatile u16*)((u32)r4 + (s32)(10)) = (u16)0u;
+    *(u16*)((u32)r4 + (s32)(10)) = (u16)0u;
     *(volatile u16*)((u32)r4 + (s32)(8)) = (u16)0u;
-    *(volatile u16*)((u32)r4 + (s32)(6)) = (u16)0u;
+    *(u16*)((u32)r4 + (s32)(6)) = (u16)0u;
     *(volatile u16*)((u32)r4 + (s32)(4)) = (u16)0u;
     *(volatile u16*)((u32)r4 + (s32)(2)) = (u16)0u;
 }

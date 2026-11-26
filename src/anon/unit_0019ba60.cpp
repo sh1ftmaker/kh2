@@ -24,7 +24,7 @@ u32 YS__OBJ__is_exist(u32 a0, u32 a1, u32 a2, u32 a3) asm("_Z17YS__OBJ__is_exist
 u32 YS__OBJ__is_exist(u32 a0, u32 a1, u32 a2, u32 a3) {
     u32 s0 = a0;
     u32 s1 = 0;
-    u32 r = YS__OBJ__is_valid(s0);                      
+    u32 r = YS__OBJ__is_valid(s0);
     if (r != 0) {
         u32 r2 = func_0019baa8(s0);
         s1 = (r2 == 0) ? 1u : 0u;
@@ -73,7 +73,7 @@ s32 func_0019bad8(Obj* o) {
 // ---- 0019bb18 from src/anon/tiny_auto80_queue.cpp
 namespace n0019bb18 {
 u32 func_0019bb18(u32 a0) asm("_Z13func_0019bb18j");
-u32 func_0019bb18(u32 a0) {                   
+u32 func_0019bb18(u32 a0) {
     u32 v0 = 0u;
     u32 t7 = *(u32*)((u32)a0 + (s32)(264));
     t7 = (u32)(t7 & 0x0002u);
@@ -267,19 +267,19 @@ namespace n0019bfd0 {
 struct QW1792 {
     f32 x, y, z, w;
     QW1792& operator=(const QW1792& o) {
-                                 
+
         if (this != &o) asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(this), "r"(&o) : "$8", "memory");
         return *this;
     }
 } __attribute__((aligned(16)));
 struct Obj1792 {
     u8 pad[0x590];
-    QW1792 pos;                 
-    QW1792 rot;                 
+    QW1792 pos;
+    QW1792 rot;
     u8 pad2[0x10];
-    QW1792 tgt;                 
+    QW1792 tgt;
     u8 pad3[0x30];
-    u64 flags;                  
+    u64 flags;
 };
 void func_00185118(Obj1792*, QW1792*) asm("func_00185118");
 void dk__Octree__collisionToMap(QW1792*) asm("dk__Octree__collisionToMap");
@@ -289,13 +289,13 @@ s32 func_0019bfd0(Obj1792* self, QW1792* v)
     func_00185118(self, v);
     self->pos = *v;
     self->pos.w = 1.0f;
-                                  
+
     asm volatile("sqc2 $vf0, 0(%0)" : : "r"(&self->rot) : "memory");
     self->flags |= 1;
     dk__Octree__collisionToMap(&self->pos);
     QW1792 d;
     f32 len;
-                                        
+
     asm volatile(".set noreorder\n\tlqc2 $vf1, 0(%0)\n\tlqc2 $vf2, 0(%1)\n\tvsub.wxyz $vf1, $vf1, $vf2\n\tsqc2 $vf1, 0(%2)\n\t.set reorder" : : "r"(&self->tgt), "r"(v), "r"(&d) : "memory");
     asm volatile(".set noreorder\n\tlqc2 $vf1, 0(%1)\n\tvmul.xyz $vf1, $vf1, $vf1\n\tvaddy.x $vf1, $vf1, $vf1y\n\tvaddz.x $vf1, $vf1, $vf1z\n\tvsqrt Q, $vf1x\n\tvwaitq\n\tcfc2.ni $8, $vi22\n\tmtc1 $8, %0\n\t.set reorder" : "=f"(len) : "r"(&d) : "$8", "memory");
     return len < 5.0f;
@@ -311,7 +311,7 @@ struct T10_1762 {
     u32 q0:23; u32 q23:1; u32 q24:8;
     u8 p3[0x160 - 0x10c];
     u32 r0:5; u32 r5:1; u32 r6:18; u32 r24:1; u32 r25:7;
-                                                                                            
+
     bool A() { bool b = false; if (r5 || ((RB1762*)&p3[0x160 - 0x10c])->r24) b = true; return b; }
 };
 s32 func_0019c090(T10_1762* a0) asm("func_0019c090");
@@ -328,7 +328,7 @@ s32 func_0019c090(void*) asm("func_0019c090");
 s32 func_0019c0f8(u8* p) asm("func_0019c0f8");
 s32 func_0019c0f8(u8* p) {
     s32 r = 0;
-    if (func_0019c090(p)) {                   
+    if (func_0019c090(p)) {
         if (!(*(u32*)(p + 352) & 0x20)) {
             u32 m = *(u32*)(*(u8**)(p + 12) + 8) & 0x200;
             r = m == 0;
@@ -447,7 +447,7 @@ namespace YS {  // n0019c410
 u32 YS__BG__IsCulling(...) asm("YS__BG__IsCulling");
 u32 OBJ::is_culling() {
     u32 r2 = 0u;
-    u32 r15 = *(volatile u32*)((u32)this + (s32)(2040));
+    u32 r15 = *(u32*)((u32)this + (s32)(2040));
     r15 = (u32)(r15 & 0x0400u);
     u32 r4 = (u32)((s32)(u32)this + (1856));
     if (r15 != 0u) {
@@ -461,12 +461,12 @@ u32 OBJ::is_culling() {
 namespace n0019c440 {
 u32 ctarget_0019c440(u32 a0, u32, u32, u32) asm("_Z16ctarget_0019c440jjjj");
 u32 ctarget_0019c440(u32 a0, u32, u32, u32) {
-    register u32 p asm("$14") = *(u32 *)(a0 + 8);
+    u32 p = *(u32 *)(a0 + 8);
     register u32 v asm("$15") = *(u16 *)(p + 72);
     v >>= 5;
     v &= 1;
     v &= 0xff;
-    asm volatile("" : "+r"(v));
+
     u32 ret = 0;
     if (v != 0) {
         v = *(u8 *)(a0 + 2268);
@@ -494,7 +494,7 @@ u32 func_0019c470(u32 a0, u32 a1, u32 a2, u32 a3) {
 namespace n0019c498 {
 u32 func_0019c498(u32 a0) asm("_Z13func_0019c498j");
 u32 func_0019c498(u32 a0) {
-    register u32 p asm("$14") = *(u32 *)(a0 + 12);
+    u32 p = *(u32 *)(a0 + 12);
     register u32 v asm("$15") = *(u32 *)(p + 8);
     v &= 0x80;
     u32 ret = 0;
@@ -681,7 +681,7 @@ s32 func_0019c778(u8* a0, u8* a1)
 {
     s32 r = 0;
     Vec82 t;
-    if (YS__OBJ__can_control(a0, a1) && 0.0f < *(f32*)(a0 + 28)) {                             
+    if (YS__OBJ__can_control(a0, a1) && 0.0f < *(f32*)(a0 + 28)) {
         YS__OBJ__get_dir(&t, a0);
         if (Dot82(a1, &t) >= 0.7f && Dot82(a1, a0 + 16) >= 0.7f) r = 1;
     }
@@ -860,7 +860,7 @@ s32 YS__OBJ__is_exist(W231Q*) asm("YS__OBJ__is_exist");
 u32 func_00154b40(u32, u32) asm("func_00154b40");
 void func_0019cb48(W231S* s) asm("func_0019cb48");
 void func_0019cb48(W231S* s) {
-    volatile u32 z[5];
+    u32 z[5];
     z[3] = 0;
     func_0019cbe8(s);
     if (s->q28->tab) {
@@ -886,11 +886,11 @@ void func_0019cbe8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a
 void func_0019cbe8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r15, r16;
     r16 = r4;
-    r15 = *(volatile u32*)((u32)r4 + (s32)(32));
+    r15 = *(u32*)((u32)r4 + (s32)(32));
     r4 = r15;
     if (r15 != 0u) {
         ((void(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_00154b80)(r4, r5, r6, r7, r8, r9, r10, r11);
-        *(volatile u32*)((u32)r16 + (s32)(32)) = 0u;
+        *(u32*)((u32)r16 + (s32)(32)) = 0u;
     }
 }
 }  // namespace n0019cbe8
@@ -1123,11 +1123,11 @@ void func_0019d228(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a
 void func_0019d228(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r15, r16;
     r16 = r4;
-    r15 = *(volatile u32*)((u32)r4 + (s32)(24));
+    r15 = *(u32*)((u32)r4 + (s32)(24));
     r4 = r15;
     if (r15 != 0u) {
         ((void(*)(u32,u32,u32,u32,u32,u32,u32,u32))dk__LockOn__end)(r4, r5, r6, r7, r8, r9, r10, r11);
-        *(volatile u32*)((u32)r16 + (s32)(24)) = 0u;
+        *(u32*)((u32)r16 + (s32)(24)) = 0u;
     }
 }
 }  // namespace n0019d228
@@ -1163,7 +1163,7 @@ void YS__LOCKON__update_mark(P* p) {
   }
   if (p->obj) {
     u8 buf[16] __attribute__((aligned(16)));
-    func_00190388(buf, &p->q);                  
+    func_00190388(buf, &p->q);
     p->obj->vt->f7(p->obj, buf);
     s32 flag = 0;
     Q* q = p->q;
@@ -1316,7 +1316,7 @@ void func_0019d548(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a
 void func_0019d548(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r15, r16;
     r16 = r4;
-    r15 = *(volatile u32*)((u32)r4 + (s32)(8));
+    r15 = *(u32*)((u32)r4 + (s32)(8));
     r4 = r15;
     if (r15 != 0u) {
         ((void(*)(u32,u32,u32,u32,u32,u32,u32,u32))dk__LockOn__end)(r4, r5, r6, r7, r8, r9, r10, r11);
@@ -1407,21 +1407,21 @@ struct Obj { u8 pad[0x7f8]; u32 flags; };
 struct Tgt { Obj* obj; u8 pad[0x10]; s32 f14; u8 pad2[0x8]; };
 struct Slot { u8 pad[0xc]; };
 struct Buf {
-    void* owner;            
-    Slot slot;              
-    Tgt tgt;                
+    void* owner;
+    Slot slot;
+    Tgt tgt;
     u8 pad[0x60 - 0x30];
 };
 struct Sub0c { u8 pad[8]; u32 f8; };
 struct Q {
     u8 pad[0xc];
-    Sub0c* f0c;              
+    Sub0c* f0c;
     u8 pad1[0x168 - 0x10];
-    u32 f168;                 
+    u32 f168;
     u8 pad2[0x508 - 0x16c];
-    void* path;               
+    void* path;
     u8 pad3[0xb50 - 0x50c];
-    s32 fb50;                 
+    s32 fb50;
 };
 struct P { u8 pad[0x9e0]; Q* q; };
 typedef void (*VFn)(void*, V);
@@ -1553,7 +1553,7 @@ void YS__RC_SEARCHER__set(u8* a0, u8* a1, u8* a2, s32 a3, s32 a4) {
         QV d = vsub_w1883(func_00190388(a2), YS__OBJ__get_pos(o));
         f32 len;
         d.y = 0;
-                                                                      
+
         asm volatile("lqc2 $vf1, 0(%1)\n\tvmul.xyz $vf1, $vf1, $vf1\n\tvaddy.x $vf1, $vf1, $vf1y\n\tvaddz.x $vf1, $vf1, $vf1z\n\tvsqrt Q, $vf1x\n\tvwaitq\n\tcfc2.ni $8, $vi22\n\tmtc1 $8, %0" : "=f"(len) : "r"(&d) : "$8", "memory");
         if ((f32)*(u16*)(a1 + 0x28) < len) {
             *(s32*)(a0 + 0x24) |= 0x40000000;
@@ -2027,7 +2027,7 @@ struct V2e2350 {
     f32 x, y, z, w;
     V2e2350() {}
     V2e2350(f32 a, f32 b, f32 c, f32 d) { x = a; y = b; z = c; w = d; }
-                                        
+
     V2e2350& operator=(const V2e2350& s) { if (this != &s) QCOPY(this, &s); return *this; }
 } __attribute__((aligned(16)));
 u8* func_00177860_19e758(u8*) asm("func_00177860");

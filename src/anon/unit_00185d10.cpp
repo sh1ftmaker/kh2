@@ -50,7 +50,7 @@ void func_00185d98(u32 a0, u32 a1, u32 a2, u32 a3) {
 
 // ==== from src/anon/batch_w16.cpp
 namespace src2 {
-                 
+
 
 u32 YS__ENEMY__Each(u32, u32, u32, u32);
 u32 YS__OBJ__Each(u32) asm("YS__OBJ__Each");
@@ -533,8 +533,8 @@ void func_00186548(u32 a0, u32 a1, f32 f12) {
 namespace src16 {
 
 
-                                                                                 
-                                                
+
+
 struct W254PE { s32 key; u8 pad[16]; };
 
 struct W254Pool { W254PE e[128]; s32 idx[128]; s32 count; };
@@ -557,7 +557,7 @@ static inline __attribute__((always_inline)) W254PE* w254_next(W254PE* prev) {
     }
     return 0;
 }}
-namespace w254_v2 { 
+namespace w254_v2 {
 struct Vec {
     f32 x, y, z, w;
     Vec& operator=(const Vec& s) {
@@ -568,7 +568,7 @@ struct Vec {
 } __attribute__((aligned(16))); }
 namespace src16 {
 }
-namespace w254_v2 { 
+namespace w254_v2 {
 static inline void VecScale(Vec* a, f32 k) {
     asm volatile("lqc2 $vf1, 0(%0)\n\tmfc1 $8, %1\n\tqmtc2 $8, $vf2\n\tvmulx.wxyz $vf1, $vf1, $vf2x\n\tsqc2 $vf1, 0(%0)" : : "r"(a), "f"(k) : "$8", "memory");
 } }
@@ -787,7 +787,7 @@ void func_00186948(void* a, u8* b) {
 namespace src20 {
 
 
-                                                          
+
 struct Vq {
     f32 x, y, z, w;
     Vq& operator=(const Vq& o) {
@@ -803,7 +803,7 @@ static inline Vq VScale(const Vq& v, f32 s) {
     return r;
 }
 
-                                                                
+
 struct LNode { u8 _0[44]; LNode* next; };
 
 struct LList {
@@ -866,7 +866,7 @@ namespace src21 {
 #define QCOPY(d, s) asm volatile("lq $8, 0(%1)\n\tsq $8, 0(%0)" : : "r"(d), "r"(s) : "$8", "memory")
 namespace src21 {
 }
-namespace n00186a90 { 
+namespace n00186a90 {
 struct QWord {
     u32 v[4];
     QWord() {}
@@ -878,7 +878,7 @@ struct QWord {
 } __attribute__((aligned(16))); }
 namespace src21 {
 }
-namespace n00186a90 { 
+namespace n00186a90 {
 static inline QWord Scale(const QWord& a, f32 k)
 {
     QWord r;
@@ -887,7 +887,7 @@ static inline QWord Scale(const QWord& a, f32 k)
 } }
 namespace src21 {
 }
-namespace n00186a90 { 
+namespace n00186a90 {
 static inline f32 Normalize(QWord* v)
 {
     f32 r;
@@ -897,11 +897,11 @@ static inline f32 Normalize(QWord* v)
 } }
 namespace src21 {
 }
-namespace n00186a90 { 
+namespace n00186a90 {
 struct Ent { u8 pad[1164]; u8* tgt; u8 pad2[2768 - 1168]; QWord dir; f32 f2784; }; }
 namespace src21 {
 }
-namespace n00186a90 { 
+namespace n00186a90 {
 void YS__BTLOBJ__set_hitback(Ent* p, QWord* v, f32 k) asm("_Z23YS__BTLOBJ__set_hitbackjjjj"); }
 namespace src21 {
 }
@@ -932,7 +932,7 @@ void YS__BTLOBJ__set_hitback(Ent* p, QWord* v, f32 k)
 // ==== from src/anon/batch_w85.cpp
 namespace src22 {
 
-                                                               
+
 struct Vec4 {
     f32 x, y, z, w;
     Vec4& operator=(const Vec4& o) {
@@ -977,14 +977,14 @@ Vec4* func_00186b90(Vec4* out, u8* o) {
 // ==== from src/anon/batch_w50.cpp
 namespace src23 {
 
-                                   
+
 
 typedef unsigned int u128 __attribute__((mode(TI)));
 
 typedef void (*VFn3)(void*, void*, void*);
 
 
-                                                                                 
+
 struct Vec4 {
     f32 x, y, z, w;
     Vec4() {}
@@ -996,7 +996,7 @@ struct Vec4 {
 } __attribute__((aligned(16)));
 
 
-                                                               
+
 struct Q16 { f32 x, y, z, w; } __attribute__((aligned(16)));
 
 union VP { u8* vt; f32 f; };
@@ -1058,15 +1058,15 @@ bool func_00186d18(u8* a0) {  // check_size140to150
 // ==== from src/anon/batch_w1937_nsa.cpp
 namespace src26 {
 }
-namespace w1937_a { 
+namespace w1937_a {
 struct W1937Obj; }
 namespace src26 {
 }
-namespace w1937_a { 
+namespace w1937_a {
 struct W1937Msk { s32 m0, m1, m2; }; }
 namespace src26 {
 }
-namespace w1937_a { 
+namespace w1937_a {
 struct W1937VT {
     u8 pad[0x58];
     s32 (*f58)(W1937Obj*);
@@ -1075,11 +1075,11 @@ struct W1937VT {
 }; }
 namespace src26 {
 }
-namespace w1937_a { 
+namespace w1937_a {
 struct W1937Ent { s32 a; s32 b; s32 c; }; }
 namespace src26 {
 }
-namespace w1937_a { 
+namespace w1937_a {
 struct W1937Obj {
     W1937VT* vt;
     u8 pad[0x48c - 4];
@@ -1089,15 +1089,15 @@ struct W1937Obj {
 }; }
 namespace src26 {
 }
-namespace w1937_a { 
+namespace w1937_a {
 struct W1937Kind { u8 pad[4]; u8 k; u8 pad2[0x12 - 5]; u8 fl; }; }
 namespace src26 {
 }
-namespace w1937_a { 
+namespace w1937_a {
 struct W1937Owner { u8 pad[0xc]; W1937Obj* o; }; }
 namespace src26 {
 }
-namespace w1937_a { 
+namespace w1937_a {
 struct W1937Arg {
     u8 pad[0x18];
     s32 flags;
@@ -1110,7 +1110,7 @@ struct W1937Arg {
 }; }
 namespace src26 {
 }
-namespace w1937_a { 
+namespace w1937_a {
 static inline u8 w1937_isKind(W1937Kind* k) { return k->k == 5 || k->k == 6; } }
 namespace src26 {
 }
@@ -1180,7 +1180,7 @@ static inline __attribute__((always_inline)) u8* w1825_mk() {
     return a;
 }
 
-           
+
 struct W1825QV {
     f32 x, y, z, w;
     W1825QV operator*(f32 s) const {
@@ -1198,7 +1198,7 @@ struct W1825QV {
 } __attribute__((aligned(16)));
 
 
-           
+
 struct W1825Flags {
     u32 a, b, c;
     u32 get() { return (a | b) & ~c; }
@@ -1219,7 +1219,7 @@ s32 func_00186ec0(W1825Obj* o, W1825Oth* p) asm("func_00186ec0");
 namespace src27 {
 
 
-           
+
 struct W1825V {
     f32 x, y, z, w;
     W1825V() {}
@@ -1391,7 +1391,7 @@ namespace src30 {
 namespace src30 {
 
 
-               
+
 struct W1816V {
     f32 x, y, z, w;
     W1816V& operator=(const W1816V& o) {
@@ -1719,7 +1719,7 @@ namespace src38 {
 void func_001879f0(u32* p) asm("func_001879f0");
 void func_001879f0(u32* p) {
     s32 i = 127;
-    do { *p = 0; i--; asm volatile("nop\n\tnop\n\tnop"); p += 8; } while (i >= 0);
+    do { *p = 0; i--;  p += 8; } while (i >= 0);
 }
 }
 
@@ -1751,7 +1751,7 @@ void func_00187a18(u32 a, u32 b, s32 c, s32 d, u32* src) {
 // ==== from src/anon/batch_w224.cpp
 namespace src40 {
 extern u32 strcmp(u32, u32) asm("strcmp");
-           
+
 u32 ctarget_00187ab8(u32* t, u32 b, u32 c, u32 d) asm("_Z16ctarget_00187ab8jjjj");
 }
 
@@ -1985,13 +1985,13 @@ u32 func_00187e20(u32 a0) {
     register u32 v asm("$15") = *(u32 *)(a0 + 156);
     v &= 1;
     v &= 0xff;
-    asm volatile("" : "+r"(v));
+
     u32 ret = 0;
     if (v == 0) {
         register u32 p asm("$14") = *(u32 *)(a0 + 136);
-        register u32 q asm("$13") = *(u32 *)(p + 4);
+        u32 q = *(u32 *)(p + 4);
         v = *(u32 *)(q + 352);
-        register u32 mask asm("$14") = 0x40000;
+        u32 mask = 0x40000;
         v &= mask;
         ret = v != 0;
     }
@@ -2003,7 +2003,7 @@ u32 func_00187e20(u32 a0) {
 namespace src44 {
 
 
-              
+
 struct W1773Tgt { u8 pad[0x154]; s32 kind; u8 pad2[0x588 - 0x158]; u32 flags; };
 
 struct W1773Link { u32 x0; W1773Tgt* t; };
@@ -2073,7 +2073,7 @@ void func_00187f90(u32 a0) {
 // ==== from src/anon/batch_w1804_nsa.cpp
 namespace src46 {
 
-                                                                              
+
 
 struct W1804C1 { u8 pad[0x1c]; s32 flags; };
 
@@ -2359,7 +2359,7 @@ void func_00188490(s32 a, s32 b, f32 c) {
 namespace src55 {
 
 
-           
+
 union U188 { u16 h; u32 w; };
 extern u32 D_01c60be0[] asm("D_01c60be0");
 u8* func_00187ab8(void*, u32) asm("func_00187ab8");
@@ -2385,7 +2385,7 @@ void func_001884d0(u8* a, u32* b)
 // ==== from src/anon/batch_w100.cpp
 namespace src56 {
 }
-namespace w100_a11 { 
+namespace w100_a11 {
 struct E11 { u32 a; u32 b; f32 t; }; }
 namespace src56 {
 }

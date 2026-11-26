@@ -10,7 +10,7 @@ extern u32 D_w asm("D_01d49940");
 /*TARGET 001c70e8*/
 void func_001c70e8(void) asm("func_001c70e8");
 void func_001c70e8(void) {
-    register s32 d asm("$15");
+    s32 d;
     Vq* c = &D_01d498d0.c;
     u32 w = D_w;
     f32 k = 55.0f;

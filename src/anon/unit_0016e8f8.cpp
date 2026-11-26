@@ -160,7 +160,7 @@ u32 YS__OBJENTRY__ReadRequest(u32 id, u32 kind, u32 mode, u32) {
     case 793: return YS__OBJENTRY__ReadRequestSub(0x20000237, kind, 5, -1);
     case 794: return YS__OBJENTRY__ReadRequestSub(0x20000238, kind, 6, -1);
     }
-    if (!func_0016f6f8(id) && !func_0016f770(id) && mode == 30) {                         
+    if (!func_0016f6f8(id) && !func_0016f770(id) && mode == 30) {
         JmEnt* e = (JmEnt*)GetCharaData_0016e920(id);
         if (!e) return;
         switch (e->type) {
@@ -204,7 +204,7 @@ void func_0016ef58(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4) {
     u32 s3 = a3;
 
     YS__OBJENTRY__ReadRequestSub(s0, s3, a4, -1);
-    if (func_0016f6f8(s0) != 0) {                         
+    if (func_0016f6f8(s0) != 0) {
         return;
     }
 
@@ -303,13 +303,13 @@ static inline __attribute__((always_inline)) void* W1634Create(W1634CharaData* c
         return (void*)W1634New<func_001c2ce8, 0xaf0>(cd, pos, rot);
     case 24:
         return (void*)W1634New<func_001d9ef0, 0xa00>(cd, pos, rot);
-    case 14:                                                                                     
+    case 14:
         return (void*)W1634New<YS__FIELDOBJ__FIELDOBJ, 0xaf0>(cd, pos, rot);
     }
     return 0;
 }
 void* func_0016f000(u32 id, void* pos, f32 rot) asm("func_0016f000");
-void* func_0016f000(u32 id, void* pos, f32 rot) {                 
+void* func_0016f000(u32 id, void* pos, f32 rot) {
     W1634CharaData* cd;
     if (func_0016f6f8(id)) {
         cd = W1634_GetCharaData(id);
@@ -355,7 +355,7 @@ u32 func_0016f448(u32 a0,u32 a1,u32 a2,u32 a3) { (void)a1; (void)a2; (void)a3; r
 // 0016f460 (from src/anon/tiny_leaf.cpp)
 namespace n0016f460 {
 u32 func_0016f460(u32 a0, u32 a1, u32 a2, u32 a3) asm("func_0016f460");
-u32 func_0016f460(u32 a0, u32 a1, u32 a2, u32 a3) {                     
+u32 func_0016f460(u32 a0, u32 a1, u32 a2, u32 a3) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r2 = 0u;
     r2 = (u32)(s32)(*(s8*)((u32)r4 + (s32)(40)));
     r2 = ((u32)0u < (u32)r2);
@@ -414,12 +414,12 @@ char* func_0016f520(U0_Res* r, u32 key, char* buf) {
     if (!buf) buf = D_004f6400;
     if (func_0016f460()) {
         func_002fee78(buf, D_0036c460, r->f40);
-        if (func_0016f7a0(key) || (func_0016f770(key) && r->f4 && func_00170978(buf) < 2)) {              
+        if (func_0016f7a0(key) || (func_0016f770(key) && r->f4 && func_00170978(buf) < 2)) {
             func_002ff2e8(func_002ff8b0(buf, '.'), D_0036c468);
         }
         return buf;
     }
-    if (func_0016f7a0(key)) {              
+    if (func_0016f7a0(key)) {
         func_002fee78(buf, D_0036c478, r->f8);
     } else buf = 0;
     return buf;
@@ -480,7 +480,7 @@ u32 func_0016f6e0(s32 i) { return D_0034dc30[i]; }
 namespace n0016f6f8 {
 u32 func_0016e920(u32) asm("func_0016e920");
 s32 func_0016f6f8(u32 id) asm("func_0016f6f8");
-s32 func_0016f6f8(u32 id) {                         
+s32 func_0016f6f8(u32 id) {
     if (!(id & 0x40000000)) return 0;
     u8* p = (u8*)func_0016e920(id);
     if (!p) return 0;
@@ -494,7 +494,7 @@ s32 func_0016f6f8(u32 id) {
 // 0016f770 (from src/anon/batch_w8.cpp)
 namespace n0016f770 {
 u32 func_0016f770(s32 x) asm("func_0016f770");
-u32 func_0016f770(s32 x) {                        
+u32 func_0016f770(s32 x) {
     switch ((u32)x) {
     case 793:
     case 794:
@@ -508,7 +508,7 @@ u32 func_0016f770(s32 x) {
 // 0016f7a0 (from src/anon/tiny_leaf.cpp)
 namespace n0016f7a0 {
 u32 func_0016f7a0(u32 a0, u32 a1, u32 a2, u32 a3) asm("func_0016f7a0");
-u32 func_0016f7a0(u32 a0, u32 a1, u32 a2, u32 a3) {              
+u32 func_0016f7a0(u32 a0, u32 a1, u32 a2, u32 a3) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r2 = 0u;
     r4 = (u32)((s32)r4 >> 28);
     r4 = (u32)(r4 & 0x0001u);
@@ -640,7 +640,7 @@ u32 func_0016fa88() { return 0x01762000; }
 namespace n0016fa98 {
 extern u32 D_01c5f460 asm("D_01c5f460");
 void func_0016fa98(u32 a0, u32 a1, u32 a2, u32 a3) asm("func_0016fa98");
-void func_0016fa98(u32 a0, u32 a1, u32 a2, u32 a3) {                   
+void func_0016fa98(u32 a0, u32 a1, u32 a2, u32 a3) {
     (void)a2;
     (void)a3;
     *(u32*)((u32)&D_01c5f460 + ((u32)a0 << 2) + (0)) = a1;
@@ -655,7 +655,7 @@ void func_0016fab0(u32 a0, u32 a1, u32 a2, u32 a3) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r15;
     r15 = (u32)&D_01c5f460;
     *(volatile u32*)((u32)r15 + (s32)(12)) = r5;
-    *(volatile u32*)((u32)r15 + (s32)(8)) = r4;
+    *(u32*)((u32)r15 + (s32)(8)) = r4;
     *(volatile u32*)((u32)r15 + (s32)(16)) = r5;
 }
 } // n0016fab0
@@ -697,7 +697,7 @@ void func_0016fb30(u8* a0, u32 a1, u32 a2, u32 a3) {
     *(u32*)(s0 + 48) = 0;
     *(u32*)(s0 + 52) = 0;
 
-    strlen(s2);           
+    strlen(s2);
     *(u32*)(s0 + 56) = s1;
 
     func_002ff2e8(s0 + 4, s2);
@@ -721,7 +721,7 @@ void func_0016fba0(u8* a0, u32 a1, u32 a2, u32 a3) {
     *(u32*)(s0 + 48) = 0;
     *(u32*)(s0 + 52) = 0;
 
-    strlen(s2);           
+    strlen(s2);
     *(u32*)(s0 + 56) = s1;
 
     func_002ff2e8(s0 + 4, s2);
@@ -825,7 +825,7 @@ void func_0016fda8(CObj* o) {
     }
     case 2: {
         register CArr* a asm("$21") = o->arr;
-        register s32 n asm("$22") = a->n;
+        s32 n = a->n;
         register u32* p asm("$18") = o->u.ids;
         s32 i;
         for (i = 0; i < n; i++) {
@@ -837,11 +837,11 @@ void func_0016fda8(CObj* o) {
             CHdr* nh = func_0016fac8(0x40);
             u32 q = *p++;
             register u32 a3 asm("$7") = sz;
-            register CHdr* h asm("$16");
+            CHdr* h;
             asm("move %0, %1" : "=r"(h) : "r"(nh), "r"(a3));
-            register CHdr* a0r asm("$4");
+            CHdr* a0r;
             asm("move %0, %1" : "=r"(a0r) : "r"(nh), "r"(h));
-            register s32 a2r asm("$6");
+            s32 a2r;
             asm("li %0, 5300" : "=r"(a2r) : "r"(a0r));
             cbh_ctor_0016fba0(a0r, q, a2r, a3);
             s32 v = e->x8;
@@ -1398,7 +1398,7 @@ extern U0_Blk* D_0034dca0 asm("D_0034dca0");
 void func_001700e8(U0_Blk*, u32) asm("func_001700e8");
 static inline bool func_00170b30_locked(U0_Blk* b) { return b->f40 >= 10000; }
 u32 func_00170b30(u32 size) asm("func_00170b30");
-u32 func_00170b30(u32 size) {                   
+u32 func_00170b30(u32 size) {
     U0_Blk* b;
     size += 127; size &= ~127;
     D_0034dca8--;
@@ -1424,7 +1424,7 @@ extern u32 D_0034dc9c asm("D_0034dc9c");
 extern u8 D_01c5c440 asm("D_01c5c440");
 void func_00170c00(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) asm("func_00170c00");
 void func_00170c00(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 idx = *(volatile u32*)&D_0034dca8;
+    u32 idx = *(u32*)&D_0034dca8;
     u32* values = (u32*)&D_01c5c440;
     u32 sum = *(volatile u32*)&D_0034dc9c;
     u32 value = values[idx];
@@ -1486,7 +1486,7 @@ u8 YS__CACHE_BUFF__IsFlushing(void) {
 namespace n00170d18 {
 u32 func_001702e0(u32, u32, u32, u32) asm("func_001702e0");
 u32 func_00170d18(u32 a0, u32 a1, u32 a2, u32 a3) asm("func_00170d18");
-u32 func_00170d18(u32 a0, u32 a1, u32 a2, u32 a3) {                    
+u32 func_00170d18(u32 a0, u32 a1, u32 a2, u32 a3) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r2 = 0u;
     r2 = func_001702e0(r4, r5, r6, r7);
     r2 = (u32)((s32)r2 + (56));
@@ -1537,11 +1537,11 @@ namespace n00170e18 {
 extern u32 D_0034dca0 asm("D_0034dca0");
 u32 func_00170e18() asm("func_00170e18");
 u32 func_00170e18() {
-    register u32 p asm("$14") = D_0034dca0;
+    u32 p = D_0034dca0;
     u32 ret = 1;
     if (p != 0) {
         while (1) {
-            register s32 v asm("$15") = *(s32 *)(p + 40);
+            s32 v = *(s32 *)(p + 40);
             ret = 0;
             v = v < 10000;
             v ^= 1;

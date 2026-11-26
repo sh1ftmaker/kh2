@@ -975,7 +975,7 @@ typedef void (*Fn_002f0798)(u32);
 typedef void (*Fn_002f07c8)(u32);
 
 void func_00176a60(u32 a0, u32 a1, u32 a2, f32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    *(volatile f32*)((u32)a0 + (s32)(2816)) = a3;
+    *(f32*)((u32)a0 + (s32)(2816)) = a3;
 }
 }  // namespace p22
 
@@ -1445,13 +1445,13 @@ extern "C" u32 func_0016cab8(...) asm("func_0016cab8");
 void func_00177498(u32 a0) {
     u32 r4 = a0, r16, r17;
     r17 = r4;
-    r16 = *(volatile u32*)((u32)r4 + (s32)(2796));
+    r16 = *(u32*)((u32)r4 + (s32)(2796));
     r4 = r16;
     if (r16 != 0u) {
         ((void(*)(u32))func_0016cab8)(r4);
         r4 = r16;
         ((void(*)(u32))func_0016c7d8)(r4);
-        *(volatile u32*)((u32)r17 + (s32)(2796)) = 0u;
+        *(u32*)((u32)r17 + (s32)(2796)) = 0u;
     }
 }
 }  // namespace p40

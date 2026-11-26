@@ -944,7 +944,7 @@ u32 Tz__JmCollection__LeaveAll(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u
         r2 = ((u32(*)())func_0029a310)();
         r2 = ((u32(*)())func_00274ac8)();
         r15 = (u32)(0x0036u << 16);
-        *(volatile u8*)((u32)r15 + (s32)(-2647)) = (u8)0u;
+        *(u8*)((u32)r15 + (s32)(-2647)) = (u8)0u;
     }
     return r2;
 }

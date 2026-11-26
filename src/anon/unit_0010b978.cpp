@@ -295,10 +295,10 @@ extern void ObjObserver_Create(void*) asm("_ZN2kn11ObjObserver6CreateEPPS0_");
 class Friend;
 /*TARGET 0010c778*/
 u32 Friend::getObjObserver() {
-    u32 r2 = *(volatile u32*)((u32)this + 2904);
+    u32 r2 = *(u32*)((u32)this + 2904);
     if (r2 == 0u) {
         ObjObserver_Create((void*)((u32)this + 2904));
-        r2 = *(volatile u32*)((u32)this + 2904);
+        r2 = *(u32*)((u32)this + 2904);
     }
     return r2;
 }
@@ -533,10 +533,10 @@ void func_0010cb50(u8* a0, s32 a1, u32 a2) {
     }
 
     u32 e = *(volatile u32*)(s0 + 2552);
-    u32 d = *(volatile u32*)(s0 + 2556);
+    u32 d = *(u32*)(s0 + 2556);
     u32 c = *(volatile u32*)(s0 + 2560);
     u32 f = *(volatile u32*)(s0 + 2564);
-    volatile u32* dst = (volatile u32*)s0;
+    volatile u32* dst = (u32*)s0;
     dst[782] = v;   // +3128
     dst[786] = f;   // +3144
     dst[783] = e;   // +3132

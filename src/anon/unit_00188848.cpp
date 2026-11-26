@@ -193,8 +193,8 @@ void func_00188c10(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a
     r13 = (u32)&D_0032bb30;
     r14 = (u32)((s32)0u + (41));    r15 = (u32)(*(u16*)((u32)r13 + (s32)(16362)));
     if (r15 == 0u) r15 = r14;
-    *(volatile u16*)((u32)r4 + (s32)(0)) = (u16)r15;
-    *(volatile u16*)((u32)r13 + (s32)(16362)) = (u16)0u;
+    *(u16*)((u32)r4 + (s32)(0)) = (u16)r15;
+    *(u16*)((u32)r13 + (s32)(16362)) = (u16)0u;
 }
 }  // namespace n00188c10
 
@@ -338,7 +338,7 @@ void func_00189028(void* a, void* b, void* c, void* d) {
 namespace n00189068 {
 u32 func_00189068(u32 a0, u32 a1) asm("_Z13func_00189068jj");
 u32 func_00189068(u32 a0, u32 a1) {
-    register u32 t5 asm("$13") = (u32)((s32)a1 + (-3000));
+    u32 t5 = (u32)((s32)a1 + (-3000));
     a1 = (u32)((s32)a1 + (-1000));
     register u32 t6 asm("$14") = (u32)((u32)t5 < 12u);
     register u32 t7 asm("$15") = (u32)(a1 << 2);
@@ -385,7 +385,7 @@ u32 func_00189108(u32 a0, u32 a1, u32 a2, u32 a3) {
 namespace n00189128 {
 void func_00189128(u32 a0) asm("func_00189128");
 void func_00189128(u32 a0) {
-    register u32 t7 asm("$15") = (u32)1;
+    u32 t7 = (u32)1;
     *(u16*)((u32)a0 + (s32)(0)) = (u16)0u;
     *(volatile u8*)((u32)a0 + (s32)(3)) = (u8)t7;
     register u32 t6 asm("$14") = (u32)((s32)a0 + (8));
@@ -408,7 +408,7 @@ void func_00189128(u32 a0) {
 namespace n00189170 {
 void func_00189170(u32 a0) asm("_Z13func_00189170j");
 void func_00189170(u32 a0) {
-    register u32 t7 asm("$15") = (u32)1;
+    u32 t7 = (u32)1;
     *(u16*)((u32)a0 + (s32)(0)) = (u16)0u;
     *(volatile u8*)((u32)a0 + (s32)(3)) = (u8)t7;
     register u32 t6 asm("$14") = (u32)((s32)a0 + (8));
@@ -510,38 +510,38 @@ struct W1645Masks {
 };
 struct W1645Obj {
     u8 pad0[0xf0];
-    f32 ff0;                         
+    f32 ff0;
     u8 padF4[0x3b4 - 0xf4];
-    u8 sub3b4[0x474 - 0x3b4];         
-    u8 sub474[0x50c - 0x474];         
-    s32 x50c;                         
+    u8 sub3b4[0x474 - 0x3b4];
+    u8 sub474[0x50c - 0x474];
+    s32 x50c;
     u8 pad510[0x588 - 0x510];
-    u32 flags588;                     
+    u32 flags588;
     u8 pad58C[0xabc - 0x58c];
-    W1645Masks masks;                 
+    W1645Masks masks;
 } __attribute__((aligned(16)));
 struct W1645Cmd {
     u8 pad0[4];
-    u8 op;           
-    u8 argc;         
+    u8 op;
+    u8 argc;
     union {
-        u16 a;       
+        u16 a;
         u8 a_b[2];
     };
-    u16 b;           
-    u16 c;            
+    u16 b;
+    u16 c;
 };
 struct W1645Ctx {
     u8 pad0[8];
-    W1645Obj* obj;       
+    W1645Obj* obj;
     u8 padC[0x14 - 0xc];
-    s32 x14;                
+    s32 x14;
     u8 pad18[0x20 - 0x18];
-    u32 f20;                
-    u32 f24;                
-    u32 f28;                
+    u32 f20;
+    u32 f24;
+    u32 f28;
     u8 pad2c[0xf8 - 0x2c];
-    u8 bf8;                 
+    u8 bf8;
 };
 void func_0019f490(void*, u16) asm("func_0019f490");
 void func_0019f4b8(void*, u16) asm("func_0019f4b8");

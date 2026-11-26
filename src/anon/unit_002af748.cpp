@@ -205,7 +205,7 @@ void func_002afaf0(void) {
     func_0028dcc0(b, a);
     q = D_0035f634;
     q += 21216;
-    { register s32 r5 asm("$5") = n1; register s32 r4 asm("$4") = q; func_0028d8c0(r4, r5, D_0035f14c, D_0035f148, D_0035f210, D_00374cc0[(o->w >> 27) & 1], -1, 0); }
+    { register s32 r5 asm("$5") = n1; s32 r4 = q; func_0028d8c0(r4, r5, D_0035f14c, D_0035f148, D_0035f210, D_00374cc0[(o->w >> 27) & 1], -1, 0); }
     func_00139620(q);
     func_0028dcc0(q, a);
     q = D_0035f634 + 22032;

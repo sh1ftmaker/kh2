@@ -270,10 +270,10 @@ u32 func_001c0e60(...) asm("func_001c0e60");
 /*TARGET 001143d8*/
 void FriendPersonality::start_limit() {
     u32 s0 = (u32)this;
-    func_0010eed8(*(volatile u32*)((u32)this + (s32)(4)), 0u, 0u);
-    u32 v0 = func_001c0cd8(*(volatile u32*)((u32)s0 + (s32)(4)));
+    func_0010eed8(*(u32*)((u32)this + (s32)(4)), 0u, 0u);
+    u32 v0 = func_001c0cd8(*(u32*)((u32)s0 + (s32)(4)));
     if (v0 != 0u) {
-        func_001c0e60(*(volatile u32*)((u32)s0 + (s32)(4)));
+        func_001c0e60(*(u32*)((u32)s0 + (s32)(4)));
     }
 }
 }  // kn
@@ -383,10 +383,10 @@ namespace n00114580 {
 /*TARGET 00114580*/
 void func_00114580(u32 a0) asm("_Z13func_00114580j");
 void func_00114580(u32 a0) {
-    *(volatile u8*)((u32)a0 + (s32)(0)) = (u8)0u;
+    *(u8*)((u32)a0 + (s32)(0)) = (u8)0u;
     u32 i = 0u;
     do {
-        *(volatile u8*)((u32)a0 + (s32)(i + 1u)) = (u8)0u;
+        *(u8*)((u32)a0 + (s32)(i + 1u)) = (u8)0u;
         i = (u32)(i + 1u);
     } while ((s32)i < 31);
 }
@@ -575,7 +575,7 @@ u32 func_00114770(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7
     u32 r14 = (u32)&D_00340000;
     *(volatile u32*)(r16 + 16) = r15;
     r14 = (u32)&D_003461e8;
-    *(volatile u32*)r16 = r14;
+    *(u32*)r16 = r14;
     *(volatile u32*)(r16 + 12) = 20;
     return r2;
 }
@@ -596,7 +596,7 @@ u32 func_001147b8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7
     u32 r14 = (u32)&D_00340000;
     *(volatile u32*)(r16 + 16) = r15;
     r14 = (u32)&D_003461e8;
-    *(volatile u32*)r16 = r14;
+    *(u32*)r16 = r14;
     *(volatile u32*)(r16 + 12) = 20;
     return r2;
 }
@@ -669,7 +669,7 @@ u32 func_00114888(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7
     u32 r14 = (u32)&D_00340000;
     *(volatile u32*)(r16 + 16) = r15;
     r14 = (u32)&D_003464b0;
-    *(volatile u32*)r16 = r14;
+    *(u32*)r16 = r14;
     *(volatile u32*)(r16 + 12) = 18;
     return r2;
 }
@@ -690,7 +690,7 @@ u32 func_001148d0(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7
     u32 r14 = (u32)&D_00340000;
     *(volatile u32*)(r16 + 16) = r15;
     r14 = (u32)&D_003464b0;
-    *(volatile u32*)r16 = r14;
+    *(u32*)r16 = r14;
     *(volatile u32*)(r16 + 12) = 18;
     return r2;
 }

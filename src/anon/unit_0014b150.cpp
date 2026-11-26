@@ -79,7 +79,7 @@ void dk_RectParamBase_setColor(u32 a0, u32 a1, u32 a2, u32 a3, u32 t0) {
     asm volatile("" : "+r"(a1), "+r"(a2), "+r"(a3));
     *(volatile u8 *)(a0 + 16) = a1;
     t0 &= 0xff;
-    *(volatile u8 *)(a0 + 17) = a2;
+    *(u8 *)(a0 + 17) = a2;
     *(volatile u8 *)(a0 + 19) = t0;
     *(volatile u8 *)(a0 + 18) = a3;
 }

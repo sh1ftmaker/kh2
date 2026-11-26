@@ -432,7 +432,7 @@ void func_001f0080(u32 a0, u32 a1, u32 a2, u32 a3) asm("_Z13func_001f0080jjjj");
 void func_001f0080(u32 a0, u32 a1, u32 a2, u32 a3) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3;
     *(volatile u32*)((u32)r5 + (s32)(12)) = r4;
-    *(volatile u32*)((u32)r5 + (s32)(8)) = 0u;
+    *(u32*)((u32)r5 + (s32)(8)) = 0u;
     *(volatile u32*)((u32)r5 + (s32)(4)) = 0u;
     *(volatile u32*)((u32)r5 + (s32)(0)) = 0u;
 }
