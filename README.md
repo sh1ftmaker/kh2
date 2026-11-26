@@ -1,67 +1,94 @@
-# Kingdom Hearts 2: Final Mix Decomp
+# Kingdom Hearts II Final Mix decompilation
 
-![SLPM_666.75's progress](https://img.shields.io/endpoint?url=https://govanify.github.io/kh2/badges/main-elf.json)
+A work-in-progress, byte-matching decompilation of *Kingdom Hearts II Final
+Mix* for the PlayStation 2 (Japan, `SLPM_666.75`): C++ source that Sony's
+`ee-gcc 3.2-040921` compiles back into the exact bytes of the game's main
+executable.
 
-This repo contains a (WIP) decompilation of Kingdom Hearts 2 Final Mix's main
-ELF, nicknamed "dasein".
+**Progress site: <https://sh1ftmaker.github.io/kh2/>**
 
-It builds the current executable: 
+<!-- assets:start -->
+<!-- assets:end -->
 
-* SLPM\_666.75: sha256sum: `d869ce4b8edd61cb978c4ff9ede595fe4d7d7b21cbb96a145275217120d8bc87`
+<!-- status:start -->
+<!-- status:end -->
 
-## Setup
+This repository contains no game data. You need your own copy of the game to
+build it.
 
-In order to work on this project, you will need to put SLPM\_666.75 at the root
-of this repo. It can be found readily available in the ISO of the game as a
-regular file.
+## What the numbers mean
 
-You will also need some dependencies although not many, namely: python3, docker
-and git lfs. This repository was also made in mind with a UNIX shell and has
-been tested and known to work on Linux and macOS. Hopefully, it should work on
-WSL (Windows) with minimal tinkering.
+- **Matched** is the headline: the function's source is linked into the
+  executable and the whole executable is byte-identical to the original. It
+  is counted in bytes of code; the function count is shown beside it because
+  thousands of tiny functions inflate it.
+- **Reviewed** is the part of the matched code with evidenced names, real
+  types and a place in its original source file. Code in `src/anon` and
+  `src/autodecomp` is matched but machine-written and not yet reviewed.
+- A weighted figure with partial credit for functions that are structurally
+  right will be added when the tool that measures it exists
+  ([docs/PLAN.md](docs/PLAN.md), K2).
 
-You need to run `git lfs pull` in order to retrieve the compiler's archive from
-the repo before running `make`.
+## Building
 
-## Workflow
+```sh
+isoinfo -i "<your iso>" -x '/SLPM_666.75;1' > SLPM_666.75
+# sha256 d869ce4b8edd61cb978c4ff9ede595fe4d7d7b21cbb96a145275217120d8bc87
 
-When you decompile a new function, add a reference to the function and any
-symbols it uses in `functions.tsv`. 
-You can then implement the function in any file present in the `src/` folder and
-it will be picked up automatically.
+tools/setup_toolchain.sh <path>/ee-gcc3.2-040921-full.tar.gz ~/ps2
+source ~/ps2/env.sh
+python3 tools/build_elf.py objects && make     # ends in MATCHED!
+python3 tools/progress_bytes.py
+```
 
+Needs x86_64 Linux with 32-bit glibc, `patchelf`, `python3` and `make`. The
+compiler archive is not distributed here.
+[docs/native-toolchain.md](docs/native-toolchain.md) has the details and the
+Docker alternative.
 
-Once your function(s) are drafted, run `make`. This will generate the required
-files to use [objdiff](https://github.com/encounter/objdiff), an automated
-diffing tool.
+## How the project works
 
-Open your project repository in it and, on the left sidebar, filter by
-incomplete to show objects which are not fully matching yet. You can then edit
-your source files and objdiff will automatically rebuild and show you the
-updated percentage as you do.
+Modelled on the [Four Swords Adventures decompilation](https://github.com/sh1ftmaker/fsa):
 
-You can also, optionally, upload an online scratch to decomp.me from the tool,
-to work collaboratively on a function.
+- One rule book for people and AI agents alike: [CLAUDE.md](CLAUDE.md),
+  [AGENTS.md](AGENTS.md), [docs/RULES_CARD.md](docs/RULES_CARD.md).
+- No fakematches: no inline asm, register pins or code shaped only to steer
+  the compiler. Names need evidence; unproven names keep their address.
+- A reviewer that never saw the author's reasoning judges every hand-written
+  submission ([docs/REVIEW_BRIEF.md](docs/REVIEW_BRIEF.md)).
+- Structure first, byte match second.
+- The plan is [docs/PLAN.md](docs/PLAN.md); the site's roadmap is
+  [docs/roadmap.yml](docs/roadmap.yml).
 
+Tools worth knowing: `tools/rig/compile_diff.py` scores one function against
+the original in about 80 ms; `tools/rig/get_context.py` gathers everything
+known about a function; `tools/rig/promote.py` lands a match and rolls back
+if the executable stops matching. [docs/rig/README.md](docs/rig/README.md)
+describes them, and [docs/codegen-3.2.md](docs/codegen-3.2.md) records what
+this compiler does.
 
 ## Symbols and file layout
 
-Symbols and file layout have been mostly recovered from the E3 kiosk demo PS3 port
-of KH2. While there is obvious drift in the overall logic, this should be a good
-resource in order to try to name functions yet unknown in this repository. I
-_highly_ encourage you to inspire yourself from those debug symbols XREFs,
-function layouts, vtables etc in order to try to recover as much of the original
-layout as possible.
+Names, class layouts and the original file layout come from the debug
+information in the E3 2014 PS3 kiosk demo of the HD remaster: 25,356
+functions and 5,859 types, of which about 7,600 functions are mapped to
+their PS2 counterparts with a graded confidence (`data/e3`). The HD build
+changed many class layouts, so its headers are a starting point that is
+checked against the PS2 code, not copied.
 
-I already recovered class definitions and file layout from said ELF. 
+The five code overlays in `OVL.IMG` (gumi ship battle and menu, shop, title,
+movie) are not built yet.
 
-There are two exceptions to that
+## Contributing
 
-* `src/anon` is not an original folder and is used as a
-placeholder until the original symbol for the function is written down. A lot of
-those functions were automatically generated through symbolic CFG traversal
-analysis of gcc and as such may not be very idiomatic C++, but they should be all 
-matching.
+See [CONTRIBUTING.md](CONTRIBUTING.md). AI-assisted work is welcome under the
+same rules as any other.
 
-* `nonmatchings`: This folder is not rigged up at all in the build system and is
-  mostly used as a dump of functions that aren't yet matching.
+## Credits and license
+
+This project continues [GovanifY's kh2](https://github.com/GovanifY/kh2)
+("dasein"), which built the matching build system, the first 4,680 matched
+functions and the header skeletons. MIT license, see [LICENSE](LICENSE).
+
+Kingdom Hearts is a trademark of its owners. This project is not affiliated
+with or endorsed by them, and is non-commercial.

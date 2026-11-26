@@ -11,7 +11,7 @@ if ! command -v docker >/dev/null 2>&1; then
 fi
 
 if [[ ! -f "${SCRIPT_DIR}/ee-gcc3.2-040921-full.tar.gz" ]]; then
-  echo "error: missing ${SCRIPT_DIR}/ee-gcc3.2-040921-full.tar.gz. Have you ran 'git lfs pull'?" >&2
+  echo "error: missing ${SCRIPT_DIR}/ee-gcc3.2-040921-full.tar.gz. Place the compiler archive there (it is not in the repository)." >&2
   exit 1
 fi
 

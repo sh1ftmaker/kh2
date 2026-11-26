@@ -9,3 +9,6 @@ __pycache__/
 *.tmp
 *.log
 objdiff.json
+
+# compiler archive: supply your own (tools/setup_toolchain.sh)
+/docker/ps2/*.tar.gz

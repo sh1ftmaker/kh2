@@ -1,0 +1,240 @@
+# Roadmap: the single source of truth for the progress website's path.
+#
+# Hand-maintained alongside docs/PLAN.md (which explains the why). Edit the
+# statuses (and add milestones) when a phase changes; tools/site_data.py
+# computes each milestone's live progress on every merge and writes
+# site/data/roadmap.json.
+#
+# status: done | active | next | later
+# focus: true on the one phase the site opens on (optional; without it the
+#   first active phase).
+# hue: the phase colour on the site: green, red, blue, purple or gold.
+# covers: what a milestone works on, as selectors:
+#   main            all code of the main ELF (SLPM_666.75)
+#   bin:lt80        functions under 80 bytes
+#   bin:80-199      functions of 80-199 bytes
+#   bin:200-999     functions of 200-999 bytes
+#   bin:ge1k        functions of 1 KB and more
+#   area:<dir>      one source area (a directory under src/, e.g. area:tozawa)
+#   overlays        the five code overlays in OVL.IMG
+# measure: how its progress is counted (optional; omit when it can't be
+# measured from the build). `of` defaults to `covers`.
+#   kind: code    matched bytes of code / all bytes of code
+#   kind: fns     matched functions / all functions
+# landed: commit(s) on `matching` that finished it (optional).
+#
+# Values are plain YAML scalars: quote any text that contains ": " or starts
+# with a special character.
+
+policies:
+  - id: no-fakematch
+    title: No fakematches
+    text: >-
+      A function counts only when source compiles to the original bytes with
+      the original compiler. Inline asm, register pins and byte arrays never
+      count. Machine-lifted functions count as matched but stay labelled
+      unreviewed until a person or agent has given them real names and types.
+  - id: review
+    title: Adversarial review of hand-written work
+    text: >-
+      A separate reviewer that never saw the author's reasoning judges names,
+      types and readability (ACCEPT / CHANGES / REJECT). Only ACCEPT merges.
+  - id: verify
+    title: Whole-ELF verification
+    text: >-
+      Every merge rebuilds the ELF and compares it byte for byte with
+      SLPM_666.75. Progress is counted in bytes of code; the function count
+      is shown beside it because small functions inflate it.
+
+phases:
+  - id: foundations
+    hue: gold
+    title: Foundations
+    status: done
+    summary: >-
+      A build that reproduces the original ELF, a scorer that cannot be
+      fooled, the full function table, and names recovered from the 2014 PS3
+      debug build.
+    milestones:
+      - id: native-build
+        title: Build without Docker
+        desc: ee-gcc 3.2-040921 runs natively; make ends in a byte compare of the whole ELF.
+        status: done
+        covers: []
+        landed: [bffabb7]
+      - id: bytes-metric
+        title: Progress counted in bytes
+        desc: tools/progress_bytes.py; the function count alone overstated progress more than three times.
+        status: done
+        covers: []
+        landed: [bffabb7]
+      - id: e3-symbols
+        title: Names from the E3 2014 PS3 debug build
+        desc: >-
+          25,356 functions and 5,859 types with layouts read from DWARF; about
+          7,600 mapped to PS2 functions with a graded confidence.
+        status: done
+        covers: []
+        landed: [a09f680]
+      - id: layout
+        title: Full function table
+        desc: layout.tsv regenerated from seven evidence sources, 11,286 to 14,618 rows.
+        status: done
+        covers: [main]
+        landed: [bdff99d, 73d21fc]
+      - id: rig
+        title: Matching rig
+        desc: compile_diff (80 ms scorer), get_context, promote with rollback, park, permuter, held-out bench.
+        status: done
+        covers: []
+        landed: [90899de]
+      - id: lifter
+        title: Machine lifter
+        desc: >-
+          A deterministic assembly-to-C lifter plus twin transfer and an
+          offline permuter; about 1,480 functions landed without a language
+          model.
+        status: done
+        covers: [area:autodecomp]
+        measure: {kind: fns}
+        landed: [04cf846]
+
+  - id: house
+    hue: blue
+    title: Putting the house in order
+    status: active
+    focus: true
+    summary: >-
+      The project moves to the working method of the Four Swords Adventures
+      decompilation: one rule book, a gate, adversarial review, whole-file
+      ownership and structural progress before byte matching.
+    milestones:
+      - id: own-repo
+        title: Standalone repository, rules and site
+        desc: One matching branch, CLAUDE.md, AGENTS.md, rules card, review brief, this website.
+        status: done
+        covers: []
+      - id: nonmatching-lane
+        title: Non-matching lane
+        desc: >-
+          Functions that compile but do not yet match are kept in the tree,
+          compiled and scored, never linked. Brings the 5,100 lifter
+          candidates into the repository.
+        status: next
+        covers: []
+      - id: structural
+        title: Structural progress metric
+        desc: >-
+          Partial credit for functions whose only differences are register
+          choice, scheduling or delay-slot fill, shown beside the matched
+          figure.
+        status: next
+        covers: []
+      - id: gate
+        title: Mechanical gate
+        desc: tools/gate.py rejects asm, register pins, byte arrays, edits to measuring tools, and unevidenced names.
+        status: next
+        covers: []
+      - id: file-map
+        title: Real source files
+        desc: >-
+          The E3 debug build gives 588 original source files. Functions move
+          out of src/anon and src/autodecomp into the file that owned them.
+        status: next
+        covers: [area:anon, area:autodecomp]
+      - id: grinder
+        title: Grinder
+        desc: Lean worker sessions with write, structure and match lanes, a judge that keeps any improvement, and a reviewer per kept change.
+        status: later
+        covers: []
+
+  - id: small
+    hue: green
+    title: Small functions
+    status: active
+    summary: Everything under 200 bytes, mostly accessors, thin wrappers and constructors.
+    milestones:
+      - id: lt80
+        title: Under 80 bytes
+        desc: Stubs, getters and setters.
+        status: active
+        covers: [bin:lt80]
+        measure: {kind: code}
+      - id: b80-199
+        title: 80 to 199 bytes
+        desc: Twin-adjacent functions; the lifter and small-model workers do most of these.
+        status: active
+        covers: [bin:80-199]
+        measure: {kind: code}
+
+  - id: compiler
+    hue: purple
+    title: Understanding the compiler
+    status: next
+    summary: >-
+      Nearly every unsolved difference is register colouring or delay-slot
+      fill. The answer is to read the compiler, write down the model and
+      search with it, before any more agent waves.
+    milestones:
+      - id: allocator-model
+        title: Register allocator model
+        desc: Verify the GCC 3.2 global.c priority formula against the Sony build with RTL dumps; write docs/REGALLOC.md.
+        status: next
+        covers: []
+      - id: mech-tools
+        title: Mechanical search at scale
+        desc: Permuter and flag sweep over every near-miss; search finds the form, a model names and tidies it.
+        status: next
+        covers: []
+
+  - id: medium
+    hue: red
+    title: The bulk of the game
+    status: next
+    summary: Functions of 200 bytes and more hold almost two thirds of the code. Whole-file work, structure first.
+    milestones:
+      - id: b200-999
+        title: 200 to 999 bytes
+        desc: Whole-file workers; structurally right first, byte match second.
+        status: next
+        covers: [bin:200-999]
+        measure: {kind: code}
+      - id: ge1k
+        title: 1 KB and more
+        desc: Large functions cut into pieces by source statement and solved piecemeal.
+        status: later
+        covers: [bin:ge1k]
+        measure: {kind: code}
+      - id: vu0
+        title: VU0 and MMI functions
+        desc: About 680 functions use vector-unit or multimedia instructions the C compiler never emits from plain C.
+        status: later
+        covers: []
+
+  - id: whole
+    hue: gold
+    title: The whole game
+    status: later
+    summary: Data owned by its files, a real link, the overlays, and a behaviour check against the original.
+    milestones:
+      - id: data
+        title: Files own their data
+        desc: Rodata, data and bss rebuilt from source instead of copied from the original.
+        status: later
+        covers: []
+      - id: overlays
+        title: The five overlays
+        desc: gumibattle, gumimenu, shop, title and movie; about 1.05 MB and 4,700 functions in OVL.IMG.
+        status: later
+        covers: [overlays]
+      - id: harness
+        title: Behaviour harness
+        desc: The original and our build run side by side in PCSX2 on the same inputs.
+        status: later
+        covers: []
+      - id: full-match
+        title: SLPM_666.75 from source
+        desc: Every function matched.
+        status: later
+        covers: [main]
+        measure: {kind: code}
