@@ -1320,8 +1320,8 @@ void func_0019d548(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a
     r4 = r15;
     if (r15 != 0u) {
         ((void(*)(u32,u32,u32,u32,u32,u32,u32,u32))dk__LockOn__end)(r4, r5, r6, r7, r8, r9, r10, r11);
-        *(volatile u32*)((u32)r16 + (s32)(8)) = 0u;
-        *(volatile u32*)((u32)r16 + (s32)(4)) = 0u;
+        *(u32*)((u32)r16 + (s32)(4)) = 0u;
+        *(u32*)((u32)r16 + (s32)(8)) = 0u;
     }
 }
 }  // namespace n0019d548

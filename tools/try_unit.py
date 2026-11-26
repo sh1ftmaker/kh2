@@ -31,8 +31,9 @@ def inside(src, show, flags):
         sys.exit(f"{src}: no compile command in out/cmds.txt (run tools/attribute.py)")
     path = ROOT / src
     ref = Path(os.environ["TRY_UNIT_REF"]).read_bytes()
-    tmp_src = path.with_name(f"zztu_{os.getpid()}{path.suffix}")
-    tmp_out = ROOT / "out" / f"zztu_{os.getpid()}"
+    tag = os.environ.get("TRY_UNIT_TAG", str(os.getpid()))   # every sandbox has the same pids
+    tmp_src = path.with_name(f"zztu_{tag}{path.suffix}")
+    tmp_out = ROOT / "out" / f"zztu_{tag}"
     argv = shlex.split(cmd)
     ref_argv = list(argv)
     if flags is not None:                         # try other switches for the working file only
@@ -94,7 +95,7 @@ def main():
     ref.write_bytes(r.stdout)
     try:
         rc = subprocess.run([str(ROOT / "tools/sandbox.sh"), "python3", "tools/try_unit.py", "--inside", src] + args[1:],
-                            cwd=ROOT, env=dict(os.environ, TRY_UNIT_REF=f"/work/out/{ref.name}")).returncode
+                            cwd=ROOT, env=dict(os.environ, TRY_UNIT_REF=f"/work/out/{ref.name}", TRY_UNIT_TAG=f"{os.getpid()}_{os.urandom(3).hex()}")).returncode
     finally:
         ref.unlink(missing_ok=True)
     sys.exit(rc)

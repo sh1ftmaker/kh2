@@ -278,11 +278,11 @@ void func_002e9d08(S2e9d08* s, u32* res, V2e9d08* origin, V2e9d08* dir, u8 neare
 
 // 002e9fa8 (from src/anon/tiny_auto80.cpp)
 namespace n002e9fa8 {
-void func_002e9fa8(u32 a0, u32 a1, u32 a2, u32 a3) asm("func_002e9fa8");
-void func_002e9fa8(u32 a0, u32 a1, u32 a2, u32 a3) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3;
-    *(volatile u8*)((u32)r4 + (s32)(4)) = (u8)0u;
-    *(volatile u32*)((u32)r4 + (s32)(8)) = 0u;
+struct Obj { u32 f0; u8 f4; u32 f8; };
+void func_002e9fa8(Obj* o) asm("func_002e9fa8");
+void func_002e9fa8(Obj* o) {
+    o->f8 = 0;
+    o->f4 = 0;
 }
 }  // namespace n002e9fa8
 

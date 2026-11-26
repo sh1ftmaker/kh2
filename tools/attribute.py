@@ -41,11 +41,12 @@ BRIDGE = {"mfc1", "mtc1", "lq", "sq", "addi", "li", "nop", "pextlw", "pextuw", "
 MMI = {"pextlw", "pextuw", "pcpyld", "pcpyud", "pextlh", "pextlb", "pextub", "pextuh", "pand", "por", "pxor",
        "paddw", "psubw", "pexew", "pdivw", "pmflo", "pmfhi", "ppacb", "ppach", "ppacw", "pcpyh", "pnor"}
 # What an assembly statement is, from the instructions the compiler pasted:
-#   vu0     vector-unit (COP2) code, with the moves that carry a value in or out
+#   vu0     vector-unit (COP2) code, with the moves that carry a value in or out; also a
+#           statement where at least a third of the instructions are vector-unit ones
 #   qcopy   128-bit copies (lq/sq): the vector classes' copy and assignment
 #   mmi     128-bit multimedia instructions (packing floats into a vector and the like)
 #   trap    a bare break instruction (assertion failure)
-#   kernel  interrupt and cache primitives (ei, di, sync)
+#   kernel  interrupt and cache primitives (ei, di, sync), reads of the global pointer
 #   nop     nothing but nop
 #   cpu     ordinary processor instructions that C could have produced
 ASM_KINDS = ("vu0", "qcopy", "mmi", "trap", "kernel", "nop", "cpu")
@@ -60,8 +61,10 @@ def asm_kind(lines):
     s = set(mns)
     cop2 = [bool(COP2.match(l.lower())) for l in ins]
     rest = {m for m, c in zip(mns, cop2) if not c}
-    if any(cop2) and rest <= BRIDGE:
-        return "vu0"
+    if any(cop2) and (rest <= BRIDGE or 3 * sum(cop2) >= len(ins)):
+        return "vu0"                              # a vector routine, with the loads and loops around it
+    if all(re.search(r"\$(?:28|gp)\b", l) for l in ins):
+        return "kernel"                           # reads the global pointer itself (Sony's RPC code)
     if s <= {"lq", "sq"}:
         return "qcopy"
     if s & MMI and s <= MMI | {"lq", "sq", "mfc1", "mtc1"}:

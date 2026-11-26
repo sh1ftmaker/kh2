@@ -11,6 +11,9 @@ game cannot change. No model is involved.
   nop       assembly statements that hold only nop instructions
   volatile  the volatile qualifier on casts and declarations
   expect    __builtin_expect(x, n) around a condition
+  order     two to four consecutive stores through volatile casts: the same stores without
+            volatile, written in another order (the compiler's scheduler then emits the
+            original order by itself)
   flags     extra compiler switches of a linked unit (linked_units.tsv), except -G0
 
 Run inside the build sandbox, from the repository root:
@@ -113,8 +116,62 @@ def apply_sites(text, sites, drop):
     return "".join(out)
 
 
+VSTORE = re.compile(r"^[ \t]*\*\s*\(\s*volatile\b[^;{}\n]*=[^;{}\n=][^;{}\n]*;[ \t]*$")
+
+
+def order_work(job):
+    """Runs of volatile stores: drop the qualifier and look for an order that compiles the same."""
+    import itertools
+    src, cmd, _, do_apply = job
+    path = ROOT / src
+    lines = path.read_text(errors="surrogateescape").split("\n")
+    runs, i = [], 0
+    while i < len(lines):
+        j = i
+        while j < len(lines) and VSTORE.match(lines[j]):
+            j += 1
+        if 2 <= j - i <= 4:
+            runs.append((i, j))
+        i = max(j, i + 1)
+    if not runs:
+        return src, 0, 0, {}
+    tmp_src = path.with_name(f"zzdt_{os.getpid()}{path.suffix}")
+    tmp_obj = ROOT / "out" / f"zzdt_{os.getpid()}.o"
+    argv = shlex.split(cmd)
+    argv[argv.index("-o") + 1] = str(tmp_obj)
+    argv[-1] = str(tmp_src)
+
+    def build(body):
+        tmp_src.write_text("\n".join(body), errors="surrogateescape")
+        tmp_obj.unlink(missing_ok=True)
+        r = subprocess.run(argv, cwd=ROOT, capture_output=True)
+        return sections(tmp_obj) if not r.returncode and tmp_obj.exists() else None
+
+    done = 0
+    try:
+        base = build(lines)
+        if base is None:
+            return src, len(runs), -1, {}
+        for a, b in runs:
+            plain = [VOLATILE.sub("", ln) for ln in lines[a:b]]
+            for perm in itertools.permutations(plain):
+                trial = lines[:a] + list(perm) + lines[b:]
+                if build(trial) == base:
+                    lines = trial
+                    done += 1
+                    break
+        if done and do_apply:
+            path.write_text("\n".join(lines), errors="surrogateescape")
+        return src, len(runs), done, {"order": [len(runs), done]}
+    finally:
+        tmp_src.unlink(missing_ok=True)
+        tmp_obj.unlink(missing_ok=True)
+
+
 def work(job):
     src, cmd, kinds, do_apply = job
+    if kinds == {"order"}:
+        return order_work(job)
     path = ROOT / src
     text = path.read_text(errors="surrogateescape")
     sites = find_sites(text, kinds)

@@ -1764,8 +1764,8 @@ u32 func_002d18e8(u32 a0, u32 a1, u32 a2, u32 a3) asm("_Z13func_002d18e8jjjj");
 
 u32 func_002d18e8(u32 a0, u32 a1, u32 a2, u32 a3) {
     u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3;
-    *(volatile u32*)((u32)r4 + (s32)(328)) = 0u;
-    *(volatile u32*)((u32)r4 + (s32)(324)) = 0u;
+    *(u32*)((u32)r4 + (s32)(324)) = 0u;
+    *(u32*)((u32)r4 + (s32)(328)) = 0u;
     return ((u32(*)(u32,u32,u32,u32))func_002d25f0)(r4, r5, r6, r7);
 }
 }  // namespace n002d18e8
