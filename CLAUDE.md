@@ -59,7 +59,7 @@ In public text (README, site, commit summaries) say "matched" or
 "byte-matched". Do not write "honest".
 
 <!-- status:start -->
-Status (2026-11-26, written by `tools/site_data.py`): 6,247 of 14,618 functions, 402,992 of 2,226,245 bytes of code matched (18.1 %). By function size: under 80 B 64.5 %, 80–199 B 39.2 %, 200–999 B 4.30 %, 1 KB and more 0.32 %. Game code 6,097 / 13,806 functions (19.1 % of its bytes; tozawa 18.7 %, yasui 24.3 %, harata 28.7 %, naka 14.6 %, taito 13.6 %, worldmap 22.1 %, sasa 27.6 %, rikeda 16.9 %, Smaller directories 20.0 %, Not placed yet 10.5 %); SDK & runtime 150 / 812 functions (3.40 %). 32 of 574 files in the file map have every function matched. The five overlays are not started. `make` ends in MATCHED!.
+Status (2026-11-26, written by `tools/site_data.py`): 6,247 of 14,618 functions, 402,992 of 2,226,245 bytes of code matched (18.1 %). By function size: under 80 B 64.5 %, 80–199 B 39.2 %, 200–999 B 4.30 %, 1 KB and more 0.32 %. Game code 6,097 / 13,806 functions (19.1 % of its bytes; Menus & Jiminy's Journal 18.7 %, Core gameplay 24.3 %, Camera, maps & HUD 28.7 %, Party members & models 14.6 %, Minigames 13.6 %, World map 22.1 %, Cutscenes & musical 27.6 %, Effects & particles 16.9 %, Smaller directories 20.0 %, Not placed yet 10.5 %); SDK & runtime 150 / 812 functions (3.40 %). 32 of 574 files in the file map have every function matched. The five overlays are not started. `make` ends in MATCHED!.
 <!-- status:end -->
 
 ## Layout

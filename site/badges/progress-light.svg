@@ -8,49 +8,49 @@
 <rect x="24" y="98" width="150.6" height="10" rx="5" fill="#3aae5c"/>
 <text x="24" y="140" font-size="12" font-weight="600" letter-spacing="1.4" fill="#7b80a3">BY SOURCE DIRECTORY OF THE ORIGINAL TREE</text>
 <rect x="24" y="169" width="9" height="9" fill="#508ae1" transform="rotate(45 28.5 173.5)"/>
-<text x="44" y="178" font-size="13" fill="#1b1f3a">tozawa</text>
+<text x="44" y="178" font-size="13" fill="#1b1f3a">Menus &amp; Jiminy&#x27;s Journal</text>
 <rect x="230" y="169" width="420" height="8" rx="4" fill="#e6e8f4"/>
 <rect x="230" y="169" width="78.7" height="8" rx="4" fill="#508ae1"/>
 <text x="664" y="178" font-size="13" font-weight="600" fill="#1b1f3a">18.7 %</text>
 <text x="856" y="178" font-size="12" text-anchor="end" fill="#7b80a3">1,136 / 2,358 fn · 481 KiB</text>
 <rect x="24" y="195" width="9" height="9" fill="#c52607" transform="rotate(45 28.5 199.5)"/>
-<text x="44" y="204" font-size="13" fill="#1b1f3a">yasui</text>
+<text x="44" y="204" font-size="13" fill="#1b1f3a">Core gameplay</text>
 <rect x="230" y="195" width="420" height="8" rx="4" fill="#e6e8f4"/>
 <rect x="230" y="195" width="102.1" height="8" rx="4" fill="#c52607"/>
 <text x="664" y="204" font-size="13" font-weight="600" fill="#1b1f3a">24.3 %</text>
 <text x="856" y="204" font-size="12" text-anchor="end" fill="#7b80a3">1,852 / 4,076 fn · 461 KiB</text>
 <rect x="24" y="221" width="9" height="9" fill="#4aa75c" transform="rotate(45 28.5 225.5)"/>
-<text x="44" y="230" font-size="13" fill="#1b1f3a">harata</text>
+<text x="44" y="230" font-size="13" fill="#1b1f3a">Camera, maps &amp; HUD</text>
 <rect x="230" y="221" width="420" height="8" rx="4" fill="#e6e8f4"/>
 <rect x="230" y="221" width="120.4" height="8" rx="4" fill="#4aa75c"/>
 <text x="664" y="230" font-size="13" font-weight="600" fill="#1b1f3a">28.7 %</text>
 <text x="856" y="230" font-size="12" text-anchor="end" fill="#7b80a3">784 / 1,433 fn · 166 KiB</text>
 <rect x="24" y="247" width="9" height="9" fill="#8c55b4" transform="rotate(45 28.5 251.5)"/>
-<text x="44" y="256" font-size="13" fill="#1b1f3a">naka</text>
+<text x="44" y="256" font-size="13" fill="#1b1f3a">Party members &amp; models</text>
 <rect x="230" y="247" width="420" height="8" rx="4" fill="#e6e8f4"/>
 <rect x="230" y="247" width="61.4" height="8" rx="4" fill="#8c55b4"/>
 <text x="664" y="256" font-size="13" font-weight="600" fill="#1b1f3a">14.6 %</text>
 <text x="856" y="256" font-size="12" text-anchor="end" fill="#7b80a3">357 / 897 fn · 121 KiB</text>
 <rect x="24" y="273" width="9" height="9" fill="#00a8a1" transform="rotate(45 28.5 277.5)"/>
-<text x="44" y="282" font-size="13" fill="#1b1f3a">taito</text>
+<text x="44" y="282" font-size="13" fill="#1b1f3a">Minigames</text>
 <rect x="230" y="273" width="420" height="8" rx="4" fill="#e6e8f4"/>
 <rect x="230" y="273" width="57.2" height="8" rx="4" fill="#00a8a1"/>
 <text x="664" y="282" font-size="13" font-weight="600" fill="#1b1f3a">13.6 %</text>
 <text x="856" y="282" font-size="12" text-anchor="end" fill="#7b80a3">272 / 684 fn · 104 KiB</text>
 <rect x="24" y="299" width="9" height="9" fill="#a96087" transform="rotate(45 28.5 303.5)"/>
-<text x="44" y="308" font-size="13" fill="#1b1f3a">worldmap</text>
+<text x="44" y="308" font-size="13" fill="#1b1f3a">World map</text>
 <rect x="230" y="299" width="420" height="8" rx="4" fill="#e6e8f4"/>
 <rect x="230" y="299" width="92.7" height="8" rx="4" fill="#a96087"/>
 <text x="664" y="308" font-size="13" font-weight="600" fill="#1b1f3a">22.1 %</text>
 <text x="856" y="308" font-size="12" text-anchor="end" fill="#7b80a3">173 / 403 fn · 61 KiB</text>
 <rect x="24" y="325" width="9" height="9" fill="#269ac2" transform="rotate(45 28.5 329.5)"/>
-<text x="44" y="334" font-size="13" fill="#1b1f3a">sasa</text>
+<text x="44" y="334" font-size="13" fill="#1b1f3a">Cutscenes &amp; musical</text>
 <rect x="230" y="325" width="420" height="8" rx="4" fill="#e6e8f4"/>
 <rect x="230" y="325" width="115.8" height="8" rx="4" fill="#269ac2"/>
 <text x="664" y="334" font-size="13" font-weight="600" fill="#1b1f3a">27.6 %</text>
 <text x="856" y="334" font-size="12" text-anchor="end" fill="#7b80a3">226 / 410 fn · 60 KiB</text>
 <rect x="24" y="351" width="9" height="9" fill="#608c3d" transform="rotate(45 28.5 355.5)"/>
-<text x="44" y="360" font-size="13" fill="#1b1f3a">rikeda</text>
+<text x="44" y="360" font-size="13" fill="#1b1f3a">Effects &amp; particles</text>
 <rect x="230" y="351" width="420" height="8" rx="4" fill="#e6e8f4"/>
 <rect x="230" y="351" width="70.9" height="8" rx="4" fill="#608c3d"/>
 <text x="664" y="360" font-size="13" font-weight="600" fill="#1b1f3a">16.9 %</text>

@@ -11,7 +11,7 @@ const REGION = {
 };
 const LIB_REGIONS = ["sdk"];
 const PART = {}; // game area key -> { color, name, desc, short }
-const GROUPS = { cat: { word: "Directory", libs: [] } };
+const GROUPS = { cat: { word: "Area", libs: [] } };
 let GROUP = "cat";
 let HAS_W = false; // structural (weighted) progress measured? (summary.totals.code_weighted)
 const REPO = "https://github.com/sh1ftmaker/kh2";
@@ -72,7 +72,7 @@ function buildTree(summary) {
     ROOT.children.push(rn);
     byId.set(rn.id, rn);
     const fileNode = (ln, f, i, src, srcIdx) => {
-      const fnode = { id: `${ln.id}/${i}`, idx: i, kind: "file", region: r.id, part: ln.part, name: f.n, path: f.p, addr: f.a, s: f.s,
+      const fnode = { id: `${ln.id}/${i}`, idx: i, kind: "file", region: r.id, part: ln.part, en: f.e, name: f.n, path: f.p, addr: f.a, s: f.s,
         c: f.c, cm: f.cm, wm: f.wm ?? f.cm, f: f.f, fm: f.fm, d: f.d || 0, dm: f.dm || 0, t: f.t || 0, u: !!f.u, bp: f.bp, src, srcIdx, parent: ln, children: null };
       ln.children.push(fnode);
       byId.set(fnode.id, fnode);
@@ -497,7 +497,8 @@ function tipHTML(n) {
   ];
   if (n.kind === "file") {
     rows.push(["Status", statusText(n.s)]);
-    if (n.region === "game" && n.cat && PART[n.cat]) rows.push(["Directory", PART[n.cat].name]);
+    if (n.en) rows.push(["In English", n.en]);
+    if (n.region === "game" && n.cat && PART[n.cat]) rows.push(["Area", PART[n.cat].name]);
     if (n.region === "game" && n.conf) rows.push(["Placement", `${n.conf} confidence${n.ev ? ` (${n.ev})` : ""}`]);
     rows.push(["Address", hex(n.addr)]);
   } else if (n.kind === "lib" || n.kind === "region") {
@@ -577,9 +578,9 @@ function drawLegend() {
     + `<span><i class="unconfkey">?</i> placement unconfirmed</span>`;
   $("#map-sub").textContent = `Area is bytes of code. The bright fill rising in each tile is matched code${HAS_W
     ? "; the paler band above it is structural progress (size × match % of structurally matched functions)" : ""}. `
-    + "The game code is coloured by the source directory of the original tree each file sat in, the SDK and runtime in gold. "
-    + "Tap or click to dive in: region, directory, file, function.";
-  $("#emblem-cap").textContent = `One gem per source directory of the game code, gold in the middle for the SDK; each fills to its ${HAS_W ? "structural progress, matched code solid" : "share of matched code"}`;
+    + "The game code is coloured by area (what that part of the game does), the SDK and runtime in gold. "
+    + "Tap or click to dive in: region, area, file, function.";
+  $("#emblem-cap").textContent = `One gem per area of the game code, gold in the middle for the SDK; each fills to its ${HAS_W ? "structural progress, matched code solid" : "share of matched code"}`;
 }
 
 /* ---------- overview: where the work is, the libraries, the game code ---------- */
@@ -667,7 +668,7 @@ function drawGameParts() {
   const g = byId.get("game");
   const parts = gameGroups();
   const gw = g.wm ?? g.cm;
-  $("#game-sub").textContent = `Square's own code, grouped by the directory of the original source tree each file sat in. `
+  $("#game-sub").textContent = `Square's own code, grouped by what it does. The original source tree had one directory per programmer; each area here is one of those directories, named in English. `
     + `The 2014 PS3 debug build names the files; data/tu_map.tsv places each PS2 function in one. Solid bars are matched code${HAS_W
       ? "; the lighter extension is structural progress (size × match % of structurally matched functions)" : ""}. A ? marks files placed on thin evidence.`;
   $("#game-sum").innerHTML = (HAS_W ? `<b>${pct(ratio(gw, g.c))}</b> structural &middot; <span class="wnote">${pct(ratio(g.cm, g.c))} matched code</span>` : `<b>${pct(ratio(g.cm, g.c))}</b> matched code`)

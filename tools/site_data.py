@@ -68,18 +68,69 @@ STRUCTURAL = ROOT / "out/generated/structural.json"
 
 # The game's own code, by the directory of the original source tree each file sat in
 # (C:/hd25/kingdom2/<dir>/...). key, directories, name, hue, short label.
+# The directories are named after the programmers who owned them (Japanese surnames), so the
+# site shows what each one holds, in English, with the directory beside it. The descriptions
+# are read off the file names the E3 debug build gives (data/tu_map.tsv).
 AREAS = [
-    ("tozawa", ["tozawa"], "tozawa", "azure", "tozawa"),
-    ("yasui", ["yasui"], "yasui", "crimson", "yasui"),
-    ("harata", ["harata"], "harata", "leaf", "harata"),
-    ("naka", ["naka"], "naka", "violet", "naka"),
-    ("taito", ["taito"], "taito", "teal", "taito"),
-    ("worldmap", ["worldmap"], "worldmap", "rose", "worldmap"),
-    ("sasa", ["sasa"], "sasa", "cyan", "sasa"),
-    ("rikeda", ["rikeda"], "rikeda", "olive", "rikeda"),
+    ("tozawa", ["tozawa"], "Menus & Jiminy's Journal", "azure", "menus"),
+    ("yasui", ["yasui"], "Core gameplay", "crimson", "gameplay"),
+    ("harata", ["harata"], "Camera, maps & HUD", "leaf", "camera & HUD"),
+    ("naka", ["naka"], "Party members & models", "violet", "party & models"),
+    ("taito", ["taito"], "Minigames", "teal", "minigames"),
+    ("worldmap", ["worldmap"], "World map", "rose", "world map"),
+    ("sasa", ["sasa"], "Cutscenes & musical", "cyan", "cutscenes"),
+    ("rikeda", ["rikeda"], "Effects & particles", "olive", "effects"),
     ("smaller", None, "Smaller directories", "coral", "smaller"),
     ("unplaced", ["unknown"], "Not placed yet", "slate", "unplaced"),
 ]
+AREA_ABOUT = {
+    "tozawa": "The pause menu (items, equipment, abilities, party, save and load, config), Jiminy's Journal, "
+              "the per-world special menus, the memory card screens.",
+    "yasui": "The game's main library: objects and their movement, the player and party, actions and attacks, "
+             "battle, commands and limits, missions, messages and windows, items, events.",
+    "harata": "Cameras, map loading and map collision, lights and fades, sprites, and the on-screen display: "
+              "command menu, HP gauges, radar, lock-on, information pop-ups.",
+    "naka": "The party members and summons (Donald, Riku, Simba, Peter Pan, Genie, Stitch, Chicken Little and "
+            "others), their behaviour, plus model drawing, animation and matrix maths.",
+    "taito": "Minigames, among them the 100 Acre Wood ones (honey, the storm, jumping), with their players, "
+             "objects and paths.",
+    "worldmap": "The world map: landing on worlds, cameras, the Gummi Ship on the map, warps, menus.",
+    "sasa": "The cutscene (event) system: cameras, motion, sound, messages, layout. Also the Atlantica "
+            "musical rhythm game.",
+    "rikeda": "Visual effects: the particle system, screen shake, effect playback.",
+}
+SMALLER_ABOUT = {"ishi": "2D sprites and screen layouts", "sugi": "assorted actions (skateboard and others)",
+                 "ohori": "sound", "riCommon": "particle parts", "common": "game modes", "menu": "menu widgets",
+                 "libyw": "scroll bar", "libgumi": "Gummi Ship", "pa": "unidentified"}
+# Parts of file names that are abbreviations, Japanese words or the game's two-letter world codes.
+GLOSSARY = {
+    "cmenu": "pause menu", "jm": "Jiminy's Journal", "smenu": "world-specific menu", "mg": "minigame",
+    "hachimitsu": "honey (Japanese)", "oarashi": "big storm (Japanese)", "gimobj": "gimmick object",
+    "gumi": "Gummi Ship", "gumimenu": "Gummi Ship menu", "gumibattle": "Gummi Ship battle",
+    "wm": "world map", "se": "sound effects", "bgm": "background music", "mcard": "memory card",
+    "saveram": "save data", "munnydraw": "munny display", "synthe": "item synthesis", "btlobj": "battle object",
+    "obj": "object", "bg": "background", "npc": "non-player character", "exp": "experience points",
+    "stat": "status", "gra": "graphics", "seq": "sequence", "musical": "Atlantica musical",
+    "libys": "gameplay library", "libdk": "camera, map and HUD library", "libkn": "party and model library",
+    "libppp2": "particle library", "libssl": "sound library",
+    "he": "Olympus Coliseum", "heco": "Olympus Coliseum", "tt": "Twilight Town", "ttpt": "Twilight Town",
+    "mu": "Land of Dragons", "lm": "Atlantica", "hb": "Hollow Bastion", "tr": "Space Paranoids",
+    "po": "100 Acre Wood", "al": "Agrabah", "eh": "The World That Never Was", "ca": "Port Royal",
+    "cana": "Port Royal", "nm": "Halloween Town", "lk": "Pride Lands", "bb": "Beast's Castle",
+    "dc": "Disney Castle", "wi": "Timeless River",
+}
+
+
+def english_hint(path):
+    """English for the abbreviations in a file's path, or '' when there are none."""
+    seen, out = set(), []
+    for tok in re.split(r"[_/.]", path.rsplit(".", 1)[0]):
+        if tok in GLOSSARY and tok not in seen:
+            seen.add(tok)
+            out.append(f"{tok} = {GLOSSARY[tok]}")
+    return "; ".join(out)
+
+
 AREA_OF_DIR = {d: k for k, dirs, *_ in AREAS if dirs for d in dirs}
 SDK_LIBS = {  # library label in data/sdk_ranges.tsv -> name on the site
     "libkernel/libc/libmc": "SDK 3.0 block",
@@ -212,9 +263,9 @@ def area_desc(key, recs):
         return ("Code the file map could not place in an original source file yet: no anchor from the "
                 "E3 debug build nearby. Grouped into provisional files by address.")
     if key == "smaller":
-        return "The smaller source directories together: " + ", ".join(dirs) + "."
-    lib = f" ({', '.join(n for n, _ in subs.most_common(3))})" if subs else ""
-    return f"Files under {key}/ in the original source tree{lib}, as the E3 debug build names them."
+        return ("The smaller source directories together: "
+                + ", ".join(f"{d} ({SMALLER_ABOUT[d]})" if d in SMALLER_ABOUT else d for d in dirs) + ".")
+    return (f"{AREA_ABOUT[key]} Source directory {key}/, named after its programmer.")
 
 
 def write(fns, subject, elf_ok):
@@ -247,6 +298,9 @@ def write(fns, subject, elf_ok):
             status = "M" if r["fm"] == r["f"] else "N" if r["fm"] else "U"
             row = {"n": r["name"], "p": r["path"], "a": r["fns"][0][1], "s": status,
                    "c": r["c"], "cm": r["cm"], "f": r["f"], "fm": r["fm"]}
+            hint = english_hint(r["path"]) if rid == "game" else ""
+            if hint:
+                row["e"] = hint
             if r["w"] > 0:
                 row["wm"] = round(r["cm"] + r["w"])
             if r["conf"]:
