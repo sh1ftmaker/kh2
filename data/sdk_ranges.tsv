@@ -1,0 +1,24 @@
+lo	hi	bytes	functions	library	kind	evidence
+0010001c	00100228	524	1	crt0	span	1 anchored functions; crt0:1
+0010001c	00100228	524	1	crt0	sub	1 anchors: entry
+001024a8	001024b0	8	1	libc	span	1 anchored functions; libc:1
+001024a8	001024b0	8	1	libc	sub	1 anchors: printf(void*)
+002f1e18	00314640	141352	784	libkernel/libc/libmc	span	268 anchored functions; libkernel:443, libc:92, libmc:49, libvu0:44, libcdvd:38, libdbc:37, libgcc:25, libm:21, libdma:17, libgraph:15, unknown-sdk:3
+002f1e18	002f20c0	680	4	libgraph	sub	1 anchors: sceGsResetPath
+002f20c0	002f2444	900	2	libkernel	sub	1 anchors: _GetGsDxDyOffset
+002f2448	002f35b0	4456	11	libgraph	sub	7 anchors: sceGsPutDispEnv, sceGsSyncV, sceGsSyncPath, FUN_002f28b8, sceGsSetDefStoreImage, sceGsExecLoadImage
+002f35b0	002f3d04	1876	17	libdma	sub	4 anchors: memclr, sceDmaReset, sceDmaPutEnv, sceDmaGetEnv
+002f3d08	002f4a74	3436	44	libvu0	sub	16 anchors: sceVu0MulMatrix, sceVu0TransposeMatrix, sceVu0InversMatrix, _sceVu0ecossin, sceVu0RotMatrix, sceVu0CameraMatrix
+002f4a78	002f67a0	7464	37	libdbc	sub	14 anchors: FUN_002f4a78, FUN_002f4dc0, FUN_002f4e30, FUN_002f4f60, FUN_002f5020, FUN_002f5288
+002f67a0	002f8acc	9004	38	libcdvd	sub	10 anchors: FUN_002f67a0, FUN_002f6870, _Z16u_call4_002f6ca0jjjj, FUN_002f6fc0, sceCdSync, FUN_002f72c0
+002f8ad0	002fb928	11864	21	libm	sub	2 anchors: f_atan2f, f_powf
+002fb928	002fea18	12528	49	libmc	sub	3 anchors: FUN_002fb928, sceMcMkdir, FUN_002fc618
+002fea18	003051c4	26540	92	libc	sub	6 anchors: rand, strcat, strcmp, strlen, strncmp, memchr
+00305200	0030ef10	40208	334	libkernel	sub	178 anchors: FUN_00305200, FUN_00305210, SetGsCrt, FUN_00305230, _Exit, FUN_00305250
+0030ef10	0030f054	324	3	unknown-sdk	sub	1 anchors: FindAddress
+0030f058	00311bb8	11104	107	libkernel	sub	22 anchors: SetSyscall, SetSyscall_0030f0c0, Copy_0030f0d0, GetEntryAddress, Copy_0030f240, SetSyscall_0030f280
+00311bb8	00314640	10888	25	libgcc	sub	3 anchors: __fixunsdfdi, __fixunssfdi, __floatdidf
+00316d68	00316dfc	148	1	libc	span	1 anchored functions; libc:1
+00316d68	00316dfc	148	1	libc	sub	1 anchors: memcmp
+003661a8	00367418	4720	25	libkernel	span	3 anchored functions; libkernel:25
+003661a8	00367418	4720	25	libkernel	sub	3 anchors: FUN_00366ff0, FUN_0036702c, FUN_00367208

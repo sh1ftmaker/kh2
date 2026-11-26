@@ -8,9 +8,24 @@ executable.
 **Progress site: <https://sh1ftmaker.github.io/kh2/>**
 
 <!-- assets:start -->
+<p align="center">
+  <a href="https://sh1ftmaker.github.io/kh2/"><img alt="Matched code" src="https://img.shields.io/endpoint?url=https%3A%2F%2Fsh1ftmaker.github.io%2Fkh2%2Fdata%2Fbadge-code.json&style=flat-square"></a>
+  <a href="https://sh1ftmaker.github.io/kh2/"><img alt="Functions matched" src="https://img.shields.io/endpoint?url=https%3A%2F%2Fsh1ftmaker.github.io%2Fkh2%2Fdata%2Fbadge-functions.json&style=flat-square"></a>
+  <a href="https://sh1ftmaker.github.io/kh2/"><img alt="SLPM_666.75 rebuilt byte-identical" src="https://img.shields.io/endpoint?url=https%3A%2F%2Fsh1ftmaker.github.io%2Fkh2%2Fdata%2Fbadge-elf.json&style=flat-square"></a>
+  <a href="https://github.com/sh1ftmaker/kh2/actions/workflows/pages.yml"><img alt="Pages" src="https://img.shields.io/github/actions/workflow/status/sh1ftmaker/kh2/pages.yml?branch=matching&style=flat-square&label=site"></a>
+</p>
+
+<a href="https://sh1ftmaker.github.io/kh2/">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="site/badges/progress-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="site/badges/progress-light.svg">
+  <img src="site/badges/progress-light.svg" width="100%" alt="Progress overview: 18.1 % of the code matched, with a bar for each source directory of the original tree, the SDK, and each function-size band">
+</picture>
+</a>
 <!-- assets:end -->
 
 <!-- status:start -->
+Status (2026-11-26, written by `tools/site_data.py`): 6,247 of 14,618 functions, 402,992 of 2,226,245 bytes of code matched (18.1 %). By function size: under 80 B 64.5 %, 80–199 B 39.2 %, 200–999 B 4.30 %, 1 KB and more 0.32 %. Game code 6,097 / 13,806 functions (19.1 % of its bytes; tozawa 18.7 %, yasui 24.3 %, harata 28.7 %, naka 14.6 %, taito 13.6 %, worldmap 22.1 %, sasa 27.6 %, rikeda 16.9 %, Smaller directories 20.0 %, Not placed yet 10.5 %); SDK & runtime 150 / 812 functions (3.40 %). 32 of 574 files in the file map have every function matched. The five overlays are not started. `make` ends in MATCHED!.
 <!-- status:end -->
 
 This repository contains no game data. You need your own copy of the game to
