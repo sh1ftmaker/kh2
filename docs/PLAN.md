@@ -69,7 +69,7 @@ missing/extra, different) and give weighted credit to the first two. The
 site and README then show weighted beside matched, as FSA's do. Until it
 exists, no weighted figure is published.
 
-### K3: the gate
+### K3: the gate (done 2026-11-25)
 
 `tools/gate.py`: the whole-ELF compare after a forced object-list rebuild;
 no drop in the total; `functions.tsv` has one symbol per address; no banned

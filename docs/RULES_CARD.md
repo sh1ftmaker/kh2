@@ -34,6 +34,7 @@ python3 tools/rig/permuter.py <addr> --src f.cpp     # a near-miss of 85 % or mo
 python3 tools/rig/promote.py <addr> --src f.cpp --dest src/<area>/<tu>.cpp
 python3 tools/rig/park.py <addr> …                   # give-up record
 python3 tools/lane.py score <addr>                   # re-score a file in nonmatching/
+python3 tools/gate.py --worker                       # before your last commit: must print `gate: ok`
 ```
 
 A function that will not match goes to `nonmatching/<addr>.cpp` (replace the

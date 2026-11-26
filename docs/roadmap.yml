@@ -132,8 +132,8 @@ phases:
         covers: []
       - id: gate
         title: Mechanical gate
-        desc: tools/gate.py rejects asm, register pins, byte arrays, edits to measuring tools, and unevidenced names.
-        status: next
+        desc: tools/gate.py rebuilds and compares the ELF, refuses a drop in progress, asm, register pins, byte arrays, renamed real names, and (for worker branches) edits to shared files.
+        status: done
         covers: []
       - id: file-map
         title: Real source files
