@@ -1105,14 +1105,11 @@ namespace n001733b8 {
 u32 func_001a7610(u32, u32, u32, f32, f32) asm("_Z13func_001a7610jjjff");
 u32 func_001733b8(u32 a0) asm("_Z13func_001733b8j");
 u32 func_001733b8(u32 a0) {
-    u32 s0 = a0;
-    volatile u32* p = (u32*)(u32)a0;
-    u32 a1 = p[1];
-    volatile float* pf = (float*)(u32)s0;
-    float f0 = pf[2];
-    u32 v0 = func_001a7610(*(u32*)((u32)a0 + (s32)(0)), a1, (u32)(4u), f0, 0.0f);
-    *(u32*)((u32)s0 + (s32)(0)) = v0;
-    return v0;
+    BD_VALUE* bd = (BD_VALUE*)a0;
+    u32 x1 = bd[1].u;
+    u32 v = func_001a7610(bd[0].u, x1, 4, bd[2].f, 0.0f);
+    bd[0].u = v;
+    return v;
 }
 }  // namespace n001733b8
 
@@ -1496,14 +1493,8 @@ namespace n00173c38 {
 u32 YS__OBJ__turn_to_dir(...) asm("YS__OBJ__turn_to_dir");
 void func_00173c38(u32 a0) asm("_Z13func_00173c38j");
 void func_00173c38(u32 a0) {
-    u32 s0 = a0;
-    volatile u32* p = (u32*)(u32)a0;
-    u32 t7 = p[0];
-    u32 a1 = p[1];
-    volatile f32* pf = (f32*)(u32)s0;
-    f32 f12 = pf[2];
-    u32 v0 = ((u32(*)(u32, u32, f32))YS__OBJ__turn_to_dir)(*(u32*)((u32)t7 + (s32)(4)), a1, f12);
-    *(u32*)((u32)s0 + (s32)(0)) = v0;
+    BD_VALUE* bd = (BD_VALUE*)a0;
+    bd[0].u = ((u32(*)(u32, u32, f32))YS__OBJ__turn_to_dir)(*(u32*)(bd[0].u + 4), bd[1].u, bd[2].f);
 }
 }  // namespace n00173c38
 
@@ -1723,13 +1714,10 @@ namespace n001740b8 {
 u32 func_00198c28(u32, u32, u32, u32) asm("_Z13func_00198c28jjjj");
 u32 func_001740b8(u32 a0, u32 a1, u32 a2, u32 a3) asm("_Z13func_001740b8jjjj");
 u32 func_001740b8(u32 a0, u32 a1, u32 a2, u32 a3) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r2, r15;
-    r5 = *(volatile u32*)((u32)r4 + (s32)(4));
-    r4 = *(volatile u32*)((u32)r4 + (s32)(0));
-    r2 = ((u32(*)(u32,u32,u32,u32))func_00198c28)(r4, r5, r6, r7);
-    r15 = (u32)((s32)0u + (1));
-    *(u8*)((u32)r2 + (s32)(48)) = (u8)r15;
-    return r2;
+    BD_VALUE* bd = (BD_VALUE*)a0;
+    u32 r = func_00198c28(bd[0].u, bd[1].u, a2, a3);
+    *(u8*)(r + 48) = 1;
+    return r;
 }
 }  // namespace n001740b8
 

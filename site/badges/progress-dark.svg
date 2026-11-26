@@ -1,48 +1,48 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 612" width="880" height="612" role="img" aria-label="Kingdom Hearts II Final Mix decompilation: 83.4 % of the code decompiled">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 612" width="880" height="612" role="img" aria-label="Kingdom Hearts II Final Mix decompilation: 84.6 % of the code decompiled">
 <rect width="880" height="612" rx="14" fill="#0b0d1a" stroke="#2a2f55"/>
 <g font-family="ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif">
 <text x="24" y="38" font-size="13" font-weight="600" letter-spacing="1.6" fill="#7c82a8">KINGDOM HEARTS II FINAL MIX · PLAYSTATION 2 · SLPM_666.75</text>
-<text x="24" y="84" font-size="40" font-weight="700" fill="#eceefb">83.4 %</text>
-<text x="214" y="84" font-size="14" fill="#b4b9d8">of the code decompiled · 1,680,672 of 2,015,044 bytes matched · 10,851 of 11,509 functions</text>
+<text x="24" y="84" font-size="40" font-weight="700" fill="#eceefb">84.6 %</text>
+<text x="214" y="84" font-size="14" fill="#b4b9d8">of the code decompiled · 1,704,640 of 2,015,044 bytes matched · 11,002 of 11,509 functions</text>
 <rect x="24" y="98" width="832" height="10" rx="5" fill="#1c2142"/>
-<rect x="24" y="98" width="693.9" height="10" rx="5" fill="#3aae5c"/>
+<rect x="24" y="98" width="703.8" height="10" rx="5" fill="#3aae5c"/>
 <text x="24" y="140" font-size="12" font-weight="600" letter-spacing="1.4" fill="#7c82a8">BY SOURCE DIRECTORY OF THE ORIGINAL TREE</text>
 <rect x="24" y="169" width="9" height="9" fill="#508ae1" transform="rotate(45 28.5 173.5)"/>
 <text x="44" y="178" font-size="13" fill="#eceefb">Menus &amp; Jiminy&#x27;s Journal</text>
 <rect x="230" y="169" width="420" height="8" rx="4" fill="#1c2142"/>
-<rect x="230" y="169" width="353.8" height="8" rx="4" fill="#508ae1"/>
-<text x="664" y="178" font-size="13" font-weight="600" fill="#eceefb">84.2 %</text>
-<text x="856" y="178" font-size="12" text-anchor="end" fill="#7c82a8">2,033 / 2,140 fn · 458 KiB</text>
+<rect x="230" y="169" width="355.2" height="8" rx="4" fill="#508ae1"/>
+<text x="664" y="178" font-size="13" font-weight="600" fill="#eceefb">84.6 %</text>
+<text x="856" y="178" font-size="12" text-anchor="end" fill="#7c82a8">2,039 / 2,140 fn · 458 KiB</text>
 <rect x="24" y="195" width="9" height="9" fill="#c52607" transform="rotate(45 28.5 199.5)"/>
 <text x="44" y="204" font-size="13" fill="#eceefb">Core gameplay</text>
 <rect x="230" y="195" width="420" height="8" rx="4" fill="#1c2142"/>
-<rect x="230" y="195" width="384.5" height="8" rx="4" fill="#c52607"/>
-<text x="664" y="204" font-size="13" font-weight="600" fill="#eceefb">91.5 %</text>
-<text x="856" y="204" font-size="12" text-anchor="end" fill="#7c82a8">3,140 / 3,232 fn · 416 KiB</text>
+<rect x="230" y="195" width="389.1" height="8" rx="4" fill="#c52607"/>
+<text x="664" y="204" font-size="13" font-weight="600" fill="#eceefb">92.6 %</text>
+<text x="856" y="204" font-size="12" text-anchor="end" fill="#7c82a8">3,178 / 3,232 fn · 416 KiB</text>
 <rect x="24" y="221" width="9" height="9" fill="#4aa75c" transform="rotate(45 28.5 225.5)"/>
 <text x="44" y="230" font-size="13" fill="#eceefb">Camera, maps &amp; HUD</text>
 <rect x="230" y="221" width="420" height="8" rx="4" fill="#1c2142"/>
-<rect x="230" y="221" width="387.1" height="8" rx="4" fill="#4aa75c"/>
-<text x="664" y="230" font-size="13" font-weight="600" fill="#eceefb">92.2 %</text>
-<text x="856" y="230" font-size="12" text-anchor="end" fill="#7c82a8">1,181 / 1,217 fn · 155 KiB</text>
+<rect x="230" y="221" width="389.1" height="8" rx="4" fill="#4aa75c"/>
+<text x="664" y="230" font-size="13" font-weight="600" fill="#eceefb">92.7 %</text>
+<text x="856" y="230" font-size="12" text-anchor="end" fill="#7c82a8">1,195 / 1,217 fn · 155 KiB</text>
 <rect x="24" y="247" width="9" height="9" fill="#8c55b4" transform="rotate(45 28.5 251.5)"/>
 <text x="44" y="256" font-size="13" fill="#eceefb">Party members &amp; models</text>
 <rect x="230" y="247" width="420" height="8" rx="4" fill="#1c2142"/>
-<rect x="230" y="247" width="315.2" height="8" rx="4" fill="#8c55b4"/>
-<text x="664" y="256" font-size="13" font-weight="600" fill="#eceefb">75.1 %</text>
-<text x="856" y="256" font-size="12" text-anchor="end" fill="#7c82a8">554 / 605 fn · 103 KiB</text>
+<rect x="230" y="247" width="324.7" height="8" rx="4" fill="#8c55b4"/>
+<text x="664" y="256" font-size="13" font-weight="600" fill="#eceefb">77.3 %</text>
+<text x="856" y="256" font-size="12" text-anchor="end" fill="#7c82a8">583 / 605 fn · 103 KiB</text>
 <rect x="24" y="273" width="9" height="9" fill="#00a8a1" transform="rotate(45 28.5 277.5)"/>
 <text x="44" y="282" font-size="13" fill="#eceefb">Minigames</text>
 <rect x="230" y="273" width="420" height="8" rx="4" fill="#1c2142"/>
-<rect x="230" y="273" width="387.5" height="8" rx="4" fill="#00a8a1"/>
-<text x="664" y="282" font-size="13" font-weight="600" fill="#eceefb">92.3 %</text>
-<text x="856" y="282" font-size="12" text-anchor="end" fill="#7c82a8">509 / 523 fn · 92 KiB</text>
+<rect x="230" y="273" width="388.7" height="8" rx="4" fill="#00a8a1"/>
+<text x="664" y="282" font-size="13" font-weight="600" fill="#eceefb">92.5 %</text>
+<text x="856" y="282" font-size="12" text-anchor="end" fill="#7c82a8">513 / 523 fn · 92 KiB</text>
 <rect x="24" y="299" width="9" height="9" fill="#a96087" transform="rotate(45 28.5 303.5)"/>
 <text x="44" y="308" font-size="13" fill="#eceefb">World map</text>
 <rect x="230" y="299" width="420" height="8" rx="4" fill="#1c2142"/>
-<rect x="230" y="299" width="332.5" height="8" rx="4" fill="#a96087"/>
-<text x="664" y="308" font-size="13" font-weight="600" fill="#eceefb">79.2 %</text>
-<text x="856" y="308" font-size="12" text-anchor="end" fill="#7c82a8">277 / 287 fn · 49 KiB</text>
+<rect x="230" y="299" width="334.8" height="8" rx="4" fill="#a96087"/>
+<text x="664" y="308" font-size="13" font-weight="600" fill="#eceefb">79.7 %</text>
+<text x="856" y="308" font-size="12" text-anchor="end" fill="#7c82a8">278 / 287 fn · 49 KiB</text>
 <rect x="24" y="325" width="9" height="9" fill="#269ac2" transform="rotate(45 28.5 329.5)"/>
 <text x="44" y="334" font-size="13" fill="#eceefb">Cutscenes &amp; musical</text>
 <rect x="230" y="325" width="420" height="8" rx="4" fill="#1c2142"/>
@@ -52,50 +52,50 @@
 <rect x="24" y="351" width="9" height="9" fill="#608c3d" transform="rotate(45 28.5 355.5)"/>
 <text x="44" y="360" font-size="13" fill="#eceefb">Effects &amp; particles</text>
 <rect x="230" y="351" width="420" height="8" rx="4" fill="#1c2142"/>
-<rect x="230" y="351" width="299.5" height="8" rx="4" fill="#608c3d"/>
-<text x="664" y="360" font-size="13" font-weight="600" fill="#eceefb">71.3 %</text>
-<text x="856" y="360" font-size="12" text-anchor="end" fill="#7c82a8">269 / 286 fn · 49 KiB</text>
+<rect x="230" y="351" width="317.6" height="8" rx="4" fill="#608c3d"/>
+<text x="664" y="360" font-size="13" font-weight="600" fill="#eceefb">75.6 %</text>
+<text x="856" y="360" font-size="12" text-anchor="end" fill="#7c82a8">274 / 286 fn · 49 KiB</text>
 <rect x="24" y="377" width="9" height="9" fill="#d9773f" transform="rotate(45 28.5 381.5)"/>
 <text x="44" y="386" font-size="13" fill="#eceefb">Smaller directories</text>
 <rect x="230" y="377" width="420" height="8" rx="4" fill="#1c2142"/>
-<rect x="230" y="377" width="365.8" height="8" rx="4" fill="#d9773f"/>
-<text x="664" y="386" font-size="13" font-weight="600" fill="#eceefb">87.1 %</text>
-<text x="856" y="386" font-size="12" text-anchor="end" fill="#7c82a8">834 / 868 fn · 113 KiB</text>
+<rect x="230" y="377" width="375.5" height="8" rx="4" fill="#d9773f"/>
+<text x="664" y="386" font-size="13" font-weight="600" fill="#eceefb">89.4 %</text>
+<text x="856" y="386" font-size="12" text-anchor="end" fill="#7c82a8">843 / 868 fn · 113 KiB</text>
 <rect x="24" y="403" width="9" height="9" fill="#8a92b8" transform="rotate(45 28.5 407.5)"/>
 <text x="44" y="412" font-size="13" fill="#eceefb">Not placed yet</text>
 <rect x="230" y="403" width="420" height="8" rx="4" fill="#1c2142"/>
-<rect x="230" y="403" width="295.3" height="8" rx="4" fill="#8a92b8"/>
-<text x="664" y="412" font-size="13" font-weight="600" fill="#eceefb">70.3 %</text>
-<text x="856" y="412" font-size="12" text-anchor="end" fill="#7c82a8">1,263 / 1,365 fn · 343 KiB</text>
+<rect x="230" y="403" width="301.0" height="8" rx="4" fill="#8a92b8"/>
+<text x="664" y="412" font-size="13" font-weight="600" fill="#eceefb">71.7 %</text>
+<text x="856" y="412" font-size="12" text-anchor="end" fill="#7c82a8">1,289 / 1,365 fn · 343 KiB</text>
 <rect x="24" y="429" width="9" height="9" fill="#d29a2e" transform="rotate(45 28.5 433.5)"/>
 <text x="44" y="438" font-size="13" fill="#eceefb">SDK &amp; runtime</text>
 <rect x="230" y="429" width="420" height="8" rx="4" fill="#1c2142"/>
-<rect x="230" y="429" width="323.0" height="8" rx="4" fill="#d29a2e"/>
-<text x="664" y="438" font-size="13" font-weight="600" fill="#eceefb">76.9 %</text>
-<text x="856" y="438" font-size="12" text-anchor="end" fill="#7c82a8">440 / 630 fn · 133 KiB</text>
+<rect x="230" y="429" width="336.8" height="8" rx="4" fill="#d29a2e"/>
+<text x="664" y="438" font-size="13" font-weight="600" fill="#eceefb">80.2 %</text>
+<text x="856" y="438" font-size="12" text-anchor="end" fill="#7c82a8">459 / 630 fn · 133 KiB</text>
 <text x="24" y="478" font-size="12" font-weight="600" letter-spacing="1.4" fill="#7c82a8">BY FUNCTION SIZE</text>
 <rect x="24" y="507" width="9" height="9" fill="#3d9cf0" transform="rotate(45 28.5 511.5)"/>
 <text x="44" y="516" font-size="13" fill="#eceefb">under 80 B</text>
 <rect x="230" y="507" width="420" height="8" rx="4" fill="#1c2142"/>
-<rect x="230" y="507" width="405.2" height="8" rx="4" fill="#3d9cf0"/>
-<text x="664" y="516" font-size="13" font-weight="600" fill="#eceefb">96.5 %</text>
-<text x="856" y="516" font-size="12" text-anchor="end" fill="#7c82a8">5,110 / 5,325 fn · 207 KiB</text>
+<rect x="230" y="507" width="413.2" height="8" rx="4" fill="#3d9cf0"/>
+<text x="664" y="516" font-size="13" font-weight="600" fill="#eceefb">98.4 %</text>
+<text x="856" y="516" font-size="12" text-anchor="end" fill="#7c82a8">5,195 / 5,325 fn · 207 KiB</text>
 <rect x="24" y="533" width="9" height="9" fill="#3d9cf0" transform="rotate(45 28.5 537.5)"/>
 <text x="44" y="542" font-size="13" fill="#eceefb">80–199 B</text>
 <rect x="230" y="533" width="420" height="8" rx="4" fill="#1c2142"/>
-<rect x="230" y="533" width="404.9" height="8" rx="4" fill="#3d9cf0"/>
-<text x="664" y="542" font-size="13" font-weight="600" fill="#eceefb">96.4 %</text>
-<text x="856" y="542" font-size="12" text-anchor="end" fill="#7c82a8">3,426 / 3,545 fn · 431 KiB</text>
+<rect x="230" y="533" width="409.1" height="8" rx="4" fill="#3d9cf0"/>
+<text x="664" y="542" font-size="13" font-weight="600" fill="#eceefb">97.4 %</text>
+<text x="856" y="542" font-size="12" text-anchor="end" fill="#7c82a8">3,460 / 3,545 fn · 431 KiB</text>
 <rect x="24" y="559" width="9" height="9" fill="#3d9cf0" transform="rotate(45 28.5 563.5)"/>
 <text x="44" y="568" font-size="13" fill="#eceefb">200–999 B</text>
 <rect x="230" y="559" width="420" height="8" rx="4" fill="#1c2142"/>
-<rect x="230" y="559" width="367.6" height="8" rx="4" fill="#3d9cf0"/>
-<text x="664" y="568" font-size="13" font-weight="600" fill="#eceefb">87.5 %</text>
-<text x="856" y="568" font-size="12" text-anchor="end" fill="#7c82a8">2,191 / 2,432 fn · 932 KiB</text>
+<rect x="230" y="559" width="373.0" height="8" rx="4" fill="#3d9cf0"/>
+<text x="664" y="568" font-size="13" font-weight="600" fill="#eceefb">88.8 %</text>
+<text x="856" y="568" font-size="12" text-anchor="end" fill="#7c82a8">2,220 / 2,432 fn · 932 KiB</text>
 <rect x="24" y="585" width="9" height="9" fill="#3d9cf0" transform="rotate(45 28.5 589.5)"/>
 <text x="44" y="594" font-size="13" fill="#eceefb">1 KB and more</text>
 <rect x="230" y="585" width="420" height="8" rx="4" fill="#1c2142"/>
-<rect x="230" y="585" width="222.1" height="8" rx="4" fill="#3d9cf0"/>
-<text x="664" y="594" font-size="13" font-weight="600" fill="#eceefb">52.9 %</text>
-<text x="856" y="594" font-size="12" text-anchor="end" fill="#7c82a8">124 / 207 fn · 398 KiB</text>
+<rect x="230" y="585" width="225.4" height="8" rx="4" fill="#3d9cf0"/>
+<text x="664" y="594" font-size="13" font-weight="600" fill="#eceefb">53.7 %</text>
+<text x="856" y="594" font-size="12" text-anchor="end" fill="#7c82a8">127 / 207 fn · 398 KiB</text>
 </g></svg>

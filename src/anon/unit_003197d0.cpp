@@ -192,9 +192,9 @@ void func_003199d0(u32 a0) {
         t15 = t15 + 4u;
     } while (t14 >= 0);
 
-    *(volatile u8*)(a0 + 577u) = 0u;
     *(u32*)(a0 + 52u) = 0u;
-    *(volatile u32*)(a0 + 56u) = 0u;
+    *(u32*)(a0 + 56u) = 0u;
+    *(u8*)(a0 + 577u) = 0u;
 }
 }  // namespace n003199d0
 

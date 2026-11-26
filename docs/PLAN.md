@@ -26,18 +26,22 @@ All 11,509 functions build and match. Of the code bytes:
 
 | kind | share | meaning |
 |---|---|---|
-| `cpp` | 67.4 % | plain C/C++ |
-| `game-asm` | 16.0 % | C++ whose only assembly is what the original had too (vector unit, 128-bit copies, traps) |
-| `cpu-asm` | 4.6 % | ordinary CPU instructions in assembly statements |
+| `cpp` | 68.0 % | plain C/C++ |
+| `game-asm` | 16.6 % | C++ whose only assembly is what the original had too (vector unit, 128-bit copies, traps) |
+| `cpu-asm` | 4.0 % | ordinary CPU instructions in assembly statements |
 | `asm-file` | 3.9 % | plain assembly file |
 | `reg-pin` | 3.0 % | pins a variable to a register |
 | `barrier` | 2.6 % | empty assembly statement that steers the optimiser |
 | `flags` | 1.5 % | code depends on an optimiser switch set for its file only |
-| `volatile` | 1.0 % | memory reached through `volatile` casts |
+| `volatile` | 0.4 % | memory reached through `volatile` casts |
 
-(2026-11-26, after `tools/detrick.py` took out every construct whose removal
-left the object unchanged. Counted the same way, the adopted source stood at
-82.3 % decompiled; it is 83.4 % now.)
+(2026-11-26. Counted the same way, the adopted source stood at 83.0 %
+decompiled, 10,621 functions; it is 84.6 %, 11,002 functions, after
+`tools/detrick.py` took out every construct whose removal left the object
+unchanged and worker sessions rewrote 111 small functions by hand
+(`docs/DETRICK_BRIEF.md`). What is left, 507 functions, resisted both:
+register swaps between two variables, scheduler order of unrelated stores,
+optimiser switches, and the large hand-tuned rendering routines.)
 
 3,536 functions (33 % of bytes) have a real name. Almost none of the source
 is reviewed: it is register-style machine output with raw offsets.

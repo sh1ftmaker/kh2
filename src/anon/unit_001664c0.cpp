@@ -55,24 +55,12 @@ u32 func_001665d8(u32 a0, u32 *a1, u32 *a2, u32 *a3, u32 *a4, u32 *a5,
 u32 func_001665d8(u32 a0, u32 *a1, u32 *a2, u32 *a3, u32 *a4, u32 *a5,
                   u32 *a6) {
     u32 p = a0 + 16;
-
-    register u32 v15 asm("$15") = *(u16 *)(p + 20);
-    *a1 = v15;
-
-    v15 = *(u16 *)(p + 22);
-    *a2 = v15;
-
-    register u32 v14 asm("$14") = *(u32 *)(p + 24);
-    *a3 = v14;
-
-    v15 = *(u32 *)(p + 32);
-    *a4 = v15;
-
-    v14 = *(u32 *)(a0 + 16);
-    *a5 = v14;
-
-    v15 = *(u32 *)(p + 4);
-    *a6 = v15;
+    *a1 = *(u16 *)(p + 20);
+    *a2 = *(u16 *)(p + 22);
+    *a3 = *(u32 *)(p + 24);
+    *a4 = *(u32 *)(p + 32);
+    *a5 = *(u32 *)(a0 + 16);
+    *a6 = *(u32 *)(p + 4);
     return *(u32 *)(p + 40);
 }
 }  // namespace n001665d8
@@ -96,12 +84,13 @@ void func_00166618(u32 a, s16 b, s16 c, s16 d, s16 e, s16 f, s32 i) {
 namespace n001666a0 {
 void func_001666a0(u32, u32, u32, u32) asm("_Z13func_001666a0jjjj");
 void func_001666a0(u32 a0, u32 a1, u32 a2, u32 a3) asm("_Z13func_001666a0jjjj");
+struct R { u32 w0; u16 h4; u16 h6; u16 h8; };
 void func_001666a0(u32 a0, u32 a1, u32 a2, u32 a3) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3;
-    *(volatile u16*)((u32)r4 + (s32)(8)) = (u16)0u;
-    *(u32*)((u32)r4 + (s32)(0)) = 0u;
-    *(volatile u16*)((u32)r4 + (s32)(4)) = (u16)0u;
-    *(volatile u16*)((u32)r4 + (s32)(6)) = (u16)0u;
+    R* p = (R*)a0;
+    p->w0 = 0;
+    p->h4 = 0;
+    p->h6 = 0;
+    p->h8 = 0;
 }
 }  // namespace n001666a0
 

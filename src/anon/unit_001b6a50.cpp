@@ -375,7 +375,7 @@ u8* YS__LEVELUP__Get(void* self, s32 a) asm("YS__LEVELUP__Get");
 u8* YS__LEVELUP__Get(void* self, s32 a) {
     s32 n = func_001b7818(self);
     if (n == 0) n = 1;
-    W1531_Tab* d = *(W1531_Tab* volatile*)&D_01d48cb4;
+    W1531_Tab* d = D_01d48cb4;
     if (n >= d->count || d->tab[n] == 0) n = 1;
     W1531_Tab* e = D_01d48cb4;
     s32* v = (s32*)e + e->tab[n];

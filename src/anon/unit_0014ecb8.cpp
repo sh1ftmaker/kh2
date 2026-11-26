@@ -669,7 +669,7 @@ extern u8 D_0034a428 asm("D_0034a428");
 /*TARGET 0014f6c8*/
 void func_0014f6c8() asm("_Z13func_0014f6c8v");
 void func_0014f6c8() {
-    if (func_00139d78(*(volatile u32*)((u32)&D_0034a428 + (s32)(0))) == 0u) {
+    if (func_00139d78(*(u32*)((u32)&D_0034a428 + (s32)(0))) == 0u) {
         return;
     }
     dk__TIMER__close(*(u32*)((u32)&D_0034a428 + (s32)(0)));
@@ -684,7 +684,7 @@ extern u8 D_0034a428 asm("D_0034a428");
 /*TARGET 0014f708*/
 void func_0014f708() asm("_Z13func_0014f708v");
 void func_0014f708() {
-    if (func_00139d78(*(volatile u32*)((u32)&D_0034a428 + (s32)(0))) == 0u) {
+    if (func_00139d78(*(u32*)((u32)&D_0034a428 + (s32)(0))) == 0u) {
         return;
     }
     dk__TIMER__alert(*(u32*)((u32)&D_0034a428 + (s32)(0)));
@@ -699,7 +699,7 @@ extern u8 D_0034a428 asm("D_0034a428");
 /*TARGET 0014f748*/
 void func_0014f748() asm("_Z13func_0014f748v");
 void func_0014f748() {
-    if (func_00139d78(*(volatile u32*)((u32)&D_0034a428 + (s32)(0))) == 0u) {
+    if (func_00139d78(*(u32*)((u32)&D_0034a428 + (s32)(0))) == 0u) {
         return;
     }
     func_001515b0(*(u32*)((u32)&D_0034a428 + (s32)(0)));
@@ -2061,9 +2061,7 @@ namespace n00151690 {
 /*TARGET 00151690*/
 f32 func_00151690(u32 a0) asm("_Z13func_00151690j");
 f32 func_00151690(u32 a0) {  // scale_ratio_2888_2880
-    f32 f1 = *(volatile f32*)((u32)a0 + (s32)(2880));
-    f32 f0 = *(volatile f32*)((u32)a0 + (s32)(2888));
-    return (f32)(f0 / f1);
+    return *(f32*)(a0 + 2888) / *(f32*)(a0 + 2880);
 }
 }  // namespace n00151690
 
@@ -2749,9 +2747,9 @@ void func_00152718(u32 a0, u32 a1, u32 a2, u32 a3) {
         return;
     }
 
-    volatile u32* vp = (u32*)a0;
-    u32 a1v = vp[107];
+    u32* vp = (u32*)a0;
     u32 a3v = vp[106];
+    u32 a1v = vp[107];
     YS__MESSAGEDRAW__MESSAGEDRAW(buf, a1v, n, a3v, 0);
 
     u32 s0 = s2 + func_0023aa18(s1);

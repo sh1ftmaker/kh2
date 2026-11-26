@@ -273,13 +273,12 @@ void func_0023f8a8(u32 a0, u32 a1, u32 a2, u32 a3) asm("_Z13func_0023f8a8jjjj");
 // 0022c410: moved to src/sasa/event_countdown.cpp (linked unit)
 
 void func_0023f8a8(u32 a0, u32 a1, u32 a2, u32 a3) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3;
-    *(volatile u32*)((u32)r4 + (s32)(20)) = 0u;
-    *(u32*)((u32)r4 + (s32)(4)) = 0u;
-    *(volatile u8*)((u32)r4 + (s32)(24)) = (u8)0u;
-    *(u32*)((u32)r4 + (s32)(8)) = 0u;
-    *(volatile u32*)((u32)r4 + (s32)(12)) = 0u;
-    *(volatile u32*)((u32)r4 + (s32)(16)) = 0u;
+    *(u32*)(a0 + 4) = 0;
+    *(u8*)(a0 + 24) = 0;
+    *(u32*)(a0 + 8) = 0;
+    *(u32*)(a0 + 12) = 0;
+    *(u32*)(a0 + 16) = 0;
+    *(u32*)(a0 + 20) = 0;
 }
 }  // namespace n0023f8a8
 
@@ -1371,12 +1370,8 @@ s32 Tz__MCard__UpdateDirInfo(void) {
             if (len == 18 && strcmp(ent->fname + 0xf, D_003716d8) == 0) {
                 D_0035ec94->hasSystem = 1;
             } else if (len == 17) {
-                // The empty asm hides that c is a zero-extended byte, so the
-                // (u8) conversion for num2 keeps the original's andi 0xff.
-                s32 c = ((u8*)ent->fname)[0xf];
-                asm("" : "+r"(c));
-                if ((u32)(c - '0') < 10) {
-                    s32 idx = num2(c, ent->fname[0x10]);
+                if ((u8)(ent->fname[0xf] - '0') < 10) {
+                    s32 idx = num2(ent->fname[0xf], ent->fname[0x10]);
                     D_0035ec94->slot[idx].used.v = 1;
                     D_0035ec94->slot[idx].name = ent->name;
                 }

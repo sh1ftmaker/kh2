@@ -368,15 +368,15 @@ void func_0013f518(u32 a0, u32 a1, u32 a2, u32 a3) {
 
 // ---- 0013f538 from src/anon/tiny_auto80.cpp
 namespace n0013f538 {
-void func_0013f538(u32 a0, u32 a1, u32 a2, u32 a3) asm("_Z13func_0013f538jjjj");
-void func_0013f538(u32 a0, u32 a1, u32 a2, u32 a3) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3;
-    *(volatile u32*)((u32)r4 + (s32)(68)) = 0u;
-    *(u8*)((u32)r4 + (s32)(56)) = (u8)0u;
-    *(volatile u8*)((u32)r4 + (s32)(57)) = (u8)0u;
-    *(u8*)((u32)r4 + (s32)(59)) = (u8)0u;
-    *(volatile u32*)((u32)r4 + (s32)(60)) = 0u;
-    *(volatile u32*)((u32)r4 + (s32)(64)) = 0u;
+struct W538 { u8 pad0[56]; u8 b38; u8 b39; u8 b3a; u8 b3b; u32 w3c; u32 w40; u32 w44; };
+void func_0013f538(W538* a0, u32 a1, u32 a2, u32 a3) asm("_Z13func_0013f538jjjj");
+void func_0013f538(W538* a0, u32 a1, u32 a2, u32 a3) {
+    a0->b38 = 0;
+    a0->b39 = 0;
+    a0->b3b = 0;
+    a0->w3c = 0;
+    a0->w40 = 0;
+    a0->w44 = 0;
 }
 }  // namespace n0013f538
 

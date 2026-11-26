@@ -408,22 +408,19 @@ void func_00189128(u32 a0) {
 namespace n00189170 {
 void func_00189170(u32 a0) asm("_Z13func_00189170j");
 void func_00189170(u32 a0) {
-    u32 t7 = (u32)1;
-    *(u16*)((u32)a0 + (s32)(0)) = (u16)0u;
-    *(volatile u8*)((u32)a0 + (s32)(3)) = (u8)t7;
-    register u32 t6 asm("$14") = (u32)((s32)a0 + (8));
-    *(u8*)((u32)a0 + (s32)(2)) = (u8)t7;
-    register u32 t5 asm("$13") = (u32)23;
-    *(volatile u32*)((u32)a0 + (s32)(4)) = 0u;
-    t7 = (u32)-1;
+    struct S { u16 a; u8 b; u8 c; u32 d; u16 e[24]; };
+    S* p = (S*)a0;
+    u16* q;
+    s32 n;
+    p->a = 0;
+    p->b = 1;
+    p->c = 1;
+    p->d = 0;
+    q = p->e;
+    n = 23;
     do {
-        *(u16*)((u32)t6 + (s32)(0)) = (u16)0u;
-        t5 = (u32)((s32)t5 + (-1));
-        if (t5 == t7) {
-            break;
-        }
-        t6 = (u32)((s32)t6 + (2));
-    } while (1);
+        *q++ = 0;
+    } while (n-- != 0);
 }
 }  // namespace n00189170
 

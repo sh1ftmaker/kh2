@@ -593,15 +593,10 @@ namespace n001d7f10 {
 u32 func_001d7f10(u32 a0) asm("func_001d7f10");
 u32 func_001d7f10(u32 a0) {
     u32 base_addr = 0x00350000u;
-    u32 off = a0 << 2;
-    register u32 base asm("$13") = *(u32 *)(base_addr + 10488);
+    u32* base = *(u32 **)(base_addr + 10488);
     u32 ret = 0;
-    u32 count = *(u32 *)(base + 4);
-    u32 ok = (s32)a0 < (s32)count;
-    off += base;
-    if (ok != 0) {
-        u32 v = *(u32 *)(off + 8);
-        ret = v != 0;
+    if ((s32)a0 < (s32)base[1]) {
+        ret = base[a0 + 2] != 0;
     }
     return ret;
 }
@@ -1413,6 +1408,7 @@ u32 IsGaugeWarning_w1519(s32 i) {
 // 001d8fa8 (from src/anon/batch_w58.cpp)
 namespace n001d8fa8 {
 struct VObj { void** vt; };
+struct WGFlags { u32 on : 1; };
 typedef void (*VFn)(void*);
 s32 func_001bb4a0(void) asm("func_001bb4a0");
 u8* func_001bbcb0(void) asm("func_001bbcb0");
@@ -1420,7 +1416,7 @@ void YS__MISSION__WarningGauge(u8 on, s32 i) asm("YS__MISSION__WarningGauge");
 void YS__MISSION__WarningGauge(u8 on, s32 i) {
     if (!func_001bb4a0()) return;
     u8* e = func_001bbcb0() + i * 52;
-    u8 f = *(volatile u32*)(e + 412) & 1;
+    u8 f = ((WGFlags*)(e + 412))->on;
     if (!f) return;
     VObj* o = (VObj*)(e + 400);
     if (on) ((VFn)o->vt[3])(o);

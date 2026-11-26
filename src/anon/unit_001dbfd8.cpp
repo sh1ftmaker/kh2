@@ -283,15 +283,13 @@ s32 func_001dc4e8(u8* p, u32 a, u32 b, u32 c) {
 
 // ---- 001dc540 from src/anon/tiny_auto80.cpp
 namespace n001dc540 {
-u32 func_001dc540(u32 a0, u32 a1, u32 a2, u32 a3) asm("_Z13func_001dc540jjjj");
-u32 func_001dc540(u32 a0, u32 a1, u32 a2, u32 a3) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r2, r15;
-    r15 = *(u32*)((u32)r5 + (s32)(0));
-    r2 = (u32)((s32)0u + (1));
-    *(volatile u32*)((u32)r4 + (s32)(16)) = r7;
-    *(u32*)((u32)r4 + (s32)(20)) = r15;
-    *(volatile u32*)((u32)r4 + (s32)(24)) = r6;
-    return r2;
+struct Effect { u32 pad[4]; u32 priority; u32 data; u32 id; };  // ryj::EFFECT: Priority @0x10, Data @0x14, ID @0x18
+u32 func_001dc540(Effect* e, u32* data, u32 id, u32 priority) asm("_Z13func_001dc540jjjj");
+u32 func_001dc540(Effect* e, u32* data, u32 id, u32 priority) {
+    e->data = *data;
+    e->id = id;
+    e->priority = priority;
+    return 1;
 }
 }  // namespace n001dc540
 

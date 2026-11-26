@@ -348,15 +348,11 @@ void func_0014dd18(u32 a0) {
 
 // --- 0014dd60
 namespace n0014dd60 {
-void func_0014dd60(u32 a0, u32 a1, u32 a2, u32 a3) asm("_Z13func_0014dd60jjjj");
-void func_0014dd60(u32 a0, u32 a1, u32 a2, u32 a3) {  // store_3bytes_470
-    a1 &= 0xff;
-    a2 &= 0xff;
-    a3 &= 0xff;
-    asm volatile("" : "+r"(a1), "+r"(a2), "+r"(a3));
-    *(volatile u8 *)(a0 + 470) = a1;
-    *(u8 *)(a0 + 472) = a3;
-    *(volatile u8 *)(a0 + 471) = a2;
+void func_0014dd60(u8* a0, u8 a, u8 b, u8 c) asm("_Z13func_0014dd60jjjj");
+void func_0014dd60(u8* a0, u8 a, u8 b, u8 c) {  // store_3bytes_470
+    a0[470] = a;
+    a0[471] = b;
+    a0[472] = c;
 }
 }  // namespace n0014dd60
 

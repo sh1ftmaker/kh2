@@ -150,15 +150,16 @@ void func_002e40a8(u32 a0, u32 a1) asm("_Z13func_002e40a8jj");
 // 002e3be8: moved to src/anon/unit_002e2f08.cpp
 
 void func_002e40a8(u32 a0, u32 a1) {
-    volatile f32* s = (f32*)a1;
-    f32 f0 = s[3];
-    f32 f1 = s[0];
-    f32 f2 = s[1];
-    f32 f3 = s[2];
-    *(volatile f32*)(a0 + 12) = f0;
-    *(f32*)(a0 + 0) = f1;
-    *(volatile f32*)(a0 + 4) = f2;
-    *(volatile f32*)(a0 + 8) = f3;
+    f32* s = (f32*)a1;
+    f32* d = (f32*)a0;
+    f32 x = s[0];
+    f32 y = s[1];
+    f32 z = s[2];
+    f32 w = s[3];
+    d[0] = x;
+    d[1] = y;
+    d[2] = z;
+    d[3] = w;
 }
 }  // namespace n002e40a8
 

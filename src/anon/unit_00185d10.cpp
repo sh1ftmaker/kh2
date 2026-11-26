@@ -1676,11 +1676,9 @@ void wtarget_001878e8(u32 a0, u32, u32, u32);
 namespace src36 {
 void wtarget_001878e8(u32 a0, u32, u32, u32) asm("_Z16wtarget_001878e8jjjj");
 void wtarget_001878e8(u32 a0, u32, u32, u32) {
-    register u32 p asm("$14") = a0 + 2640;
-    asm volatile("" : "+r"(p));
     u32 v = *(u32 *)(a0 + 2732);
     if (v != 0) {
-        func_001c0458(p, v);
+        func_001c0458(a0 + 2640, v);
     }
 }
 }
@@ -1982,17 +1980,13 @@ void YS__ACT__exec(Obj187 *p)
 namespace src36 {
 u32 func_00187e20(u32 a0) asm("func_00187e20");
 u32 func_00187e20(u32 a0) {
-    register u32 v asm("$15") = *(u32 *)(a0 + 156);
-    v &= 1;
-    v &= 0xff;
-
+    u32 w = *(u32 *)(a0 + 156);
+    u8 fl = w & 1;
     u32 ret = 0;
-    if (v == 0) {
-        register u32 p asm("$14") = *(u32 *)(a0 + 136);
+    if (fl == 0) {
+        u32 p = *(u32 *)(a0 + 136);
         u32 q = *(u32 *)(p + 4);
-        v = *(u32 *)(q + 352);
-        u32 mask = 0x40000;
-        v &= mask;
+        u32 v = *(u32 *)(q + 352) & 0x40000;
         ret = v != 0;
     }
     return ret;

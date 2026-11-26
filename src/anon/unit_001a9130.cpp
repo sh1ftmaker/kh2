@@ -965,20 +965,11 @@ u32 YS__MESSAGEDRAW__set_line_space(u32 a0, u32 a1, u32 a2, u32 a3) {
 namespace n001aa6f0 {
 u32 func_001aa6f0(u32 a0, u32 a1) asm("func_001aa6f0");
 u32 func_001aa6f0(u32 a0, u32 a1) {
-    u32 scale = *(u8 *)(a0 + 63);
-    u32 alpha = a1 >> 24;
-    register u32 mask asm("$14") = 0x00ffffff;
-    alpha *= scale;
-    a1 &= mask;
-    mask = 255;
-    alpha >>= 7;
-    scale = alpha < 256;
-    if (scale == 0) {
-        alpha = mask;
+    u32 alpha = ((a1 >> 24) * *(u8 *)(a0 + 63)) >> 7;
+    if (alpha >= 256) {
+        alpha = 255;
     }
-    alpha <<= 24;
-    a1 |= alpha;
-    return a1;
+    return (a1 & 0x00ffffff) | (alpha << 24);
 }
 } // n001aa6f0
 

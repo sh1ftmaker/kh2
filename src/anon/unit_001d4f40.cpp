@@ -363,18 +363,13 @@ void func_001d5718(BD_VALUE* bd) { func_001d5730(bd); }
 // 001d5730 (from src/anon/tiny_auto80_queue.cpp)
 namespace n001d5730 {
 u32 func_002bc358(...) asm("func_002bc358");
-void func_001d5730(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) asm("func_001d5730");
-void func_001d5730(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r8 = a4, r9 = a5, r10 = a6, r11 = a7, r15, r16;
-    r16 = r4;
-    r15 = *(u32*)((u32)r4 + (s32)(0));
-    r4 = r15;
-    if (r15 != 0u) {
-        r5 = (u32)((s32)0u + (10));
-        ((void(*)(u32,u32,u32,u32,u32,u32,u32,u32))func_002bc358)(r4, r5, r6, r7, r8, r9, r10, r11);
-        *(volatile u32*)((u32)r16 + (s32)(8)) = 0u;
-        *(u32*)((u32)r16 + (s32)(0)) = 0u;
-        *(volatile u32*)((u32)r16 + (s32)(4)) = 0u;
+void func_001d5730(u32* bd) asm("func_001d5730");
+void func_001d5730(u32* bd) {
+    if (bd[0] != 0u) {
+        func_002bc358(bd[0], 10);
+        bd[0] = 0u;
+        bd[1] = 0u;
+        bd[2] = 0u;
     }
 }
 } // n001d5730

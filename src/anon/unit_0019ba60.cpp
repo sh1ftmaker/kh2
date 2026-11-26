@@ -462,18 +462,9 @@ namespace n0019c440 {
 u32 ctarget_0019c440(u32 a0, u32, u32, u32) asm("_Z16ctarget_0019c440jjjj");
 u32 ctarget_0019c440(u32 a0, u32, u32, u32) {
     u32 p = *(u32 *)(a0 + 8);
-    register u32 v asm("$15") = *(u16 *)(p + 72);
-    v >>= 5;
-    v &= 1;
-    v &= 0xff;
-
-    u32 ret = 0;
-    if (v != 0) {
-        v = *(u8 *)(a0 + 2268);
-        v ^= 1;
-        ret = v < 1;
-    }
-    return ret;
+    u8 v = (*(u16 *)(p + 72) >> 5) & 1;
+    if (v == 0) return 0;
+    return *(u8 *)(a0 + 2268) == 1;
 }
 }  // namespace n0019c440
 
@@ -495,19 +486,10 @@ namespace n0019c498 {
 u32 func_0019c498(u32 a0) asm("_Z13func_0019c498j");
 u32 func_0019c498(u32 a0) {
     u32 p = *(u32 *)(a0 + 12);
-    register u32 v asm("$15") = *(u32 *)(p + 8);
-    v &= 0x80;
-    u32 ret = 0;
-    if (v != 0) {
-        v = *(u32 *)(a0 + 352);
-        v &= 0x4000;
-        if (v == 0) {
-            v = *(u32 *)(a0 + 360);
-            v &= 2;
-            ret = v < 1;
-        }
-    }
-    return ret;
+    if ((*(u32 *)(p + 8) & 0x80) == 0) return 0;
+    if (*(u32 *)(a0 + 352) & 0x4000) return 0;
+    u32 bit = *(u32 *)(a0 + 360) & 2;
+    return bit == 0;
 }
 }  // namespace n0019c498
 

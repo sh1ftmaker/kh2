@@ -602,10 +602,10 @@ void Ft4Base::setGsPrim(u64 v) { reinterpret_cast<Ft4BaseLayout*>(this)->gs_prim
 // ---- 0013ee40 from src/anon/auto200_999.cpp
 namespace dk {
 void Ft4Base::setGsUV(u64 a0, u64 a1, u64 a2, u64 a3) {
-    *(volatile u64 *)((u8 *)this + 208) = a0;
+    *(u64 *)((u8 *)this + 208) = a0;
+    *(u64 *)((u8 *)this + 224) = a1;
+    *(u64 *)((u8 *)this + 240) = a2;
     *(u64 *)((u8 *)this + 256) = a3;
-    *(volatile u64 *)((u8 *)this + 224) = a1;
-    *(volatile u64 *)((u8 *)this + 240) = a2;
 }
 }  // namespace dk
 

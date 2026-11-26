@@ -14,7 +14,7 @@
 
 // 002aeb28 (was src/tozawa/jm_puzzle.cpp)
 namespace Tz { // method 002aeb28
-extern u8* volatile D_0035f638 asm("D_0035f638");
+extern u8* D_0035f638 asm("D_0035f638");
 void func_002fde18(void*, u32, u32) asm("func_002fde18");
 void JmPuzzle::InitInfo() {
     u32 s0 = 0x00360000;

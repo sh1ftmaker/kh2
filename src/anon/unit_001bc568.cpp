@@ -50,16 +50,15 @@ s32 func_001bc568(E1bc* e, B1bc* b) {
 
 // ---- 001bc688 from src/yasui/libys/commandmenu.cpp
 namespace n001bc688 {
-void slot_clear(u8* self) asm("_ZN2YS12COMMAND_SLOT5clearEv");
-void slot_clear(u8* self) {
-    u32 r4 = (u32)self, r15;
-    r15 = (u32)((s32)0u + 5);
-    *(u32*)(r4 + 8) = 0u;
-    *(volatile u8*)(r4 + 5) = (u8)r15;
-    *(u16*)(r4 + 0) = (u16)0u;
-    *(volatile u16*)(r4 + 2) = (u16)0u;
-    *(u8*)(r4 + 4) = (u8)0u;
-    *(volatile u8*)(r4 + 6) = (u8)0u;
+struct COMMAND_SLOT { u16 h0; u16 h2; u8 b4; u8 b5; u8 b6; u8 pad7; u32 w8; };
+void slot_clear(COMMAND_SLOT* self) asm("_ZN2YS12COMMAND_SLOT5clearEv");
+void slot_clear(COMMAND_SLOT* self) {
+    self->h0 = 0;
+    self->h2 = 0;
+    self->b4 = 0;
+    self->b5 = 5;
+    self->b6 = 0;
+    self->w8 = 0;
 }
 }  // namespace n001bc688
 

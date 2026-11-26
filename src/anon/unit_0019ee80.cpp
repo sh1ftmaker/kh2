@@ -336,15 +336,7 @@ void func_0019f4e8(u32* p, u32 n) {
 namespace n0019f528 {
 u32 func_0019f528(u32 a0, u32 a1) asm("_Z13func_0019f528jj");
 u32 func_0019f528(u32 a0, u32 a1) {
-    u32 word = a1 >> 5;
-    register u32 mask asm("$15") = 1;
-    word <<= 2;
-    a1 &= 0x1f;
-    word += a0;
-    mask <<= a1;
-    u32 v = *(u32 *)word;
-    v &= mask;
-    return v != 0;
+    return (((u32 *)a0)[a1 >> 5] & (1 << (a1 & 0x1f))) != 0;
 }
 }  // namespace n0019f528
 

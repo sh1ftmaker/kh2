@@ -20,13 +20,13 @@ original file structure, and no assembly where C++ will do.
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="site/badges/progress-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="site/badges/progress-light.svg">
-  <img src="site/badges/progress-light.svg" width="100%" alt="Progress overview: 83.4 % of the code decompiled, with a bar for each source directory of the original tree, the SDK, and each function-size band">
+  <img src="site/badges/progress-light.svg" width="100%" alt="Progress overview: 84.6 % of the code decompiled, with a bar for each source directory of the original tree, the SDK, and each function-size band">
 </picture>
 </a>
 <!-- assets:end -->
 
 <!-- status:start -->
-Status (2026-11-26, written by `tools/site_data.py`): 10,851 of 11,509 functions, 1,680,672 of 2,015,044 bytes of code decompiled to C/C++ (83.4 %); all 11,509 are built from source and the executable is byte-identical, but 658 still use assembly or a register pin; 3,536 functions (33.0 % of the code) carry a real name. By function size: under 80 B 96.5 %, 80–199 B 96.4 %, 200–999 B 87.5 %, 1 KB and more 52.9 %. Game code 10,411 / 10,879 functions (83.9 % of its bytes; Menus & Jiminy's Journal 84.2 %, Core gameplay 91.5 %, Camera, maps & HUD 92.2 %, Party members & models 75.1 %, Minigames 92.3 %, World map 79.2 %, Cutscenes & musical 95.0 %, Effects & particles 71.3 %, Smaller directories 87.1 %, Not placed yet 70.3 %); SDK & runtime 440 / 630 functions (76.9 %). 447 of 668 files in the file map have every function matched. The five overlays are not started. `make` ends in MATCHED!.
+Status (2026-11-26, written by `tools/site_data.py`): 11,002 of 11,509 functions, 1,704,640 of 2,015,044 bytes of code decompiled to C/C++ (84.6 %); all 11,509 are built from source and the executable is byte-identical, but 507 still use assembly or a register pin; 3,536 functions (33.0 % of the code) carry a real name. By function size: under 80 B 98.4 %, 80–199 B 97.4 %, 200–999 B 88.8 %, 1 KB and more 53.7 %. Game code 10,543 / 10,879 functions (84.9 % of its bytes; Menus & Jiminy's Journal 84.6 %, Core gameplay 92.6 %, Camera, maps & HUD 92.7 %, Party members & models 77.3 %, Minigames 92.5 %, World map 79.7 %, Cutscenes & musical 95.0 %, Effects & particles 75.6 %, Smaller directories 89.4 %, Not placed yet 71.7 %); SDK & runtime 459 / 630 functions (80.2 %). 490 of 668 files in the file map have every function matched. The five overlays are not started. `make` ends in MATCHED!.
 <!-- status:end -->
 
 This repository contains no game data. You need your own copy of the game to

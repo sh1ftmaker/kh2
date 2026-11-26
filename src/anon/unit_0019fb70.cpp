@@ -1660,9 +1660,7 @@ u32 YS__SHEET__is_mpdrive(u32 a0, u32 a1, u32 a2, u32 a3) {
 namespace n001a1e00 {
 f32 func_001a1e00(u32 a0) asm("_Z13func_001a1e00j");
 f32 func_001a1e00(u32 a0) {
-    f32 f1 = *(volatile f32*)((u32)a0 + (s32)(448));
-    f32 f0 = *(volatile f32*)((u32)a0 + (s32)(444));
-    return (f32)(f0 / f1);
+    return *(f32*)(a0 + 444) / *(f32*)(a0 + 448);
 }
 }  // namespace n001a1e00
 

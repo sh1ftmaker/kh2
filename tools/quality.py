@@ -11,6 +11,7 @@ kind, worst first; a function gets the worst that applies:
   asm-file   it comes from a .s file (not decompiled; Sony's own assembly included)
   cpu-asm    assembly statements with ordinary processor instructions C could have produced
   volatile   memory reached through volatile casts: machine code transcribed load by load
+             (not counted on a line that names a hardware register, 0x1000xxxx and the like)
   reg-pin    a variable pinned to a machine register (register T x asm("$16"))
   barrier    an empty assembly statement, there only to steer the optimiser
   flags      its code depends on an optimiser switch the rest of the game does not use
@@ -38,6 +39,7 @@ RANK = {k: i for i, k in enumerate(KINDS)}
 BARRIER = re.compile(r"(?:\b__asm__|\basm)\s*(?:volatile|__volatile__)?\s*\(\s*\"\"")
 PIN = re.compile(r"\bregister\b[^;{}]*\b(?:asm|__asm__)\s*\(\s*\"\$")
 VOLATILE = re.compile(r"\bvolatile\b(?!\s*\()")
+HARDWARE = re.compile(r"\b0x(?:1000|1200|[bB]000)[0-9a-fA-F]{4}\b")
 GAME_ASM = {"vu0", "qcopy", "mmi", "trap", "kernel"}
 SUFFIX_FLAGS = re.compile(r"_(?:nosched|nsi|nsr|mam|ncfj|aj1|nsamam|gnsamam|gnsa_nogcse)\.(?:c|cpp)$")
 
@@ -60,7 +62,8 @@ def classify_function(src_lines, row, suffix_flags):
     text = "\n".join(src_lines[n - 1] for n in sorted(nums) if 0 < n <= len(src_lines))
     found = Counter()
     found["cpu-asm"] = asm["cpu"] + asm["nop"]
-    found["volatile"] = len(VOLATILE.findall(text))
+    # volatile on a line that names a hardware register address is what Sony's own macros do
+    found["volatile"] = sum(len(VOLATILE.findall(ln)) for ln in text.split("\n") if not HARDWARE.search(ln))
     found["reg-pin"] = len(PIN.findall(text))
     found["barrier"] = len(BARRIER.findall(text))
     found["flags"] = asm["steered"] + int(suffix_flags)

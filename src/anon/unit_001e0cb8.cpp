@@ -2387,17 +2387,15 @@ extern const u32 R_0036ecf0[5] asm("D_0036ecf0") __attribute__((aligned(4))) = {
 // 001e4248 (was src/anon/batch_w244.cpp)
 namespace n001e4248 {
 // 002cef80: moved to src/taito/minigame_base.cpp (linked unit)
-// register pins reproduce the original's counter/temp allocation
 struct Hdr1e { s16 a; s16 b; s16 c; s16 fmt; u8 pad[16]; s32 off; };
 /*TARGET 001e4248*/
 Hdr1e** func_001e4248(s32* p) asm("func_001e4248");
 Hdr1e** func_001e4248(s32* p) {
-  register s32 n asm("$15") = p[0];
-  Hdr1e** h = (Hdr1e**)(p + 1);
+  s32 n = *p++;
   s32 i;
-  if (n > 0) for (i = n; i != 0; i--) {
+  for (i = 0; i < n; i++) {
     s32 cnt = 0;
-    Hdr1e* t = *h++;
+    Hdr1e* t = *(Hdr1e**)p++;
     u8* d = (u8*)t + t->off + 32;
     if (t->b == 0) continue;
     switch (t->fmt) {
@@ -2410,7 +2408,7 @@ Hdr1e** func_001e4248(s32* p) {
       d += 4;
     }
   }
-  return h;
+  return (Hdr1e**)p;
 }
 }  // namespace n001e4248
 

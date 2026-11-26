@@ -46,6 +46,12 @@ EXPECT = re.compile(r"\b__builtin_expect\s*\(")
 PIN = re.compile(r"\bregister\b(\s+[^;{}=()]*?)\s*\b(?:asm|__asm__)\s*\(\s*\"\$?\w+\"\s*\)")
 
 
+# With DETRICK_LOOSE=1 relocation entries are compared as a set. The compiler and the assembler
+# fill a delay slot with the same instruction but list the relocations in a different order;
+# the linked bytes are normally the same, so confirm such a run with a full `make`.
+LOOSE = bool(os.environ.get("DETRICK_LOOSE"))
+
+
 def sections(path):
     """The comparable content of an ELF32 little-endian object."""
     d = Path(path).read_bytes()
@@ -59,6 +65,8 @@ def sections(path):
         if SKIP_SECTIONS.match(name) or name in (".shstrtab",):
             continue
         body = b"" if h[1] == 8 else d[h[4]:h[4] + h[5]]            # SHT_NOBITS has no bytes
+        if LOOSE and h[1] == 9:                                     # SHT_REL: same entries, any order
+            body = b"".join(sorted(body[i:i + 8] for i in range(0, len(body), 8)))
         out.append((name, h[1], h[2], h[5], h[8], body))
     return out
 

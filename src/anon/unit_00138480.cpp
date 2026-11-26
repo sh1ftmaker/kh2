@@ -444,17 +444,10 @@ void Sprite::getOffsetPos(s32& x, s32& y) { using namespace ::n00138c78;
 
 // ---- 00138c90 from src/anon/tiny_auto80.cpp
 namespace n00138c90 {
-void dk__Sprite__getPosAddOffset(u32 a0, u32 a1, u32 a2, u32 a3) asm("_Z27dk__Sprite__getPosAddOffsetjjjj");
-void dk__Sprite__getPosAddOffset(u32 a0, u32 a1, u32 a2, u32 a3) {
-    u32 r4 = a0, r5 = a1, r6 = a2, r7 = a3, r14, r15;
-    r14 = *(u32*)((u32)r4 + (s32)(376));
-    r15 = *(u32*)((u32)r4 + (s32)(368));
-    r15 = (u32)(r15 + r14);
-    *(u32*)((u32)r5 + (s32)(0)) = r15;
-    r14 = *(volatile u32*)((u32)r4 + (s32)(380));
-    r15 = *(volatile u32*)((u32)r4 + (s32)(372));
-    r15 = (u32)(r15 + r14);
-    *(u32*)((u32)r6 + (s32)(0)) = r15;
+void dk__Sprite__getPosAddOffset(dk::SpriteLayout* s, s32* x, s32* y) asm("_Z27dk__Sprite__getPosAddOffsetjjjj");
+void dk__Sprite__getPosAddOffset(dk::SpriteLayout* s, s32* x, s32* y) {
+    *x = s->posX + s->offsetX;
+    *y = s->posY + s->offsetY;
 }
 }  // namespace n00138c90
 

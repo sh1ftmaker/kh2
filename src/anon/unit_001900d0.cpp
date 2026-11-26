@@ -402,23 +402,14 @@ TGT* tgt_dup(TGT* self) {
 
 // ---- 00190840 from src/anon/auto200_999.cpp
 namespace n00190840 {
-extern u8 D_01c60d50 asm("D_01c60d50");
-void YS_TARGET_free(u32 a0) asm("_ZN2YS6TARGET4freeEv");
-void YS_TARGET_free(u32 a0) {
-    u32 base = (u32)&D_01c60d50;
-    register u32 magic asm("$13") = 0xcccccccd;
-    a0 -= base;
-
-    u32 count = *(u32 *)(base + 3072);
-
-    a0 = (s32)a0 >> 2;
-    a0 *= magic;
-    asm volatile("" : "+r"(a0), "+r"(count));
-    u32 off = count << 2;
-    count += 1;
-    off += base;
-    *(u32 *)(base + 3072) = count;
-    *(u32 *)(off + 2560) = a0;
+struct TGT { u32 w[5]; };
+struct TPool { TGT items[128]; s32 freel[128]; s32 count; };
+extern TPool D_01c60d50 asm("D_01c60d50");
+void YS_TARGET_free(TGT* t) asm("_ZN2YS6TARGET4freeEv");
+void YS_TARGET_free(TGT* t) {
+    s32 i = t - D_01c60d50.items;
+    D_01c60d50.freel[D_01c60d50.count] = i;
+    D_01c60d50.count++;
 }
 }  // namespace n00190840
 

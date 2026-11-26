@@ -760,20 +760,13 @@ typedef u32 (*Func_001db610_cb)(u32, u32);
 typedef u32 (*Method1)(u32);
 
 u32 func_001844e8(u32 a0) {
-    u32 s0 = a0;
-    u32 s1 = 0;
-    if (func_00184478(s0) != 0) {
-        s1 = 1;
-    } else {
-        volatile float *p1 = (float *)(s0 + 1348);
-        float f1 = *p1;
-        volatile float *p0 = (float *)(s0 + 2116);
-        float f0 = *p0;
-        if (!(f0 == f1)) {
-            s1 = 1;
-        }
+    u32 r = 0;
+    if (func_00184478(a0) != 0) {
+        r = 1;
+    } else if (*(float *)(a0 + 2116) != *(float *)(a0 + 1348)) {
+        r = 1;
     }
-    return s1;
+    return r;
 }
 }  // namespace o13
 

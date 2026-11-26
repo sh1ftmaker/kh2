@@ -380,19 +380,15 @@ void func_001a8d40(T4* out, s32 idx) asm("func_001a8d40");
 void func_001a8d40(T4* out, s32 idx)
 {
     T4 a, b;
-    s32 j;
-    register s32 i asm("$18");
+    s32 i, j;
     func_001a8bb8(&a);
     func_001a8bb8(&b);
     a = D_01c6cc0c[idx];
     func_001a8c60(&b, 0, func_001a8bf8(&a, 0));
     j = 1;
-    i = 1;
-    s32 m = ~0x3f;
-    for (; i < 4; i++) {
-        s32 c = a.b[i];
-        if (m & c) {
-            func_001a8c60(&b, j, (u8)c);
+    for (i = 1; i < 4; i++) {
+        if (a.b[i] & 0xc0) {
+            func_001a8c60(&b, j, a.b[i]);
             j++;
             a.b[i] = 18;
         }

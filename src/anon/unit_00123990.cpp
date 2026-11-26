@@ -706,15 +706,15 @@ void func_00124bb8(u32, u32, u32, u32, u32, u32, u32, u32) asm("_Z13func_00124bb
 extern u8 D_00347b88 asm("D_00347b88");
 /*TARGET 00124bb8*/
 void func_00124bb8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) asm("_Z13func_00124bb8jjjjjjjj");
+struct O124bb8 { u32 vt; u32 a; u32 b; u32 c; u32 d; u32 e; };
 void func_00124bb8(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a5, u32 a6, u32 a7) {  // obj_ctor_347b88
-    u32 r4 = a0, r5 = a1, r15;
-    r15 = (u32)&D_00347b88;
-    *(u32*)(r4 + 4) = r5;
-    *(u32*)(r4 + 20) = 0u;
-    *(volatile u32*)(r4 + 0) = r15;
-    *(u32*)(r4 + 8) = 0u;
-    *(volatile u32*)(r4 + 12) = 0u;
-    *(volatile u32*)(r4 + 16) = 0u;
+    O124bb8* o = (O124bb8*)a0;
+    o->vt = (u32)&D_00347b88;
+    o->a = a1;
+    o->b = 0;
+    o->c = 0;
+    o->d = 0;
+    o->e = 0;
 }
 }  // namespace n00124bb8
 
